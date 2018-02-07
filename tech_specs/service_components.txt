@@ -87,19 +87,23 @@ Events -> SSE: notify(event)
 
 cloud GUI
 node Gateway
-node ControlBox
-node LegacyController
+node BrewBlox
 node EventBus
 node InfluxDB
+node Reporting {
+    database Batches
+    database Processes
+}
 
 GUI --> Gateway
-Gateway --> EventBus
+Gateway --> "subscribe" EventBus
 Gateway --> InfluxDB
-Gateway --> ControlBox
-Gateway --> LegacyController
+Gateway --> BrewBlox
+Gateway --> Reporting
 
-ControlBox "publish" -down-> EventBus
-LegacyController "publish" -down-> EventBus
-InfluxDB "subscribe" -down-> EventBus
+BrewBlox "publish" -down-> EventBus
+BrewBlox --> InfluxDB
+
+Reporting --> InfluxDB
 
 @enduml

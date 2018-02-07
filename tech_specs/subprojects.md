@@ -43,13 +43,17 @@ Dependency injection of the core components ensures that multiple backends can c
 
 An alternative is to take all components identified above, and split them into micro-services.
 The following components would be separate services:
-* Each backend.
+* Each backend
 * The event bus
 * InfluxDB
+* (New) A data collation reporting module, for when discrete brewing processes use multiple controllers.
 * A router/reverse proxy, acting as a gateway for all REST services
 
 The datastore is specific for each backend, and can be integrated in each separate backend service.
 
-Controllers only need to be aware of the event bus. They have no need for cross-controller communication, and do not directly push data to Influx.
+Controllers interact with the event bus, and with Influx. They push data to Influx, and object change notifications to the event bus.
+Any client wishing to retrieve the new controller state should do so when prompted by this event.
+
+Controller state values are not pushed through the event bus to prevent flooding.
 
 The primary advantage to this approach is that it is very easy to add new controller services. Additional features are that complexity of each service can be kept down: they offer a REST interface, and do one thing. No complex integration patterns required.
