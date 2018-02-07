@@ -38,3 +38,18 @@ The various backends are not sufficiently similar to warrant a shared interface.
 Dependency injection of the core components ensures that multiple backends can coexist: the application does not need specific dependencies on plugins - they merely need to implement interface functions for injecting the REST, SSE, and event handler objects.
 
 `flask-plugin` offers generic plugin capability: anything in a defined plugin directory is imported. If it implements the required interfaces, it is available as a plugin component.
+
+## Splitting up
+
+An alternative is to take all components identified above, and split them into micro-services.
+The following components would be separate services:
+* Each backend.
+* The event bus
+* InfluxDB
+* A router/reverse proxy, acting as a gateway for all REST services
+
+The datastore is specific for each backend, and can be integrated in each separate backend service.
+
+Controllers only need to be aware of the event bus. They have no need for cross-controller communication, and do not directly push data to Influx.
+
+The primary advantage to this approach is that it is very easy to add new controller services. Additional features are that complexity of each service can be kept down: they offer a REST interface, and do one thing. No complex integration patterns required.

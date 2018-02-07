@@ -81,3 +81,25 @@ Events -> SSE: notify(event)
 <- SSE: publish(event)
 
 @enduml
+
+
+@startuml "Micro services"
+
+cloud GUI
+node Gateway
+node ControlBox
+node LegacyController
+node EventBus
+node InfluxDB
+
+GUI --> Gateway
+Gateway --> EventBus
+Gateway --> InfluxDB
+Gateway --> ControlBox
+Gateway --> LegacyController
+
+ControlBox "publish" -down-> EventBus
+LegacyController "publish" -down-> EventBus
+InfluxDB "subscribe" -down-> EventBus
+
+@enduml
