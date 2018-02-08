@@ -47,6 +47,7 @@ The following components would be separate services:
 * The event bus
 * InfluxDB
 * (New) A data collation reporting module, for when discrete brewing processes use multiple controllers.
+* (New) A deployment supervisor, responsible for starting services, and rewriting Gateway configuration.
 * A router/reverse proxy, acting as a gateway for all REST services
 
 The datastore is specific for each backend, and can be integrated in each separate backend service.
