@@ -30,3 +30,17 @@ Consequences:
 * We open more ports
 * Everyone needs to remember two hosts: the MQ, and the gateway
 * Two separate security implementations
+
+## Conclusions
+
+* We do not want outside clients to have a direct connection to the event bus implementation (RabbitMQ)
+* For service <-> event bus communication, AMQP is sufficiently generic.
+* Outside clients will need to subscribe to services offering data sources. This allows abstraction of the internal event bus implementation.
+
+## Implementation
+
+* RabbitMQ is the chosen implementation.
+* Services are responsible for event bus interaction through functionality offered in `brewblox_service.events`.
+* `brewblox_service.events` communicates using an async AMQP library. This implementation detail is hidden from clients of the API.
+* The event bus is not reverse proxied through the gateway
+* Clients outside the gateway will be able to subscribe to data sources offered by services. These services will be responsible for event -> data source translation.

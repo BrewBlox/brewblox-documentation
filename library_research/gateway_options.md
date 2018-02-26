@@ -15,10 +15,11 @@ Options will be shortlisted based on the must haves, and then compared on could 
 ### Must haves
 * support encrypted traffic.
 * reverse proxy calls to known services
-* configuration hot reload
+* configuration hot reload or runtime registration
 * support HTTP communication
 * free (as in beer)
 * actively maintained
+* support multiple instances of services at different end points
 
 ### Could haves
 * support multiple instances of services (load balancing)
@@ -41,6 +42,7 @@ Options will be shortlisted based on the must haves, and then compared on could 
 * lightweight
 * works equally well in and outside docker context
 * scalability
+* Actively developed by a large community or company
 
 ## Candidates
 

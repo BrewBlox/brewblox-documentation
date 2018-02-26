@@ -25,23 +25,31 @@ In order to make these ends meet, we can identify the following levels:
 
 ### Control Center (eg. "Brewery Two")
 
-The top level grouping inside the GUI application. All sensors, actuators, and settings for a single service are somewhere in here. UI blocks are stored here, so multiple processes can share them.
+The top level grouping inside the GUI application. All sensors, actuators, and settings for a single service are somewhere in here. UI blocks are stored here, so multiple views can share them.
 
-### Dashboard (eg. "Fermentation" / "Overview" / "All temperature sensors")
+### View (eg. "Fermentation" / "Overview" / "All temperature sensors")
 
-A clearly defined subset of an activity. This involves a subset of all UI blocks, but generally uses all assigned UI blocks simultaneously.
+A canvas displaying one or more widgets. Views do not directly display data or actions: they contain all objects (widgets) that do.
 
-It should be possible that multiple dashboards share physical UI blocks.
+Views can contain other views. Views can share widgets.
 
-If you'd say an activity "has `N` processes", then you could create a separate dashboard for each process.
+### Widget (eg. UI Block / Graph)
+
+All discrete objects in the UI are widgets. UI blocks display state and actions, graphs display history. Widgets can be created and moved by users.
+
+The same widget can be present on multiple views.
 
 ### UI block (eg. PID, actuator, mutex)
 
-Performs a specific, abstract task. A UI block isn't busy brewing beer. It might keep temperature at a certain level, or even just toggle the heater.
+Represents a hardware component performing a specific, abstract task. A UI block isn't busy brewing beer. It might keep temperature at a certain level, or even just toggle the heater.
 
-UI blocks can be composited to offer distinct functionality. This reflects the possibility that some are never used independently.
+If associated with a hardware component, they display current state - not history. The UI may choose to add a button to easily view the history graph for the same hardware component.
 
 UI blocks are an abstraction. They can be associated with hardware components, but do not have to be.
+
+### History graph
+
+Displays past state of hardware components. Where a UI block displays current state, a history graph displays the history of one or more hardware components over a time frame.
 
 ## Serialization
 
@@ -51,18 +59,14 @@ Two datasets require persistence and serialization: values used as input/output 
 
 Controller <-> service layer communication is already specced, and outside the scope of this document.
 
-Some points of interest:
-* Some data should only be sent if changed
-* The dashboard layer prefers data associated with UI block names, not controller object names
-
-TODO
+Specing of serialization and schemas of service <-> UI data transfer is still TODO.
 
 ### Component Serialization
 
-For the purposes of serialization, processes, and UI blocks should all be capable of serialization without their parents. 
+For the purposes of serialization, views, and UI blocks should all be capable of serialization without their parents. 
 Two modes of serialization should be offered: with and without hardware associations.
 
-Dashboard persistence requires saving hardware associations, but configurations shared between users should not have to assume that hardware mappings are perfectly identical.
+View persistence requires saving hardware associations, but configurations shared between users should not have to assume that hardware mappings are perfectly identical.
 
 ## Data Collection
 
@@ -88,12 +92,13 @@ We want to filter on the following data points / properties:
 * time points
 
 We want to simultaneously display data from (including all members):
-* activities
-* processes
+* views
 * UI blocks
 * hardware blocks
 
 ## Data Schema
+
+TODO: pending spec of serialization schema
 
 Default configuration is to create a measurement per activity.
 Optional, depending on volume: measurement per controller block
