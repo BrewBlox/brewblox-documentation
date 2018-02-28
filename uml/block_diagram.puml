@@ -1,0 +1,19 @@
+@startuml
+    class View
+    class UIBlockCollection
+    class UIBlock
+    class Association
+    class DummyAssociation
+    class HardwareAssociation
+
+    UIBlockCollection *--x "*" UIBlock : contains
+
+    View o--x "*" UIBlock : references
+
+    UIBlock : string identifier
+    UIBlock *-- "*" Association
+
+    Association <|-- DummyAssociation
+    Association <|-- HardwareAssociation
+
+@enduml

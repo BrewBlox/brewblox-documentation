@@ -1,0 +1,32 @@
+@startuml "Service Components"
+[REST]
+[SSE]
+[InfluxDB]
+[Events]
+
+package Plugins {
+    package Controlbox {
+        [Datastore]
+        [Backend]
+        package Blocks
+    }
+
+    package Legacy {
+    }
+}
+
+Plugins .up.> REST
+Plugins .up.> SSE
+Plugins .left.> "generates" Events
+InfluxDB ..> "reads" Events
+
+@enduml
+
+
+
+
+
+
+
+
+
