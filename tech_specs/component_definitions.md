@@ -2,8 +2,6 @@
 
 Components as defined by the controller firmware are not fully suited for use by the service and GUI layers, as they lack a clear mapping to user concepts.
 
-Note: see PlantUML output of `block_diagram.txt` for pictures.
-
 ## User Considerations
 
 In order to adjust software to the user (and not the other way around), it's good to keep in mind what aspects are important for the user:
@@ -40,6 +38,8 @@ All discrete objects in the UI are widgets. UI blocks display state and actions,
 The same widget can be present on multiple views.
 
 ### UI block (eg. PID, actuator, mutex)
+
+![block_diagram](http://www.plantuml.com/plantuml/png/RP7F2i8m3CRlFaNOSR0N40_ppq4VmDrBcqcmIo7fc88FRvq8dLrkoUzBleIq6et4SV0RI66zKOMESChIw-NWWxqVW_Te8mKkMLRPgmPBvazt6eVXkOxEHjna17Cwuy8NwgPvG5LNFmHRi86Z8TPlosTp2ALAi4T1jgYBqObe5E8Ra4EEr1FAWYV3ULAnMrQ0tIkfLWyiLAktjiWkFU0D "block_diagram")
 
 Represents a hardware component performing a specific, abstract task. A UI block isn't busy brewing beer. It might keep temperature at a certain level, or even just toggle the heater.
 
