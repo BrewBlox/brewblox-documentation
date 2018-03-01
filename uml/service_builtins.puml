@@ -1,0 +1,16 @@
+@startuml "Builtin service features"
+
+Package ImplementationService  {
+    Package brewblox_service #lightgray {
+        Class service
+        Class events
+        Class announcer
+    }
+
+    Class main
+    Class implementation
+
+    service -> announcer
+}
+
+@enduml
