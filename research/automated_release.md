@@ -35,13 +35,13 @@ The steps in bold are now done manually, and should be automated.
 
 It proscribes two long-lived branches, with other, shorter, branches forking from one, and merging back into one, or both.
 
-The `develop` branch is the core branch for development. A new `feature` branch is forked from here for each task. When the task is done, the branch is merged back into develop.
+The `develop` branch is the core branch for development. A new `feature` branch is branched from here for each task. When the task is done, the branch is merged back into develop.
 
 In theory, this branch interaction model is sufficient for multiple programmers to cooperatively develop software. In practice, develop is not sufficiently stable for release to end users.
 
 `master` is the branch intended for stable software releases. This branch should only receive code that is thoroughly tested, and does not contain partially finished features.
 
-In order to verify that code on `develop` is ready for primetime, new `release` branches are created regularly. These fork from `develop` either after a set interval (end of Scrum sprint), or when a feature is complete.
+In order to verify that code on `develop` is ready for primetime, new `release` branches are created regularly. These branch from `develop` either after a set interval (end of Scrum sprint), or when a feature is complete.
 
 At this point developers can continue to add new features to `develop`, while the `release` branch is used to verify that its frozen set of features are bug-free, and meet requirements.
 
@@ -49,8 +49,8 @@ Bug fixes made on `release` branches should also be merged into develop. No new 
 
 When the software on `release` passes all checks, it is merged into `master`.
 
-Occasionally, despite best efforts, `master` will have bugs. For the most critical of them, `hotfix` branches are forked directly from `master` to fix the issue.
-When ready, these branches are forked both into `master`, and `develop`.
+Occasionally, despite best efforts, `master` will have bugs. For the most critical of them, `hotfix` branches are branched directly from `master` to fix the issue.
+When ready, these branches are merged both into `master`, and `develop`.
 
 Brewblox as a project has no special requirements that mandate any changes to this model. At time of writing, we do still need to implement meaningful and automatic regression tests that should be run against `release` software.
 
@@ -69,13 +69,21 @@ We'll refer to the base repository as `upstream`, and to the contributor reposit
 
 In a forked Git Flow repository, there will be no `feature` or `hotfix` branches in `upstream`. This is all done in `downstream`.
 
-Contributors fork new `downstream/feature` branches from `upstream/develop`, and when ready, make a pull request back into `upstream/develop`.
+Contributors branch new `downstream/feature` branches from `upstream/develop`, and when ready, make a pull request back into `upstream/develop`.
 
 `release` branches are created in `upstream`. If any fixes need to be made, these are directly done in `downstream/release` (or a forked branch), and merged back in through pull request.
 
-The same goes for `hotfix` branches: `downstream/hotfix` is forked from `upstream/master`, and merged back into `upstream/master`.
+The same goes for `hotfix` branches: `downstream/hotfix` is branched from `upstream/master`, and merged back into `upstream/master`.
 
-At any given time, there are at most three active branches in `upstream`: `master`, `develop`, and (when active) `release`.
+Normally, only 3 branches will exist in `upstream`: `master`, `develop`, and (when active) `release`.
+
+ Exceptions are:
+
+* Long running feature branches that involve multiple developers. They can use a feature branch on `upstream` to synchronize work. They could do pull requests to the `upstream/feature` branch.
+* Multiple release branches can exist in parallel, for example the latest stable release and a new release candidate for the next major version.
+
+In general: small features do not require a feature branches on the upstream repo.
+
 
 ## Semantic Versioning
 
@@ -97,7 +105,9 @@ Git itself supports [tags][12]. These can provide extra information about the re
 
 GitHub offers additional functionality for tags with [GitHub Releases][13].
 
-While we don't particularly care about GitHub releases (we release Python code to PyPi), tags are still a good indicator of at which commit a release was done.
+We don't particularly need the package distribution offered by GitHub Releases, as we release our Python code to PyPi.
+
+More useful is the easy display/editing of tag descriptions. These can be used as release change logs.
 
 ## Travis Deployment
 
