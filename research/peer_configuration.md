@@ -149,17 +149,55 @@ $ curl localhost:8500/v1/catalog/service/history
 [{"Node":"f845f1747f2b","Address":"172.19.0.2","ServiceID":"fb86bef8b063:stage_history_1:5000","ServiceName":"history","ServiceTags":[],"ServiceAddress":"172.19.0.5","ServicePort":32824,"ServiceEnableTagOverride":false,"CreateIndex":9,"ModifyIndex":23}]
 ```
 
+## Complexity
+
+Centralized discovery is very fancy, and likely required for massive distributed service clouds.
+A point of note is that our deployment architecture wants to be neither.
+
+During implementation of consul-based service discovery, we reached the conclusion that supporting reconnecting and discovered services would be complex.
+Not impossible, but it would certainly decrease maintainability and robustness of the system.
+
+Given how we're increasingly certain we'll only be deploying to containerized environments, there was another alternative.
+We hardcode the host names in Python code, and configure the environment to meet those expectations.
+
+The resulting configuration is suddenly much simpler:
+
+```yaml
+services:
+  eventbus:
+    image: rabbitmq:alpine
+
+  influx:
+    image: influxdb:alpine
+
+  history:
+    build: ../images/brewblox-history
+    depends_on:
+      - influx
+      - eventbus
+
+  gateway:
+    image: dockercloud/haproxy
+    links:
+      - history
+    ports:
+      - "80:80"
+      # stats port
+      - "1936:1936"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+```
+
 ## Conclusion
 
 In a Docker environment we can automate service discovery for both the gateway, and inter-container communication.
-This does reduce compatibility with non-docker deployment environments. 
+This does reduce compatibility with non-docker deployment environments, and significantly increases code complexity.
 
-Design decision for now is to disable announcing to the Janus gateway, and assume a docker environment by default.
-
-Brewblox-service will need to implement `get_service()` functionality, that attempts to contact Registrator for a service url/port.
-To gracefully support incomplete or local deployment, this should fall back to `localhost` if Registrator does not respond.
-
-This mechanism allows for future implementation of service-specific configuration, for when Registrator is not available, but the target is not on localhost.
+Design decisions are:
+* Drop the Janus gateway, as HAProxy automatically recognizes online services.
+* Make host configuration simple in Python (host="eventbus"), and configure deployment to match.
+* We'll drop the "must function on localhost" requirement for now.
 
 
 
