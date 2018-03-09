@@ -194,6 +194,8 @@ services:
 In a Docker environment we can automate service discovery for both the gateway, and inter-container communication.
 This does reduce compatibility with non-docker deployment environments, and significantly increases code complexity.
 
+If needed, we can always revisit this decision, and implement dynamic feature discovery. Right now, we just don't need it.
+
 Design decisions are:
 * Drop the Janus gateway, as HAProxy automatically recognizes online services.
 * Make host configuration simple in Python (host="eventbus"), and configure deployment to match.
