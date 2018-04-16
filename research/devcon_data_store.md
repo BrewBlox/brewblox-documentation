@@ -42,7 +42,7 @@ Lacks asyncio bindings.
 
 ### SQLite
 
-SQLite + ORM asyncio library not found. Still looking.
+SQLite + ORM asyncio library not found.
 
 ### Couchbase Lite
 
@@ -62,10 +62,29 @@ TinyDB seems well supported, but the wrapper is fan-made.
 It's also optimized around size, not speed.
 
 Using its recommended optimization features (different json library, and a caching middleware), its performance seems acceptable.
-
 If speed is not taken into account, then its use of JSON files is a plus. It makes data migration and transfer a lot easier.
+
+### ZODB
+
+Really nice syntax.
+Does not support asyncio. A GitHub issue recommends thread workers
+https://github.com/zopefoundation/ZODB/issues/53
+
+
+## Conclusion
+
+The simplest and most straightforward implementation that matches requirements is TinyDB.
+Its drawbacks are performance, and that the asyncio wrapper library does not have a large backing community or company.
+
+We'll have to migrate to a database running in an external container if performance becomes an issue.
+
+`aiotinydb` is sufficiently small that in the worst case scenario (stops being maintained, no replacement available), we can maintain it ourselves.
+
+As TinyDB also offers in-memory storage, we can reuse the same database access layer for the object cache.
+
+An added bonus is that TinyDB serializes to plain JSON. This makes its backing files user-readable, and allows easy data migration.
 
 
 [1]: https://pythonhosted.org/pickleDB/
-[3]: https://pypi.python.org/pypi/tinydb
+[3]: https://tinydb.readthedocs.io/en/latest/#
 [4]: https://github.com/ASMfreaK/aiotinydb
