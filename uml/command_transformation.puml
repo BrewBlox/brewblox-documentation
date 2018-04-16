@@ -1,0 +1,76 @@
+@startuml Command Transformation
+
+partition "api.py" {
+    (*) --> "Receive HTTP request"
+    --> "Parse arguments from HTTP request (url and/or body)"
+
+    --> "Map object/system/profile CRUD function to Spark commands"
+    note right
+        Example: POST /spark/objects requires a CREATE_OBJECT command,
+        and a data store create
+    end note
+
+
+    partition "device.py" {
+        --> "Convert service ID to controller ID"
+        note right
+            Service IDs are strings, and can be changed by the user.
+            Controller IDs are lists of ints (varint), and are determined by the controller.
+            Conversion is done by doing an object data store lookup.
+
+            An exception is raised if no controller ID could be found.
+        end note
+
+        partition "codec.py (encode)" {
+            --> "Encode block data"
+            note right
+                Convert a dict of arguments to Protobuf-encoded bytes.
+                Some data types require a pre-processing step.
+
+                An example is OneWireBus:
+                Protobuf decodes its 'address' field (bytes) as base64 strings.
+                BrewBlox wants them displayed to the user as hexadecimal strings.
+                This hex <-> base64 conversion is done in a preprocessing step in encode().
+            end note
+        }
+
+        partition "commander.py" {
+            --> "Build Command"
+            note right
+                Construct is responsible for converting the command arguments to bytes.
+
+                Note: according to construct, block data already is 'bytes'.
+            end note
+
+            --> "Send Command, match with reply"
+
+            --> "Parse Command"
+            note right
+                The symmetrical opposite of "Build Command".
+                Converts from bytes to a dict of arguments.
+
+                Block data still is a 'bytes' object here.
+            end note
+        }
+
+        partition "codec.py (decode)" {
+            --> "Decode block data"
+            note right
+                Symmetrical opposite of "Encode block data"
+            end note
+        }
+
+        --> "Convert Controller ID to Service ID"
+        note right
+            Looks up a service ID that matches the controller ID.
+
+            When it comes to IDs, the controller is considered the source of truth.
+            If no service ID can be found, one is created, and saved to data store.
+        end note
+    }
+
+    --> "Return HTTP request"
+
+}
+
+@enduml
