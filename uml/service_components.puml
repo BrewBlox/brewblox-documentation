@@ -4,7 +4,7 @@
 [InfluxDB]
 [Events]
 
-package Plugins {
+package Services {
     package Controlbox {
         [Datastore]
         [Backend]
@@ -13,12 +13,15 @@ package Plugins {
 
     package Legacy {
     }
+
+    [DataSource]
+    [History]
 }
 
-Plugins .up.> REST
-Plugins .up.> SSE
-Plugins .left.> "generates" Events
-InfluxDB ..> "reads" Events
+Services .up.> REST
+DataSource .up.> "publish" SSE
+Services .right.> "sub/pub" Events
+History ..> "write" InfluxDB
 
 @enduml
 
