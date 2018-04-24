@@ -1,0 +1,32 @@
+@startuml Brewblox object relations
+
+component front-end {
+    component GUI
+    component GUIBlock
+}
+
+component back-end {
+    component Services
+    component DeviceService
+    component ServiceBlock
+    component HistoryService
+}
+
+component spark {
+    component Controller
+    component ControllerBlock
+}
+
+GUI *-- "*" GUIBlock
+
+GUI ..> Services : REST
+
+Services *-- HistoryService
+Services *-- DeviceService
+
+DeviceService .left.> Controller : Serial
+DeviceService *-- "*" ServiceBlock
+
+Controller *-- "*" ControllerBlock
+
+@enduml
