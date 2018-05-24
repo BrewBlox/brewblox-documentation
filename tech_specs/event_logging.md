@@ -14,7 +14,7 @@ This way the controller services are not aware of the history service implementa
 
 ## Data Structure
 
-After a subscription is set, it will relay all incoming messages (as described under *Decoupling*).
+After a subscription is set, it will relay all incoming messages (as described under [Decoupling](#Decoupling)).
 
 When relaying, the data dict is flattened.
 The first part of the routing key is considered the data source name, and becomes the InfluxDB measurement name.
