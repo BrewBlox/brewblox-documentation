@@ -116,3 +116,8 @@ Brewpi does not and will not have a MLoC sized code base. Any solutions pertaini
 
 
 [microservice_io]: http://microservices.io/patterns/microservices.html
+
+
+## References
+
+* http://microservices.io/patterns/microservices.html

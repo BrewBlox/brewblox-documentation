@@ -92,3 +92,14 @@ Decisions:
 [5]: https://hub.docker.com/r/arm32v7/rabbitmq/
 [6]: https://docs.docker.com/engine/reference/commandline/cli/#configuration-files
 [7]: https://github.com/docker/cli/issues/327
+
+
+## References:
+
+* https://blog.hypriot.com/post/setup-simple-ci-pipeline-for-arm-images/
+* https://docs.docker.com/registry/spec/manifest-v2-2/#manifest-list
+* https://hub.docker.com/_/rabbitmq/
+* https://github.com/docker-library/official-images#architectures-other-than-amd64
+* https://hub.docker.com/r/arm32v7/rabbitmq/
+* https://docs.docker.com/engine/reference/commandline/cli/#configuration-files
+* https://github.com/docker/cli/issues/327

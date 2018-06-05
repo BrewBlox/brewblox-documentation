@@ -156,3 +156,20 @@ Some features will possibly be relevant in the future, but are not specified or 
 [12]: https://git-scm.com/book/en/v2/Git-Basics-Tagging
 [13]: https://help.github.com/articles/creating-releases/
 [14]: https://docs.travis-ci.com/user/deployment#Conditional-Releases-with-on%3A
+
+## References
+
+* https://jeffkreeftmeijer.com/git-flow
+* https://devblog.dwarvesf.com/post/git-best-practices/
+* https://semver.org/
+* https://docs.travis-ci.com/user/deployment/pypi/
+* https://github.com/c4urself/bump2version
+* https://packaging.python.org/guides/single-sourcing-package-version/
+* https://github.com/michaeljoseph/changes
+* http://zestreleaser.readthedocs.io/en/latest/
+* https://travis-ci.org/
+* https://pypi.python.org/pypi
+* https://docs.travis-ci.com/user/environment-variables/
+* https://git-scm.com/book/en/v2/Git-Basics-Tagging
+* https://help.github.com/articles/creating-releases/
+* https://docs.travis-ci.com/user/deployment#Conditional-Releases-with-o*

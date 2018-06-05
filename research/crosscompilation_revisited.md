@@ -66,3 +66,8 @@ The excessive build time for the ARM history image remained an issue (>1 hour). 
 
 
 [aioinflux issue]: https://github.com/plugaai/aioinflux/issues/9
+
+
+## References
+
+* https://github.com/plugaai/aioinflux/issues/9

@@ -146,3 +146,10 @@ All requirements can be satisfied by a combination of deployment rules (expresse
 [setuptools_scm]: https://github.com/pypa/setuptools_scm
 [dev_version_pep]: https://www.python.org/dev/peps/pep-0440/
 [travis_secure_vars]: https://docs.travis-ci.com/user/environment-variables/#Defining-encrypted-variables-in-.travis.yml
+
+
+## References
+
+* https://github.com/pypa/setuptools_scm
+* https://www.python.org/dev/peps/pep-0440/
+* https://docs.travis-ci.com/user/environment-variables/#Defining-encrypted-variables-in-.travis.yml
