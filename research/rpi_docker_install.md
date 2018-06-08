@@ -41,3 +41,9 @@ This means we can use the default Raspbian image, along with the default [instal
 
 [1]: https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
 [2]: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
+
+
+## References
+
+* https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
+* https://www.raspberrypi.org/documentation/installation/installing-images/README.md

@@ -1,0 +1,37 @@
+@startuml Component Definitions
+
+[Control Center]
+note right
+    The top level grouping inside the GUI application.
+    All sensors, actuators, and settings for a single service are somewhere in here.
+    UI blocks are stored here, so multiple views can share them.
+end note
+
+[View]
+note right
+    A canvas displaying one or more widgets.
+    Views do not directly display data or actions: they contain all objects (widgets) that do.
+
+    Views can contain other views. Views can share widgets.
+end note
+
+[Widget]
+note right
+    All discrete objects in the UI are widgets.
+    UI blocks display state and actions, graphs display history.
+    Widgets can be created and moved by users.
+
+    The same widget can be present on multiple views.
+end note
+
+
+[Graph]
+[Block]
+
+[Control Center] --> "*" View
+[View] --> "*" [Widget]
+
+[Widget] <|-- [Block]
+[Widget] <|-- [Graph]
+
+@enduml

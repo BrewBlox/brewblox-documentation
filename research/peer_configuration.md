@@ -216,3 +216,20 @@ Design decisions are:
 [11]: http://blog.arungupta.me/zookeeper-microservice-registration-discovery/
 [12]: https://www.consul.io/intro/index.html
 [13]: https://gliderlabs.com/registrator/latest/user/quickstart/
+
+
+## References
+
+* http://microservices.io/patterns/server-side-discovery.html
+* https://www.nginx.com/blog/service-discovery-in-a-microservices-architecture/
+* https://github.com/docker/dockercloud-haproxy
+* https://gitlab.com/ProftaakS61mGroepA/ProjectPub/blob/master/deploy-order/docker-compose.yml
+* https://github.com/hellofresh/janus
+* https://docs.docker.com/docker-cloud/apps/service-links/#discovering-containers-on-the-same-service-or-stack
+* <https://success.docker.com/article/Docker_Reference_Architecture-_Service_Discovery_and_Load_Balancing_with_Docker_Universal_Control_Plane_(UCP)>
+* https://serverfault.com/questions/816293/haproxy-reverse-proxy-and-virtual-host
+* http://jasonwilder.com/blog/2014/07/15/docker-service-discovery/
+* https://github.com/gliderlabs/registrator
+* http://blog.arungupta.me/zookeeper-microservice-registration-discovery/
+* https://www.consul.io/intro/index.html
+* https://gliderlabs.com/registrator/latest/user/quickstart/

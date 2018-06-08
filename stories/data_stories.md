@@ -1,3 +1,4 @@
+```gherkin
 Feature: Data management
 Values measured by controller blocks are captured
 Configuration is captured
@@ -32,3 +33,4 @@ User annotations are captured
         Then an input field should appear
         And the text I enter here is added to the graph
         And when I refresh the data, the annotation is displayed
+```

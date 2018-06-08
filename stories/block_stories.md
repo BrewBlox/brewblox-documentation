@@ -1,3 +1,4 @@
+```gherkin
 # Note: alternative name for "UI block" could be "Block"
 
 Feature: UI blocks
@@ -60,3 +61,4 @@ UI blocks are grouped in one or more processes
         And a display of available hardware components is shown
         When I make a selection
         Then the hardware association is identified
+```

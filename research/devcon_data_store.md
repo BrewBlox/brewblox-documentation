@@ -88,3 +88,10 @@ An added bonus is that TinyDB serializes to plain JSON. This makes its backing f
 [1]: https://pythonhosted.org/pickleDB/
 [3]: https://tinydb.readthedocs.io/en/latest/#
 [4]: https://github.com/ASMfreaK/aiotinydb
+
+
+## References:
+
+* https://pythonhosted.org/pickleDB/
+* https://tinydb.readthedocs.io/en/latest/#
+* https://github.com/ASMfreaK/aiotinydb
