@@ -5,27 +5,23 @@
 </template>
 
 <script>
-const plantumlEncoder = require('plantuml-encoder')
+const plantumlEncoder = require("plantuml-encoder");
 
 module.exports = {
-    props: {
-        src: String,
-        title: String,
-    },
-    computed: {
-        url: function() {
-            // console.log(this.src)
-            if(this.src){
-                const sourceFile = require("../../" + this.src);
-                console.log(sourceFile)
-                const encoded = plantumlEncoder.encode(sourceFile);
-                console.log(encoded) 
-                return "http://www.plantuml.com/plantuml/png/" + encoded;
-            }
-            else {
-                return "";
-            }
-        }
+  props: {
+    src: String,
+    title: String
+  },
+  computed: {
+    url: function() {
+      if (!this.src) {
+        return "";
+      }
+
+      const sourceFile = require("../../" + this.src);
+      const encoded = plantumlEncoder.encode(sourceFile);
+      return "http://www.plantuml.com/plantuml/png/" + encoded;
     }
-}
+  }
+};
 </script>
