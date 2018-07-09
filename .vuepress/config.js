@@ -53,5 +53,13 @@ module.exports = {
             }
         ],
         lastUpdated: 'Last Updated',
-    }
+    },
+    configureWebpack: (config, isServer) => {
+        config.module.rules.push(
+            {
+                test: /\.puml$/,
+                use: 'raw-loader'
+            }
+        );
+    }    
 };
