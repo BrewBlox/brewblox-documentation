@@ -4,59 +4,63 @@ module.exports = {
     themeConfig: {
         nav: [
             { text: 'HOME', link: '/' },
-            { text: 'ABOUT', link: '/user/about.md' },
+            { text: 'DEV', link: '/dev/' },
             { text: 'BREWPI', link: 'https://www.brewpi.com/' }
         ],
-        sidebar: [
-            ['/', 'Home'],
-            '/user/startup',
-            '/user/features',
-            '/user/examples',
-            {
-                title: 'Contributing',
-                children: [
-                    '/dev/contributing/docker',
-                    '/dev/contributing/raspberry',
-                ]
-            },
-            {
-                title: 'Reference Documents',
-                children: [
-                    '/dev/reference/event_logging',
-                    '/dev/reference/spark_commands',
-                ]
-            },
-            {
-                title: 'Design Decisions',
-                children: [
-                    '/dev/decisions/',
-                    '/dev/decisions/component_definitions',
-                    '/dev/decisions/block_stories',
-                    '/dev/decisions/data_stories',
-                    '/dev/decisions/subprojects',
-                    '/dev/decisions/microservice_adjustments',
-                    '/dev/decisions/communication_options',
-                    '/dev/decisions/gateway_options',
-                    '/dev/decisions/eventbus',
-                    '/dev/decisions/concurrent_functionality',
-                    '/dev/decisions/automated_release',
-                    '/dev/decisions/docker_crosscompilation',
-                    '/dev/decisions/rpi_docker_install',
-                    '/dev/decisions/peer_configuration',
-                    '/dev/decisions/controlbox_spark_protocol',
-                    '/dev/decisions/devcon_data_store',
-                    '/dev/decisions/crosscompilation_revisited',
-                    '/dev/decisions/dev_releases',
-                    '/dev/decisions/orchestration',
-                    '/dev/decisions/documentation_layout',
-                ]
-            },
-            {
-                title: 'Changelog',
-                children: []
-            },
-            '/links'
-        ],
+        sidebar: {
+            '/dev/': [
+                '',
+                {
+                    title: 'Contributing',
+                    children: [
+                        'contributing/docker',
+                        'contributing/raspberry',
+                    ]
+                },
+                {
+                    title: 'Reference Documents',
+                    children: [
+                        'reference/event_logging',
+                        'reference/spark_commands',
+                    ]
+                },
+                {
+                    title: 'Design Decisions',
+                    children: [
+                        'decisions/',
+                        'decisions/component_definitions',
+                        'decisions/block_stories',
+                        'decisions/data_stories',
+                        'decisions/subprojects',
+                        'decisions/microservice_adjustments',
+                        'decisions/communication_options',
+                        'decisions/gateway_options',
+                        'decisions/eventbus',
+                        'decisions/concurrent_functionality',
+                        'decisions/automated_release',
+                        'decisions/docker_crosscompilation',
+                        'decisions/rpi_docker_install',
+                        'decisions/peer_configuration',
+                        'decisions/controlbox_spark_protocol',
+                        'decisions/devcon_data_store',
+                        'decisions/crosscompilation_revisited',
+                        'decisions/dev_releases',
+                        'decisions/orchestration',
+                        'decisions/documentation_layout',
+                    ]
+                },
+            ],
+            '/': [
+                ['', 'Home'],
+                'user/startup',
+                'user/features',
+                'user/examples',
+                {
+                    title: 'Changelog',
+                    children: []
+                },
+            ]
+        },
         repo: 'steersbob/brewblox-documentation',
         lastUpdated: 'Last Updated',
         docsBranch: 'feature/vuepress', // defaults to master

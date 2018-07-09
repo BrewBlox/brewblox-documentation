@@ -7,6 +7,9 @@
 <script>
 const plantumlEncoder = require("plantuml-encoder");
 
+// TODO(Bob): generate urls for all plantuml diagrams at compile time
+// This avoids having to read the file every time the page is loaded
+
 module.exports = {
   props: {
     src: String,

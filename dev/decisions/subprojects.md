@@ -34,7 +34,7 @@ The various backend service implementations only share endpoints for service hea
 
 ## Splitting up
 
-<PlantUml src="uml/microservices_diagram" title="Micro Services"/>
+<PlantUml src="uml/microservices_diagram.puml" title="Micro Services"/>
 
 
 An alternative is to take all components identified above, and split them into micro-services.
