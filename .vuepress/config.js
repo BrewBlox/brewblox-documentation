@@ -16,6 +16,7 @@ module.exports = {
                 children: [
                     '/dev/docker',
                     '/dev/raspberry',
+                    '/dev/raspberry'
                 ]
             },
             {
