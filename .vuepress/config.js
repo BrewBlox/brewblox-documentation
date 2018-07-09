@@ -11,45 +11,51 @@ module.exports = {
             ['/', 'Home'],
             '/user/startup',
             '/user/features',
+            '/user/examples',
             {
                 title: 'Contributing',
                 children: [
-                    '/dev/docker',
-                    '/dev/raspberry'
+                    '/dev/contributing/docker',
+                    '/dev/contributing/raspberry',
                 ]
             },
             {
-                title: 'Project Documentation',
+                title: 'Reference Documents',
                 children: [
-                    '/stories/block_stories',
-                    '/stories/data_stories',
-                    '/tech_specs/component_definitions',
-                    '/tech_specs/event_logging',
-                    '/tech_specs/spark_commands',
-                    '/tech_specs/subprojects'
+                    '/dev/reference/event_logging',
+                    '/dev/reference/spark_commands',
                 ]
             },
             {
-                title: 'Research Documents',
+                title: 'Design Decisions',
                 children: [
-                    '/research/',
-                    '/research/20180214_microservice_adjustments',
-                    '/research/20180215_communication_options',
-                    '/research/20180216_gateway_options',
-                    '/research/20180217_eventbus',
-                    '/research/20180218_concurrent_functionality',
-                    '/research/20180301_automated_release',
-                    '/research/20180314_docker_crosscompilation',
-                    '/research/20180314_rpi_docker_install',
-                    '/research/20180315_peer_configuration',
-                    '/research/20180402_controlbox_spark_protocol',
-                    '/research/20180410_devcon_data_store',
-                    '/research/20180522_crosscompilation_revisited',
-                    '/research/20180522_dev_releases',
-                    '/research/20180703_orchestration',
-                    '/research/20180706_documentation_layout',
+                    '/dev/decisions/',
+                    '/dev/decisions/component_definitions',
+                    '/dev/decisions/block_stories',
+                    '/dev/decisions/data_stories',
+                    '/dev/decisions/subprojects',
+                    '/dev/decisions/microservice_adjustments',
+                    '/dev/decisions/communication_options',
+                    '/dev/decisions/gateway_options',
+                    '/dev/decisions/eventbus',
+                    '/dev/decisions/concurrent_functionality',
+                    '/dev/decisions/automated_release',
+                    '/dev/decisions/docker_crosscompilation',
+                    '/dev/decisions/rpi_docker_install',
+                    '/dev/decisions/peer_configuration',
+                    '/dev/decisions/controlbox_spark_protocol',
+                    '/dev/decisions/devcon_data_store',
+                    '/dev/decisions/crosscompilation_revisited',
+                    '/dev/decisions/dev_releases',
+                    '/dev/decisions/orchestration',
+                    '/dev/decisions/documentation_layout',
                 ]
-            }
+            },
+            {
+                title: 'Changelog',
+                children: []
+            },
+            '/links'
         ],
         repo: 'steersbob/brewblox-documentation',
         lastUpdated: 'Last Updated',

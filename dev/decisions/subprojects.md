@@ -1,4 +1,4 @@
-# Project division
+# BrewBlox Subprojects
 
 Current (february 2018) state of affairs is that all relevant code is spread over a set of repositories, contained in various accounts.
 
@@ -34,7 +34,8 @@ The various backend service implementations only share endpoints for service hea
 
 ## Splitting up
 
-![Micro services](http://www.plantuml.com/plantuml/png/TPFDRi8m48Jl-nIhS4RSAnGX1A8SgDIYFe3ZBC6giIDxJSZRDoQaa9_cwCyxEpD9Lfw5ut3Hc1oKT1OzkQkIv1C0Lgm90PldpXu8XPDdnIGvE88xNcP2_hmLJjJfXsMiYT6N9DL9KRvSH9Y-NjIgE7FXY4owlJ4v8pIAijHA2bRMJ4pKfBMjqhMZAjFsrhb4TIarNSXmVv1CZdVt05BRaEFkUm_6veGxmLI96cTF3oquXZ9gUkjm5eEqfnkAQuwFRRFMHek-H9OfFdoEfTwLP-lgoQczEUbmswp7Kzjh4-DeW_jl7vNMiJB5a48J3kVpjCi6NSPurlVIGxriFJ9SrODZdtzu6VcpI81-VKaPCgty6HVeG-QbKnabECzjPUBIHvy0ewGJGM1GSlAg-Aesk1TPzmu09Zh_LmXMpLVL_2Y_ "Micro services")
+<PlantUml src="uml/microservices_diagram" title="Micro Services"/>
+
 
 An alternative is to take all components identified above, and split them into micro-services.
 The following components would be separate:
