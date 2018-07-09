@@ -1,8 +1,6 @@
 # Project division
 
-**Note:** See `service_components.txt` for diagrams.
-
-Current state of affairs is that all relevant code is spread over a set of repositories, contained in various accounts.
+Current (february 2018) state of affairs is that all relevant code is spread over a set of repositories, contained in various accounts.
 
 It needs a more organized setup, but there are some considerations.
 * Functionality is logically spread over multiple loosely coupled parts:

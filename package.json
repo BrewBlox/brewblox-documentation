@@ -1,0 +1,25 @@
+{
+  "name": "brewblox-documentation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vuepress dev .",
+    "build": "vuepress build ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrewBlox/brewblox-documentation"
+  },
+  "keywords": [],
+  "author": "BrewPi",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/BrewBlox/brewblox-documentation/issues"
+  },
+  "homepage": "https://github.com/BrewBlox/brewblox-documentation#readme",
+  "devDependencies": {
+    "vuepress": "^0.10.2"
+  }
+}
