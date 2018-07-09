@@ -73,3 +73,7 @@ typings/
 
 # Serverless directories
 .serverless
+
+# Generated files
+.vuepress/generated/*
+!.vuepress/generated/.gitkeep

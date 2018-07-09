@@ -55,25 +55,11 @@ module.exports = {
                 'user/startup',
                 'user/features',
                 'user/examples',
-                {
-                    title: 'Changelog',
-                    children: []
-                },
             ]
         },
         repo: 'steersbob/brewblox-documentation',
         lastUpdated: 'Last Updated',
         docsBranch: 'feature/vuepress', // defaults to master
         editLinks: true,
-    },
-    configureWebpack: (config, isServer) => {
-        config.module.rules.push({
-            test: /LICENSE$/,
-            use: 'raw-loader',
-        });
-        config.module.rules.push({
-            test: /\.puml$/,
-            use: 'raw-loader',
-        });
     }
 };
