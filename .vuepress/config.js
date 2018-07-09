@@ -57,9 +57,8 @@ module.exports = {
                 'user/examples',
             ]
         },
-        repo: 'steersbob/brewblox-documentation',
+        repo: 'brewblox/brewblox-documentation',
         lastUpdated: 'Last Updated',
-        docsBranch: 'feature/vuepress', // defaults to master
         editLinks: true,
     }
 };
