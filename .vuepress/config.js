@@ -54,6 +54,7 @@ module.exports = {
                 ['', 'Home'],
                 'user/startup',
                 'user/features',
+                'user/advanced',
                 'user/examples',
             ]
         },
