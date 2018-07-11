@@ -82,20 +82,18 @@ To enable cross compiling images in your current terminal session, run
 docker run --rm --privileged multiarch/qemu-user-static:register --reset
 ```
 
-If we adjust the Dockerfile and build script from the getting started with Docker guide, we get:
+In the "Getting started with Docker" guide we used `docker/amd/Dockerfile`. Now we'll switch to `docker/arm/Dockerfile`
 
 Dockerfile:
 ```Docker
 FROM brewblox/brewblox-service:rpi-latest
 
-RUN mkdir -p /pkg
-COPY ./pkg/* /pkg/
-
 EXPOSE 5000
+WORKDIR /app
 
-RUN pip3 install /pkg/* || true \
-    && pip3 install YOUR-PACKAGE \
-    && pip3 show YOUR-PACKAGE
+COPY ./dist /app/dist
+RUN pip3 install /app/dist/*
+RUN pip3 show YOUR-PACKAGE
 
 ENTRYPOINT ["python3", "-m", "YOUR_PACKAGE"]
 ```
@@ -104,11 +102,14 @@ Build script:
 ```bash
 tox
 
-rm docker/pkg/*
-cp .tox/dist/* docker/pkg/
+rm docker/dist/*
+cp .tox/dist/* docker/dist/
 
 docker run --rm --privileged multiarch/qemu-user-static:register --reset
-docker build --tag your-package:rpi-local docker/
+docker build \
+  --tag your-package:rpi-local \
+  --file docker/arm/Dockerfile \
+  docker/
 ```
 
 Note how we changed the `latest` and `local` versions to `rpi-latest` and `rpi-local`.
