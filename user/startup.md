@@ -61,14 +61,10 @@ Wait for the Pi to finish starting up, and follow the first-time startup instruc
 Open the terminal, and run the following command:
 
 ```
-curl -sSL https://INSTALLSCRIPT | sh
+curl -sSL https://brewblox.netlify.com/install | sh
 ```
 
 Restart your Pi for the installation to complete.
-
-::: tip
-TODO: deploy install script
-::: 
 
 ## Step 4: Start a service
 
