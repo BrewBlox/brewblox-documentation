@@ -22,40 +22,48 @@ The first part of the routing key is considered the data source name, and become
 All subsequent routing key components are considered to be sub-set indicators of the data source.
 If the routing key is controller1.block1.sensor1, we consider this as being equal to:
 
-    'controller1': {
-        'block1': {
-            'sensor1': <event data>
-        }
+```python
+'controller1': {
+    'block1': {
+        'sensor1': <event data>
     }
+}
+```
 
 Data in sub-dicts (including those implied by routing key) is flattened.
 The key name will be the path to the sub-dict, separated by /.
 
 If we'd received an event where:
 
-    routing_key = 'controller1.block1.sensor1'
-    data = {
-        settings: {
-            'setting': 'setting'
-        },
-        values: {
-            'value': 'val',
-            'other': 1
-        }
+```python
+routing_key = 'controller1.block1.sensor1'
+data = {
+    'settings': {
+        'setting': 'setting'
+    },
+    'values': {
+        'value': 'val',
+        'other': 1
     }
+}
+```
 
 it would be flattened to:
 
-    {
-        'block1/sensor1/settings/setting': 'setting',
-        'block1/sensor1/values/value': 'val',
-        'block1/sensor1/values/other': 1
-    }
+```python
+{
+    'block1/sensor1/settings/setting': 'setting',
+    'block1/sensor1/values/value': 'val',
+    'block1/sensor1/values/other': 1
+}
+```
 
 If the event data is not a dict, but a string, it is first converted to:
 
-    {
-        'text': <string data>
-    }
+```python
+{
+    'text': <string data>
+}
+```
 
 This dict is then flattened.

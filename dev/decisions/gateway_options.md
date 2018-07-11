@@ -2,7 +2,7 @@
 
 ## Business Case
 
-In the top-level microservice architecture for Brewblox ([documentation](../tech_specs/subprojects.md), [diagrams](../tech_specs/service_components.txt)), there are some supporting services.
+In the top-level microservice architecture for Brewblox ([documentation](./subprojects.md), [diagrams](.service_components.txt)), there are some supporting services.
 
 One of them is the gateway. This gateway should function as a unifying API, reverse-proxying all calls to the relevant services.
 
