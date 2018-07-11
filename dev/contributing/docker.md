@@ -12,28 +12,42 @@ At this point you'll have a working Python package that can be run locally, uplo
 
 ## The Dockerfile
 
-In the boilerplate repository, the `docker/Dockerfile` describes a straightforward Docker image: it has Python3.6, inherits `brewblox/brewblox-service` dependencies, and can install a local package.
+In the boilerplate repository, `docker/amd/Dockerfile` describes a straightforward Docker image: it has Python3.6, inherits `brewblox/brewblox-service` dependencies, and can install a local package.
 
 To explain what it's doing:
 
 ```Docker
-RUN mkdir -p /pkg
-COPY ./pkg/* /pkg/
+EXPOSE 5000
 ```
 
-This copies everything from the `docker/pkg/` directory (outside the image) into the `/pkg/` dictory inside the image.
+This opens the 5000 port in the container. Aiohttp will listen for incoming connections on this port.
+
+```Docker
+WORKDIR /app
+```
+
+The working directory for building and running the application is now `/app`.
+This is relevant if you're adding a volume to the container.
+
+
+```Docker
+COPY ./dist /app/dist
+```
+
+This copies everything from the `docker/dist/` directory (outside the image) into the `/app/dist/` directory inside the image.
 
 This allows building Docker images from local Python packages (not available on PyPi).
 
 ```Docker
-RUN pip3 install /pkg/* || true \
-    && pip3 install YOUR-PACKAGE \
-    && pip3 show YOUR-PACKAGE
+RUN pip3 install /app/dist/*
+RUN pip3 show YOUR-PACKAGE
 ```
 
 By now you'll have replaced `YOUR-PACKAGE` with something meaningful, but the logic remains the same:
-* It tries to install everything from `/pkg/` (those local packages copied in earlier)
-* It installs the package, and its dependencies. If a local version of the package was installed already, it won't attempt to find a new version on PyPi. This is useful for both local-only packages, and dev versions.
+* It tries to install everything from `/app/dist/` (those local packages copied in earlier)
+* It installs the package, and its dependencies. Any local packages installed now won't also be downloaded from PyPi.
+  * This approach allows simultaneously publishing to Docker and PyPi.
+* It displays the current version of `YOUR-PACKAGE`. This both logs the installed version to the build log, and makes sure the package is installed.
 
 ```Docker
 ENTRYPOINT ["python3", "-m", "YOUR_PACKAGE"]
@@ -48,10 +62,13 @@ Full script first, then we'll walk through it:
 ```bash
 tox
 
-rm docker/pkg/*
-cp .tox/dist/* docker/pkg/
+rm docker/dist/*
+cp .tox/dist/* docker/dist/
 
-docker build --tag your-package:local docker/
+docker build \
+  --tag your-package:local \
+  --file docker/amd/Dockerfile \
+  docker/
 ```
 
 Now step by step: 
@@ -64,18 +81,24 @@ This builds the Python package, and runs all tests PyTest could find.
 The output from building the package can be found in `.tox/dist/`, and is called `your-package-0.1.0.zip`. (0.1.0 being the version number).
 
 ```bash
-rm docker/pkg/*
-cp .tox/dist/* docker/pkg/
+rm docker/dist/*
+cp .tox/dist/* docker/dist/
 ```
 Remove all previous versions of your package from `docker/pkg/`, so there's no confusion as to what version should be installed when building the Docker image.
 
-Then copy the newly built image from `.tox/dist/` to `docker/pkg/` so Docker can copy the files into the image.
+Then copy the newly built image from `.tox/dist/` to `docker/dist/` so Docker can copy the files into the image.
 
 ```bash
-docker build --tag your-package:local docker/
+docker build \
+  --tag your-package:local \
+  --file docker/amd/Dockerfile \
+  docker/
 ```
 
 Build the docker image, and call it `your-package`. Everything after the `:` is the version tag (in this case: `local`).
+The build context is `docker/`. Docker can access everything in this directory (for example: to copy files into the image).
+
+The `--file` argument instructs Docker where to find its build script. By default, it will use a `Dockerfile` directly inside the build context.
 
 ## Running the image
 
@@ -139,7 +162,7 @@ services:
       - "traefik.frontend.rule=PathPrefix: /your_package"
 ```
 
-For a detailed explanation of everything you can put in a compose file, see https://docs.docker.com/compose/compose-file/#compose-file-structure-and-examples.
+For a detailed explanation of everything you can put in a compose file, see [the docker-compose documentation](https://docs.docker.com/compose/compose-file/#compose-file-structure-and-examples).
 
 We'll just concentrate on the bits most relevant for this service.
 
