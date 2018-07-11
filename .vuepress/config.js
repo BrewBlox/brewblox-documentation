@@ -3,9 +3,9 @@ module.exports = {
     description: 'Build your brewery, your way',
     themeConfig: {
         nav: [
-            { text: 'HOME', link: '/' },
-            { text: 'DEV', link: '/dev/' },
-            { text: 'BREWPI', link: 'https://www.brewpi.com/' }
+            { text: 'User Guides', link: '/user/startup' },
+            { text: 'Documentation', link: '/dev/' },
+            { text: 'BrewPi', link: 'https://www.brewpi.com/' }
         ],
         sidebar: {
             '/dev/': [
@@ -50,12 +50,10 @@ module.exports = {
                     ]
                 },
             ],
-            '/': [
-                ['', 'Home'],
-                'user/startup',
-                'user/features',
-                'user/advanced',
-                'user/examples',
+            '/user/': [
+                'startup',
+                'advanced',
+                'examples',
             ]
         },
         repo: 'brewblox/brewblox-documentation',
