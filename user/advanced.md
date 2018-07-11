@@ -58,3 +58,99 @@ Installing Docker is easy on [Ubuntu Linux](https://docs.docker.com/install/linu
 Docker-compose files must be adjusted between desktop and Pi versions, to account for the different architecture. Usually this means changing the version tag, but occasionally the Pi uses third-party images of external applications (eg. InfluxDB, Compose UI).
 
 BrewBlox images are always published for both architectures: simply remove the `rpi-` prefix to get the desktop version.
+
+## Defining base units
+
+The BrewPi Spark controller uses °C for temperature, and the metric system for everything else.
+
+You can configure the service to automatically convert controller values to any compatible unit.
+This is done by creating a unit system configuration file, using the [Pint](https://pint.readthedocs.io/en/latest/systems.html) syntax.
+
+First choose the system to inherit from. You can choose from one of the following:
+* `mks` (metre, kilogram, second)
+* `cgs` (centimeter, gram, second)
+* `imperial`
+* `US`
+
+Then decide which values you want to override, and set as your base units. An example file:
+
+```
+@system mySystem using cgs
+    degF
+    delta_degF
+@end
+```
+
+This configuration uses the `cgs` system as its base, but replaces the default `Kelvin` with Fahrenheit.
+If you set a custom temperature, you need to specify both the temperature, and its `delta` variant as base unit.
+
+Standard abbreviations and full names can both be used in the configuration file. `degF` and `fahrenheit` are both valid names.
+
+To add the configuration file to a spark service, you need to mount the file.
+
+Example service, using the `mySystem.txt` file:
+```yaml
+spark:
+    # standard configuration
+    image: brewblox/brewblox-devcon-spark:rpi-latest
+    privileged: true
+    depends_on:
+        - eventbus
+    labels:
+        - "traefik.port=5000"
+        - "traefik.frontend.rule=PathPrefix: /spark"
+
+    # Add volume, and use it in a command line argument
+    volumes:
+        - ./mySystem.txt:/mySystem.txt
+    command:
+        - "--unit-system-file=/mySystem.txt"
+```
+
+
+## Listing Spark devices
+
+By default, a `spark` service will list all USB devices, and connect to the first BrewPi Spark it sees.
+This works perfectly fine for a single Spark, but will be unreliable when using multiple Spark devices.
+
+For this reason, the `brewblox/brewblox-devcon-spark` image has a `--list-devices` command. 
+This will print out all connected devices, and exit.
+
+To use:
+* Plug the BrewPi Spark in the Raspberry Pi USB port
+* Open the terminal on the Raspberry Pi
+* Run the following command:
+```
+docker run --privileged brewblox/brewblox-devcon-spark:rpi-latest --list-devices
+```
+
+Example output:
+```
+2018/07/11 13:43:23 INFO     brewblox_service.service        Creating [spark] application
+2018/07/11 13:43:23 INFO     __main__                        Listing connected devices: 
+2018/07/11 13:43:23 INFO     __main__                        >> /dev/ttyACM1 | P1 - P1 Serial | USB VID:PID=2B04:C008 SER=240024000451353432383931 LOCATION=1-1.5:1.0
+2018/07/11 13:43:23 INFO     __main__                        >> /dev/ttyACM0 | P1 - P1 Serial | USB VID:PID=2B04:C008 SER=3f0025000851353532343835 LOCATION=1-1.3:1.0
+2018/07/11 13:43:23 INFO     __main__                        >> /dev/ttyAMA0 | ttyAMA0 | 3f201000.serial
+```
+
+There are three connected devices, two of which are P1 Sparks. The important information is their unique serial number (`SER=240024000451353432383931` and `SER=3f0025000851353532343835`).
+
+We can now use the serial number to connect by ID. This will match a service to a specific Spark.
+
+Example service:
+```yaml
+spark:
+    # standard configuration
+    image: brewblox/brewblox-devcon-spark:rpi-latest
+    privileged: true
+    depends_on:
+        - eventbus
+    labels:
+        - "traefik.port=5000"
+        - "traefik.frontend.rule=PathPrefix: /spark"
+
+    # connect by id
+    command:
+        - "--device-id=240024000451353432383931"
+        # or "--device-id=3f0025000851353532343835"
+```

@@ -53,7 +53,15 @@ module.exports = {
             '/user/': [
                 'startup',
                 'advanced',
-                'examples',
+                'compose',
+                {
+                    title: 'Example Configurations',
+                    children: [
+                        'examples/system',
+                        'examples/simulation',
+                        'examples/single_spark',
+                    ]
+                }
             ]
         },
         repo: 'brewblox/brewblox-documentation',
