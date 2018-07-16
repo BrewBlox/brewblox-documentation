@@ -49,16 +49,20 @@ Annotations are ordered on the position of their end character.
 
 Given the buffer:
 
-    '<messageA <messageB> <messageC> > data <messageD>'
+```python
+'<messageA <messageB> <messageC> > data <messageD>'
+```
 
 Yielded annotations will be:
 
-    [
-        'messageB',
-        'messageC',
-        'messageA   ',
-        'messageD'
-    ]
+```python
+[
+    'messageB',
+    'messageC',
+    'messageA   ',
+    'messageD'
+]
+```
 
 Afterwards, the buffer will contain `' data '`
 

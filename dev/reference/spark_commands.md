@@ -57,11 +57,11 @@ First argument in request is always opcode. First argument in Response is always
 * Request:
     * Opcode: Byte
     * ObjectId: Variable Length Id
-    * ObjectType: Byte
+    * ObjectType: uint16_t
     * ObjectSize: Byte
 * Response:
     * ErrorCode: Byte
-    * ObjectType: Byte
+    * ObjectType: uint16_t
     * ObjectSize: Byte
     * ObjectData: Byte[]
 
@@ -76,12 +76,12 @@ First argument in request is always opcode. First argument in Response is always
 * Request:
     * Opcode: Byte
     * ObjectId: Variable Length Id
-    * ObjectType: Byte
+    * ObjectType: uint16_t
     * ObjectSize: Byte
     * ObjectData: Byte[]
 * Response:
     * ErrorCode: Byte
-    * ObjectType: Byte
+    * ObjectType: uint16_t
     * ObjectSize: Byte
     * ObjectData: Byte[]
 
@@ -95,7 +95,7 @@ First argument in request is always opcode. First argument in Response is always
 * Opcode: 3
 * Request:
     * Opcode: Byte
-    * ObjectType: Byte
+    * ObjectType: uint16_t
     * ObjectSize: Byte
     * ObjectData: Byte[]
 * Response:
@@ -127,7 +127,7 @@ First argument in request is always opcode. First argument in Response is always
     * Padding: Byte
     * Objects (repeated):
         * ObjectId: Variable Length Id
-        * ObjectType: Byte
+        * ObjectType: uint16_t
         * ObjectSize: Byte
         * ObjectData: Byte[]
     * Padding: Byte
@@ -191,7 +191,7 @@ First argument in request is always opcode. First argument in Response is always
     * ErrorCode: Byte
     * Optional: Objects (repeated):
         * ObjectId: Variable Length Id
-        * ObjectType: Byte
+        * ObjectType: uint16_t
         * ObjectSize: Byte
         * ObjectData: Byte[]
     * Padding: Byte
@@ -242,11 +242,11 @@ First argument in request is always opcode. First argument in Response is always
 * Request:
     * Opcode: Byte
     * SystemObjectId: Variable Length Id
-    * ObjectType: Byte
+    * ObjectType: uint16_t
     * ObjectSize: Byte
 * Response:
     * ErrorCode: Byte
-    * ObjectType: Byte
+    * ObjectType: uint16_t
     * ObjectSize: Byte
     * ObjectData: Byte[]
 
@@ -261,12 +261,12 @@ First argument in request is always opcode. First argument in Response is always
 * Request:
     * Opcode: Byte
     * SystemObjectId: Variable Length Id
-    * ObjectType: Byte
+    * ObjectType: uint16_t
     * ObjectSize: Byte
     * ObjectData: Byte[]
 * Response:
     * ErrorCode: Byte
-    * ObjectType: Byte
+    * ObjectType: uint16_t
     * ObjectSize: Byte
     * ObjectData: Byte[]
 
