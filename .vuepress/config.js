@@ -22,6 +22,7 @@ module.exports = {
                     children: [
                         'reference/event_logging',
                         'reference/spark_commands',
+                        'reference/eeprom_persistence',
                     ]
                 },
                 {

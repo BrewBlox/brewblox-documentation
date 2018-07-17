@@ -3,22 +3,19 @@
 ## Opcodes
 
 ```python
-READ_VALUE=1,  # read a value
-WRITE_VALUE=2,  # write a value
-CREATE_OBJECT=3,  # add object in a container
-DELETE_OBJECT=4,  # delete the object at the specified location
-LIST_OBJECTS=5,  # list objects in a container
-FREE_SLOT=6,  # retrieves the next free slot in a container
-CREATE_PROFILE=7,  # create a new profile
-DELETE_PROFILE=8,  # delete a profile
-ACTIVATE_PROFILE=9,  # activate a profile
-LOG_VALUES=10,  # log values from the selected container
-RESET=11,  # reset the device
-FREE_SLOT_ROOT=12,  # find the next free slot in the root container
-UNUSED=13,  # unused
-LIST_PROFILES=14,  # list the define profile IDs and the active profile
-READ_SYSTEM_VALUE=15,  # read the value of a system object
-WRITE_SYSTEM_VALUE=16,  # write the value of a system object
+READ_OBJECT=1
+WRITE_OBJECT=2
+CREATE_OBJECT=3
+DELETE_OBJECT=4
+ACTIVATE_PROFILES=5
+READ_SYSTEM_OBJECT=6
+WRITE_SYSTEM_OBJECT=7
+LIST_ACTIVE_PROFILES=8
+LIST_ACTIVE_OBJECTS=9
+LIST_PROFILE_OBJECTS=10
+LIST_SYSTEM_OBJECTS=11
+CLEAR_PROFILE=12
+RESET=13
 ```
 
 ## Error Codes
@@ -48,228 +45,172 @@ INVALID_ID=-69
 
 ## Arguments
 
-First argument in request is always opcode. First argument in Response is always error code
+The response consists of three parts:
+- Request
+- Response
+- Values (optional)
+
+First argument in request is always opcode. First argument in Response is always error code.
+
+Values are only used when they can be repeated. </br>
+A command that will only ever return a single value will return it as part of the Response.
+
+Request and response are separated by a `|` character. </br>
+Response and each listed value are separated by a `,` character.
+
+Example:
+```
+REQUEST | RESPONSE , VALUE , VALUE
+```
 
 ---
-### Read Value
+### Read Object
 
-* Opcode: 1
-* Request:
-    * Opcode: Byte
-    * ObjectId: Variable Length Id
-    * ObjectType: uint16_t
-    * ObjectSize: Byte
-* Response:
-    * ErrorCode: Byte
-    * ObjectType: uint16_t
-    * ObjectSize: Byte
-    * ObjectData: Byte[]
-
-**TODO**:
-* Remove size from request
-* Remove size from response
+- Request:
+    - Opcode: `byte`
+    - ObjectId: `uint8_t`
+    - ObjectType: `uint16_t`
+- Response:
+    - Errorcode: `byte`
+    - Profiles: `bit[8]`
+    - ObjectType: `uint16_t`
+    - ObjectData: `byte[]`
 
 ---
-### Write Value
+### Write Object
 
-* Opcode: 2
-* Request:
-    * Opcode: Byte
-    * ObjectId: Variable Length Id
-    * ObjectType: uint16_t
-    * ObjectSize: Byte
-    * ObjectData: Byte[]
-* Response:
-    * ErrorCode: Byte
-    * ObjectType: uint16_t
-    * ObjectSize: Byte
-    * ObjectData: Byte[]
-
-**TODO**:
-* Remove size from request
-* Remove size from response
+- Request:
+    - Opcode: `byte`
+    - ObjectId: `uint8_t`
+    - Profiles: `bit[8]`
+    - ObjectType: `uint16_t`
+    - ObjectData: `byte[]`
+- Response:
+    - Errorcode: `byte`
+    - Profiles: `bit[8]`
+    - ObjectType: `uint16_t`
+    - ObjectData: `byte[]`
 
 ---
 ### Create Object
 
-* Opcode: 3
-* Request:
-    * Opcode: Byte
-    * ObjectType: uint16_t
-    * ObjectSize: Byte
-    * ObjectData: Byte[]
-* Response:
-    * ErrorCode: Byte
-
-**TODO**:
-* Add ObjectId to response
-* Remove ObjectSize from request
+- Request:
+    - Opcode: `byte`
+    - ObjectId: `uint8_t`
+    - Profiles: `bit[8]`
+    - ObjectType: `uint16_t`
+    - ObjectData: `byte[]`
+- Response:
+    - Errorcode: `byte`
+    - ObjectId: `uint8_t`
 
 ---
 ### Delete Object
 
-* Opcode: 4
-* Request:
-    * Opcode: Byte
-    * ObjectId: Variable Length Id
-* Response:
-    * ErrorCode: Byte
+- Request:
+    - Opcode: `byte`
+    - ObjectId: `uint8_t`
+- Response:
+    - Errorcode: `byte`
 
 ---
-### List Objects
+### Activate Profiles
 
-* Opcode: 5
-* Request:
-    * Opcode: Byte
-    * ProfileId: int8_t
-* Response:
-    * ErrorCode: Byte
-    * Padding: Byte
-    * Objects (repeated):
-        * ObjectId: Variable Length Id
-        * ObjectType: uint16_t
-        * ObjectSize: Byte
-        * ObjectData: Byte[]
-    * Padding: Byte
-    * Terminated: Null Byte
-
-**TODO**:
-* Remove padding from response
-* Remove ObjectSize from response
+- Request:
+    - Opcode: `byte`
+    - Profiles: `bit[8]`
+- Response:
+    - Errorcode: `byte`
 
 ---
-### Free Object Slot
+### Read System Object
 
-* Opcode: 6
-* Request:
-    * Opcode: Byte
-    * ObjectId: Variable Length Id
-* Response:
-    * ErrorCode: Byte
-
----
-### Create Profile
-
-* Opcode: 7
-* Request:
-    * Opcode: Byte
-* Response:
-    * ErrorCode: Byte
-    * ProfileId: int8_t
+- Request:
+    - Opcode: `byte`
+    - ObjectId: `uint8_t`
+    - ObjectType: `uint16_t`
+- Response:
+    - Errorcode: `byte`
+    - ObjectType: `uint16_t`
+    - ObjectData: `byte[]`
 
 ---
-### Delete Profile
+### Write System Object
 
-* Opcode: 8
-* Request:
-    * Opcode: Byte
-    * ProfileId: int8_t
-* Response:
-    * ErrorCode: Byte
-
----
-### Activate Profile
-
-* Opcode: 9
-* Request:
-    * Opcode: Byte
-    * ProfileId: int8_t
-* Response:
-    * ErrorCode: Byte
+- Request:
+    - Opcode: `byte`
+    - ObjectId: `uint8_t`
+    - ObjectType: `uint16_t`
+    - ObjectData: `byte[]`
+- Response:
+    - Errorcode: `byte`
+    - ObjectType: `uint16_t`
+    - ObjectData: `byte[]`
 
 ---
-### Log Values
+### List Active Profiles
 
-* Opcode: 10
-* Request:
-    * Opcode: Byte
-    * Flags: Byte with bit flags
-        * bit 1: Id chain
-        * bit 2: Log system container
-    * Optional: ObjectId: Variable Length Id
-* Response:
-    * ErrorCode: Byte
-    * Optional: Objects (repeated):
-        * ObjectId: Variable Length Id
-        * ObjectType: uint16_t
-        * ObjectSize: Byte
-        * ObjectData: Byte[]
-    * Padding: Byte
-    * Terminated: Null Byte
+- Request:
+    - Opcode: `byte`
+- Response:
+    - Errorcode: `byte`
+    - Profiles: `bit[8]`
 
-**TODO**:
-* Remove padding from response
-* Remove ObjectSize from response
+---
+### List Active Objects
+
+- Request:
+    - Opcode: `byte`
+- Response:
+    - Errorcode: `byte`
+    - Profiles: `bit[8]`
+- Values:
+    - ObjectId: `uint8_t`
+    - Profiles: `bit[8]`
+    - ObjectType: `uint16_t`
+    - ObjectData: `byte[]`
+
+---
+### List Profile Objects
+
+- Request:
+    - Opcode: `byte`
+- Response:
+    - Errorcode: `byte`
+- Values:
+    - ObjectId: `uint8_t`
+    - Profiles: `bit[8]`
+    - ObjectType: `uint16_t`
+    - ObjectData: `byte[]`
+
+---
+### List System Objects
+
+- Request:
+    - Opcode: `byte`
+- Response:
+    - Errorcode: `byte`
+- Values:
+    - ObjectId: `uint8_t`
+    - ObjectType: `uint16_t`
+    - ObjectData: `byte[]`
+
+---
+### Clear Profile
+
+- Request:
+    - Opcode: `byte`
+    - Profiles: `bit[8]`
+- Response:
+    - Errorcode: `byte`
 
 ---
 ### Reset
 
-* Opcode: 11
 * Request:
-    * Opcode: Byte
-    * Flags: Byte with bit flags
+    * Opcode: `byte`
+    * Flags: `bit[8]`
         * bit 1: erase EEProm
         * bit 2: hard reset
 * Response:
-    * ErrorCode: Byte
-
----
-### Free Root Slot
-
-* Opcode: 12
-* Request:
-    * Opcode: Byte
-    * System Object Id: Variable Length Id
-* Response:
-    * ErrorCode: Byte
-
----
-### List Profiles
-
-* Opcode: 14
-* Request:
-    * Opcode: Byte
-* Response:
-    * ErrorCode: Byte
-    * ProfileId: int8_t
-    * Profiles (repeated):
-        * ProfileId: int8_t
-
----
-### Read System Value
-
-* Opcode: 15
-* Request:
-    * Opcode: Byte
-    * SystemObjectId: Variable Length Id
-    * ObjectType: uint16_t
-    * ObjectSize: Byte
-* Response:
-    * ErrorCode: Byte
-    * ObjectType: uint16_t
-    * ObjectSize: Byte
-    * ObjectData: Byte[]
-
-**TODO**:
-* Remove size from request
-* Remove size from response
-
----
-### Write System Value
-
-* Opcode: 16
-* Request:
-    * Opcode: Byte
-    * SystemObjectId: Variable Length Id
-    * ObjectType: uint16_t
-    * ObjectSize: Byte
-    * ObjectData: Byte[]
-* Response:
-    * ErrorCode: Byte
-    * ObjectType: uint16_t
-    * ObjectSize: Byte
-    * ObjectData: Byte[]
-
-**TODO**:
-* Remove size from request
-* Remove size from response
+    * Errorcode: `byte`
