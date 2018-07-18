@@ -175,6 +175,7 @@ REQUEST | RESPONSE , VALUE , VALUE
 
 - Request:
     - Opcode: `byte`
+    - Profile: `uint8_t`
 - Response:
     - Errorcode: `byte`
 - Values:
