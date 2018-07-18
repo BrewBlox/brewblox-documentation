@@ -7,15 +7,16 @@ READ_OBJECT=1
 WRITE_OBJECT=2
 CREATE_OBJECT=3
 DELETE_OBJECT=4
-ACTIVATE_PROFILES=5
-READ_SYSTEM_OBJECT=6
-WRITE_SYSTEM_OBJECT=7
-LIST_ACTIVE_PROFILES=8
+READ_SYSTEM_OBJECT=5
+WRITE_SYSTEM_OBJECT=6
+READ_ACTIVE_PROFILES=7
+WRITE_ACTIVE_PROFILES=8
 LIST_ACTIVE_OBJECTS=9
-LIST_PROFILE_OBJECTS=10
+LIST_SAVED_OBJECTS=10
 LIST_SYSTEM_OBJECTS=11
 CLEAR_PROFILE=12
-RESET=13
+FACTORY_RESET=13
+RESTART=14
 ```
 
 ## Error Codes
@@ -68,10 +69,11 @@ REQUEST | RESPONSE , VALUE , VALUE
 
 - Request:
     - Opcode: `byte`
-    - ObjectId: `uint8_t`
+    - ObjectId: `uint16_t`
     - ObjectType: `uint16_t`
 - Response:
     - Errorcode: `byte`
+    - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
@@ -81,12 +83,13 @@ REQUEST | RESPONSE , VALUE , VALUE
 
 - Request:
     - Opcode: `byte`
-    - ObjectId: `uint8_t`
+    - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 - Response:
     - Errorcode: `byte`
+    - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
@@ -96,29 +99,23 @@ REQUEST | RESPONSE , VALUE , VALUE
 
 - Request:
     - Opcode: `byte`
-    - ObjectId: `uint8_t`
+    - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 - Response:
     - Errorcode: `byte`
-    - ObjectId: `uint8_t`
+    - ObjectId: `uint16_t`
+    - Profiles: `bit[8]`
+    - ObjectType: `uint16_t`
+    - ObjectData: `byte[]`
 
 ---
 ### Delete Object
 
 - Request:
     - Opcode: `byte`
-    - ObjectId: `uint8_t`
-- Response:
-    - Errorcode: `byte`
-
----
-### Activate Profiles
-
-- Request:
-    - Opcode: `byte`
-    - Profiles: `bit[8]`
+    - ObjectId: `uint16_t`
 - Response:
     - Errorcode: `byte`
 
@@ -127,10 +124,11 @@ REQUEST | RESPONSE , VALUE , VALUE
 
 - Request:
     - Opcode: `byte`
-    - ObjectId: `uint8_t`
+    - ObjectId: `uint16_t`
     - ObjectType: `uint16_t`
 - Response:
     - Errorcode: `byte`
+    - ObjectId: `uint16_t`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 
@@ -139,7 +137,7 @@ REQUEST | RESPONSE , VALUE , VALUE
 
 - Request:
     - Opcode: `byte`
-    - ObjectId: `uint8_t`
+    - ObjectId: `uint16_t`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 - Response:
@@ -148,13 +146,24 @@ REQUEST | RESPONSE , VALUE , VALUE
     - ObjectData: `byte[]`
 
 ---
-### List Active Profiles
+### Read Active Profiles
 
 - Request:
     - Opcode: `byte`
 - Response:
     - Errorcode: `byte`
     - Profiles: `bit[8]`
+
+---
+### Write Active Profiles
+
+- Request:
+    - Opcode: `byte`
+    - Profiles: `bit[8]`
+- Response:
+    - Errorcode: `byte`
+    - Profiles: `bit[8]`
+
 
 ---
 ### List Active Objects
@@ -165,21 +174,21 @@ REQUEST | RESPONSE , VALUE , VALUE
     - Errorcode: `byte`
     - Profiles: `bit[8]`
 - Values:
-    - ObjectId: `uint8_t`
+    - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 
 ---
-### List Profile Objects
+### List Saved Objects
 
 - Request:
     - Opcode: `byte`
-    - Profile: `uint8_t`
 - Response:
     - Errorcode: `byte`
+    - Profiles: `bit[8]`
 - Values:
-    - ObjectId: `uint8_t`
+    - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
@@ -192,7 +201,7 @@ REQUEST | RESPONSE , VALUE , VALUE
 - Response:
     - Errorcode: `byte`
 - Values:
-    - ObjectId: `uint8_t`
+    - ObjectId: `uint16_t`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 
@@ -206,12 +215,17 @@ REQUEST | RESPONSE , VALUE , VALUE
     - Errorcode: `byte`
 
 ---
-### Reset
+### Factory Reset
 
 * Request:
     * Opcode: `byte`
-    * Flags: `bit[8]`
-        * bit 1: erase EEProm
-        * bit 2: hard reset
+* Response:
+    * Errorcode: `byte`
+
+---
+### Restart
+
+* Request:
+    * Opcode: `byte`
 * Response:
     * Errorcode: `byte`
