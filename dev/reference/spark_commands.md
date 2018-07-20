@@ -70,7 +70,6 @@ REQUEST | RESPONSE , VALUE , VALUE
 - Request:
     - Opcode: `byte`
     - ObjectId: `uint16_t`
-    - ObjectType: `uint16_t`
 - Response:
     - Errorcode: `byte`
     - ObjectId: `uint16_t`
@@ -142,6 +141,7 @@ REQUEST | RESPONSE , VALUE , VALUE
     - ObjectData: `byte[]`
 - Response:
     - Errorcode: `byte`
+    - ObjectId: `uint16_t`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 
