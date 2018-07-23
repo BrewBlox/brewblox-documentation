@@ -64,6 +64,13 @@ Example:
 REQUEST | RESPONSE , VALUE , VALUE
 ```
 
+Each section is validated with an 8bit Dallas OneWire CRC that is calculated for only that section.
+
+This makes it:
+```
+REQUEST[CRC] | RESPONSE[CRC] , VALUE[CRC] , VALUE[CRC]
+```
+
 ---
 ### Read Object
 
