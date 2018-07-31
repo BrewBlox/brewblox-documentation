@@ -17,7 +17,7 @@ SSH will now be enabled when the Pi boots.
 
 To configure WiFi, create the `/etc/wpa_supplicant/wpa_supplicant.conf` file in the root partition.
 
-The file contents should be: 
+The file contents should be:
 
 ```
 country=YOUR_COUNTRY_CODE
@@ -43,7 +43,7 @@ The default BrewBlox projects are installed in the `pi` user root directory (`/h
 
 To get started with docker-compose, you can find a tutorial [here](https://docs.docker.com/compose/gettingstarted/#step-3-define-services-in-a-compose-file).
 
-::: warning 
+::: warning
 The Raspberry Pi uses the `ARM32v7` processor architecture. This is supported by most [official Docker images](https://hub.docker.com/explore/), but not all.
 
 All BrewBlox images built for the Pi have their version prefixed with `rpi-`. (Example: `brewblox/brewblox-history:rpi-latest`).
@@ -77,12 +77,10 @@ Then decide which values you want to override, and set as your base units. An ex
 ```
 @system mySystem using cgs
     degF
-    delta_degF
 @end
 ```
 
 This configuration uses the `cgs` system as its base, but replaces the default `Kelvin` with Fahrenheit.
-If you set a custom temperature, you need to specify both the temperature, and its `delta` variant as base unit.
 
 Standard abbreviations and full names can both be used in the configuration file. `degF` and `fahrenheit` are both valid names.
 
@@ -113,7 +111,7 @@ spark:
 By default, a `spark` service will list all USB devices, and connect to the first BrewPi Spark it sees.
 This works perfectly fine for a single Spark, but will be unreliable when using multiple Spark devices.
 
-For this reason, the `brewblox/brewblox-devcon-spark` image has a `--list-devices` command. 
+For this reason, the `brewblox/brewblox-devcon-spark` image has a `--list-devices` command.
 This will print out all connected devices, and exit.
 
 To use:
@@ -127,7 +125,7 @@ docker run --privileged brewblox/brewblox-devcon-spark:rpi-latest --list-devices
 Example output:
 ```
 2018/07/11 13:43:23 INFO     brewblox_service.service        Creating [spark] application
-2018/07/11 13:43:23 INFO     __main__                        Listing connected devices: 
+2018/07/11 13:43:23 INFO     __main__                        Listing connected devices:
 2018/07/11 13:43:23 INFO     __main__                        >> /dev/ttyACM1 | P1 - P1 Serial | USB VID:PID=2B04:C008 SER=240024000451353432383931 LOCATION=1-1.5:1.0
 2018/07/11 13:43:23 INFO     __main__                        >> /dev/ttyACM0 | P1 - P1 Serial | USB VID:PID=2B04:C008 SER=3f0025000851353532343835 LOCATION=1-1.3:1.0
 2018/07/11 13:43:23 INFO     __main__                        >> /dev/ttyAMA0 | ttyAMA0 | 3f201000.serial
