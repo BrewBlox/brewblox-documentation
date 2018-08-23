@@ -3,45 +3,53 @@
 ## Opcodes
 
 ```python
+NONE=0
 READ_OBJECT=1
 WRITE_OBJECT=2
 CREATE_OBJECT=3
 DELETE_OBJECT=4
-READ_SYSTEM_OBJECT=5
-WRITE_SYSTEM_OBJECT=6
-READ_ACTIVE_PROFILES=7
-WRITE_ACTIVE_PROFILES=8
-LIST_ACTIVE_OBJECTS=9
-LIST_SAVED_OBJECTS=10
-LIST_SYSTEM_OBJECTS=11
-CLEAR_PROFILE=12
-FACTORY_RESET=13
-RESTART=14
+LIST_ACTIVE_OBJECTS=5
+LIST_STORED_OBJECTS=6
+CLEAR_OBJECTS=7
+REBOOT=8
+FACTORY_RESET=9
 ```
 
 ## Error Codes
 
 ```python
 OK=0
-UNKNOWN_ERROR=-1
-STREAM_ERROR=-2
-PROFILE_NOT_ACTIVE=-3
-INSUFFICIENT_PERSISTENT_STORAGE=-16
-INSUFFICIENT_HEAP=-17
+UNKNOWN_ERROR=1
 
-OBJECT_NOT_WRITABLE=-32
-OBJECT_NOT_READABLE=-33
-OBJECT_NOT_CREATABLE=-34
-OBJECT_NOT_DELETABLE=-35
-OBJECT_NOT_CONTAINER=-37
-CONTAINER_FULL=-38
+# Object creation
+INSUFFICIENT_HEAP=4
 
-INVALID_PARAMETER=-64
-INVALID_OBJECT_ID=-65
-INVALID_TYPE=-66
-INVALID_SIZE=-67
-INVALID_PROFILE=-68
-INVALID_ID=-69
+# Generic stream errors
+STREAM_ERROR_UNSPECIFIED=8
+OUTPUT_STREAM_WRITE_ERROR=9
+INPUT_STREAM_READ_ERROR=10
+INPUT_STREAM_DECODING_ERROR=11
+OUTPUT_STREAM_ENCODING_ERROR=12
+
+# Storage errors
+INSUFFICIENT_PERSISTENT_STORAGE=16
+PERSISTED_OBJECT_NOT_FOUND=17
+INVALID_PERSISTED_BLOCK_TYPE=18
+COULD_NOT_READ_PERSISTED_BLOCK_SIZE=19
+PERSISTED_BLOCK_STREAM_ERROR=20
+PERSISTED_STORAGE_WRITE_ERROR=21
+
+# Invalid actions
+OBJECT_NOT_WRITABLE=32
+OBJECT_NOT_READABLE=33
+OBJECT_NOT_CREATABLE=34
+OBJECT_NOT_DELETABLE=35
+
+# Invalid parameters
+INVALID_COMMAND=63
+INVALID_OBJECT_ID=65
+INVALID_OBJECT_TYPE=66
+INVALID_OBJECT_PROFILES=68
 ```
 
 ## Arguments
@@ -75,10 +83,10 @@ REQUEST[CRC] | RESPONSE[CRC] , VALUE[CRC] , VALUE[CRC]
 ### Read Object
 
 - Request:
-    - Opcode: `byte`
+    - Opcode: `uint8_t`
     - ObjectId: `uint16_t`
 - Response:
-    - Errorcode: `byte`
+    - Errorcode: `uint8_t`
     - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
     - ObjectType: `uint16_t`
@@ -88,13 +96,13 @@ REQUEST[CRC] | RESPONSE[CRC] , VALUE[CRC] , VALUE[CRC]
 ### Write Object
 
 - Request:
-    - Opcode: `byte`
+    - Opcode: `uint8_t`
     - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 - Response:
-    - Errorcode: `byte`
+    - Errorcode: `uint8_t`
     - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
     - ObjectType: `uint16_t`
@@ -104,13 +112,13 @@ REQUEST[CRC] | RESPONSE[CRC] , VALUE[CRC] , VALUE[CRC]
 ### Create Object
 
 - Request:
-    - Opcode: `byte`
+    - Opcode: `uint8_t`
     - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 - Response:
-    - Errorcode: `byte`
+    - Errorcode: `uint8_t`
     - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
     - ObjectType: `uint16_t`
@@ -120,66 +128,18 @@ REQUEST[CRC] | RESPONSE[CRC] , VALUE[CRC] , VALUE[CRC]
 ### Delete Object
 
 - Request:
-    - Opcode: `byte`
+    - Opcode: `uint8_t`
     - ObjectId: `uint16_t`
 - Response:
-    - Errorcode: `byte`
-
----
-### Read System Object
-
-- Request:
-    - Opcode: `byte`
-    - ObjectId: `uint16_t`
-    - ObjectType: `uint16_t`
-- Response:
-    - Errorcode: `byte`
-    - ObjectId: `uint16_t`
-    - ObjectType: `uint16_t`
-    - ObjectData: `byte[]`
-
----
-### Write System Object
-
-- Request:
-    - Opcode: `byte`
-    - ObjectId: `uint16_t`
-    - ObjectType: `uint16_t`
-    - ObjectData: `byte[]`
-- Response:
-    - Errorcode: `byte`
-    - ObjectId: `uint16_t`
-    - ObjectType: `uint16_t`
-    - ObjectData: `byte[]`
-
----
-### Read Active Profiles
-
-- Request:
-    - Opcode: `byte`
-- Response:
-    - Errorcode: `byte`
-    - Profiles: `bit[8]`
-
----
-### Write Active Profiles
-
-- Request:
-    - Opcode: `byte`
-    - Profiles: `bit[8]`
-- Response:
-    - Errorcode: `byte`
-    - Profiles: `bit[8]`
-
+    - Errorcode: `uint8_t`
 
 ---
 ### List Active Objects
 
 - Request:
-    - Opcode: `byte`
+    - Opcode: `uint8_t`
 - Response:
-    - Errorcode: `byte`
-    - Profiles: `bit[8]`
+    - Errorcode: `uint8_t`
 - Values:
     - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
@@ -187,13 +147,12 @@ REQUEST[CRC] | RESPONSE[CRC] , VALUE[CRC] , VALUE[CRC]
     - ObjectData: `byte[]`
 
 ---
-### List Saved Objects
+### List Stored Objects
 
 - Request:
-    - Opcode: `byte`
+    - Opcode: `uint8_t`
 - Response:
-    - Errorcode: `byte`
-    - Profiles: `bit[8]`
+    - Errorcode: `uint8_t`
 - Values:
     - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
@@ -201,38 +160,25 @@ REQUEST[CRC] | RESPONSE[CRC] , VALUE[CRC] , VALUE[CRC]
     - ObjectData: `byte[]`
 
 ---
-### List System Objects
+### Clear Objects
 
-- Request:
-    - Opcode: `byte`
-- Response:
-    - Errorcode: `byte`
-- Values:
-    - ObjectId: `uint16_t`
-    - ObjectType: `uint16_t`
-    - ObjectData: `byte[]`
+* Request:
+    * Opcode: `uint8_t`
+* Response:
+    * Errorcode: `uint8_t`
 
 ---
-### Clear Profile
+### Reboot
 
-- Request:
-    - Opcode: `byte`
-    - Profiles: `bit[8]`
-- Response:
-    - Errorcode: `byte`
+* Request:
+    * Opcode: `uint8_t`
+* Response:
+    * Errorcode: `uint8_t`
 
 ---
 ### Factory Reset
 
 * Request:
-    * Opcode: `byte`
+    * Opcode: `uint8_t`
 * Response:
-    * Errorcode: `byte`
-
----
-### Restart
-
-* Request:
-    * Opcode: `byte`
-* Response:
-    * Errorcode: `byte`
+    * Errorcode: `uint8_t`
