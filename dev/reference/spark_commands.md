@@ -52,6 +52,11 @@ INVALID_OBJECT_TYPE=66
 INVALID_OBJECT_PROFILES=68
 ```
 
+## Endianness
+
+With the exception of `ObjectData`, all multi-byte values are little endian. </br>
+`ObjectData` is considered a black box of byte values. Consequently, its endianness is irrelevant.
+
 ## Arguments
 
 The response consists of three parts:
