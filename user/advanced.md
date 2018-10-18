@@ -59,52 +59,6 @@ Docker-compose files must be adjusted between desktop and Pi versions, to accoun
 
 BrewBlox images are always published for both architectures: simply remove the `rpi-` prefix to get the desktop version.
 
-## Defining base units
-
-The BrewPi Spark controller uses °C for temperature, and the metric system for everything else.
-
-You can configure the service to automatically convert controller values to any compatible unit.
-This is done by creating a unit system configuration file, using the [Pint](https://pint.readthedocs.io/en/latest/systems.html) syntax.
-
-First choose the system to inherit from. You can choose from one of the following:
-* `mks` (metre, kilogram, second)
-* `cgs` (centimeter, gram, second)
-* `imperial`
-* `US`
-
-Then decide which values you want to override, and set as your base units. An example file:
-
-```
-@system mySystem using cgs
-    degF
-@end
-```
-
-This configuration uses the `cgs` system as its base, but replaces the default `Kelvin` with Fahrenheit.
-
-Standard abbreviations and full names can both be used in the configuration file. `degF` and `fahrenheit` are both valid names.
-
-To add the configuration file to a spark service, you need to mount the file.
-
-Example service, using the `mySystem.txt` file:
-```yaml
-spark:
-    # standard configuration
-    image: brewblox/brewblox-devcon-spark:rpi-latest
-    privileged: true
-    depends_on:
-        - eventbus
-    labels:
-        - "traefik.port=5000"
-        - "traefik.frontend.rule=PathPrefix: /spark"
-
-    # Add volume, and use it in a command line argument
-    volumes:
-        - ./mySystem.txt:/mySystem.txt
-    command:
-        - "--unit-system-file=/mySystem.txt"
-```
-
 
 ## Listing Spark devices
 
