@@ -247,7 +247,7 @@ Triggers a controller reboot after returning the response.
 
 ---
 ### Factory Reset
-Wipes all persisted data and reboots.
+Wipes all persisted data, and triggers a controller reboot after returning the response.
 
 - Request:
     - Opcode: `uint8_t = 10`
