@@ -47,6 +47,7 @@ module.exports = {
                         'decisions/dev_releases',
                         'decisions/orchestration',
                         'decisions/documentation_layout',
+                        'decisions/block_synchronization',
                     ]
                 },
             ],
