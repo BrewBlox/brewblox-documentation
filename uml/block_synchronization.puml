@@ -1,0 +1,27 @@
+@startuml Block Synchronization
+    node Service_Master
+    node Spark_Master
+    entity Sensor
+
+    node Service_Slave_1
+    node Spark_Slave_1
+    entity Actuator_1
+
+    node Service_Slave_2
+    node Spark_Slave_2
+    entity Actuator_2
+
+    storage RabbitMQ
+
+    Service_Master --> "read" Spark_Master
+    Service_Slave_1 --> "write" Spark_Slave_1
+    Service_Slave_2 --> "write" Spark_Slave_2
+    
+    Service_Master --> "broadcast" RabbitMQ
+    Service_Slave_1 -up-> "subscribe" RabbitMQ
+    Service_Slave_2 -up-> "subscribe" RabbitMQ
+
+    Spark_Master --> Sensor
+    Spark_Slave_1 --> Actuator_1
+    Spark_Slave_2 --> Actuator_2
+@enduml
