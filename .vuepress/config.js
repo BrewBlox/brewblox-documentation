@@ -48,6 +48,7 @@ module.exports = {
                         'decisions/orchestration',
                         'decisions/documentation_layout',
                         'decisions/block_synchronization',
+                        'decisions/docker_image_cleaning',
                     ]
                 },
             ],
