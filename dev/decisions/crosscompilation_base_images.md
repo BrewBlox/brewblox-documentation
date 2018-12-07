@@ -106,7 +106,7 @@ After creating our images we could upgrade all our services to Python 3.7. While
 [xcompile-1]: ./docker_crosscompilation.md
 [xcompile-2]: ./crosscompilation_revisited.md
 [manifest]: https://docs.docker.com/edge/engine/reference/commandline/manifest/
-[build-guide]: http://www.hotblackrobotics.com/en/blog/2018/01/22/docker-images-arm/
+[build-guide]: https://www.hotblackrobotics.com/en/blog/2018/01/22/docker-images-arm/
 [docker-cli]: https://docs.docker.com/engine/reference/commandline/build/#options
 [python-amd]: https://hub.docker.com/r/amd64/python/
 [python-arm]: https://hub.docker.com/r/arm32v7/python/

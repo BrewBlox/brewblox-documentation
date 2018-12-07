@@ -24,6 +24,6 @@ To build the docs with hot reloading:
 npm run dev
 ```
 
-The docs will be served at http://localhost:8080
+The docs will be served at `http://localhost:8080`
 
 

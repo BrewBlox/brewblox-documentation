@@ -67,11 +67,11 @@ The industry default for RPI is REST, but more research is required to determine
 [is-rest-best]: https://capgemini.github.io/architecture/is-rest-best-microservices/
 [dzone-msa-communication]: https://dzone.com/articles/communicating-between-microservices
 [rest-wiki]: https://en.wikipedia.org/wiki/Representational_state_transfer
-[msa-patterns]: http://microservices.io/patterns/microservices.html
-[rpi-pattern]: http://microservices.io/patterns/communication-style/rpi.html
+[msa-patterns]: https://microservices.io/patterns/microservices.html
+[rpi-pattern]: https://microservices.io/patterns/communication-style/rpi.html
 [grpc]: https://grpc.io/
 [thrift]: https://thrift.apache.org/
-[implementing-rpc]: http://pages.cs.wisc.edu/~sschang/OS-Qual/distOS/RPC.htm
+[implementing-rpc]: https://pages.cs.wisc.edu/~sschang/OS-Qual/distOS/RPC.htm
 
 
 ## References
@@ -81,8 +81,8 @@ The industry default for RPI is REST, but more research is required to determine
 * https://capgemini.github.io/architecture/is-rest-best-microservices/
 * https://dzone.com/articles/communicating-between-microservices
 * https://en.wikipedia.org/wiki/Representational_state_transfer
-* http://microservices.io/patterns/microservices.html
-* http://microservices.io/patterns/communication-style/rpi.html
+* https://microservices.io/patterns/microservices.html
+* https://microservices.io/patterns/communication-style/rpi.html
 * https://grpc.io/
 * https://thrift.apache.org/
-* http://pages.cs.wisc.edu/~sschang/OS-Qual/distOS/RPC.htm
+* https://pages.cs.wisc.edu/~sschang/OS-Qual/distOS/RPC.htm

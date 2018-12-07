@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const plantumlEncoder = require('plantuml-encoder');
 
-const urlbase = 'http://www.plantuml.com/plantuml/png/';
+const urlbase = 'https://www.plantuml.com/plantuml/png/';
 let files = fs.readdirSync('uml/');
 let urls = {};
 

@@ -109,7 +109,7 @@ For I/O constrained applications, the asynchronous implementation is simpler, an
 [asyncio-benchmarks]: https://github.com/python/asyncio/wiki/Benchmarks
 [asyncio-benchmark-2]: https://eng.paxos.com/python-3s-killer-feature-asyncio
 [async-looking-glass]: https://hackernoon.com/async-through-the-looking-glass-d69a0a88b661
-[threads-vs-events]: http://berb.github.io/diploma-thesis/original/043_threadsevents.html
+[threads-vs-events]: https://berb.github.io/diploma-thesis/original/043_threadsevents.html
 [memory-benchmark]: https://code.kiwi.com/memory-efficiency-of-parallel-io-operations-in-python-6e7d6c51905d
 
 
@@ -121,5 +121,5 @@ For I/O constrained applications, the asynchronous implementation is simpler, an
 * https://github.com/python/asyncio/wiki/Benchmarks
 * https://eng.paxos.com/python-3s-killer-feature-asyncio
 * https://hackernoon.com/async-through-the-looking-glass-d69a0a88b661
-* http://berb.github.io/diploma-thesis/original/043_threadsevents.html
+* https://berb.github.io/diploma-thesis/original/043_threadsevents.html
 * https://code.kiwi.com/memory-efficiency-of-parallel-io-operations-in-python-6e7d6c51905d

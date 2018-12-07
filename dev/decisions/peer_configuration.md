@@ -203,7 +203,7 @@ Design decisions are:
 
 
 
-[1]: http://microservices.io/patterns/server-side-discovery.html
+[1]: https://microservices.io/patterns/server-side-discovery.html
 [2]: https://www.nginx.com/blog/service-discovery-in-a-microservices-architecture/
 [3]: https://github.com/docker/dockercloud-haproxy
 [4]: https://gitlab.com/ProftaakS61mGroepA/ProjectPub/blob/master/deploy-order/docker-compose.yml
@@ -211,16 +211,16 @@ Design decisions are:
 [6]: https://docs.docker.com/docker-cloud/apps/service-links/#discovering-containers-on-the-same-service-or-stack
 [7]: https://success.docker.com/article/Docker_Reference_Architecture-_Service_Discovery_and_Load_Balancing_with_Docker_Universal_Control_Plane_(UCP)
 [8]: https://serverfault.com/questions/816293/haproxy-reverse-proxy-and-virtual-host
-[9]: http://jasonwilder.com/blog/2014/07/15/docker-service-discovery/
+[9]: https://jasonwilder.com/blog/2014/07/15/docker-service-discovery/
 [10]: https://github.com/gliderlabs/registrator
-[11]: http://blog.arungupta.me/zookeeper-microservice-registration-discovery/
+[11]: https://blog.arungupta.me/zookeeper-microservice-registration-discovery/
 [12]: https://www.consul.io/intro/index.html
 [13]: https://gliderlabs.com/registrator/latest/user/quickstart/
 
 
 ## References
 
-* http://microservices.io/patterns/server-side-discovery.html
+* https://microservices.io/patterns/server-side-discovery.html
 * https://www.nginx.com/blog/service-discovery-in-a-microservices-architecture/
 * https://github.com/docker/dockercloud-haproxy
 * https://gitlab.com/ProftaakS61mGroepA/ProjectPub/blob/master/deploy-order/docker-compose.yml
@@ -228,8 +228,8 @@ Design decisions are:
 * https://docs.docker.com/docker-cloud/apps/service-links/#discovering-containers-on-the-same-service-or-stack
 * <https://success.docker.com/article/Docker_Reference_Architecture-_Service_Discovery_and_Load_Balancing_with_Docker_Universal_Control_Plane_(UCP)>
 * https://serverfault.com/questions/816293/haproxy-reverse-proxy-and-virtual-host
-* http://jasonwilder.com/blog/2014/07/15/docker-service-discovery/
+* https://jasonwilder.com/blog/2014/07/15/docker-service-discovery/
 * https://github.com/gliderlabs/registrator
-* http://blog.arungupta.me/zookeeper-microservice-registration-discovery/
+* https://blog.arungupta.me/zookeeper-microservice-registration-discovery/
 * https://www.consul.io/intro/index.html
 * https://gliderlabs.com/registrator/latest/user/quickstart/
