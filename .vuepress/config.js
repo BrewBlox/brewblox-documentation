@@ -49,6 +49,7 @@ module.exports = {
                         'decisions/documentation_layout',
                         'decisions/block_synchronization',
                         'decisions/docker_image_cleaning',
+                        'decisions/crosscompilation_base_images',
                     ]
                 },
             ],
