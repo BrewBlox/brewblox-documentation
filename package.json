@@ -21,8 +21,8 @@
   },
   "homepage": "https://github.com/BrewBlox/brewblox-documentation#readme",
   "devDependencies": {
-    "vuepress": "^0.10.2",
-    "plantuml-encoder": "^1.2.5"
+    "plantuml-encoder": "^1.2.5",
+    "vuepress": "^0.14.8"
   },
   "dependencies": {}
 }
