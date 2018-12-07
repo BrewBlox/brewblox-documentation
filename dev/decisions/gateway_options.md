@@ -65,7 +65,7 @@ Seems capable, but documentation needs some more detailed attention.
 * Only hosts the gateway, not the services
 * Bad documentation - low on technical info, high on sales pitches
 
-### [OpenResty](http://openresty.org/en/)
+### [OpenResty](https://openresty.org/en/)
 
 * Nginx based.
 * Seems to lack auto service discovery.

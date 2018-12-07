@@ -149,7 +149,7 @@ Some features will possibly be relevant in the future, but are not specified or 
 [5]: https://github.com/c4urself/bump2version
 [6]: https://packaging.python.org/guides/single-sourcing-package-version/
 [7]: https://github.com/michaeljoseph/changes
-[8]: http://zestreleaser.readthedocs.io/en/latest/
+[8]: https://zestreleaser.readthedocs.io/en/latest/
 [9]: https://travis-ci.org/
 [10]: https://pypi.python.org/pypi
 [11]: https://docs.travis-ci.com/user/environment-variables/
@@ -166,7 +166,7 @@ Some features will possibly be relevant in the future, but are not specified or 
 * https://github.com/c4urself/bump2version
 * https://packaging.python.org/guides/single-sourcing-package-version/
 * https://github.com/michaeljoseph/changes
-* http://zestreleaser.readthedocs.io/en/latest/
+* https://zestreleaser.readthedocs.io/en/latest/
 * https://travis-ci.org/
 * https://pypi.python.org/pypi
 * https://docs.travis-ci.com/user/environment-variables/

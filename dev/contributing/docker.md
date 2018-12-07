@@ -108,7 +108,7 @@ You can run this by using `docker run -p 80:5000 your-package:latest`. The `-p 8
 
 During configuration of the boilerplate code, you changed the default name of your service ([here](https://github.com/BrewBlox/brewblox-boilerplate/blob/5babb2c6ec4fb03bf833964854a2c680ffa0a133/YOUR_PACKAGE/__main__.py#L122)).
 
-If you haven't, you can now go to http://localhost/YOUR_PACKAGE/api/doc to see the endpoints registered in your service. If you did change the name, you'll have to replace `YOUR_PACKAGE` with the actual name.
+If you haven't, you can now go to `http://localhost/YOUR_PACKAGE/api/doc` to see the endpoints registered in your service. If you did change the name, you'll have to replace `YOUR_PACKAGE` with the actual name.
 
 ## Interacting with other BrewBlox services
 
@@ -208,7 +208,7 @@ Traefik automatically recognizes active Docker containers, but needs a hint on h
 
 `traefik.port=5000` tells Traefik to forward traffic to port 5000 on this container.
 
-`traefik.frontend.rule=PathPrefix: /history` instructs Traefik to forward all requests to addresses starting with `/history` to this container. Example: http://localhost/history/api/doc.
+`traefik.frontend.rule=PathPrefix: /history` instructs Traefik to forward all requests to addresses starting with `/history` to this container. Example: `http://localhost/history/api/doc`.
 
 ```yaml
   your_package:

@@ -115,9 +115,9 @@ Many benefits and drawbacks of microservices still hold for BrewBlox. The big ex
 Brewpi does not and will not have a MLoC sized code base. Any solutions pertaining to inter-team communication are only relevant if external contributors are considered "teams".
 
 
-[microservice_io]: http://microservices.io/patterns/microservices.html
+[microservice_io]: https://microservices.io/patterns/microservices.html
 
 
 ## References
 
-* http://microservices.io/patterns/microservices.html
+* https://microservices.io/patterns/microservices.html
