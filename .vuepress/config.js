@@ -50,6 +50,7 @@ module.exports = {
                         'decisions/block_synchronization',
                         'decisions/docker_image_cleaning',
                         'decisions/crosscompilation_base_images',
+                        'decisions/dynamic_ui_plugins',
                     ]
                 },
             ],

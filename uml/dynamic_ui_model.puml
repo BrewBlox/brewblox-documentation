@@ -1,0 +1,8 @@
+@startuml Dynamic UI Startup
+    Entrypoint -> Framework: Load
+    Entrypoint -> Datastore: Get plugins
+    Entrypoint -> CDN: Get plugin code
+    Entrypoint -> Plugin: Load
+    Plugin -> Framework: Import
+    Entrypoint -> Entrypoint: Run
+@enduml

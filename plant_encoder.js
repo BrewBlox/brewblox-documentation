@@ -13,5 +13,5 @@ files.forEach((f) => {
 
 fs.writeFileSync(
     '.vuepress/generated/uml-urls.json',
-    JSON.stringify(urls)
+    JSON.stringify(urls, undefined, 2),
 );
