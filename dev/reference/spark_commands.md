@@ -9,7 +9,7 @@ The interpretation of `ObjectData` is left to each object individually. The obje
 ## Command syntax
 All data is sent and received as hex encoded uppercase ASCII strings. This allows us to use special characters outside of the [0-9A-F] range for stream handling.
 
-A request always starts with a 1-byte opcode, followed by opcode specific arguments.
+A request always starts with a 2-byte message id, then a 1-byte opcode, followed by opcode specific arguments.
 
 The response consists of three parts:
 - Echoed request
@@ -120,6 +120,7 @@ WRITE_TO_INACTIVE_OBJECT = 200,
 Reads a single object.
 
 - Request:
+    - MsgId: `uint16_t`
     - Opcode: `uint8_t = 1`
     - ObjectId: `uint16_t`
 - Response:
@@ -137,6 +138,7 @@ If the new profiles bit field results in de-activating the object, the response 
 Data written to an InactiveObject will be persisted.
 
 - Request:
+    - MsgId: `uint16_t`
     - Opcode: `uint8_t = 2`
     - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
@@ -159,6 +161,7 @@ If `ObjectId` is zero in the request, the Spark assigns an id and returns it in 
 Matches write in other behavior.
 
 - Request:
+    - MsgId: `uint16_t`
     - Opcode: `uint8_t = 3`
     - ObjectId: `uint16_t`
     - Profiles: `bit[8]`
@@ -176,6 +179,7 @@ Matches write in other behavior.
 Removes a single object.
 
 - Request:
+    - MsgId: `uint16_t`
     - Opcode: `uint8_t = 4`
     - ObjectId: `uint16_t`
 - Response:
@@ -186,6 +190,7 @@ Removes a single object.
 Lists all objects as a comma separated list. Each individual object matches what read would return.
 
 - Request:
+    - MsgId: `uint16_t`
     - Opcode: `uint8_t = 5`
 - Response:
     - Errorcode: `uint8_t`
@@ -203,6 +208,7 @@ Bypasses any runtime objects.
 This command can be used to read the stored data for an inactive object.
 
 - Request:
+    - MsgId: `uint16_t`
     - Opcode: `uint8_t = 6`
     - ObjectId: `uint16_t`
 - Response:
@@ -217,6 +223,7 @@ This command can be used to read the stored data for an inactive object.
 Similar to Read Stored Object, but returns all objects in storage.
 
 - Request:
+    - MsgId: `uint16_t`
     - Opcode: `uint8_t = 7`
 - Response:
     - Errorcode: `uint8_t`
@@ -232,6 +239,7 @@ Deleted all user objects. System objects are unaffected and keep their value.
 To also reset system objects, use Factory Reset.
 
 - Request:
+    - MsgId: `uint16_t`
     - Opcode: `uint8_t = 8`
 - Response:
     - Errorcode: `uint8_t`
@@ -241,6 +249,7 @@ To also reset system objects, use Factory Reset.
 Triggers a controller reboot after returning the response.
 
 - Request:
+    - MsgId: `uint16_t`
     - Opcode: `uint8_t = 9`
 - Response:
     - Errorcode: `uint8_t`
@@ -250,6 +259,7 @@ Triggers a controller reboot after returning the response.
 Wipes all persisted data, and triggers a controller reboot after returning the response.
 
 - Request:
+    - MsgId: `uint16_t`
     - Opcode: `uint8_t = 10`
 - Response:
     - Errorcode: `uint8_t`
@@ -260,6 +270,7 @@ Wipes all persisted data, and triggers a controller reboot after returning the r
 Returns IDs of all objects on the controller that implement or inherit the provided type.
 
 - Request:
+    - MsgId: `uint16_t`
     - Opcode: `uint8_t = 11`
     - ObjectType: `uint16_t`
 - Response:
@@ -276,6 +287,7 @@ Returns object IDs for newly created objects.
 The newly created object will be of the default type for the connected sensor or actuator.
 
 - Request:
+    - MsgId: `uint16_t`
     - Opcode: `uint8_t = 12`
     - ObjectType: `uint16_t`
 - Response:
