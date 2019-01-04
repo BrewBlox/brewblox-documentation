@@ -1,0 +1,6 @@
+@startuml Plugin Dev Startup
+    PluginEntrypoint -> Plugin: Import
+    PluginEntrypoint -> Starter: Start([myPlugin])
+    Starter -> Framework: Load
+    Starter -> Plugin: Load
+@enduml
