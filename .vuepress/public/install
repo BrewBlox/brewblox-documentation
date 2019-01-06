@@ -3,7 +3,7 @@ set -e
 
 # One-click web install script for Docker and BrewBlox
 # If this script is hosted at eg https://brewblox.com/install
-# You can run it with "curl -sSL https://brewblox.com/install | sh"
+# You can run it with "curl -sSL https://brewblox.com/install | bash"
 #
 # - Docker will only be installed if it was not yet present
 # - Current user will be added to the "docker" group
@@ -33,8 +33,10 @@ do_install() {
     if command_exists docker; then
         echo "Docker is already installed, skipping..."
     else
-        curl -sSL https://get.docker.com | sh
-        RESTART_NEEDED=true
+        if [ $(prompt "Do you want to install Docker?") = yes ]; then
+            curl -sSL https://get.docker.com | sh
+            RESTART_NEEDED=true
+        fi
     fi
 
     if id -nG "$USER" | grep -qw "docker"; then
@@ -46,13 +48,22 @@ do_install() {
         fi
     fi
 
-    sudo apt install -y git python python-pip
-    pip install --user -U docker-compose
+    if command_exists docker-compose; then
+        echo "docker-compose is already installed, skipping..."
+    else
+        if [ $(prompt "Do you want to install docker-compose (from pip)?") = yes ]; then
+            sudo apt install -y git python python-pip
+            pip install --user -U docker-compose
+        fi
+    fi
 
-    mkdir brewblox/
+    read -p "In which directory do you want to install the BrewBlox configuration? [./brewblox] " CONFIG_DIR
+    CONFIG_DIR=$(eval echo ${CONFIG_DIR:-"./brewblox"}/)
+
+    mkdir ${CONFIG_DIR}
     curl -L -o /tmp/zippy.zip https://github.com/brewblox/brewblox-deployment/archive/develop.zip
     unzip -q /tmp/zippy.zip -d /tmp/brewblox/
-    cp -r /tmp/brewblox/*/$(dpkg --print-architecture)/* brewblox/
+    cp -r /tmp/brewblox/*/$(dpkg --print-architecture)/* ${CONFIG_DIR}
     rm /tmp/zippy.zip
     rm -r /tmp/brewblox
 
