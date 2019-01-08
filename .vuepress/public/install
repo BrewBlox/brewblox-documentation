@@ -63,6 +63,7 @@ do_install() {
     mkdir ${CONFIG_DIR}
     curl -L -o /tmp/zippy.zip https://github.com/brewblox/brewblox-deployment/archive/develop.zip
     unzip -q /tmp/zippy.zip -d /tmp/brewblox/
+    cp -r /tmp/brewblox/*/shared/* ${CONFIG_DIR}
     cp -r /tmp/brewblox/*/$(dpkg --print-architecture)/* ${CONFIG_DIR}
     rm /tmp/zippy.zip
     rm -r /tmp/brewblox
