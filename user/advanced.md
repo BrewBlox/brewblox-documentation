@@ -37,9 +37,6 @@ Replace `YOUR_COUNTRY_CODE`, `YOUR_WIFI_NAME`, and `YOUR_WIFI_PASSWORD` with the
 ## Managing BrewBlox using the terminal
 
 BrewBlox is a set of [Docker](https://docs.docker.com/) containers, managed by [docker-compose](https://docs.docker.com/compose/). </br>
-The Compose UI also runs inside a Docker container, and uses the docker-compose Python API.
-
-The default BrewBlox projects are installed in the `pi` user root directory (`/home/pi`).
 
 To get started with docker-compose, you can find a tutorial [here](https://docs.docker.com/compose/gettingstarted/#step-3-define-services-in-a-compose-file).
 
@@ -53,11 +50,11 @@ All BrewBlox images built for the Pi have their version prefixed with `rpi-`. (E
 
 BrewBlox can be installed on any system that has Docker installed.
 
-Installing Docker is easy on [Ubuntu Linux](https://docs.docker.com/install/linux/docker-ce/ubuntu/) or [Mac](https://docs.docker.com/docker-for-mac/install/#install-and-run-docker-for-mac), but more complicated for [Windows](https://docs.docker.com/docker-for-windows/install/).
+Installing Docker is easy on [Ubuntu Linux](https://docs.docker.com/install/linux/docker-ce/ubuntu/), but more complicated for [Windows](https://docs.docker.com/docker-for-windows/install/). The [Mac](https://docs.docker.com/docker-for-mac/install/#install-and-run-docker-for-mac) version can't natively [access USB devices](https://github.com/docker/for-mac/issues/900).
 
 Docker-compose files must be adjusted between desktop and Pi versions, to account for the different architecture. Usually this means changing the version tag, but occasionally the Pi uses third-party images of external applications (eg. InfluxDB, Compose UI).
 
-BrewBlox images are always published for both architectures: simply remove the `rpi-` prefix to get the desktop version.
+The BrewBlox install script will automatically select the correct image versions for your system.
 
 
 ## Listing Spark devices
@@ -73,7 +70,7 @@ To use:
 * Open the terminal on the Raspberry Pi
 * Run the following command:
 ```
-docker run --privileged brewblox/brewblox-devcon-spark:rpi-latest --list-devices
+docker run --privileged brewblox/brewblox-devcon-spark:rpi-develop --list-devices
 ```
 
 Example output:
@@ -97,6 +94,7 @@ spark:
     privileged: true
     depends_on:
         - eventbus
+        - datastore
     labels:
         - "traefik.port=5000"
         - "traefik.frontend.rule=PathPrefix: /spark"
