@@ -17,7 +17,4 @@ features:
 footer: Copyright © 2018 BrewPi
 ---
 
-::: tip
-TODO: add GUI gif
-:::
-
+![BrewBlox UI](./images/brewblox-ui.png)

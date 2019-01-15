@@ -58,41 +58,66 @@ Wait for the Pi to finish starting up, and follow the first-time startup instruc
 
 ## Step 3: Install BrewBlox
 
-Open the terminal, and run the following command:
+Open the terminal, and run the following commands:
 
+```bash
+curl -sSL https://brewblox.netlify.com/install > install.sh
+bash ./install.sh
 ```
-curl -sSL https://brewblox.netlify.com/install | sh
+
+This script installs Docker and docker-compose, and generates the default configuration in a directory of choice (default: `./brewblox`). It will ask for confirmation before installing a component.
+
+If prompted, restart your Pi for the installation to complete.
+
+## Step 4: First-time setup
+
+To finish the installation, and initialize your system, run the first-time setup script.
+
+Open the terminal, and run the following commands:
+
+```bash
+# Should be the directory you chose in the install script
+cd ~/brewblox
+bash ./first-time.sh
 ```
 
-Restart your Pi for the installation to complete.
+This script creates an SSL certificate, downloads Docker images, and adds default UI settings. It will ask for confirmation before doing anything.
 
-## Step 4: Start a service
+## Step 5: Flash the firmware
 
-After installing BrewBlox, any time you (re)start the Pi, the Compose UI will start automatically.
+Connect the Spark to the Raspberry Pi using USB, and run the following commands:
 
-This UI can be used to manage your BrewBlox system. To view it, navigate to `http://raspberrypi:5000` using either the Pi browser, or any other computer in the same network.
+```bash
+docker pull brewblox/firmware-flasher:rpi-develop
+docker run -it --rm --privileged brewblox/firmware-flasher:rpi-develop trigger-dfu
+docker run -it --rm --privileged brewblox/firmware-flasher:rpi-develop flash
+docker run -it --rm --privileged brewblox/firmware-flasher:rpi-develop flash-bootloader
 
-It may take a few minutes after startup for the UI to be available.
+# If you want to connect your Spark to your Wi-Fi network
+docker run -it --rm --privileged brewblox/firmware-flasher:rpi-develop wifi
+```
 
-To test your system, select the `Simulation` project on the left side, and click the `up` button on the right side.
+## Step 6: Start the system
 
-![Compose UI](../images/compose-ui.png)
+If you connected your Spark to your Wi-Fi network, you can now disconnect from your Raspberry Pi, and connect the Spark to some other power source.
 
-The simulation project will now start up. This will take a few minutes the first time, but will be much quicker afterwards.
+On your Raspberry Pi, open the terminal, and run the following commands:
 
-When the Compose UI displays the active containers, you can visit the BrewBlox UI at `http://raspberrypi`.
+```bash
+# Should be the directory you chose in the install script
+cd ~/brewblox
+docker-compose up -d
+```
 
-## Step 5: Connect the BrewPi Spark
+After the project is done starting up, you can use the BrewBlox UI at `https://raspberrypi` (or your Raspberry Pi's IP address) to configure and monitor your Spark.
 
 ::: warning
-Only one project can run at a time. </br>
-If the `Simulation` project is still running, stop it using the `down` button.
+Because we're using a local (self-signed) SSL certificate, your browser will display a warning the first time you visit the page.
+
+There's no need to panic. Click advanced, and add an exception for the current host.
+![BrewBlox UI](../images/ssl-error.png)
 :::
 
-To start using the BrewPi spark, connect the Spark to the Pi using a micro-USB to USB cable.
-
-Now start the `Single-Spark` project using the `up` button.
-
-After the project is done starting up, you can use the BrewBlox UI at `http://raspberrypi` to configure and monitor your Spark.
+## Step 7: Done!
 
 ![BrewBlox UI](../images/brewblox-ui.png)
