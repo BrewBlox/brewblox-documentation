@@ -53,7 +53,7 @@ do_install() {
     else
         if [ $(prompt "Do you want to install docker-compose (from pip)?") = yes ]; then
             sudo apt install -y git python python-pip
-            pip install --user -U docker-compose
+            sudo pip install -U docker-compose
         fi
     fi
 

@@ -69,21 +69,7 @@ This script installs Docker and docker-compose, and generates the default config
 
 If prompted, restart your Pi for the installation to complete.
 
-## Step 4: First-time setup
-
-To finish the installation, and initialize your system, run the first-time setup script.
-
-Open the terminal, and run the following commands:
-
-```bash
-# Should be the directory you chose in the install script
-cd ~/brewblox
-bash ./first-time.sh
-```
-
-This script creates an SSL certificate, downloads Docker images, and adds default UI settings. It will ask for confirmation before doing anything.
-
-## Step 5: Flash the firmware
+## Step 4: Flash the firmware
 
 Connect the Spark to the Raspberry Pi using USB, and run the following commands:
 
@@ -96,6 +82,20 @@ docker run -it --rm --privileged brewblox/firmware-flasher:rpi-develop flash-boo
 # If you want to connect your Spark to your Wi-Fi network
 docker run -it --rm --privileged brewblox/firmware-flasher:rpi-develop wifi
 ```
+
+## Step 5: First-time setup
+
+To finish the installation, and initialize your system, run the first-time setup script.
+
+Open the terminal, and run the following commands:
+
+```bash
+# Should be the directory you chose in the install script
+cd ~/brewblox
+bash ./first-time.sh
+```
+
+This script creates an SSL certificate, downloads Docker images, and adds default UI settings. It will ask for confirmation before doing anything.
 
 ## Step 6: Start the system
 
