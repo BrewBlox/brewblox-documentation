@@ -32,7 +32,7 @@ See the [Advanced](./advanced.md) page for instructions.
 
 Download the required software:
 * [Raspbian OS](https://www.raspberrypi.org/downloads/raspbian/)
-* [Etcher](https://etcher.io/) for writing the image to the microSD card.
+* [Etcher](https://www.balena.io/etcher/) for writing the image to the microSD card.
 
 Insert your microSD card in the card reader, and connect the reader to your computer.
 
@@ -74,6 +74,13 @@ If prompted, restart your Pi for the installation to complete.
 Connect the Spark to the Raspberry Pi using USB, and run the following commands:
 
 ```bash
+# Should be the directory you chose in the install script
+cd brewblox
+
+# You can't flash the firmware while the service is running
+docker-compose down
+
+# Flash the firmware
 docker pull brewblox/firmware-flasher:rpi-develop
 docker run -it --rm --privileged brewblox/firmware-flasher:rpi-develop trigger-dfu
 docker run -it --rm --privileged brewblox/firmware-flasher:rpi-develop flash
@@ -91,7 +98,8 @@ Open the terminal, and run the following commands:
 
 ```bash
 # Should be the directory you chose in the install script
-cd ~/brewblox
+cd brewblox
+
 bash ./first-time.sh
 ```
 
@@ -105,7 +113,8 @@ On your Raspberry Pi, open the terminal, and run the following commands:
 
 ```bash
 # Should be the directory you chose in the install script
-cd ~/brewblox
+cd brewblox
+
 docker-compose up -d
 ```
 
