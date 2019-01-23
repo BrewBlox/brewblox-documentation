@@ -99,7 +99,7 @@ If prompted, restart your Pi for the installation to complete.
 Navigate to the directory you chose during the installation (default: `./brewblox`), and run the following command in your terminal:
 
 ```bash
-./menu flash
+./menu flash wifi
 ```
 
 Follow the instructions until the menu exits.
