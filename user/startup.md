@@ -13,10 +13,6 @@ Always:
 * Raspberry Pi power supply (5V to micro USB)
 * MicroSD card
 * MicroSD card reader
-* USB keyboard
-* USB mouse
-* HDMI monitor or tv
-* HDMI cable
 * Wifi network or ethernet cable
 
 When connecting the BrewPi Spark
@@ -42,21 +38,50 @@ Now use Etcher to write it to your microSD card. Make sure to safely eject the m
 
 For more information, see the [official Raspberry install guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
 
-## Step 2: Install the Raspberry Pi
+## Step 2: Enable SSH and WiFi
+
+By default, SSH is disabled on the Pi.
+It can be enabled after Etcher has written the Raspbian image to the microSD card.
+
+After writing the image, it will be recognized by the OS as a removable drive with two partitions. <br> Open the `boot` partition, and create an empty `ssh` file. (No extensions or content.)
+SSH will now be enabled when the Pi boots.
+
+To configure WiFi, create the `/etc/wpa_supplicant/wpa_supplicant.conf` file in the `root` partition.
+
+The file contents should be:
+
+```
+country=YOUR_COUNTRY_CODE
+
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+
+update_config=1
+
+network={
+   ssid="YOUR_WIFI_NAME"
+   psk="YOUR_WIFI_PASSWORD"
+}
+```
+
+Replace `YOUR_COUNTRY_CODE`, `YOUR_WIFI_NAME`, and `YOUR_WIFI_PASSWORD` with the relevant values.
+
+
+## Step 3: Connect to the Raspberry Pi
 
 ::: warning
 Make sure the power supply is disconnected at this point.
 :::
 
-Insert the microSD card into your Pi, and connect the keyboard, mouse, and monitor.
+On your desktop computer, you need an SSH client. This is already available on Linux and OSX, but must be installed on Windows. <br>
+Popular choices are [PuTTY](https://www.putty.org/) and [Git Bash](https://git-scm.com/download/win).
 
-Now connect the power supply. The Pi will start automatically.
+After you installed your SSH client, insert the microSD card into your Pi, and connect the power supply. The Pi will start automatically.
 
-Wait for the Pi to finish starting up, and follow the first-time startup instructions. Make sure to connect to the internet, either using WiFi, or through an ethernet cable.
+Wait for the Pi to finish starting up, and connect to it using your SSH client.
 
-![Pi Setup Wizard](../images/piwiz.png)
+The default user name is `pi`, and the default password is `raspberry`. It is strongly advised to change the password immediately.
 
-## Step 3: Install BrewBlox
+## Step 4: Install BrewBlox
 
 Open the terminal, and run the following commands:
 
@@ -65,58 +90,44 @@ curl -sSL https://brewblox.netlify.com/install > install.sh
 bash ./install.sh
 ```
 
-This script installs Docker and docker-compose, and generates the default configuration in a directory of choice (default: `./brewblox`). It will ask for confirmation before installing a component.
+This script updates your system, installs Docker and docker-compose, and generates the default configuration in a directory of choice (default: `./brewblox`). It will ask for confirmation before installing a component.
 
 If prompted, restart your Pi for the installation to complete.
 
-## Step 4: Flash the firmware
+## Step 5: Flash the firmware
 
-Connect the Spark to the Raspberry Pi using USB, and run the following commands:
+Navigate to the directory you chose during the installation (default: `./brewblox`), and run the following command in your terminal:
 
 ```bash
-# Should be the directory you chose in the install script
-cd brewblox
-
-# You can't flash the firmware while the service is running
-docker-compose down
-
-# Flash the firmware
-docker pull brewblox/firmware-flasher:rpi-develop
-docker run -it --rm --privileged brewblox/firmware-flasher:rpi-develop trigger-dfu
-docker run -it --rm --privileged brewblox/firmware-flasher:rpi-develop flash
-docker run -it --rm --privileged brewblox/firmware-flasher:rpi-develop flash-bootloader
-
-# If you want to connect your Spark to your Wi-Fi network
-docker run -it --rm --privileged brewblox/firmware-flasher:rpi-develop wifi
+./menu flash
 ```
 
-## Step 5: First-time setup
+Follow the instructions until the menu exits.
+
+## Step 6: First-time setup
 
 To finish the installation, and initialize your system, run the first-time setup script.
 
-Open the terminal, and run the following commands:
+Navigate to the directory you chose during the installation (default: `./brewblox`), and run the following command in your terminal:
 
 ```bash
-# Should be the directory you chose in the install script
-cd brewblox
-
-bash ./first-time.sh
+./menu setup
 ```
 
-This script creates an SSL certificate, downloads Docker images, and adds default UI settings. It will ask for confirmation before doing anything.
+Follow the instructions until the menu exits.
 
-## Step 6: Start the system
+## Step 7: Start the system
 
 If you connected your Spark to your Wi-Fi network, you can now disconnect from your Raspberry Pi, and connect the Spark to some other power source.
 
-On your Raspberry Pi, open the terminal, and run the following commands:
+Navigate to the directory you chose during the installation (default: `./brewblox`), and run the following command in your terminal:
 
 ```bash
-# Should be the directory you chose in the install script
-cd brewblox
-
 docker-compose up -d
 ```
+
+Alternatively, open the BrewBlox menu (`./menu`), and choose `up`.
+
 
 After the project is done starting up, you can use the BrewBlox UI at `https://raspberrypi` (or your Raspberry Pi's IP address) to configure and monitor your Spark.
 
@@ -127,6 +138,6 @@ There's no need to panic. Click advanced, and add an exception for the current h
 ![BrewBlox UI](../images/ssl-error.png)
 :::
 
-## Step 7: Done!
+## Step 8: Done!
 
 ![BrewBlox UI](../images/brewblox-ui.png)

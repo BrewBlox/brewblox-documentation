@@ -4,36 +4,6 @@ For people comfortable using command-line applications, there are some alternati
 
 These tutorials are an extension of the default [Getting Started guide](./startup.md).
 
-## SSH configuration
-
-Attaching a monitor and keyboard to the Raspberry Pi is optional. </br>
-An alternative is to enable SSH, and configure the system from your own computer.
-
-By default, SSH is disabled on the Pi.
-It can be enabled after Etcher has written the Raspbian image to the microSD card.
-
-After writing the image, it will be recognized by the OS as a removable drive with two partitions. Open the `/boot/` partition, and create an empty `ssh` file. (No extensions or content.)
-SSH will now be enabled when the Pi boots.
-
-To configure WiFi, create the `/etc/wpa_supplicant/wpa_supplicant.conf` file in the root partition.
-
-The file contents should be:
-
-```
-country=YOUR_COUNTRY_CODE
-
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-
-update_config=1
-
-network={
-   ssid="YOUR_WIFI_NAME"
-   psk="YOUR_WIFI_PASSWORD"
-}
-```
-
-Replace `YOUR_COUNTRY_CODE`, `YOUR_WIFI_NAME`, and `YOUR_WIFI_PASSWORD` with the relevant values.
-
 ## Managing BrewBlox using the terminal
 
 BrewBlox is a set of [Docker](https://docs.docker.com/) containers, managed by [docker-compose](https://docs.docker.com/compose/). </br>

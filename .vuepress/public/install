@@ -30,6 +30,11 @@ prompt() {
 do_install() {
     echo "Executing BrewBlox install script..."
 
+    echo "Installing system packages..."
+    sudo apt update && sudo apt upgrade -y
+    sudo apt install -y python-pip python3-pip httpie
+    pip3 install --user requests
+
     if command_exists docker; then
         echo "Docker is already installed, skipping..."
     else
@@ -52,7 +57,6 @@ do_install() {
         echo "docker-compose is already installed, skipping..."
     else
         if [ $(prompt "Do you want to install docker-compose (from pip)?") = yes ]; then
-            sudo apt install -y git python python-pip
             sudo pip install -U docker-compose
         fi
     fi
@@ -65,6 +69,8 @@ do_install() {
     unzip -q /tmp/zippy.zip -d /tmp/brewblox/
     cp -r /tmp/brewblox/*/shared/* ${CONFIG_DIR}
     cp -r /tmp/brewblox/*/$(dpkg --print-architecture)/* ${CONFIG_DIR}
+    chmod +x ${CONFIG_DIR}/menu
+
     rm /tmp/zippy.zip
     rm -r /tmp/brewblox
 
