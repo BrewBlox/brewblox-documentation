@@ -120,13 +120,15 @@ Follow the instructions until the menu exits.
 
 If you connected your Spark to your Wi-Fi network, you can now disconnect from your Raspberry Pi, and connect the Spark to some other power source.
 
-Navigate to the directory you chose during the installation (default: `./brewblox`), and run the following command in your terminal:
+Navigate to the directory you chose during the installation (default: `./brewblox`), and start the menu:
 
 ```bash
-docker-compose up -d
+./menu
 ```
 
-Alternatively, open the BrewBlox menu (`./menu`), and choose `up`.
+You can use the menu to easily manage your system, and perform common actions. Choose `up` to start your system.
+
+![BrewBLox Menu](../images/menu-screenshot.png)
 
 
 After the project is done starting up, you can use the BrewBlox UI at `https://raspberrypi` (or your Raspberry Pi's IP address) to configure and monitor your Spark.
