@@ -106,7 +106,7 @@ OBJECT_NOT_DELETABLE = 35,
 INVALID_COMMAND = 63,
 INVALID_OBJECT_ID = 64,
 INVALID_OBJECT_TYPE = 65,
-INVALID_OBJECT_PROFILES = 66,
+INVALID_OBJECT_GROUPS = 66,
 CRC_ERROR_IN_COMMAND = 67,
 OBJECT_DATA_NOT_ACCEPTED = 68,
 
@@ -126,7 +126,7 @@ Reads a single object.
 - Response:
     - Errorcode: `uint8_t`
     - ObjectId: `uint16_t`
-    - Profiles: `bit[8]`
+    - Groups: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 
@@ -134,20 +134,20 @@ Reads a single object.
 ### Write Object
 Writes a single object.
 The response is identical to what a read would return.
-If the new profiles bit field results in de-activating the object, the response will contain an InactiveObject.
+If the new groups bit field results in de-activating the object, the response will contain an InactiveObject.
 Data written to an InactiveObject will be persisted.
 
 - Request:
     - MsgId: `uint16_t`
     - Opcode: `uint8_t = 2`
     - ObjectId: `uint16_t`
-    - Profiles: `bit[8]`
+    - Groups: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 - Response:
     - Errorcode: `uint8_t`
     - ObjectId: `uint16_t`
-    - Profiles: `bit[8]`
+    - Groups: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 
@@ -164,13 +164,13 @@ Matches write in other behavior.
     - MsgId: `uint16_t`
     - Opcode: `uint8_t = 3`
     - ObjectId: `uint16_t`
-    - Profiles: `bit[8]`
+    - Groups: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 - Response:
     - Errorcode: `uint8_t`
     - ObjectId: `uint16_t`
-    - Profiles: `bit[8]`
+    - Groups: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 
@@ -196,7 +196,7 @@ Lists all objects as a comma separated list. Each individual object matches what
     - Errorcode: `uint8_t`
 - List Values:
     - ObjectId: `uint16_t`
-    - Profiles: `bit[8]`
+    - Groups: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 
@@ -214,7 +214,7 @@ This command can be used to read the stored data for an inactive object.
 - Response:
     - Errorcode: `uint8_t`
     - ObjectId: `uint16_t`
-    - Profiles: `bit[8]`
+    - Groups: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
   
@@ -229,7 +229,7 @@ Similar to Read Stored Object, but returns all objects in storage.
     - Errorcode: `uint8_t`
 - Values:
     - ObjectId: `uint16_t`
-    - Profiles: `bit[8]`
+    - Groups: `bit[8]`
     - ObjectType: `uint16_t`
     - ObjectData: `byte[]`
 
