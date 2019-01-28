@@ -46,7 +46,7 @@ It can be enabled after Etcher has written the Raspbian image to the microSD car
 After writing the image, it will be recognized by the OS as a removable drive with two partitions. <br> Open the `boot` partition, and create an empty `ssh` file. (No extensions or content.)
 SSH will now be enabled when the Pi boots.
 
-To configure WiFi, create the `/etc/wpa_supplicant/wpa_supplicant.conf` file in the `root` partition.
+To configure WiFi, create the `wpa_supplicant.conf` file in the `boot` partition.
 
 The file contents should be:
 
