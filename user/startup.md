@@ -86,20 +86,26 @@ The default user name is `pi`, and the default password is `raspberry`. It is st
 Open the terminal, and run the following commands:
 
 ```bash
-curl -sSL https://brewblox.netlify.com/install > install.sh
-bash ./install.sh
+sudo apt update && sudo apt install -y python3-pip
+sudo pip3 install -U brewblox-ctl
 ```
 
-This script updates your system, installs Docker and docker-compose, and generates the default configuration in a directory of choice (default: `./brewblox`). It will ask for confirmation before installing a component.
+This script installs `brewblox-ctl`, a menu for installing and managing your BrewBlox system. <br>
+To install a new system, run the following command:
 
-If prompted, restart your Pi for the installation to complete.
+```bash
+brewblox-ctl install
+```
+
+This will walk you through the relevant choices, and then install BrewBlox in a directory of your choice.
 
 ## Step 5: Flash the firmware
 
-Navigate to the directory you chose during the installation (default: `./brewblox`), and run the following command in your terminal:
+Navigate to the directory you chose during the installation (default: `./brewblox`), and run the following commands in your terminal:
 
 ```bash
-./menu flash wifi
+brewblox-ctl flash
+brewblox-ctl wifi
 ```
 
 Follow the instructions until the menu exits.
@@ -111,7 +117,7 @@ To finish the installation, and initialize your system, run the first-time setup
 Navigate to the directory you chose during the installation (default: `./brewblox`), and run the following command in your terminal:
 
 ```bash
-./menu setup
+brewblox-ctl setup
 ```
 
 Follow the instructions until the menu exits.
@@ -123,7 +129,7 @@ If you connected your Spark to your Wi-Fi network, you can now disconnect from y
 Navigate to the directory you chose during the installation (default: `./brewblox`), and start the menu:
 
 ```bash
-./menu
+brewblox-ctl
 ```
 
 You can use the menu to easily manage your system, and perform common actions. Choose `up` to start your system.
