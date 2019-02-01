@@ -4,18 +4,6 @@ For people comfortable using command-line applications, there are some alternati
 
 These tutorials are an extension of the default [Getting Started guide](./startup.md).
 
-## Managing BrewBlox using the terminal
-
-BrewBlox is a set of [Docker](https://docs.docker.com/) containers, managed by [docker-compose](https://docs.docker.com/compose/). </br>
-
-To get started with docker-compose, you can find a tutorial [here](https://docs.docker.com/compose/gettingstarted/#step-3-define-services-in-a-compose-file).
-
-::: warning
-The Raspberry Pi uses the `ARM32v7` processor architecture. This is supported by most [official Docker images](https://hub.docker.com/explore/), but not all.
-
-All BrewBlox images built for the Pi have their version prefixed with `rpi-`. (Example: `brewblox/brewblox-history:rpi-latest`).
-:::
-
 ## Installing BrewBlox on a desktop computer
 
 BrewBlox can be installed on any system that has Docker installed.

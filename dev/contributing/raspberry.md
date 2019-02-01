@@ -20,7 +20,7 @@ For third-party images, the solution is often simple: somebody else already prov
 
 Where for desktop builds we'd use the following images in our `docker-compose.yml`:
 
-```yml
+```yaml
 services:
   eventbus:
     image: rabbitmq:alpine
@@ -34,7 +34,7 @@ services:
 
 For the Pi, we switch to:
 
-```yml
+```yaml
 services:
   eventbus:
     image: rabbitmq:alpine
