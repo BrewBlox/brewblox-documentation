@@ -27,7 +27,7 @@ FROM arm32v7/python:3.6
 
 This resulted in the following error:
 
-```sh
+```bash
 Sending build context to Docker daemon  17.92kB
 Step 1/6 : FROM arm32v7/python:3.6
 3.6: Pulling from arm32v7/python
