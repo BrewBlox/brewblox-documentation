@@ -113,7 +113,19 @@ brewblox-ctl wifi
 
 Follow the instructions until the menu exits.
 
-## Step 6: Start the system
+## Step 6: First-time setup
+
+To finish the installation, and initialize your system, run the first-time setup script.
+
+Navigate to the directory you chose during the installation (default: `./brewblox`), and run the following command in your terminal:
+
+```bash
+brewblox-ctl setup
+```
+
+Follow the instructions until the menu exits.
+
+## Step 7: Start the system
 
 If you connected your Spark to your Wi-Fi network, you can now disconnect from your Raspberry Pi, and connect the Spark to some other power source.
 
@@ -137,6 +149,6 @@ There's no need to panic. Click advanced, and add an exception for the current h
 ![BrewBlox UI](../images/ssl-error.png)
 :::
 
-## Step 7: Done!
+## Step 8: Done!
 
 ![BrewBlox UI](../images/brewblox-ui.png)
