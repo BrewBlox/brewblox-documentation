@@ -42,15 +42,13 @@ For more information, see the [official Raspberry install guide](https://www.ras
 
 ## Step 2: Enable SSH and WiFi
 
-By default, SSH is disabled on the Pi.
-It can be enabled after Etcher has written the Raspbian image to the microSD card.
-
-After writing the image, it will be recognized by the OS as a removable drive with two partitions. <br> 
-Download [this archive](/pi-files.zip) and extract the contents to the `boot` partition.
+After writing the image, your SD card will be recognized by the computer as a removable drive with two partitions. Download [this archive](/pi-files.zip) and extract the contents into the `boot` partition.
 
 It contains two files: `ssh`, and `wpa_supplicant.conf`.
 
-Open `wpa_supplicant.conf` in a text editor. The file contents should be:
+The `ssh` file enables SSH, just by being there.
+
+To configure WiFi, open `wpa_supplicant.conf` in a text editor. The file contents should be:
  
 ```
 country=YOUR_COUNTRY_CODE
