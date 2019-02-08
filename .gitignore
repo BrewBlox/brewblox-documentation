@@ -68,12 +68,12 @@ typings/
 # nuxt.js build output
 .nuxt
 
-# vuepress build output
-.vuepress/dist
-
 # Serverless directories
 .serverless
 
+# vuepress build output
+docs/.vuepress/dist
+
 # Generated files
-.vuepress/generated/*
-!.vuepress/generated/.gitkeep
+docs/.vuepress/generated/*
+!docs/.vuepress/generated/.gitkeep
