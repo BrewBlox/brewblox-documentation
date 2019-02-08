@@ -119,11 +119,67 @@ brewblox-ctl install
 
 This will walk you through the relevant choices, and then install BrewBlox in a directory of your choice.
 
+## Interlude: Navigating Linux directories
+
+For the next steps, a basic understanding of Linux commands makes things easier.
+We'll stick to the basics, and assume the default settings on a Raspberry Pi.
+
+After logging in over SSH, you'll see this text in front of your cursor: 
+```
+pi@raspberrypi:~ $
+```
+
+This is the shell prompt, and it consists of three parts:
+- `pi` is the current user. `pi` is the default user for a Raspberry Pi.
+- `raspberrypi` is the computer host name. Again, `raspberrypi` is the default.
+- `~` is the current directory. 
+
+`~` is a special character for the user home directory. When opening a new SSH terminal, you will start in this directory. You can use the `pwd` command to show the complete path, replacing the special character with directory names.
+
+For example, on a Raspberry Pi:
+```
+pi@raspberrypi:~ $ pwd
+/home/pi
+pi@raspberrypi:~ $
+```
+
+By default, BrewBlox is installed in the `./brewblox` directory. This is a relative path: `.` means "current directory". The absolute path for this directory is `~/brewblox` or `/home/pi/brewblox`.
+
+You can change directories by using the `cd` command. This can be used with either relative, or absolute paths. After you change directory, the current directory component of your shell prompt will change.
+
+For example, after using `cd ./brewblox`, your shell prompt will be:
+```
+pi@raspberrypi:~/brewblox
+```
+
+You can navigate back to the home directory by using either one of these commands:
+```
+cd ~
+```
+```
+cd ..
+```
+`..` is another special character. It means "one directory up".
+
+Examples:
+```
+pi@raspberrypi:~/brewblox $ cd ..
+pi@raspberrypi:~ $
+```
+```
+pi@raspberrypi:~/brewblox/deeply/nested/subdirectory $ cd ..
+pi@raspberrypi:~/brewblox/deeply/nested $
+```
+
+If you'd like some more explanation, this [guide to linux commands](https://www.raspberrypi.org/documentation/linux/usage/commands.md) explains how to use the most common commands on a Raspberry Pi.
+
+
+
 ## Step 5: First-time setup
 
 To finish the installation, and initialize your system, run the first-time setup script.
 
-Navigate to the directory you chose during the installation (default: `./brewblox`), and run the following command in your terminal:
+Navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and run the following command in your terminal:
 
 ```bash
 brewblox-ctl setup
@@ -135,7 +191,7 @@ Follow the instructions until the menu exits.
 
 For this step, your Spark should be connected to your Raspberry Pi over USB.
 
-Navigate to the directory you chose during the installation (default: `./brewblox`), and run the following commands in your terminal (one at a time):
+Navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and run the following commands in your terminal (one at a time):
 
 ```bash
 brewblox-ctl flash
@@ -149,7 +205,7 @@ Follow the instructions until the menu exits.
 
 If you connected your Spark to your Wi-Fi network, you can now disconnect from your Raspberry Pi, and connect the Spark to some other power source.
 
-Navigate to the directory you chose during the installation (default: `./brewblox`), and start the menu:
+Navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and start the menu:
 
 ```bash
 brewblox-ctl
