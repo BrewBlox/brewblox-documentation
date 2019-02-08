@@ -1,20 +1,38 @@
----
-home: true
-heroImage: /brewpi-logo.png
-actionText: Get Started →
-actionLink: /user/startup
-features:
-  -
-    title: Simple
-    details: Monitor and control everything in your brewery from a single dashboard.
-  -
-    title: Modular
-    details: It's easy to add, remove, or update devices. Only enable what you need.
-  -
-    title: Scalable
-    details: Combine as many devices as you want.
+# BrewBlox Documentation
 
-footer: Copyright © 2018 BrewPi
----
+## View the documentation at [https://brewblox.netlify.com](https://brewblox.netlify.com)
 
-![BrewBlox UI](./images/brewblox-ui.png)
+This is the code repository for the BrewBlox documentation website. These docs are built with vuepress and written in markdown.
+
+
+## Editing
+
+Recommended tools:
+- Visual Studio Code
+- [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) plugin.
+
+You might want to add these lines to your user Settings:
+
+```
+"markdown.extension.toc.githubCompatibility": true,
+"markdown.extension.preview.autoShowPreviewToSide": true,
+"markdown.extension.print.absoluteImgPath": false
+```
+
+## Building
+
+In the root of this repo, run:
+
+```
+npm install
+```
+
+To build the docs with hot reloading:
+
+```
+npm run dev
+```
+
+The docs will be served at `http://localhost:8080`
+
+

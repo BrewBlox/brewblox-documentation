@@ -6,8 +6,8 @@
   "scripts": {
     "generate": "node ./plant_encoder.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npm run generate && vuepress dev .",
-    "build": "npm run generate && vuepress build ."
+    "dev": "npm run generate && vuepress dev docs",
+    "build": "npm run generate && vuepress build docs"
   },
   "repository": {
     "type": "git",
