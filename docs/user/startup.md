@@ -179,9 +179,10 @@ If you'd like some more explanation, this [guide to linux commands](https://www.
 
 To finish the installation, and initialize your system, run the first-time setup script.
 
-Navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and run the following command in your terminal:
+Navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and start the setup.
 
 ```bash
+cd ./brewblox
 brewblox-ctl setup
 ```
 
