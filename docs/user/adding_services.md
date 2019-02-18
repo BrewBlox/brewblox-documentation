@@ -55,6 +55,7 @@ Among them is the service that manages your first Spark. Its configuration will 
       - "traefik.frontend.rule=PathPrefix: /spark-one"
     command: >
       --name=spark-one
+      --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
 ```
 
 To create a new one, copy this block, but change the name from `spark-one` to something else. The name of the service in YAML, the traefik rule, and the value of the `--name` argument must all be the same.
@@ -74,6 +75,7 @@ Example (including old service):
       - "traefik.frontend.rule=PathPrefix: /spark-one"
     command: >
       --name=spark-one
+      --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
 
   spark-two:
     image: brewblox/brewblox-devcon-spark:rpi-${BREWBLOX_RELEASE:-stable}
@@ -87,6 +89,7 @@ Example (including old service):
       - "traefik.frontend.rule=PathPrefix: /spark-two"
     command: >
       --name=spark-two
+      --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
 ```
 
 ## Step 4: Connect to a specific Spark
@@ -108,12 +111,14 @@ Example (rest of config left out):
     ...
     command: >
       --name=spark-one
+      --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
       --device-host=192.168.0.60
 
   spark-two:
     ...
     command: >
       --name=spark-two
+      --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
       --device-host=192.168.0.65
 ```
 
@@ -123,13 +128,13 @@ Example (rest of config left out):
 `--device-id` uses the unique serial number of your Spark controller. While your Spark controller is connected over USB, you can get its serial number by running the following command in your terminal:
 
 ```bash
-docker run --privileged brewblox/brewblox-devcon-spark:rpi-stable --list-devices
+docker run --privileged brewblox/brewblox-devcon-spark:rpi-edge --list-devices
 ```
 
 Example output (SER is the serial number):
 
 ```bash
-pi@brewpipi:~/brewblox $ docker run --privileged brewblox/brewblox-devcon-spark:rpi-stable --list-devices
+pi@brewpipi:~/brewblox $ docker run --privileged brewblox/brewblox-devcon-spark:rpi-edge --list-devices
 2019/02/01 10:41:05 INFO     brewblox_service.service        Creating [spark] application
 2019/02/01 10:41:05 INFO     __main__                        Listing connected devices: 
 2019/02/01 10:41:05 INFO     __main__                        >> /dev/ttyACM0 | P1 - P1 Serial | USB VID:PID=2B04:C008 SER=300045000851353532343835 LOCATION=1-1.2:1.0

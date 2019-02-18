@@ -28,7 +28,7 @@ To use:
 * Open the terminal on the Raspberry Pi
 * Run the following command:
 ```
-docker run --privileged brewblox/brewblox-devcon-spark:rpi-develop --list-devices
+docker run --rm --privileged brewblox/brewblox-devcon-spark:rpi-edge --list-devices
 ```
 
 Example output:
@@ -46,19 +46,19 @@ We can now use the serial number to connect by ID. This will match a service to 
 
 Example service:
 ```yaml
-spark:
-    # standard configuration
-    image: brewblox/brewblox-devcon-spark:rpi-latest
-    privileged: true
-    depends_on:
-        - eventbus
-        - datastore
-    labels:
-        - "traefik.port=5000"
-        - "traefik.frontend.rule=PathPrefix: /spark"
-
-    # connect by id
-    command:
-        - "--device-id=240024000451353432383931"
-        # or "--device-id=3f0025000851353532343835"
+spark-one:
+  image: brewblox/brewblox-devcon-spark:rpi-${BREWBLOX_RELEASE:-stable}
+  privileged: true
+  depends_on:
+    - eventbus
+    - datastore
+  restart: unless-stopped
+  labels:
+    - "traefik.port=5000"
+    - "traefik.frontend.rule=PathPrefix: /spark-one"
+# Add connection settings to command
+  command: >
+    --name=spark-one
+    --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
+    --device-id=240024000451353432383931
 ```

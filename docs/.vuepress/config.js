@@ -60,14 +60,6 @@ module.exports = {
                 'adding_services',
                 'advanced',
                 'compose',
-                {
-                    title: 'Example Configurations',
-                    children: [
-                        'examples/system',
-                        'examples/simulation',
-                        'examples/single_spark',
-                    ]
-                }
             ]
         },
         repo: 'brewblox/brewblox-documentation',
