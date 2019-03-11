@@ -96,67 +96,9 @@ Example (including old service):
 
 By default, a Spark service will connect to the first Spark controller it can find. If you're using multiple Sparks, you want each service to connect to the same controller every time.
 
-You can do this by using the `--device-host` or the `--device-id` command. Services are independent: you can use `--device-host` for one service, and `--device-id` for the other.
+You can do this by using the `--device-host`, `--device-serial` and `--device-id` arguments. Services are independent: you can use `--device-host` for one service, and `--device-id` for the other.
 
-### By host/IP
-
-`--device-host` takes a host name or IP address as value. If you've connected your Spark to WiFi, it will show its IP address on the display.
-
-Update the `command` section of both Spark services in your `docker-compose.yml` to add the IP addresses.
-
-Example (rest of config left out):
-
-```yaml
-  spark-one:
-    ...
-    command: >
-      --name=spark-one
-      --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
-      --device-host=192.168.0.60
-
-  spark-two:
-    ...
-    command: >
-      --name=spark-two
-      --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
-      --device-host=192.168.0.65
-```
-
-### By serial number
-
-
-`--device-id` uses the unique serial number of your Spark controller. While your Spark controller is connected over USB, you can get its serial number by running the following command in your terminal:
-
-```bash
-docker run --privileged brewblox/brewblox-devcon-spark:rpi-edge --list-devices
-```
-
-Example output (SER is the serial number):
-
-```bash
-pi@brewpipi:~/brewblox $ docker run --privileged brewblox/brewblox-devcon-spark:rpi-edge --list-devices
-2019/02/01 10:41:05 INFO     brewblox_service.service        Creating [spark] application
-2019/02/01 10:41:05 INFO     __main__                        Listing connected devices: 
-2019/02/01 10:41:05 INFO     __main__                        >> /dev/ttyACM0 | P1 - P1 Serial | USB VID:PID=2B04:C008 SER=300045000851353532343835 LOCATION=1-1.2:1.0
-```
-
-Update the `command` section of both Spark services in your `docker-compose.yml` to add the serial numbers.
-
-Example (rest of config left out):
-
-```yaml
-  spark-one:
-    ...
-    command: >
-      --name=spark-one
-      --device-id=300045000851353532343835
-
-  spark-two:
-    ...
-    command: >
-      --name=spark-two
-      --device-id=3f0025000851353532343835
-```
+The [Spark Connection Settings page](./connect_settings.html) explains how to use the various arguments.
 
 ## Step 5: Add the service in the UI
 

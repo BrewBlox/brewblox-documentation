@@ -58,6 +58,7 @@ module.exports = {
             '/user/': [
                 'startup',
                 'adding_services',
+                'connect_settings',
                 'advanced',
                 'compose',
             ]
