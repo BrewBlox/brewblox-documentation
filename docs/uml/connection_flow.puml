@@ -1,0 +1,41 @@
+@startuml "Connecting to a Spark"
+start
+
+:Startup;
+
+if (--device-serial arg?) then (yes)
+    :select serial address;
+elseif (--device-host arg?) then (yes)
+    :select TCP address;
+else
+    :Discovery;
+
+    if (--discovery=all) then (yes)
+        :discover USB;
+        :discover Wifi;
+    elseif (--discovery=usb) then (yes)
+        :discover USB;
+    elseif (--discovery=wifi) then (yes)
+        :discover Wifi;
+    else
+        stop
+    endif
+
+    if (device(s) discovered) then (yes)
+        if (--device-id arg?) then (yes)
+            if (device found with correct ID) then (yes)
+            else (no)
+                stop
+            endif
+        endif
+    else (no)
+        stop
+    endif
+
+    :select discovered address;
+endif
+
+:Ready to connect;
+
+stop
+@enduml
