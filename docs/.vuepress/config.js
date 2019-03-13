@@ -64,6 +64,7 @@ module.exports = {
             ]
         },
         repo: 'brewblox/brewblox-documentation',
+        docsDir: 'docs',
         lastUpdated: 'Last Updated',
         editLinks: true,
     }
