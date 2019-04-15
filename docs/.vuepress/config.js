@@ -15,6 +15,7 @@ module.exports = {
                     children: [
                         'contributing/docker',
                         'contributing/raspberry',
+                        'contributing/using_service',
                     ]
                 },
                 {
