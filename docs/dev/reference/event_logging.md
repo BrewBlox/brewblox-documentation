@@ -12,6 +12,12 @@ The history service subscribes to these events, and writes the raw data to the d
 
 This way the controller services are not aware of the history service implementation, and the history implementation is not aware of controller service implementation details.
 
+## Addressing
+
+By default, the `brewblox-history` service listens to the `brewcast` exchange. 
+
+You can subscribe to additional exchanges by sending a POST request to the `/subscribe` endpoint, but for most use cases this is not required.
+
 ## Data Structure
 
 After a subscription is set, it will relay all incoming messages (as described under [Decoupling](#Decoupling)).
