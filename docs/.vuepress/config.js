@@ -16,6 +16,7 @@ module.exports = {
                         'contributing/docker',
                         'contributing/raspberry',
                         'contributing/using_service',
+                        'contributing/tools_tricks',
                     ]
                 },
                 {
