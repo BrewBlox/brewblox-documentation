@@ -102,6 +102,6 @@ The [Spark Connection Settings page](./connect_settings.html) explains how to us
 
 ## Step 5: Add the service in the UI
 
-When adding your service, the `Service ID` field must match the name you gave the service in `docker-compose.yml`. The `Service name` field is free.
+When adding your service, the `Service ID` field must match the name you gave the service in `docker-compose.yml`. The `Service title` field is free.
 
 ![Adding service](../images/adding-service.gif)
