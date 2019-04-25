@@ -12,13 +12,13 @@ partition "api.py" {
 
 
     partition "device.py" {
-        --> "Convert service ID to controller ID"
+        --> "Convert sid to nid"
         note right
-            Service IDs are strings, and can be changed by the user.
-            Controller IDs are lists of ints (varint), and are determined by the controller.
-            Conversion is done by doing an object data store lookup.
+            The controller assigns numeric IDs (nid) to Blocks.
+            For usability, the Block is exported with a user-changable string ID (sid).
+            Here the string ID is converted to the numeric ID known to the controller.
 
-            An exception is raised if no controller ID could be found.
+            An exception is raised if no numeric ID could be found.
         end note
 
         partition "codec.py (encode)" {
@@ -60,12 +60,13 @@ partition "api.py" {
             end note
         }
 
-        --> "Convert Controller ID to Service ID"
+        --> "Add sid to block"
         note right
-            Looks up a service ID that matches the controller ID.
+            Looks up a string ID that matches the numeric ID.
+            The resulting object will contain both nid and sid.
 
             When it comes to IDs, the controller is considered the source of truth.
-            If no service ID can be found, one is created, and saved to data store.
+            If no string ID can be found, one is created, and saved to data store.
         end note
     }
 
