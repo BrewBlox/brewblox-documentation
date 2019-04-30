@@ -27,7 +27,7 @@ The drawback of the basic control chain is that it can only ever influence the s
 
 If you require both heating and cooling, you'll need a separate PID for each action. They can both use the same sensor value and setpoint setting. If the sensor value is lower than the setpoint setting, the heating PID will correct this. If the sensor value is higher than the setpoint setting, the cooling PID will become active.
 
-To avoid simultaneous cooling and heating, the two Actuator Pins are linked to a Mutex Block. This ensures only one will ever be active at the same time.
+To avoid simultaneous cooling and heating, the two Actuator Pins are linked to a Mutex (**mut**ually **ex**clusive) Block. This ensures only one will ever be active at the same time.
 
 ## Beer Control
 
@@ -56,3 +56,17 @@ By default, a Setpoint Sensor Pair has a constant setting. If you want to automa
 A Setpoint Profile will change the Setpoint setting at a specific time. For example, you could create a profile that will repeatedly cold crash your beer, or one that slowly heats it by increasing the Setpoint setting by 1 degree per hour.
 
 Once again, everything else in the control chain remains the same: the PID will automatically adjust to the changed Setpoint setting.
+
+## Balanced Actuators
+
+<PlantUml src="balanced_chain.puml" title="Balanced Control Chain"/>
+
+It is not uncommon to have electrical elements where the combined power draw is more than the fuses can handle. The Balancer Block constrains actuators to divide the available power (output setting) as fairly as possible.
+
+This functionality is not directly relevant to the standard Fridge setup, as there the heater and cooler should not be active at the same time, but is intended for systems with (for example) multiple heating elements in different kettles.
+
+A Mutex Block solves the problem of heating elements being active at the same time, but also causes a new issue: resource hogging. If the left PWM Actuator has an output setting of 100%, it may prevent the right heating element from ever turning on.
+
+The Balancer Block fairly distributes available output (100%) over the two actuators, and takes their requested output into account. If the left PWM actuator requests 100%, and the right PWM actuator requests 60%, the Balancer may grant 65% to the left and 35% to the right (example numbers).
+
+When combined, the Mutex makes sure the heating elements are never drawing power at the same time, and the Balancer makes sure that both PWM cycles leave room for the other.
