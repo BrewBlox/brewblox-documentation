@@ -1,0 +1,14 @@
+@startuml OneWire control chain
+component PID
+component PWM as "PWM actuator"
+component Actuator as "DS2413 Actuator" #Cyan
+component Chip as "DS2413 Chip" #Cyan
+component SSP as "Setpoint Sensor Pair"
+component Sensor as "Temperature Sensor"
+
+Sensor .down.> "input" SSP
+SSP .down.> "input" PID
+PID -down-> "drives" PWM
+PWM -down-> "drives" Actuator
+Actuator -down-> "drives" Chip
+@enduml
