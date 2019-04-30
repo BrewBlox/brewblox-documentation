@@ -10,7 +10,7 @@ This guide describes some of the most common combinations, and how they are used
 
 This basic control loop has five Blocks, each with a distinct responsibility:
 - *Temperature Sensor* measures the current temperature
-- *Setpoint Sensor Pair* combines the measures temperature with the desired value (Setpoint setting)
+- *Setpoint Sensor Pair* combines the measured temperature with the desired value (Setpoint setting)
 - *PID* uses the Setpoint setting and Sensor value to calculate the required output
   - For an explanation on how PID controllers work, see [wikipedia](https://en.wikipedia.org/wiki/PID_controller)
 - *PWM Actuator* converts the % output value from the PID into a sequence of on/off periods.
@@ -21,9 +21,9 @@ This basic control loop has five Blocks, each with a distinct responsibility:
 
 <PlantUml src="fridge_chain.puml" title="Fridge Control Chain"/>
 
-The drawback of the basic control chain is that it can only ever influence the system in one direction. Actuator Pins only have an on/off switch.
-
 We'll refer to your controlled environment as the "Fridge". The assumption is that you keep your beer in a separate container inside your Fridge.
+
+The drawback of the basic control chain is that it can only ever influence the system in one direction. Actuator Pins only have an on/off switch.
 
 If you require both heating and cooling, you'll need a separate PID for each action. They can both use the same sensor value and setpoint setting. If the sensor value is lower than the setpoint setting, the heating PID will correct this. If the sensor value is higher than the setpoint setting, the cooling PID will become active.
 
