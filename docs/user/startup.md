@@ -42,6 +42,14 @@ For more information, see the [official Raspberry install guide](https://www.ras
 
 ## Step 2: Enable SSH and WiFi
 
+::: tip
+For Windows users, [Lee Bussy](https://community.brewpi.com/u/lbussy/summary) created a tool to automate this step.
+
+![HeadlessPi](https://camo.githubusercontent.com/fe14a42f7f208f9c7fe32d61925d38bd3445da3f/68747470733a2f2f7777772e62726577706972656d69782e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031392f30322f486561646c657373506953637265656e73686f742e706e67)
+
+You can download it [here](https://github.com/lbussy/headless-pi/releases/latest).
+:::
+
 After writing the image, your SD card will be recognized by the computer as a removable drive with two partitions. Download [this archive](/pi-files.zip) and extract the contents into the `boot` partition.
 
 It contains two files: `ssh`, and `wpa_supplicant.conf`.
