@@ -9,12 +9,12 @@ This guide describes some of the most common combinations, and how they are used
 <PlantUml src="basic_chain.puml" title="Basic Control Chain"/>
 
 This basic control loop has five Blocks, each with a distinct responsibility:
-- *Temperature Sensor* measures the current temperature
-- *Setpoint Sensor Pair* combines the measured temperature with the desired value (Setpoint setting)
-- *PID* uses the Setpoint setting and Sensor value to calculate the required output
-  - For an explanation on how PID controllers work, see [wikipedia](https://en.wikipedia.org/wiki/PID_controller)
+- *Temperature Sensor* measures the current temperature.
+- *Setpoint Sensor Pair* combines the measured temperature with the desired value (Setpoint setting).
+- *PID* uses the Setpoint setting and Sensor value to calculate the required output.
+  - For an explanation on how PID controllers work, see [wikipedia](https://en.wikipedia.org/wiki/PID_controller).
 - *PWM Actuator* converts the % output value from the PID into a sequence of on/off periods.
-  - [explanation of pulse-width modulation (PWM)](https://en.wikipedia.org/wiki/Pulse-width_modulation)
+  - [explanation of pulse-width modulation (PWM)](https://en.wikipedia.org/wiki/Pulse-width_modulation).
 - *Actuator Pin* toggles the heating or cooling element.
 
 ## Fridge Control
