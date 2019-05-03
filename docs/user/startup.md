@@ -7,6 +7,14 @@ The default configuration uses a single Spark. The [Adding Services](./adding_se
 
 For more advanced users, there are alternative ways for configuring and using the system. These are described in the [Advanced](./advanced.md) page.
 
+::: warning
+The following Raspberry Pi models are **not** compatible with BrewBlox.
+- Raspberry Pi 1 Model A
+- Raspberry Pi 1 Model B
+- Raspberry Pi Zero
+- Raspberry Pi Zero W
+:::
+
 ## What you will need
 
 Always:
