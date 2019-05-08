@@ -1,0 +1,31 @@
+@startuml Balanced Control Chain
+component left_Sensor as "Left Sensor"
+component left_SSP as "Left Setpoint Sensor Pair"
+component left_PID as "Left PID"
+component left_PWM as "Left PWM Actuator"
+component left_Pin as "Left Pin"
+
+component right_Sensor as "Right Sensor"
+component right_SSP as "Right Setpoint Sensor Pair"
+component right_PID as "Right PID"
+component right_PWM as "Right PWM Actuator"
+component right_Pin as "Right Pin"
+
+component Balancer #Cyan
+component Mutex
+
+left_Sensor .down.> "input" left_SSP
+left_SSP .down.> "input" left_PID
+left_PID -down-> "drives" left_PWM
+left_PWM -down-> "drives" left_Pin
+left_PWM .right.> Balancer
+left_Pin .right.> Mutex
+
+right_Sensor .down.> "input" right_SSP
+right_SSP .down.> "input" right_PID
+right_PID -down-> "drives" right_PWM
+right_PWM -down-> "drives" right_Pin
+right_PWM .left.> Balancer
+right_Pin .left.> Mutex
+
+@enduml

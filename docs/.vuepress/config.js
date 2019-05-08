@@ -59,6 +59,7 @@ module.exports = {
             ],
             '/user/': [
                 'startup',
+                'control_chains',
                 'adding_services',
                 'connect_settings',
                 'advanced',
