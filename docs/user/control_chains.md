@@ -1,33 +1,65 @@
 # BrewBlox Control Chains
 
-When first installing BrewBlox, it can be a bit overwhelming. The disadvantage of a modular system is that there are a lot of moving parts that must be understood in order to use them.
+When first installing BrewBlox, it can be a bit overwhelming.
+We designed BrewBlox to be very flexible and modular to give you a lot of freedom (and responsibility) to adapt it to your brewery.
+The downside of this flexibility is that it there are a lot of parts that you can combine and should understand.
 
-This guide describes some of the most common combinations, and how they are used in the Classic BrewPi arrangement.
+This page describes some common ways on how blocks can be combined to create control chains.
+We will add wizards to the UI to create the most common arrangements, but still it helps to understand their design.
 
-## Basics
+## A basic example
 
 <PlantUml src="basic_chain.puml" title="Basic Control Chain"/>
 
-This basic control loop has five Blocks, each with a distinct responsibility:
-- *Temperature Sensor* measures the current temperature.
-- *Setpoint Sensor Pair* combines the measured temperature with the desired value (Setpoint setting).
-- *PID* uses the Setpoint setting and Sensor value to calculate the required output.
-  - For an explanation on how PID controllers work, see [wikipedia](https://en.wikipedia.org/wiki/PID_controller).
-- *PWM Actuator* converts the % output value from the PID into a sequence of on/off periods.
-  - [explanation of pulse-width modulation (PWM)](https://en.wikipedia.org/wiki/Pulse-width_modulation).
-- *Actuator Pin* toggles the heating or cooling element.
+The minimal building blocks for a control system are:
 
-## Fridge Control
+- A sensor, to measure what you want to control.
+- A setpoint, the target value for the sensor.
+- An actuator, to drive the sensor value towards the setpoint
+- A controller, in our case a *PID*, to calculate what the value for the actuator should be from the sensor and setpoint value.
+
+In BrewBlox, the input of a PID is a *setpoint-sensor pair*. This block contains the target value (setpoint) and a link to the sensor.
+
+The *PID* calculates the error, the difference between setpoint and sensor, and keeps a history of to calculates an output value.
+The details of the PID will be described in a different article. [Wikipedia](https://en.wikipedia.org/wiki/PID_controller) also gives a good overview.
+
+The actuator, a heater or cooler, can in most cases only be turned fully ON or fully OFF with a digital output pin.
+But the PID calculation generates a numeric value, like 20 or 56. This is solved with a PWM block between the PID and the digital pin.
+
+PWM stands for [Pulse Width Modulation](https://en.wikipedia.org/wiki/Pulse-width_modulation). The PWM block has a configurable time period of for example 4 seconds.
+It will turn ON the actuator for a part of that 4 second period and off for the remaining time.
+A PWM value of 40% will turn ON for 1.6 seconds and OFF for 2.4 seconds and repeat.
+This turns the digital ON/OFF actuator into an 'analog' numeric actuator with a range between 0% and 100%.
+
+## Heating and cooling a Fridge
 
 <PlantUml src="fridge_chain.puml" title="Fridge Control Chain"/>
 
-We'll refer to your controlled environment as the "Fridge". The assumption is that you keep your beer in a separate container inside your Fridge.
+As a second example, we'll look at controlling fridge temperature.
+You can cool the air in the fridge by turning the fridge compressor on.
+To be able to also raise the fridge temperature, you can install a heater inside the fridge.
 
-The drawback of the basic control chain is that it can only ever influence the system in one direction. Actuator Pins only have an on/off switch.
+Because the system responds differently to the heater and cooler, they will each get their own PID and PWM block.
+They can both use the same sensor-setpoint pair as input.
 
-If you require both heating and cooling, you'll need a separate PID for each action. They can both use the same sensor value and setpoint setting. If the sensor value is lower than the setpoint setting, the heating PID will correct this. If the sensor value is higher than the setpoint setting, the cooling PID will become active.
+The cooling PID will have an opposite sign compared to the heating PID, so they generally do not overlap.
+If the system needs heating, the output of the heating PID will be positive and the output of the cooling PID wil be negative.
+The heating PWM will start pulsing and the cooling PWM will remain off.
 
-To avoid simultaneous cooling and heating, the two Actuator Pins are linked to a Mutex (**mut**ually **ex**clusive) Block. This ensures only one will ever be active at the same time.
+#### The mutex block
+
+To prevent simultaneous simultaneous cooling and heating, we add a constraint to the actuaor pins.
+The Actuator Pins are linked to a Mutex (**mut**ually **ex**clusive) Block. When one of them already holds the Mutex, the other one cannot turn on.
+This ensures only one will ever be active at the same time.
+The Mutex block has an additional wait time setting: when the heater has been ON, the cooler has to wait at least 30 minutes. This prevents quickly alternating.
+
+#### Minimum ON and OFF time to protect the compressor
+
+For heaters, it is fine to turn it on and off every 10 seconds.
+But a fridge compressor can be damaged by short bursts of power. It needs some time to cool down after it has has run.
+
+So for the fridge we choose a PWM period of 30 minutes and configure a minimum OFF time of 5 minutes on the output pin.
+
 
 ## Beer Control
 
