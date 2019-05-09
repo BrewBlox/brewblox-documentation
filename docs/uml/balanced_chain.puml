@@ -1,31 +1,23 @@
 @startuml Balanced Control Chain
-component left_Sensor as "Left Sensor"
-component left_SSP as "Left Setpoint Sensor Pair"
-component left_PID as "Left PID"
-component left_PWM as "Left PWM Actuator"
-component left_Pin as "Left Pin"
+component HLT_PID as "BK PID"
+component HLT_PWM as "BK PWM"
+component HLT_Pin as "BK Element"
 
-component right_Sensor as "Right Sensor"
-component right_SSP as "Right Setpoint Sensor Pair"
-component right_PID as "Right PID"
-component right_PWM as "Right PWM Actuator"
-component right_Pin as "Right Pin"
+component BK_PID as "HLT PID"
+component BK_PWM as "HLT PWM"
+component BK_Pin as "HLT element"
 
 component Balancer #Cyan
-component Mutex
+component Mutex #Cyan
 
-left_Sensor .down.> "input" left_SSP
-left_SSP .down.> "input" left_PID
-left_PID -down-> "drives" left_PWM
-left_PWM -down-> "drives" left_Pin
-left_PWM .right.> Balancer
-left_Pin .right.> Mutex
+HLT_PID -down-> HLT_PWM
+HLT_PWM -down-> HLT_Pin
+HLT_PWM .right.> Balancer
+HLT_Pin .right.> Mutex
 
-right_Sensor .down.> "input" right_SSP
-right_SSP .down.> "input" right_PID
-right_PID -down-> "drives" right_PWM
-right_PWM -down-> "drives" right_Pin
-right_PWM .left.> Balancer
-right_Pin .left.> Mutex
+BK_PID -down-> BK_PWM
+BK_PWM -down-> BK_Pin
+BK_PWM .left.> Balancer
+BK_Pin .left.> Mutex
 
 @enduml
