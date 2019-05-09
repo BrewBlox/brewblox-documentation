@@ -42,63 +42,152 @@ To be able to also raise the fridge temperature, you can install a heater inside
 Because the system responds differently to the heater and cooler, they will each get their own PID and PWM block.
 They can both use the same sensor-setpoint pair as input.
 
-The cooling PID will have an opposite sign compared to the heating PID, so they generally do not overlap.
+The cooling PID will have an opposite sign compared to the heating PID, so they generally do not overlap (The cooling PID should have a negative Kp setting).
 If the system needs heating, the output of the heating PID will be positive and the output of the cooling PID wil be negative.
 The heating PWM will start pulsing and the cooling PWM will remain off.
 
-#### The mutex block
+### Adding a mutex block
 
 To prevent simultaneous simultaneous cooling and heating, we add a constraint to the actuaor pins.
 The Actuator Pins are linked to a Mutex (**mut**ually **ex**clusive) Block. When one of them already holds the Mutex, the other one cannot turn on.
 This ensures only one will ever be active at the same time.
 The Mutex block has an additional wait time setting: when the heater has been ON, the cooler has to wait at least 30 minutes. This prevents quickly alternating.
 
-#### Minimum ON and OFF time to protect the compressor
+### Minimum ON and OFF time to protect the compressor
 
-For heaters, it is fine to turn it on and off every 10 seconds.
-But a fridge compressor can be damaged by short bursts of power. It needs some time to cool down after it has has run.
+Heaters can be switched on and off every 4 seconds, but a fridge compressor can be damaged by short bursts of power.
+It needs some time to cool down after it has has run.
+So for the fridge we choose a PWM period of 30 minutes and configure a minimum OFF time constraint of 5 minutes on the output pin.
 
-So for the fridge we choose a PWM period of 30 minutes and configure a minimum OFF time of 5 minutes on the output pin.
-
-
-## Beer Control
+## Controlling beer temperature with a dynamic fridge setpoint
 
 <PlantUml src="offset_chain.puml" title="Beer Control Chain"/>
 
-The Fridge Control chain ensures a constant temperature inside the fridge. For a more consistent temperature of the beer inside your fridge, you may want to extend your control chain.
+To control beer temperature, we could use 2 PIDs directly like we did for the fridge, but with the beer sensor as input.
+But BrewBlox also supports a more advanced form of indirect control with a dynamic fridge temperature setting.
 
-All other Blocks function the same, but now we will be automatically adjusting the Fridge Setpoint setting.
+To set this up, we start with the same fridge temperature control arrangement as above, but we add a new PID to control the fridge setting.
+The *Offset Actuator* can be set as output of a PID and can offset a target setpoint (fridge) from a reference setpoint (beer).
 
-The beer PID drives the Fridge Offset Actuator, and the Fridge Offset Actuator translates the output setting dictated by the PID to an adjustment of the Fridge Setpoint setting.
+Sounds complicated, but is actually pretty simple. An example situation:
+The beer temperature is 18 degrees, but should be 20 degrees. The beer PID has a gain (Kp) of 5, so the offset actuator is set to 10 by the PID.
+The offset actuator in turn sets the fridge setpoint 10 degrees higher than its reference, resulting in a fridge setpoint of 30.
+
+With this arrangement, the fridge setpoint will be automatically adjust to what the beer needs to reach the desired temperature.
+
+### When not to use a dynamic fridge setpoint
+
+A dynamic fridge point should only be used if the fridge air is what cools and heats the beer.
+If your fermenter is very close to the cooled wall of the fridge or close to the heater, it will respond to heating/cooling independent of the fridge air temperature.
+Using the fridge air temperature to try to control your beer temperature doesn't work well in this case.
+
+Your air temperature sensor should be between the cooler and heater and the beer. If it is not, move it or use the beer temperature directly as input to your heating and cooling PIDs.
+
+## Controlling beer temperature with cold water or glycol
+
+As fermenters get bigger, finding a large enough fridge becomes difficult and unpractical.
+
+Cooling with cold water works great in this situation. You will need a cooling coil in your fermenter or a cooling jacket.
+Your source of cold water can be an undercounter beer line chiller or glycol chiller.
+For each fermenter you can put a submersible pump in the water reservoir to pump water through your cooling coil or jacket.
+
+Heating can be done with a heating belt around the fermenter.
 
 ## OneWire Actuators (DS2413)
 
 <PlantUml src="onewire_chain.puml" title="OneWire Control Chain"/>
 
-If you want to use a DS2413 Actuator instead of an Actuator Pin, this requires a subtly different setup. The DS2413 Chip will be automatically discovered, but you need to create an Actuator to use one of the channels as the Chip for output.
+Next to the 5 digital outputs on the Spark 3, BrewBlox supports extension boards to add extra outputs.
+The SSR expansion board that we sell has a DS2413 OneWire chip that provides 2 extra output pins.
+To use it, use the 'discover blocks' button on the Spark service page. The discovered *DS2413* will be added.
 
-Everything else in the control chain remains the same.
+Next, create a new *DS2413 Actuator* with one of the channels of the *DS2413* block as target.
+
+The DS2413 Actuator can be used just like a Spark 3 output pin. It can be the target of a PWM block, with the exception that it does not support being driven in 100Hz PWM mode.
 
 ## Setpoint Profiles
 
 <PlantUml src="profile_chain.puml" title="Profile Control Chain"/>
 
-By default, a Setpoint Sensor Pair has a constant setting. If you want to automatically adjust the temperature over time, you can add a Setpoint Profile Block.
+A Setpoint Sensor Pair has a constant setting. If you want to automatically change the setting over time, you can add a Setpoint Profile Block.
+This Setpoint Profile block changes the setting inside a Setpoint Sensor Pair for you between two or more dates/times that you add.
 
-A Setpoint Profile will change the Setpoint setting at a specific time. For example, you could create a profile that will repeatedly cold crash your beer, or one that slowly heats it by increasing the Setpoint setting by 1 degree per hour.
+The Setpoint Profile is very useful to slowly change your temperature setting to give the yeast has time to adapt.
+By adding 2 points 3 days apart, with a setting of 20 degrees and 23 degrees, the temperature setting will increase 1 degree per day, 1/24 degree per hour.
 
-Once again, everything else in the control chain remains the same: the PID will automatically adjust to the changed Setpoint setting.
+The value is interpolated between points, so the setting increases slowly from point 1 to point 2.
+If you want a sudden step, create 2 points with the same time but a different temperature setting.
 
-## Balanced Actuators
+## Mashing with BrewBlox
+
+When you want to use BrewBlox to control the hot side of brewing (mashing, boiling), the arrangement of blocks is almost identical to the examples for fermentation control.
+
+For each kettle with a heating element, you will have a temperature sensor, sensor setpoint pair, PID, PWM and a digital output.
+
+For reference:
+- HLT stands for Hot Liquor Tun, your hot water kettle with a HERMS coil inside.
+- MT stands for Mash Tun
+- BK stands for Brew Kettle, in which you boil the wort.
+
+### A HERMS with dynamic HLT setpoint
+
+Similar to the dynamic fridge temperature setting, we can let the measured mash temperature determine what the HLT temperature must be to raise the mash temperature during circulation.
+
+<PlantUml src="herms_chain.puml" title="HERMS Control Chain"/>
+
+**An example:**
+
+Your mash temperature is 64, but should be 67. The system will set the HLT setpoint to 70.
+If you mix equal volumes of 64 degree water and 70 degree water, the mixed water will be 67 degrees.
+Pumping the wort through the HERMS coil in your HLT has the same effect.
+
+While you are recirculating, the mash temperature will rise and the HLT setpoint will be lowered towards the desired mash temperature.
+
+A higher HLT temperature will raise your mash temperature quicker. But if you build up too much heat in your HLT, more than should eventually be transferred to your mash tun, you will overshoot your setpoint.
+This is why it is best to minimize the amount of water in the HLT: mount your HERMS coil as low as possible and fill the HLT only to just above the coil.
+
+If the amount of water in your HLT is only halve of the volume in your mash tun, you could raise the HLT temperature to 73 degrees without overshoot in the previous example.
+This will give you much more responsive system.
+
+To have no overshoot, the gain of the mash tun PID should be set to MT volume divided by HLT volume. Setting it higher will make the system faster, but will give you some overshoot.
+
+### Constant HLT temperature
+
+If you use an offset actuator driving your HLT setpoint, you should disable it when you want a constant HLT temperature. You will only use dynamic setpoint when mashing, not for pre-heating or heating your sparge water.
+
+### Boiling
+
+When boiling your wort, you want to boil with constant power. You can do this by disabling the BK PID or BK setpoint. Once they are disabled, you can manually set the amount of power (0-100%) of the BK PWM block.
+
+## When you only have power for 1 element: sharing power over multiple elements
+
+Heating large volumes of water takes a lot of power, so brewers buy the biggest heating element that their fuses can handle.
+In most cases, they can therefore only power for 1 element at a time. This is not pratical, so BrewBlox offers you a solution!
 
 <PlantUml src="balanced_chain.puml" title="Balanced Control Chain"/>
 
-It is not uncommon to have electrical elements where the combined power draw is more than the fuses can handle. The Balancer Block constrains actuators to divide the available power (output setting) as fairly as possible.
+### Mutex
 
-This functionality is not directly relevant to the standard Fridge setup, as there the heater and cooler should not be active at the same time, but is intended for systems with (for example) multiple heating elements in different kettles.
+First, we create a mutex block that both elements will have to share and add a mutex constraint linking to it to both output pins.
+This will prevent the elements from turning on at the same time. When one element is turned on, it will block the other one from turning on.
 
-A Mutex Block solves the problem of heating elements being active at the same time, but also causes a new issue: resource hogging. If the left PWM Actuator has an output setting of 100%, it may prevent the right heating element from ever turning on.
+### Balancer
+We have prevented blowing fuses, but what happens when you want to pre-heat both your HLT and BK at the same time?
+If both kettles are cold, both PIDs will set their output to 100%.
 
-The Balancer Block fairly distributes available output (100%) over the two actuators, and takes their requested output into account. If the left PWM actuator requests 100%, and the right PWM actuator requests 60%, the Balancer may grant 65% to the left and 35% to the right (example numbers).
+The first kettle will hold the mutex until it drops below 100%, preventing the other kettle from getting any power.
+This is not what we want, we want equal sharing. Both kettles should get 50% of the available power.
 
-When combined, the Mutex makes sure the heating elements are never drawing power at the same time, and the Balancer makes sure that both PWM cycles leave room for the other.
+The arbiter for fair power sharing is the Balancer Block. It will limit the power to each client so they add up to 100%.
+
+If the BK and HLT both request 100%, they each get 50%. <br/>
+If the HLT requests 80% and the BK 40%, the HLT gets 67% and the BK gets 33%.
+
+### PWM with Mutex and Balancing
+
+The result of a mutex on the digital pins and a Balancer ensuring that the PWM blocks leave enough OFF time for each other, is that the PWM cycles overlap.
+As soon as one element turns off, the other one can turn on.
+If the PWM period is configured to be 4 seconds, the power will switch between elements every 2 seconds if they are balanced 50/50.
+The power draw through your fuses will be nearly 100%.
+
+Balancing is set up by creating a *Balancer* block and adding a *Balanced* constraint to each PWM block.
