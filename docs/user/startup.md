@@ -230,14 +230,13 @@ To list all possible commands, navigate to the directory you chose during the in
 brewblox-ctl --help
 ```
 
+![BrewBLox Menu](../images/menu-screenshot.png)
+
 You can use brewblox-ctl to easily manage your system, and perform common actions. Run the following command to start your system:
 
 ```bash
 brewblox-ctl up
 ```
-
-![BrewBLox Menu](../images/menu-screenshot.png)
-
 
 After the project is done starting up, you can use the BrewBlox UI at `https://raspberrypi` (or your Raspberry Pi's IP address) to configure and monitor your Spark.
 
