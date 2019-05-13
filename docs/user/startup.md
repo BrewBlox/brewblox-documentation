@@ -123,6 +123,7 @@ The default user name is `pi`, and the default password is `raspberry`. It is st
 First, we have to fix some SSH settings. In your SSH terminal, run the following commands (one at a time):
 ```bash
 sudo sed -i 's/^AcceptEnv LANG LC/# AcceptEnv LANG LC/g' /etc/ssh/sshd_config
+sudo systemctl restart ssh
 exit
 ```
 
