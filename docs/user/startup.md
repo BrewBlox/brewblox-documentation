@@ -224,13 +224,17 @@ Follow the instructions until the menu exits.
 
 If you connected your Spark to your Wi-Fi network, you can now disconnect from your Raspberry Pi, and connect the Spark to some other power source.
 
-Navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and start the menu:
+To list all possible commands, navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and run:
 
 ```bash
-brewblox-ctl
+brewblox-ctl --help
 ```
 
-You can use the menu to easily manage your system, and perform common actions. Choose `up` to start your system.
+You can use brewblox-ctl to easily manage your system, and perform common actions. Run the following command to start your system:
+
+```bash
+brewblox-ctl up
+```
 
 ![BrewBLox Menu](../images/menu-screenshot.png)
 
