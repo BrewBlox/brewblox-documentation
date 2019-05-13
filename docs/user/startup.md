@@ -120,7 +120,15 @@ The default user name is `pi`, and the default password is `raspberry`. It is st
 
 ## Step 4: Install BrewBlox
 
-Open the terminal, and run the following commands (one at a time):
+First, we have to fix some SSH settings. In your SSH terminal, run the following commands (one at a time):
+```bash
+sudo sed -i 's/^AcceptEnv LANG LC/# AcceptEnv LANG LC/g' /etc/ssh/sshd_config
+exit
+```
+
+This will exit your SSH session. That's fine: just open a new one. It will use the changed settings.
+
+In your new SSH terminal, run the following commands:
 
 ```bash
 sudo apt update && sudo apt upgrade -y
