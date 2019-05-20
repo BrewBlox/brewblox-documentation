@@ -67,11 +67,11 @@ To control beer temperature, we could use 2 PIDs directly like we did for the fr
 But BrewBlox also supports a more advanced form of indirect control with a dynamic fridge temperature setting.
 
 To set this up, we start with the same fridge temperature control arrangement as above, but we add a new PID to control the fridge setting.
-The *Offset Actuator* can be set as output of a PID and can offset a target setpoint (fridge) from a reference setpoint (beer).
+The *Setpoint Driver* can be set as output of a PID and uses a reference setpoint (beer) to drive a target setpoint (fridge).
 
 Sounds complicated, but is actually pretty simple. An example situation:
-The beer temperature is 18 degrees, but should be 20 degrees. The beer PID has a gain (Kp) of 5, so the offset actuator is set to 10 by the PID.
-The offset actuator in turn sets the fridge setpoint 10 degrees higher than its reference, resulting in a fridge setpoint of 30.
+The beer temperature is 18 degrees, but should be 20 degrees. The beer PID has a gain (Kp) of 5, so the setpoint driver is set to 10 by the PID.
+The setpoint driver in turn sets the fridge setpoint 10 degrees higher than its reference, resulting in a fridge setpoint of 30.
 
 With this arrangement, the fridge setpoint will be automatically adjust to what the beer needs to reach the desired temperature.
 
@@ -153,7 +153,7 @@ To have no overshoot, the gain of the mash tun PID should be set to MT volume di
 
 ### Constant HLT temperature
 
-If you use an offset actuator driving your HLT setpoint, you should disable it when you want a constant HLT temperature. You will only use dynamic setpoint when mashing, not for pre-heating or heating your sparge water.
+If you use an setpoint driver driving your HLT setpoint, you should disable it when you want a constant HLT temperature. You will only use dynamic setpoint when mashing, not for pre-heating or heating your sparge water.
 
 ### Boiling
 

@@ -15,7 +15,7 @@ component Mutex
 component beer_PID as "Beer PID" #Cyan
 component beer_SSP as "Beer Setpoint Sensor Pair" #Cyan
 component beer_Sensor as "Beer Sensor" #Cyan
-component beer_Offset as "Fridge Offset Actuator" #Cyan
+component beer_Offset as "Fridge Setpoint Driver" #Cyan
 
 fridge_Sensor .down.> "input" fridge_SSP
 fridge_SSP .down.> "input" heat_PID

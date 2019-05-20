@@ -1,6 +1,6 @@
 @startuml Basic control chain
 component PID
-component PWM as "PWM Actuator"
+component PWM
 component Pin as "Actuator Pin"
 component SSP as "Setpoint Sensor Pair"
 component Sensor as "Temperature Sensor"
