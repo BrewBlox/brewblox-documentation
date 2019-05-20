@@ -1,10 +1,10 @@
 @startuml Fridge Control Chain
 component heat_PID as "Heat PID"
-component heat_PWM as "Heat PWM Actuator"
+component heat_PWM as "Heat PWM"
 component heat_Pin as "Heat Pin"
 
 component cool_PID as "Cool PID"
-component cool_PWM as "Cool PWM Actuator"
+component cool_PWM as "Cool PWM"
 component cool_Pin as "Cool Pin"
 
 component fridge_SSP as "Fridge Setpoint Sensor Pair"
