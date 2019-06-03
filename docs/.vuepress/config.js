@@ -64,6 +64,7 @@ module.exports = {
                 'connect_settings',
                 'advanced',
                 'compose',
+                'release_notes',
             ]
         },
         repo: 'brewblox/brewblox-documentation',
