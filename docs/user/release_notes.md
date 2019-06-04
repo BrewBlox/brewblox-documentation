@@ -1,5 +1,23 @@
 # BrewBlox Release Notes
 
+## Edge release 2019/06/04
+
+**Firmware release date: 2019/06/04**
+
+We (hopefully) fixed the reboot issues people were experiencing, and added the Step View widget.
+
+**Changes**
+
+- Added Firmware Release Date to the Spark Widget. This should make it easier to check whether you need to flash the controller.
+- Added the Step View widget.
+  - This allows applying predetermined changes to multiple Blocks at the same time.
+  - You can choose to change a subset of Block fields - values will be merged.
+- Only reinitialize OneWire sensors when they are actually found, but have lost power since last read. 
+  - Previously a re-init was tried at every read error. This is a slow operation, which really slowed down the system when configured sensors were disconnected.
+- When using 100Hz PWM, unregister interrupt handler before PWM block destruction (fixed hard fault SOS).
+- Handle WiFi status and IP address display in system event handler. 
+  - A [major bug](https://github.com/particle-iot/device-os/issues/1805) in particle device-os could cause a hard fault SOS when WiFi was connecting in the system thread while the application thread was trying to read the IP address.
+
 ## Edge release 2019/05/28
 
 **Firmware version: 9b0330f4** (no changes)
