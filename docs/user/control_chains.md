@@ -23,13 +23,15 @@ In BrewBlox, the input of a PID is a *setpoint-sensor pair*. This block contains
 The *PID* calculates the error, the difference between setpoint and sensor, and keeps a history of to calculates an output value.
 The details of the PID will be described in a different article. [Wikipedia](https://en.wikipedia.org/wiki/PID_controller) also gives a good overview.
 
-The actuator, a heater or cooler, can in most cases only be turned fully ON or fully OFF with a digital output pin.
-But the PID calculation generates a numeric value, like 20 or 56. This is solved with a PWM block between the PID and the digital pin.
+The *Digital Actuator* toggles an output pin. It can either use a pin on the Spark itself, or one connected through OneWire (DS2408 or DS2413). <br>
+Digital Actuators can only be turned ON or OFF, but the PID calculation generates a numeric value, like 20 or 56. This is solved with a PWM block between the PID and the Digital Actuator.
 
 PWM stands for [Pulse Width Modulation](https://en.wikipedia.org/wiki/Pulse-width_modulation). The PWM block has a configurable time period of for example 4 seconds.
 It will turn ON the actuator for a part of that 4 second period and off for the remaining time.
 A PWM value of 40% will turn ON for 1.6 seconds and OFF for 2.4 seconds and repeat.
 This turns the digital ON/OFF actuator into an 'analog' numeric actuator with a range between 0% and 100%.
+
+
 
 ## Heating and cooling a Fridge
 
@@ -48,8 +50,8 @@ The heating PWM will start pulsing and the cooling PWM will remain off.
 
 ### Adding a mutex block
 
-To prevent simultaneous simultaneous cooling and heating, we add a constraint to the actuaor pins.
-The Actuator Pins are linked to a Mutex (**mut**ually **ex**clusive) Block. When one of them already holds the Mutex, the other one cannot turn on.
+To prevent simultaneous simultaneous cooling and heating, we add a constraint to the digital actuators.
+The actuators are linked to a Mutex (**mut**ually **ex**clusive) Block. When one of them already holds the Mutex, the other one cannot turn on.
 This ensures only one will ever be active at the same time.
 The Mutex block has an additional wait time setting: when the heater has been ON, the cooler has to wait at least 30 minutes. This prevents quickly alternating.
 
@@ -101,9 +103,7 @@ Next to the 5 digital outputs on the Spark 3, BrewBlox supports extension boards
 The SSR expansion board that we sell has a DS2413 OneWire chip that provides 2 extra output pins.
 To use it, use the 'discover blocks' button on the Spark service page. The discovered *DS2413* will be added.
 
-Next, create a new *DS2413 Actuator* with one of the channels of the *DS2413* block as target.
-
-The DS2413 Actuator can be used just like a Spark 3 output pin. It can be the target of a PWM block, with the exception that it does not support being driven in 100Hz PWM mode.
+The DS2413 can be used just like a Spark 3 output pin. It can be the target of a Digital Actuator, with the exception that it does not support being driven in 100Hz PWM mode.
 
 ## Setpoint Profiles
 
@@ -185,7 +185,7 @@ If the HLT requests 80% and the BK 40%, the HLT gets 67% and the BK gets 33%.
 
 ### PWM with Mutex and Balancing
 
-The result of a mutex on the digital pins and a Balancer ensuring that the PWM blocks leave enough OFF time for each other, is that the PWM cycles overlap.
+The result of a mutex on the digital actuators and a Balancer ensuring that the PWM blocks leave enough OFF time for each other, is that the PWM cycles overlap.
 As soon as one element turns off, the other one can turn on.
 If the PWM period is configured to be 4 seconds, the power will switch between elements every 2 seconds if they are balanced 50/50.
 The power draw through your fuses will be nearly 100%.

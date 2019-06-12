@@ -6,6 +6,9 @@ component MT_PID
 component HLT_PWM as "MT PWM"
 component BK_PWM as "BK PWM"
 
+component HLT_Digital as "HLT Digital Actuator"
+component BK_Digital as "BK Digital Actuator"
+
 component HLT_Pin as "HLT Element Pin"
 component BK_Pin as "BK Element Pin"
 
@@ -20,7 +23,8 @@ component HLT_Offset as "HLT Offset actuator"
 HLT_Sensor .down.> "input" HLT_SSP
 HLT_SSP .down.> "input" HLT_PID
 HLT_PID -down-> "drives" HLT_PWM
-HLT_PWM -down-> "drives" HLT_Pin
+HLT_PWM -down-> "drives" HLT_Digital
+HLT_Digital -down-> "drives" HLT_Pin
 
 MT_Sensor .down.> "input" MT_SSP
 MT_SSP .down.> "input" MT_PID
@@ -30,6 +34,7 @@ HLT_Offset -left-> "drives" HLT_SSP
 BK_Sensor .down.> "input" BK_SSP
 BK_SSP .down.> "input" BK_PID
 BK_PID -down-> "drives" BK_PWM
-BK_PWM -down-> "drives" BK_Pin
+BK_PWM -down-> "drives" BK_Digital
+BK_Digital -down-> "drives" BK_Pin
 
 @enduml

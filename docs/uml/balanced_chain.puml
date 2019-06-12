@@ -1,23 +1,27 @@
 @startuml Balanced Control Chain
-component HLT_PID as "BK PID"
-component HLT_PWM as "BK PWM"
-component HLT_Pin as "BK Element"
+component HLT_PID as "HLT PID"
+component HLT_PWM as "HLT PWM"
+component HLT_Digital as "HLT Actuator"
+component HLT_Pin as "HLT Pin"
 
-component BK_PID as "HLT PID"
-component BK_PWM as "HLT PWM"
-component BK_Pin as "HLT element"
+component BK_PID as "BK PID"
+component BK_PWM as "BK PWM"
+component BK_Digital as "BK Actuator"
+component BK_Pin as "BK Pin"
 
 component Balancer #Cyan
 component Mutex #Cyan
 
 HLT_PID -down-> HLT_PWM
-HLT_PWM -down-> HLT_Pin
+HLT_PWM -down-> HLT_Digital
 HLT_PWM .right.> Balancer
-HLT_Pin .right.> Mutex
+HLT_Digital .right.> Mutex
+HLT_Digital -down-> HLT_Pin
 
 BK_PID -down-> BK_PWM
-BK_PWM -down-> BK_Pin
+BK_PWM -down-> BK_Digital
 BK_PWM .left.> Balancer
-BK_Pin .left.> Mutex
+BK_Digital .left.> Mutex
+BK_Digital -down-> BK_Pin
 
 @enduml

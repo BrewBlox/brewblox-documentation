@@ -1,13 +1,16 @@
 @startuml Basic control chain
+component Sensor as "Temperature Sensor"
+component SSP as "Setpoint Sensor Pair"
 component PID
 component PWM
-component Pin as "Actuator Pin"
-component SSP as "Setpoint Sensor Pair"
-component Sensor as "Temperature Sensor"
+component Digital as "Digital Actuator"
+component Pin as "Pin / OneWire channel"
 
 Sensor .down.> "input" SSP
 SSP .down.> "input" PID
 PID -down-> "drives" PWM
-PWM -down-> "drives" Pin
+PWM -down-> "drives" Digital
+Digital -down-> "drives" Pin
+
 
 @enduml
