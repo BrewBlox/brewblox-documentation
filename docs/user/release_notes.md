@@ -1,5 +1,62 @@
 # BrewBlox Release Notes
 
+## Edge release 2019/06/17
+
+**Firmware release date: 2019/06/17**
+
+WARNING: This release contains breaking changes
+
+DS2408 Valves are now supported. We've also refactored actuators to be more consistent between DS2413 and Spark pins.
+
+`Pin Actuator` and `DS2413 Actuator` no longer exist. The Spark now has a single block that contains references to all pins. There is now a single `Digital Actuator` block that can target either a Spark pin, or a DS2413 channel.
+
+See [the updated control chain documentation](./control_chains.md) for a full overview of how this impacts configurations.
+
+Newly introduced blocks: `DS2408 Chip` and `Motor Valve`. Their behavior is comparable to `DS2413 Chip` and `Digital Actuator`: `Motor Valve` targets a channel on `DS2408 Chip`, and can be toggled on (open) and off (closed).
+
+`Motor Valve` is a valid target for `PWM` if you wish to have more fine-grained flow control.
+
+**Changes:**
+
+- Added new blocks:
+  - `Spark2Pins` (System object, only exists on Spark v1 and v2)
+  - `Spark3Pins` (System object, only exists on Spark v3)
+    - Allows toggling 5V and 12V
+    - Displays actual 5V and 12V voltage
+    - Allows toggling LCD backlight
+  - `DS2408 Chip` (Discovered)
+  - `Digital Actuator`
+  - `Motor Valve`
+- Removed blocks:
+  - `Pin Actuator`
+  - `DS2413 Actuator`
+- Actuator Valves in Process View Widget now can be linked to `Motor Valve` blocks.
+- Moved multiple Block actions to the Action dropdown button in the widget.
+  - Rename Block
+  - Choose Block (select different Block to be displayed by widget)
+  - Block Info
+  - Choose Groups
+  - Choose Preset
+  - Remove Block
+- Improved edit popups for values.
+- Improved performance when opening a dialog to select a block.
+  - Options should now appear immediately.
+- Unit fields (temperature, time, etc) will no longer automatically replace `-` with `0` while editing.
+- Reworked the Datetime edit dialog.
+  - For now we've gone with an easily editable input field. Please let us know if you preferred the datetime picker.
+- Fixed rendering issues in graphs.
+  - The graph in the Graph widget will now correctly update when resizing the widget.
+  - Full-screen graphs will no longer be rendered small before updating to the correct size.
+- Improved `Display Settings` layout.
+  - Slots in the widget are now clickable, and will open the settings menu.
+  - The settings menu layout now resembles the LCD layout: two rows of three slots.
+  - Added border color to slots in the settings menu.
+- The Block Relations diagram is now also scrollable in the horizontal direction.
+- Fixed a bug where incorrect rules were used for Block names in wizards.
+- Fixed multiple bugs in the widget wizard when creating a new widget for an existing block.
+- In the PID widget, the entire input/output row are now clickable (opens settings dialog for input/output block)
+
+
 ## Edge release 2019/06/04
 
 **Firmware release date: 2019/06/04**
