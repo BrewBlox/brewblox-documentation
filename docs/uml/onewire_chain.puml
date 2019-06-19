@@ -1,7 +1,7 @@
 @startuml OneWire control chain
 component PID
 component PWM
-component Actuator as "DS2413 Actuator" #Cyan
+component Actuator as "Digital Actuator"
 component Chip as "DS2413 Chip" #Cyan
 component SSP as "Setpoint Sensor Pair"
 component Sensor as "Temperature Sensor"

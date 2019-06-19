@@ -3,13 +3,15 @@ component Sensor as "Temperature Sensor"
 component Profile as "Setpoint Profile" #Cyan
 component SSP as "Setpoint Sensor Pair"
 component PID
-component PWM as "PWM Actuator"
-component Pin as "Actuator Pin"
+component PWM
+component Digital as "Digital Actuator"
+component Pin as "Spark Pin"
 
 Sensor .down.> "input" SSP
 Profile -down-> "drives" SSP
 SSP .down.> "input" PID
 PID -down-> "drives" PWM
-PWM -down-> "drives" Pin
+PWM -down-> "drives" Digital
+Digital -down-> "drives" Pin
 
 @enduml
