@@ -1,8 +1,8 @@
 # BrewBlox Release Notes
 
-## Edge release 2019/06/17
+## Edge release 2019/06/19
 
-**Firmware release date: 2019/06/17**
+**Firmware release date: 2019/06/19** (Now also checked automatically)
 
 WARNING: This release contains breaking changes
 
@@ -15,6 +15,15 @@ See [the updated control chain documentation](./control_chains.md) for a full ov
 Newly introduced blocks: `DS2408 Chip` and `Motor Valve`. Their behavior is comparable to `DS2413 Chip` and `Digital Actuator`: `Motor Valve` targets a channel on `DS2408 Chip`, and can be toggled on (open) and off (closed).
 
 `Motor Valve` is a valid target for `PWM` if you wish to have more fine-grained flow control.
+
+**Migration:**
+
+- Note down the current constraints of your `DS2413 Actuator` and `Pin Actuator` blocks.
+- Update your system.
+- Run the `Discover new OneWire Blocks` action in the Spark service page.
+- Add `Digital Actuator` blocks to replace your (now disappeared) `DS2413 Actuator` and `Pin Actuator` blocks.
+- Point your actuators towards the correct Spark pins or DS2413 pins.
+- Set the constraints on your new actuators.
 
 **Changes:**
 
@@ -43,7 +52,8 @@ Newly introduced blocks: `DS2408 Chip` and `Motor Valve`. Their behavior is comp
   - Options should now appear immediately.
 - Unit fields (temperature, time, etc) will no longer automatically replace `-` with `0` while editing.
 - Reworked the Datetime edit dialog.
-  - For now we've gone with an easily editable input field. Please let us know if you preferred the datetime picker.
+  - For now we've gone with a masked input field.
+  - The option to use a date picker will be re-added in a future release.
 - Fixed rendering issues in graphs.
   - The graph in the Graph widget will now correctly update when resizing the widget.
   - Full-screen graphs will no longer be rendered small before updating to the correct size.
@@ -55,6 +65,9 @@ Newly introduced blocks: `DS2408 Chip` and `Motor Valve`. Their behavior is comp
 - Fixed a bug where incorrect rules were used for Block names in wizards.
 - Fixed multiple bugs in the widget wizard when creating a new widget for an existing block.
 - In the PID widget, the entire input/output row are now clickable (opens settings dialog for input/output block)
+- When selecting a link (target block / input block /etc), you now often have the option to create a new block of a compatible type
+- The Spark service now compares service and firmware versions when connecting. An error will be displayed in the UI when they are incompatible.
+- Fixed a bug where a disabled Setpoint driver would not stop driving the Setpoint Sensor Pair
 
 
 ## Edge release 2019/06/04
