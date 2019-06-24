@@ -1,5 +1,16 @@
 # BrewBlox Release Notes
 
+## Edge release 2019/06/24
+
+**Firmware release date: 2019/06/24**
+
+**Changes:**
+
+- Improved time to first load for the UI.
+- Improved firmware compatibility check.
+  - Now separately displays whether it's still waiting for the service <-> firmware handshake.
+  - Fixed a bug where the service <-> firmware handshake would not happen.
+
 ## Edge release 2019/06/19
 
 **Firmware release date: 2019/06/19** (Now also checked automatically)
