@@ -23,6 +23,7 @@ module.exports = {
                     title: 'Reference Documents',
                     children: [
                         'reference/event_logging',
+                        'reference/controlbox_spark_protocol',
                         'reference/spark_commands',
                     ]
                 },
@@ -43,7 +44,6 @@ module.exports = {
                         'decisions/docker_crosscompilation',
                         'decisions/rpi_docker_install',
                         'decisions/peer_configuration',
-                        'decisions/controlbox_spark_protocol',
                         'decisions/devcon_data_store',
                         'decisions/crosscompilation_revisited',
                         'decisions/dev_releases',
