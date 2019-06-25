@@ -1,7 +1,5 @@
 # Controlbox Spark serial communication protocol
 
-Date: 2018/04/02
-
 ## Context
 
 The primary controller for the Brewblox stack is the Spark.
