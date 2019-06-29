@@ -256,10 +256,10 @@ There's no need to panic. Click advanced, and add an exception for the current h
 ![BrewBlox UI](../images/ssl-error.png)
 :::
 
-## Step 8 (Optional): Start the Fridge configuration wizard (Classic BrewPi)
+## Step 8 (Optional): Start the Fermentation Fridge wizard (Classic BrewPi)
 
-To easily replicate functionality from the original BrewPi, you can run the `Classic BrewPi` wizard.
+To easily replicate functionality from the original BrewPi, you can run the `Fermentation Fridge` wizard.
 
-This will generate a set of widgets, and configure them with defaults for managing a fridge.
+This will generate a set of blocks and widgets, configured to let you control the brew in your fridge.
 
-![Adding service](../images/start-classic-wizard.gif)
+![Start Ferment wizard](../images/ferment-wizard.gif)
