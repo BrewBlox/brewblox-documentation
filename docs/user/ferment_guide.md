@@ -13,7 +13,7 @@ This is the simplest representation of your fridge: it shows you the temperature
 In the wizard, we chose to use the fridge setpoint as target.
 As a result, the beer setpoint is not displayed in the carboy, and the heater is now trying to get the fridge temperature up to 20°C.
 
-You can edit both the fridge setpoint and the beer setpoint by clicking on them.
+The indicators for the setpoints (beer and fridge) and the outputs (cooling and heating) are all clickable, and will open the relevant settings popup.
 
 In the Ferment Actions widget you can switch to using the beer setpoint, but we'll get to that.
 
