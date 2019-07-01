@@ -119,8 +119,13 @@ Wait for the Pi to finish starting up, and connect to it using your SSH client.
 The default user name is `pi`, and the default password is `raspberry`. It is strongly advised to change the password immediately.
 
 ## Step 4: Install BrewBlox
+To execute the commands that follow, copy them and paste them in your SSH client.
+Trying to type them yourself is frustrating and error prone.
 
-First, we have to fix some SSH settings. In your SSH terminal, run the following commands (one at a time):
+If you use Putty, you can paste the contents of your clipboard with the right mouse button.
+
+First, we have to fix some SSH settings on the Pi.
+In your SSH terminal, run the following commands (one at a time):
 ```bash
 sudo sed -i 's/^AcceptEnv LANG LC/# AcceptEnv LANG LC/g' /etc/ssh/sshd_config
 sudo systemctl restart ssh
