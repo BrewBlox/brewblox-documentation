@@ -1,5 +1,61 @@
 # BrewBlox Release Notes
 
+## Edge release 2019/07/01
+
+**Firmware release date: 2019/07/01**
+
+We've reworked the Fermentation Fridge arrangement. The result should now be much more intuitive for both starting and expert users.
+
+To make the system respond faster to settings changes, we've moved the filter from PID to Setpoint. <br>
+Setpoint has reasonably sensible default filter settings, but you may want to configure them to your liking.
+
+**Changes**
+
+- Reworked the Classic BrewPi wizard.
+  - It's now called "Fermentation Fridge".
+  - Generates fewer and more useful widgets on the new dashboard.
+  - Simplified the Beer constant mode: it now directly uses the beer setpoint.
+  - A Process View widget is added, displaying fridge/beer setpoints, and PID output.
+  - Added back buttons in the wizard.
+  - Automatically select unused block names.
+  - Improved validation of block names.
+  - Added short explanation while blocks and widgets are being created.
+  - Added longer documentation page at https://brewblox.netlify.com/user/ferment_guide.html
+- Renamed `Setpoint/Sensor Pair` to `Setpoint`
+- Moved the input filter from PID to Setpoint.
+  - This should make it more transparent how changes in temperature have a delayed impact on output.
+  - The filter resets when the setting is changed, making it respond faster.
+- The Setpoint filter can now be manually bypassed.
+  - This can be done to immediately see the effect of configuration changes.
+- The PID I value can now be manually set.
+  - This can be done to immediately see the effect of configuration changes.
+- Added multiple parts to the Process View widget.
+  - Setpoint display
+  - PID display
+  - PWM display
+  - Fridge (can change size)
+  - Carboy (can display a setpoint)
+  - Keg (can display a setpoint)
+  - Beer bottle
+- Added widget and block actions to the setting popups.
+- Improved the rendering and scroll behavior of the relations diagram (again).
+- Show widget type name in the settings popup toolbar.
+- You can now copy steps in the Step View widget.
+- Moved the "Add block" button to the bottom of the step in the Step View widget.
+- Fixed a bug where Actuator valves in Process view couldn't be linked to Motor Valve blocks.
+- Actuator buttons now display a loading icon when they're waiting to apply state.
+  - This happens if they're blocked by a Mutex block.
+- Added edit button to Driven indicator (click to open settings for the top-level driver).
+- Added edit button in block selection popup.
+- Added Clone Block action.
+- Setpoints now display which PID blocks are using them as input.
+- Added an option in Step View to confirm changes.
+  - When applying, a popup window is presented for each confirmed change.
+  - The default value is the one set in the Step View settings.
+- Dashboard actions are now also accessible in the dashboard itself.
+
+**Changes**
+
 ## Edge release 2019/06/24
 
 **Firmware release date: 2019/06/24**
