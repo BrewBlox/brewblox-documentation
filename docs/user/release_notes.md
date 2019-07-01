@@ -19,7 +19,6 @@ If you are running a pretty standard fridge setup, you probably want to restart 
 **Changes**
 
 - Reworked the Classic BrewPi wizard.
-
   - It's now called "Fermentation Fridge".
   - Added documentation page at https://brewblox.netlify.com/user/ferment_guide.html
   - Generates fewer and more useful widgets on the new dashboard.
@@ -29,7 +28,6 @@ If you are running a pretty standard fridge setup, you probably want to restart 
   - Automatically select unused block names.
   - Improved validation of block names.
   - Added short explanation while blocks and widgets are being created.
-
 - Renamed `Setpoint/Sensor Pair` to `Setpoint`
 - Moved the input filter from PID to Setpoint.
 - The Setpoint filter can now be manually bypassed.
