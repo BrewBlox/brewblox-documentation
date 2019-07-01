@@ -4,15 +4,24 @@
 
 **Firmware release date: 2019/07/01**
 
-We've reworked the Fermentation Fridge arrangement. The result should now be much more intuitive for both starting and expert users.
+This release moves around some things to make it easier to understand the system:
 
-To make the system respond faster to settings changes, we've moved the filter from PID to Setpoint. <br>
-Setpoint has reasonably sensible default filter settings, but you may want to configure them to your liking.
+- Filtering is moved from the PID to the (shared) setpoint.
+  - The old value is not copied, so check the filter period in your updated setpoint widgets!
+- The filter now stores the sensor value, instead of the difference between setting and sensor. As a result, the setpoint is no longer filtered. Changing it will trigger an immediate response.
+
+We've reworked the Fermentation Fridge arrangement. The result should now be much more intuitive for both starting and expert users.
+The default configuration now is that the actuators directly respond to the beer temperature, not via the fridge setpoint.
+This is much easier to understand and is less sensitive to badly tuned PID settings.
+
+If you are running a pretty standard fridge setup, you probably want to restart from scratch with the new wizard.
 
 **Changes**
 
 - Reworked the Classic BrewPi wizard.
+
   - It's now called "Fermentation Fridge".
+  - Added documentation page at https://brewblox.netlify.com/user/ferment_guide.html
   - Generates fewer and more useful widgets on the new dashboard.
   - Simplified the Beer constant mode: it now directly uses the beer setpoint.
   - A Process View widget is added, displaying fridge/beer setpoints, and PID output.
@@ -20,15 +29,11 @@ Setpoint has reasonably sensible default filter settings, but you may want to co
   - Automatically select unused block names.
   - Improved validation of block names.
   - Added short explanation while blocks and widgets are being created.
-  - Added longer documentation page at https://brewblox.netlify.com/user/ferment_guide.html
+
 - Renamed `Setpoint/Sensor Pair` to `Setpoint`
 - Moved the input filter from PID to Setpoint.
-  - This should make it more transparent how changes in temperature have a delayed impact on output.
-  - The filter resets when the setting is changed, making it respond faster.
 - The Setpoint filter can now be manually bypassed.
-  - This can be done to immediately see the effect of configuration changes.
 - The PID I value can now be manually set.
-  - This can be done to immediately see the effect of configuration changes.
 - Added multiple parts to the Process View widget.
   - Setpoint display
   - PID display
@@ -43,18 +48,13 @@ Setpoint has reasonably sensible default filter settings, but you may want to co
 - You can now copy steps in the Step View widget.
 - Moved the "Add block" button to the bottom of the step in the Step View widget.
 - Fixed a bug where Actuator valves in Process view couldn't be linked to Motor Valve blocks.
-- Actuator buttons now display a loading icon when they're waiting to apply state.
-  - This happens if they're blocked by a Mutex block.
+- Actuator toggle buttons now display a loading icon when they're waiting for a constraint.
 - Added edit button to Driven indicator (click to open settings for the top-level driver).
 - Added edit button in block selection popup.
 - Added Clone Block action.
 - Setpoints now display which PID blocks are using them as input.
-- Added an option in Step View to confirm changes.
-  - When applying, a popup window is presented for each confirmed change.
-  - The default value is the one set in the Step View settings.
-- Dashboard actions are now also accessible in the dashboard itself.
-
-**Changes**
+- Added an option in Step View to prompt for the actual value before applying.
+- Dashboard actions are now also shown in the dropdown on the dashboard toolbar.
 
 ## Edge release 2019/06/24
 
@@ -136,7 +136,6 @@ Newly introduced blocks: `DS2408 Chip` and `Motor Valve`. Their behavior is comp
 - The Spark service now compares service and firmware versions when connecting. An error will be displayed in the UI when they are incompatible.
 - Fixed a bug where a disabled Setpoint driver would not stop driving the Setpoint Sensor Pair
 
-
 ## Edge release 2019/06/04
 
 **Firmware release date: 2019/06/04**
@@ -149,10 +148,10 @@ We (hopefully) fixed the reboot issues people were experiencing, and added the S
 - Added the Step View widget.
   - This allows applying predetermined changes to multiple Blocks at the same time.
   - You can choose to change a subset of Block fields - values will be merged.
-- Only reinitialize OneWire sensors when they are actually found, but have lost power since last read. 
+- Only reinitialize OneWire sensors when they are actually found, but have lost power since last read.
   - Previously a re-init was tried at every read error. This is a slow operation, which really slowed down the system when configured sensors were disconnected.
 - When using 100Hz PWM, unregister interrupt handler before PWM block destruction (fixed hard fault SOS).
-- Handle WiFi status and IP address display in system event handler. 
+- Handle WiFi status and IP address display in system event handler.
   - A [major bug](https://github.com/particle-iot/device-os/issues/1805) in particle device-os could cause a hard fault SOS when WiFi was connecting in the system thread while the application thread was trying to read the IP address.
 
 ## Edge release 2019/05/28
@@ -215,7 +214,7 @@ In the future, we'll also be grouping blocks more. For many use cases, [control 
 
 **Firmware version: 9b0330f4** (same as last week)
 
-Also compatible: 2789cc06. 
+Also compatible: 2789cc06.
 
 **Changes**
 
@@ -257,7 +256,7 @@ Running `brewblox-ctl` without a command will no longer open a menu, but now pri
 - Made decimal precision user-configurable in the Metrics widget.
 - Made the rules for new Block IDs stricter to prevent future issues.
   - ID must start with a letter.
-  - ID may consist of letters, numbers, spaces, and these characters: | ( ) _ -
+  - ID may consist of letters, numbers, spaces, and these characters: | ( ) \_ -
   - ID must not be longer than 200 characters.
 - Fixed a bug where clicking on an actuator button in unknown state would do nothing.
 - Disabled edit button (pencil) in PID widgets for input/output blocks that are not set.
@@ -291,16 +290,15 @@ There are no firmware changes in this release. If you have the latest version (2
 **Changes**
 
 - In the Process View edit modal, tools can now be swapped by hotkey.
-    - Keys are listed to the right of the tool in the side bar.
+  - Keys are listed to the right of the tool in the side bar.
 - In Process View, parts can be flipped again, using either the part menu, or the Flip tool.
 - Improved part display in the "New Part" modal.
 - Moved generic actions from the Spark Widget modal to the Actions button in the Spark service page.
 - Fixed a bug in Graph where the config would be corrupted when changing display type.
 - Fixed a bug in PID where Measured and Target output were displayed swapped.
 - DS2413 actuators are now viable options when running the BrewPi classic arrangement wizard.
-    - For now, you must manually create the DS2413 actuator.
-    - A button to create new blocks was added to the wizard.
-
+  - For now, you must manually create the DS2413 actuator.
+  - A button to create new blocks was added to the wizard.
 
 ## Edge release 2019/04/18
 
@@ -312,6 +310,7 @@ This is a small release, to fix two serious bugs. We will be releasing new featu
 - Fixed a bug where some Block wizards would crash.
 
 ## Edge release 2019/04/16
+
 - Fixed how setpoint/sensor pair works, so that setting can always be set and enabled/disabled is handled separately.
 - Fixed some issues with popup edit menus
 - Make invalid widgets deletable
@@ -328,7 +327,7 @@ This is a small release, to fix two serious bugs. We will be releasing new featu
 
 **Changes**
 
-- Resolved multiple issues with setpoints. 
+- Resolved multiple issues with setpoints.
   - Merged SetpointSimple and SetpointSensorPair.
   - All fancy setpoints (eg. SetpointProfile) are now drivers of SetpointSensorPair.
   - Thanks @j616s for the suggestion of making SetpointProfile a driver!
@@ -338,7 +337,7 @@ This is a small release, to fix two serious bugs. We will be releasing new featu
   - Moved "Export widget" and "Delete all parts" actions to the edit modal.
   - Parts are highlighted on mouseover in the edit modal.
   - Editing can be done with selectable tools. Select a tool, and then click or drag parts.
-  - Available tools: 
+  - Available tools:
     - Click to add new part.
     - Drag to move part.
     - Click to rotate part.
