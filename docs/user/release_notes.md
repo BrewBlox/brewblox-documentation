@@ -1,5 +1,38 @@
 # BrewBlox Release Notes
 
+## Edge release 2019/07/10
+
+**Firmware release date: 2019/07/10**
+
+This release adds some usability improvements, and fixes an annoying bug in the firmware.
+
+An oft-requested feature was for the Step view widget to display which step already has been applied.
+Note that this is independent from whether you actually clicked the button: it will consider the step active if applying it would not change anything.
+
+The firmware had a bug where if the Spark couldn't find the network, it would retry before the previous serach was finished. This would significantly slow down everything else.
+
+**Changes**
+
+- Fixed a bug where the controller becomes very slow if Wifi is unavailable.
+- Improved the PID response to setpoint changes.
+  - The proportional part of the calculation uses the immediate (unfiltered) value.
+  - The integral still uses the filtered value.
+- Added a filter option to Setpoint: unfiltered.
+- Improved display of pending state in Digital Actuators and Motor Valves.
+  - State is pending if one or more constraints block it.
+  - A spinner is displayed over the desired state.
+  - If the actuator is not driven, you can toggle the state back to the (non-constrained) setting.
+  - A tooltip displays which constraint is currently blocking the state change.
+- The Graph now displays a message if no data is available for the current settings.
+- The "Apply Step" button is colored green if the step is currently active (matches the current state).
+- If a value was changed during the Step view prompt, it is persisted in settings.
+- Changed multiple parts in Process View:
+  - Split the Pump in two parts: Pump, and PWM Pump.
+  - Pump can be either manual, or linked to a digital actuator.
+  - PWM pump is linked to a PWM (big surprise), and will turn slower/faster depending on PWM setting.
+  - Actuator Valve can now also be linked to a Digital Actuator.
+- Display settings are reset when removing all service blocks.
+
 ## Edge release 2019/07/01
 
 **Firmware release date: 2019/07/01**
