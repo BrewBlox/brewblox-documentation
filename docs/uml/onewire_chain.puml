@@ -3,11 +3,11 @@ component PID
 component PWM
 component Actuator as "Digital Actuator"
 component Chip as "DS2413 Chip" #Cyan
-component SSP as "Setpoint Sensor Pair"
+component Setpoint
 component Sensor as "Temperature Sensor"
 
-Sensor .down.> "input" SSP
-SSP .down.> "input" PID
+Sensor .down.> "input" Setpoint
+Setpoint .down.> "input" PID
 PID -down-> "drives" PWM
 PWM -down-> "drives" Actuator
 Actuator -down-> "drives" Chip
