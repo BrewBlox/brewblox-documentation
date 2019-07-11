@@ -1,15 +1,15 @@
 @startuml Profile control chain
 component Sensor as "Temperature Sensor"
 component Profile as "Setpoint Profile" #Cyan
-component SSP as "Setpoint Sensor Pair"
+component Setpoint
 component PID
 component PWM
 component Digital as "Digital Actuator"
 component Pin as "Spark Pin"
 
-Sensor .down.> "input" SSP
-Profile -down-> "drives" SSP
-SSP .down.> "input" PID
+Sensor .down.> "input" Setpoint
+Profile -down-> "drives" Setpoint
+Setpoint .down.> "input" PID
 PID -down-> "drives" PWM
 PWM -down-> "drives" Digital
 Digital -down-> "drives" Pin

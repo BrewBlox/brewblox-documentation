@@ -9,11 +9,10 @@ component cool_PWM as "Cool PWM"
 component cool_Digital as "Cool Digital Actuator"
 component cool_Pin as "Cool Pin"
 
-component fridge_SSP as "Fridge Setpoint Sensor Pair"
+component fridge_SSP as "Fridge Setpoint"
 component fridge_Sensor as "Fridge Sensor"
 
 component Mutex
-component SparkPins as "Spark Pins"
 
 fridge_Sensor .down.> "input" fridge_SSP
 fridge_SSP .down.> "input" heat_PID

@@ -9,19 +9,19 @@ component cool_PWM as "Cool PWM"
 component cool_Digital as "Cool Digital Actuator"
 component cool_Pin as "Cool Pin"
 
-component fridge_SSP as "Fridge Setpoint Sensor Pair"
+component fridge_Setpoint as "Fridge Setpoint"
 component fridge_Sensor as "Fridge Sensor"
 
 component Mutex
 
 component beer_PID as "Beer PID" #Cyan
-component beer_SSP as "Beer Setpoint Sensor Pair" #Cyan
+component beer_Setpoint as "Beer Setpoint" #Cyan
 component beer_Sensor as "Beer Sensor" #Cyan
 component beer_Offset as "Fridge Setpoint Driver" #Cyan
 
-fridge_Sensor .down.> "input" fridge_SSP
-fridge_SSP .down.> "input" heat_PID
-fridge_SSP .down.> "input" cool_PID
+fridge_Sensor .down.> "input" fridge_Setpoint
+fridge_Setpoint .down.> "input" heat_PID
+fridge_Setpoint .down.> "input" cool_PID
 
 heat_PID -down-> "drives" heat_PWM
 heat_PWM -down-> "drives" heat_Digital
@@ -33,10 +33,10 @@ cool_PWM -down-> "drives" cool_Digital
 cool_Digital .left.> Mutex
 cool_Digital -down- "drives" cool_Pin
 
-beer_Sensor .down.> "input" beer_SSP
-beer_SSP .down.> "input" beer_PID
-beer_SSP .down.> "reference" beer_Offset
+beer_Sensor .down.> "input" beer_Setpoint
+beer_Setpoint .down.> "input" beer_PID
+beer_Setpoint .down.> "reference" beer_Offset
 beer_PID -down-> beer_Offset
-beer_Offset -left-> "drives" fridge_SSP
+beer_Offset -left-> "drives" fridge_Setpoint
 
 @enduml
