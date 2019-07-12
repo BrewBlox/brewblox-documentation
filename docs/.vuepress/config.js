@@ -17,6 +17,7 @@ module.exports = {
                         'contributing/raspberry',
                         'contributing/using_service',
                         'contributing/tools_tricks',
+                        'contributing/release_tools',
                     ]
                 },
                 {
