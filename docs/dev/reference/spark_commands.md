@@ -69,6 +69,7 @@ REBOOT = 9,
 FACTORY_RESET = 10,
 LIST_COMPATIBLE_OBJECTS = 11,
 DISCOVER_OBJECTS = 12,
+FIRMWARE_UPDATE = 100,
 ```
 
 ### Error Codes
@@ -294,3 +295,15 @@ The newly created object will be of the default type for the connected sensor or
     - Errorcode: `uint8_t`
 - Values:
     - ObjectId: `uint16_t`
+
+
+
+---
+### Firmware Update
+Returns response, and then closes all open connections. New connections are handled using the firmware update YModem protocol.
+
+- Request:
+    - MsgId: `uint16_t`
+    - Opcode: `uint8_t = 100`
+- Response:
+    - Errorcode: `uint8_t`
