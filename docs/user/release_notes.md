@@ -1,5 +1,55 @@
 # BrewBlox Release Notes
 
+## Edge release 2019/07/15
+
+**Firmware release date: 2019/07/15**
+
+We've been reconsidering some widget names, as the "XXX View" format has some issues.
+
+The immediate result is that `Process View` is now called `Brewery Builder`. It still works the same, but now has a different subtitle in the widget. Step View will also be renamed, but we're not sure yet how to call it. Feel free to add suggestions!
+
+In the past, we've deprecated multiple types of blocks. This created some leftovers on the Spark that consumed valuable space in memory. Deprecated blocks will now be shown in the UI, where they can be removed.
+
+The service/controller handshake mechanism added a useful version check, but was somewhat unreliable. We've added some fixes here to improve that.
+
+Due to how driven blocks work (eg. a PID driving a PWM), it was possible for PWMs or Digital Actuators to suddenly turn on if the controller rebooted after the PID or Setpoint was disabled. We'd rather not have that, so we fixed it.
+
+**Changes**
+
+- Show deprecated objects.
+  - This allows you to clear space on the controller.
+  - In the future, we'll use these objects to gracefully migrate the configuration when we deprecate blocks.
+- Improved PWM behavior when constrained.
+- Fixed a bug where PWM/Digital actuators would suddenly turn on if the driving PID was disabled.
+- Make display brightness configurable with a slider on the Spark 3.
+  - Previously only supported on/off.
+- Fixed a bug where widgets would not be placed at the end when copied to a dashboard.
+- You can now view the PID relations from the settings dialog.
+- You can now view graphs for block widgets from the settings dialog.
+- Setting dialogs are now correctly closed when a breaking change is made. This happens when:
+  - The block ID is changed.
+  - The widget is removed.
+  - The block is removed.
+- Renamed Process View to "Brewery Builder".
+- Fixed window scrolling when editing the Brewery Builder (again).
+- Parts in the Brewery Builder can now be placed on top of each other.
+  - An indicator will show how many parts are placed at the same position.
+  - New parts can be created on top of other parts (useful when filling kettles or fridges).
+- Standardized the Kettle part in Brewery Builder.
+  - Kettle can be scaled in both width and height.
+  - Small and Large kettles are now just kettles.
+  - A liquid color can be set manually. This is a stopgap solution until we calculate liquid levels in kettles.
+  - The text is now editable.
+- Added the Filter Bottom part. It can be resized in width to visually fit the kettle.
+- Improved handshake behavior in the Spark service.
+  - The handshake is triggered repeatedly until a confirmation is received.
+  - Added a timeout to the "waiting for handshake" state. Service is restarted after.
+- Added runtime firmware updates.
+  - This allows updating the controller over both Wifi and USB, without having to stop all other services.
+  - Firmware changes were required, so the first opportunity to use the new update mechanism is the next release.
+  - UI prompts to update will be enabled in the next release.
+  - This minimizes the issue where actuators would turn on while the firmware was being updated.
+
 ## Edge release 2019/07/10
 
 **Firmware release date: 2019/07/10**
