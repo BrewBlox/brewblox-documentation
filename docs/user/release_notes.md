@@ -1,5 +1,46 @@
 # BrewBlox Release Notes
 
+## Edge release 2019/07/18
+
+**Firmware release date: 2019/07/17**
+
+Due to Elco's upcoming holiday, we decided to push some firmware changes now. This leaves us time to fix any
+critical issues while he's still here.
+
+This release does include a pretty exciting change: we can now update firmware over Wifi! You can even run it from the UI, without having to restart your services.
+
+### IMPORTANT: If you skipped the last update, you'll need to run `brewblox-ctl flash` to enable updates in the UI.
+
+The new mechanism is experimental, and may require a retry before it works. There are multiple checks in place to ensure that if an update fails halfway, the current firmware is not corrupted.
+
+**Changes**
+
+- When the PWM setting is less than 5%, its actuator will not be listed as waiting for the Mutex.
+  - This is mostly a cosmetic change, to prevent actuators visibly waiting for the Mutex because the PWM setting (briefly) jumped to 0.0001.
+- Fixed a bug where errors in the OneWire bus would cause the Spark to be stuck after rebooting.
+- Enabled flashing the firmware in the UI. It can be accessed from the actions button in the Spark service page.
+  - This is available for both USB and Wifi connections, and does not require other controllers to be unplugged.
+  - `brewblox-ctl flash` is still available.
+  - If you're updating from an older version, you'll have to run `brewblox-ctl flash` to enable this feature.
+  - The UI will prompt you to update if an older firmware version is found.
+  - `brewblox-ctl update` no longer prompts you to flash the controller.
+- Brewery Builder changes:
+  - Removed the % sign from the Pid Display part
+  - Added the Url Display part. You can use this to easily navigate to local or external links.
+  - The fridge wizard adds an Url Display that links to the [fermentation arrangement guide](https://brewblox.netlify.com/user/ferment_guide.html).
+  - PWM Display / Heating element parts are now clickable, and open the PWM settings dialog.
+  - Pid / PWM displays now show achieved output values.
+  - When closing / reopening the Builder editor with the Delete tool selected, the previous tool will be used instead.
+  - Added a search field to the part catalog (shown when adding a new part).
+- Unit edit dialogs now use a value rounded to 2 decimals.
+- Reworked how constraints are displayed.
+  - Normally, only the currently limiting constraints are shown.
+  - Clicking the field opens an edit dialog.
+  - This standardizes how constraints are rendered in widgets and block setting dialogs, and removes the need for an expansion item in setting dialogs.
+- Removed expansion items (collapsable subsections) from block settings dialogs.
+  - During the last few months, we've moved generic actions and less relevant fields to dialogs and actions. This made the expansion items unnecessary.
+- Fixed an issue where API errors would generate useless error messages about commits only being possible in dynamic modules.
+
 ## Edge release 2019/07/15
 
 **Firmware release date: 2019/07/15**
