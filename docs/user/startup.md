@@ -11,25 +11,28 @@ For more advanced users, there are alternative ways for configuring and using th
 
 ::: warning
 The following Raspberry Pi models are **not** compatible with BrewBlox.
+
 - Raspberry Pi 1 Model A
 - Raspberry Pi 1 Model B
 - Raspberry Pi Zero
 - Raspberry Pi Zero W
-:::
+  :::
 
 ## What you will need
 
 Always:
-* Laptop or desktop computer
-* [Raspberry Pi 3](https://www.raspberrypi.org/products/) minicomputer
-* Raspberry Pi power supply (5V to micro USB)
-* MicroSD card
-* MicroSD card reader
-* Wifi network or ethernet cable
+
+- Laptop or desktop computer
+- [Raspberry Pi 3](https://www.raspberrypi.org/products/) minicomputer
+- Raspberry Pi power supply (5V to micro USB)
+- MicroSD card
+- MicroSD card reader
+- Wifi network or ethernet cable
 
 When connecting the BrewPi Spark
-* BrewPi Spark
-* Micro-USB to USB cable
+
+- BrewPi Spark
+- Micro-USB to USB cable
 
 ::: tip
 You can also install BrewBlox on a desktop computer.
@@ -39,8 +42,9 @@ See the [Advanced](./advanced.md) page for instructions.
 ## Step 1: Format the microSD card
 
 Download the required software:
-* [Raspbian OS](https://www.raspberrypi.org/downloads/raspbian/) (we recommend Raspbian Lite)
-* [Etcher](https://www.balena.io/etcher/) for writing the image to the microSD card.
+
+- [Raspbian OS](https://www.raspberrypi.org/downloads/raspbian/) (we recommend Raspbian Lite)
+- [Etcher](https://www.balena.io/etcher/) for writing the image to the microSD card.
 
 Insert your microSD card in the card reader, and connect the reader to your computer.
 
@@ -67,7 +71,7 @@ It contains two files: `ssh`, and `wpa_supplicant.conf`.
 The `ssh` file enables SSH, just by being there.
 
 To configure WiFi, open `wpa_supplicant.conf` in a text editor. The file contents should be:
- 
+
 ```
 country=YOUR_COUNTRY_CODE
 
@@ -102,7 +106,6 @@ network={
 }
 ```
 
-
 ## Step 3: Connect to the Raspberry Pi
 
 ::: warning
@@ -114,11 +117,12 @@ Popular choices are [PuTTY](https://www.putty.org/) and [Git Bash](https://git-s
 
 After you installed your SSH client, insert the microSD card into your Pi, and connect the power supply. The Pi will start automatically.
 
-Wait for the Pi to finish starting up, and connect to it using your SSH client. 
+Wait for the Pi to finish starting up, and connect to it using your SSH client.
 
 The default user name is `pi`, and the default password is `raspberry`. It is strongly advised to change the password immediately.
 
 ## Step 4: Install BrewBlox
+
 To execute the commands that follow, copy them and paste them in your SSH client.
 Trying to type them yourself is frustrating and error prone.
 
@@ -126,6 +130,7 @@ If you use Putty, you can paste the contents of your clipboard with the right mo
 
 First, we have to fix some SSH settings on the Pi.
 In your SSH terminal, run the following commands (one at a time):
+
 ```bash
 sudo sed -i 's/^AcceptEnv LANG LC/# AcceptEnv LANG LC/g' /etc/ssh/sshd_config
 sudo systemctl restart ssh
@@ -156,19 +161,22 @@ This will walk you through the relevant choices, and then install BrewBlox in a 
 For the next steps, a basic understanding of Linux commands makes things easier.
 We'll stick to the basics, and assume the default settings on a Raspberry Pi.
 
-After logging in over SSH, you'll see this text in front of your cursor: 
+After logging in over SSH, you'll see this text in front of your cursor:
+
 ```
 pi@raspberrypi:~ $
 ```
 
 This is the shell prompt, and it consists of three parts:
+
 - `pi` is the current user. `pi` is the default user for a Raspberry Pi.
 - `raspberrypi` is the computer host name. Again, `raspberrypi` is the default.
-- `~` is the current directory. 
+- `~` is the current directory.
 
 `~` is a special character for the user home directory. When opening a new SSH terminal, you will start in this directory. You can use the `pwd` command to show the complete path, replacing the special character with directory names.
 
 For example, on a Raspberry Pi:
+
 ```
 pi@raspberrypi:~ $ pwd
 /home/pi
@@ -180,32 +188,36 @@ By default, BrewBlox is installed in the `./brewblox` directory. This is a relat
 You can change directories by using the `cd` command. This can be used with either relative, or absolute paths. After you change directory, the current directory component of your shell prompt will change.
 
 For example, after using `cd ./brewblox`, your shell prompt will be:
+
 ```
 pi@raspberrypi:~/brewblox
 ```
 
 You can navigate back to the home directory by using either one of these commands:
+
 ```
 cd ~
 ```
+
 ```
 cd ..
 ```
+
 `..` is another special character. It means "one directory up".
 
 Examples:
+
 ```
 pi@raspberrypi:~/brewblox $ cd ..
 pi@raspberrypi:~ $
 ```
+
 ```
 pi@raspberrypi:~/brewblox/deeply/nested/subdirectory $ cd ..
 pi@raspberrypi:~/brewblox/deeply/nested $
 ```
 
 If you'd like some more explanation, this [guide to linux commands](https://www.raspberrypi.org/documentation/linux/usage/commands.md) explains how to use the most common commands on a Raspberry Pi.
-
-
 
 ## Step 5: First-time setup
 
@@ -261,7 +273,12 @@ There's no need to panic. Click advanced, and add an exception for the current h
 ![BrewBlox UI](../images/ssl-error.png)
 :::
 
-## Step 8 (Optional): Start the Fermentation Fridge wizard (Classic BrewPi)
+## Step 8: Use the system
+
+By default, temperature values are in Celsius. If you prefer Fahrenheit (or Kelvin), now is a good time to configure that.
+The unit settings can be found under the `Actions` button in the Spark service page.
+
+![Spark actions](../images/spark-actions.png)
 
 To easily replicate functionality from the original BrewPi, you can run the `Fermentation Fridge` wizard.
 
