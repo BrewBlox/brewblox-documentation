@@ -1,5 +1,29 @@
 # BrewBlox Release Notes
 
+## Edge release 2019/07/23
+
+**Firmware release date: 2019/07/23**
+
+We're pushing some fixes in firmware, and the first of some new features in the Builder widget.
+
+When brewing, processes often require physical changes to your layout (eg. when using detachable hoses).
+This can't be easily expressed in a single Builder, so we added the ability to quickly switch between layouts.
+
+**Changes**
+
+- Introducing Layouts in the Builder widget.
+  - Layouts are collections of parts, and are kept globally.
+  - Each Builder can select one or more Layouts, and change between them like a slide show.
+  - The Builder editor can toggle between all available Layouts.
+  - Existing configurations are automatically migrated to a new Layout.
+- Made multiple improvements to the reliability of runtime firmware updates.
+  - Some of them are firmware-side, so you'll only notice them during the next update.
+  - Changed the LED color during runtime firmware updates from orange to purple.
+  - Now immediately throws an error if you try to update while the service is not connected.
+- Fixed a bug where Digital Actuators would lose the link to the pin channel after a reboot.
+- A retry is scheduled when connection is lost to a Spark service.
+  - If the retry restores connection, the notification will be automatically closed.
+
 ## Edge release 2019/07/18
 
 **Firmware release date: 2019/07/17**
