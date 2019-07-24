@@ -41,6 +41,12 @@ See the [Advanced](./advanced.md) page for instructions.
 
 ## Step 1: Format the microSD card
 
+::: warning
+There are ongoing issues with the Docker installation for Raspbian.
+
+See [this topic](https://community.brewpi.com/t/e-pacakge-docker-ce-has-no-installation-candidate/3906) on the forum for details.
+:::
+
 Download the required software:
 
 - [Raspbian OS](https://www.raspberrypi.org/downloads/raspbian/) (we recommend Raspbian Lite)
