@@ -1,5 +1,43 @@
 # BrewBlox Release Notes
 
+## Edge release 2019/07/30
+
+**Firmware release date: 2019/07/25**
+
+This release is all about the UI. We implemented a handful of feature requests, and did some additional tinkering on the Brewery Builder.
+
+We like where the Builder is headed in terms of features, but performance is becoming an issue. We'll likely re-evaluate the flow calculations soon, to make everything much more snappy.
+
+**Changes**
+
+- Added a warning to the Motor Valve widget when 12V is disabled (Spark 3 only).
+  - You can also toggle this in the Spark Pins widget.
+  - 12V is disabled by default, to prevent accidental damage to 5V peripherals.
+- You can now select multiple parts in the Brewery Builder.
+  - Drag to select in a square.
+  - Click on a part to select/unselect it.
+  - Click on the grid to unselect all.
+  - Selected parts can be copied/moved/removed using the respective tools.
+- Added Undo button to the Brewery Builder.
+  - Changes to the currently open layout are tracked.
+  - Removed an earlier change where the delete tool would not be persisted.
+- The center shelf position in the Fridge Part is now configurable.
+- In the Builder Editor, moved the coordinate numbers from individual parts to the left and top edges of the grid.
+- Fixed a graphical bug in toolbars where title text would overflow.
+- Widget warnings now have a max width.
+  - This prevents widgets in the service page suddenly all becoming much wider.
+- Constraints now show a separate message if no constraints are configured.
+  - "Not limited" is still shown if constraints are configured, but not limiting.
+- When editing dashboard IDs, the ID is now validated to prevent unreachable URLs.
+- Default labels in the Graph and Metrics widgets are now prettified.
+  - `spark/sensor-1/value[degC]` becomes `sensor-1 value °C`.
+  - You can still edit labels to give them custom names.
+- In the Graph widget, line colors are now editable.
+- Objects in the relation diagram now have a hover effect.
+  - This should increase visibility that they are clickable.
+- Made block warnings more consistent.
+  - A warning is now also shown if the target is not set (eg. PID is not driving anything).
+
 ## Edge release 2019/07/23
 
 **Firmware release date: 2019/07/23**
