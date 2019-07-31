@@ -41,12 +41,6 @@ See the [Advanced](./advanced.md) page for instructions.
 
 ## Step 1: Format the microSD card
 
-::: warning
-There are ongoing issues with the Docker installation for Raspbian.
-
-See [this topic](https://community.brewpi.com/t/e-pacakge-docker-ce-has-no-installation-candidate/3906) on the forum for details.
-:::
-
 Download the required software:
 
 - [Raspbian OS](https://www.raspberrypi.org/downloads/raspbian/) (we recommend Raspbian Lite)
@@ -242,10 +236,15 @@ Follow the instructions until the menu exits.
 
 For this step, your Spark should be connected to your Raspberry Pi over USB.
 
-Navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and run the following commands in your terminal (one at a time):
+Navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and run the following command in your terminal:
 
 ```bash
 brewblox-ctl flash
+```
+
+If this is your first install, also run the following commands. You can skip these if you're reinstalling BrewBlox.
+
+```bash
 brewblox-ctl bootloader
 brewblox-ctl wifi
 ```
