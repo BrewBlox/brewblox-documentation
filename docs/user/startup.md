@@ -240,12 +240,6 @@ Navigate to the directory you chose during the installation (default: `cd ~/brew
 
 ```bash
 brewblox-ctl flash
-```
-
-If this is your first install, also run the following commands. You can skip these if you're reinstalling BrewBlox.
-
-```bash
-brewblox-ctl bootloader
 brewblox-ctl wifi
 ```
 
