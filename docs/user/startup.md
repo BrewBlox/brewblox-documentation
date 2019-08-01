@@ -236,7 +236,7 @@ Follow the instructions until the menu exits.
 
 For this step, your Spark should be connected to your Raspberry Pi over USB.
 
-Navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and run the following command in your terminal:
+Navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and run the following commands in your terminal:
 
 ```bash
 brewblox-ctl flash
