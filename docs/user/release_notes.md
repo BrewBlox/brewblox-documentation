@@ -1,5 +1,20 @@
 # BrewBlox Release Notes
 
+## Edge release 2019/08/07
+
+**Firmware release date: 2019/08/06**
+
+The UI now supports third-party plugins. If you want to add your own custom widgets, you can now do so.
+We created the example repository https://github.com/BrewBlox/brewblox-plugin to get developers started.
+
+**Changes**
+
+- Added the plugin menu to the sidebar.
+  - Plugins are loaded from an URL, and require a page reload to activate.
+  - If a plugin failed to load, an error is shown here.
+- Fixed a bug where fast PWM mode failed to activate (Spark pins automatically switch to 100Hz mode when PWM period is set to < 1s)
+- Fixed a bug where you could not select a different service in the Fridge arrangement wizard.
+
 ## Edge release 2019/07/30
 
 **Firmware release date: 2019/07/25**
