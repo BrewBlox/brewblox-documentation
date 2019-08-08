@@ -17,8 +17,6 @@ USB:
 - Spark controller must be connected to service host (Raspberry Pi) over USB.
 - Spark controller must be plugged in before Spark service is started.
 
-Note that currently we do not support flashing the firmware over Wifi.
-
 ## Discovery vs Address
 
 The Spark service is able to automatically discover Spark controllers over both Wifi and USB.
