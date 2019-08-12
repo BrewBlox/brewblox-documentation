@@ -1,5 +1,35 @@
 # BrewBlox Release Notes
 
+Relevant links:
+- User guides: https://brewblox.netlify.com/
+- Previous release notes: https://brewblox.netlify.com/user/release_notes.html
+- Project board: https://github.com/orgs/BrewBlox/projects/1
+- Code repositories: https://github.com/BrewBlox
+
+## Edge release 2019/08/12
+
+**Firmware release date: 2019/08/06**
+
+No dramatic new features this week, just a steady stream of iterative improvements.
+
+**Changes**
+
+- Added two oft-requested features to the Step View widget:
+  - The Step tooltip in the widget now shows a detailed overview of the changes that would be applied (current => new).
+  - In the settings popup, Steps and Step Changes can now be dragged to change their order.
+- Refactored the Graph settings popup.
+  - It now uses tabs instead of expansion items.
+  - There's a combined display settings tab. Y-axis and line color settings are placed here, with room for future settings.
+  - Added help text clarifying that only fields updated the last 24h are shown, and that this will include renamed or deleted fields.
+  - Added help text explaining averaging periods.
+- In the Builder Widget, tweaked the Select tool
+  - You can now drag to add more parts to the current selection. (Previously it would clear current selection)
+  - Flow is now correctly updated for currently selected parts after dragging them.
+- The UI is now more responsive while calculating flows.
+- Fixed a bug in the Step View widget where it would use the wrong field for PWM/Setpoint Driver setting.
+- When using `brewblox-ctl log`, blocks from the default `spark-one` service are added to the output.
+  - We're still working on automatically detecting all active Spark servies.
+
 ## Edge release 2019/08/07
 
 **Firmware release date: 2019/08/06**
