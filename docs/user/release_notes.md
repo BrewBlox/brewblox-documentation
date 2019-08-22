@@ -1,10 +1,40 @@
 # BrewBlox Release Notes
 
 Relevant links:
+
 - User guides: https://brewblox.netlify.com/
 - Previous release notes: https://brewblox.netlify.com/user/release_notes.html
 - Project board: https://github.com/orgs/BrewBlox/projects/1
 - Code repositories: https://github.com/BrewBlox
+
+## Edge release 2019/08/20
+
+**Firmware release date: 2019/08/20**
+
+To make it easier to edit the configuration, we added a web-based editor for the `docker-compose.yml` file.
+You can start it by running `brewblox-ctl editor`, and visiting the Pi IP at port 8300.
+
+To avoid redirection issues we've moved the UI to the `/ui/` subdirectory. If you navigate to `https://PI_ADDRESS` you'll be automatically redirected. This fixes multiple issues with accessing the datastore on startup.
+
+**Changes**
+
+- Added the `editor` command to brewblox-ctl.
+- Moved UI address root from `/` to `/ui`.
+- Pinned Docker image versions for external services (datastore, influx, and traefik).
+- Fixed erronous period stretching in the firmware when PWM duty goes over 50%.
+- Added `?safe` URL parameter to disable loading remote plugins.
+  - This allows removing plugins that prevent the UI from rendering.
+- Improved the Step view diff tooltip.
+  - Actuator state is now printed as `Active`,`Inactive`,`Unknown` instead of a number.
+  - Changed values are now rendered with old values in red, and new values in green.
+  - Unchanged values are now rendered as a single value, instead of `old => new`.
+- Fixed a bug in Builder where a new part would be placed at an incorrect location.
+- Disabled the Editor button in IE/Edge browsers due to a breaking bug.
+- Improved help texts in the Builder settings screen.
+- Third-party plugins can now register Builder parts.
+  - We'll be working to allow third-party plugins to acces helper functions.
+- Fixed a bug where the UI would return a 200 status code for `/datastore` and `/history` endpoints if the datastore/history service is not (yet) online.
+- Fixed a bug where changing duration in a Block graph would not re-render the graph.
 
 ## Edge release 2019/08/12
 
