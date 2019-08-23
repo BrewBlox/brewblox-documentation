@@ -1,9 +1,9 @@
 @startuml HERMS
 component HLT_PID as "HLT PID"
-component BK_PID as "BT PID"
+component BK_PID as "BK PID"
 component MT_PID as "MT PID"
 
-component HLT_PWM as "MT PWM"
+component HLT_PWM as "HLT PWM"
 component BK_PWM as "BK PWM"
 
 component HLT_Digital as "HLT Digital Actuator"
