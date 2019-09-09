@@ -7,6 +7,43 @@ Relevant links:
 - Project board: https://github.com/orgs/BrewBlox/projects/1
 - Code repositories: https://github.com/BrewBlox
 
+## Edge release 2019/09/09
+
+**Firmware release date: 2019/08/24**
+
+There is now an arrangement wizard for a HERMS configuration. To go along with this, we reworked the flow calculations to also consider kettles. This has been a pretty big rewrite, and we'll be adding fixes for some edge cases in the coming weeks.
+
+If you have a layout where flows are suddenly going the wrong way, please let us know.
+
+Because we're making more and more use of the setting popup components, we added a pull-out tab for graphs.
+This includes the Graph widget, but also various blocks, and the Setpoint Profile.
+The intention is that you can now easily access graphs, even if you opened the settings from a Builder layout or relations diagram.
+
+This is part of the ongoing approach to reduce the number of elements initially visible, while making it easy to navigate between related blocks and widgets.
+
+**Changes**
+- Added HERMS arrangement wizard.
+- Reworked flow calculations
+  - Flow calculations now include kettles (no more need for the SystemIO workaround).
+  - Calculations are significantly faster.
+- All blocks with graphs can now display them inline in their settings menu.
+- Changed some builder components.
+  - Added a Setpoint Profile part.
+  - The Heating Element part in the Builder can now be resized.
+- Fixed a firmware crash if the Balancer tried to remove a non-existent ID.
+- The Web Editor for the configuration file now continuously checks whether the server is still online.
+- Display current status and values for pin/sensor options in arrangement wizards.
+- Fixed a bug where the Step View would fail to update PID Kp settings.
+- Fixed a bug where the Step View would consider time durations such as "1h" and "60m" as not equal.
+- Fixed a bug where the relations diagram would not render correctly in Firefox.
+- PIDs are now configured differently for fridge and beer modes.
+  - Changed the default settings when generated through the arrangement wizard.
+  - Changing beer <-> fridge constant mode will also change the PID settings. This is prompted to avoid silently overwriting user settings.
+  - Fixed PID presets, and added new ones.
+- In the Setpoint Profile, if you change the upcoming point, it will offer to splice the profile.
+  - This will generate a point at the current time and temperature setting.
+  - This avoids immediate jumps in temperature setting - it will calculate the line from the current setting to the next point instead of from the previous point to the next point.
+
 ## Edge release 2019/08/22
 
 **Firmware release date: 2019/08/20**
