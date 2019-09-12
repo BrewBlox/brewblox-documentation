@@ -7,9 +7,9 @@ Relevant links:
 - Project board: https://github.com/orgs/BrewBlox/projects/1
 - Code repositories: https://github.com/BrewBlox
 
-## Edge release 2019/09/11
+## Edge release 2019/09/12
 
-**Firmware release date: 2019/08/24**
+**Firmware release date: 2019/09/12**
 
 There is now a wizard for a HERMS configuration. To go along with this, we reworked the flow calculations to also consider kettles. This has been a pretty big rewrite, and we'll be adding fixes for some edge cases in the coming weeks.
 
