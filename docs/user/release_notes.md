@@ -54,6 +54,7 @@ This is part of the ongoing approach to reduce the number of elements initially 
 - Improved the tooltip when constraints are configured, but none are currently limiting the value.
 - Improved explanatory text in Wizardry.
 - Fixed a bug in Quick Start wizards where repeatedly going back and forth between steps would exit the wizard.
+- Tweaked the theme colors. Toolbars are now less prominent.
 
 ## Edge release 2019/08/22
 
