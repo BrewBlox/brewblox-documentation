@@ -23,6 +23,8 @@ The intention is that you can now easily access graphs, even if you opened the s
 
 This is part of the ongoing approach to reduce the number of elements initially visible, while making it easy to navigate between related blocks and widgets.
 
+As it's a relevant feature for HERMS, we added Boil Mode support to the PID. When the setpoint is higher than a configurable value (default 100 celsius or equivalent), the integrator is disabled. A minimum output during boil mode can also be set.
+
 **Changes**
 - Renamed "Arrangement" to Quick Start.
 - Added HERMS Quick Start wizard.
@@ -37,6 +39,7 @@ This is part of the ongoing approach to reduce the number of elements initially 
   - System IO/Pump pressure is now configurable in part settings.
   - Condensed service/block link selector into a single select that shows all blocks on all spark services.
   - You can now use a color picker and preset colors in both containers (Kettle, Carboy, Bottle), and System IO parts.
+  - The PID display part now shows output setting. If output value is 0, the icon color turns white instead of red/blue.
 - Fixed a firmware crash if the Balancer tried to remove a non-existent ID.
 - The Web Editor for the configuration file now continuously checks whether the server is still online.
 - Display current status and values for pin/sensor options in quick start wizards.
@@ -55,6 +58,8 @@ This is part of the ongoing approach to reduce the number of elements initially 
 - Improved explanatory text in Wizardry.
 - Fixed a bug in Quick Start wizards where repeatedly going back and forth between steps would exit the wizard.
 - Tweaked the theme colors. Toolbars are now less prominent.
+- The PID now supports Boil Mode.
+- Improved the toggle button for changing dashboard edit mode.
 
 ## Edge release 2019/08/22
 
