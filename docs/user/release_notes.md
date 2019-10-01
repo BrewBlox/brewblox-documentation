@@ -7,6 +7,40 @@ Relevant links:
 - Project board: https://github.com/orgs/BrewBlox/projects/1
 - Code repositories: https://github.com/BrewBlox
 
+## Edge release 2019/10-01
+
+**Firmware release date: 2019/09/16**
+
+So far, we like how quick start wizards simplify the setup process.
+We intend to have a wizard for all commonly used setups. 
+Feel free to make a request if you have or want a specific setup!
+
+We added two this release: 
+
+**RIMS Brew-in-a-Bag** uses a single kettle and a RIMS tube.
+
+**Glycol Fermentation** generates a fermentation setup where cooling is done by pumping glycol through a coil.
+
+
+- Added `RIMS Brew-in-a-Bag` and `Glycol Fermentation` quick start wizards.
+- You can now export graph data to CSV from the Graph widget actions.
+  - This will use the currently displayed time span, but always choose high precision data.
+- You can now save and load stored profiles in `Setpoint Profile`.
+  - Profiles are stored globally, and can be used in all your Setpoint Profiles.
+  - When loading a saved profile, the Setpoint Profile keeps its current target.
+  - Profile points are relative to the start time. When loading a profile you can choose to set start time to now.
+- Fixed a bug that significantly increased the UI size. Page load should now be noticeably faster.
+- `brewblox-ctl update` now asks to prune docker images to clean up disk space.
+- Added builder parts:
+  - Gravity tube (simulates height differences in your layout by increasing flow speed).
+  - RIMS tube
+  - PWM display part (shows the same values as the `Heating Element` part)
+- The liquid level in Kettles is now editable. This is a cosmetic change: flow calculations treat every kettle as completely full.
+- Settings in quickstart wizards are now remembered if you go back in the wizard.
+- Setpoint displays in the builder can now be placed inline in tubes.
+  - Each edge is connected to all other edges.
+
+
 ## Edge release 2019/09/12
 
 **Firmware release date: 2019/09/12**
