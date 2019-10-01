@@ -7,7 +7,7 @@ Relevant links:
 - Project board: https://github.com/orgs/BrewBlox/projects/1
 - Code repositories: https://github.com/BrewBlox
 
-## Edge release 2019/10-01
+## Edge release 2019/10/01
 
 **Firmware release date: 2019/09/16**
 
@@ -325,7 +325,7 @@ This release adds some usability improvements, and fixes an annoying bug in the 
 An oft-requested feature was for the Step view widget to display which step already has been applied.
 Note that this is independent from whether you actually clicked the button: it will consider the step active if applying it would not change anything.
 
-The firmware had a bug where if the Spark couldn't find the network, it would retry before the previous serach was finished. This would significantly slow down everything else.
+The firmware had a bug where if the Spark couldn't find the network, it would retry before the previous search was finished. This would significantly slow down everything else.
 
 **Changes**
 
