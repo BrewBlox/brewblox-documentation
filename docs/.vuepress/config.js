@@ -56,6 +56,7 @@ module.exports = {
                         'decisions/dynamic_ui_plugins',
                         'decisions/stable_releases',
                         'decisions/crud_component',
+                        'decisions/dynamic_widgets',
                     ]
                 },
             ],
