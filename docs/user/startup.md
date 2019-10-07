@@ -284,3 +284,16 @@ To easily replicate functionality from the original BrewPi, you can run the `Fer
 This will generate a set of blocks and widgets, configured to let you control the brew in your fridge.
 
 ![Start Ferment wizard](../images/ferment-wizard.gif)
+
+
+## Later: Updating
+
+BrewBlox receives regular updates. Whenever a new update is released, the release notes are posted on [the forum](https://community.brewpi.com/), and added to the [overview](./release_notes.html).
+
+To update, close the UI, and run the following command:
+
+```bash
+brewblox-ctl update
+```
+
+After the command is done, visit the UI page to verify everything is up and running again. The UI will then notify you if a new firmware version is available. Click on the notification to install the new firmware.
