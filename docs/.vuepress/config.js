@@ -62,7 +62,7 @@ module.exports = {
             ],
             '/user/': [
                 'startup',
-                'fridge_guide',
+                'ferment_guide',
                 'control_chains',
                 'adding_services',
                 'connect_settings',
