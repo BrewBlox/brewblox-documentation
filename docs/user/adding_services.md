@@ -28,7 +28,6 @@ Navigate to the directory you chose during the installation (default: `./brewblo
 
 ```bash
 brewblox-ctl flash
-brewblox-ctl bootloader
 brewblox-ctl wifi
 ```
 
