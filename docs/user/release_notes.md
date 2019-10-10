@@ -37,6 +37,10 @@ When selecting a widget in the index, the displayed widget will automatically sc
 - Fixed a bug in Setpoint Profile where the Graph would not resize after a warning disappeared.
 - Added an express mode to `brewblox-ctl install`. This will install with default settings, and disable the `the following commands will be used` prompt.
 - Improved wording in brewblox-ctl prompts to clarify that immediately pressing enter will choose the default value.
+- Added a button to switch the Block in a Step View change while keeping the changed fields.
+- Added an option to restore names of discovered blocks when removing all blocks in the Spark Service page.
+  - This is useful for resetting your system without having to figure out the physical position of `New|TempSensorOneWire-1` again.
+  - The following types can be restored: `OneWire Temp Sensor`, `DS2408`, `DS2413`.
 
 
 ## Edge release 2019/10/01
