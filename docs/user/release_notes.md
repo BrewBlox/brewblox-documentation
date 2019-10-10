@@ -41,6 +41,14 @@ When selecting a widget in the index, the displayed widget will automatically sc
 - Added an option to restore names of discovered blocks when removing all blocks in the Spark Service page.
   - This is useful for resetting your system without having to figure out the physical position of `New|TempSensorOneWire-1` again.
   - The following types can be restored: `OneWire Temp Sensor`, `DS2408`, `DS2413`.
+- Added an option to save a text file with hardware links when removing all blocks in the Spark Service page.
+  - This can serve as reminder which pins were used by which actuator.
+- Fixed a bug that incorrectly marked some Step View steps as not active if they contained PID setting changes.
+- Shuffled some items in the sidebar.
+  - Added a quick button for the Builder Editor.
+  - Moved the dashboards and services up, and placed the Quick Start and Builder Editor items below them.
+  - Placed the plugins button at the bottom, next to the debug button.
+- Added a button in the Builder Editor to create a widget showing the current layout.
 
 
 ## Edge release 2019/10/01
