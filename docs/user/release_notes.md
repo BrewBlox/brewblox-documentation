@@ -7,6 +7,50 @@ Relevant links:
 - Project board: https://github.com/orgs/BrewBlox/projects/1
 - Code repositories: https://github.com/BrewBlox
 
+## Edge release 2019/10/10
+
+**Firmware release date: 2019/09/16**
+
+We're happy with how we can open a block in a dialog from anywhere in the UI, but there were some drawbacks.
+Most notably, dialogs always used the (more extensive) settings component.
+
+To fix this, we reworked how widgets are rendered. Most widgets can now easily toggle between simple and full modes, both when displayed on a dashboard, and in a dialog.
+Toolbar buttons have been tweaked to make accessing settings smoother.
+
+In the coming weeks, we will be reviewing all widgets.
+- The basic view is for day-to-day use: settings and values that you want to see during a brew day.
+- The full view is for configuration: setting up and tuning your system.
+
+While we were at it, we also improved the Spark service page. The index and the widgets now scroll independently.
+When selecting a widget in the index, the displayed widget will automatically scroll in view.
+
+**Changes**
+- All widgets can now toggle between Basic and Full mode
+  - The settings button on the widget toolbar will now toggle the widget to Full.
+  - Clicking the settings button again will open the settings in a dialog.
+- Improved the Spark service page.
+  - The index and widgets are now elements that scroll separately.
+  - Click on an element in the index to make it visible in the right-hand scroll area.
+  - Click the check button on the left to collapse the widget - it will no longer be shown on the right.
+- Blocks without links are now shown in the Spark relations diagram.
+- Builder parts with links now display a warning if they have a broken link.
+- Fixed a bug in Setpoint Profile where the Graph would not resize after a warning disappeared.
+- Added an express mode to `brewblox-ctl install`. This will install with default settings, and disable the `the following commands will be used` prompt.
+- Improved wording in brewblox-ctl prompts to clarify that immediately pressing enter will choose the default value.
+- Added a button to switch the Block in a Step View change while keeping the changed fields.
+- Added an option to restore names of discovered blocks when removing all blocks in the Spark Service page.
+  - This is useful for resetting your system without having to figure out the physical position of `New|TempSensorOneWire-1` again.
+  - The following types can be restored: `OneWire Temp Sensor`, `DS2408`, `DS2413`.
+- Added an option to save a text file with hardware links when removing all blocks in the Spark Service page.
+  - This can serve as reminder which pins were used by which actuator.
+- Fixed a bug that incorrectly marked some Step View steps as not active if they contained PID setting changes.
+- Shuffled some items in the sidebar.
+  - Added a quick button for the Builder Editor.
+  - Moved the dashboards and services up, and placed the Quick Start and Builder Editor items below them.
+  - Placed the plugins button at the bottom, next to the debug button.
+- Added a button in the Builder Editor to create a widget showing the current layout.
+
+
 ## Edge release 2019/10/01
 
 **Firmware release date: 2019/09/16**
