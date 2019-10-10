@@ -7,7 +7,7 @@ Relevant links:
 - Project board: https://github.com/orgs/BrewBlox/projects/1
 - Code repositories: https://github.com/BrewBlox
 
-## Edge release 2019/10/09
+## Edge release 2019/10/10
 
 **Firmware release date: 2019/09/16**
 
