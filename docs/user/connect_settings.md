@@ -58,13 +58,19 @@ Because USB devices are more specific, they will always be checked first.
 
 `device-id` is used to disqualify discovered devices. If `--device-id` is not set, all discovered devices are valid.
 
-The argument value is the unique serial number of your Spark controller. While your Spark controller is connected over USB, you can get its serial number by running the following command in your terminal:
+The argument value is the unique device ID of your Spark controller. There are multiple ways to get this ID.
+
+If your Spark controller is connected to Wifi, you can navigate to its IP address in your browser.
+
+![Device ID result](../images/device-id-message.png)
+
+If your Spark controller is connected over USB, you can get its device ID by running the following command in your terminal:
 
 ```bash
 docker run --rm --privileged brewblox/brewblox-devcon-spark:rpi-edge --list-devices
 ```
 
-Example output (SER is the serial number):
+Example output (SER is the device ID):
 
 ```bash
 pi@brewpipi:~/brewblox $ docker run --privileged brewblox/brewblox-devcon-spark:rpi-edge --list-devices
