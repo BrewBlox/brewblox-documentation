@@ -19,7 +19,7 @@ We keep this list updated with the issues we're aware of, but haven't yet perman
 
 **After (re)starting, all my services and dashboards disappeared**
 
-Sometimes the datastore service hangs on startup. To check, you can view the Docker logs using the `docker-compose logs datastore` command.
+Sometimes the datastore service is very slow to get started. To check its status, you can view the Docker logs using the `docker-compose logs datastore` command.
 
 After startup, the service is expected to print the following to its log:
 
@@ -36,16 +36,7 @@ datastore_1  |          to set it in "docker run".
 datastore_1  | ****************************************************
 ```
 
-The service hangs if after 2-3 minutes after startup it still hasn't logged anything.
-
-Until we find a permanent solution, you can try the following workaround.
-
-- Close the UI page.
-- Stop the service: `docker-compose stop datastore`
-- Recreate the service: `docker-compose up -d`
-- Check logs for startup message: `docker-compose logs --follow datastore`
-
-If it hasn't logged the startup message after 2-3 minutes, press Ctrl-C to exit the logs, and retry.
+Sometimes, this may take a few minutes.
 
 ## Frequently asked questions
 
