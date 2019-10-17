@@ -7,6 +7,50 @@ Relevant links:
 - Project board: https://github.com/orgs/BrewBlox/projects/1
 - Code repositories: https://github.com/BrewBlox
 
+## Edge release 2019/10/17
+
+**Firmware release date: 2019/10/14**
+
+The Builder editor was functional, but somewhat clunky at times.
+We often saw users being surprised by what happened when they clicked in the grid, because they didn't realise they still had a specific tool active.
+
+To combat this, we split the tools between `modes`, and `tools`.
+
+`modes` function like tools used to: a persistent mode that determines what happens when you click or drag in the grid.
+- `Select`: click or drag to select or unselect part. (No changes here).
+- `Interact`: click on parts to interact with them - this toggles valves or opens block dialogs. (No changes here either).
+
+`tools` are now immediate actions that modify parts that are currently selected or under the cursor.
+You can trigger a tool by either selecting the target parts and clicking on the button, or selecting/hovering target parts and using the keyboard shortcut.
+- `New`: immediately opens the block catalog. After selecting a part in the catalog, click in the grid to place it.
+- `Move`: selected or hovered parts are attached to the cursor. Click in the grid to place them.
+- `Copy`: same as `Move`, except that parts are copied.
+- `Rotate`: floating, selected or hovered part is rotated 90 degrees clockwise. (Does nothing if multiple parts are selected.)
+- `Flip`: floating, selected or hovered part is flipped. (Does nothing if multiple parts are selected.)
+- `Edit Settings`: opens part settings for selected or hovered part. (Does nothing if multiple parts are selected.)
+- `Interact`: interacts with selected or hovered part. (Does nothing if multiple parts are selected.)
+- `Delete`: removes selected or hovered parts.
+
+On the whole, this should offer a smoother and more intuitive editing experience.
+
+**Changes**
+- Overhauled Builder editor tools.
+  - Split tools in `modes` and `tools` (described above).
+  - Automatically detect when the editor loses focus, to clearly display when keyboard shortcuts won't register.
+  - Added `redo` button.
+  - `undo` and `redo` are now triggered by `ctrl+Z` / `ctrl+Y`.
+  - Moved the layout actions and selector to the toolbar.
+- Renamed many builder parts to follow a common convention, and allow sensible grouping when sorted.
+- Added the `Label: text` part to go along with `Label: URL` (previously `Url Display`).
+- Simplified the naming task in Quick Start wizards. Now it just asks to pick a prefix and a dashboard name.
+- Quick Start wizards now always create a new dashboard.
+- Added a toggle to the Spark service page, to show blocks either in a list (previous behaviour), or in a relations diagram.
+- Added a build date to the debug menu in the sidebar, to help identify the currently installed release.
+- When visiting the Spark IP in the browser, it now also shows its unique device ID.
+  - This should make it easier to setup a configuration that uses multiple Sparks connected over Wifi.
+  - See https://brewblox.netlify.com/user/connect_settings.html#spark-connection-settings for how this device ID can be used.
+- Fixed a bug in the Glycol wizard that would not allow the user to create a configuration without a glycol sensor.
+
 ## Edge release 2019/10/10
 
 **Firmware release date: 2019/09/16**
