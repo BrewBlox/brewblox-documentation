@@ -59,7 +59,7 @@ For more information, see the [official Raspberry install guide](https://www.ras
 ::: tip
 For Windows users, [Lee Bussy](https://community.brewpi.com/u/lbussy/summary) created a tool to automate this step.
 
-![HeadlessPi](https://camo.githubusercontent.com/fe14a42f7f208f9c7fe32d61925d38bd3445da3f/68747470733a2f2f7777772e62726577706972656d69782e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031392f30322f486561646c657373506953637265656e73686f742e706e67)
+![HeadlessPi](https://i2.wp.com/www.brewpiremix.com/wp-content/uploads/2019/02/HeadlessPiScreenshot.png?w=580&ssl=1)
 
 You can download it [here](https://github.com/lbussy/headless-pi/releases/latest).
 :::
