@@ -12,6 +12,7 @@ Relevant links:
 **Firmware release date: 2019/11/12**
 
 *Firmware stability and calendar time*
+
 Multiple users were suffering from crashes and hangups most likely caused by bugs in the Wifi system layer.
 This release includes a system layer update from particle that that should fix many of these issues.
 
@@ -22,6 +23,7 @@ This means that the system time will only be lost on a power cycle. When using o
 These changes also mean that the time cannot overflow anymore and long running profiles are not a problem.
 
 *Graph configruation*
+
 We reworked yet another configuration screen. This time it's selection of history fields (`Graph`, `Metrics`, `Session View`).
 
 The Graph configuration suffered from being overly detailed.
@@ -32,6 +34,7 @@ To improve visibility we removed the tabbed layout, and merged the settings in t
 You can now click on nodes to edit their display settings.
 
 *New Widget: Session Log*
+
 We added a new widget: the `Session Log`. The goal of this widget is to write down things during a brew day: when did things happen? What was the start SG?
 You can export this to printable HTML. It is also the easiest place to keep graphs of sessions, because it has a start and stop button.
 
@@ -52,6 +55,7 @@ You can export sessions to a simple HTML file. Any [markdown](https://dillinger.
 We think that Session Log is a sufficiently big improvement over the Session View widget that it can completely replace it. If feedback is positive, we'll likely deprecate and eventually remove the Session View widget.
 
 **Changes**
+
 - Updated Spark system software.
   - This fixes multiple bugs that caused crashes or boot loops.
 - Reworked the settings component for selecting history data (used in Graph, Metrics, Session View, Session Log)
