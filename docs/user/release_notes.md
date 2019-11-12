@@ -11,10 +11,18 @@ Relevant links:
 
 **Firmware release date: 2019/11/12**
 
-Multiple users were suffering from crashes and hangups caused by bugs in the Wifi sytem software.
-This release includes a system software update that should fix many of these issues.
+*Firmware stability and calendar time*
+Multiple users were suffering from crashes and hangups most likely caused by bugs in the Wifi system layer.
+This release includes a system layer update from particle that that should fix many of these issues.
 
-In other news: we reworked yet another configuration screen. This time it's selection of history fields (`Graph`, `Metrics`, `Session View`).
+The Spark now also receives the current time if it connects to the Spark cloud. So if the brewblox service on the pi down, it can still track profiles.
+If no cloud connection is used or the Sprak does not have WiFi, it will be able to restore the last system time it recieved from the service from backup memory.
+This means that the system time will only be lost on a power cycle. When using only USB, the service swill still set the time.
+
+These changes also mean that the time cannot overflow anymore and long running profiles are not a problem.
+
+*Graph configruation*
+We reworked yet another configuration screen. This time it's selection of history fields (`Graph`, `Metrics`, `Session View`).
 
 The Graph configuration suffered from being overly detailed.
 The history service has no notion of blocks, and allows every individual field to be selected. This requires users to make very fine-grained decisions when selecting data to show.
@@ -23,11 +31,13 @@ Settings were also very spread out: adding a single field might require using 3 
 To improve visibility we removed the tabbed layout, and merged the settings in the field tree.
 You can now click on nodes to edit their display settings.
 
-We also added a new widget: the `Session Log`.
+*New Widget: Session Log*
+We added a new widget: the `Session Log`. The goal of this widget is to write down things during a brew day: when did things happen? What was the start SG?
+You can export this to printable HTML. It is also the easiest place to keep graphs of sessions, because it has a start and stop button.
 
 The Session Log allows creating a template for your brew day / batch notes.
 In the basic view, you can click on a note to edit its value without changing the template settings.
-When starting a new session, it will automatically copy the template from the current session.
+When starting a new session, it will automatically copy the template from the current opened session.
 
 The session consists of a number of notes. You can edit the title and display width for each note in the Full view of the Session log widget.
 
