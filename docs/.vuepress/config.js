@@ -64,6 +64,7 @@ module.exports = {
                 'startup',
                 'ferment_guide',
                 'control_chains',
+                'multiple_devices',
                 'adding_services',
                 'connect_settings',
                 'advanced',

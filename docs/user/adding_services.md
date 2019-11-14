@@ -1,4 +1,4 @@
-# Adding services
+# Adding a Spark service
 
 After you've followed the [Getting Started guide](./startup.md), you may want to connect your second or third Spark. <br>
 This guide walks you through this process.
