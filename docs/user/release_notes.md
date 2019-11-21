@@ -7,6 +7,33 @@ Relevant links:
 - Project board: https://github.com/orgs/BrewBlox/projects/1
 - Code repositories: https://github.com/BrewBlox
 
+## Edge release 2019/11/21
+
+**Firmware release date: 2019/11/12**
+
+Instead of releasing a big new feature, we took the time to polish and refactor multiple smaller UI components.
+
+We made a lot of small tweaks to the Session Log widget, and to many input components throughout the UI.
+
+**Changes**
+
+- Multiple small improvements to the Session Log widget.
+  - `Insert date` now inserts at the current cursor position, not always at the end of the note.
+  - Creating a new Session now spawns a dialog where you can pick the session name, and choose from which other session to import notes.
+  - Drag to resize notes when editing the Session Log (cogwheel button).
+  - Render content of text notes to reduce layout "jumps" when toggling between basic and full mode.
+- Deprecated the Session View widget.
+- Improved display of editable fields (no more underlined text, but something that looks like an input field).
+- Next to presets, you can also pick a custom duration in the graph toolbar.
+- Auto-fill SSL cert questions in `brewblox-ctl setup`
+- Fixed an error that caused the PWM pump in the builder to not respond to clicks.
+- Display warning icon if a PWM/PID itself is disabled in the builder.
+  - Recommended way to disable a control chain is to disable the setpoint.
+- Builder editor remembers the active layout.
+- Setpoint profile will now offer to insert a new point when making any change that will cause the current temperature setting to jump.
+  - Previously, this only happened when changing the temperature of the last or next point.
+  - Now it will also happen when editing the time.
+
 ## Edge release 2019/11/12
 
 **Firmware release date: 2019/11/12**
