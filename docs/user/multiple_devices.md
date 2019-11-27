@@ -89,7 +89,7 @@ When you install BrewBlox, it generates a `docker-compose.yml` file for you. Thi
       --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
 ```
 
-This is rather more complex than the YAML configuration we've seen so far. To make sense of it, we'll look at the individual settings.
+This configuration is more advanced than what we've seen so far. To make sense of it, we'll look at the individual settings.
 
 
 ---
