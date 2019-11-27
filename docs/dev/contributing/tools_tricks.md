@@ -35,58 +35,57 @@ function code() {
 
 This replaces the `code` command with something that checks whether the target directory contains a Pipenv configuration file (Pipfile). If so, it uses `pipenv run` to start VSCode.
 
-## brewblox-tools
+## brewblox-dev
 
-The boilerplate repository has a dev dependency on `brewblox-tools`. This package is a collection of scripts to automate Continuous Deployment tasks.
+The boilerplate repository has a dev dependency on `brewblox-dev`. This package is a collection of CLI functions to automate Continuous Deployment tasks.
 
 The invidual commands will be available when you either run `pipenv shell`, or used the VSCode trick to run your entire editor in the pipenv virtual environment.
 
-## bbt-localbuild
+## brewblox-dev localbuild
 
 The one-stop-shop for generating docker images. Also takes all default actions for building service images (running setup, copying code, generating requirements file, activating the QEMU cross compiler, etc)
-Type `bbt-localbuild --help` to see all arguments.
+Type `brewblox-dev localbuild --help` to see all arguments.
 
 An overview of the most common and useful combinations:
 
 ```sh
-bbt-localbuild
+brewblox-dev localbuild
 ```
 
 Creates a local image. Reads your .env file for the `DOCKER_REPO` setting. 
 For example, when used in `brewblox-devcon-spark`, it will create the `brewblox/brewblox-devcon-spark:local` image.
 
 ```sh
-bbt-localbuild --branch-tag
+brewblox-dev localbuild --branch-tag
 ```
 
 Creates a local image, but uses a sanitized version of the branch name as tag.
 For example, when used in `brewblox-devcon-spark`, on the `feature/gadget` branch, it will create the `brewblox/brewblox-devcon-spark:feature-gadget` image.
 
 ```sh
-bbt-localbuild --arch amd arm
+brewblox-dev localbuild --arch amd --arch arm
 ```
 
-By default, `bbt-localbuild` only creates the AMD64 image. When also setting the `arm` argument to `--arch`, it will create an image that can be run on the Raspberry Pi. ARM image names are automatically prefixed with `rpi-`.
+By default, `brewblox-dev localbuild` only creates the AMD64 image. When also setting the `arm` argument to `--arch`, it will create an image that can be run on the Raspberry Pi. ARM image names are automatically prefixed with `rpi-`.
 
 For example, when used in `brewblox-devcon-spark`, on the `feature/gadget` branch, it will create two images:
 - `brewblox/brewblox-devcon-spark:feature-gadget`
 - `brewblox/brewblox-devcon-spark:rpi-feature-gadget`
 
 ```sh
-bbt-localbuild --arch arm --branch-tag --push
+brewblox-dev localbuild --arch arm --branch-tag --push
 ```
 
 You can use this to quickly create and push an image for testing on your Pi. This does require a Docker Hub account.
 
-## bbt-bump
+## brewblox-dev bump
 
 If you're using semantic versioning, you can use this to increment the version tag in git.
 
 Example call:
 
 ```sh
-steersbob@BrewBox:~/git/brewblox-history$ bbt-bump minor
-{'bump_type': 'minor'}
+steersbob@BrewBox:~/git/brewblox-history$ brewblox-dev bump minor
 Bumping "minor" version: 0.9.0 ==> 0.10.0
 Do you want to tag the current commit with that version? [Y/n]
 ```
@@ -106,7 +105,7 @@ setup(
 )
 ```
 
-Now you only have to increment the git tag (with `bbt-bump`), and the package version will follow.
+Now you only have to increment the git tag (with `brewblox-dev bump`), and the package version will follow.
 
 ## Directly testing code changes in docker-compose
 

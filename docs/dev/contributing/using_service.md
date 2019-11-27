@@ -24,7 +24,7 @@ Some examples:
 - [brewblox-devcon-spark](https://github.com/BrewBlox/brewblox-devcon-spark/blob/develop/brewblox_devcon_spark/api/sse_api.py) reads controller blocks every few seconds, and then writes the result to all active SSE connections.
 - [brewblox-history](https://github.com/BrewBlox/brewblox-history/blob/develop/brewblox_history/influx.py) checks every few seconds whether it received new data points, and then inserts them all at once to the database.
 
-For code examples on how to schedule tasks, see [the docstrings](https://github.com/BrewBlox/brewblox-service/blob/develop/brewblox_service/scheduler.py).
+For code examples on how to create a repeating task, see [the docstrings](https://github.com/BrewBlox/brewblox-service/blob/develop/brewblox_service/repeater.py).
 
 ## Publishing data to InfluxDB
 
@@ -81,7 +81,7 @@ from concurrent.futures import CancelledError
 import time
 
 from aiohttp import web
-from brewblox_service import brewblox_logger, events, features, scheduler
+from brewblox_service import brewblox_logger, events, features, repeater
 
 LOGGER = brewblox_logger(__name__)
 
@@ -90,50 +90,30 @@ def setup(app: web.Application):
     features.add(app, Influxer(app))
 
 
-class Influxer(features.ServiceFeature):
+class Influxer(repeater.RepeaterFeature):
 
-    def __init__(self, app: web.Application):
-        super().__init__(app)
-        self._task: asyncio.Task = None
-
-    # We can start using async calls here
-    async def startup(self, app: web.Application):
-        self._task = await scheduler.create_task(app, self._run())
-
-    # Cleanup before the service shuts down
-    async def shutdown(self, app: web.Application):
-        await scheduler.cancel_task(self.app, self._task)
-        self._task = None
-
-    # This function is run by the scheduler
-    async def _run(self):
-        name = self.app['config']['name'] # The unique service name
-        publisher = events.get_publisher(self.app)
-        
+    # This function runs once
+    async def prepare(self):
         LOGGER.info('Started Influxer')
 
-        while True:
-            try:
-                # Async sleep calls will not block the rest of the service
-                await asyncio.sleep(5)
+    # This function is called in a loop, until the service shuts down
+    async def run(self):
+        # The unique service name
+        name = self.app['config']['name']
 
-                await publisher.publish(
-                    exchange='brewcast', # brewblox-history listens to this exchange
-                    routing=name,        # this will be the measurement name in influx
-                    message={
-                        'time': time.time(),
-                    }
-                )
-                LOGGER.info('Published data')
+        # Async sleep calls will not block the rest of the service
+        await asyncio.sleep(5)
 
-            # This exception is raised when the task is cancelled (scheduler.cancel_task())
-            # It means we're gracefully shutting down. No need to complain or log errors.
-            except CancelledError:
-                break
+        publisher = events.get_publisher(self.app)
 
-            # All other errors are still errors - something bad happened
-            # Wait a second, and then continue running
-            except Exception as ex:
-                LOGGER.error(f'Encountered an error: {ex}')
-                await asyncio.sleep(1)
+        await publisher.publish(
+            # brewblox-history listens to this exchange
+            exchange='brewcast',
+            # this will be the measurement name in influx
+            routing=self._name,
+            message={
+                'time': time.time(),
+            }
+        )
+        LOGGER.info('Published data')
 ```
