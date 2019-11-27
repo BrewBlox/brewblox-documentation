@@ -5,9 +5,7 @@ The default device for the BrewBlox system is the BrewPi Spark, but you can try 
 
 For an explanation of how to combine the various Spark Blocks, see the [BrewBlox control chains](./control_chains.md) page.
 
-The default configuration uses a single Spark controller. The [Multiple Devices](./multiple_devices.md) guide describe how to get started using more devices.
-
-For more advanced users, there are alternative ways for configuring and using the system. These are described in the [Advanced](./advanced.md) page.
+The default configuration uses a single Spark controller. The [Multiple Devices](./multiple_devices.md) guide describes how to get started using more devices.
 
 ::: warning
 The following Raspberry Pi models are **not** compatible with BrewBlox.
@@ -23,8 +21,8 @@ The following Raspberry Pi models are **not** compatible with BrewBlox.
 Always:
 
 - Laptop or desktop computer
-- [Raspberry Pi 3](https://www.raspberrypi.org/products/) minicomputer
-- Raspberry Pi power supply (5V to micro USB)
+- [Raspberry Pi 3 or 4](https://www.raspberrypi.org/products/) minicomputer
+- Raspberry Pi power supply cable
 - MicroSD card
 - MicroSD card reader
 - Wifi network or ethernet cable
@@ -35,8 +33,7 @@ When connecting the BrewPi Spark
 - Micro-USB to USB cable
 
 ::: tip
-You can also install BrewBlox on a desktop computer.
-See the [Advanced](./advanced.md) page for instructions.
+You can also install BrewBlox on a Synology NAS, desktop computer, or laptop - as long as it's using Linux.
 :::
 
 ## Step 1: Format the microSD card

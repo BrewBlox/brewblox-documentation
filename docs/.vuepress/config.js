@@ -67,8 +67,6 @@ module.exports = {
                 'multiple_devices',
                 'adding_spark',
                 'connect_settings',
-                'advanced',
-                'compose',
                 'release_notes',
                 'troubleshooting',
             ]
