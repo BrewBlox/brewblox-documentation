@@ -157,3 +157,26 @@ Because USB devices are more specific, they will always be checked first.
 `device-id` is used to disqualify discovered devices. If `--device-id` is not set, all discovered devices are valid.
 
 The argument value is the unique device ID of your Spark controller. 
+
+Specific device, over Wifi or USB:
+```yaml
+  spark-one:
+    ...
+    command: >
+      --device-id=300045000851353532343835
+```
+Specific device, USB only:
+```yaml
+  spark-one:
+    ...
+    command: >
+      --discovery=usb
+      --device-id=300045000851353532343835
+```
+First discovered device, Wifi only:
+```yaml
+  spark-one:
+    ...
+    command: >
+      --discovery=wifi
+```
