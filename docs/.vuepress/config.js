@@ -65,7 +65,7 @@ module.exports = {
                 'ferment_guide',
                 'control_chains',
                 'multiple_devices',
-                'adding_services',
+                'adding_spark',
                 'connect_settings',
                 'advanced',
                 'compose',
