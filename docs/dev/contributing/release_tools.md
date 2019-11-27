@@ -1,18 +1,13 @@
-# BrewBlox release tooling
+# BrewBlox dev deployment tools
 
-There are some tools available for mainline development. These do require write access to the core repositories.
+`brewblox-dev` contains some tools for mainline development. Some of these require write access to the mainline repositories.
 
-## Brewblox-deploy
-
-Installed by running `pip3 install --user -U brewblox-deploy`.
-The CLI name is `bbdeploy`. Try running `bbdeploy --help` to see available commands.
-
-## bbdeploy delta
+## brewblox-dev delta
 
 This shows the number of commits between various release tracks.
 
 ```bash
-steersbob@BrewBox:~/git/brewblox-documentation$ bbdeploy delta
+steersbob@BrewBox:~/git/brewblox-documentation$ brewblox-dev delta
 repository                develop > edge > tag
 ----------------------------------------------
 brewblox-devcon-spark     7         138    -  
@@ -25,12 +20,12 @@ brewblox-firmware         9         251    -
 
 `brewblox-devcon-spark` develop is 7 commits ahead of edge. The edge branch is 138 commits ahead of the latest tag.
 
-## bbdeploy release-edge
+## brewblox-dev release-edge
 
 This asks to create a Pull request from develop to edge for each released BrewBlox repository.
 
 ```bash
-steersbob@BrewBox:~/git/brewblox-documentation$ bbdeploy release-edge
+steersbob@BrewBox:~/git/brewblox-documentation$ brewblox-dev release-edge
 Do you want to create a develop -> edge PR for brewblox-devcon-spark? [Y/n]
 
 https://github.com/BrewBlox/brewblox-devcon-spark/pull/269

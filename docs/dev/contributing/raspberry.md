@@ -52,67 +52,38 @@ At time of writing multi-architecture manifests are still an experimental featur
 
 All ARM versions of BrewBlox are prefixed with `rpi-`. If you want the latest version of the history service on your desktop, you pull `brewblox/brewblox-history:latest`. If you want it on a Pi, you pull `brewblox/brewblox-history:rpi-latest`.
 
-## Adjusting the Dockerfile
-
-In the first line of the BrewBlox boilerplate Dockerfile, it inherits from brewblox-service.
-
-```Docker
-FROM brewblox/brewblox-service:latest
-```
-
-Switching to ARM is as simple as changing this line to
-
-```Docker
-FROM brewblox/brewblox-service:rpi-latest
-```
-
-The problem is that now `docker build` will fail as it attempts to interact with ARM binaries.
-
 ## Building ARM images
 
-The solution for building ARM images seems simple: just do it on ARM hardware. Install Python3.6 and Docker on a Pi, and run the build script.
+The solution for building ARM images seems simple: just do it on ARM hardware. Install Python 3 and Docker on a Pi, and run the build script.
 
 This works as long as you're willing to always do this manually, and accept long build times (a Pi is not that fast).
 
-The good news: cross compiling is possible. We can build ARM images on AMD64 computers.
+The good news: cross-compiling is possible. We can build ARM images on AMD64 computers.
 
-To enable cross compiling images in your current terminal session, run 
+To enable cross-compiling images in your current terminal session, run 
 
 ```bash
 docker run --rm --privileged multiarch/qemu-user-static:register --reset
 ```
 
-In the "Getting started with Docker" guide we used `docker/amd/Dockerfile`. Now we'll switch to `docker/arm/Dockerfile`
-
-Dockerfile:
-```Docker
-FROM brewblox/brewblox-service:rpi-latest
-
-EXPOSE 5000
-WORKDIR /app
-
-COPY ./dist /app/dist
-RUN pip3 install /app/dist/*
-RUN pip3 show YOUR-PACKAGE
-
-ENTRYPOINT ["python3", "-m", "YOUR_PACKAGE"]
-```
+In the [Docker guide](./docker.html) guide we used `docker/amd/Dockerfile`. Now we'll switch to `docker/arm/Dockerfile`
 
 Build script:
 ```bash
-tox
+# changed (new command)
+docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
+python3 setup.py sdist
+pipenv lock --requirements > docker/requirements.txt
 
 rm docker/dist/*
-cp .tox/dist/* docker/dist/
+cp dist/* docker/dist/
 
-docker run --rm --privileged multiarch/qemu-user-static:register --reset
 docker build \
-  --tag your-package:rpi-local \
-  --file docker/arm/Dockerfile \
+  --tag your-package:rpi-local \ # changed (local -> rpi-local)
+  --file docker/arm/Dockerfile \ # changed (docker/amd -> docker/arm)
   docker/
 ```
-
-Note how we changed the `latest` and `local` versions to `rpi-latest` and `rpi-local`.
 
 ## Manually deploying an image
 
