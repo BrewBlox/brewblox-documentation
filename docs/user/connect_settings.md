@@ -136,11 +136,6 @@ Example configuration to only discover USB devices:
 
 ## Connection flowchart
 
-The Spark service is able to automatically discover Spark controllers over both Wifi and USB.
-
-Note that the order in which controllers are discovered is not guaranteed.
-If you are using multiple Spark controllers, you will want to specify a device address or serial number.
-
 The Spark service uses multiple arguments to determine how and where to find the Spark controller it should connect to.
 These arguments are:
 * `--device-serial`
@@ -154,7 +149,7 @@ If discovery fails, the service reboots. This is because of a limitation in how 
 <PlantUml src="connection_flow.puml" title="Selecting device address"/>
 
 `--device-serial` and `--device-host` are the most specific arguments, and will take priority.
-Note that device ID will not be checked when using these arguments.
+Note that device ID will still be checked after connection is made.
 
 Examples:
 ```yaml
