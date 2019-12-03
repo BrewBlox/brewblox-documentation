@@ -2,13 +2,17 @@
 
 The Spark service can connect to the controller using either Wifi, or USB. Once connected, there is no difference.
 
-Connection settings are specified by editing the Spark service arguments in the `docker-compose.yml` file. See the [Multiple Devices](./multiple_devices.html) guide for an explanation on service configuration.
+Connection settings are specified by editing the Spark service arguments in the `docker-compose.yml` file, or by using the `brewblox-ctl add-spark` command.
+
+See the [Multiple Devices](./multiple_devices.html) guide for an explanation on service configuration.
 
 The service can either connect immediately to a fixed address, or first try to discover the controller address.
 
 ## What settings to use
 
 There are multiple arguments you can use (and combine) to configure how the Spark Service connects to the Spark Controller.
+
+These arguments can be used both in the `docker-compose.yml` file, and with the `brewblox-ctl add-spark` command.
 
 **If: you want to make sure the service always connects to same controller**
 - Use `--device-id`
@@ -22,13 +26,38 @@ There are multiple arguments you can use (and combine) to configure how the Spar
 **If: you only want to use USB, even if Wifi is connected**
 - Use `--discovery=usb`
 
-## `--device-id`
 
-Every Spark controller has a unique serial number that can be used as device ID.
+## Finding the device ID
+
+Every Spark controller has a unique serial number that can be used as device ID. The Spark service can use this ID to check that it doesn't accidentally connect to the wrong Spark controller.
+
+The simplest way to find the controller device ID is to use `brewblox-ctl discover`. This will scan for devices: both over USB, and Wifi.
+
+The output format is `connection type` + `device ID` + `additional values`.
+
+Example output:
+
+```bash
+pi@fridgepi:~/brewblox $ brewblox-ctl discover
+usb 280038000847343337373738 Photon
+wifi 280038000847343337373738 192.168.0.57 8332
+wifi 240024000451353432383931 192.168.0.86 8332
+```
+
+In the example, two devices were found. We know this because there are only two unique device IDs in the list. The first can be reached over both USB and Wifi, the second is only reachable over Wifi.
+
+For USB devices, "additional values" is the chip model (Spark v2 = Photon, Spark v3 = P1).
+For Wifi devices, the IP address and port are listed here.
+
+## `--device-id`
 
 If you set the `--device-id` argument, device discovery will skip any devices with a different ID. This goes for discovery in both USB, and Wifi.
 
-Scroll down for instructions on how to find the device ID.
+Example call to `add-spark`:
+
+```
+brewblox-ctl add-spark --name=spark-two --device-id=300045000851353532343835
+```
 
 Example configuration with `--device-id` set:
 
@@ -51,6 +80,12 @@ Example configuration with `--device-id` set:
 If you enabled Wifi on the Spark, you can use the management page in your router to give it a fixed IP address. To find out how to do so, google "static dhcp lease" + the brand and model of your router.
 
 After you have done so, you can tell the service to always connect to the same address by using the `--device-host` argument.
+
+Example call to `add-spark`:
+
+```
+brewblox-ctl add-spark --name=spark-two --device-host=192.168.0.101
+```
 
 Example configuration with `--device-host` set:
 
@@ -76,6 +111,12 @@ Controllers can be discovered both over USB, and over Wifi. By default, the serv
 
 You can restrict discovery by using the `--discovery` argument. This can be used in combination with `--device-id`.
 
+Example call to `add-spark`:
+
+```
+brewblox-ctl add-spark --name=spark-two --discovery=usb
+```
+
 Example configuration to only discover USB devices:
 
 ```yaml
@@ -89,38 +130,11 @@ Example configuration to only discover USB devices:
     command: >
       --name=spark-two
       --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
+      --device-id=300045000851353532343835
       --discovery=usb
 ```
 
-## Finding the device ID
-
-There are multiple ways to get the controller device ID.
-
-If your Spark controller is connected to Wifi, you can navigate to its IP address in your browser.
-
-![Device ID result](../images/device-id-message.png)
-
-If your Spark controller is connected over USB, you can get its device ID by running the following command in your terminal:
-
-```bash
-docker run --rm --privileged brewblox/brewblox-devcon-spark:rpi-edge --list-devices
-```
-
-Example output (SER is the device ID):
-
-```bash
-pi@brewpipi:~/brewblox $ docker run --privileged brewblox/brewblox-devcon-spark:rpi-edge --list-devices
-2019/02/01 10:41:05 INFO     brewblox_service.service        Creating [spark] application
-2019/02/01 10:41:05 INFO     __main__                        Listing connected devices: 
-2019/02/01 10:41:05 INFO     __main__                        >> /dev/ttyACM0 | P1 - P1 Serial | USB VID:PID=2B04:C008 SER=300045000851353532343835 LOCATION=1-1.2:1.0
-```
-
 ## Connection flowchart
-
-The Spark service is able to automatically discover Spark controllers over both Wifi and USB.
-
-Note that the order in which controllers are discovered is not guaranteed.
-If you are using multiple Spark controllers, you will want to specify a device address or serial number.
 
 The Spark service uses multiple arguments to determine how and where to find the Spark controller it should connect to.
 These arguments are:
@@ -135,7 +149,7 @@ If discovery fails, the service reboots. This is because of a limitation in how 
 <PlantUml src="connection_flow.puml" title="Selecting device address"/>
 
 `--device-serial` and `--device-host` are the most specific arguments, and will take priority.
-Note that device ID will not be checked when using these arguments.
+Note that device ID will still be checked after connection is made.
 
 Examples:
 ```yaml
