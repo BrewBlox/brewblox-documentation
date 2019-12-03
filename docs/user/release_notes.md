@@ -9,7 +9,7 @@ Relevant links:
 
 ## Edge release 2019/12/03
 
-**Firmware release date: 2019/11/12**
+**Firmware release date: 2019/12/03**
 
 While the initial installation by now is pretty smooth, editing `docker-compose.yml` has a steeper learning curve.
 
