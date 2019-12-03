@@ -57,6 +57,8 @@ For those cases when `docker-compose.yml` still needs to be changed, we moved th
   - https://brewblox.netlify.com/user/multiple_devices.html
   - https://brewblox.netlify.com/user/adding_spark.html
   - https://brewblox.netlify.com/user/connect_settings.html
+- The `--device-id` flag in the Spark service configuration is now checked when connecting to a controlller.
+  - This allows it to be used in combination with `--device-host`.
 - Prettified Quick Actions editor
 - Fixed a bug in glycol wizard actions
 
