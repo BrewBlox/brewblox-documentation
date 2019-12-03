@@ -7,6 +7,59 @@ Relevant links:
 - Project board: https://github.com/orgs/BrewBlox/projects/1
 - Code repositories: https://github.com/BrewBlox
 
+## Edge release 2019/12/03
+
+**Firmware release date: 2019/11/12**
+
+While the initial installation by now is pretty smooth, editing `docker-compose.yml` has a steeper learning curve.
+
+To counteract this we moved some configuration, and added two commands to brewblox-ctl: `discover` and `add-spark`.
+
+`brewblox-ctl discover` scans USB/Wifi for devices, and will print the ones it found.
+
+Example:
+```
+pi@fridgepi:~/brewblox $ brewblox-ctl discover
+usb 280038000847343337373738 Photon
+wifi 280038000847343337373738 192.168.0.57 8332
+wifi 240024000451353432383931 192.168.0.86 8332
+```
+
+`brewblox-ctl add-spark` will create a new Spark service in `docker-compose.yml`.
+It accepts multiple arguments, some mandatory, some optional.
+
+For reference, see the updated docs for [adding a spark](https://brewblox.netlify.com/user/adding_spark.html) and [connection settings](https://brewblox.netlify.com/user/connect_settings.html).
+
+Example call:
+```
+steersbob@BrewBox:~/brewblox$ brewblox-ctl add-spark
+Service name: new-spark
+Discovering devices...
+device 1 :: wifi 280038000847343337373738 192.168.0.57 8332
+device 2 :: wifi 240024000451353432383931 192.168.0.86 8332
+
+
+Which device do you want to use? [press ENTER for default value '1']2
+A Wifi device was chosen: do you want to use its URL as --device-host? [Press ENTER for default value 'Yes']
+
+Added Spark service "new-spark".
+You can now add it as service in the UI.
+```
+
+For those cases when `docker-compose.yml` still needs to be changed, we moved the system services to `docker-compose.shared.yml`, to reduce cognitive load when editing.
+
+**Changes**
+
+- Added `brewblox-ctl discover`
+- Added `brewblox-ctl add-spark`
+- Moved system services to their own file (`docker-compose.shared.yml`)
+- Added / updated documentation for adding and using multiple services
+  - https://brewblox.netlify.com/user/multiple_devices.html
+  - https://brewblox.netlify.com/user/adding_spark.html
+  - https://brewblox.netlify.com/user/connect_settings.html
+- Prettified Quick Actions editor
+- Fixed a bug in glycol wizard actions
+
 ## Edge release 2019/11/21
 
 **Firmware release date: 2019/11/12**

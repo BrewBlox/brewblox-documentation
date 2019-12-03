@@ -78,7 +78,7 @@ When you install BrewBlox, it generates a `docker-compose.yml` file for you. Thi
 
 ```yaml
   spark-one:
-    image: brewblox/brewblox-devcon-spark:rpi-${BREWBLOX_RELEASE:-stable}
+    image: brewblox/brewblox-devcon-spark:rpi-${BREWBLOX_RELEASE}
     privileged: true
     restart: unless-stopped
     labels:
@@ -86,7 +86,7 @@ When you install BrewBlox, it generates a `docker-compose.yml` file for you. Thi
       - "traefik.frontend.rule=PathPrefix: /spark-one"
     command: >
       --name=spark-one
-      --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
+      --mdns-port=${BREWBLOX_PORT_MDNS}
 ```
 
 This configuration is more advanced than what we've seen so far. To make sense of it, we'll look at the individual settings.
@@ -95,7 +95,7 @@ This configuration is more advanced than what we've seen so far. To make sense o
 ---
 ```yaml
 spark-one:
-  image: brewblox/brewblox-devcon-spark:rpi-${BREWBLOX_RELEASE:-stable}
+  image: brewblox/brewblox-devcon-spark:rpi-${BREWBLOX_RELEASE}
   ...
 ```
 
@@ -139,7 +139,7 @@ Not all services need this. For example: Tilt, iSpindel, and Plaato services don
   ...
   command: >
   --name=spark-one
-  --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
+  --mdns-port=${BREWBLOX_PORT_MDNS}
 ```
 
 The `command` setting contains settings for the software running *inside* the service.
