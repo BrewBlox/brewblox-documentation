@@ -33,14 +33,13 @@ For reference, see the updated docs for [adding a spark](https://brewblox.netlif
 Example call:
 ```
 steersbob@BrewBox:~/brewblox$ brewblox-ctl add-spark
-Service name: new-spark
+How do you want to call this service? The name must be unique: new-spark
 Discovering devices...
 device 1 :: wifi 280038000847343337373738 192.168.0.57 8332
 device 2 :: wifi 240024000451353432383931 192.168.0.86 8332
 
 
 Which device do you want to use? [press ENTER for default value '1']2
-A Wifi device was chosen: do you want to use its URL as --device-host? [Press ENTER for default value 'Yes']
 
 Added Spark service "new-spark".
 You can now add it as service in the UI.
