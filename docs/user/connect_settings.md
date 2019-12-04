@@ -1,4 +1,4 @@
-# Spark Connection Settings
+# Spark connection settings
 
 The Spark service can connect to the controller using either Wifi, or USB. Once connected, there is no difference.
 

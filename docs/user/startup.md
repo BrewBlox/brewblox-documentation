@@ -1,4 +1,4 @@
-# Getting Started
+# Getting started
 
 This guide describes how to install the BrewBlox system on a Raspberry Pi. </br>
 The default device for the BrewBlox system is the BrewPi Spark, but you can try this tutorial without it.

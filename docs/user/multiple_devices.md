@@ -3,7 +3,7 @@
 :::tip
 This page explains how and why the service configuration works.
 
-If you prefer to get started immediately with setting up a second Spark: you can skip forward to [the install guide](./adding_spark.html).
+If you prefer to get started immediately with setting up a second Spark: you can skip forward to [Adding a Spark service](./adding_spark.html).
 :::
 
 BrewBlox is designed to let you control multiple devices with a single application.

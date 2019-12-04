@@ -1,4 +1,4 @@
-# BrewBlox Release Notes
+# BrewBlox release notes
 
 Relevant links:
 

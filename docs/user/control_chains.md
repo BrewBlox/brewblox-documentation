@@ -1,4 +1,4 @@
-# BrewBlox Control Chains
+# BrewBlox control chains
 
 When first installing BrewBlox, it can be a bit overwhelming.
 We designed BrewBlox to be very flexible and modular to give you a lot of freedom (and responsibility) to adapt it to your brewery.

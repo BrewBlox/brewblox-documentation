@@ -1,4 +1,4 @@
-# Fermentation Fridge Guide
+# Fermentation fridge guide
 
 While going through the [startup guide](./startup.html), you may have run the `Fermentation Fridge` wizard. This wizard asked you some questions, and then slapped some widgets on a dashboard. 
 
