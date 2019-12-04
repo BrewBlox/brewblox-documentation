@@ -1,5 +1,11 @@
 # Connecting multiple devices
 
+:::tip
+This page explains how and why the service configuration works.
+
+If you prefer to get started immediately with setting up a second Spark: you can skip forward to [the install guide](./adding_spark.html).
+:::
+
 BrewBlox is designed to let you control multiple devices with a single application.
 
 To make this both reliable and easy, devices are connected to a central hub (the **server**).
@@ -11,7 +17,7 @@ On the server, we need some software to talk to individual devices. To make it e
 Some services are used for shared functionality: The **history service** collects data from device services, and stores it for later use in graphs. Others are used to control individual devices.
 
 Some examples of supported devices:
-- The BrewPi Spark
+- The [BrewPi Spark](./adding_spark.html)
 - The [Tilt hydrometer](https://github.com/j616/brewblox-tilt)
 - The [iSpindel hydrometer ](https://github.com/bdelbosc/brewblox-ispindel)
 - The [Plaato digital airlock](https://github.com/BrewBlox/brewblox-plaato)
@@ -72,7 +78,7 @@ If we want to add a new device, we need a new service to manage it. Once again: 
 
 Each type of service may have a slightly different configuration. We'll take a detailed look at a Spark service here, but other services will have configuration that is very much like it.
 
-## Service configuration: settings
+## Docker-compose service syntax
 
 When you install BrewBlox, it generates a `docker-compose.yml` file for you. This includes the default `spark-one` service.
 
@@ -81,12 +87,10 @@ When you install BrewBlox, it generates a `docker-compose.yml` file for you. Thi
     image: brewblox/brewblox-devcon-spark:rpi-${BREWBLOX_RELEASE}
     privileged: true
     restart: unless-stopped
+    command: '--name=spark-one --mdns-port=${BREWBLOX_PORT_MDNS}'
     labels:
-      - "traefik.port=5000"
-      - "traefik.frontend.rule=PathPrefix: /spark-one"
-    command: >
-      --name=spark-one
-      --mdns-port=${BREWBLOX_PORT_MDNS}
+      - traefik.port=5000
+      - 'traefik.frontend.rule=PathPrefix: /spark-one'
 ```
 
 This configuration is more advanced than what we've seen so far. To make sense of it, we'll look at the individual settings.
@@ -119,32 +123,30 @@ These settings are the same for every Spark service (and many other services).
 ---
 ```yaml
   ...
-  labels:
-    - "traefik.port=5000"
-    - "traefik.frontend.rule=PathPrefix: /spark-one"
+  command: '--name=spark-one --mdns-port=${BREWBLOX_PORT_MDNS}'
 ```
 
-Labels are used by the Traefik gateway service. The gateway makes it possible for the UI to communicate with the service.
+The `command` setting contains arguments for the software running *inside* the service.
 
-Not all services need this. For example: Tilt, iSpindel, and Plaato services don't have their own widgets in the UI. They send data to the history service, and the history service sends that data to the UI.
+The `--name` argument must (again) be the same as the service name.
 
-**The `PathPrefix` setting in the label must match the service name.** If you add the `spark-two` service, the second label must be:
-
-```yaml
-"traefik.frontend.rule=PathPrefix: /spark-two"
-```
+For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./connect_settings.html)
 
 ---
 ```yaml
   ...
-  command: >
-  --name=spark-one
-  --mdns-port=${BREWBLOX_PORT_MDNS}
+  labels:
+    - traefik.port=5000
+    - 'traefik.frontend.rule=PathPrefix: /spark-one'
 ```
 
-The `command` setting contains settings for the software running *inside* the service.
+Labels are used by the Traefik gateway service. With these settings, Traefik will forward all HTTP requests to addresses beginning with `/spark-one` to this service at port 5000.
 
-The `--name` argument must (again) be the same as the service name.
+This way, multiple services can share the same base address: requests to `https://my-pi-address/spark-one` and requests to `https://my-pi-address/spark-two` will be forwarded to different services.
+
+Not all services need this. For example: Tilt, iSpindel, and Plaato services don't have their own widgets in the UI. They send data to the history service, and the history service sends that data to the UI.
+
+**The `PathPrefix` setting in the label must match the service name.** If you add the `spark-two` service, the second label must be: `"traefik.frontend.rule=PathPrefix: /spark-two"`
 
 ::: tip
 The service name is mentioned three times in the YAMl for a Spark service. It must be the same each time.
@@ -152,5 +154,3 @@ The service name is mentioned three times in the YAMl for a Spark service. It mu
 - in the labels (`PathPrefix: /spark-one`)
 - in the command (`--name=spark-one`)
 :::
-
-For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./connect_settings.html)

@@ -8,7 +8,7 @@ The [Multiple Devices](./multiple_devices.html) guide explains how Services work
 
 * Existing BrewBlox installation
 * BrewPi Spark
-* Micro-USB to USB cable
+* Micro-USB cable
 
 ## Step 1: Stop your system
 
@@ -37,16 +37,17 @@ Follow the instructions until the menu exits.
 
 ## Step 3: Edit configuration
 
-We will be using the `brewblox-ctl add-spark` command to add the service. 
+We will be using the `brewblox-ctl add-spark` command to add the service. It will ask you some questions, and then automatically edit your `docker-compose.yml` file.
 
-This command takes (optional) arguments that change how the service will communicate with the controller. The [Adding Spark](./adding_spark.html) guide describes these arguments in detail.
+If you run `brewblox-ctl add-spark` without any arguments, it will prompt you for required info, and then create a sensibly configured service.
+
+If you want to fine-tune your service configuration, multiple arguments are available. The [Connection settings](./connect_settings.html) guide describes these in detail.
 
 Some arguments that can be set:
 - `--device-id`: If you already know the device ID.
 - `--device-host`: If your Spark controller has a fixed IP address, you can skip discovery, and immediately connect to its IP address. You must assign the Spark controller a static DHCP lease in your router for this to work.
 - `--discovery`: If you want to restrict device discovery to only use USB (`--discovery=usb`), or only use Wifi (`--discovery=wifi`).
 
-If you run `brewblox-ctl add-spark` without arguments, it will prompt you for its unique service name, and let you choose from discovered devices.
 
 ## Step 4: Add the service in the UI
 
