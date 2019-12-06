@@ -7,6 +7,33 @@ Relevant links:
 - Project board: https://github.com/orgs/BrewBlox/projects/1
 - Code repositories: https://github.com/BrewBlox
 
+## Edge release 2019/12/06
+
+**Firmware release date: 2019/12/03**
+
+A smaller release again, with some fixed bugs, and a handful of display improvements.
+
+To make it easier to find sessions, they can now have tags. When selecting sessions you can search to filter by name, date, or tag.
+
+**Changes**
+
+- Added tags to Session Log sessions
+- You can now close the current session in Session log to return to initial state (no selected session)
+- PWM/PID displays in builder are now postfixed with `%`/`°C`. 
+  - Support for Fahrenheit when the PID is using a Setpoint Driver is still on the backlog.
+- PID displays in builder now display a different icon (`±`) when driving a Setpoint Driver.
+- Fixed a bug in quick actions where the change editor would close every time blocks were refreshed.
+- Fixed a bug where the side graph in a block dialog would exit and not resume when the full-screen graph was opened.
+- Fixed a bug where side graphs would not resize when basic/full mode was toggled in a block dialog.
+- Added help text to `discover` and `add-spark` commands
+- The plaato service now has an install script.
+  - https://github.com/BrewBlox/brewblox-plaato
+- `brewblox-ctl update` will prompt for pruning images at the start, not halfway in.
+  - Due to how brewblox-ctl updates itself, this will take effect in the next update.
+- Improved rendering when there is a large number of dashboards.
+  - Dashboards will no longer scroll in front of the bottom buttons in the sidebar
+  - In wizards, a dropdown will be shown if there is a large number of dashboard options.
+
 ## Edge release 2019/12/03
 
 **Firmware release date: 2019/12/03**
