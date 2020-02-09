@@ -17,6 +17,12 @@ We quickly fix most bugs we find. Some of them can't be fixed immediately, but h
 We keep this list updated with the issues we're aware of, but haven't yet permanently resolved.
 :::
 
+**The Spark service keeps losing connection to the controller (wifi)**
+
+The Wifi system library in the Spark controller has some serious issues. We've already fixed many of them, and are working on replacing the network library entirely.
+
+Until then, be aware: any network reset will cause the Spark to lose Wifi connection. This includes router/AP resets, channel hops, and bad reception. We've also had reports of powerline adapters causing resets.
+
 **After (re)starting, all my services and dashboards disappeared**
 
 Sometimes the datastore service is very slow to get started. To check its status, you can view the Docker logs using the `docker-compose logs datastore` command.
@@ -36,7 +42,9 @@ datastore_1  |          to set it in "docker run".
 datastore_1  | ****************************************************
 ```
 
-Sometimes, this may take a few minutes.
+Depending on the host, this takes a few seconds to a few minutes.
+
+You can also run `brewblox-ctl http wait https://localhost/datastore`. This will retry until it can connect to the datastore. When it reports success, refresh the UI.
 
 ## Frequently asked questions
 
@@ -75,14 +83,14 @@ There are two settings: one for the UI and history, one for the Spark LCD.
 UI:
 
 - Go to the Spark service page
-- In the top right corner, click on the `Actions` button.
+- In the top right corner, click on the Actions button (three vertical dots).
 - Click on `Units`, and change the `Temperature` unit.
 
 LCD:
 
 - Go to the Spark service page.
 - Click to select the `DisplaySettings` block in the block list.
-- Click on the cogwheel in the DisplaySettings widget to open settings.
+- Click the widget toolbar button to switch to `Full` mode.
 - Click on the current `Temperature Unit` to change the value.
 
 **Why can removed or renamed blocks still be selected in the Graph Widget settings?**
