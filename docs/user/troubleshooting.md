@@ -1,6 +1,6 @@
 # Troubleshooting
 
-We're happy to help with any problems or questions that arise when using BrewBlox. You can reach us on the forum: https://community.brewpi.com
+We're happy to help with any problems or questions that arise when using Brewblox. You can reach us on the forum: https://community.brewpi.com
 
 Our first reply often consists of the same handful of questions. To save you some time, you may want to run through this checklist first.
 
@@ -50,7 +50,7 @@ You can also run `brewblox-ctl http wait https://localhost/datastore`. This will
 
 **My service can't connect to my Spark over Wifi**
 
-For reference, you can find the full guide on connection settings guide [here](./connect_settings.html).
+For reference, you can find the full guide on connection settings guide [here](./connect_settings.md).
 
 Assuming you're still using the default settings (haven't added device-specific arguments to `docker-compose.yml`), you can use the following steps to troubleshoot your connection.
 
@@ -72,7 +72,7 @@ If the answer to all questions is yes, but the service still can't find your Spa
 
 By default, we use [multicast DNS](https://en.wikipedia.org/wiki/Multicast_DNS) to discover Sparks that are not connected over USB. In most - but not all - routers, mDNS is enabled by default. Check your router configuration for settings related to multicast DNS.
 
-If you can't solve the problem in your router settings, it may be preferable to skip discovery, and add `--device-host=SPARK_IP` to your docker-compose.yml file. You can find the syntax in the [connection settings guide](./connect_settings.html).
+If you can't solve the problem in your router settings, it may be preferable to skip discovery, and add `--device-host=SPARK_IP` to your docker-compose.yml file. You can find the syntax in the [connection settings guide](./connect_settings.md).
 
 When doing so, it is advised to assign a fixed IP address to the Spark in your router settings. (Also called "static DHCP lease").
 

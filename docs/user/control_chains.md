@@ -1,7 +1,7 @@
-# BrewBlox control chains
+# Brewblox control chains
 
-When first installing BrewBlox, it can be a bit overwhelming.
-We designed BrewBlox to be very flexible and modular to give you a lot of freedom (and responsibility) to adapt it to your brewery.
+When first installing Brewblox, it can be a bit overwhelming.
+We designed Brewblox to be very flexible and modular to give you a lot of freedom (and responsibility) to adapt it to your brewery.
 The downside of this flexibility is that it there are a lot of parts that you can combine and should understand.
 
 This page describes some common ways on how blocks can be combined to create control chains.
@@ -18,7 +18,7 @@ The minimal building blocks for a control system are:
 - An actuator, to drive the sensor value towards the setpoint
 - A controller, in our case a *PID*, to calculate what the value for the actuator should be from the sensor and setpoint value.
 
-In BrewBlox, the input of a PID is a *setpoint-sensor pair*. This block contains the target value (setpoint) and a link to the sensor.
+In Brewblox, the input of a PID is a *setpoint-sensor pair*. This block contains the target value (setpoint) and a link to the sensor.
 
 The *PID* calculates the error, the difference between setpoint and sensor, and keeps a history of to calculates an output value.
 The details of the PID will be described in a different article. [Wikipedia](https://en.wikipedia.org/wiki/PID_controller) also gives a good overview.
@@ -66,7 +66,7 @@ So for the fridge we choose a PWM period of 30 minutes and configure a minimum O
 <PlantUml src="offset_chain.puml" title="Beer Control Chain"/>
 
 To control beer temperature, we could use 2 PIDs directly like we did for the fridge, but with the beer sensor as input.
-But BrewBlox also supports a more advanced form of indirect control with a dynamic fridge temperature setting.
+But Brewblox also supports a more advanced form of indirect control with a dynamic fridge temperature setting.
 
 To set this up, we start with the same fridge temperature control arrangement as above, but we add a new PID to control the fridge setting.
 The *Setpoint Driver* can be set as output of a PID and uses a reference setpoint (beer) to drive a target setpoint (fridge).
@@ -99,7 +99,7 @@ Heating can be done with a heating belt around the fermenter.
 
 <PlantUml src="onewire_chain.puml" title="OneWire Control Chain"/>
 
-Next to the 5 digital outputs on the Spark 3, BrewBlox supports extension boards to add extra outputs.
+Next to the 5 digital outputs on the Spark 3, Brewblox supports extension boards to add extra outputs.
 The SSR expansion board that we sell has a DS2413 OneWire chip that provides 2 extra output pins.
 To use it, use the 'discover blocks' button on the Spark service page. The discovered *DS2413* will be added.
 
@@ -118,9 +118,9 @@ By adding 2 points 3 days apart, with a setting of 20 degrees and 23 degrees, th
 The value is interpolated between points, so the setting increases slowly from point 1 to point 2.
 If you want a sudden step, create 2 points with the same time but a different temperature setting.
 
-## Mashing with BrewBlox
+## Mashing with Brewblox
 
-When you want to use BrewBlox to control the hot side of brewing (mashing, boiling), the arrangement of blocks is almost identical to the examples for fermentation control.
+When you want to use Brewblox to control the hot side of brewing (mashing, boiling), the arrangement of blocks is almost identical to the examples for fermentation control.
 
 For each kettle with a heating element, you will have a temperature sensor, sensor setpoint pair, PID, PWM and a digital output.
 
@@ -162,7 +162,7 @@ When boiling your wort, you want to boil with constant power. You can do this by
 ## When you only have power for 1 element: sharing power over multiple elements
 
 Heating large volumes of water takes a lot of power, so brewers buy the biggest heating element that their fuses can handle.
-In most cases, they can therefore only power for 1 element at a time. This is not pratical, so BrewBlox offers you a solution!
+In most cases, they can therefore only power for 1 element at a time. This is not pratical, so Brewblox offers you a solution!
 
 <PlantUml src="balanced_chain.puml" title="Balanced Control Chain"/>
 

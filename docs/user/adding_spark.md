@@ -1,20 +1,20 @@
 # Adding a Spark service
 
-After you've followed the [Getting Started guide](./startup.html), you may want to connect your second or third Spark.
+After you've followed the [Getting Started guide](./startup.md), you may want to connect your second or third Spark.
 
-The [Multiple Devices](./multiple_devices.html) guide explains how Services work in BrewBlox. This guide walks you through the steps to add a new Spark service.
+The [Multiple Devices](./multiple_devices.md) guide explains how Services work in Brewblox. This guide walks you through the steps to add a new Spark service.
 
 ## What you will need
 
-* Existing BrewBlox installation
+* Existing Brewblox installation
 * BrewPi Spark
 * Micro-USB cable
 
 ## Step 1: Stop your system
 
-You'll be changing the configuration of your BrewBlox system. For the changes to take effect, you must stop and start your system.
+You'll be changing the configuration of your Brewblox system. For the changes to take effect, you must stop and start your system.
 
-In your BrewBlox directory (default: `./brewblox`), run this command:
+In your Brewblox directory (default: `./brewblox`), run this command:
 
 ```bash
 brewblox-ctl down
@@ -26,7 +26,7 @@ brewblox-ctl down
 Make sure no other Sparks are connected over USB while you're flashing your controller.
 :::
 
-In your BrewBlox directory (default: `./brewblox`), run these command:
+In your Brewblox directory (default: `./brewblox`), run these command:
 
 ```bash
 brewblox-ctl flash
@@ -41,7 +41,7 @@ We will be using the `brewblox-ctl add-spark` command to add the service. It wil
 
 If you run `brewblox-ctl add-spark` without any arguments, it will prompt you for required info, and then create a sensibly configured service.
 
-If you want to fine-tune your service configuration, multiple arguments are available. The [Connection settings](./connect_settings.html) guide describes these in detail.
+If you want to fine-tune your service configuration, multiple arguments are available. The [Connection settings](./connect_settings.md) guide describes these in detail.
 
 Some arguments that can be set:
 - `--device-id`: If you already know the device ID.

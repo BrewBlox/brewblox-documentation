@@ -6,7 +6,7 @@ Date: 2018/07/03
 
 The natural result of having a system consisting of multiple Docker containers, is that you need to manage them.
 
-BrewBlox adds some additional complexity with the notion that every user has their own local deployment stack.
+Brewblox adds some additional complexity with the notion that every user has their own local deployment stack.
 Any container orchestration tool used must be sufficiently simple for it to be operated by end users.
 
 ## Requirements
@@ -26,7 +26,7 @@ Any container orchestration tool used must be sufficiently simple for it to be o
 
 ## [Docker-Compose][docker-compose]
 
-This has so far in the BrewBlox project been the go-to choice for container orchestration. It is simple to install and configure.
+This has so far in the Brewblox project been the go-to choice for container orchestration. It is simple to install and configure.
 
 While it works well when used by developers willing to SSH onto a server to rewrite a YAML file, it lacks a good GUI.
 
@@ -63,7 +63,7 @@ Ansible is a task automation tool that can do much more than just managing docke
 
 While it is powerful, and likely very useful for power users, it is not simple to get started. It has an UI, but that is not free, and marketed at corporate users.
 
-Users who already utilise Ansible can easily integrate BrewBlox containers in their existing environment, but offering it as the default would only increase the barrier of entry for new users.
+Users who already utilise Ansible can easily integrate Brewblox containers in their existing environment, but offering it as the default would only increase the barrier of entry for new users.
 
 
 ## Conclusion

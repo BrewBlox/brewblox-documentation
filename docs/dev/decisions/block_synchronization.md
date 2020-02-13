@@ -28,7 +28,7 @@ This approach decouples services, and allows for easy implementation of a one-to
 The brewblox-devcon-spark service offers two endpoints for block synchronization: `/remote/master`, and `/remote/slave`.
 
 Requirements:
-- A BrewBlox environment with:
+- A Brewblox environment with:
     - A RabbitMQ eventbus
     - A Spark service called `spark-master`, connected to a Spark
     - A Spark service called `spark-slave`, connected to a Spark
@@ -155,4 +155,4 @@ The body of the message should be a JSON string containing object data. Object I
 
 
 [rabbitmq-tutorial]: https://www.rabbitmq.com/tutorials/tutorial-three-python.html
-[boilerplate-main]: https://github.com/BrewBlox/brewblox-boilerplate/blob/develop/YOUR_PACKAGE/__main__.py
+[boilerplate-main]: https://github.com/Brewblox/brewblox-boilerplate/blob/develop/YOUR_PACKAGE/__main__.py

@@ -4,7 +4,7 @@ Date: 2018/05/22
 
 ## Context
 
-After previous efforts, the BrewBlox CI automatically releases Python packages to PyPi, and Docker images to Docker Hub. Images are created both for the AMD64 and ARM32v7 architectures.
+After previous efforts, the Brewblox CI automatically releases Python packages to PyPi, and Docker images to Docker Hub. Images are created both for the AMD64 and ARM32v7 architectures.
 
 An issue is that this only happens for released versions. Developers wanting to test their new features or bugfixes using Docker containers must replicate the release process manually.
 

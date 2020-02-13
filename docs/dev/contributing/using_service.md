@@ -8,11 +8,11 @@ After setting up a new service from the [boilerplate repository](https://github.
 
 In `brewblox-service`, long-lived handlers are registered as `ServiceFeature` classes inside `app`. This allows them to be used by HTTP request handlers.
 
-Features are useful for using shared state and references (configuration, open connections, etc). For example, the [brewblox_devcon_spark.commander](https://github.com/BrewBlox/brewblox-devcon-spark/blob/develop/brewblox_devcon_spark/commander.py) module matches responses to requests for Spark commands.
+Features are useful for using shared state and references (configuration, open connections, etc). For example, the [brewblox_devcon_spark.commander](https://github.com/Brewblox/brewblox-devcon-spark/blob/develop/brewblox_devcon_spark/commander.py) module matches responses to requests for Spark commands.
 
 Features should be created before the service starts running `app`, and will receive callbacks on startup and shutdown. These callbacks are important because they are made after the service started running the async loop, and before the loop is stopped.
 
-For code examples on how to use features, see [the docstrings](https://github.com/BrewBlox/brewblox-service/blob/develop/brewblox_service/features.py).
+For code examples on how to use features, see [the docstrings](https://github.com/Brewblox/brewblox-service/blob/develop/brewblox_service/features.py).
 
 
 ## Long-running tasks
@@ -20,22 +20,22 @@ For code examples on how to use features, see [the docstrings](https://github.co
 A common use case for a service is to have a feature that does X every Y seconds, independent from any HTTP requests.
 
 Some examples:
-- [brewblox-devcon-spark](https://github.com/BrewBlox/brewblox-devcon-spark/blob/develop/brewblox_devcon_spark/broadcaster.py) reads controller blocks every few seconds, and then broadcasts the data to the eventbus (to be inserted in InfluxDB).
-- [brewblox-devcon-spark](https://github.com/BrewBlox/brewblox-devcon-spark/blob/develop/brewblox_devcon_spark/api/sse_api.py) reads controller blocks every few seconds, and then writes the result to all active SSE connections.
-- [brewblox-history](https://github.com/BrewBlox/brewblox-history/blob/develop/brewblox_history/influx.py) checks every few seconds whether it received new data points, and then inserts them all at once to the database.
+- [brewblox-devcon-spark](https://github.com/Brewblox/brewblox-devcon-spark/blob/develop/brewblox_devcon_spark/broadcaster.py) reads controller blocks every few seconds, and then broadcasts the data to the eventbus (to be inserted in InfluxDB).
+- [brewblox-devcon-spark](https://github.com/Brewblox/brewblox-devcon-spark/blob/develop/brewblox_devcon_spark/api/sse_api.py) reads controller blocks every few seconds, and then writes the result to all active SSE connections.
+- [brewblox-history](https://github.com/Brewblox/brewblox-history/blob/develop/brewblox_history/influx.py) checks every few seconds whether it received new data points, and then inserts them all at once to the database.
 
-For code examples on how to create a repeating task, see [the docstrings](https://github.com/BrewBlox/brewblox-service/blob/develop/brewblox_service/repeater.py).
+For code examples on how to create a repeating task, see [the docstrings](https://github.com/Brewblox/brewblox-service/blob/develop/brewblox_service/repeater.py).
 
 ## Publishing data to InfluxDB
 
 ::: tip
-If you want the data to be saved to your Influx database, you also need to run the following containers from the default BrewBlox configuration:
+If you want the data to be saved to your Influx database, you also need to run the following containers from the default Brewblox configuration:
 - eventbus (RabbitMQ)
 - influx (InfluxDB)
 - history (brewblox-history)
 :::
 
-Any service running in the BrewBlox docker-compose configuration can insert data in the history database by publishing it to the right RabbitMQ topic.
+Any service running in the Brewblox docker-compose configuration can insert data in the history database by publishing it to the right RabbitMQ topic.
 The history service listens to this topic, and inserts the data in the database.
 
 See [the event logging spec](../reference/event_logging) for how to format data.

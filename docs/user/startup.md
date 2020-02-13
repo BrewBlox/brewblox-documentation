@@ -1,14 +1,14 @@
 # Getting started
 
-This guide describes how to install the BrewBlox system on a Raspberry Pi. </br>
-The default device for the BrewBlox system is the BrewPi Spark, but you can try this tutorial without it.
+This guide describes how to install the Brewblox system on a Raspberry Pi. </br>
+The default device for the Brewblox system is the BrewPi Spark, but you can try this tutorial without it.
 
-For an explanation of how to combine the various Spark Blocks, see the [BrewBlox control chains](./control_chains.md) page.
+For an explanation of how to combine the various Spark Blocks, see the [Brewblox control chains](./control_chains.md) page.
 
 The default configuration uses a single Spark controller. The [Multiple Devices](./multiple_devices.md) guide describes how to get started using more devices.
 
 ::: warning
-The following Raspberry Pi models are **not** compatible with BrewBlox.
+The following Raspberry Pi models are **not** compatible with Brewblox.
 
 - Raspberry Pi 1 Model A
 - Raspberry Pi 1 Model B
@@ -33,7 +33,7 @@ When connecting the BrewPi Spark
 - Micro-USB to USB cable
 
 ::: tip
-You can also install BrewBlox on a Synology NAS, desktop computer, or laptop - as long as it's using Linux.
+You can also install Brewblox on a Synology NAS, desktop computer, or laptop - as long as it's using Linux.
 :::
 
 ## Step 1: Format the microSD card
@@ -118,7 +118,7 @@ Wait for the Pi to finish starting up, and connect to it using your SSH client.
 
 The default user name is `pi`, and the default password is `raspberry`. It is strongly advised to change the password immediately.
 
-## Step 4: Install BrewBlox
+## Step 4: Install Brewblox
 
 To execute the commands that follow, copy them and paste them in your SSH client.
 Trying to type them yourself is frustrating and error prone.
@@ -144,14 +144,14 @@ sudo apt install -y python3-pip
 sudo pip3 install -U setuptools brewblox-ctl
 ```
 
-These commands installed `brewblox-ctl`, a menu for installing and managing your BrewBlox system. <br>
+These commands installed `brewblox-ctl`, a menu for installing and managing your Brewblox system. <br>
 To install a new system, run the following command:
 
 ```bash
 brewblox-ctl install
 ```
 
-This will walk you through the relevant choices, and then install BrewBlox in a directory of your choice.
+This will walk you through the relevant choices, and then install Brewblox in a directory of your choice.
 
 ## Interlude: Navigating Linux directories
 
@@ -180,7 +180,7 @@ pi@raspberrypi:~ $ pwd
 pi@raspberrypi:~ $
 ```
 
-By default, BrewBlox is installed in the `./brewblox` directory. This is a relative path: `.` means "current directory". The absolute path for this directory is `~/brewblox` or `/home/pi/brewblox`.
+By default, Brewblox is installed in the `./brewblox` directory. This is a relative path: `.` means "current directory". The absolute path for this directory is `~/brewblox` or `/home/pi/brewblox`.
 
 You can change directories by using the `cd` command. This can be used with either relative, or absolute paths. After you change directory, the current directory component of your shell prompt will change.
 
@@ -260,13 +260,13 @@ You can use brewblox-ctl to easily manage your system, and perform common action
 brewblox-ctl up
 ```
 
-After the project is done starting up, you can use the BrewBlox UI at `https://raspberrypi` (or your Raspberry Pi's IP address) to configure and monitor your Spark.
+After the project is done starting up, you can use the Brewblox UI at `https://raspberrypi` (or your Raspberry Pi's IP address) to configure and monitor your Spark.
 
 ::: warning
 Because we're using a local (self-signed) SSL certificate, your browser will display a warning the first time you visit the page.
 
 There's no need to panic. Click advanced, and add an exception for the current host.
-![BrewBlox UI](../images/ssl-error.png)
+![Brewblox UI](../images/ssl-error.png)
 :::
 
 ## Step 8: Use the system
@@ -285,7 +285,7 @@ This will generate a set of blocks and widgets, configured to let you control th
 
 ## Later: Updating
 
-BrewBlox receives regular updates. Whenever a new update is released, the release notes are posted on [the forum](https://community.brewpi.com/), and added to the [overview](./release_notes.html).
+Brewblox receives regular updates. Whenever a new update is released, the release notes are posted on [the forum](https://community.brewpi.com/), and added to the [overview](./release_notes.md).
 
 To update, close the UI, and run the following command:
 

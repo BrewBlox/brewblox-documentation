@@ -35,7 +35,7 @@ Widgets are considered the interfacing component between the fully generic Dashb
 
 Forms have more freedom of implementation - at time of design, the widget was the only expected caller.
 
-The proliferation of dialogs led to the standardization of block forms ([crud component design](./crud_component.html)), to the point where they could be created by a generic function.
+The proliferation of dialogs led to the standardization of block forms ([crud component design](./crud_component.md)), to the point where they could be created by a generic function.
 
 If we want to show non-block features in dialogs, they must implement a common interface.
 

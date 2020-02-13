@@ -1,8 +1,8 @@
-# BrewBlox Documentation
+# Brewblox Documentation
 
 ## View the documentation at [https://brewblox.netlify.com](https://brewblox.netlify.com)
 
-This is the code repository for the BrewBlox documentation website. These docs are built with vuepress and written in markdown.
+This is the code repository for the Brewblox documentation website. These docs are built with vuepress and written in markdown.
 
 
 ## Editing

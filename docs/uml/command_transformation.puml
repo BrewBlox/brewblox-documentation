@@ -29,7 +29,7 @@ partition "api.py" {
 
                 An example is OneWireBus:
                 Protobuf decodes its 'address' field (bytes) as base64 strings.
-                BrewBlox wants them displayed to the user as hexadecimal strings.
+                Brewblox wants them displayed to the user as hexadecimal strings.
                 This hex <-> base64 conversion is done in a preprocessing step in encode().
             end note
         }

@@ -1,6 +1,6 @@
 # Dynamically loading UI plugins
 
-BrewBlox is set up to be dynamic and extensible at runtime through configuration. <br>
+Brewblox is set up to be dynamic and extensible at runtime through configuration. <br>
 While the backend accomplishes this through a microservice architecture, the UI is still a single application.
 
 Making a transpiled single application dynamically extensible is not trivial. 
@@ -8,7 +8,7 @@ This document describes the various steps that must be taken to do so.
 
 ## Context
 
-The [backend architecture design](./subprojects.html) set out to make the system scalable by dividing it into separate applications.
+The [backend architecture design](./subprojects.md) set out to make the system scalable by dividing it into separate applications.
 
 The UI requires a slightly different approach: it should be a single application where end users can monitor and control all backend services.
 
@@ -32,7 +32,7 @@ The remaining issues that must be solved concern deployment, not code architectu
 - Changing the plugin configuration does not require a code rebuild
 - Plugin configuration must be persistent
 - Plugins can be created without modifying the brewblox-ui code (either upstream, or in a fork)
-- Plugins do not require actions or approval by the BrewBlox team before they can be loaded
+- Plugins do not require actions or approval by the Brewblox team before they can be loaded
 - Plugins can import and use framework code and typings
 - Loading plugins does not significantly increase page load times
 - Development features such as hot reload are still usable while developing plugins
@@ -55,7 +55,7 @@ This can be done by offering a separate `main.js` and `index.js` file. The `main
 ## Importing the framework
 
 [This guide][publish-vue] describes the main steps required to publish and import a Vue library.
-In our case we just need to change the behavior slightly: instead of directly registering components when imported, it should export a BrewBlox plugin startup function. (eg. [Spark plugin index][spark-plugin-index])
+In our case we just need to change the behavior slightly: instead of directly registering components when imported, it should export a Brewblox plugin startup function. (eg. [Spark plugin index][spark-plugin-index])
 
 ## Loading plugin code
 
@@ -87,7 +87,7 @@ This fulfills the requirement of being able to use development features as hot m
 
 ## Core plugins
 
-It is a reasonable assumption that the majority of BrewBlox end users are using the Spark/History plugins. <br>
+It is a reasonable assumption that the majority of Brewblox end users are using the Spark/History plugins. <br>
 
 To improve load times, and avoid splitting the brewblox-ui repository, these plugins should remain in the `src/plugins` directory.
 The Starter module should by default load these core plugins, along with all plugins provided by the entrypoint.
@@ -114,7 +114,7 @@ Summary of required changes:
 
 
 
-[ui-repo]: https://github.com/BrewBlox/brewblox-ui
-[ui-plugin-dir]: https://github.com/BrewBlox/brewblox-ui/tree/develop/src/plugins
+[ui-repo]: https://github.com/Brewblox/brewblox-ui
+[ui-plugin-dir]: https://github.com/Brewblox/brewblox-ui/tree/develop/src/plugins
 [publish-vue]: https://medium.com/justfrontendthings/how-to-create-and-publish-your-own-vuejs-component-library-on-npm-using-vue-cli-28e60943eed3
-[spark-plugin-index]: https://github.com/BrewBlox/brewblox-ui/blob/develop/src/plugins/spark/index.ts
+[spark-plugin-index]: https://github.com/Brewblox/brewblox-ui/blob/develop/src/plugins/spark/index.ts

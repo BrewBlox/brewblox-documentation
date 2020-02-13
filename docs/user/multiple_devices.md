@@ -3,10 +3,10 @@
 :::tip
 This page explains how and why the service configuration works.
 
-If you prefer to get started immediately with setting up a second Spark: you can skip forward to [Adding a Spark service](./adding_spark.html).
+If you prefer to get started immediately with setting up a second Spark: you can skip forward to [Adding a Spark service](./adding_spark.md).
 :::
 
-BrewBlox is designed to let you control multiple devices with a single application.
+Brewblox is designed to let you control multiple devices with a single application.
 
 To make this both reliable and easy, devices are connected to a central hub (the **server**).
 
@@ -17,10 +17,10 @@ On the server, we need some software to talk to individual devices. To make it e
 Some services are used for shared functionality: The **history service** collects data from device services, and stores it for later use in graphs. Others are used to control individual devices.
 
 Some examples of supported devices:
-- The [BrewPi Spark](./adding_spark.html)
+- The [BrewPi Spark](./adding_spark.md)
 - The [Tilt hydrometer](https://github.com/j616/brewblox-tilt)
 - The [iSpindel hydrometer ](https://github.com/bdelbosc/brewblox-ispindel)
-- The [Plaato digital airlock](https://github.com/BrewBlox/brewblox-plaato)
+- The [Plaato digital airlock](https://github.com/Brewblox/brewblox-plaato)
 
 <PlantUml src="server_services.puml" title="Server services"/>
 
@@ -80,7 +80,7 @@ Each type of service may have a slightly different configuration. We'll take a d
 
 ## Docker-compose service syntax
 
-When you install BrewBlox, it generates a `docker-compose.yml` file for you. This includes the default `spark-one` service.
+When you install Brewblox, it generates a `docker-compose.yml` file for you. This includes the default `spark-one` service.
 
 ```yaml
   spark-one:
@@ -130,7 +130,7 @@ The `command` setting contains arguments for the software running *inside* the s
 
 The `--name` argument must (again) be the same as the service name.
 
-For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./connect_settings.html)
+For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./connect_settings.md)
 
 ---
 ```yaml

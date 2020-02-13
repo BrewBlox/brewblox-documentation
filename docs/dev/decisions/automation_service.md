@@ -4,13 +4,13 @@ Date: 2019/11/18
 
 ## Context
 
-Right now, the core functionality of BrewBlox as fermentation control system is mostly complete. Users can:
+Right now, the core functionality of Brewblox as fermentation control system is mostly complete. Users can:
 - Keep brews at a desired temperature - or temperature profile
 - Manually control secondary actuators (valves)
 - View process data in graphs
 - Render and control their system using a simplified model (Builder)
 
-The ambition is for BrewBlox to be more than a fermentation control system, so it was time to identify the Next Big Thing.
+The ambition is for Brewblox to be more than a fermentation control system, so it was time to identify the Next Big Thing.
 
 Any brew day follows a mostly predetermined set of steps - some manual, some that can be automated. If we want it to be able of managing the entire brewing process, it must be able to manage processes that require significant changes to settings throughout the process.
 
@@ -51,13 +51,13 @@ Processes are kept strictly linear, without any conditional branching.
 
 ## Defining Todo items
 
-The majority of brewers using BrewBlox will still use a process that involves manual tasks - be it adding ingredients, re-routing tubing, opening valves, or simple verification that everything is as it should be.
+The majority of brewers using Brewblox will still use a process that involves manual tasks - be it adding ingredients, re-routing tubing, opening valves, or simple verification that everything is as it should be.
 
 We can support this in our automated state machine by generating and checking Todo items. **Actions** may generate an item, and **conditions** may check whether the user has marked the item as "done".
 
 ## Conclusions
 
-The Next Big Thing for BrewBlox is an automation service to fully manage brew days.
+The Next Big Thing for Brewblox is an automation service to fully manage brew days.
 This automation service is implemented as a backend service, using a straightforward linear state machine.
 
 Manual tasks are explicitly supported: the user is responsible for marking them as completed.

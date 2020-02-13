@@ -1,10 +1,10 @@
-# Getting started with BrewBlox: Raspberry containers
+# Getting started with Brewblox: Raspberry containers
 
 An overview of what changes must be made to build and run Docker containers on the Raspberry Pi.
 
 ## Assumptions
 
-This guide assumes that you've followed the **Getting started with BrewBlox: Docker** guide previously, and have a `your-package:local` Docker image on your computer.
+This guide assumes that you've followed the **Getting started with Brewblox: Docker** guide previously, and have a `your-package:local` Docker image on your computer.
 
 ## What's different?
 
@@ -48,9 +48,9 @@ services:
 
 Surprisingly, `eventbus` and `traefik` continue to use the same versions. This is done using Docker manifests (https://docs.docker.com/edge/engine/reference/commandline/manifest/) where Docker uses the current architecture to automatically select the image that's really used.
 
-At time of writing multi-architecture manifests are still an experimental feature. BrewBlox doesn't use them. Instead, users should manually select the correct version.
+At time of writing multi-architecture manifests are still an experimental feature. Brewblox doesn't use them. Instead, users should manually select the correct version.
 
-All ARM versions of BrewBlox are prefixed with `rpi-`. If you want the latest version of the history service on your desktop, you pull `brewblox/brewblox-history:latest`. If you want it on a Pi, you pull `brewblox/brewblox-history:rpi-latest`.
+All ARM versions of Brewblox are prefixed with `rpi-`. If you want the latest version of the history service on your desktop, you pull `brewblox/brewblox-history:latest`. If you want it on a Pi, you pull `brewblox/brewblox-history:rpi-latest`.
 
 ## Building ARM images
 
@@ -66,7 +66,7 @@ To enable cross-compiling images in your current terminal session, run
 docker run --rm --privileged multiarch/qemu-user-static:register --reset
 ```
 
-In the [Docker guide](./docker.html) guide we used `docker/amd/Dockerfile`. Now we'll switch to `docker/arm/Dockerfile`
+In the [Docker guide](./docker.md) guide we used `docker/amd/Dockerfile`. Now we'll switch to `docker/arm/Dockerfile`
 
 Build script:
 ```bash

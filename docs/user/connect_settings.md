@@ -4,7 +4,7 @@ The Spark service can connect to the controller using either Wifi, or USB. Once 
 
 Connection settings are specified by editing the Spark service arguments in the `docker-compose.yml` file, or by using the `brewblox-ctl add-spark` command.
 
-See the [Multiple Devices](./multiple_devices.html) guide for an explanation on service configuration.
+See the [Multiple Devices](./multiple_devices.md) guide for an explanation on service configuration.
 
 The service can either connect immediately to a fixed address, or first try to discover the controller address.
 
