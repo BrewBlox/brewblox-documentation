@@ -2,7 +2,7 @@ module.exports = {
     title: 'Brewblox',
     description: 'Build your brewery, your way',
     themeConfig: {
-        logo: '/favicon.ico',
+        logo: '/favicon-96x96.png',
         nav: [
             { text: 'User guides', link: '/user/startup' },
             { text: 'Developer docs', link: '/dev/' },
