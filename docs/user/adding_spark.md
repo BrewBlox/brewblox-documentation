@@ -51,6 +51,8 @@ Some arguments that can be set:
 
 ## Step 4: Add the service in the UI
 
-When adding your service, the `Service ID` field must match the name you gave the service in `brewblox-ctl add-spark`. The `Service title` field is not important for configuration: pick a name that makes sense to you.
+After you started the newly added service, it will automatically show up in the UI sidebar a few seconds later.
+
+Click on it to start using the service in the UI.
 
 ![Adding service](../images/adding-service.gif)
