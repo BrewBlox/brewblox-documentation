@@ -1,4 +1,4 @@
-# Getting started with BrewBlox: Docker
+# Getting started with Brewblox: Docker
 
 A quick overview of what buttons to press to get a new containerized service up and running.
 
@@ -6,7 +6,7 @@ A quick overview of what buttons to press to get a new containerized service up 
 
 If you're creating a new service, the boilerplate repository can help you out.
 
-Create a new repository using the template at https://github.com/brewblox/brewblox-boilerplate (click the `Use this template` button in GitHub), and follow the instructions in https://github.com/BrewBlox/brewblox-boilerplate/blob/develop/README.md to get started.
+Create a new repository using the template at https://github.com/brewblox/brewblox-boilerplate (click the `Use this template` button in GitHub), and follow the instructions in https://github.com/Brewblox/brewblox-boilerplate/blob/develop/README.md to get started.
 
 At this point you'll have a working Python package that can be run locally, uploaded to PyPi, or installed in a Docker image. We'll ignore PyPi for now, and concentrate on Docker.
 
@@ -173,9 +173,9 @@ During configuration of the boilerplate code, you changed the default name of yo
 
 If you haven't, you can now go to `http://localhost/YOUR_PACKAGE/api/doc` to see the endpoints registered in your service. If you did change the name, you'll have to replace `YOUR_PACKAGE` with the actual name.
 
-## Interacting with other BrewBlox services
+## Interacting with other Brewblox services
 
-Just after getting started, no other BrewBlox services are needed.
+Just after getting started, no other Brewblox services are needed.
 * We're not directly communicating with the history service, InfluxDB, or other device services.
 * We already did the gateway's job by manually forwarding host port 80 to container port 5000
 * The eventbus is designed to be safe: it will not crash your service when it can't connect.
@@ -259,7 +259,7 @@ This bit declares the three external services we're using: RabbitMQ, InfluxDB, a
       - "traefik.frontend.rule=PathPrefix: /history"
 ```
 
-This is the BrewBlox history service. It needs both Influx and RabbitMQ to do its job, and needs to be recognized by the Traefik gateway.
+This is the Brewblox history service. It needs both Influx and RabbitMQ to do its job, and needs to be recognized by the Traefik gateway.
 
 ```yaml
     labels:

@@ -1,4 +1,4 @@
-# BrewBlox Subprojects
+# Brewblox Subprojects
 
 Current (february 2018) state of affairs is that all relevant code is spread over a set of repositories, contained in various accounts.
 

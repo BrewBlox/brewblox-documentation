@@ -1,4 +1,4 @@
-# Microservice design adjustments for BrewBlox
+# Microservice design adjustments for Brewblox
 
 ## Introduction
 
@@ -8,16 +8,16 @@ Advertised advantages are scalability and flexibility.
 
 Intuitively, its separation of functionality is a good fit for a modular system.
 
-As with any other design pattern, microservices are not a silver bullet. The BrewBlox system also does not match the original use case for microservices: a large web application that needs significant horizontal scaling.
+As with any other design pattern, microservices are not a silver bullet. The Brewblox system also does not match the original use case for microservices: a large web application that needs significant horizontal scaling.
 
-**Which benefits and drawbacks of the microservice pattern are relevant to BrewBlox?**
+**Which benefits and drawbacks of the microservice pattern are relevant to Brewblox?**
 
 
 ## (Relevant) microservice advantages
 
 Microservices.io has a nice overview on [when to implement microservices][microservice_io].
 
-We'll look at each listed benefit, and evaluate whether it applies to the BrewBlox context.
+We'll look at each listed benefit, and evaluate whether it applies to the Brewblox context.
 
 ### Better testability - services are smaller and faster to test
 
@@ -27,7 +27,7 @@ This does not eliminate the need for integration and system tests, but it does c
 
 ### Better deployability - services can be deployed independently
 
-This may be nice, but is not strictly required for BrewBlox. Each user has a separate installation, greatly reducing the cost of bringing the system down for an update.
+This may be nice, but is not strictly required for Brewblox. Each user has a separate installation, greatly reducing the cost of bringing the system down for an update.
 
 ### It enables you to organize the development effort around multiple, auto teams.
 
@@ -51,7 +51,7 @@ See: previous point.
 
 This is certainly useful. If a non-critical service crashes, the impact is limited. 
 
-BrewBlox governs real-world processes of significant duration. Robustness is important when controlling brews over a period of days or weeks.
+Brewblox governs real-world processes of significant duration. Robustness is important when controlling brews over a period of days or weeks.
 
 ### Eliminates long-term commitment to a technology stack
 
@@ -64,15 +64,15 @@ Hopefully, this also makes the project more attractive to contributors.
 
 All benefits that revolve around isolation of functionality are useful regardless of the scope of the project.
 
-The significant difference between BrewBlox and the monolith envisioned by the microservice pattern is scale.
-Individual BrewBlox systems see very little traffic, and Brewpi is unlikely to employ multiple teams of software developers.
+The significant difference between Brewblox and the monolith envisioned by the microservice pattern is scale.
+Individual Brewblox systems see very little traffic, and Brewpi is unlikely to employ multiple teams of software developers.
 
 
 ## (Relevant) microservice drawbacks
 
 Again we'll be referring to [when to implement microservices][microservice_io] on microservices.io.
 
-This time, each listed drawback is evaluated on relevancy for the BrewBlox project.
+This time, each listed drawback is evaluated on relevancy for the Brewblox project.
 
 ### Developer tools don't provide explicit support for distributed applications
 
@@ -110,7 +110,7 @@ A secondary issue is the increased memory overhead. Any isolation using containe
 
 ## Conclusion
 
-Many benefits and drawbacks of microservices still hold for BrewBlox. The big exceptions are the ones that become relevant for large companies.
+Many benefits and drawbacks of microservices still hold for Brewblox. The big exceptions are the ones that become relevant for large companies.
 
 Brewpi does not and will not have a MLoC sized code base. Any solutions pertaining to inter-team communication are only relevant if external contributors are considered "teams".
 

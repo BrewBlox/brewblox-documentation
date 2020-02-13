@@ -73,7 +73,7 @@ By switching base image, the layers from `python:3.6` are automatically discarde
 
 ## Partial compilation (brewblox-service)
 
-BrewBlox services inherit from `brewblox-service`, where some of the largest dependencies (aiohttp) were introduced.
+Brewblox services inherit from `brewblox-service`, where some of the largest dependencies (aiohttp) were introduced.
 
 If specific images (`brewblox-devcon-spark`, `brewblox-history`) can inherit built wheel files from `brewblox-service`, then this would significantly improve build time.
 

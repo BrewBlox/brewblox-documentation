@@ -29,9 +29,9 @@ Solutions are ranked by:
 
 When evaluating options, it is done on the basis of multiple assumptions we make about our future application:
 
-**Individual service tasks are not CPU-limited**: BrewBlox is the implementation of a classic three-tier system: GUI, service layer, I/O backend (database, device, file). No excessively CPU-heavy tasks are expected, so the default rules hold: I/O is the primary bottleneck.
+**Individual service tasks are not CPU-limited**: Brewblox is the implementation of a classic three-tier system: GUI, service layer, I/O backend (database, device, file). No excessively CPU-heavy tasks are expected, so the default rules hold: I/O is the primary bottleneck.
 
-**Services are not expected to always run at max load**: We are not Netflix [citation needed]. Most services in any given BrewBlox system are expected to only receive a few calls per second at most.
+**Services are not expected to always run at max load**: We are not Netflix [citation needed]. Most services in any given Brewblox system are expected to only receive a few calls per second at most.
 Efficient performance when at low load is a serious consideration.
 
 **Services are already efficiently split up**: The microservice architecture (MSA) already solves the concurrency problem on a high level, by dividing functionality over different services.

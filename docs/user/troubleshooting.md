@@ -1,6 +1,6 @@
 # Troubleshooting
 
-We're happy to help with any problems or questions that arise when using BrewBlox. You can reach us on the forum: https://community.brewpi.com
+We're happy to help with any problems or questions that arise when using Brewblox. You can reach us on the forum: https://community.brewpi.com
 
 Our first reply often consists of the same handful of questions. To save you some time, you may want to run through this checklist first.
 

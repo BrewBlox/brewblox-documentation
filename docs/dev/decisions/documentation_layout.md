@@ -5,7 +5,7 @@ Date: 2018/07/06
 
 ## Context
 
-During the BrewBlox project, a lot of documentation has been written, both in the `brewblox-dev-docs` repository, and in source code.
+During the Brewblox project, a lot of documentation has been written, both in the `brewblox-dev-docs` repository, and in source code.
 
 In order to improve accessibility, this should be properly categorized and published.
 
@@ -16,7 +16,7 @@ Documentation is generated for many purposes and audiences.
 There is some overlap between groups, but we should keep the following "users" in mind:
 
 
-**People completely unfamiliar with BrewBlox**
+**People completely unfamiliar with Brewblox**
 
 A common pitfall of software libraries is that when it comes to introducing the library, they skip straight to "why should you use this particular library (and not the competitor)".
 

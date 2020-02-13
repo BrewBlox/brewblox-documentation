@@ -1,5 +1,5 @@
 # Spark Command Protocol
-This document describes the protocol for interacting with the BrewBlox Spark over TCP or serial.
+This document describes the protocol for interacting with the Brewblox Spark over TCP or serial.
 
 ## Endianness
 

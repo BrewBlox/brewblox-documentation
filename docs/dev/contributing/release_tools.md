@@ -1,4 +1,4 @@
-# BrewBlox dev deployment tools
+# Brewblox dev deployment tools
 
 `brewblox-dev` contains some tools for mainline development. Some of these require write access to the mainline repositories.
 
@@ -22,13 +22,13 @@ brewblox-firmware         9         251    -
 
 ## brewblox-dev release-edge
 
-This asks to create a Pull request from develop to edge for each released BrewBlox repository.
+This asks to create a Pull request from develop to edge for each released Brewblox repository.
 
 ```bash
 steersbob@BrewBox:~/git/brewblox-documentation$ brewblox-dev release-edge
 Do you want to create a develop -> edge PR for brewblox-devcon-spark? [Y/n]
 
-https://github.com/BrewBlox/brewblox-devcon-spark/pull/269
+https://github.com/Brewblox/brewblox-devcon-spark/pull/269
 Do you want to create a develop -> edge PR for brewblox-history? [Y/n]
 
 Error creating pull request: Unprocessable Entity (HTTP 422)

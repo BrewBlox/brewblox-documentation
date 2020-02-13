@@ -30,7 +30,7 @@ Example:
 
 There are two data messages, and one annotation in this example.
 
-The log message function is defined by the application, for the BrewBlox firmware, log messages are sent as annotations, prefixed with `INFO:`, `WARNING:`, `ERROR:` or `DEBUG:`.
+The log message function is defined by the application, for the Brewblox firmware, log messages are sent as annotations, prefixed with `INFO:`, `WARNING:`, `ERROR:` or `DEBUG:`.
 
 **Events** are annotations carrying event-driven data. While data messages are only sent in response to requests, events are sent unprompted.
 
@@ -43,7 +43,7 @@ Example:
 
 On startup, the controller will send a welcome message. This message is defined by the application.
 
-The BrewBlox firmware sends an event prefixed with `BREWBLOX,`, containing in order and comma separated:
+The Brewblox firmware sends an event prefixed with `BREWBLOX,`, containing in order and comma separated:
 
 - Firmware version (git sha)
 - Protocol version (git sha)

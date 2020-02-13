@@ -1,11 +1,11 @@
-# BrewBlox release notes
+# Brewblox release notes
 
 Relevant links:
 
 - User guides: https://brewblox.netlify.com/
 - Previous release notes: https://brewblox.netlify.com/user/release_notes.html
-- Project board: https://github.com/orgs/BrewBlox/projects/1
-- Code repositories: https://github.com/BrewBlox
+- Project board: https://github.com/orgs/Brewblox/projects/1
+- Code repositories: https://github.com/Brewblox
 
 ## Edge release 2020/02/12
 
@@ -179,7 +179,7 @@ To make it easier to find sessions, they can now have tags. When selecting sessi
 - Fixed a bug where side graphs would not resize when basic/full mode was toggled in a block dialog.
 - Added help text to `discover` and `add-spark` commands
 - The plaato service now has an install script.
-  - https://github.com/BrewBlox/brewblox-plaato
+  - https://github.com/Brewblox/brewblox-plaato
 - `brewblox-ctl update` will prompt for pruning images at the start, not halfway in.
   - Due to how brewblox-ctl updates itself, this will take effect in the next update.
 - Improved rendering when there is a large number of dashboards.
@@ -564,7 +564,7 @@ No dramatic new features this week, just a steady stream of iterative improvemen
 **Firmware release date: 2019/08/06**
 
 The UI now supports third-party plugins. If you want to add your own custom widgets, you can now do so.
-We created the example repository https://github.com/BrewBlox/brewblox-plugin to get developers started.
+We created the example repository https://github.com/Brewblox/brewblox-plugin to get developers started.
 
 **Changes**
 
@@ -1008,7 +1008,7 @@ Running `brewblox-ctl` without a command will no longer open a menu, but now pri
 - Reworked brewblox-ctl.
   - When running brewblox-ctl on an ARMv6 platform (Raspberry Pi model 0 or 1), a warning message with a confirmation prompt will be shown on startup.
   - The firmware flash commands will no longer print a notification about updating particle-cli.
-  - The flash/bootloader/wifi commands must now either be run in a BrewBlox directory, or with the `--release` argument.
+  - The flash/bootloader/wifi commands must now either be run in a Brewblox directory, or with the `--release` argument.
   - Added `brewblox-ctl http`. This is used by other commands to make HTTP requests, and can be used for debugging the system.
   - The system will automatically restart after running `brewblox-ctl update`
 - Made decimal precision user-configurable in the Metrics widget.
@@ -1182,7 +1182,7 @@ Changes:
   - OneWire actuators still have a minimum period of 1s.
 
 Apart from these changes, we're working on the implementation of a drag-n-drop interactive display of a brewery - flows included.
-https://brewpi-ui-demo.herokuapp.com/processview/herms-automated-valves is the prototype and proof of concept. The BrewBlox implementation will allow users to recreate their own setup, and control / view their blocks in the display.
+https://brewpi-ui-demo.herokuapp.com/processview/herms-automated-valves is the prototype and proof of concept. The Brewblox implementation will allow users to recreate their own setup, and control / view their blocks in the display.
 
 When the most important features are included, we will start drawing more attention to it in the UI, and add it to the BrewPi classic wizard.
 
