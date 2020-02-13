@@ -66,7 +66,7 @@ To enable cross-compiling images in your current terminal session, run
 docker run --rm --privileged multiarch/qemu-user-static:register --reset
 ```
 
-In the [Docker guide](./docker.html) guide we used `docker/amd/Dockerfile`. Now we'll switch to `docker/arm/Dockerfile`
+In the [Docker guide](./docker.md) guide we used `docker/amd/Dockerfile`. Now we'll switch to `docker/arm/Dockerfile`
 
 Build script:
 ```bash

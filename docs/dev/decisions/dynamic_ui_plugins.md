@@ -8,7 +8,7 @@ This document describes the various steps that must be taken to do so.
 
 ## Context
 
-The [backend architecture design](./subprojects.html) set out to make the system scalable by dividing it into separate applications.
+The [backend architecture design](./subprojects.md) set out to make the system scalable by dividing it into separate applications.
 
 The UI requires a slightly different approach: it should be a single application where end users can monitor and control all backend services.
 

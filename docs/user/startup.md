@@ -285,7 +285,7 @@ This will generate a set of blocks and widgets, configured to let you control th
 
 ## Later: Updating
 
-Brewblox receives regular updates. Whenever a new update is released, the release notes are posted on [the forum](https://community.brewpi.com/), and added to the [overview](./release_notes.html).
+Brewblox receives regular updates. Whenever a new update is released, the release notes are posted on [the forum](https://community.brewpi.com/), and added to the [overview](./release_notes.md).
 
 To update, close the UI, and run the following command:
 

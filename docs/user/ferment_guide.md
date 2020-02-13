@@ -1,6 +1,6 @@
 # Fermentation fridge guide
 
-While going through the [startup guide](./startup.html), you may have run the `Fermentation Fridge` wizard. This wizard asked you some questions, and then slapped some widgets on a dashboard. 
+While going through the [startup guide](./startup.md), you may have run the `Fermentation Fridge` wizard. This wizard asked you some questions, and then slapped some widgets on a dashboard. 
 
 In this guide we'll shed some light on what they do, and why they do it.
 
@@ -63,7 +63,7 @@ You can view all blocks used by your setup, and how they relate.
 - Click on `Actions` (button, top right corner).
 - Click on `Show Relations` in the dropdown.
 
-These are the building blocks of your configuration. For an in-depth explanation, you can check the [control chains guide](./control_chains.html).
+These are the building blocks of your configuration. For an in-depth explanation, you can check the [control chains guide](./control_chains.md).
 
 ![Relations](../images/ferment-relations.png)
 

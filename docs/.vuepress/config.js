@@ -1,5 +1,5 @@
 module.exports = {
-    title: 'BrewBlox',
+    title: 'Brewblox',
     description: 'Build your brewery, your way',
     themeConfig: {
         nav: [
@@ -68,6 +68,7 @@ module.exports = {
                 'multiple_devices',
                 'adding_spark',
                 'connect_settings',
+                'blocks_in_depth',
                 'release_notes',
                 'troubleshooting',
             ]
