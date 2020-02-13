@@ -2,9 +2,10 @@ module.exports = {
     title: 'Brewblox',
     description: 'Build your brewery, your way',
     themeConfig: {
+        logo: '/favicon.ico',
         nav: [
-            { text: 'User Guides', link: '/user/startup' },
-            { text: 'Documentation', link: '/dev/' },
+            { text: 'User guides', link: '/user/startup' },
+            { text: 'Developer docs', link: '/dev/' },
             { text: 'BrewPi', link: 'https://www.brewpi.com/' }
         ],
         sidebar: {

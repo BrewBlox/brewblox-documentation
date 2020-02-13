@@ -1,6 +1,7 @@
 ---
 home: true
-heroImage: /brewpi-logo.png
+heroImage: /brewpi-wordmark.svg
+heroText: null
 actionText: Get Started →
 actionLink: /user/startup
 features:

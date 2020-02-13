@@ -1,19 +1,26 @@
 # Developer Documentation
 
-TODO: introductory text
+Brewblox is a rapidly evolving system that welcomes external plugins. To reflect this, developer documentation is split in three subcategories:
 
-## [Brewblox Service](https://github.com/brewblox/brewblox-service)
+**Contributing guides** describe how to get started building a service, and how to use dev tools.
 
-## [Brewblox History](https://github.com/brewblox/brewblox-history)
+**Reference documents** describe protocols and interfaces, and are updated whenever these change.
 
-## [Brewblox Spark](https://github.com/brewblox/brewblox-devcon-spark)
+**Design decisions** are documents describing past research and the context for major decisions.
+These are not updated: if a decision changes or is reversed, a new document is added. This ensures that not only the current state is known, but also the process that led us there.
 
-## [Brewblox Deployment](https://github.com/brewblox/brewblox-deployment)
+## Useful links
 
-## [Brewblox UI](https://github.com/brewblox/brewblox-ui)
+- [Project board](https://github.com/orgs/Brewblox/projects/1)
+- [Github](https://github.com/Brewblox)
 
-## [Brewblox Boilerplate](https://github.com/brewblox/brewblox-boilerplate)
-
-## [Brewblox Tools](https://github.com/brewblox/brewblox-tools)
-
-## [Combined Issue Tracker](https://waffle.io/Brewblox/waffle)
+## Noteworthy repositories
+- [brewblox-service: common code for python services](https://github.com/brewblox/brewblox-service)
+- [brewblox-boilerplate: a template for new services](https://github.com/brewblox/brewblox-boilerplate)
+- [brewblox-devcon-spark: the Spark service](https://github.com/brewblox/brewblox-devcon-spark)
+- [brewblox-firmware: the Spark controller](https://github.com/brewblox/brewblox-firmware)
+- [brewblox-ui: the web-based GUI](https://github.com/BrewBlox/brewblox-ui)
+- [brewblox-history: the InfluxDB client](https://github.com/brewblox/brewblox-history)
+- [brewblox-ctl: CLI tool for users](https://github.com/BrewBlox/brewblox-ctl)
+- [brewblox-ctl-lib: release-specific libs for brewblox-ctl](https://github.com/BrewBlox/brewblox-ctl-lib)
+- [brewblox-dev: CLI tool for devs](https://github.com/BrewBlox/brewblox-dev)
