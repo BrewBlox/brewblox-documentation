@@ -69,6 +69,7 @@ module.exports = {
                 'adding_spark',
                 'connect_settings',
                 'blocks_in_depth',
+                'removing_things',
                 'release_notes',
                 'troubleshooting',
             ]
