@@ -7,6 +7,158 @@ Relevant links:
 - Project board: https://github.com/orgs/BrewBlox/projects/1
 - Code repositories: https://github.com/BrewBlox
 
+## Edge release 2020/02/12
+
+**Firmware release date: 2020/01/17**
+
+During development of the new website, we discovered the existence of a whole spectrum of colors not called `$dark`, `$dark_darker`, `$dark_bright`, or `$darkish`. We sprinkled some of them over the UI and brewblox-ctl.
+
+As a happy side effect of implementing the automation service, we added auto discovery of Spark services. Any active Spark service in your docker-compose network will automatically show up in the UI sidebar. Click on it to add it as UI service.
+
+Brewblox-ctl has been made significantly less spammy. You are still prompted at the start of commands (and can still disable that), but it now offers to do a dry run.
+
+Dry running a command will print all shell commands / config changes to the terminal instead of executing them.
+If you enable verbose mode, it will both print and execute.
+
+**Changes**
+
+- Implemented new color palette in UI.
+- Reworked widget styling.
+- Reworked widget/dialog toolbars.
+  - Click the toolbar to edit widget title / block name / service title.
+- Improved scroll behavior and styling.
+- Improved wrapping behavior in small widgets.
+- Spark services are automatically discovered.
+- A green/yellow/red indicator for service status is shown in the sidebar.
+- Removed service wizards.
+- (Developers): Significant changes to interfaces used by plugins.
+  - See brewblox-plugin for descriptions and examples.
+- Unpinned widgets no longer jump when being resized.
+- Reworked brewblox-ctl to add more options, and reduce spam.
+- Added --quiet, --verbose, and --dry-run flags to brewblox-ctl.
+- Use the `--dry-run` option, or answer `d` / `dry-run` in a prompt to have the command print its actions instead of executing them.
+- Added env commands to brewblox-ctl to list/get/set values in .env.
+- Moved `brewblox-ctl save-backup` to `brewblox-ctl backup save`.
+- Added `brewblox-ctl backup load`.
+- Moved `brewblox-ctl editor` and `brewblox-ctl ports` to the `brewblox-ctl service` group.
+- Added `brewblox-ctl service remove` and `brewblox-ctl service show`.
+- Added `brewblox-ctl follow` to see service logs.
+- Added help texts throughout brewblox-ctl.
+- `brewblox-ctl service editor` will now show an address you can directly copy to your browser to visit the editor GUI.
+
+## Edge release 2020/01/20
+
+**Firmware release date: 2020/01/17**
+
+This release, we're happy to introduce the new Brewblox logo.
+
+We've also fixed some longstanding bugs in how Safari displays Builder layouts.
+
+**Changes**
+
+- Added the new Brewblox logo.
+  - This is displayed in the UI, and on the Spark boot screen.
+- Firmware build date is now displayed on the Spark boot screen.
+- Added the `brewblox-ctl save-backup` command.
+  - This creates a zip file in `brewblox/backup/` with datastore and Spark export files.
+  - We will soon add the corresponding `load-backup` command.
+- Fixed a bug in history where the wrong dataset was displayed in graphs for data with a very low update rate.
+- Fixed Builder icons being displayed in the top left in Webkit browsers (Safari).
+- Added an overview of previous notifications.
+  - This can be accessed by clicking the bell icon in the bottom right of the UI.
+- A warning is now shown if the flow calculation in Builder exited early due to an overly complex layout.
+- Updated the icon used for heating PIDs in the Builder.
+- Dashboard / service / layout title is now shown as page title in the browser.
+
+## Edge release 2020/01/02
+
+**Firmware release date: 2019/12/24**
+
+First of all: happy new year everyone!
+
+As of this release, we officially support mobile devices.
+This update fixes the UI elements we identified as being broken on small screens. Any newly reported issues will be treated as bugs, and given due priority.
+
+One exception is the Builder Editor. While technically it now works on mobile, it's pretty much unusable. For this reason, we've hidden UI links to the editor on small screens.
+Builder widgets in dashboards are still shown, and now automatically resize the layout to fit the widget/screen.
+
+**Changes**
+
+- The UI automatically switches to mobile mode if the screen is less than 1000px wide.
+  - This applies both when opening the UI on a small device, or resizing the browser window.
+- In mobile mode, some elements behave differently:
+  - Widget/wizard dialogs are always maximized.
+  - Dashboards are rendered as list.
+  - In the Spark service page, only the block index is shown. Clicking on it will open the block in a dialog.
+  - Graphs are given a fixed height to prevent rendering issues.
+  - The Builder editor is hidden.
+- Fixed a lot of issues with elements not scrolling correctly.
+- The displayed layout in the builder widget now automatically resizes to match the widget.
+  - To fix alignment issues in your layout, adjust the grid size in the builder editor.
+  - We updated the default grid size for layouts generated in Quick Start wizards.
+- Redesigned toolbar buttons on dashboard and service pages.
+- Graphs now consistently re-render when widget is resized due to:
+  - window resize
+  - sidebar open/close
+  - device rotation
+- Fixed double display of "this PID is disabled" warning in full PID widget.
+- Fixed warnings in Setpoint Profile having a lighter background color.
+- Fixed varying widget widths in the Spark service page.
+- Placed index buttons for dashboard/builder/wizard in the sidebar
+- Builder editor is now implemented as a page, and not a dialog.
+- Redesigned/moved the sidebar buttons for navigating to dashboards/builder/wizards.
+- Added option in the builder sidebar to prevent the "Click to resume editing" warning.
+  - You still need to refocus the screen before you can use shortcuts.
+- Added a layout selection menu to the Builder widget toolbar.
+  - This includes a dropdown with all known layouts, and a list with starred layouts.
+  - You can star/unstar layouts in the dropdown.
+- Removed "full" version of the Builder widget (made redundant by the layout selection menu).
+- Reduced timeout in service <-> controller communication to prevent reboots caused by dropped messages.
+
+## Edge release 2019/12/23
+
+**Firmware release date: 2019/12/17**
+
+**Changes**
+
+- Added annotations for graphs in session log
+  - Open the graph and click on a line to add/edit an annotation
+  - You may have to open/close the graph before the annotation shows. This will be fixed soon.
+- Updated system layer in firmware.
+- Fixed a bug in how spark pins are claimed / released.
+- Fixed a bug in how graph notes are exported in session log
+- Fixed a bug in build where source parts would disappear while dragging to copy parts
+- Fixed a bug in builder where flow was calculated incorrectly if there were multiple parallel pumps
+
+## Edge release 2019/12/17
+
+**Firmware release date: 2019/12/03**
+
+**Changes**
+
+- Fixed a bug where device ID checks during discovery and handshakes were case sensitive.
+- Added automated migration from Session View sessions to Session Log sessions.
+- Added functionality to export/import a single block.
+  - This is only useful in very specific scenarios, as the exported block includes links.
+- Plotly graphs are now exported in higher resolution.
+  - To export a graph, mouseover the graph, and click the camera button.
+- Reworked the buttons in the widget toolbar to be more consistent.
+  - In widget, from left to right:
+    - toggle between full/basic view
+    - open widget in dialog
+    - show menu
+  - in dialog, from left to right:
+    - toggle between full/basic view
+    - show menu
+    - close dialog
+- Reworked the widget dropdown menu. It now shows all items in multiple columns.
+- Removed multiple redundant or obsolete actions from widget menus.
+- Fixed a bug in quick start wizards where editing the prefix could cause the application to freeze.
+- Fixed a bug in the graph settings where the tree would not correctly expand when searching.
+- Fixed a bug in the graph settings where you could not tick fields while searching.
+- In the builder, when clicking a heating element that is driven by a PID, it will open the PID dialog.
+- Setpoint setting is now directly editable in the PID widget (both in basic, and full view).
+
 ## Edge release 2019/12/06
 
 **Firmware release date: 2019/12/03**
