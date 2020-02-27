@@ -7,6 +7,42 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Edge release 2020/03/02
+
+**Firmware release date: ????**
+
+This release includes fixes for two very important bugs.
+
+The controller needed a reboot when losing and regaining connection to Wifi. Many Spark controllers are placed in basements or sheds where reception is patchy, making this a very serious issue.
+We're reasonably certain we fixed this particular bug, but please let us know if you continue to have connection issues.
+
+The second issue is not as common, but no less serious. It was possible for actuators with mutex constraints to enter a deadlock if a DS2413/DS2408 device disconnected and reconnected at the wrong time.
+
+To solve this, we reworked how constraints interact with the mutex. This includes constraints now having their own setting for the mutex lockout period (the time between an actuator turning off, and the next actuator being allowed to turn on).
+To not break current configurations, the mutex will still have its own setting, which will be treated as a default value. The setting in the constraint overrides the one in the mutex.
+
+**Changes**
+
+- Fixed a bug where the controller could not be discovered over Wifi after a network or router reset.
+- Fixed a bug where the controller could not be connected to over Wifi after a network or router reset.
+- Fixed a bug where the controller losing connection to a DS2413 actuator could cause a mutex deadlock.
+- Mutex constraints for digital actuators can now override the mutex lockout period.
+  - The lockout period is the minimum time between an actuator turning off, and a different actuator being allowed to turn on.
+- Updated docker-compose.yml version to 3.7.
+- Fixed a bug where the sensor display builder part was showing its value twice.
+- Made boil mode less prominent in the PID.
+  - The "boil" text is hidden if the minimum boiling output is not set.
+  - Boil mode settings are moved to below the PID calculation display.
+- Fixed a bug where additional fields were not shown in OneWire Temp Sensor full mode.
+- Streamlined wizards.
+  - Options are now shown as clickable items.
+  - Single click to toggle selection, double click to immediately continue.
+- The block name field is automatically filled with a suggestion when selecting an item in the block wizard.
+- You can now double click on dashboards to open the widget wizard.
+- You can now double click on the spark service page to open the block wizard.
+- Removed the menu for creating mock blocks - the block wizard is sufficiently efficient for quickly and often creating mocks.
+- Fixed a bug where the dashboard graph would not update when its configuration was changed in a dialog.
+
 ## Edge release 2020/02/12
 
 **Firmware release date: 2020/01/17**
