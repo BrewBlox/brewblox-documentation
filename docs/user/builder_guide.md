@@ -3,20 +3,9 @@
 ![Builder](../images/herms-builder-widget.gif)
 
 The Brewery Builder is a responsive and fully configurable view of your system.
-Whenever you open a valve or enable a pump, it will immediately show the new flow.
+Whenever you make a change, it will immediately recalculate the new flow.
 
-Quickstart wizards will automatically generate Builder widgets, but you can also add and edit them yourself.
-
-```
-- introduction
-- widgets / editor
-- layouts
-- tools
-- parts
-- flows
-- kettle / global inlets
-- block links
-```
+Quickstart wizards will automatically generate Builder widgets, but you can also add and edit your own layouts.
 
 ## Builder widget, Builder editor
 
@@ -50,6 +39,8 @@ Some have more settings. For example, the kettle allows setting:
 
 ![Kettle settings](../images/builder-kettle-settings.png)
 
+**Interact** is the equivalent of clicking on a part in the Builder widget. Click on valves to open/close them, or click on linked parts to open the block dialog.
+
 ## Modes
 
 ![Builder modes](../images/builder-modes.png)
@@ -60,6 +51,8 @@ The default mode is `select`. Click, or click and drag in the grid to select one
 
 Not all tools work when multiple parts are selected.
 
+The other mode is `interact`. It is equivalent to using the interact tool, but on every click.
+
 ## Flow calculations
 
 Whenever there is a viable route from a liquid source (a kettle or inlet) to a liquid sink (another kettle or inlet), the route and flow speed will be shown.
@@ -69,6 +62,8 @@ Building routes is fairly self-explanatory: if it looks like a tube, it'll work 
 To simulate height differences in your system, there's also the `Tube: gravity`. It works like a pump that's always on.
 
 ## Inlets
+
+![Builder inlet](../images/builder-inlet.png)
 
 Liquid flows must always start and end at inlets. Simply having a tube without a connecting part does not count as being an inlet. There are two kinds: global inlets, and kettle inlets.
 
@@ -83,4 +78,16 @@ The kettle liquid color is not changed when a different liquid flows into the ke
 
 ## Linked blocks
 
-todo
+![Setpoint](../images/builder-setpoint.png)
+
+Some Builder parts can be linked to Spark blocks. Most of these display block values, but you can also link valve and pump parts.
+
+When a valve or pump is linked to a block, it will use the block's state. Clicking on the part will toggle the block. If the block can't be toggled because (for example) it is constrained by a mutex, the part state will also not update.
+
+Linked valves and pumps are identified by a lightning bolt icon.
+
+![Linked parts](../images/builder-linked-parts.png)
+
+For other linked parts: if you use the `Interact` tool (editor) or simply click on them (widget), it will show the linked block in a dialog.
+
+There is some intelligence in the system here. For example: if you click a heating element (linked to a PWM), it will show you the PID dialog. You can set desired temperature here.
