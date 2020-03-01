@@ -43,6 +43,7 @@ To not break current configurations, the mutex will still have its own setting, 
 - Removed the menu for creating mock blocks - the block wizard is sufficiently efficient for quickly and often creating mocks.
 - Fixed a bug where the dashboard graph would not update when its configuration was changed in a dialog.
 - `brewblox-ctl install` now runs commands after all prompts are done. You shouldn't need to babysit a process that can take 10+ minutes.
+- Added a user guide for the basic concepts of the Brewery Builder.
 
 ## Edge release 2020/02/12
 
