@@ -25,6 +25,7 @@ To not break current configurations, the mutex will still have its own setting, 
 
 - Fixed a bug where the controller could not be discovered over Wifi after a network or router reset.
 - Fixed a bug where the controller could not be connected to over Wifi after a network or router reset.
+- The service will now restart and reconnect after multiple controller messages failed to send.
 - Fixed a bug where the controller losing connection to a DS2413 actuator could cause a mutex deadlock.
 - Mutex constraints for digital actuators can now override the extra lock time setting in the Mutex.
   - The extra lock time is the minimum time between an actuator turning off, and a different actuator being allowed to turn on.
