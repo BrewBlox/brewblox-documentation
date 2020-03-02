@@ -9,7 +9,7 @@ Relevant links:
 
 ## Edge release 2020/03/02
 
-**Firmware release date: ????**
+**Firmware release date: 2020/03/02**
 
 This release includes fixes for two very important bugs.
 
@@ -18,7 +18,7 @@ We're reasonably certain we fixed this particular bug, but please let us know if
 
 The second issue is not as common, but no less serious. It was possible for actuators with mutex constraints to enter a deadlock if a DS2413/DS2408 device disconnected and reconnected at the wrong time.
 
-To solve this, we reworked how constraints interact with the mutex. This includes constraints now having their own setting for the mutex lockout period (the time between an actuator turning off, and the next actuator being allowed to turn on).
+To solve this, we reworked how constraints interact with the mutex. This includes constraints now having their own setting for the extra lock time (the time between an actuator turning off, and the next actuator being allowed to turn on).
 To not break current configurations, the mutex will still have its own setting, which will be treated as a default value. The setting in the constraint overrides the one in the mutex.
 
 **Changes**
@@ -26,8 +26,8 @@ To not break current configurations, the mutex will still have its own setting, 
 - Fixed a bug where the controller could not be discovered over Wifi after a network or router reset.
 - Fixed a bug where the controller could not be connected to over Wifi after a network or router reset.
 - Fixed a bug where the controller losing connection to a DS2413 actuator could cause a mutex deadlock.
-- Mutex constraints for digital actuators can now override the mutex lockout period.
-  - The lockout period is the minimum time between an actuator turning off, and a different actuator being allowed to turn on.
+- Mutex constraints for digital actuators can now override the extra lock time setting in the Mutex.
+  - The extra lock time is the minimum time between an actuator turning off, and a different actuator being allowed to turn on.
 - Updated docker-compose.yml version to 3.7.
 - Fixed a bug where the sensor display builder part was showing its value twice.
 - Made boil mode less prominent in the PID.
@@ -44,6 +44,7 @@ To not break current configurations, the mutex will still have its own setting, 
 - Fixed a bug where the dashboard graph would not update when its configuration was changed in a dialog.
 - `brewblox-ctl install` now runs commands after all prompts are done. You shouldn't need to babysit a process that can take 10+ minutes.
 - Added a user guide for the basic concepts of the Brewery Builder.
+- Moved the layout selector in the Builder editor from the toolbar to the sidebar.
 
 ## Edge release 2020/02/12
 
