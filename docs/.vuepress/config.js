@@ -69,6 +69,7 @@ module.exports = {
                 'multiple_devices',
                 'adding_spark',
                 'connect_settings',
+                'builder_guide',
                 'blocks_in_depth',
                 'removing_things',
                 'release_notes',
