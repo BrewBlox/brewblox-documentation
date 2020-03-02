@@ -41,17 +41,17 @@ Some have more settings. For example, the kettle allows setting:
 
 **Interact** is the equivalent of clicking on a part in the Builder widget. Click on valves to open/close them, or click on linked parts to open the block dialog.
 
-## Modes
+## Mouse actions
 
-![Builder modes](../images/builder-modes.png)
+![Builder mouse actions](../images/builder-mouse-actions.png)
 
-Builder modes are always active, and change what happen when you first click on a part.
+Builder mouse actions are always active, and determine what happen when you first click on a part.
 
-The default mode is `select`. Click, or click and drag in the grid to select one or more parts. You can then copy, move, or remove those parts.
+The default action is `select`. Click, or click and drag in the grid to select one or more parts. You can then copy, move, or remove those parts.
 
 Not all tools work when multiple parts are selected.
 
-The other mode is `interact`. It is equivalent to using the interact tool, but on every click.
+The other action is `interact`. It is equivalent to using the interact tool, but on every click.
 
 ## Flow calculations
 
