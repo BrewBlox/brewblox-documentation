@@ -17,12 +17,6 @@ We quickly fix most bugs we find. Some of them can't be fixed immediately, but h
 We keep this list updated with the issues we're aware of, but haven't yet permanently resolved.
 :::
 
-**The Spark service keeps losing connection to the controller (wifi)**
-
-The Wifi system library in the Spark controller has some serious issues. We've already fixed many of them, and are working on replacing the network library entirely.
-
-Until then, be aware: any network reset will cause the Spark to lose Wifi connection. This includes router/AP resets, channel hops, and bad reception. We've also had reports of powerline adapters causing resets.
-
 **After (re)starting, all my services and dashboards disappeared**
 
 Sometimes the datastore service is very slow to get started. To check its status, you can view the Docker logs using the `docker-compose logs datastore` command.
