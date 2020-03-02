@@ -27,9 +27,9 @@ In the Builder editor sidebar, you can find the tools required for changing your
 
 Either hover your cursor over the grid and press the shortcut, or select one or more parts, and then click the tool.
 
-The function of most tools is fairly self-explanatory, but we'll take a closer look at two of them: `Edit Settings` and `Interact`.
+The function of most tools is self-explanatory, but we'll take a closer look at two of them: `Edit Settings` and `Interact`.
 
-**Edit Settings** will open a dialog with the settings available for a part. For many parts this will be fairly generic: rotate, flip, or remove the part.
+**Edit Settings** will open a dialog with the settings available for a part. For many parts this will be generic: rotate, flip, or remove the part.
 
 Some have more settings. For example, the kettle allows setting:
 - The label (displayed at the top)
@@ -57,7 +57,7 @@ The other action is `interact`. It is equivalent to using the interact tool, but
 
 Whenever there is a viable route from a liquid source (a kettle or inlet) to a liquid sink (another kettle or inlet), the route and flow speed will be shown.
 
-Building routes is fairly self-explanatory: if it looks like a tube, it'll work like a tube. Valves and pumps can be used to redirect and speed up flows.
+Building routes is straightforward: if it looks like a tube, it'll work like a tube. Valves and pumps can be used to redirect and speed up flows.
 
 To simulate height differences in your system, there's also the `Tube: gravity`. It works like a pump that's always on.
 
