@@ -70,6 +70,7 @@ module.exports = {
                 'adding_spark',
                 'connect_settings',
                 'builder_guide',
+                'backup_guide',
                 'blocks_in_depth',
                 'removing_things',
                 'release_notes',
