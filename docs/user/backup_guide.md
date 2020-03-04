@@ -14,7 +14,7 @@ To create a backup, use the `backup save` command.
 brewblox-ctl backup save
 ```
 
-This will create a new zip archive in the `backups/` directory inside your Brewblox directory. The file name includes the current date and time.
+This will create a new zip archive in the `backup/` directory inside your Brewblox directory. The file name includes the current date and time.
 
 To load settings from a backup, use the `backup load [ARCHIVE]` command,
 and run brewblox-ctl update to migrate any outdated settings.
