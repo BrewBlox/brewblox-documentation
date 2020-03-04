@@ -40,34 +40,13 @@ The backup archive includes the following:
 - History data
 - Docker images
 
-## Transferring backup files (Windows)
+## Transferring backup files
 
-The easiest way to transfer files from your Pi to your own computer is to use SCP.
-Windows users can use [this guide](https://it.cornell.edu/managed-servers/transfer-files-using-putty) to install PuTTY SCP.
+The easiest way to move files between your computer and the Pi is to use [FileZilla](https://filezilla-project.org/).
 
-To copy all backup archives from the Pi to your computer, run the following commands in CMD:
+The host field should be `sftp://IP_ADDRESS`. Username / password are the same as when logging in over SSH.
 
-``` bash
-cd %userprofile%/documents
-mkdir brewblox_backup
-
-pscp pi@RASPBERRY_IP:/home/pi/brewblox/backup/* ./brewblox_backup/
-```
-
-This will copy all files to the Documents directory in Windows.
-
-## Transferring backup files (Mac/Linux)
-
-SCP comes pre-installed on Mac and Linux computers.
-
-To copy all backup archives, run the following command:
-
-```
-cd ~/Documents
-mkdir brewblox_backup
-
-scp pi@RASPBERRY_IP:/home/pi/brewblox/backup/* ./brewblox_backup/
-```
+![FileZilla](../images/filezilla.png)
 
 ## Limitations
 
