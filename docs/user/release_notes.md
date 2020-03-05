@@ -19,17 +19,15 @@ Quick start wizards will also try and add generated PIDs to the display.
 
 **Changes**
 
-- Removed the `--copy-shared` option from brewblox-ctl update.
-  - `docker-compose.shared.yml` is now always copied from defaults
-  - If you need to make changes to shared services, you can do so in docker-compose.yml
+- Quick start wizards now try to add their PID blocks to the display.
+- Added the "Add to Spark display" action to sensors, setpoints, PWM, and PID blocks. This will attempt to add the block to an available slot on the Spark LCD, and open the display settings in a dialog.
 - The .env file is now included in backups.
 - Fixed a bug where the wrong actuators would be listed in the text file created during the `Remove all blocks` action.
 - Exporting actuator / sensor links is now also available as separate action.
 - Fixed a bug in the Glycol wizard where the backend would interpret a time value as the Planck constant.
-- Added the "Add to Spark display" action to sensors, setpoints, PWM, and PID blocks.
-  - This will attempt to add the block to an available slot on the Spark LCD, and open the display settings in a dialog.
-- Quick start wizards now try to add their PID blocks to the display.
 - The Spark service now uses a 60s timeout instead of a fixed number of retry attempts before it restarts.
+- `docker-compose.shared.yml` is now always copied from defaults during updates
+  - If you need to make changes to shared services, you can do so in docker-compose.yml
 
 ## Edge release 2020/03/02
 
