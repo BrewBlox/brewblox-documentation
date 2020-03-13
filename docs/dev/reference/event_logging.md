@@ -110,7 +110,7 @@ Event data must be a serialized JSON object, with the following schema:
 {
     'key': str,
     'type': str,
-    'duration': str,
+    'ttl': str,
     'data': Or(dict, list),
 }
 ```
@@ -119,7 +119,7 @@ Event data must be a serialized JSON object, with the following schema:
 
 **type** is the identifier for the type of data. Typically this will be the type of your service. An example use of this value is service autodiscovery in the UI.
 
-**duration** is a string indicating for how long this state snapshot will remain valid. Values will be parsed by [pytimeparse](https://github.com/wroberts/pytimeparse).
+**ttl** is a string indicating for how long this state snapshot will remain valid. Values will likely be parsed by [pytimeparse](https://github.com/wroberts/pytimeparse) or [parse-duration](https://github.com/jkroso/parse-duration), but this is not guaranteed. Stick with simple formats such as '1min' or '60s' to be safe.
 
 **data** is the actual state data. This can either be a list, or an object.
 
