@@ -15,7 +15,7 @@ The minimal building blocks for a control system are:
 
 - A sensor, to measure what you want to control.
 - A setpoint, the target value for the sensor.
-- An actuator, to drive the sensor value towards the setpoint
+- An actuator, to drive the sensor value towards the setpoint.
 - A controller, in our case a *PID*, to calculate what the value for the actuator should be from the sensor and setpoint value.
 
 In Brewblox, the input of a PID is a *Setpoint*. This block contains the target value (setpoint setting) and a link to the sensor.
