@@ -22,7 +22,7 @@ It does not drive any pins, but can be used as an output block by the PID.
 
 It is very common that the fuses simply can't handle all heating elements turning on at the same time. Using the `Balancer` block in combination with a `Mutex` block allows you to turn on multiple elements, and having them 'share' by rapidly alternating.
 
-Usage of the balancer block has its own section in the [control chains guide](./control_chains.md#when-you-only-have-power-for-1-element-sharing-power-over-multiple-elements).
+Usage of the Balancer block has its own section in the [control chains guide](./control_chains.md#when-you-only-have-power-for-1-element-sharing-power-over-multiple-elements).
 
 A balancer is configured by creating the balancer itself, and then adding `Balanced` constraints to multiple PWM blocks, and `Mutexed` constraints to the Digital Actuators driven by those PWM blocks.
 
@@ -151,8 +151,52 @@ The Sensor and Setpoint are chained like this to allow for the Setpoint filterin
 
 ## Setpoint Driver
 
+Not all systems can be described as a single `input - control - output` chain. Sometimes you have a system that indirectly impacts a different system.
+
+The `Setpoint Driver` block allows us to have control chain A subcontracting work to control chain B without directly controlling its actuators.
+
+We'll use the HLT and MT in a HERMS setup as a practical example.
+
+The wort in the MT should be heated, but we don't want a heating element inside the MT, as it'll burn the grains. We evenly heat the wort by pumping it through a coil submerged in hot water in the HLT.
+
+![HLT heating](../images/hlt-heating.gif)
+
+There is a control chain heating the HLT. It doesn't need to be micro-managed to achieve the desired temperature of *water in the HLT*.
+
+That means the PID controlling the MT doesn't need to bother with the details of controlling the HLT temperature. *It can simply change the HLT setpoint.*
+
+In the above picture the MT Setpoint setting is 66.7 °C (displayed in the middle kettle), and the PID calculated that the offset between HLT and MT Setpoints should be 6.72 °C. This value is shown at the top left of the MT kettle.
+
+This is where the Setpoint Driver block came in. It set the HLT Setpoint setting to `66.7 °C + 6.72 °C = 73.4 °C`. You can see this value in the middle of the left-most kettle.
+
+As the measured temperature in the MT approaches the setpoint, the calculated offset will go down.
+
+The [control chains guide](./control_chains.md#controlling-beer-temperature-with-a-dynamic-fridge-setpoint) includes a section on when and how to use a Setpoint Driver block.
+
 ## Setpoint Profile
+
+Whenever you want a Setpoint to change over time, you'll be using the `Setpoint Profile` block.
+
+You configure it by setting a temperature value at specific times. The firmware will extrapolate all values between those two points, and gradually change the Setpoint.
+
+![Setpoint Profile](../images/block-setpoint-profile.png)
+
+In the above example, the Setpoint Profile is between two points, and changing temperature from 0 °C to 50 °C. It's about halfway, so the Setpoint is set to 27.27 °C.
+
+All points are saved as an offset from the start time, so you can easily re-use profiles. You can also create, load, and save profiles from the action menu.
 
 ## Spark Pins
 
+The `Spark 2 Pins` and `Spark 3 Pins` blocks are system blocks. They always exist. Unsurprisingly, it depends on the model of your Spark controller whether you'll see the Spark 2 or the Spark 3 version.
+
+![Spark Pins](../images/block-spark-pins.png)
+
+Spark pins can't be toggled without a Digital Actuator block, but the Spark Pins widget will show the current state of linked actuators. If you click on the toggle button here, it will toggle the desired setting in the actuator.
+
+The Spark 3 version (but not the Spark 2) will also show current values for the 5V and 12V power supply.
+
 ## Temp Sensor (Mock)
+
+While (re)configuring your system, it may be useful to see how it reacts to specific temperature values. 
+
+The `Temp Sensor (Mock)` block can be placed in control chains wherever you'd place a OneWire Temp Sensor, but it allows you to manually set the 'measured' value.
