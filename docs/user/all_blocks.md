@@ -259,7 +259,7 @@ With a setpoint of 20°C and Kp at 20, the actuator will be set to 10% when the 
 At this point the energy added and lost are in equilibrium.
 Without the integrator, the beer would stay at 19.5°C.
 
-But with the integrator, the small error slowly accumulates in the integral and raises the *I* part of PID.
+But with the integrator, the small error slowly accumulates in the integral and raises the **I** part of PID.
 The integral will continue to rise until the error is zero at 20°C.
 
 Ti should be long enough to only affect these equilibrium situations.
