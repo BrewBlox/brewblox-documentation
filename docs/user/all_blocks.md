@@ -209,16 +209,6 @@ Without the balancer, a heater with PWM at 100% would never release the mutex to
 
 Usage of the Balancer block has its own section in the [control chains guide](./control_chains.md#when-you-only-have-power-for-1-element-sharing-power-over-multiple-elements).
 
-## Display Settings
-The Spark controller has a LCD screen that can show up to six blocks.
-Sensors, setpoints, PWMs, and PIDs can be shown on the display.
-
-You can use the *Display Settings* block to add blocks to the screen and edit how they are displayed.
-Eligible blocks also have an *Add to Spark display* action in their action menu (top right button in the widget).
-
-The *DisplaySettings* has its own temperature unit setting, separate from the service unit setting. 
-This only sets the display unit on the Spark. If you wish to configure your system to use Fahrenheit, you will need to edit both settings.
-
 
 ## PID
 The PID block is the block that actually controls a temperature:
@@ -300,3 +290,13 @@ When the *minimum output when boiling* is set, the output value will never drop 
 If the setpoint is below the configured boil tempeature, boil mode does nothing.
 It is automatically applied based on the value of the setpoint.
 
+
+## Display Settings
+The Spark controller has a LCD screen that can show up to six blocks.
+Sensors, setpoints, PWMs, and PIDs can be shown on the display.
+
+You can use the *Display Settings* block to add blocks to the screen and edit how they are displayed.
+Eligible blocks also have an *Add to Spark display* action in their action menu (top right button in the widget).
+
+The *DisplaySettings* has its own temperature unit setting, separate from the service unit setting. 
+This only sets the display unit on the Spark. If you wish to configure your system to use Fahrenheit, you will need to edit both settings.
