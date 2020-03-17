@@ -1,202 +1,302 @@
 # Block types
 
-::: tip
-Blocks are combined to build [control chains](./control_chains.md).
-:::
+::: tip Note
+Blocks are combined to build [control chains](./control_chains.md) to run on the BrewBlox Spark.
 
-::: tip
-For more information on blocks vs widgets, see the [Blocks in depth guide](./blocks_in_depth.md).
-:::
+In the UI, they can be displayed by widgets on a dashboard. For more information on blocks vs widgets, see the [Blocks in depth guide](./blocks_in_depth.md).
 
-::: tip
 For a description of widgets, see the [Widget types page](./all_widgets.md).
 :::
 
-## Analog Actuator (Mock)
+## Sensors
+Sensors measure something. Currently we only have sensor blocks for temperature.
 
-The `Analog Actuator (Mock)` block can often be ignored: it is mostly used for testing and development purposes.
+### OneWire Temp Sensor
+OneWire sensors are identified by address and can be automatically discovered.
+They can be plugged into the Spark directly or in a connected expansion board.
 
-It does not drive any pins, but can be used as an output block by the PID.
+To look for new sensors, go to the service page of the Spark and click on 'Discover OneWire Blocks' in the top right menu.
 
-## Balancer
+You can apply a calibration offset to a OneWire sensor in its settings.
 
-It is very common that the fuses simply can't handle all heating elements turning on at the same time. Using the `Balancer` block in combination with a `Mutex` block allows you to turn on multiple elements, and having them 'share' by rapidly alternating.
+### Temp Sensor (Mock)
+This is a simulated sensor of which you can manually set the 'measured' value.
+It is mainly used for testing, but you can also use it to play with the system to see how it would respond.
 
-Usage of the Balancer block has its own section in the [control chains guide](./control_chains.md#when-you-only-have-power-for-1-element-sharing-power-over-multiple-elements).
+## Setpoints
+A Setpoint holds the target value for a specific sensor. It used as input for a PID.
 
-A balancer is configured by creating the balancer itself, and then adding `Balanced` constraints to multiple PWM blocks, and `Mutexed` constraints to the Digital Actuators driven by those PWM blocks.
+Each setpoint has a link to the associated sensor and it provides the PID with filtered sensor values.
+The amount of averaging can be configured (Filter period). The filter can be bypassed to respond quicker when the difference between filtered and measured value exceeds a certain threshold.
 
-## Digital Actuator
+### Setpoint Profile
+If you want to slowly change a setpoint over time, you can use the *Setpoint Profile* block.
 
-Your physical devices are connected to the Spark using either an actuator port, or a OneWire port. In software, this results in a `Spark Pins`, `DS2413`, or `DS2408` block. `Digital Actuator` can target any of these.
+You configure it by setting a temperature value at specific dates / times. The firmware will interpolate the values between those two points and gradually change the target setpoint.
 
-This separation between software-only blocks (Digital Actuator), and hardware-linked blocks (pins), allows you to easily change output ports.
+![Setpoint Profile](../images/block-setpoint-profile.png)
 
-Digital Actuator blocks can either be driven by PWM blocks, or toggled manually. Spark/OneWire pins can't be toggled without a Digital Actuator.
+In the example above, the Setpoint Profile is between point 1 and 2, changing temperature from 0°C to 50°C.
+It is about halfway, so the Setpoint is set to 27.27°C.
 
-`Minimum OFF time`, `Minimum ON time`, and `Mutually exclusive` constraints can be set.
+All points are saved as an offset from the start time, so you can easily re-use profiles by changing only the start time.
+You can also create, load, and save profiles from the action menu.
 
-When looking at history fields, you'll notice the Digital Actuator block has a both a `state`, and a `desiredState` field. `state` is read from the physical pin, and `desiredState` is set by either you or a PWM toggling the actuator. Every update tick, the firmware tries to make sure `state` equals `desiredState`. Constraints can deny this. 
+The times and temperatures are stored on the Spark, so the profile continues to run if the Spark has no connection to the server. 
+However, if the Spark loses power and it doesn't know what time it is afterwards, it waits until it receives the actual date and time before applying the profile.
 
-For example: you have a Digital Actuator with a `Minimum ON time` (10 seconds) constraint, and a current state of OFF.
 
-If you toggle the actuator, it will turn on. If you immediately try to toggle it again, it will remain on for 10 seconds, and then turn off. During this period, the widget will display a spinner, and a description of the currently limiting constraint.
+## Digital Actuators
+Actuators act on things in the real world, like temperature or water flow.
+Digital actuators turn things ON or OFF: a heater, cooler, pump or valve.
+For all of these, the Digital Actuator Block can be used.
+
+A few blocks provide digital output pins, often more than one.
+These blocks are *Spark Pins*, *DS2413*, or *DS2408*. 
+They are automatically detected and correspond with physical hardware.
+
+A *Digital Actuator* is a software only block that manages a pin on one of those target blocks.
+
+### Spark Pins
+The *Spark 2 Pins* and *Spark 3 Pins* blocks are system blocks and cannot be deleted.
+Through this block, the green digital outputs on the Spark itself can be used.
+ 
+![Spark Pins](../images/block-spark-pins.png)
+
+Spark pins can't be toggled without a Digital Actuator block, but the Spark Pins widget will show the current state of driving actuators.
+If you click on the toggle button here, it will toggle the desired setting in the actuator.
+
+On the Spark 3, you can also see the current values of the 5V and 12V supply.
+Putting 12V on the RJ12 connectors can be enabled or disabled here.
+If you don't have motor valve expansion boards, leave it disabled to avoid any damage if things are connected wrongly.
+
+### DS2413 Chip
+The DS2413 is the IC drives the SSR extension board. It makes two extra digital outputs available via OneWire. Channel A and B can be used as target for Digital Actuator blocks.
+
+This block is added clicking 'Discover OneWire Blocks' from the Spark service page menu.
+
+### DS2408 Chip
+The DS2408 IC is used in the Motor Valve Expansion board.
+It has 8 pins, which are used to drive 2 motor valves by the extension board.
+
+This block is added clicking 'Discover OneWire Blocks' from the Spark service page menu.
+
+Technically, you can connect Digital Actuators to DS2408 Chips.
+There is an [issue](https://github.com/BrewBlox/brewblox-firmware/issues/152) on the backlog for improving the distinction between DS2408 chips that are used for valves, and those used for actuators.
+
+### Motor Valve
+The *Motor Valve* functions like a Digital Actuator, but is a special block to be used with our Motor Valve expansion board and the DS2408 Block.
+The board uses 4 pins per valve to drive the motor bidirectionally and to read open/closed feedback pins.
+
+If you use valves that take a single digital signal, like solenoid valves for example, you should just use the Digital Actuator block.
+Both the *Digital Actuator* and the *Motor Valve* block can be linked to a valve in the Brewery Builder.
+
+Motor Valve blocks can also be driven by PWM blocks.
+
+
+## Analog Actuators
+Analog actuators have an output range, a numeric value.
+A PID requires an analog actuator as output.
+We currently have 3 analog actuator blocks: PWM, SetPoint Driver and Mock.
+
+### PWM
+Digital Actuators can only be turned ON or OFF, but by turning them on and off repeatedly, you can run them at 20% or 50% on average over a certain time.
+This is the function of the PWM block. It toggles a Digital Actuator target repeatedly to achieve an average ON percentage.
+
+PWM stands for [Pulse Width Modulation](https://en.wikipedia.org/wiki/Pulse-width_modulation). 
+It has a configurable time period of for example 4 seconds.
+When it is set to 40% it will turn the target ON for 1.6 seconds and OFF for 2.4 seconds and repeat.
+So the output is repeatedly pulsed, with a changing (modulated) pulse width.
+
+This turns a digital ON/OFF actuator into an 'analog' actuator with a range between 0% and 100%.
+
+Note: The PWM block keeps a short history of when it toggled and tries to maintain the correct average.
+To do this it can make a period a bit longer or shorter than what is configured.
+
+### Setpoint Driver
+Sometimes a temperature is best controlled indirectly by managing another temperature.
+An example is a HERMS system, where the mash temperature interacts with the HLT temperature.
+
+The *Setpoint Driver* block turns the difference between two temperatures into an actuator.
+
+Lets look at the HERMS example.
+
+![HLT heating](../images/hlt-heating.gif)
+
+The wort in the mash tun (MT, middle) is picking up heat when it flows through the HERMS coil in the hot liqor tun (HLT, left).
+The water in the HLT is warmer than the water in the MT and comes back at a temperature close the the water in the HLT.
+
+You will have more control over the system if you manage the HLT temperature.
+Directly driving the heater in the HLT based on the mash temperature would make the HLT temperature uncontrolled and just along for the ride.
+
+BrewBlox lets you set up two PIDs for this scenario:
+* One PID will ensure that the HLT temperature approaches the HLT setpoint by driving the HLT heater PWM block.
+* One PID will continuously change the HLT setpoint to the value that would get the mash to the desired temperature as quickly as possible without overshoot.
+  This PID will have a setpoint driver as ouput.
+
+In the example above the MT setpoint is 66.7 °C.
+The PID calculated that HLT setpoint should be 6.72°C higher than the MT setpoint.
+The Setpoint Driver applied this by changing the HLT setpoint to: 66.7°C 6.72°C = 73.4°C.
+
+The effect of a driven HLT setpoint can be seen in the graph below.
+With the mash temperature (red) well under target (green), the HLT setting is at its maximum, so the kettle was heated on full power until the temperature (brown) approached the setting (purple).
+The HLT setting was lowered as the mash tun approached the target to minimize overshoot.
+
+![Graph of mash step with setpoint driver](../images/setpoint-driver-mash-graph.png)
+
+This combination of control blocks is generated by the HERMS wizard.
+More details and an example of the setpoint driver in a fermentation fridge is described in the [control chains guide](./control_chains.md#controlling-beer-temperature-with-a-dynamic-fridge-setpoint).
+
+### Analog Actuator Mock
+This is a dummy actuator that is mostly used for testing and development.
+
+## Digital Actuator Constraints
+Digital actuators can have constraints that limit when they can turn on or off.
+*Minimum OFF time*, *Minimum ON time*, and *Mutually exclusive* constraints can be set.
+A minimum on and off time are often used to protect a fridge compressor from overheating.
+
+A digital actuator has a *desiredState*, set by you or PWM block driving it, and a *state*, the actual status of the physical pin.
+Every update tick, the firmware tries to change *state* to *desiredState*, if the constraints allow it.
+
+For example: you have a Digital Actuator with a *Minimum ON time* (10 seconds) constraint, and a current state of OFF.
+
+If you toggle the actuator, it will turn on.
+If you immediately try to toggle it again, it will remain on for 10 seconds, and then turn off.
+During this period, the widget will display a spinner, and a description of the currently limiting constraint.
 
 ![Constrained actuator](../images/block-actuator-constrained.png)
 
-## Display Settings
+### Mutex
+When two digital actuators should never be active at the same time, they can be constrained with a Mutex. *Mutex* stands for **Mut**ually **ex**clusive.
+This can be used to prevent a heating and cooling at the same time, or ensure that 2 high power heating elements are not both turned on and blow a fuse.
 
+To use a mutex, you first create a Mutex Block.
+This is the token that actuators have to posess to be allowed to turn on.
+When they take this token, they lock the mutex for other actuators.
+
+After creating the Mutex Block, you can add a Mutexed constraint to each digital actuator, with the Mutex block as target.
+
+In the Mutexed constraint, you can configure the *extra lock time* setting to hold the mutex for a while after the actuator turns off.
+This can let a cooler block the heater from turning on for a certain time, to prevent heating too quickly after cooling.
+When the *extra lock time* is not set in the constraint, the duration falls back to the default, which is set in the target Mutex Block.
+
+Note that the mutex works on the digital actuator (pin) level.
+If you have 2 heating elements that are driven by PWM, the PWM cycles can overlap.
+As soon as one turns off, the other can turn on.
+This makes it possible to run both elements at 50% at the same time!
+To ensure that they will each take their fair share and not hog the mutex, you should also add a Balancer (see below).
+
+
+## Analog Actuator Constraints
+On analog actuators, you can limit the range of the output by adding constraints.
+You can set *Minimum*, *Maximum*, and *Balanced* constraints.
+
+Analog actuators have 3 values to manage this: *desiredSetting*, *setting*, and *value*.
+
+**Desired setting** is the number set by either you, or by the PID.
+
+**Setting** is the number after constraints have have been applied.
+
+**Value** is the value that has actually been measured. It can differ from the setting if the actuator cannot reach the setting.
+
+### Balancer
+When two actuators need to share a total available amount, the balancer can ensure it is shared fairly.
+
+The most common example is that 2 heating elements cannot run simulanteously, so their sum is limited to 100%.
+When a Balancing constraint is added to both PWM blocks, they ask their target Balancer how much they can use.
+The Balancer scales down their setting proportionally so the sum does not exceed 100%.
+Without the balancer, a heater with PWM at 100% would never release the mutex to give the other heater some time.
+
+Usage of the Balancer block has its own section in the [control chains guide](./control_chains.md#when-you-only-have-power-for-1-element-sharing-power-over-multiple-elements).
+
+## Display Settings
 The Spark controller has a LCD screen that can show up to six blocks.
 Sensors, setpoints, PWMs, and PIDs can be shown on the display.
 
-You can use the `Display Settings` block to add blocks to the screen, or edit how they are displayed. Eligible blocks also have an `Add to Spark display` action in their action menu (top right button in the widget).
+You can use the *Display Settings* block to add blocks to the screen and edit how they are displayed.
+Eligible blocks also have an *Add to Spark display* action in their action menu (top right button in the widget).
 
-Note that the `DisplaySettings` block has its own temperature unit setting, separate from the service unit setting. If you wish to configure your system to use Fahrenheit, you will need to edit both settings.
+The *DisplaySettings* has its own temperature unit setting, separate from the service unit setting. 
+This only sets the display unit on the Spark. If you wish to configure your system to use Fahrenheit, you will need to edit both settings.
 
-## DS2408 Chip
-
-Whenever you plug in a DS2408 OneWire extension board, a `DS2408 Chip` block is discovered. You can't manually create a DS2408 block (or any other discovered block).
-
-DS2408 Chips are primarily used to control valves. In order to toggle the valve, you must connect a Motor Valve block.
-
-Technically, you can connect Digital Actuators to DS2408 Chips. There is an [issue](https://github.com/BrewBlox/brewblox-firmware/issues/152) on the backlog for improving the distinction between DS2408 chips that are used for valves, and those used for actuators.
-
-## DS2413 Chip
-
-The `DS2413 Chip` is very much like the DS2408, except that it does not support valves.
-
-Whenever you connect a OneWire extension board, it is discovered as a DS2413 chip. The two channels on this chip can be used as target for Digital Actuator blocks.
-
-## Motor Valve
-
-The `Motor Valve` functions like a Digital Actuator, except in that it controls valves, and is only compatible with the DS2408.
-
-Motor Valve blocks can be driven by PWM blocks.
-
-## Mutex
-
-Many configurations involve behavior that shouldn't happen at the same time. This may be a fermentation that should either be heating or cooling (but not both at the same time), or a HERMS setup where running multiple heating elements concurrently would blow a fuse.
-
-`Mutex` stands for **Mut**ually **ex**clusive. You set it up by adding a Mutex block, and then setting `Mutexed` constraints on all Digital Actuators that should be exclusive. You can have multiple independent Mutex 'groups' by adding more Mutex blocks.
-
-You can then also add `Balanced` constraints on the PWM blocks to ensure that mutex time is being fairly shared among the actuators.
-
-In both the Mutex block itself, and in the Mutexed constraint, you can configure the `extra lock time` setting. This prevents actuators from alternating too quickly.
-
-If you set the `extra lock time` setting in a constraint, it will override the setting in the Mutex block.
-
-## OneWire Temp Sensor
-
-When you plug in a OneWire temperature sensor, a `OneWire Temp Sensor` block is discovered.
-
-This block can either be used independently (to show temperature), or as input for a Setpoint block.
-
-In its settings, you can configure an offset value for calibration purposes.
 
 ## PID
+The PID block is the block that actually controls a temperature:
 
-The minimal building blocks for a control system are:
+* It reads the sensor input
+* It compares the measured value with a setpoint
+* It then uses math to calculate a desired output value for the target actuator
 
-- A sensor, to measure what you want to control. *(OneWire Temp Sensor block)*
-- A setpoint, the target value for the sensor. *(Setpoint block)*
-- An actuator, to drive the sensor value towards the setpoint. *(Digital Actuator block)*
-- **A controller, to calculate what the value for the actuator should be from the sensor and setpoint value. *(PID block)***
-
-The PID calculates the error, the difference between setpoint setting and sensor value, and keeps a history of to calculates an output value.
 [Wikipedia](https://en.wikipedia.org/wiki/PID_controller) offers a good explanation of how PID controllers work.
 
 The PID has more configuration settings than most other blocks.
-If this seems daunting, and you just want to keep your fermentation fridge at 18°C: don't worry. QuickStart wizards create preconfigured PID blocks that need little to no changes.
+If this seems daunting, and you just want to keep your fermentation fridge at 18°C: don't worry.
+QuickStart wizards create preconfigured PID blocks that need little to no changes.
 
 ![PID settings](../images/block-pid-full.png)
 
 Settings are divided in three sections:
 
-**Input/output** settings are at the top. You can choose the previous and next blocks in the control chain here. Clicking on the `Setting` button will directly edit the Setpoint block.
+#### Input / Output
+You can choose which Setpoint is used as input here and assign which Analog Actuator is driven by the PID. 
+By Clicking on the *Setting* button, you can also directly edit setting of the Setpoint block.
 
-**Calculation** settings are in the middle. This section shows both your settings, and how current values contribute to the output.
+Below the input and output, the math of the PID algorithm is shown.
 
-Other guides will go into more detail on how to configure `Kp`, `Ti`, and `Td`, but one thing is important to know: **If Kp > 0, it's a heating PID; if Kp < 0, it's a cooling PID**.
+#### Proportional
+The first equation calculates **P**, the proportional part of PID.
+Kp is called the *proportional gain*.
+The difference between the measured value and the setting, the error, is multiplied by Kp.
+A higher value of Kp will give a higher output value and more agressive correction.
 
-**Boil mode** settings are listed below. Boil mode is an optional feature in PIDs. You enable it by setting `Minimum output when boiling` to a non-zero value.
+::: warning Important
+Kp should be **posivive** if the PID is controls a **heater**.
+Kp should be **negative** if the PID is controls a **cooler**.
+:::
 
-The reasoning behind boil mode is that temperatures behave differently during phase transitions. The liquid water in a boiling kettle will remain at +/- 100 °C (212 °F). You don't want your heater to turn off, but if you boil water by setting your setpoint to 110 °C, your PID would demand 100% output when it fails to reach the desired temperature.
+#### Integral
+The second equation calculates **I**, the integral part of PID.
+Every second, the error value is added to the integral.
+This means that a small error slowly builds up and the integral will inrease over time.
+The integral value is multiplied by Kp and divided by Ti, the *integral time constant*.
+The result is that the time it takes for **I** to rise to the same value as **P** is Ti.
 
-When minimum boil output is set, the PID will use a higher output % to reach boil temperature, and then keep the kettle boiling by setting the output to at least the minimum output. This way, you can easily keep water boiling, without confusing the PID.
+The purpose of the integral is to slowly move the process to the desired value, when the process is constantly losing energy to the environment.
 
-Whenever the Setpoint setting is less than (100 °C + `boil temperature setting`), boil mode does nothing.
+::: tip Example
+When you are fermenting a beer in a cold room, the heater might need to run at 10% continusously to offset the heat lost to the environment. 
+With a setpoint of 20°C and Kp at 20, the actuator will be set to 10% when the beer reaches 19.5°C. 
+At this point the energy added and lost are in equilibrium.
+Without the integrator, the beer would stay at 19.5°C.
 
-## PWM
+But with the integrator, the small error slowly accumulates in the integral and raises the *I* part of PID.
+The integral will continue to rise until the error is zero at 20°C.
 
-Digital Actuators can only be turned ON or OFF, but the PID calculation generates a numeric value, like 20 or 56. This is solved with a `PWM` block between the PID and the Digital Actuator.
+Ti should be long enough to only affect these equilibrium situations.
+If Ti is too short, the integral will accumulate before equilibrium is reached and overshoot will happen.
 
-PWM stands for [Pulse Width Modulation](https://en.wikipedia.org/wiki/Pulse-width_modulation). The PWM block has a configurable time period of for example 4 seconds.
-It will turn ON the actuator for a part of that 4 second period and off for the remaining time.
-A PWM value of 40% will turn ON for 1.6 seconds and OFF for 2.4 seconds and repeat.
-This turns the digital ON/OFF actuator into an 'analog' numeric actuator with a range between 0% and 100%.
+Note that the algorithm does not increase the integral if the output value cannot be achieved by the actuator.
+This is called anti-windup.
+::: 
 
-Somewhat like Digital Actuator, the PWM block has three history fields: `desiredSetting`, `setting`, and `value`. All three are in %.
+#### Derivative
+The last equation calculates **D**, the derivative part of PID.
+The derivative is the slope of the error.
+When it is negative, the process is already moving in the right direction and less actuator action might be needed.
 
-**Desired setting** is the number set by either you, or by the PID.
+The derivative reduces the actuator output to avoid overshoot.
+Td is the *derivative time constant*, roughly the duration of overshoot that is expected.
 
-**Setting** is the number after constraints have had their say. You can set `Minimum`, `Maximum`, and `Balanced` constraints. The Balancer will take `desiredSetting` of this and all competing PWMs into account when determining how much `setting` is granted.
+The PID automatically selects the amount of filtering that for calcuting the derivative based on Td.
 
-**Value** is a historic number: what is the % of time that the actuator `state` has actually been ON? Differences between `setting` and `value` will mostly be the result of constraints on the actuator.
+#### Boil mode
+Boil mode is an optional feature of the PID. 
+Boil mode lets the PID approach the boil temperature at full power and maintain a minimum output when it is reached.
 
-## Setpoint
+When you set your setpoint to 100°C, you want to keep boiling when you reach 100°C and you don't want to stop heating when you get close.
 
-A `Setpoint` block contains the target value for a control system, and has a link to the sensor block that is used to measure the actual value.
+When the *minimum output when boiling* is set, the output value will never drop under the configured minimum if the setpoint is at or above the boil temperature. 
 
-The Sensor and Setpoint are chained like this to allow for the Setpoint filtering the value reported by the Sensor. This prevents temperature spikes caused by measurement errors from upsetting the PID.
+If the setpoint is below the configured boil tempeature, boil mode does nothing.
+It is automatically applied based on the value of the setpoint.
 
-## Setpoint Driver
-
-Not all systems can be described as a single `input - control - output` chain. Sometimes you have a system that indirectly impacts a different system.
-
-The `Setpoint Driver` block allows us to have control chain A subcontracting work to control chain B without directly controlling its actuators.
-
-We'll use the HLT and MT in a HERMS setup as a practical example.
-
-The wort in the MT should be heated, but we don't want a heating element inside the MT, as it'll burn the grains. We evenly heat the wort by pumping it through a coil submerged in hot water in the HLT.
-
-![HLT heating](../images/hlt-heating.gif)
-
-There is a control chain heating the HLT. It doesn't need to be micro-managed to achieve the desired temperature of *water in the HLT*.
-
-That means the PID controlling the MT doesn't need to bother with the details of controlling the HLT temperature. *It can simply change the HLT setpoint.*
-
-In the above picture the MT Setpoint setting is 66.7 °C (displayed in the middle kettle), and the PID calculated that the offset between HLT and MT Setpoints should be 6.72 °C. This value is shown at the top left of the MT kettle.
-
-This is where the Setpoint Driver block came in. It set the HLT Setpoint setting to `66.7 °C + 6.72 °C = 73.4 °C`. You can see this value in the middle of the left-most kettle.
-
-As the measured temperature in the MT approaches the setpoint, the calculated offset will go down.
-
-The [control chains guide](./control_chains.md#controlling-beer-temperature-with-a-dynamic-fridge-setpoint) includes a section on when and how to use a Setpoint Driver block.
-
-## Setpoint Profile
-
-Whenever you want a Setpoint to change over time, you'll be using the `Setpoint Profile` block.
-
-You configure it by setting a temperature value at specific times. The firmware will extrapolate all values between those two points, and gradually change the Setpoint.
-
-![Setpoint Profile](../images/block-setpoint-profile.png)
-
-In the above example, the Setpoint Profile is between two points, and changing temperature from 0 °C to 50 °C. It's about halfway, so the Setpoint is set to 27.27 °C.
-
-All points are saved as an offset from the start time, so you can easily re-use profiles. You can also create, load, and save profiles from the action menu.
-
-## Spark Pins
-
-The `Spark 2 Pins` and `Spark 3 Pins` blocks are system blocks. They always exist. Unsurprisingly, it depends on the model of your Spark controller whether you'll see the Spark 2 or the Spark 3 version.
-
-![Spark Pins](../images/block-spark-pins.png)
-
-Spark pins can't be toggled without a Digital Actuator block, but the Spark Pins widget will show the current state of linked actuators. If you click on the toggle button here, it will toggle the desired setting in the actuator.
-
-The Spark 3 version (but not the Spark 2) will also show current values for the 5V and 12V power supply.
-
-## Temp Sensor (Mock)
-
-While (re)configuring your system, it may be useful to see how it reacts to specific temperature values. 
-
-The `Temp Sensor (Mock)` block can be placed in control chains wherever you'd place a OneWire Temp Sensor, but it allows you to manually set the 'measured' value.
