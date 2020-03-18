@@ -15,16 +15,16 @@ The minimal building blocks for a control system are:
 
 - A sensor, to measure what you want to control.
 - A setpoint, the target value for the sensor.
-- An actuator, to drive the sensor value towards the setpoint
+- An actuator, to drive the sensor value towards the setpoint.
 - A controller, in our case a *PID*, to calculate what the value for the actuator should be from the sensor and setpoint value.
 
-In Brewblox, the input of a PID is a *setpoint-sensor pair*. This block contains the target value (setpoint) and a link to the sensor.
+In Brewblox, the input of a PID is a *Setpoint*. This block contains the target value (setpoint setting) and a link to the sensor.
 
-The *PID* calculates the error, the difference between setpoint and sensor, and keeps a history of to calculates an output value.
-The details of the PID will be described in a different article. [Wikipedia](https://en.wikipedia.org/wiki/PID_controller) also gives a good overview.
+The *PID* calculates the error, the difference between setpoint setting and sensor value, and keeps a history of to calculates an output value.
+[Wikipedia](https://en.wikipedia.org/wiki/PID_controller) offers a good explanation of how PID controllers work.
 
 The *Digital Actuator* toggles an output pin. It can either use a pin on the Spark itself, or one connected through OneWire (DS2408 or DS2413). <br>
-Digital Actuators can only be turned ON or OFF, but the PID calculation generates a numeric value, like 20 or 56. This is solved with a PWM block between the PID and the Digital Actuator.
+Digital Actuators can only be turned ON or OFF, but the PID calculation generates a numeric value, like 20 or 56. This is solved with a *PWM* block between the PID and the Digital Actuator.
 
 PWM stands for [Pulse Width Modulation](https://en.wikipedia.org/wiki/Pulse-width_modulation). The PWM block has a configurable time period of for example 4 seconds.
 It will turn ON the actuator for a part of that 4 second period and off for the remaining time.
@@ -42,7 +42,7 @@ You can cool the air in the fridge by turning the fridge compressor on.
 To be able to also raise the fridge temperature, you can install a heater inside the fridge.
 
 Because the system responds differently to the heater and cooler, they will each get their own PID and PWM block.
-They can both use the same sensor-setpoint pair as input.
+They can both use the same sensor / setpoint pair as input.
 
 The cooling PID will have an opposite sign compared to the heating PID, so they generally do not overlap (The cooling PID should have a negative Kp setting).
 If the system needs heating, the output of the heating PID will be positive and the output of the cooling PID wil be negative.
@@ -66,12 +66,12 @@ So for the fridge we choose a PWM period of 30 minutes and configure a minimum O
 <PlantUml src="offset_chain.puml" title="Beer Control Chain"/>
 
 To control beer temperature, we could use 2 PIDs directly like we did for the fridge, but with the beer sensor as input.
-But Brewblox also supports a more advanced form of indirect control with a dynamic fridge temperature setting.
+Brewblox also supports a more advanced form of indirect control with a dynamic fridge temperature setting.
 
 To set this up, we start with the same fridge temperature control arrangement as above, but we add a new PID to control the fridge setting.
 The *Setpoint Driver* can be set as output of a PID and uses a reference setpoint (beer) to drive a target setpoint (fridge).
 
-Sounds complicated, but is actually pretty simple. An example situation:
+This sounds complicated, but is actually pretty simple. An example situation:
 The beer temperature is 18 degrees, but should be 20 degrees. The beer PID has a gain (Kp) of 5, so the setpoint driver is set to 10 by the PID.
 The setpoint driver in turn sets the fridge setpoint 10 degrees higher than its reference, resulting in a fridge setpoint of 30.
 
@@ -99,7 +99,7 @@ Heating can be done with a heating belt around the fermenter.
 
 <PlantUml src="onewire_chain.puml" title="OneWire Control Chain"/>
 
-Next to the 5 digital outputs on the Spark 3, Brewblox supports extension boards to add extra outputs.
+Next to the five actuator pins on the Spark 3, Brewblox supports extension boards to add extra outputs.
 The SSR expansion board that we sell has a DS2413 OneWire chip that provides 2 extra output pins.
 To use it, use the 'discover blocks' button on the Spark service page. The discovered *DS2413* will be added.
 
@@ -109,10 +109,10 @@ The DS2413 can be used just like a Spark 3 output pin. It can be the target of a
 
 <PlantUml src="profile_chain.puml" title="Profile Control Chain"/>
 
-A Setpoint Sensor Pair has a constant setting. If you want to automatically change the setting over time, you can add a Setpoint Profile Block.
-This Setpoint Profile block changes the setting inside a Setpoint Sensor Pair for you between two or more dates/times that you add.
+A Setpoint has a constant setting. If you want to automatically change the setting over time, you can add a *Setpoint Profile*.
+This Setpoint Profile block gradually changes the setting in the Setpoint block, to avoid sudden jumps in temperature.
 
-The Setpoint Profile is very useful to slowly change your temperature setting to give the yeast has time to adapt.
+The Setpoint Profile is very useful to slowly change your temperature setting to ensure the yeast has time to adapt.
 By adding 2 points 3 days apart, with a setting of 20 degrees and 23 degrees, the temperature setting will increase 1 degree per day, 1/24 degree per hour.
 
 The value is interpolated between points, so the setting increases slowly from point 1 to point 2.
@@ -153,7 +153,7 @@ To have no overshoot, the gain of the mash tun PID should be set to MT volume di
 
 ### Constant HLT temperature
 
-If you use an setpoint driver driving your HLT setpoint, you should disable it when you want a constant HLT temperature. You will only use dynamic setpoint when mashing, not for pre-heating or heating your sparge water.
+If you have a Setpoint Driver driving your HLT setpoint, you should disable it when you want a constant HLT temperature. You will only use dynamic setpoint when mashing, not for pre-heating or heating your sparge water.
 
 ### Boiling
 

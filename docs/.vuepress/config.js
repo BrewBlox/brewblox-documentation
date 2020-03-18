@@ -66,6 +66,8 @@ module.exports = {
                 'startup',
                 'ferment_guide',
                 'control_chains',
+                'all_widgets',
+                'all_blocks',
                 'multiple_devices',
                 'adding_spark',
                 'connect_settings',
