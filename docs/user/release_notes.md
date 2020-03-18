@@ -15,8 +15,8 @@ Relevant links:
 **Changes**
 
 - Added the `Brewery` page mode, for full-screen display of a single Builder layout.
-- Added documentation page describing all widget types.
-- Added documentation page describing all block types.
+- Added [documentation page](https://brewblox.netlify.com/user/all_widgets.md) describing all widget types.
+- Added [documentation page](https://brewblox.netlify.com/user/all_blocks.md) describing all block types.
 - Timeout values for Spark services are now configurable in docker-compose.yml.
 - Refactored part settings dialogs in Builder.
 - Fixed a bug where no block was selecatable as link in the Temp Sensor part.
