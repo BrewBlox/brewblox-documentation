@@ -30,7 +30,7 @@ Each Setpoint has a link to a sensor.
 The Setpoint provides the PID with averaged sensor values to filter noise.
 How many values are averaged is set by the Filter period.
 The filter can be bypassed to respond faster when the filtered value differs too much from the current value.
-The bypass threshold sets the difference at which this happens..
+The bypass threshold sets the difference at which this happens.
 
 ### Setpoint Profile
 If you want to slowly change a Setpoint over time, you can use the *Setpoint Profile* block.
@@ -76,14 +76,14 @@ Putting 12V on the RJ12 connectors can be enabled or disabled here.
 If you don't have motor valve expansion boards, leave it disabled to avoid any damage if things are connected wrongly.
 
 ### DS2413 Chip
-The DS2413 chip is used on the SSR extension board and DC Switch extension board.
+The DS2413 is used on the SSR extension board and DC Switch extension board.
 It makes two extra digital outputs available for use via OneWire.
 Channel A and B can be used as target for Digital Actuator blocks.
 
 This block is added by clicking 'Discover new OneWire block' in the Spark service page menu.
 
 ### DS2408 Chip
-The DS2408 chip is used on the Motor Valve Expansion board.
+The DS2408 is used on the Motor Valve Expansion board.
 It has 8 pins, which can be used by two Motor Valve blocks: each Motor Valve requires four pins.
 
 This block is added by clicking 'Discover new OneWire block' in the Spark service page menu.
@@ -110,7 +110,7 @@ We currently have three types of analog actuator:
 - *Setpoint Driver*
 - *Analog Actuator (Mock)*
 
-Tthe *Minimum*, *Maximum*, and *Balanced* constraints can be set on all analog actuator blocks.
+The *Minimum*, *Maximum*, and *Balanced* constraints can be set on all analog actuator blocks.
 
 ### PWM
 Digital Actuators can only be turned ON or OFF.
@@ -223,7 +223,7 @@ Analog actuators have 3 values to manage this: *desiredSetting*, *setting*, and 
 
 **Value** is the value that has actually been measured. It can differ from the setting if the actuator cannot reach the setting.
 The target of a PWM Block can have its own constraints that hold it back.
-The SetPoint driver uses the measured value of the setpoint, which needs time to reach the desired value.
+The SetPoint Driver uses the measured value of the setpoint, which needs time to reach the desired value.
 
 ### Balancer
 When two actuators need to share a total available amount, the balancer can ensure it is shared fairly.
