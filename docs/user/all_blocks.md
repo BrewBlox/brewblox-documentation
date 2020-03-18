@@ -20,14 +20,17 @@ To look for new sensors, go to the service page of the Spark and click on 'Disco
 You can apply a calibration offset to a OneWire sensor in its settings.
 
 ### Temp Sensor (Mock)
-This is a simulated sensor where you can manually set the 'measured' value.
+This is a simulated sensor that allows you to manually set the 'measured' value.
 You can use it to play with the system, to see how it will respond.
 
 ## Setpoints
 A Setpoint holds the target value for a specific sensor. It used as input for a PID.
 
-Each Setpoint has a link to a sensor. The Setpoint provides the PID with averaged sensor values.
-The amount of averaging can be configured (Filter period). The filter can be bypassed to respond faster to sudden changes in temperature.
+Each Setpoint has a link to a sensor.
+The Setpoint provides the PID with averaged sensor values to filter noise.
+How many values are averaged is set by the Filter period.
+The filter can be bypassed to respond faster when the filtered value differs too much from the current value.
+The bypass threshold sets the difference at which this happens..
 
 ### Setpoint Profile
 If you want to slowly change a Setpoint over time, you can use the *Setpoint Profile* block.
@@ -39,12 +42,14 @@ You configure it by setting a temperature value at specific dates / times. The f
 In the example above, the Setpoint Profile is between point 1 and 2, changing temperature from 0°C to 50°C.
 It is about halfway, so the Setpoint is set to 27.27°C.
 
-All points are saved as an offset from the start time, so you can easily re-use profiles. Change the start time, and all other points will be adjusted.
+All points are saved as an offset from the start time, so you can easily re-use profiles. 
+Change the start time, and all other points will be shifted.
 You can also create, load, and save profiles from the action menu.
 
 The profile is stored on the Spark itself. The Setpoint Profile continues to run if the Spark has no connection to the server.
 
-Whenever the Spark loses power, it forgets the date and time. It will continue applying the profile when the Spark service has reconnected and sent the actual date and time.
+When the Spark loses power, it forgets the date and time. 
+The profile is on hold until the Spark reconnects and receives the actual date and time.
 
 ## Digital Actuators
 Actuators act on things in the real world, like temperature or water flow.
@@ -71,13 +76,15 @@ Putting 12V on the RJ12 connectors can be enabled or disabled here.
 If you don't have motor valve expansion boards, leave it disabled to avoid any damage if things are connected wrongly.
 
 ### DS2413 Chip
-The DS2413 represents an SSR extension board. It makes two extra digital outputs available for use. Channel A and B can be used as target for Digital Actuator blocks.
+The DS2413 chip is used on the SSR extension board and DC Switch extension board.
+It makes two extra digital outputs available for use via OneWire.
+Channel A and B can be used as target for Digital Actuator blocks.
 
 This block is added by clicking 'Discover new OneWire block' in the Spark service page menu.
 
 ### DS2408 Chip
-The DS2408 represents a Motor Valve Expansion board.
-It has 8 pins, which can be used as input for two Motor Valve blocks: each Motor Valve requires four pins.
+The DS2408 chip is used on the Motor Valve Expansion board.
+It has 8 pins, which can be used by two Motor Valve blocks: each Motor Valve requires four pins.
 
 This block is added by clicking 'Discover new OneWire block' in the Spark service page menu.
 
@@ -91,11 +98,11 @@ The board uses 4 pins per valve to drive the motor bidirectionally and to read o
 If you use valves that take a single digital signal, like solenoid valves for example, you should just use the Digital Actuator block.
 Both the *Digital Actuator* and the *Motor Valve* block can be linked to a valve in the Brewery Builder.
 
-The Motor Valve block can be driven by a PWM block. It supports the *Minimum ON*, *Minimum OFF*, and *Mutexed* constraints.
+The Motor Valve block can be driven by a PWM block. It also supports the *Minimum ON*, *Minimum OFF*, and *Mutexed* constraints.
 
 
 ## Analog Actuators
-Analog actuators have an output range and a numeric setting.
+Analog actuators have a numeric output value, between a minimum and maximum.
 A PID requires an analog actuator as output.
 
 We currently have three types of analog actuator: 
@@ -106,13 +113,19 @@ We currently have three types of analog actuator:
 Tthe *Minimum*, *Maximum*, and *Balanced* constraints can be set on all analog actuator blocks.
 
 ### PWM
-Digital Actuators can only be turned ON or OFF, but by turning them on and off repeatedly, you can run them at 20% or 50% on average over a certain time.
-This is the function of the PWM block. It toggles a Digital Actuator target repeatedly to achieve an average ON percentage.
+Digital Actuators can only be turned ON or OFF.
+But by turning them on and off repeatedly, you can run them at 20% or 50% on average over a certain time.
+This is the function of the PWM block.
+It toggles a Digital Actuator target repeatedly to achieve an average ON percentage.
+The duration of each ON-OFF cycle is the period.
 
 PWM stands for [Pulse Width Modulation](https://en.wikipedia.org/wiki/Pulse-width_modulation). 
-It has a configurable time period of (for example) 4 seconds.
-When it is set to 40% it will turn the target ON for 1.6 seconds and OFF for 2.4 seconds and repeat.
+
+::: tip Example
+The period is configured to be 4 seconds.
+When the PWM actuator is set to 40% it will turn the target ON for 1.6 seconds and OFF for 2.4 seconds and repeat.
 So the output is repeatedly pulsed, with a changing (modulated) pulse width.
+:::
 
 This turns a digital ON/OFF actuator into an 'analog' actuator with a range between 0% and 100%.
 
@@ -132,11 +145,11 @@ Lets look at the HERMS example.
 The wort in the mash tun (MT, middle) is picking up heat when it flows through the HERMS coil in the hot liqor tun (HLT, left).
 The water in the HLT is warmer than the wort in the MT. The wort will come back to the MT at a temperature close to that of the water in the HLT.
 
-By adjusting the HLT temperature, you have more control over this system.
+Directly using the MT sensor as input for the HLT heater can result in too much overshoot, or a slowly reacting system.
+Because of the long delay between heating the HLT and measuring the effect in the MT, heating has to be slow to give the process time to respond.
 
-Directly using the MT sensor as input for the HLT heater would result in either too much overshoot, or a very slow system.
-Wort has to be pumped through the coil before the MT sensor can measure the new value.
-This makes for a long delay between the heater turning on, and the sensor measuring the result.
+If we control HLT temperature in relation to the MT temperature, we can have more control over the system.
+We can heat the HLT to a temperature above the desired mash temperature if we know that the extra heat in the HLT can eventually be transferred to the MT without overshoot.
 
 Brewblox lets you build this scenario using two PIDs:
 * One PID will directly control the HLT temperature, using the HLT sensor, HLT setpoint, and HLT heater.
@@ -150,7 +163,7 @@ The Setpoint Driver applied this by changing the HLT setpoint to: 66.7°C + 6.72
 The effect of a driven HLT setpoint can be seen in the graph below.
 With the <span style="color: red">MT temperature</span> well under <span style="color: green">MT setting</span>, the <span style="color: purple">HLT setting</span> was set to its maximum. 
 
-The HLT was heated until its <span style="color: brown">temperature</span> approached the <span style="color: purple">setting</span>.
+The HLT was heated quickly until its <span style="color: #804643">temperature</span> approached the <span style="color: purple">setting</span>.
 When the <span style="color: red">MT temperature</span> approached the <span style="color: green">MT setting</span>, the <span style="color: purple">HLT setting</span> was lowered to minimize overshoot.
 
 ![Graph of mash step with setpoint driver](../images/setpoint-driver-mash-graph.png)
@@ -182,7 +195,7 @@ When two digital actuators should never be active at the same time, they can be 
 This can be used to prevent a heating and cooling at the same time, or ensure that two high power heating elements are not both turned on and blow a fuse.
 
 To use a mutex, you first create a Mutex block.
-This provides the token that actuators have to posess to be allowed to turn on.
+It provides the token that actuators have to posess to be allowed to turn on.
 When they take this token, they lock the mutex for other actuators.
 
 After creating the Mutex block, you can add a *Mutually exclusive* constraint to each Digital Actuator, with the Mutex block as target.
@@ -208,12 +221,14 @@ Analog actuators have 3 values to manage this: *desiredSetting*, *setting*, and 
 
 **Setting** is the number after constraints have have been applied.
 
-**Value** is the value that has actually been measured. It can differ from the setting if the actuator cannot reach the setting. (Maybe it has its own constraints.)
+**Value** is the value that has actually been measured. It can differ from the setting if the actuator cannot reach the setting.
+The target of a PWM Block can have its own constraints that hold it back.
+The SetPoint driver uses the measured value of the setpoint, which needs time to reach the desired value.
 
 ### Balancer
 When two actuators need to share a total available amount, the balancer can ensure it is shared fairly.
 
-The most common example is two heating elements with a *Mutually exclusive* constraint having the sum of their settings limited to 100%.
+The most common example is using two heating elements with a *Mutually exclusive* constraint. The sum of their settings should be limited to 100%.
 
 When a *Balanced* constraint is set on both PWM blocks, they ask their target Balancer how much they can use.
 The Balancer scales down their setting proportionally so the sum does not exceed 100%.
