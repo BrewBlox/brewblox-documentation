@@ -19,7 +19,7 @@ Relevant links:
 - Added [documentation page](https://brewblox.netlify.com/user/all_blocks.md) describing all block types.
 - Timeout values for Spark services are now configurable in docker-compose.yml.
 - Refactored part settings dialogs in Builder.
-- Fixed a bug where no block was selecatable as link in the Temp Sensor part.
+- Fixed a bug where no block was selectable as link in the Temp Sensor part.
 - Fixed a bug where a disabled PWM pump part was still animated.
 - Decreased minimum Builder layout size to 1x1.
 
