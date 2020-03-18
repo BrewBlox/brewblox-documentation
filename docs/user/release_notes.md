@@ -8,7 +8,7 @@ Relevant links:
 - Code repositories: https://github.com/Brewblox
 
 
-## Edge release 2020/03/17
+## Edge release 2020/03/18
 
 **Firmware release date: 2020/03/02**
 
