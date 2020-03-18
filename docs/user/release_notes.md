@@ -8,6 +8,21 @@ Relevant links:
 - Code repositories: https://github.com/Brewblox
 
 
+## Edge release 2020/03/18
+
+**Firmware release date: 2020/03/02**
+
+**Changes**
+
+- Added the `Brewery` page mode, for full-screen display of a single Builder layout.
+- Added [documentation page](https://brewblox.netlify.com/user/all_widgets.md) describing all widget types.
+- Added [documentation page](https://brewblox.netlify.com/user/all_blocks.md) describing all block types.
+- Timeout values for Spark services are now configurable in docker-compose.yml.
+- Refactored part settings dialogs in Builder.
+- Fixed a bug where no block was selecatable as link in the Temp Sensor part.
+- Fixed a bug where a disabled PWM pump part was still animated.
+- Decreased minimum Builder layout size to 1x1.
+
 ## Edge release 2020/03/05
 
 **Firmware release date: 2020/03/02**
