@@ -59,6 +59,7 @@ module.exports = {
                         'decisions/crud_component',
                         'decisions/dynamic_widgets',
                         'decisions/automation_service',
+                        'decisions/crosscompilation_buildx',
                     ]
                 },
             ],
