@@ -41,43 +41,6 @@ The boilerplate repository has a dev dependency on `brewblox-dev`. This package 
 
 The invidual commands will be available when you either run `pipenv shell`, or used the VSCode trick to run your entire editor in the pipenv virtual environment.
 
-## brewblox-dev localbuild
-
-The one-stop-shop for generating docker images. Also takes all default actions for building service images (running setup, copying code, generating requirements file, activating the QEMU cross compiler, etc)
-Type `brewblox-dev localbuild --help` to see all arguments.
-
-An overview of the most common and useful combinations:
-
-```sh
-brewblox-dev localbuild
-```
-
-Creates a local image. Reads your .env file for the `DOCKER_REPO` setting. 
-For example, when used in `brewblox-devcon-spark`, it will create the `brewblox/brewblox-devcon-spark:local` image.
-
-```sh
-brewblox-dev localbuild --branch-tag
-```
-
-Creates a local image, but uses a sanitized version of the branch name as tag.
-For example, when used in `brewblox-devcon-spark`, on the `feature/gadget` branch, it will create the `brewblox/brewblox-devcon-spark:feature-gadget` image.
-
-```sh
-brewblox-dev localbuild --arch amd --arch arm
-```
-
-By default, `brewblox-dev localbuild` only creates the AMD64 image. When also setting the `arm` argument to `--arch`, it will create an image that can be run on the Raspberry Pi. ARM image names are automatically prefixed with `rpi-`.
-
-For example, when used in `brewblox-devcon-spark`, on the `feature/gadget` branch, it will create two images:
-- `brewblox/brewblox-devcon-spark:feature-gadget`
-- `brewblox/brewblox-devcon-spark:rpi-feature-gadget`
-
-```sh
-brewblox-dev localbuild --arch arm --branch-tag --push
-```
-
-You can use this to quickly create and push an image for testing on your Pi. This does require a Docker Hub account.
-
 ## brewblox-dev bump
 
 If you're using semantic versioning, you can use this to increment the version tag in git.
@@ -133,9 +96,6 @@ services:
 
   history:
     image: brewblox/brewblox-history:develop
-    depends_on:
-      - influx
-      - eventbus
     labels:
       - "traefik.port=5000"
       - "traefik.frontend.rule=PathPrefix: /history"
@@ -154,17 +114,12 @@ services:
   spark:
     image: brewblox/brewblox-devcon-spark:develop
     privileged: true
-    depends_on:
-      - eventbus
-      - datastore
-      - sparksimulator
     labels:
       - "traefik.port=5000"
       - "traefik.frontend.rule=PathPrefix: /spark"
     volumes:
       - "./:/app/" # Magic happens here
-    command: >
-      --device-host=sparksimulator
+    command: --device-host=sparksimulator
 ```
 
 For brewblox service images, the default working directory is `/app`. By mounting the current directory (your project root) here, the code in your project root will be imported when running the image.
