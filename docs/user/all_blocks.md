@@ -319,6 +319,67 @@ If the setpoint is below the configured boil temperature, boil mode does nothing
 
 Of course, if the minimum output is 0%, boil mode also does nothing.
 
+## Logic Actuator
+The PID algorithm is an excellent solution for temperature management, but can't do everything.
+
+Some scenarios aren't based on a temperature value, but on the current state of the system. That's where the *Logic Actuator* comes in.
+
+Use cases include:
+- Multiple fermenters sharing a glycol pump. Each individual fermenter controls a valve connecting its own coil to the shared line, and the pump should be active if one or more valves are open.
+- Actuators requiring cooling fans. The fans should be on whenever the actuator is on.
+- Systems using multiple heaters, and want a single PWM to be driving multiple Digital Actuators.
+- Mutually exclusive pairs where one has priority, and the low priority actuator should immediately yield whenever the high priority actuator is turned on.
+- Boundary-based systems. The actuator should be on whenever the measured value is higher than X, and off otherwise.
+
+![Logic Actuator Full mode](../images/block-logic-full.png)
+
+### Comparisons
+
+The Logic Actuator drives a Digital Actuator, and evaluates one or more *Comparisons* to determine whether the result is ON or OFF.
+
+You can add Comparisons for Digital Actuator, Motor Valve, Setpoint, and PWM blocks. These Comparisons have an operator and a value, and their own true/false result.
+
+In the above picture, `Digital Actuator` and `Setpoint` have a `true` result, and `Digital Actuator-2` and `PWM` have a `false` result.
+
+To allow for more complex evaluations than "all/any of these should be `true`", the Expression field exists.
+
+Each Comparison is assigned a reference letter. You can use those in combination with `( )` brackets, and `! & | ^` operators.
+
+You can add multiple Comparisons that refer to the same block. This allows building expressions like *if value is below 25 or above 75*.
+
+### Operators
+
+`(` and `)` work exactly the same as brackets in maths. Sub-expressions are evaluated first to get a result that is then used in the rest of the expression.
+
+`!` is the logical NOT operator. It is placed before a Comparison or sub-expression, and inverts its result. `!true` is `false`, and `!false` is `true`. `!!true` is true again.
+
+`&` is the logical AND operator. It is placed between two Comparisons or sub-expressions. The combined result is only `true` if both values are `true`.
+`true & true` is `true`, while `true & false`, `false & true`, and `false & false` are all `false`.
+
+`|` is the logical OR operator. It is placed between two Comparisons or sub-expressions. The combined result is `true` if either (or both) values are `true`.
+`true | false`, `false | true`, `true | true` are all true, and only `false | false` is `false`.
+
+`^` is the logical XOR operator. It is placed between two Comparisons or sub-expressions. The combined result is `true` if exactly one of the values is `true`.
+`true ^ false` / `false ^ true` are `true`, and `true ^ true` / `false ^ false` are `false`.
+
+### Example expression
+
+In the above image, the expression is `(a|b)&(A|B)`.
+
+Brackets are evaluated first, so we'll start with `(a|b)`.
+
+- `a` is the Comparison for the `Digital Actuator` block. Here it is `true` (as shown by the green indicator).
+- `b` is the Comparison for the `Digital Actuator-2` block. The red indicator shows this currently evaluates to `false`.
+- `true | false` is `true`.
+
+The second set of brackets is evaluated next: `(A|B)`.
+
+- `A` is the Comparison for the `Setpoint` block. It has a green indicator showing it to be currently `true`. Apparently, its setting is higher than 25 °C.
+- `B` is the Comparison for the `PWM`. It has a red indicator. Its measured value is below 25 °C, resulting in a `false`.
+- `true | false` is `true`.
+
+At this point, the expression has been simplified from `(a|b)&(A|B)` to `true & true`. This evaluates to `true`, meaning that `Digital Actuator-4` will be turned ON.
+
 ## Display Settings
 The Spark controller has a LCD screen that can show up to six blocks.
 Sensors, setpoints, PWMs, and PIDs can be shown on the display.
