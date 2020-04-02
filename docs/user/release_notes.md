@@ -8,6 +8,41 @@ Relevant links:
 - Code repositories: https://github.com/Brewblox
 
 
+## Edge release 2020/04/02
+
+**Firmware release date: 2020/04/02**
+
+We're happy to announce the release of the Logic Actuator block.
+You can use this block to toggle a Digital Actuator based on the state of other Digital Actuator, Motor Valve, Setpoint, or PWM blocks.
+
+For a more in-depth explanation, see the [blocks page](https://brewblox.netlify.com/user/all_blocks.md).
+
+To assist with this feature, we also added the Mock Pins block, and constraints for delaying the ON or OFF switch on digital actuators.
+
+A less noticeable change is that we now build all our Docker images to be suitable for both AMD64 desktop computers and the ARM32 Raspberry Pi.
+
+Previously, we prefixed Pi image tags with `rpi-`. This is no longer required.
+To prevent breakage, we now tag the universally compatible images both with and without prefix.
+
+This change will make it possible to move your system between a desktop computer and a Pi without having to make any changes to configuration.
+
+**Changes**
+
+- Added *Logic Actuator* block.
+- Added *Mock Pins* block.
+- Added *Delay ON* and *Delay OFF* digital constraints.
+- Made all Docker images multiplatform, removing the need for `rpi-` prefixes.
+- Updated Spark system libraries.
+- Fixed a bug where controllers would stop being discoverable over Wifi.
+- Added support for value fluctuations in Temp Sensor (Mock).
+- `brewblox-ctl backup load` now reads the values from the loaded .env file before loading databases and Spark services.
+  - You can disable this with the `--no-load-env` option.
+- `brewblox-ctl backup load` now restarts Spark services to make sure they use the correct block names.
+- `brewblox-ctl setup` now uses a Docker container to generate SSL certificates. The host no longer needs to have OpenSSL installed. This was an issue for installing the system on Mac hosts.
+- Fixed a bug where the graph in Setpoint Profile was not updated if the block settings where changed in a different widget.
+- The firmware simulator is now embedded in the Spark service Docker image. This is a first step towards having a demo setup that does not need a controller. For now this only works on amd64 (desktop) computers. We're still working on getting the firmware to compile an ARM simulator.
+- Fixed a bug where DS2408 / DS2413 chips could not be removed in the UI.
+
 ## Edge release 2020/03/18
 
 **Firmware release date: 2020/03/02**
