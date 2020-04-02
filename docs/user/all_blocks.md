@@ -319,6 +319,79 @@ If the setpoint is below the configured boil temperature, boil mode does nothing
 
 Of course, if the minimum output is 0%, boil mode also does nothing.
 
+## Logic Actuator
+The Logic Actuator allows to toggle a Digital Actuator based on a combination of comparisons.
+Examples of comparisons are: `beer temperature >= 20`, `frige setpoint <= 10`, `heater == ON`.
+
+For controlling temperature, the PID block is almost always a better choice. The Logic Actuator is for additional behavior while the PID controls the temperature.
+
+Some examples of when the Logic Actuator can be used:
+- Multiple fermenters sharing a glycol pump. Each individual fermenter controls a valve connecting its own coil from a shared loop, and the pump should be active if one or more valves are open.
+- Turning on a fan in a fridge to circulate the air when either the heater or the cooler is ON.
+- Turning on a fan if the PWM setting of a heater is over a limit. The fan might not be needed if the heater is under 10%, it is good to circulate air if the heater is running at higher power.
+- Turning on a warning light if a temperature exceeds a threshold.
+
+![Logic Actuator Full mode](../images/block-logic-full.png)
+
+### Comparisons
+
+The Logic Actuator drives a Digital Actuator, and evaluates one or more *comparisons* to determine whether the result is ON or OFF.
+
+You can add comparisons based on Digital Actuator, Motor Valve, Setpoint, and PWM blocks. 
+Each comparison compares the value or setting of the block to a value configured in the comparison.
+The result is displayed as a green dot for comparisons that are `true` and red for `false`.
+
+In the above picture, `Digital Actuator` and `Setpoint` have a `true` result, and `Digital Actuator-2` and `PWM` have a `false` result.
+
+You can add multiple comparisons that use the same block. To check whether a value is within a range, you can use *if value is greater or equal to 25 AND value is smaller or equal to 75*.
+
+Digital comparisons can be based on the *measured state*, the actual digital pin state, or the *desired state*, the state requested by PWM or the user.
+
+Analog comparisons can be based on the setting, or the measured value. For a setpoint, the setting is the target temperature and the value is the reading from the temperature sensor.
+
+### Expression
+You can use multiple comparisons to get the final result.
+
+Each comparison is assigned a reference letter. The letters are combined with `! & | ^` operators and brackets. The string of comparisons, operators, and brackets is called the *expression*.
+
+`!` is the logical NOT operator. It is placed before a comparison or sub-expression, and inverts its result. `!true` is `false`, and `!false` is `true`.
+(Example: `!a`)
+
+`&` is the logical AND operator. The result is only `true` if both values are `true`.
+(Example: `a&b` , `a&b&c`)
+
+`|` is the logical OR operator. The result is `true` if one of the values or both values are `true`.
+(Example: `a|b`, `a|b|c`)
+
+`^` is the logical XOR operator. The result is `true` if exactly one of the values is `true`.
+(Example: `a^b`, `a^b^c`)
+
+`(` and `)` work exactly the same as brackets in maths. Sub-expressions are evaluated first to get a result that is then used in the rest of the expression.
+(Example: `a&(a|b)`)
+
+### Example
+
+In the above image, the expression is `(a|b)&(A|B)`.
+
+Brackets are evaluated first, so we'll start with `(a|b)`.
+
+- `a` is the Comparison for the `Digital Actuator` block. Here it is `true` (as shown by the green indicator).
+- `b` is the Comparison for the `Digital Actuator-2` block. The red indicator shows this currently evaluates to `false`.
+- `true | false` is `true`.
+
+The second set of brackets is evaluated next: `(A|B)`.
+
+- `A` is the Comparison for the `Setpoint` block. It has a green indicator showing it to be currently `true`. Apparently, its setting is higher than 25 °C.
+- `B` is the Comparison for the `PWM`. It has a red indicator. Its measured value is below 25 °C, resulting in a `false`.
+- `true | false` is `true`.
+
+At this point, the expression has been simplified from `(a|b)&(A|B)` to `true & true`. This evaluates to `true`, meaning that `Digital Actuator-4` will be turned ON.
+
+### Combining logic with constraints
+When you use the logic actuator to drive a fan, it will set the desired state of the Digital Actuator of the fan. You use an expression like `a|b`, to check that the heater or cooler is turned on.
+
+Next you can set a `Delayed ON` and a `Delayed OFF` constraint on that fan actuator. This would cause the fan to start a while after the heater/cooler has turned ON and run for a while after it has turned off.
+
 ## Display Settings
 The Spark controller has a LCD screen that can show up to six blocks.
 Sensors, setpoints, PWMs, and PIDs can be shown on the display.
