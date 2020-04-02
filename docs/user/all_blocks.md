@@ -100,6 +100,8 @@ Both the *Digital Actuator* and the *Motor Valve* block can be linked to a valve
 
 The Motor Valve block can be driven by a PWM block. It also supports the *Minimum ON*, *Minimum OFF*, and *Mutexed* constraints.
 
+### Mock Pins
+Used for testing, or in combination with the Logic Actuator block, there also is the *Mock Pins* block. It has 8 virtual pins that can be used as target for a Digital Actuator.
 
 ## Analog Actuators
 Analog actuators have a numeric output value, between a minimum and maximum.
@@ -176,7 +178,7 @@ This is a dummy actuator that is mostly used for testing and development.
 
 ## Digital Actuator Constraints
 Digital actuators can have constraints that limit when they can turn on or off.
-*Minimum OFF time*, *Minimum ON time*, and *Mutually exclusive* constraints can be set.
+*Minimum OFF time*, *Minimum ON time*, *Delay ON*, *Delay OFF*, and *Mutually exclusive* constraints can be set.
 A minimum on and off time are often used to protect a fridge compressor from overheating.
 
 A digital actuator has a *desiredState*, set by you or PWM block driving it, and a *state*, the actual status of the physical pin.
