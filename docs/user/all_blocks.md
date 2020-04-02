@@ -320,10 +320,10 @@ If the setpoint is below the configured boil temperature, boil mode does nothing
 Of course, if the minimum output is 0%, boil mode also does nothing.
 
 ## Logic Actuator
-The logic actuator allows to toggle a digital actuator based on a combination of comparisons.
+The Logic Actuator allows to toggle a Digital Actuator based on a combination of comparisons.
 Examples of comparisons are: `beer temperature >= 20`, `frige setpoint <= 10`, `heater == ON`.
 
-For controlling temperature, the PID block is almost always a better choice. The logic actuator is for additional behavior while the PID controls the temperature.
+For controlling temperature, the PID block is almost always a better choice. The Logic Actuator is for additional behavior while the PID controls the temperature.
 
 Some examples of when the Logic Actuator can be used:
 - Multiple fermenters sharing a glycol pump. Each individual fermenter controls a valve connecting its own coil from a shared loop, and the pump should be active if one or more valves are open.
@@ -343,30 +343,31 @@ The result is displayed as a green dot for comparisons that are `true` and red f
 
 In the above picture, `Digital Actuator` and `Setpoint` have a `true` result, and `Digital Actuator-2` and `PWM` have a `false` result.
 
-You can add multiple comparisons that use the same block, so to check whether a value is within a range, you can use *if value is greater or equal to 25 AND smaller or equal to 75*.
+You can add multiple comparisons that use the same block. To check whether a value is within a range, you can use *if value is greater or equal to 25 AND value is smaller or equal to 75*.
 
-For digital comparisons, the comparison can be based on the *measured state*, the actual digital pin state, or the *desired state*, the state set by PWM or the user, regardless or constraints or whether the hardware could apply the state succesfully.
+Digital comparisons can be based on the *measured state*, the actual digital pin state, or the *desired state*, the state requested by PWM or the user.
 
-For analog comparisons, the comparison can be based on the setting, or the measured value. For a setpoint, setting will use the target temperature and value will use the reading from the temperature sensor.
+Analog comparisons can be based on the setting, or the measured value. For a setpoint, the setting is the target temperature and the value is the reading from the temperature sensor.
 
 ### Expression
-You combine multiple comparisons into an expression to get the final result.
+You can use multiple comparisons to get the final result.
 
-Each comparison is assigned a reference letter. The letters are combined with `! & | ^` operators and brackets.
+Each comparison is assigned a reference letter. The letters are combined with `! & | ^` operators and brackets. The string of comparisons, operators, and brackets is called the *expression*.
 
-`!` is the logical NOT operator. It is placed before a comparison or sub-expression, and inverts its result. `!true` is `false`, and `!false` is `true`. 
-Example: `!a`.
+`!` is the logical NOT operator. It is placed before a comparison or sub-expression, and inverts its result. `!true` is `false`, and `!false` is `true`.
+(Example: `!a`)
 
 `&` is the logical AND operator. The result is only `true` if both values are `true`.
-Example: `a&b`, `a&b&c`.
+(Example: `a&b` , `a&b&c`)
 
-`|` is the logical OR operator. The result is `true` if one of the values or both values are `true`. Example: `a|b`, `a|b|c`.
+`|` is the logical OR operator. The result is `true` if one of the values or both values are `true`.
+(Example: `a|b`, `a|b|c`)
 
 `^` is the logical XOR operator. The result is `true` if exactly one of the values is `true`.
-Example: `a^b`, `a^b^c`.
+(Example: `a^b`, `a^b^c`)
 
-`(` and `)` work exactly the same as brackets in maths. Sub-expressions are evaluated first to get a result that is then used in the rest of the expression. 
-Example: `a&(a|b)`.
+`(` and `)` work exactly the same as brackets in maths. Sub-expressions are evaluated first to get a result that is then used in the rest of the expression.
+(Example: `a&(a|b)`)
 
 ### Example
 
