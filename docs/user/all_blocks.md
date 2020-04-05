@@ -351,6 +351,12 @@ Digital comparisons can be based on the *measured state*, the actual digital pin
 
 Analog comparisons can be based on the setting, or the measured value. For a setpoint, the setting is the target temperature and the value is the reading from the temperature sensor.
 
+**If you want to check ... create a comparison for a ...**
+- Temperature ⇒ Setpoint
+- Output % ⇒ PWM
+- Output ON/OFF ⇒ Digital Actuator
+- Valve open/closed ⇒ Motor Valve
+
 ### Expression
 You can use multiple comparisons to get the final result.
 
@@ -384,7 +390,7 @@ Brackets are evaluated first, so we'll start with `(a|b)`.
 The second set of brackets is evaluated next: `(A|B)`.
 
 - `A` is the Comparison for the `Setpoint` block. It has a green indicator showing it to be currently `true`. Apparently, its setting is higher than 25 °C.
-- `B` is the Comparison for the `PWM`. It has a red indicator. Its measured value is below 25 °C, resulting in a `false`.
+- `B` is the Comparison for the `PWM`. It has a red indicator. Its measured value is below 25%, resulting in a `false`.
 - `true | false` is `true`.
 
 At this point, the expression has been simplified from `(a|b)&(A|B)` to `true & true`. This evaluates to `true`, meaning that `Digital Actuator-4` will be turned ON.
