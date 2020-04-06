@@ -8,6 +8,29 @@ Relevant links:
 - Code repositories: https://github.com/Brewblox
 
 
+## Edge release 2020/04/06
+
+**Firmware release date: 2020/04/06**
+
+This release includes a collection of quick fixes to problems introduced or uncovered in the previous release.
+
+**Important: we fixed a problem with updating brewblox-ctl. To make use of the fix, please run brewblox-ctl update twice**. The correct version of brewblox-ctl for this release is 0.18.0.
+
+
+**Changes**
+- (fix) The Spark LCD now uses the correct formula for converting Celsius to Fahrenheit.
+- (fix) PID integral is now reset Ti is set to 0.
+- (fix) Two consecutive operators (`a|&b`) in Logic Actuator now trigger an error result in firmware.
+- (improvement) `brewblox-ctl flash` is now faster.
+- (improvement) `brewblox-ctl bootloader` no longer requires the --force option.
+- (fix) Improved how in-UI firmware updates are handled. This doesn't solve all known issues, but should improve reliability.
+- (fix) The update of brewblox-ctl now ignores the local cache. **Please run brewblox-ctl update twice to make use of this fix**.
+- (fix) Blocks from all services can now be selected in Builder Setpoint / Sensor display parts.
+- (improvement) The Logic Actuator expression field is now more responsive.
+- (improvement) The Logic Actuator error display now has a fixed height. Lower-placed elements will now consistently render in the same place.
+- (fix) When loading the UI, a notification will appear if the datastore could not yet be reached. It is common for the datastore to be much slower to start up than the UI. This results in a UI without any available dashboards or services.
+
+
 ## Edge release 2020/04/02
 
 **Firmware release date: 2020/04/02**
