@@ -38,16 +38,13 @@ You can also install Brewblox on a Synology NAS, desktop computer, or laptop - a
 
 ## Step 1: Format the microSD card
 
-Download the required software:
-
-- [Raspbian OS](https://www.raspberrypi.org/downloads/raspbian/) (we recommend Raspbian Lite)
-- [Etcher](https://www.balena.io/etcher/) for writing the image to the microSD card.
+Download the [Raspberry Pi Imager](https://www.raspberrypi.org/downloads/)
 
 Insert your microSD card in the card reader, and connect the reader to your computer.
 
-Now use Etcher to write it to your microSD card. Make sure to safely eject the microSD card before removing it from the card reader.
+Select Raspbian Lite, and write it to your SD card.
 
-![Etcher](../images/etcher.jpg)
+![Imager](../images/imager.png)
 
 For more information, see the [official Raspberry install guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
 
