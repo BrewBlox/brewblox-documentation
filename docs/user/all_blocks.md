@@ -144,7 +144,7 @@ Lets look at the HERMS example.
 
 ![HLT heating](../images/hlt-heating.gif)
 
-The wort in the mash tun (MT, middle) is picking up heat when it flows through the HERMS coil in the hot liqor tun (HLT, left).
+The wort in the mash tun (MT, middle) is picking up heat when it flows through the HERMS coil in the hot liquor tun (HLT, left).
 The water in the HLT is warmer than the wort in the MT. The wort will come back to the MT at a temperature close to that of the water in the HLT.
 
 Directly using the MT sensor as input for the HLT heater can result in too much overshoot, or a slowly reacting system.
