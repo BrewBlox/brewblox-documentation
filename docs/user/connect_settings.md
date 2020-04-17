@@ -109,7 +109,7 @@ If you haven't used `--device-host` to set a fixed address, the Spark service wi
 
 Controllers can be discovered both over USB, and over Wifi. By default, the service tries both: first USB, then Wifi.
 
-You can restrict discovery by using the `--discovery` argument. This can be used in combination with `--device-id`.
+You can restrict discovery by using the `--discovery` argument. This can be used in combination with `--device-id`. Valid options for `--discovery` are: `all`, `usb`, or `wifi`.
 
 Example call to `add-spark`:
 
