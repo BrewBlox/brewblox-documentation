@@ -234,14 +234,15 @@ Navigate to the directory you chose during the installation (default: `cd ~/brew
 
 ```bash
 brewblox-ctl flash
-brewblox-ctl wifi
 ```
 
 Follow the instructions until the menu exits.
 
-## Step 7: Start the system
+::: tip
+The Spark supports Wifi. You can set this up using the UI in Step 8.
+:::
 
-If you connected your Spark to your Wi-Fi network, you can now disconnect from your Raspberry Pi, and connect the Spark to some other power source.
+## Step 7: Start the system
 
 To list all possible commands, navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and run:
 
@@ -249,7 +250,7 @@ To list all possible commands, navigate to the directory you chose during the in
 brewblox-ctl --help
 ```
 
-![BrewBLox Menu](../images/menu-screenshot.png)
+![Brewblox Menu](../images/menu-screenshot.png)
 
 You can use brewblox-ctl to easily manage your system, and perform common actions. Run the following command to start your system:
 
@@ -272,6 +273,8 @@ By default, temperature values are in Celsius. If you prefer Fahrenheit (or Kelv
 The unit settings can be found under the `Actions` button in the Spark service page.
 
 ![Spark actions](../images/spark-actions.png)
+
+You can also use the Actions menu to configure Wifi on the Spark.
 
 To easily replicate functionality from the original BrewPi, you can run the `Fermentation Fridge` wizard.
 
