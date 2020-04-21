@@ -8,6 +8,69 @@ Relevant links:
 - Code repositories: https://github.com/Brewblox
 
 
+## Edge release 2020/04/21
+
+**Firmware release date: 2020/04/20**
+
+The previous release brought multiple firmware issues to light.
+We hotfixed some of them immediately, and then started work on the others.
+This release includes fixes for a few nasty out-of-memory errors that would manifest as sudden reboots.
+
+In the UI, we focused on improving usability.
+This includes fixes for scenarios such as:
+- "I don't see any dashboards or services" (show notification while waiting for datastore, automatically reload page when available)
+- "Controller out of memory in Quickstart wizard" (prompt if existing control blocks are found on controller)
+- "I picked the wrong sensor in Quickstart" (swap addresses of sensor blocks)
+
+For the majority of changes, we'd be happy if nobody notices them, and they Just Work.
+
+We also added the L-Valve Builder part.
+
+
+**Changes**
+- (fix) The outOfMemory handler in the firmware could cause a crash.
+- (fix) Reduced firmware memory use to avoid crashes in listening mode.
+- (fix) Removed firmware lock on serial connection to avoid crash in listening mode.
+- (fix) Controller now reboots after listening mode.
+- (fix) Reduced connection timeout in firmware.
+- (feature) Instructions are now shown on LCD screen during listening mode.
+- (feature) Memory use is now shown on LCD screen.
+- (feature) Added eeprom dump command, for use in brewblox-ctl. This allows detailed export of persistent data for debugging purposes.
+- (fix) PWM now keeps better track of state history. This prevents incorrect jumps after a period of steady state.
+- (fix) PWM will now only stretch periods after a normal-length period.
+- (improve) Docker volumes are now also pruned during updates.
+- (improve) Added the `--ignore-spark-error` flag to brewblox-ctl backup save. If set, the update will continue if it encounters an unreachable Spark service.
+- (feature) Added the `brewblox-ctl disable-ipv6` command. Having IPv6 enabled on the Pi can cause interrupts for all services whenever a service restarts. If your Spark service is frequently unreachable without the controller restarting, you can run this.
+- (improve) Reduced UI memory usage.
+- (improve) In the relations diagram, Logic Actuator comparison blocks are now rendered above the Logic Actuator itself. This shows more clearly them being "input" for the Logic Actuator.
+- (feature) The Quick Actions widget is now compatible with all Spark services on your system.
+- (improve) Show a spinner when busy applying a Quick Action.
+- (improve) Show a notification whenever a Quick Action is applied.
+- (improve) Refresh all blocks after a Quick Action, to show secondary effects (eg. PID values after changing a Setpoint).
+- (improve) Quick Start wizards are now disabled when no Spark service is available.
+- (config) Changed the default Ferment fridge Minimum ON constraint from 3 -> 2 minutes.
+- (fix) The brewery page no longer potentially references to a property of a removed layout.
+- (feature) Sidebar status is now stored in localstorage. It will retain its open/closed status on next visits.
+- (feature) The UI now waits for the datastore to be available, and then automatically reloads the page. This prevents mysteriously blank pages just after startup.
+- (feature) Added controller reboot action to the Spark service page actions.
+- (fix) The actual HTTP errors are shown again in error notifications.
+- (feature) Added the L-valve Builder part. The valve can be triggered manually, or linked to a Digital Actuator / Motor Valve.
+- (feature) Progress messages are now streamed to the UI during firmware updates.
+- (improve) The "Edit start/end" button is now always available for Session Graph Notes.
+- (feature) Added a duration preset dropdown for all relevant graphs. This was previously missing for sidebar graphs in dialogs.
+- (deprecate) Deprecated the Block Groups feature. It provided a solution to a problem nobody had.
+- (deprecate) Removed the Session View widget (the precursor to Session Log). It has been deprecated for 6 months now.
+- (feature) Added widget wizards for discovered blocks.
+- (feature) Quickstart wizards now check for existing blocks on the controller. If blocks are found, you can choose to keep them or remove them. You still have to remove obsolete dashboards and widgets yourself.
+- (fix) Resolved an issue where Builder parts were not draggable in browser fullscreen mode.
+- (improve) ENTER / CTRL-ENTER behavior in dialogs now more consistently saves and closes input dialogs.
+- (feature) Added OneWire Temp Sensor action to swap addresses with a different sensor. This should help when a sensor is being replaced, or the wrong sensor was chosen during a Quickstart wizard.
+- (feature) Added selectors for overriding graph Y ranges (both Y1 and Y2).
+- (API) Added "policy" argument to `history/query/last_values` endpoint.
+- (fix) Graphs with a start time earlier than 24h ago will now never use the realtime dataset (only kept for 24h).
+- (improve) When the service can connect, but does not receive a handshake, the troubleshooter suggests to flash the bootloader.
+
+
 ## Edge release 2020/04/06
 
 **Firmware release date: 2020/04/06**
