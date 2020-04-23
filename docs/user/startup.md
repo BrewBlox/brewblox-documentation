@@ -236,7 +236,15 @@ Navigate to the directory you chose during the installation (default: `cd ~/brew
 brewblox-ctl flash
 ```
 
-Follow the instructions until the menu exits.
+Follow the instructions until the menu exits. You should now see a dark screen with six empty boxes. 
+
+We ship new Sparks with the bootloader pre-flashed. 
+If you are upgrading an older Spark, and the screen is completely black, or completely white, you may need to flash the bootloader.
+
+**Only if you are not seeing six boxes on the Spark LCD** , run:
+```bash
+brewblox-ctl particle -c flash-bootloader
+```
 
 ::: tip
 The Spark supports Wifi. You can set this up using the UI in Step 8.
