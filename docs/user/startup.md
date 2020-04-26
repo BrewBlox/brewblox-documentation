@@ -138,7 +138,7 @@ In your new SSH terminal, run the following commands:
 ```bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y python3-pip
-sudo pip3 install -U setuptools brewblox-ctl
+pip3 install --user setuptools brewblox-ctl
 ```
 
 These commands installed `brewblox-ctl`, a menu for installing and managing your Brewblox system. <br>
