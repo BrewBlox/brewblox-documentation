@@ -254,11 +254,61 @@ The Spark supports Wifi. You can set this up using the UI in Step 8.
 
 To list all possible commands, navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and run:
 
-```bash
+```
 brewblox-ctl --help
 ```
 
-![Brewblox Menu](../images/menu-screenshot.png)
+Example output:
+```
+pi@raspberrypi:~ $ cd brewblox
+pi@raspberrypi:~/brewblox $ brewblox-ctl --help
+Usage: brewblox-ctl [OPTIONS] COMMAND [ARGS]...
+
+  The Brewblox management tool.
+
+  It can be used to create and control Brewblox configurations. More
+  commands are available when used in a Brewblox installation directory.
+
+  If the command you're looking for was not found, please check your current
+  directory.
+
+  By default, Brewblox is installed to ~/brewblox.
+
+  Example calls:
+
+      brewblox-ctl install
+      brewblox-ctl --quiet down
+      brewblox-ctl --verbose up
+
+Options:
+  -y, --yes             Do not prompt to confirm commands.
+  -d, --dry, --dry-run  Dry run mode: echo commands instead of running them.
+  -q, --quiet           Show less detailed output.
+  -v, --verbose         Show more detailed output.
+  --color / --no-color  Format messages with unicode color codes.
+  --help                Show this message and exit.
+
+Commands:
+  up              Start all services.
+  down            Stop all services.
+  restart         Stop and start all services.
+  follow          Show logs for one or more services.
+  kill            Stop and remove all containers on this computer.
+  install         Create Brewblox directory; install system dependencies;...
+  flash           Flash firmware on Spark.
+  wifi            DISABLED: Configure Spark Wifi settings.
+  particle        Start a Docker container with access to the Particle CLI.
+  disable-ipv6    Disable IPv6 support on the host machine.
+  env             List, get, or set env values.
+  setup           Run first-time setup in Brewblox directory.
+  discover-spark  Discover available Spark controllers.
+  add-spark       Create or update a Spark service.
+  service         Show or edit services in docker-compose.yml.
+  update          Download and apply updates.
+  log             Generate and share log file for bug reports.
+  backup          Save or load backups.
+pi@raspberrypi:~/brewblox $ 
+```
 
 You can use brewblox-ctl to easily manage your system, and perform common actions. Run the following command to start your system:
 
