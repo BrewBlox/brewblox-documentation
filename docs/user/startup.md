@@ -321,7 +321,7 @@ After the project is done starting up, you can use the Brewblox UI at `https://r
 ::: warning
 Because we're using a local (self-signed) SSL certificate, your browser will display a warning the first time you visit the page.
 
-There's no need to panic. Click advanced, and add an exception for the current host.
+There's no need to panic. Click advanced, and proceed to the page.
 ![Brewblox UI](../images/ssl-error-chrome.png)
 :::
 
