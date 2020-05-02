@@ -71,6 +71,7 @@ module.exports = {
                 'all_blocks',
                 'multiple_devices',
                 'adding_spark',
+                'adding_spark_sim',
                 'connect_settings',
                 'builder_guide',
                 'backup_guide',
