@@ -2,13 +2,35 @@
 
 Relevant links:
 
-- User guides: https://brewblox.netlify.com/
-- Previous release notes: https://brewblox.netlify.com/user/release_notes.html
+- User guides: https://brewblox.netlify.app/
+- Previous release notes: https://brewblox.netlify.app/user/release_notes.html
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
 
-## Edge release 2020/04/21
+## Brewblox release 2020/05/04
+
+**Firmware release date: 2020/05/03**
+
+We now officially support Spark simulation services on the Raspberry Pi.
+You can find instructions on how to add and use it at https://brewblox.netlify.app/user/adding_spark_sim.html.
+
+If you were using the preview simulator, you can use the same command to upgrade your version.
+**The version used in the preview will no longer be updated.**
+
+**Changes**
+
+- (feature) Added official support for the firmware simulator on Raspberry Pi.
+- (feature) Added indicator icons for connection type (wifi | usb | simulation) in sidebar.
+- (feature) UI temperature units and display settings units are now settable in the same dialog. The dialog can be accessed from both the Display Settings block and the service actions.
+- (removed) Dropped support for Kelvin temperature units.
+- (removed) Time and LongTime units are no longer configurable.
+- (improve) Made Quick Actions editor less cluttered.
+- (fix) Fixed a bug where PID settings were not correctly editable in Quick Actions.
+- (feature) Setpoint Profile profiles now support import/export from and to file.
+- (feature) Quickstart wizards in simulation services now offer to create mock sensors.
+
+## Brewblox release 2020/04/21
 
 **Firmware release date: 2020/04/20**
 
@@ -71,7 +93,7 @@ We also added the L-Valve Builder part.
 - (improve) When the service can connect, but does not receive a handshake, the troubleshooter suggests to flash the bootloader.
 
 
-## Edge release 2020/04/06
+## Brewblox release 2020/04/06
 
 **Firmware release date: 2020/04/06**
 
@@ -94,7 +116,7 @@ This release includes a collection of quick fixes to problems introduced or unco
 - (fix) When loading the UI, a notification will appear if the datastore could not yet be reached. It is common for the datastore to be much slower to start up than the UI. This results in a UI without any available dashboards or services.
 
 
-## Edge release 2020/04/02
+## Brewblox release 2020/04/02
 
 **Firmware release date: 2020/04/02**
 
@@ -129,7 +151,7 @@ This change will make it possible to move your system between a desktop computer
 - The firmware simulator is now embedded in the Spark service Docker image. This is a first step towards having a demo setup that does not need a controller. For now this only works on amd64 (desktop) computers. We're still working on getting the firmware to compile an ARM simulator.
 - Fixed a bug where DS2408 / DS2413 chips could not be removed in the UI.
 
-## Edge release 2020/03/18
+## Brewblox release 2020/03/18
 
 **Firmware release date: 2020/03/02**
 
@@ -144,7 +166,7 @@ This change will make it possible to move your system between a desktop computer
 - Fixed a bug where a disabled PWM pump part was still animated.
 - Decreased minimum Builder layout size to 1x1.
 
-## Edge release 2020/03/05
+## Brewblox release 2020/03/05
 
 **Firmware release date: 2020/03/02**
 
@@ -165,7 +187,7 @@ Quick start wizards will also try and add generated PIDs to the display.
 - `docker-compose.shared.yml` is now always copied from defaults during updates
   - If you need to make changes to shared services, you can do so in docker-compose.yml
 
-## Edge release 2020/03/02
+## Brewblox release 2020/03/02
 
 **Firmware release date: 2020/03/02**
 
@@ -205,7 +227,7 @@ To not break current configurations, the mutex will still have its own setting, 
 - Added a user guide for the basic concepts of the Brewery Builder.
 - Moved the layout selector in the Builder editor from the toolbar to the sidebar.
 
-## Edge release 2020/02/12
+## Brewblox release 2020/02/12
 
 **Firmware release date: 2020/01/17**
 
@@ -244,7 +266,7 @@ If you enable verbose mode, it will both print and execute.
 - Added help texts throughout brewblox-ctl.
 - `brewblox-ctl service editor` will now show an address you can directly copy to your browser to visit the editor GUI.
 
-## Edge release 2020/01/20
+## Brewblox release 2020/01/20
 
 **Firmware release date: 2020/01/17**
 
@@ -268,7 +290,7 @@ We've also fixed some longstanding bugs in how Safari displays Builder layouts.
 - Updated the icon used for heating PIDs in the Builder.
 - Dashboard / service / layout title is now shown as page title in the browser.
 
-## Edge release 2020/01/02
+## Brewblox release 2020/01/02
 
 **Firmware release date: 2019/12/24**
 
@@ -313,7 +335,7 @@ Builder widgets in dashboards are still shown, and now automatically resize the 
 - Removed "full" version of the Builder widget (made redundant by the layout selection menu).
 - Reduced timeout in service <-> controller communication to prevent reboots caused by dropped messages.
 
-## Edge release 2019/12/23
+## Brewblox release 2019/12/23
 
 **Firmware release date: 2019/12/17**
 
@@ -328,7 +350,7 @@ Builder widgets in dashboards are still shown, and now automatically resize the 
 - Fixed a bug in build where source parts would disappear while dragging to copy parts
 - Fixed a bug in builder where flow was calculated incorrectly if there were multiple parallel pumps
 
-## Edge release 2019/12/17
+## Brewblox release 2019/12/17
 
 **Firmware release date: 2019/12/03**
 
@@ -357,7 +379,7 @@ Builder widgets in dashboards are still shown, and now automatically resize the 
 - In the builder, when clicking a heating element that is driven by a PID, it will open the PID dialog.
 - Setpoint setting is now directly editable in the PID widget (both in basic, and full view).
 
-## Edge release 2019/12/06
+## Brewblox release 2019/12/06
 
 **Firmware release date: 2019/12/03**
 
@@ -384,7 +406,7 @@ To make it easier to find sessions, they can now have tags. When selecting sessi
   - Dashboards will no longer scroll in front of the bottom buttons in the sidebar
   - In wizards, a dropdown will be shown if there is a large number of dashboard options.
 
-## Edge release 2019/12/03
+## Brewblox release 2019/12/03
 
 **Firmware release date: 2019/12/03**
 
@@ -438,7 +460,7 @@ For those cases when `docker-compose.yml` still needs to be changed, we moved th
 - Prettified Quick Actions editor
 - Fixed a bug in glycol wizard actions
 
-## Edge release 2019/11/21
+## Brewblox release 2019/11/21
 
 **Firmware release date: 2019/11/12**
 
@@ -465,7 +487,7 @@ We made a lot of small tweaks to the Session Log widget, and to many input compo
   - Previously, this only happened when changing the temperature of the last or next point.
   - Now it will also happen when editing the time.
 
-## Edge release 2019/11/12
+## Brewblox release 2019/11/12
 
 **Firmware release date: 2019/11/12**
 
@@ -528,7 +550,7 @@ We think that Session Log is a sufficiently big improvement over the Session Vie
   - ID/URL is now automatically suggested based on chosen title.
 - Block dialogs opened by clicking a relation diagram will now initially show the basic display.
 
-## Edge release 2019/10/17
+## Brewblox release 2019/10/17
 
 **Firmware release date: 2019/10/14**
 
@@ -572,7 +594,7 @@ On the whole, this should offer a smoother and more intuitive editing experience
   - See https://brewblox.netlify.com/user/connect_settings.html#spark-connection-settings for how this device ID can be used.
 - Fixed a bug in the Glycol wizard that would not allow the user to create a configuration without a glycol sensor.
 
-## Edge release 2019/10/10
+## Brewblox release 2019/10/10
 
 **Firmware release date: 2019/09/16**
 
@@ -616,7 +638,7 @@ When selecting a widget in the index, the displayed widget will automatically sc
 - Added a button in the Builder Editor to create a widget showing the current layout.
 
 
-## Edge release 2019/10/01
+## Brewblox release 2019/10/01
 
 **Firmware release date: 2019/09/16**
 
@@ -650,7 +672,7 @@ We added two this release:
   - Each edge is connected to all other edges.
 
 
-## Edge release 2019/09/12
+## Brewblox release 2019/09/12
 
 **Firmware release date: 2019/09/12**
 
@@ -704,7 +726,7 @@ As it's a relevant feature for HERMS, we added Boil Mode support to the PID. Whe
 - The PID now supports Boil Mode.
 - Improved the toggle button for changing dashboard edit mode.
 
-## Edge release 2019/08/22
+## Brewblox release 2019/08/22
 
 **Firmware release date: 2019/08/20**
 
@@ -733,7 +755,7 @@ To avoid redirection issues we've moved the UI to the `/ui/` subdirectory. If yo
 - Fixed a bug where the UI would return a 200 status code for `/datastore` and `/history` endpoints if the datastore/history service is not (yet) online.
 - Fixed a bug where changing duration in a Block graph would not re-render the graph.
 
-## Edge release 2019/08/12
+## Brewblox release 2019/08/12
 
 **Firmware release date: 2019/08/06**
 
@@ -757,7 +779,7 @@ No dramatic new features this week, just a steady stream of iterative improvemen
 - When using `brewblox-ctl log`, blocks from the default `spark-one` service are added to the output.
   - We're still working on automatically detecting all active Spark servies.
 
-## Edge release 2019/08/07
+## Brewblox release 2019/08/07
 
 **Firmware release date: 2019/08/06**
 
@@ -772,7 +794,7 @@ We created the example repository https://github.com/Brewblox/brewblox-plugin to
 - Fixed a bug where fast PWM mode failed to activate (Spark pins automatically switch to 100Hz mode when PWM period is set to < 1s)
 - Fixed a bug where you could not select a different service in the Fridge arrangement wizard.
 
-## Edge release 2019/07/30
+## Brewblox release 2019/07/30
 
 **Firmware release date: 2019/07/25**
 
@@ -810,7 +832,7 @@ We like where the Builder is headed in terms of features, but performance is bec
 - Made block warnings more consistent.
   - A warning is now also shown if the target is not set (eg. PID is not driving anything).
 
-## Edge release 2019/07/23
+## Brewblox release 2019/07/23
 
 **Firmware release date: 2019/07/23**
 
@@ -834,7 +856,7 @@ This can't be easily expressed in a single Builder, so we added the ability to q
 - A retry is scheduled when connection is lost to a Spark service.
   - If the retry restores connection, the notification will be automatically closed.
 
-## Edge release 2019/07/18
+## Brewblox release 2019/07/18
 
 **Firmware release date: 2019/07/17**
 
@@ -875,7 +897,7 @@ The new mechanism is experimental, and may require a retry before it works. Ther
   - During the last few months, we've moved generic actions and less relevant fields to dialogs and actions. This made the expansion items unnecessary.
 - Fixed an issue where API errors would generate useless error messages about commits only being possible in dynamic modules.
 
-## Edge release 2019/07/15
+## Brewblox release 2019/07/15
 
 **Firmware release date: 2019/07/15**
 
@@ -925,7 +947,7 @@ Due to how driven blocks work (eg. a PID driving a PWM), it was possible for PWM
   - UI prompts to update will be enabled in the next release.
   - This minimizes the issue where actuators would turn on while the firmware was being updated.
 
-## Edge release 2019/07/10
+## Brewblox release 2019/07/10
 
 **Firmware release date: 2019/07/10**
 
@@ -958,7 +980,7 @@ The firmware had a bug where if the Spark couldn't find the network, it would re
   - Actuator Valve can now also be linked to a Digital Actuator.
 - Display settings are reset when removing all service blocks.
 
-## Edge release 2019/07/01
+## Brewblox release 2019/07/01
 
 **Firmware release date: 2019/07/01**
 
@@ -1012,7 +1034,7 @@ If you are running a pretty standard fridge setup, you probably want to restart 
 - Added an option in Step View to prompt for the actual value before applying.
 - Dashboard actions are now also shown in the dropdown on the dashboard toolbar.
 
-## Edge release 2019/06/24
+## Brewblox release 2019/06/24
 
 **Firmware release date: 2019/06/24**
 
@@ -1023,7 +1045,7 @@ If you are running a pretty standard fridge setup, you probably want to restart 
   - Now separately displays whether it's still waiting for the service <-> firmware handshake.
   - Fixed a bug where the service <-> firmware handshake would not happen.
 
-## Edge release 2019/06/19
+## Brewblox release 2019/06/19
 
 **Firmware release date: 2019/06/19** (Now also checked automatically)
 
@@ -1092,7 +1114,7 @@ Newly introduced blocks: `DS2408 Chip` and `Motor Valve`. Their behavior is comp
 - The Spark service now compares service and firmware versions when connecting. An error will be displayed in the UI when they are incompatible.
 - Fixed a bug where a disabled Setpoint driver would not stop driving the Setpoint Sensor Pair
 
-## Edge release 2019/06/04
+## Brewblox release 2019/06/04
 
 **Firmware release date: 2019/06/04**
 
@@ -1110,7 +1132,7 @@ We (hopefully) fixed the reboot issues people were experiencing, and added the S
 - Handle WiFi status and IP address display in system event handler.
   - A [major bug](https://github.com/particle-iot/device-os/issues/1805) in particle device-os could cause a hard fault SOS when WiFi was connecting in the system thread while the application thread was trying to read the IP address.
 
-## Edge release 2019/05/28
+## Brewblox release 2019/05/28
 
 **Firmware version: 9b0330f4** (no changes)
 
@@ -1135,7 +1157,7 @@ A set of smaller changes. Two bigger features are in progress, but are not yet r
   - Blocks in this display are also clickable.
 - The metric selection trees in Graph/Metric wizards display fields that have had an update in the last day.
 
-## Edge release 2019/05/20
+## Brewblox release 2019/05/20
 
 **Firmware version: 9b0330f4** (no changes)
 
@@ -1166,7 +1188,7 @@ In the future, we'll also be grouping blocks more. For many use cases, [control 
 - Changed the display name of "Offset Actuator" to "Setpoint Driver".
 - Changed the display name of "Pulse Width Modulator" to "PWM".
 
-## Edge release 2019/05/14
+## Brewblox release 2019/05/14
 
 **Firmware version: 9b0330f4** (same as last week)
 
@@ -1192,7 +1214,7 @@ Also compatible: 2789cc06.
   - This is only shown if the browser viewport is more than 1500px wide.
 - Fixed a bug in brewblox-devcon-spark where Blocks could not be read/changed/deleted using their numeric ID.
 
-## Edge release 2019/05/07
+## Brewblox release 2019/05/07
 
 **Firmware version: 9b0330f4**
 If you're on the previous firmware version (2789cc06), you don't need to flash your Spark.
@@ -1220,7 +1242,7 @@ Running `brewblox-ctl` without a command will no longer open a menu, but now pri
 - Fixed a bug where the Block ID was still reserved if Block creation failed during importing of Spark Blocks.
 - Fixed a bug where importing a large amount of Blocks over USB would cause a buffer overrun.
 
-## Edge release 2019/04/29
+## Brewblox release 2019/04/29
 
 **Changes**
 
@@ -1239,7 +1261,7 @@ Running `brewblox-ctl` without a command will no longer open a menu, but now pri
 - Services will now log their version on startup.
 - EDIT: brewblox-ctl now allows disabling confirmation prompts. Run `brewblox-ctl settings` to enable/disable.
 
-## Edge release 2019/04/23
+## Brewblox release 2019/04/23
 
 There are no firmware changes in this release. If you have the latest version (2019/04/18), you do not need to flash your Spark. When in doubt, it's best to be safe and flash your Spark.
 
@@ -1256,7 +1278,7 @@ There are no firmware changes in this release. If you have the latest version (2
   - For now, you must manually create the DS2413 actuator.
   - A button to create new blocks was added to the wizard.
 
-## Edge release 2019/04/18
+## Brewblox release 2019/04/18
 
 This is a small release, to fix two serious bugs. We will be releasing new features after Easter.
 
@@ -1265,14 +1287,14 @@ This is a small release, to fix two serious bugs. We will be releasing new featu
 - Fixed a bug where setpoint profile time values would be corrupted after changing them.
 - Fixed a bug where some Block wizards would crash.
 
-## Edge release 2019/04/16
+## Brewblox release 2019/04/16
 
 - Fixed how setpoint/sensor pair works, so that setting can always be set and enabled/disabled is handled separately.
 - Fixed some issues with popup edit menus
 - Make invalid widgets deletable
 - Fix tree dropdown in graph config to not hide children when search is used
 
-## Edge release 2019/04/15
+## Brewblox release 2019/04/15
 
 **Breaking Changes**
 
@@ -1316,7 +1338,7 @@ This is a small release, to fix two serious bugs. We will be releasing new featu
   - This notification will disappear automatically if connection is restored.
 - Made PID input/output blocks directly editable from the PID widget.
 
-## Edge release 2019/04/04
+## Brewblox release 2019/04/04
 
 This release includes a pretty big rework of the UI.
 
@@ -1363,7 +1385,7 @@ Changes:
   - Toggling the valve will toggle the actuator, and vice versa.
 - Fixed a bug where the eventbus would gradually consume more RAM, until it froze.
 
-## Edge release 2019/03/18
+## Brewblox release 2019/03/18
 
 - `brewblox-ctl update` will now prompt to also update the firmware
   - IMPORTANT: this does not apply to this update. You will need to manually run `brewblox-ctl flash` this time.
@@ -1386,7 +1408,7 @@ When the most important features are included, we will start drawing more attent
 
 For those interested in an early preview: it is creatable as the `Process View` widget.
 
-## Edge release 2019/03/11
+## Brewblox release 2019/03/11
 
 This release includes changes to the firmware. To update, please run both `brewblox-ctl flash`, and `brewblox-ctl update`.
 
