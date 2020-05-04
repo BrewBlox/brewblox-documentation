@@ -12,15 +12,75 @@ Relevant links:
 
 **Firmware release date: 2020/05/03**
 
-We now officially support Spark simulation services on the Raspberry Pi.
+#### Spark simulator
+
+We now officially support Spark simulation on the Raspberry Pi.
+This means that you can run a fully simulated Spark, instead of the actual hardware, to try experiment or try before you buy.
+The code used by the simulator is the actual firmware code running on the Spark, with some changes for simulation of course.
+
 You can find instructions on how to add and use it at https://brewblox.netlify.app/user/adding_spark_sim.html.
+The simulator is now embedded in the devcon container from now on. If you used a separate simulator before, which was available as preview, please update.
 
-If you were using the preview simulator, you can use the same command to upgrade your version.
-**The version used in the preview will no longer be updated.**
+#### New MDNS library (firmware)
 
-**Changes**
+We found out that one of the reasons for instability was running out of memory. 
+A big consumer of memory was a third party MDNS library. MDNS resolves .local address and automatically finds your Sparks on the network.
 
-- (feature) Added official support for the firmware simulator on Raspberry Pi.
+Elco refactored the MDNS library to use much less memory and cpu.
+It is [available here](https://github.com/BrewBlox/particle-mdns/tree/develop) to use in your own projects.
+
+[PR #217](https://github.com/BrewBlox/brewblox-firmware/pull/217)
+
+#### Interpolate values in output of slower filter stages (firmware)
+
+Sensor data runs through max 6 filter stages. Each stage runs at a slower update rate as the previous.
+This resulted in blocky output for slow filters.
+I added linear interpolation between values of slower updated filters, for a smooth output.
+See the image below for the before and after.
+
+![image](https://user-images.githubusercontent.com/1708921/80886065-04c64900-8cbe-11ea-8319-8139ffee9e34.png)
+
+[PR #225](https://github.com/BrewBlox/brewblox-firmware/pull/225)
+
+#### PID improvements to make the derivative much more usable (firmware)
+
+The PID reads the derative from a certain filter stage depending on the value of the Td time constant.
+The default filter it selected was very slow, larger than Td, to not have much noise.
+But this meant that the derivative used by the PID was also delayed a lot. Not helpful if you want to prevent overshoot!
+
+With the new filter implementation, the PID can work with a lot less filtering, and the selected filter delay is now 25-50% of Td.
+The derivate part will also only be active if it counteracts the proportional part (if it prevents overshoot).
+
+You'll find that the derivative part of the PID is now a lot more predictable and more effective.
+
+[PR #226](https://github.com/BrewBlox/brewblox-firmware/pull/226)
+
+#### PWM improvements to look more towards the future (firmware)
+
+The calculations for the achieved PWM value only looked back, not ahead. This meant the PWM value always lagged the setting.
+- The PWM now looks ahead for what it can achieve and limits how far it looks back.
+- When at 0% or 100%, the achived value now also slowly changes.
+- A minimal low/high time is introduced to prevent two short bursts when the setting increases quickly.
+- 
+[PR #217](https://github.com/BrewBlox/brewblox-firmware/pull/217)
+
+#### Reduce memory used by filters in setpoints (firmware)
+
+Another change to reduce memory use is to create filter stages on demand.
+When you change the filtering in a setpoint, or the Td value of a PID, the setpoint will create only the needed filter stages.
+
+[PR #223](https://github.com/BrewBlox/brewblox-firmware/pull/223)
+
+#### Fix fluctuations in mock sensors (firmware)
+
+For testing, you can add periodic fluctuations in a simulated mock sensor.
+I fixed some bugs and they now work as expected.
+
+[PR #224](https://github.com/BrewBlox/brewblox-firmware/pull/224) and [PR #218](https://github.com/BrewBlox/brewblox-firmware/pull/218)
+
+
+#### Other changes
+
 - (feature) Added indicator icons for connection type (wifi | usb | simulation) in sidebar.
 - (feature) UI temperature units and display settings units are now settable in the same dialog. The dialog can be accessed from both the Display Settings block and the service actions.
 - (removed) Dropped support for Kelvin temperature units.
