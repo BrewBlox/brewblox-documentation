@@ -15,16 +15,19 @@ Relevant links:
 #### Spark simulator
 
 We now officially support Spark simulation on the Raspberry Pi.
-This means that you can run a fully simulated Spark, instead of the actual hardware, to try experiment or try before you buy.
+This means that you can run a fully simulated Spark, instead of the actual hardware, to experiment with settings, or try before you buy.
 The code used by the simulator is the actual firmware code running on the Spark, with some changes for simulation of course.
 
 You can find instructions on how to add and use it at https://brewblox.netlify.app/user/adding_spark_sim.html.
-The simulator is now embedded in the devcon container from now on. If you used a separate simulator before, which was available as preview, please update.
+From now on, the simulator is embedded in the devcon container. If you used the preview simulator, please update by running
+```
+brewblox-ctl add-spark --name spark-sim --force --simulation
+```
 
 #### New MDNS library (firmware)
 
 We found out that one of the reasons for instability was running out of memory. 
-A big consumer of memory was a third party MDNS library. MDNS resolves .local address and automatically finds your Sparks on the network.
+A big consumer of memory was a third party MDNS library. MDNS resolves .local addresses and automatically finds your Sparks on the network.
 
 Elco refactored the MDNS library to use much less memory and cpu.
 It is [available here](https://github.com/BrewBlox/particle-mdns/tree/develop) to use in your own projects.
