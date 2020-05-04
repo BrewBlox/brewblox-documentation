@@ -1,14 +1,15 @@
 # Getting started
 
-This guide describes how to install the Brewblox system on a Raspberry Pi. </br>
-The default device for the Brewblox system is the BrewPi Spark, but you can try this tutorial without it.
+This guide describes how to install the Brewblox system on a Raspberry Pi.</br>
+The default device for the Brewblox system is the BrewPi Spark.
+To preview Brewblox, you can use a simulated Spark.
 
 For an explanation of how to combine the various Spark Blocks, see the [Brewblox control chains](./control_chains.md) page.
 
 The default configuration uses a single Spark controller. The [Multiple Devices](./multiple_devices.md) guide describes how to get started using more devices.
 
 ::: warning
-The following Raspberry Pi models are **not** compatible with Brewblox.
+The following Raspberry Pi models are **NOT** compatible with Brewblox.
 
 - Raspberry Pi 1 Model A
 - Raspberry Pi 1 Model B
@@ -227,6 +228,12 @@ brewblox-ctl setup
 Follow the instructions until the menu exits.
 
 ## Step 6: Flash the firmware
+
+::: tip
+If you want to try out Brewblox, you can use the Spark simulation instead.
+
+Skip this step, and follow the instructions [here](./adding_spark_sim.md).
+:::
 
 For this step, your Spark should be connected to your Raspberry Pi over USB.
 
