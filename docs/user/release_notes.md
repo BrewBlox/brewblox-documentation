@@ -2,8 +2,8 @@
 
 Relevant links:
 
-- User guides: https://brewblox.netlify.com/
-- Previous release notes: https://brewblox.netlify.com/user/release_notes.html
+- User guides: https://brewblox.netlify.app/
+- Previous release notes: https://brewblox.netlify.app/user/release_notes.html
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
@@ -12,7 +12,11 @@ Relevant links:
 
 **Firmware release date: 2020/05/03**
 
-We now officially support Raspberry Pi simulation mode. 
+We now officially support Spark simulation services on the Raspberry Pi.
+You can find instructions on how to add and use it at https://brewblox.netlify.app/user/adding_spark_sim.html.
+
+If you were using the preview simulator, you can use the same command to upgrade your version.
+**The version used in the preview will no longer be updated.**
 
 **Changes**
 
