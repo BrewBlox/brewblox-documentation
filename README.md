@@ -34,5 +34,3 @@ npm run dev
 ```
 
 The docs will be served at `http://localhost:8080`
-
-
