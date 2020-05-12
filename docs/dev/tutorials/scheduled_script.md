@@ -16,7 +16,6 @@ On your Pi, create a new directory `scheduledscript`. in it, create two files:
 **script.py**
 
 ```python
-
 """
 Code example for publishing data to the Brewblox eventbus on a fixed schedule
 
