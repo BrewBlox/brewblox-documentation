@@ -1,6 +1,8 @@
 # Developer Documentation
 
-Brewblox is a rapidly evolving system that welcomes external plugins. To reflect this, developer documentation is split in three subcategories:
+Brewblox is a rapidly evolving system that welcomes external contributions. To reflect this, developer documentation is split in four subcategories:
+
+**Tutorials** show how to create and run simple scripts. These are useful for everyone that wants to tinker with their own system. The source code for all tutorials is also available [here](https://github.com/brewblox/brewblox-tutorials).
 
 **Contributing guides** describe how to get started building a service, and how to use dev tools.
 

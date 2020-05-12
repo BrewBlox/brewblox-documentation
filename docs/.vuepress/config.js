@@ -12,6 +12,16 @@ module.exports = {
             '/dev/': [
                 '',
                 {
+                    title: 'Tutorials',
+                    children: [
+                        'tutorials/remote_scripts',
+                        'tutorials/container_script',
+                        'tutorials/serial_script',
+                        'tutorials/publisher_script',
+                        'tutorials/scheduled_script',
+                    ],
+                },
+                {
                     title: 'Contributing',
                     children: [
                         'contributing/docker',

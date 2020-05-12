@@ -22,7 +22,7 @@
   "homepage": "https://github.com/BrewBlox/brewblox-documentation#readme",
   "devDependencies": {
     "plantuml-encoder": "^1.4.0",
-    "vuepress": "^1.4.0"
+    "vuepress": "^1.5.0"
   },
   "dependencies": {}
 }
