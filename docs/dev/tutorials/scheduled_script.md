@@ -100,29 +100,10 @@ docker build --tag scheduledscript scheduledscript/
 
 To access the eventbus, you will need to either add your container to the docker-compose.yml file, or expose the eventbus port. In this tutorial we will take the second approach.
 
-Edit `docker-compose.yml`, and add the following configuration under `services`:
-```yaml
-  eventbus:
-    ports:
-    - "5672:5672"
+To edit your docker-compose.yml file, run:
+
 ```
-
-Example configuration:
-
-```yaml
-services:
-  spark-one:
-    command: --name=spark-one --mdns-port=${BREWBLOX_PORT_MDNS} --discovery=wifi
-    image: brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
-    labels:
-    - traefik.port=5000
-    - 'traefik.frontend.rule=PathPrefix: /spark-one'
-    privileged: true
-    restart: unless-stopped
-  eventbus:
-    ports:
-    - "5672:5672"
-version: '3.7'
+brewblox-ctl service expose eventbus 5672:5672
 ```
 
 ## Running

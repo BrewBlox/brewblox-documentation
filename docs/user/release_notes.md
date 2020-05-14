@@ -7,6 +7,28 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2020/05/14
+
+**Firmware release date: 2020/05/13**
+
+This release fixes a bug where Digital Actuators would "freeze" under certain circumstances.
+
+We also added a new command to brewblox-ctl: `brewblox-ctl service expose`. This sets or clears exposed ports for any service.
+
+So far, the most common use case is to expose the eventbus port.
+You can do this by running `brewblox-ctl service expose eventbus 5672:5672`.
+
+Earlier this week, we also published some tutorials for adding straightforward scripts that interact with Brewblox. You can check them out at https://brewblox.netlify.app/dev/.
+
+**Changes:**
+- (feature) Spark services can now be paused. The service will wait with discovering / connecting a controller until the status is cleared.
+- (feature) Constraints are now settable in Quick Actions.
+- (feature) Added a scale slider to the Brewery Page. This allows rendering the same layout in a sensible size in both the Builder Widget, and the Brewery Page.
+- (improve) Changed the layout selector dropdown in the Builder Editor to use a tab. This hopefully improves visibility.
+- (defaults) Increased the default Kp for the Glycol Quickstart wizard heater from 20 to 100 1/degC.
+- (feature) Added the `brewblox-ctl service expose` command.
+- (improve) Increased filtering for derivative a bit again to reduce effect of limited sensor resolution for slow processes with high TD.
+- (fix) Fixed interval for periodic check on digital actuators to verify that desired and actual state match.
 
 ## Brewblox release 2020/05/04
 
