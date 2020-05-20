@@ -84,6 +84,7 @@ module.exports = {
                 'adding_spark_sim',
                 'connect_settings',
                 'builder_guide',
+                'automation_guide',
                 'backup_guide',
                 'blocks_in_depth',
                 'removing_things',

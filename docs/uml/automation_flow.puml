@@ -1,0 +1,29 @@
+@startuml "Process flow"
+
+start
+:Start step;
+
+repeat :Preconditions;
+backward:Wait and retry}
+repeat while (conditions ok?) is (no)
+->yes;
+
+:Actions;
+
+repeat :Transitions;
+    partition "Transition 1" {
+        if (conditions ok?) then (Start next step)
+            stop
+        else (no)
+        endif
+    }
+    partition "Transition 2" {
+        if (conditions ok?) then (Start next step)
+            stop
+        else (no)
+        endif
+    }
+backward:Wait and retry}
+repeat while (No transition found)
+
+@enduml
