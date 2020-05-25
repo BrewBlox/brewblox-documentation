@@ -6,6 +6,21 @@ The automation service is currently in alpha.
 Be careful.
 :::
 
+## Getting started
+
+The automation service will be added to `docker-compose.shared.yml` when it leaves alpha.
+
+Before then, you can enable it by adding the following service to your `docker-compose.yml` file:
+
+```yaml
+  automation:
+    image: brewblox/brewblox-automation:${BREWBLOX_RELEASE}
+    init: true
+    labels:
+      - "traefik.port=5000"
+      - "traefik.frontend.rule=PathPrefix: /automation"
+```
+
 ## Context
 
 The Spark controller is built to keep your system in a steady state.
