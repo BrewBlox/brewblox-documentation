@@ -36,6 +36,8 @@ The automation service is and will be completely optional.
 We'll make an announcement when the automation service is sufficiently polished and stable for general release.
 For now you'll see release notes split between regular changes, and those concerning automation.
 
+For those wanting to try the preview version, we added a short [guide](https://brewblox.netlify.app/user/automation_guide.html).
+
 **Changes**
 - (improve) Widgets now show hints / get started buttons when empty.
 - (feature) Some builder parts are now scalable. This applies to parts that did not previously have size sliders, and do not include tubing.
