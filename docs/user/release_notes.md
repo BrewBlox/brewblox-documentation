@@ -7,6 +7,51 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2020/05/27
+
+**Firmware release date: 2020/05/13**
+
+For the last few months, we have been working on building advanced process control for Brewblox.
+After all: brewing is a process with multiple distinct steps.
+Currently, Spark settings must be changed multiple times over the course of a brew day.
+
+We aim to streamline this, so you only have to press "start" and "next" during a brew day.
+
+This is implemented as the new *automation service* on the Pi.
+
+**The service is currently in alpha / preview, and is not yet enabled by default**
+
+You can use the UI to build processes with branching or repeating steps.
+The service runs processes in the background, and can interact with all Brewblox devices.
+This includes Spark controllers, but also third-party devices and REST APIs.
+
+Processes can use sensor values from one device to adjust settings on another device.
+They can also integrate manual actions by creating tasks for the user, and then waiting until the task is marked as done.
+
+Later features will include integration with recipe formats such as beer.xml.
+
+Everything else in Brewblox will keep working as usual.
+The automation service is and will be completely optional.
+
+We'll make an announcement when the automation service is sufficiently polished and stable for general release.
+For now you'll see release notes split between regular changes, and those concerning automation.
+
+**Changes**
+- (improve) Widgets now show hints / get started buttons when empty.
+- (feature) Some builder parts are now scalable. This applies to parts that did not previously have size sliders, and do not include tubing.
+- (feature) Merged the PwmPump and Pump parts in Builder. If you had a PwmPump, it is automatically migrated.
+- (feature) Value display parts now can act as tube. Do note that scaling parts with flow enabled rapidly increases flow calculation time.
+- (feature) The Graph Widget now has an action to quickly add fields from specific blocks.
+
+**Automation changes**
+- (feature) Added webhook action
+- (improve) Changed Create Task to Edit Task.
+- (improve) Condition tasks are now created at step start.
+- (improve) Steps and focused phase (conditions / actions / transitions) are now shown side by side.
+- (fix) You can now use readonly fields as a condition.
+- (feature) You can now select all options when changing task status.
+
+
 ## Brewblox release 2020/05/14
 
 **Firmware release date: 2020/05/13**
