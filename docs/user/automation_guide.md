@@ -3,7 +3,8 @@
 ::: warning
 The automation service is currently in alpha.
 
-Be careful.
+It is not feature complete, and there will be bugs.
+Use at your own risk.
 :::
 
 ## Getting started
