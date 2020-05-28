@@ -137,9 +137,11 @@ This will exit your SSH session. That's fine: just open a new one. It will use t
 In your new SSH terminal, run the following commands:
 
 ```bash
-sudo apt update && sudo apt upgrade -y
+sudo apt update
+sudo apt upgrade -y
 sudo apt install -y python3-pip
 pip3 install --user setuptools brewblox-ctl
+exec $SHELL --login
 ```
 
 These commands installed `brewblox-ctl`, a menu for installing and managing your Brewblox system. <br>
