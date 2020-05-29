@@ -31,7 +31,7 @@ This category can be split into two sub-categories: people who want an estimate 
 
 Both want the same thing: the user manual equivalent of 
 
-```c++
+```cpp
 #import <iostream>
 
 int main()

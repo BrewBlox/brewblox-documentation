@@ -1,3 +1,5 @@
+const plantuml = require('./plantuml');
+
 module.exports = {
     title: 'Brewblox',
     description: 'Build your brewery, your way',
@@ -96,5 +98,10 @@ module.exports = {
         docsDir: 'docs',
         lastUpdated: 'Last Updated',
         editLinks: true,
+    },
+    chainMarkdown: config => {
+        const opts = config.options;
+        // Pass the default function as backup to plantuml highlight
+        opts.set('highlight', plantuml.highlight(opts.get('highlight')));
     }
 };

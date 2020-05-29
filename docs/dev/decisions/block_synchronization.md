@@ -19,7 +19,35 @@ To keep network communication asynchronous, synchronization is done using the ex
 `Master` blocks periodically broadcast their state on the designated RabbitMQ exchange, using a unique routing key.
 `Slave` blocks subscribe to a given routing key, and write received data to a controller object.
 
-<PlantUml src="block_synchronization.puml" title="Block Synchronization"/>
+```plantuml
+@startuml Block Synchronization
+    node Service_Master
+    node Spark_Master
+    entity Sensor
+
+    node Service_Slave_1
+    node Spark_Slave_1
+    entity Actuator_1
+
+    node Service_Slave_2
+    node Spark_Slave_2
+    entity Actuator_2
+
+    storage RabbitMQ
+
+    Service_Master --> "read" Spark_Master
+    Service_Slave_1 --> "write" Spark_Slave_1
+    Service_Slave_2 --> "write" Spark_Slave_2
+    
+    Service_Master --> "broadcast" RabbitMQ
+    Service_Slave_1 -up-> "subscribe" RabbitMQ
+    Service_Slave_2 -up-> "subscribe" RabbitMQ
+
+    Spark_Master --> Sensor
+    Spark_Slave_1 --> Actuator_1
+    Spark_Slave_2 --> Actuator_2
+@enduml
+```
 
 This approach decouples services, and allows for easy implementation of a one-to-many relation of master/slave objects.
 

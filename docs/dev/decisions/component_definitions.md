@@ -38,7 +38,26 @@ All discrete objects in the UI are widgets. UI blocks display state and actions,
 The same widget can be present on multiple views.
 
 ### UI block (eg. PID, actuator, mutex)
-<PlantUml src="block_diagram.puml" title="Block Diagram"/>
+```plantuml
+@startuml Block diagram
+    class View
+    class UIBlockCollection
+    class UIBlock
+    class Association
+    class DummyAssociation
+    class HardwareAssociation
+
+    UIBlockCollection *--x "*" UIBlock : contains
+
+    View o--x "*" UIBlock : references
+
+    UIBlock : string identifier
+    UIBlock *-- "*" Association
+
+    Association <|-- DummyAssociation
+    Association <|-- HardwareAssociation
+@enduml
+```
 
 Represents a hardware component performing a specific, abstract task. A UI block isn't busy brewing beer. It might keep temperature at a certain level, or even just toggle the heater.
 

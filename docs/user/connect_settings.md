@@ -146,7 +146,49 @@ These arguments are:
 The following diagram is a (simplified) display of the decision process to select a device.
 If discovery fails, the service reboots. This is because of a limitation in how Docker handles USB devices: the service must be started after the device was plugged in.
 
-<PlantUml src="connection_flow.puml" title="Selecting device address"/>
+```plantuml
+@startuml Connecting to a Spark
+start
+
+:Startup;
+
+if (--device-serial arg?) then (yes)
+    :select serial address;
+elseif (--device-host arg?) then (yes)
+    :select TCP address;
+else
+    :Discovery;
+
+    if (--discovery=all) then (yes)
+        :discover USB;
+        :discover Wifi;
+    elseif (--discovery=usb) then (yes)
+        :discover USB;
+    elseif (--discovery=wifi) then (yes)
+        :discover Wifi;
+    else
+        stop
+    endif
+
+    if (device(s) discovered) then (yes)
+        if (--device-id arg?) then (yes)
+            if (device found with correct ID) then (yes)
+            else (no)
+                stop
+            endif
+        endif
+    else (no)
+        stop
+    endif
+
+    :select discovered address;
+endif
+
+:Ready to connect;
+
+stop
+@enduml
+```
 
 `--device-serial` and `--device-host` are the most specific arguments, and will take priority.
 Note that device ID will still be checked after connection is made.
