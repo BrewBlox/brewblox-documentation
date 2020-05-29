@@ -1,4 +1,7 @@
 const umlEncoder = require('plantuml-encoder');
+const fs = require('fs');
+const path = require('path');
+const axios = require('axios');
 
 const sidebar = {
     '/dev/': [
@@ -85,17 +88,40 @@ const sidebar = {
     ]
 };
 
+const hashCode = s =>
+    s.split('').reduce((a, b) => (((a << 5) - a) + b.charCodeAt(0)) | 0, 0);
+
+const download = async (encoded, dest) => {
+    const url = `https://www.plantuml.com/plantuml/png/${encoded}`;
+    const writer = fs.createWriteStream(path.resolve(__dirname, 'public', dest));
+    const response = await axios({
+        url,
+        method: 'GET',
+        responseType: 'stream'
+    });
+    response.data.pipe(writer);
+    return new Promise((resolve, reject) => {
+        writer.on('finish', resolve)
+        writer.on('error', reject)
+    });
+}
+
+const umlTitle = src => {
+    const match = src.match(/@startuml (.*)/);
+    return match && match[1]
+        ? match[1].trim()
+        : 'Diagram';
+}
+
 const highlight = (str, lang) => {
     // Intercept handling for 'plantuml' code blocks
     // We don't want to show the code, but the rendered result
-    // const [plantLang, title] = lang.trim().split(' ', 2);
     if (lang.trim() === 'plantuml') {
         const encoded = umlEncoder.encode(str);
-        const match = str.match(/@startuml (.*)/);
-        const title = match && match[1]
-            ? match[1].trim()
-            : 'Diagram';
-        return `<uml-diagram encoded="${encoded}" title="${title}" />`
+        const fname = `uml/${hashCode(encoded)}.png`;
+        const title = umlTitle(str);
+        download(encoded, fname);
+        return `<p><img src="/${fname}" title="${title}" alt="${title}"></img></p>`;
     }
     return '';
 }
