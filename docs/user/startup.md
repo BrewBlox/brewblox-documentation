@@ -43,7 +43,7 @@ Download the [Raspberry Pi Imager](https://www.raspberrypi.org/downloads/)
 
 Insert your microSD card in the card reader, and connect the reader to your computer.
 
-Select Raspbian Lite, and write it to your SD card.
+Select Raspberry Pi OS (32-bit), and write it to your SD card.
 
 ![Imager](../images/imager.png)
 
