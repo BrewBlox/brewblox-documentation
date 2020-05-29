@@ -1,130 +1,4 @@
-const umlEncoder = require('plantuml-encoder');
-const fs = require('fs');
-const path = require('path');
-const axios = require('axios');
-
-const sidebar = {
-    '/dev/': [
-        '',
-        {
-            title: 'Tutorials',
-            children: [
-                'tutorials/remote_scripts',
-                'tutorials/container_script',
-                'tutorials/serial_script',
-                'tutorials/publisher_script',
-                'tutorials/scheduled_script',
-            ],
-        },
-        {
-            title: 'Contributing',
-            children: [
-                'contributing/docker',
-                'contributing/raspberry',
-                'contributing/using_service',
-                'contributing/tools_tricks',
-                'contributing/release_tools',
-            ]
-        },
-        {
-            title: 'Reference Documents',
-            children: [
-                'reference/event_logging',
-                'reference/controlbox_spark_protocol',
-                'reference/spark_commands',
-            ]
-        },
-        {
-            title: 'Design Decisions',
-            children: [
-                'decisions/',
-                'decisions/component_definitions',
-                'decisions/block_stories',
-                'decisions/data_stories',
-                'decisions/subprojects',
-                'decisions/microservice_adjustments',
-                'decisions/communication_options',
-                'decisions/gateway_options',
-                'decisions/eventbus',
-                'decisions/concurrent_functionality',
-                'decisions/automated_release',
-                'decisions/docker_crosscompilation',
-                'decisions/rpi_docker_install',
-                'decisions/peer_configuration',
-                'decisions/devcon_data_store',
-                'decisions/crosscompilation_revisited',
-                'decisions/dev_releases',
-                'decisions/orchestration',
-                'decisions/documentation_layout',
-                'decisions/block_synchronization',
-                'decisions/docker_image_cleaning',
-                'decisions/crosscompilation_base_images',
-                'decisions/dynamic_ui_plugins',
-                'decisions/stable_releases',
-                'decisions/crud_component',
-                'decisions/dynamic_widgets',
-                'decisions/automation_service',
-                'decisions/crosscompilation_buildx',
-            ]
-        },
-    ],
-    '/user/': [
-        'startup',
-        'ferment_guide',
-        'control_chains',
-        'all_widgets',
-        'all_blocks',
-        'multiple_devices',
-        'adding_spark',
-        'adding_spark_sim',
-        'connect_settings',
-        'builder_guide',
-        'automation_guide',
-        'backup_guide',
-        'blocks_in_depth',
-        'removing_things',
-        'release_notes',
-        'troubleshooting',
-    ]
-};
-
-const hashCode = s =>
-    s.split('').reduce((a, b) => (((a << 5) - a) + b.charCodeAt(0)) | 0, 0);
-
-const download = async (encoded, dest) => {
-    const url = `https://www.plantuml.com/plantuml/png/${encoded}`;
-    const writer = fs.createWriteStream(path.resolve(__dirname, 'public', dest));
-    const response = await axios({
-        url,
-        method: 'GET',
-        responseType: 'stream'
-    });
-    response.data.pipe(writer);
-    return new Promise((resolve, reject) => {
-        writer.on('finish', resolve)
-        writer.on('error', reject)
-    });
-}
-
-const umlTitle = src => {
-    const match = src.match(/@startuml (.*)/);
-    return match && match[1]
-        ? match[1].trim()
-        : 'Diagram';
-}
-
-const highlight = (str, lang) => {
-    // Intercept handling for 'plantuml' code blocks
-    // We don't want to show the code, but the rendered result
-    if (lang.trim() === 'plantuml') {
-        const encoded = umlEncoder.encode(str);
-        const fname = `uml/${hashCode(encoded)}.png`;
-        const title = umlTitle(str);
-        download(encoded, fname);
-        return `<p><img src="/${fname}" title="${title}" alt="${title}"></img></p>`;
-    }
-    return '';
-}
+const plantuml = require('./plantuml');
 
 module.exports = {
     title: 'Brewblox',
@@ -136,7 +10,90 @@ module.exports = {
             { text: 'Developer docs', link: '/dev/' },
             { text: 'BrewPi', link: 'https://www.brewpi.com/' }
         ],
-        sidebar,
+        sidebar: {
+            '/dev/': [
+                '',
+                {
+                    title: 'Tutorials',
+                    children: [
+                        'tutorials/remote_scripts',
+                        'tutorials/container_script',
+                        'tutorials/serial_script',
+                        'tutorials/publisher_script',
+                        'tutorials/scheduled_script',
+                    ],
+                },
+                {
+                    title: 'Contributing',
+                    children: [
+                        'contributing/docker',
+                        'contributing/raspberry',
+                        'contributing/using_service',
+                        'contributing/tools_tricks',
+                        'contributing/release_tools',
+                    ]
+                },
+                {
+                    title: 'Reference Documents',
+                    children: [
+                        'reference/event_logging',
+                        'reference/controlbox_spark_protocol',
+                        'reference/spark_commands',
+                    ]
+                },
+                {
+                    title: 'Design Decisions',
+                    children: [
+                        'decisions/',
+                        'decisions/component_definitions',
+                        'decisions/block_stories',
+                        'decisions/data_stories',
+                        'decisions/subprojects',
+                        'decisions/microservice_adjustments',
+                        'decisions/communication_options',
+                        'decisions/gateway_options',
+                        'decisions/eventbus',
+                        'decisions/concurrent_functionality',
+                        'decisions/automated_release',
+                        'decisions/docker_crosscompilation',
+                        'decisions/rpi_docker_install',
+                        'decisions/peer_configuration',
+                        'decisions/devcon_data_store',
+                        'decisions/crosscompilation_revisited',
+                        'decisions/dev_releases',
+                        'decisions/orchestration',
+                        'decisions/documentation_layout',
+                        'decisions/block_synchronization',
+                        'decisions/docker_image_cleaning',
+                        'decisions/crosscompilation_base_images',
+                        'decisions/dynamic_ui_plugins',
+                        'decisions/stable_releases',
+                        'decisions/crud_component',
+                        'decisions/dynamic_widgets',
+                        'decisions/automation_service',
+                        'decisions/crosscompilation_buildx',
+                    ]
+                },
+            ],
+            '/user/': [
+                'startup',
+                'ferment_guide',
+                'control_chains',
+                'all_widgets',
+                'all_blocks',
+                'multiple_devices',
+                'adding_spark',
+                'adding_spark_sim',
+                'connect_settings',
+                'builder_guide',
+                'automation_guide',
+                'backup_guide',
+                'blocks_in_depth',
+                'removing_things',
+                'release_notes',
+                'troubleshooting',
+            ]
+        },
         repo: 'brewblox/brewblox-documentation',
         docsDir: 'docs',
         lastUpdated: 'Last Updated',
@@ -145,6 +102,6 @@ module.exports = {
     chainMarkdown: config => {
         config
             .options
-            .highlight(highlight);
+            .highlight(plantuml.highlight);
     }
 };
