@@ -8,10 +8,6 @@ For an explanation of how to combine the various Spark Blocks, see the [Brewblox
 
 The default configuration uses a single Spark controller. The [Multiple Devices](./multiple_devices.md) guide describes how to get started using more devices.
 
-## Compatibility
-
-
-
 ::: warning
 The following Raspberry Pi models are **NOT** compatible with Brewblox.
 
