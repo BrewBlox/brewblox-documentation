@@ -43,7 +43,60 @@ The child components inherit from either `CrudComponent` or `BlockCrudComponent`
 
 `BlockCrud` is an extension of `Crud`: it can also be used by a direct descendant of `CrudComponent`
 
-<PlantUml src="crud_component.puml" title="A component tree using Crud objects"/>
+```plantuml
+@startuml Crud Components 
+allowmixing
+
+package showBlockDialog #cyan
+Class FormDialog
+Class PidWidget #cyan
+Class BlockWidgetToolbar
+Class PidForm
+Class WidgetActions
+Class BlockActions
+Class RenameBlockAction
+Class RenameWidgetAction
+Class BlockFormToolbar
+Class CrudComponent {
+    renameWidget()
+}
+Class BlockCrudComponent {
+    renameBlock()
+}
+
+note right of showBlockDialog
+    Creates BlockCrud object
+end note
+
+note top of PidWidget
+    Creates BlockCrud object
+end note
+
+CrudComponent <|-down- WidgetActions
+CrudComponent <|-down- RenameWidgetAction
+CrudComponent <|-down- BlockCrudComponent
+
+BlockCrudComponent <|-down- PidForm
+BlockCrudComponent <|-down- BlockActions
+BlockCrudComponent <|-down- BlockFormToolbar
+BlockCrudComponent <|-down- RenameBlockAction
+BlockCrudComponent <|-down- BlockWidgetToolbar
+
+showBlockDialog .down.> FormDialog
+PidWidget .left.> FormDialog
+FormDialog .down.> PidForm
+PidWidget .down.> BlockWidgetToolbar
+BlockWidgetToolbar .down.> WidgetActions
+BlockWidgetToolbar .down.> BlockActions
+WidgetActions .down.> RenameWidgetAction
+BlockActions .down.> RenameBlockAction
+
+PidForm .down.> BlockFormToolbar
+BlockFormToolbar .down.> WidgetActions
+BlockFormToolbar .down.> BlockActions
+
+@enduml
+```
 
 The above diagram is a practical example of components relate. 
 - `PidWidget` is the dashboard item.

@@ -34,7 +34,48 @@ The various backend service implementations only share endpoints for service hea
 
 ## Splitting up
 
-<PlantUml src="microservices_diagram.puml" title="Micro Services"/>
+```plantuml
+@startuml Microservices
+
+title 
+    Microservice architecture
+
+    <back:gray>Not yet specified</back>
+
+    <back:lightgreen>External application</back>
+
+    <back:yellow>Brewblox service implementation</back>
+
+end title
+
+cloud GUI
+node Gateway #lightgreen
+node Supervisor #gray
+node DeviceService #yellow
+node RabbitMQ #lightgreen
+node HistoryService #yellow
+node InfluxDB #lightgreen
+node EventSourceService #yellow
+node ReportingService #yellow
+
+GUI --> Gateway
+Gateway --> HistoryService
+Gateway --> DeviceService
+Gateway --> ReportingService
+Gateway --> EventSourceService
+Gateway <--> Supervisor
+
+DeviceService "publish / subscribe" -down-> RabbitMQ
+
+ReportingService --> HistoryService
+
+HistoryService "subscribe" --> RabbitMQ
+HistoryService --> InfluxDB
+
+EventSourceService "subscribe" --> RabbitMQ
+
+@enduml
+```
 
 
 An alternative is to take all components identified above, and split them into micro-services.

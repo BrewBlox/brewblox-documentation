@@ -9,7 +9,23 @@ We will add wizards to the UI to create the most common arrangements, but still 
 
 ## A basic example
 
-<PlantUml src="basic_chain.puml" title="Basic Control Chain"/>
+```plantuml
+@startuml Basic control chain
+component Sensor as "Temperature Sensor"
+component Setpoint
+component PID
+component PWM
+component Digital as "Digital Actuator"
+component Pin as "Pin / OneWire channel"
+
+Sensor .down.> "input" Setpoint
+Setpoint .down.> "input" PID
+PID -down-> "drives" PWM
+PWM -down-> "drives" Digital
+Digital -down-> "drives" Pin
+
+@enduml
+```
 
 The minimal building blocks for a control system are:
 
@@ -35,7 +51,39 @@ This turns the digital ON/OFF actuator into an 'analog' numeric actuator with a 
 
 ## Heating and cooling a Fridge
 
-<PlantUml src="fridge_chain.puml" title="Fridge Control Chain"/>
+```plantuml
+@startuml Fridge Control Chain
+component heat_PID as "Heat PID"
+component heat_PWM as "Heat PWM"
+component heat_Digital as "Heat Digital Actuator"
+component heat_Pin as "Heat Pin"
+
+component cool_PID as "Cool PID"
+component cool_PWM as "Cool PWM"
+component cool_Digital as "Cool Digital Actuator"
+component cool_Pin as "Cool Pin"
+
+component fridge_SSP as "Fridge Setpoint"
+component fridge_Sensor as "Fridge Sensor"
+
+component Mutex
+
+fridge_Sensor .down.> "input" fridge_SSP
+fridge_SSP .down.> "input" heat_PID
+fridge_SSP .down.> "input" cool_PID
+
+heat_PID -down-> "drives" heat_PWM
+heat_PWM -down-> "drives" heat_Digital
+heat_Digital -down-> "drives" heat_Pin
+heat_Digital .right.> Mutex
+
+cool_PID -down-> "drives" cool_PWM
+cool_PWM -down-> "drives" cool_Digital
+cool_Digital -down-> "drives" cool_Pin
+cool_Digital .left.> Mutex
+
+@enduml
+```
 
 As a second example, we'll look at controlling fridge temperature.
 You can cool the air in the fridge by turning the fridge compressor on.
@@ -63,7 +111,50 @@ So for the fridge we choose a PWM period of 30 minutes and configure a minimum O
 
 ## Controlling beer temperature with a dynamic fridge setpoint
 
-<PlantUml src="offset_chain.puml" title="Beer Control Chain"/>
+```plantuml
+@startuml Beer Offset Control Chain
+component heat_PID as "Heat PID"
+component heat_PWM as "Heat PWM"
+component heat_Digital as "Heat Digital Actuator"
+component heat_Pin as "Heat Pin"
+
+component cool_PID as "Cool PID"
+component cool_PWM as "Cool PWM"
+component cool_Digital as "Cool Digital Actuator"
+component cool_Pin as "Cool Pin"
+
+component fridge_Setpoint as "Fridge Setpoint"
+component fridge_Sensor as "Fridge Sensor"
+
+component Mutex
+
+component beer_PID as "Beer PID" #Cyan
+component beer_Setpoint as "Beer Setpoint" #Cyan
+component beer_Sensor as "Beer Sensor" #Cyan
+component beer_Offset as "Fridge Setpoint Driver" #Cyan
+
+fridge_Sensor .down.> "input" fridge_Setpoint
+fridge_Setpoint .down.> "input" heat_PID
+fridge_Setpoint .down.> "input" cool_PID
+
+heat_PID -down-> "drives" heat_PWM
+heat_PWM -down-> "drives" heat_Digital
+heat_Digital .right.> Mutex
+heat_Digital -down-> "drives" heat_Pin
+
+cool_PID -down-> "drives" cool_PWM
+cool_PWM -down-> "drives" cool_Digital
+cool_Digital .left.> Mutex
+cool_Digital -down- "drives" cool_Pin
+
+beer_Sensor .down.> "input" beer_Setpoint
+beer_Setpoint .down.> "input" beer_PID
+beer_Setpoint .down.> "reference" beer_Offset
+beer_PID -down-> beer_Offset
+beer_Offset -left-> "drives" fridge_Setpoint
+
+@enduml
+```
 
 To control beer temperature, we could use 2 PIDs directly like we did for the fridge, but with the beer sensor as input.
 Brewblox also supports a more advanced form of indirect control with a dynamic fridge temperature setting.
@@ -97,7 +188,22 @@ Heating can be done with a heating belt around the fermenter.
 
 ## OneWire Actuators (DS2413)
 
-<PlantUml src="onewire_chain.puml" title="OneWire Control Chain"/>
+```plantuml
+@startuml OneWire control chain
+component PID
+component PWM
+component Actuator as "Digital Actuator"
+component Chip as "DS2413 Chip" #Cyan
+component Setpoint
+component Sensor as "Temperature Sensor"
+
+Sensor .down.> "input" Setpoint
+Setpoint .down.> "input" PID
+PID -down-> "drives" PWM
+PWM -down-> "drives" Actuator
+Actuator -down-> "drives" Chip
+@enduml
+```
 
 Next to the five actuator pins on the Spark 3, Brewblox supports extension boards to add extra outputs.
 The SSR expansion board that we sell has a DS2413 OneWire chip that provides 2 extra output pins.
@@ -107,7 +213,25 @@ The DS2413 can be used just like a Spark 3 output pin. It can be the target of a
 
 ## Setpoint Profiles
 
-<PlantUml src="profile_chain.puml" title="Profile Control Chain"/>
+```plantuml
+@startuml Profile control chain
+component Sensor as "Temperature Sensor"
+component Profile as "Setpoint Profile" #Cyan
+component Setpoint
+component PID
+component PWM
+component Digital as "Digital Actuator"
+component Pin as "Spark Pin"
+
+Sensor .down.> "input" Setpoint
+Profile -down-> "drives" Setpoint
+Setpoint .down.> "input" PID
+PID -down-> "drives" PWM
+PWM -down-> "drives" Digital
+Digital -down-> "drives" Pin
+
+@enduml
+```
 
 A Setpoint has a constant setting. If you want to automatically change the setting over time, you can add a *Setpoint Profile*.
 This Setpoint Profile block gradually changes the setting in the Setpoint block, to avoid sudden jumps in temperature.
@@ -133,7 +257,48 @@ For reference:
 
 Similar to the dynamic fridge temperature setting, we can let the measured mash temperature determine what the HLT temperature must be to raise the mash temperature during circulation.
 
-<PlantUml src="herms_chain.puml" title="HERMS Control Chain"/>
+```plantuml
+@startuml HERMS
+component HLT_PID as "HLT PID"
+component BK_PID as "BK PID"
+component MT_PID as "MT PID"
+
+component HLT_PWM as "HLT PWM"
+component BK_PWM as "BK PWM"
+
+component HLT_Digital as "HLT Digital Actuator"
+component BK_Digital as "BK Digital Actuator"
+
+component HLT_Pin as "HLT Element Pin"
+component BK_Pin as "BK Element Pin"
+
+component HLT_SSP as "HLT Setpoint"
+component MT_SSP as "MT Setpoint"
+component BK_SSP as "BK Setpoint"
+component HLT_Sensor as "HLT Sensor"
+component BK_Sensor as "BK Sensor"
+component MT_Sensor as "MT Sensor"
+component HLT_Driver as "HLT Setpoint Driver"
+
+HLT_Sensor .down.> "input" HLT_SSP
+HLT_SSP .down.> "input" HLT_PID
+HLT_PID -down-> "drives" HLT_PWM
+HLT_PWM -down-> "drives" HLT_Digital
+HLT_Digital -down-> "drives" HLT_Pin
+
+MT_Sensor .down.> "input" MT_SSP
+MT_SSP .down.> "input" MT_PID
+MT_PID -down-> "drives" HLT_Driver
+HLT_Driver -left-> "drives" HLT_SSP
+
+BK_Sensor .down.> "input" BK_SSP
+BK_SSP .down.> "input" BK_PID
+BK_PID -down-> "drives" BK_PWM
+BK_PWM -down-> "drives" BK_Digital
+BK_Digital -down-> "drives" BK_Pin
+
+@enduml
+```
 
 **An example:**
 
@@ -164,7 +329,35 @@ When boiling your wort, you want to boil with constant power. You can do this by
 Heating large volumes of water takes a lot of power, so brewers buy the biggest heating element that their fuses can handle.
 In most cases, they can therefore only power for 1 element at a time. This is not pratical, so Brewblox offers you a solution!
 
-<PlantUml src="balanced_chain.puml" title="Balanced Control Chain"/>
+```plantuml
+@startuml Balanced Control Chain
+component HLT_PID as "HLT PID"
+component HLT_PWM as "HLT PWM"
+component HLT_Digital as "HLT Actuator"
+component HLT_Pin as "HLT Pin"
+
+component BK_PID as "BK PID"
+component BK_PWM as "BK PWM"
+component BK_Digital as "BK Actuator"
+component BK_Pin as "BK Pin"
+
+component Balancer #Cyan
+component Mutex #Cyan
+
+HLT_PID -down-> HLT_PWM
+HLT_PWM -down-> HLT_Digital
+HLT_PWM .right.> Balancer
+HLT_Digital .right.> Mutex
+HLT_Digital -down-> HLT_Pin
+
+BK_PID -down-> BK_PWM
+BK_PWM -down-> BK_Digital
+BK_PWM .left.> Balancer
+BK_Digital .left.> Mutex
+BK_Digital -down-> BK_Pin
+
+@enduml
+```
 
 ### Mutex
 

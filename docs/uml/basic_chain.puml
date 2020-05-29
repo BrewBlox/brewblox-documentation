@@ -11,6 +11,4 @@ Setpoint .down.> "input" PID
 PID -down-> "drives" PWM
 PWM -down-> "drives" Digital
 Digital -down-> "drives" Pin
-
-
 @enduml

@@ -46,7 +46,17 @@ Two requirements have the most impact on high-level architecture:
 - Plugins can import and use framework code and typings
 
 A simple representation of required steps during startup:
-<PlantUml src="dynamic_ui_model.puml" title="Dynamic UI sequence"/>
+
+```plantuml
+@startuml Dynamic UI Startup
+    Entrypoint -> Framework: Load
+    Entrypoint -> Datastore: Get plugins
+    Entrypoint -> CDN: Get plugin code
+    Entrypoint -> Plugin: Load
+    Plugin -> Framework: Import
+    Entrypoint -> Entrypoint: Run
+@enduml
+```
 
 Based on these steps, the application entrypoint must be somewhat separated from the framework. The framework must be available for import without triggering the entrypoint.
 
@@ -59,7 +69,18 @@ In our case we just need to change the behavior slightly: instead of directly re
 
 ## Loading plugin code
 
-<PlantUml src="dynamic_ui_starter.puml" title="Dynamic UI Starter"/>
+```plantuml
+@startuml Dynamic UI Starter
+    Entrypoint -> Datastore: Get plugins
+    Entrypoint -> CDN: Get plugin code
+    Entrypoint -> PluginA: Import
+    Entrypoint -> PluginB: Import
+    Entrypoint -> Starter: Start([pluginA, pluginB])
+    Starter -> Framework: Load
+    Starter -> PluginA: Load
+    Starter -> PluginB: Load
+@enduml
+```
 
 The entrypoint (in brewblox-ui) queries the datastore for the plugin configuration, before importing the desired plugins from a CDN.
 
@@ -77,7 +98,14 @@ Whether this is best accomplished through `package.json`, or by requiring plugin
 
 ## Development workflow
 
-<PlantUml src="dynamic_ui_devstarter.puml" title="Plugin Development Startup"/>
+```plantuml
+@startuml Plugin Dev Startup
+    PluginEntrypoint -> Plugin: Import
+    PluginEntrypoint -> Starter: Start([myPlugin])
+    Starter -> Framework: Load
+    Starter -> Plugin: Load
+@enduml
+```
 
 Plugin developers benefit from the ability to define alternative entry points. Their entrypoint can skip the datastore/CDN round trips for their own plugin, and use a relative import instead.
 

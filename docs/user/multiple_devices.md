@@ -10,7 +10,22 @@ Brewblox is designed to let you control multiple devices with a single applicati
 
 To make this both reliable and easy, devices are connected to a central hub (the **server**).
 
-<PlantUml src="server_devices.puml" title="Linked devices"/>
+```plantuml
+@startuml Server linked to devices
+
+node Server
+node SparkOne as "Spark controller #1" #cyan
+node SparkTwo as "Spark controller #2" #cyan
+node Tilt as "Tilt hydrometer" #cyan
+
+Server <-right-> SparkOne
+Server <-right-> SparkTwo
+Server <-right-> Tilt
+
+SparkOne -[hidden]- SparkTwo
+SparkTwo -[hidden]- Tilt
+@enduml
+```
 
 On the server, we need some software to talk to individual devices. To make it easy to add new devices, we split the software into **services**.
 
@@ -22,7 +37,34 @@ Some examples of supported devices:
 - The [iSpindel hydrometer ](https://github.com/bdelbosc/brewblox-ispindel)
 - The [Plaato digital airlock](https://github.com/Brewblox/brewblox-plaato)
 
-<PlantUml src="server_services.puml" title="Server services"/>
+```plantuml
+@startuml Services overview
+
+node Server {
+    component History as "service 'history'"
+    component SvcSparkOne as "service 'spark-one'"
+    component SvcSparkTwo as "service 'spark-two'"
+    component SvcTilt as "service 'tilt'"
+}
+
+node DevSparkOne as "Spark controller #1" #cyan
+node DevSparkTwo as "Spark controller #2" #cyan
+node DevTilt as "Tilt hydrometer" #cyan
+
+History -[hidden]- SvcSparkOne
+SvcSparkOne -[hidden]- SvcSparkTwo
+SvcSparkTwo -[hidden]- SvcTilt
+
+SvcSparkOne -up-> History
+SvcSparkTwo -up-> History
+SvcTilt -up-> History
+
+SvcSparkOne -right-> DevSparkOne
+SvcSparkTwo -right-> DevSparkTwo
+SvcTilt -right-> DevTilt
+
+@enduml
+```
 
 ## Service configuration
 

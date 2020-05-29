@@ -38,7 +38,55 @@ and the service edits Spark settings when required - even when you're not lookin
 
 ## Runtime
 
-<PlantUml src="automation_deployment.puml" title="Automation nodes"/>
+```plantuml
+@startuml Automation service deployment
+
+actor User
+cloud UI [
+    <b>UI
+
+    - Edit templates
+    - Start processes
+    - Mark tasks as done
+]
+database Datastore [
+    <b>Datastore
+
+    - Store templates
+    - Store processes
+    - Store tasks
+]
+node AutomationService [
+    <b>automation service
+
+    - Run processes
+    - Create / check tasks
+    - Check Spark values
+    - Edit Spark settings
+]
+node SparkService [
+    <b>Spark service
+
+    - Read controller values
+    - Write controller settings
+]
+node SparkController [
+    <b>Spark controller
+
+    - Read sensors
+    - Control actuators
+]
+
+User --> UI
+UI --> AutomationService
+UI ..> SparkService
+UI --> Datastore
+SparkService --> SparkController
+AutomationService --> Datastore
+AutomationService --> SparkService
+
+@enduml
+```
 
 The templates for processes are edited in the UI, but the automation service runs the process.
 
@@ -55,7 +103,37 @@ Processes are split into multiple steps.
 
 Each step has three phases: *Preconditions*, *Actions*, and *Transitions*.
 
-<PlantUml src="automation_flow.puml" title="Automation flow"/>
+```plantuml
+@startuml Process flow
+
+start
+:Start step;
+
+repeat :Preconditions;
+backward:Wait and retry}
+repeat while (conditions ok?) is (no)
+->yes;
+
+:Actions;
+
+repeat :Transitions;
+    partition "Transition 1" {
+        if (conditions ok?) then (Start next step)
+            stop
+        else (no)
+        endif
+    }
+    partition "Transition 2" {
+        if (conditions ok?) then (Start next step)
+            stop
+        else (no)
+        endif
+    }
+backward:Wait and retry}
+repeat while (No transition found)
+
+@enduml
+```
 
 Actions change the system. Preconditions and transitions are used to control the process itself.
 
