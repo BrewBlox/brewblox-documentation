@@ -29,7 +29,7 @@ const umlTitle = src => {
         : 'Diagram';
 }
 
-const highlight = (str, lang) => {
+const highlight = (fallback) => (str, lang) => {
     // Intercept handling for 'plantuml' code blocks
     // We don't want to show the code, but the rendered result
     if (lang.trim() === 'plantuml') {
@@ -40,7 +40,7 @@ const highlight = (str, lang) => {
         download(encoded, fname);
         return `<p><img src="/${fname}" title="${title}" alt="${title}"></img></p>`;
     }
-    return '';
+    return fallback(str, lang);
 }
 
 module.exports = {

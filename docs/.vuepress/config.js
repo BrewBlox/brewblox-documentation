@@ -100,8 +100,8 @@ module.exports = {
         editLinks: true,
     },
     chainMarkdown: config => {
-        config
-            .options
-            .highlight(plantuml.highlight);
+        const opts = config.options;
+        // Pass the default function as backup to plantuml highlight
+        opts.set('highlight', plantuml.highlight(opts.get('highlight')));
     }
 };
