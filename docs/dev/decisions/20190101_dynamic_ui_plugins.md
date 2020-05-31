@@ -1,5 +1,7 @@
 # Dynamically loading UI plugins
 
+Date: 2019/01/01
+
 Brewblox is set up to be dynamic and extensible at runtime through configuration. <br>
 While the backend accomplishes this through a microservice architecture, the UI is still a single application.
 
@@ -8,7 +10,7 @@ This document describes the various steps that must be taken to do so.
 
 ## Context
 
-The [backend architecture design](./subprojects.md) set out to make the system scalable by dividing it into separate applications.
+The [backend architecture design](./20180206_subprojects) set out to make the system scalable by dividing it into separate applications.
 
 The UI requires a slightly different approach: it should be a single application where end users can monitor and control all backend services.
 

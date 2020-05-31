@@ -1,5 +1,7 @@
 # User Stories: Data
 
+Date: 2018/02/06
+
 ```gherkin
 Feature: Data management
 Values measured by controller blocks are captured

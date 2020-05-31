@@ -1,5 +1,7 @@
 # Automated software release
 
+Date: 2018/03/06
+
 ## Context
 
 Part of an efficient software development pipeline is automatic deployment and release.

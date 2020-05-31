@@ -81,4 +81,4 @@ Whether this is always relevant in practice remains to be seen: BrewPi is a smal
 
 
 
-[automated-release]: ./automated_release.md
+[automated-release]: ./20180306_automated_release

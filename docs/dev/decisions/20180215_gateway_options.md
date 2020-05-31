@@ -1,5 +1,7 @@
 # Options for gateway services in a microservice architecture
 
+Date: 2018/02/15
+
 ## Business Case
 
 In the top-level microservice architecture for Brewblox ([documentation](./subprojects.md), [diagrams](.service_components.txt)), there are some supporting services.

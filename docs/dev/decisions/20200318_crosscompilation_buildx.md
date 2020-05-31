@@ -4,7 +4,7 @@ Date: 2020/03/18
 
 ## Context
 
-Cross-compilation of Docker images already saw three previous attempts at implementation ([original](./docker_crosscompilation.md), [revisited](./crosscompilation_revisited.md), [base images](./crosscompilation_base_images.md)).
+Cross-compilation of Docker images already saw three previous attempts at implementation ([original](./20180314_docker_crosscompilation), [revisited](./20180522_crosscompilation_revisited), [base images](./20181207_crosscompilation_base_images)).
 
 At that point, cross-compilation worked, and every build generated amd64 and arm32 images. The latter had tags prefixed with `rpi-`.
 

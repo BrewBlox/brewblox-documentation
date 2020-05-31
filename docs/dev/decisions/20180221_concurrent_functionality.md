@@ -1,5 +1,7 @@
 # Concurrent Functionality
 
+Date: 2018/02/21
+
 ## Context
 
 Individual services can communicate using two protocols: REST for direct communication, and AMQP for event-driven communication.

@@ -4,7 +4,7 @@ Date: 2018/05/22
 
 ## Context
 
-Previous research (docker_crosscompilation.md) concluded that cross compiling ARMv7 Docker images was not feasible.
+[Previous research ](./20180314_docker_crosscompilation) concluded that cross compiling ARMv7 Docker images was not feasible.
 
 Re-evaluating used references indicated that a solution was not yet considered.
 

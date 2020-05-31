@@ -125,7 +125,7 @@ Crosscompiling software for the Raspberry Pi ARM32v7 environment takes considera
 
 
 
-[xcompile-1]: ./docker_crosscompilation.md
-[xcompile-2]: ./crosscompilation_revisited.md
+[xcompile-1]: ./20180314_docker_crosscompilation
+[xcompile-2]: ./20180522_crosscompilation_revisited
 [multistage-docker]: https://docs.docker.com/develop/develop-images/multistage-build/
 [pip-wheel]: https://pip.pypa.io/en/stable/reference/pip_wheel/
