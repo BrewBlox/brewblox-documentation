@@ -103,8 +103,8 @@ The Resin images we used previously worked, but added (for us) unneccessary extr
 After creating our images we could upgrade all our services to Python 3.7. While not absolutely critical, it is still nice to use the latest and greatest version.
 
 
-[xcompile-1]: ./docker_crosscompilation.md
-[xcompile-2]: ./crosscompilation_revisited.md
+[xcompile-1]: ./20180314_docker_crosscompilation
+[xcompile-2]: ./20180522_crosscompilation_revisited
 [manifest]: https://docs.docker.com/edge/engine/reference/commandline/manifest/
 [build-guide]: https://www.hotblackrobotics.com/en/blog/2018/01/22/docker-images-arm/
 [docker-cli]: https://docs.docker.com/engine/reference/commandline/build/#options

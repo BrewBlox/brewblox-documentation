@@ -1,4 +1,5 @@
 # Block Synchronization
+
 Date: 2018/11/02
 
 Note: this document assumes familiarity with RabbitMQ protocols and syntax. <br>

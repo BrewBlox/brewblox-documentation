@@ -1,5 +1,7 @@
 # User Stories: Blocks
 
+Date: 2018/02/06
+
 ```gherkin
 # Note: alternative name for "UI block" could be "Block"
 

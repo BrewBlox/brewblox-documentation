@@ -1,5 +1,7 @@
 # Definitions and mapping of GUI entities
 
+Date: 2018/02/06
+
 Components as defined by the controller firmware are not fully suited for use by the service and GUI layers, as they lack a clear mapping to user concepts.
 
 ## User Considerations
