@@ -112,3 +112,14 @@ During a deprecation period, the history service is subscribed both to the exist
 - A preconfigured Docker image is used for RabbitMQ (`brewblox/rabbitmq`).
 - The Emitter service is removed.
 - Existing tutorials are updated to use MQTT over WS for publishing history.
+
+## Further work
+
+The UI directly subscribing to the eventbus causes a regression in functionality: the emitter service also served as Last Value Cache.
+The UI will now first receive data when the source next publishes its state.
+
+The likely implementation is for the UI to republishing of the last value.
+Values are cached by either:
+  - Every publishing service.
+  - A new service.
+  - An existing service (history?).
