@@ -61,11 +61,13 @@ For us, the relevant advantages are:
 
 AMQP has two settings that are used for addressing: exchange, and routing key. MQTT published to a fixed exchange, and only has a /-separated message topic.
 
+MQTT subscribers can use the `+` and `#` wildcards
+
 This requires a breaking change for publishing history data, as it meaningfully uses both exchange (`brewcast.history`), and routing key (measurement name).
 
 State data uses the exchange (`brewcast.state`), but could use any value as routing key. Metadata is included in the message itself.
 
-The required schema is:
+The required schema for state messages is:
 ```json
 {
   "type": "object",
@@ -93,7 +95,24 @@ The required schema is:
 
 The proposed changes are:
 - Message topics become the predefined const values `brewcast/history` and `brewcast/state`.
-- History messages use a comparable schema to state messages. (the `ttl` field is not required).
+- History messages must adhere to a schema:
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string"
+    },
+    "data": {}
+  },
+  "required": [
+    "key",
+    "data",
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
+```
 
 During a deprecation period, the history service is subscribed both to the existing AMQP `brewcast.history` exchange, and the new MQTT `brewcast/history` topic.
 
@@ -101,8 +120,13 @@ During a deprecation period, the history service is subscribed both to the exist
 
 - The RabbitMQ web_mqtt endpoint is added as Traefik proxy backend.
 - The UI subscribes to MQTT over WS messages from the eventbus.
+  - Topic filter: `brewcast/state/#`.
 - Device services publish history data using MQTT.
 - The Automation service subscribes to MQTT events.
+  - Topic filter: `brewcast/state/#`.
+  - Messages from automation itself must be filtered.
+- The history service subscribes to MQTT events:
+  - Topic filter: `brewcast/history/#`.
 - The history service stays subscribed to the AMQP history spec for a deprecation period.
 - The spec for publishing history messages is updated.
 - AMQP support is removed from brewblox-service.
@@ -118,8 +142,12 @@ During a deprecation period, the history service is subscribed both to the exist
 The UI directly subscribing to the eventbus causes a regression in functionality: the emitter service also served as Last Value Cache.
 The UI will now first receive data when the source next publishes its state.
 
-The likely implementation is for the UI to republishing of the last value.
+One possible implementation is for the UI to request republishing the most recent state data.
 Values are cached by either:
   - Every publishing service.
   - A new service.
   - An existing service (history?).
+
+Another option is to leverage the [retain flag](https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/) on MQTT messages.
+
+Both solutions have drawbacks, and must be investigated further.
