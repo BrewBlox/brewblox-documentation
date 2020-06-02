@@ -27,9 +27,11 @@ The eventbus host name is always `eventbus`. It listens for MQTT messages on por
 mqtt://eventbus:1883
 ```
 
-If your publishing device or service is outside the network, you can open a websocket connection with <HOST>:<HTTPS_PORT>/eventbus. It will be forwarded to the eventbus by the Traefik gateway.
+If your publishing device or service is outside the network, you can open a websocket connection to `<HOST>:443/eventbus`. It will be forwarded to the eventbus by the Traefik gateway.
 
 Do note that you have to enable SSL/TLS. If you are using a self-signed certificate (the default), you'll have to disable certificate verification.
+
+You'll want to make the port configurable. It must match the Traefik HTTPS port (default: 443), which can be changed by users.
 
 ```bash
 # Outside the network
@@ -38,7 +40,7 @@ wss://HOST:443/eventbus
 
 ## History vs. State
 
-In most scenarios, there are two reasons for services to continuously broadcast their current state:
+In most scenarios, there are two reasons for services to continuously broadcast data:
 
 - The data is to be stored in a history database, and can later be retrieved for analytics.
 - The data is to be immediately and continuously processed.
@@ -56,19 +58,27 @@ What is important is how data should be formatted, and where it must be sent.
 
 ### Publishing history data
 
-History data should be published to a topic starting with `brewcast/history`. <br>
-`brewcast/history` and `brewcast/history/device-name` are both fine.
-Everything after `brewcast/history` is ignored.
-
+History data should be published to a topic starting with `brewcast/history`.
+Everything after `brewcast/history` is ignored by clients.
 
 ### History data formatting
 
 The payload for history events must be a JSON serialized object, with as schema:
 
-```python
+```json
 {
-    'key': str;
-    'data': dict;
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string"
+    },
+    "data": {}
+  },
+  "required": [
+    "key",
+    "data"
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
 }
 ```
 
@@ -93,7 +103,7 @@ The `key` field is considered the data source name, and becomes the InfluxDB mea
 The `data` field is flattened.
 The key to all values is set as a /-separated path that includes the key of all parent objects.
 
-If we receive this event:
+This event...
 
 ```python
 {
@@ -114,7 +124,7 @@ If we receive this event:
 }
 ```
 
-...the data will be flattened to:
+...is flattened to:
 
 ```python
 {
@@ -131,7 +141,7 @@ Services are expected to sanitize data before publishing.
 
 ## State
 
-Published state data is expected to be consumed immediately. An optional validity duration can be provided to help caching.
+Published state data is expected to be consumed immediately. A `ttl` (time to live) field must be provided to help caching.
 
 ### Publishing state
 
@@ -144,10 +154,43 @@ Event data must be a serialized JSON object, with the following schema:
 
 ``` python
 {
-    'key': str,
-    'type': str,
-    'ttl': str,
-    'data': Or(dict, list),
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "ttl": {
+      "type": "string"
+    },
+    "data": {}
+  },
+  "required": [
+    "key",
+    "type",
+    "ttl",
+    "data"
+  ],
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
+```
+
+For example:
+
+```python
+{
+    'key': 'my-device',
+    'type': 'device_type',
+    'ttl': '10m',
+    'data': {
+        'sensor1': 10,
+        'sensor2': {
+            'value1': 50,
+            'value2': 123,
+        }
+    }
 }
 ```
 
