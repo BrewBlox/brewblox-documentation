@@ -2,7 +2,9 @@
 
 Brewblox is a rapidly evolving system that welcomes external contributions. To reflect this, developer documentation is split in four subcategories:
 
-**Tutorials** show how to create and run simple scripts. These are useful for everyone that wants to tinker with their own system. The source code for all tutorials is also available [here](https://github.com/brewblox/brewblox-tutorials).
+**Tutorials** show how to create and run simple scripts.
+These are useful for everyone that wants to tinker with their own system.
+The source code for all tutorials is also available [here](https://github.com/BrewBlox/brewblox-documentation/tree/develop/docs/dev/tutorials).
 
 **Contributing guides** describe how to get started building a service, and how to use dev tools.
 
@@ -25,4 +27,3 @@ These are not updated: if a decision changes or is reversed, a new document is a
 - [brewblox-history: the InfluxDB client](https://github.com/brewblox/brewblox-history)
 - [brewblox-ctl: CLI tool for users](https://github.com/BrewBlox/brewblox-ctl)
 - [brewblox-ctl-lib: release-specific libs for brewblox-ctl](https://github.com/BrewBlox/brewblox-ctl-lib)
-- [brewblox-dev: CLI tool for devs](https://github.com/BrewBlox/brewblox-dev)

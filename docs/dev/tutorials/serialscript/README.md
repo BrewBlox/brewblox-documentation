@@ -4,7 +4,7 @@ Many related devices and sensors publish their data directly to a serial port.
 This includes connected Arduinos.
 
 This tutorial shows you how to read from a serial port while inside a Docker container.
-It assumes you're either familiar with Docker, or have followed the [dockerized script](./container_script) tutorial.
+It assumes you're either familiar with Docker, or have followed the [dockerized script](../brewscript/) tutorial.
 
 ## Source code
 
@@ -12,38 +12,7 @@ On your Pi, create a new directory `serialscript`. In it, create two files:
 
 **script.py**
 
-```python
-"""
-Example for reading from a serial port inside a container
-
-Dependencies:
-- pyserial
-"""
-
-import serial
-
-# This is the default serial port
-PORT = '/dev/ttyACM0'
-
-# You may need to further configure settings
-# See the pyserial documentation for more info
-# https://pythonhosted.org/pyserial/pyserial_api.html#classes
-ser = serial.Serial(port=PORT,
-                    baudrate=9600,
-                    timeout=1)
-
-try:
-    while True:
-        # Read raw data from the stream
-        # Convert the binary string to a normal string
-        # Remove the trailing newline character
-        message = ser.readline().decode().rstrip()
-
-        print(f'recv {message}')
-finally:
-    ser.close()
-
-```
+<<< @/docs/dev/tutorials/serialscript/script.py
 
 **Dockerfile**
 
