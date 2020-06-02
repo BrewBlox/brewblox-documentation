@@ -17,10 +17,10 @@ module.exports = {
                     title: 'Tutorials',
                     children: [
                         'tutorials/remote_scripts',
-                        'tutorials/container_script',
-                        'tutorials/serial_script',
-                        'tutorials/publisher_script',
-                        'tutorials/scheduled_script',
+                        'tutorials/brewscript/',
+                        'tutorials/serialscript/',
+                        'tutorials/pubscript/',
+                        'tutorials/scheduledscript/',
                     ],
                 },
                 {
