@@ -23,7 +23,7 @@ FROM python:3.7-slim
 
 COPY script.py /app/script.py
 
-RUN pip3 install pika
+RUN pip3 install paho-mqtt
 
 CMD ["python3", "/app/script.py"]
 
@@ -43,16 +43,6 @@ To build the image, run:
 docker build --tag pubscript pubscript/
 ```
 
-## Editing docker-compose.yml
-
-To access the eventbus, you will need to either add your container to the docker-compose.yml file, or expose the eventbus port. In this tutorial we will take the second approach.
-
-To edit your docker-compose.yml file, run:
-
-```
-brewblox-ctl service expose eventbus 5672:5672
-```
-
 ## Running
 
 To run the built image:
@@ -60,4 +50,4 @@ To run the built image:
 docker run --rm --tty pubscript
 ```
 
-This is exactly the same as the command in [the dockerized script tutorial](./container_script).
+This is exactly the same as the command in [the dockerized script tutorial](../brewscript/).
