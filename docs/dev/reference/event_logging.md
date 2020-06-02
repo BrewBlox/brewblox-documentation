@@ -18,7 +18,7 @@ Events are published using the [MQTT protocol](https://randomnerdtutorials.com/w
 
 MQTT can use TCP or websockets as transport layer.
 
-The eventbus is only accessible for TCP connections from inside the Brewblox network.
+TCP can only be used from inside a Brewblox network.
 
 The eventbus host name is always `eventbus`. It listens for MQTT messages on port 1883.
 
@@ -27,9 +27,9 @@ The eventbus host name is always `eventbus`. It listens for MQTT messages on por
 mqtt://eventbus:1883
 ```
 
-If your publishing device or service is outside the network, you can open a websocket connection to `<HOST>:443/eventbus`. It will be forwarded to the eventbus by the Traefik gateway.
+If your publishing device or service is outside the network, you can open a websocket connection to `<HOST>:443/eventbus`, where *HOST* is the address of the Pi running Brewblox. It will be forwarded to the eventbus by the Traefik gateway.
 
-Do note that you have to enable SSL/TLS. If you are using a self-signed certificate (the default), you'll have to disable certificate verification.
+When using websockets, you have to enable SSL/TLS. If you are using a self-signed certificate (the default), you'll have to disable certificate verification.
 
 You'll want to make the port configurable. It must match the Traefik HTTPS port (default: 443), which can be changed by users.
 
@@ -72,7 +72,9 @@ The payload for history events must be a JSON serialized object, with as schema:
     "key": {
       "type": "string"
     },
-    "data": {}
+    "data": {
+      "type": "object"
+    }
   },
   "required": [
     "key",
@@ -84,14 +86,14 @@ The payload for history events must be a JSON serialized object, with as schema:
 
 For example:
 
-```python
+```json
 {
-    'key': 'my-device',
-    'data': {
-        'sensor1': 10,
-        'sensor2': {
-            'value1': 50,
-            'value2': 123,
+    "key": "my-device",
+    "data": {
+        "sensor1": 10,
+        "sensor2": {
+            "value1": 50,
+            "value2": 123,
         }
     }
 }
@@ -103,20 +105,20 @@ The `key` field is considered the data source name, and becomes the InfluxDB mea
 The `data` field is flattened.
 The key to all values is set as a /-separated path that includes the key of all parent objects.
 
-This event...
+The data in this event...
 
-```python
+```json
 {
-    'key': 'controller1',
-    'data': {
-        'block1': {
-            'sensor1': {
-                'settings': {
-                    'setting': 'setting'
+    "key": "controller1",
+    "data": {
+        "block1": {
+            "sensor1": {
+                "settings": {
+                    "setting": "setting"
                 },
-                'values': {
-                    'value': 'val',
-                    'other': 1
+                "values": {
+                    "value": "val",
+                    "other": 1
                 }
             }
         }
@@ -126,11 +128,11 @@ This event...
 
 ...is flattened to:
 
-```python
+```json
 {
-    'block1/sensor1/settings/setting': 'setting',
-    'block1/sensor1/values/value': 'val',
-    'block1/sensor1/values/other': 1
+    "block1/sensor1/settings/setting": "setting",
+    "block1/sensor1/values/value": "val",
+    "block1/sensor1/values/other": 1
 }
 ```
 
@@ -152,7 +154,7 @@ Everything after `brewcast/state` is ignored by clients.
 
 Event data must be a serialized JSON object, with the following schema:
 
-``` python
+```json
 {
   "type": "object",
   "properties": {
@@ -165,7 +167,9 @@ Event data must be a serialized JSON object, with the following schema:
     "ttl": {
       "type": "string"
     },
-    "data": {}
+    "data": {
+      "type": "object"
+    }
   },
   "required": [
     "key",
@@ -179,16 +183,16 @@ Event data must be a serialized JSON object, with the following schema:
 
 For example:
 
-```python
+```json
 {
-    'key': 'my-device',
-    'type': 'device_type',
-    'ttl': '10m',
-    'data': {
-        'sensor1': 10,
-        'sensor2': {
-            'value1': 50,
-            'value2': 123,
+    "key": "my-device",
+    "type": "device_type",
+    "ttl": "10m",
+    "data": {
+        "sensor1": 10,
+        "sensor2": {
+            "value1": 50,
+            "value2": 123,
         }
     }
 }
