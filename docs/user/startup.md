@@ -151,7 +151,8 @@ To install a new system, run the following command:
 brewblox-ctl install
 ```
 
-This will walk you through the relevant choices, and then install Brewblox in a directory of your choice.
+This will walk you through the relevant choices, and then create the Brewblox install directory.
+By default, `~/brewblox` is used as install directory.
 
 ## Interlude: Navigating Linux directories
 
@@ -220,7 +221,7 @@ If you'd like some more explanation, this [guide to linux commands](https://www.
 
 To finish the installation, and initialize your system, run the first-time setup script.
 
-Navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and start the setup.
+Navigate to the Brewblox install directory (default: `cd ~/brewblox`), and start the setup.
 
 ```bash
 cd ./brewblox
@@ -239,7 +240,7 @@ Skip this step, and follow the instructions [here](./adding_spark_sim.md).
 
 For this step, your Spark should be connected to your Raspberry Pi over USB.
 
-Navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and run the following commands in your terminal:
+Navigate to the Brewblox install directory (default: `cd ~/brewblox`), and run the following commands in your terminal:
 
 ```bash
 brewblox-ctl flash
@@ -261,7 +262,7 @@ The Spark supports Wifi. You can set this up using the UI in Step 8.
 
 ## Step 7: Start the system
 
-To list all possible commands, navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and run:
+To list all possible commands, navigate to the Brewblox install directory (default: `cd ~/brewblox`), and run:
 
 ```
 brewblox-ctl --help
@@ -336,7 +337,7 @@ There's no need to panic. Click advanced, and proceed to the page.
 
 ## Step 8: Use the system
 
-By default, temperature values are in Celsius. If you prefer Fahrenheit (or Kelvin), now is a good time to configure that.
+By default, temperature values are in Celsius. If you prefer Fahrenheit, now is a good time to configure that.
 The unit settings can be found under the `Actions` button in the Spark service page.
 
 ![Spark actions](../images/spark-actions.png)
