@@ -145,7 +145,7 @@ exec $SHELL --login
 ```
 
 These commands installed `brewblox-ctl`, a menu for installing and managing your Brewblox system. <br>
-To install a new system, run the following command:
+To install a new system, run this command:
 
 ```bash
 brewblox-ctl install
@@ -219,12 +219,11 @@ If you'd like some more explanation, this [guide to linux commands](https://www.
 
 ## Step 5: First-time setup
 
-To finish the installation, and initialize your system, run the first-time setup script.
+To finish the installation, and initialize your system, run the setup command.
 
-Navigate to the Brewblox install directory (default: `cd ~/brewblox`), and start the setup.
+Navigate to the Brewblox install directory (default: `cd ~/brewblox`), and run this command:
 
 ```bash
-cd ./brewblox
 brewblox-ctl setup
 ```
 
@@ -240,7 +239,7 @@ Skip this step, and follow the instructions [here](./adding_spark_sim.md).
 
 For this step, your Spark should be connected to your Raspberry Pi over USB.
 
-Navigate to the Brewblox install directory (default: `cd ~/brewblox`), and run the following commands in your terminal:
+Navigate to the Brewblox install directory (default: `cd ~/brewblox`), and run this command:
 
 ```bash
 brewblox-ctl flash
@@ -328,7 +327,7 @@ brewblox-ctl up
 
 After the project is done starting up, you can use the Brewblox UI at `https://raspberrypi` (or your Raspberry Pi's IP address) to configure and monitor your Spark.
 
-::: warning
+::: tip
 Because we're using a local (self-signed) SSL certificate, your browser will display a warning the first time you visit the page.
 
 There's no need to panic. Click advanced, and proceed to the page.
