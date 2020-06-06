@@ -73,7 +73,8 @@ module.exports = {
                         'decisions/20191118_automation_service',
                         'decisions/20200318_crosscompilation_buildx',
                         'decisions/20200530_mqtt_events',
-                    ]
+                        'decisions/20200606_replacing_rabbitmq',
+                    ],
                 },
             ],
             '/user/': [
