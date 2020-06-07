@@ -69,6 +69,23 @@ poetry shell
 profiling view localhost:8912
 ```
 
+## Mapped code volumes
+
+You can make code changes without rebuilding your Docker image by mapping a volume to your code repository:
+
+```yml
+  sparkey:
+    volumes:
+      - ../brewblox-devcon-spark/brewblox_devcon_spark:/app/brewblox_devcon_spark
+```
+
+Normally, you can then apply your code changes by running `docker-compose restart sparkey`. This does not work when profiling: the profiling process is forcibly closed, and after the restart it will be unable to reclaim its bound port.
+To prevent this, use:
+
+```
+docker-compose up -d --force-recreate sparkey
+```
+
 ## Cleanup
 
 When you're done, undo the changes to tracked files.
