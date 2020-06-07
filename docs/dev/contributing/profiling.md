@@ -33,8 +33,6 @@ Now either use a docker-compose.override.yml file with:
 ```yml
   sparkey:
     image: profiled:local
-    cap_add:
-      - sys_ptrace
     ports:
       - "8912:8912"
 ```
@@ -44,8 +42,6 @@ Or edit the config in your docker-compose.yml file:
 ```yml
   sparkey:
     # ------ new -----------------------
-    cap_add:
-      - sys_ptrace
     ports:
       - "8912:8912"
     # ------ changed -------------------
