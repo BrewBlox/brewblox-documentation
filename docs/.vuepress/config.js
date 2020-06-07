@@ -8,7 +8,7 @@ module.exports = {
         nav: [
             { text: 'User guides', link: '/user/startup' },
             { text: 'Developer docs', link: '/dev/' },
-            { text: 'BrewPi', link: 'https://www.brewpi.com/' }
+            { text: 'BrewPi', link: 'https://www.brewpi.com/' },
         ],
         sidebar: {
             '/dev/': [
@@ -31,7 +31,8 @@ module.exports = {
                         'contributing/using_service',
                         'contributing/tools_tricks',
                         'contributing/release_tools',
-                    ]
+                        'contributing/profiling',
+                    ],
                 },
                 {
                     title: 'Reference Documents',
@@ -39,7 +40,7 @@ module.exports = {
                         'reference/event_logging',
                         'reference/controlbox_spark_protocol',
                         'reference/spark_commands',
-                    ]
+                    ],
                 },
                 {
                     title: 'Design Decisions',
@@ -94,7 +95,7 @@ module.exports = {
                 'removing_things',
                 'release_notes',
                 'troubleshooting',
-            ]
+            ],
         },
         repo: 'brewblox/brewblox-documentation',
         docsDir: 'docs',
@@ -105,5 +106,5 @@ module.exports = {
         const opts = config.options;
         // Pass the default function as backup to plantuml highlight
         opts.set('highlight', plantuml.highlight(opts.get('highlight')));
-    }
+    },
 };
