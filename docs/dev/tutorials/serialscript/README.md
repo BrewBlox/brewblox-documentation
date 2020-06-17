@@ -23,7 +23,7 @@ COPY script.py /app/script.py
 
 RUN pip3 install pyserial
 
-CMD ["python3", "/app/script.py"]
+CMD ["python3", "-u", "/app/script.py"]
 
 ```
 

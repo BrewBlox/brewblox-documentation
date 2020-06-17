@@ -10,4 +10,4 @@ COPY script.py /app/script.py
 RUN pip3 install requests
 
 # The command is executed when the container starts
-CMD ["python3", "/app/script.py"]
+CMD ["python3", "-u", "/app/script.py"]

@@ -3,7 +3,7 @@
 The most common use case for integration with Brewblox is "I want to see my data in a graph".
 You can do that by publishing your data to the Brewblox eventbus.
 
-This tutorial shows you how to send data to a RabbitMQ eventbus, and run the script in a Docker container.
+This tutorial shows you how to send data to the Brewblox eventbus, and run the script in a Docker container.
 It assumes you're either familiar with Docker, or have followed the [dockerized script](../brewscript/) tutorial.
 
 This script can be combined with [reading a serial port](../serialscript/).
@@ -25,7 +25,7 @@ COPY script.py /app/script.py
 
 RUN pip3 install paho-mqtt
 
-CMD ["python3", "/app/script.py"]
+CMD ["python3", "-u", "/app/script.py"]
 
 ```
 

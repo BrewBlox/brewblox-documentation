@@ -26,7 +26,7 @@ client.tls_set(cert_reqs=CERT_NONE)
 client.tls_insecure_set(True)
 
 try:
-    client.connect(host=HOST, port=443)
+    client.connect_async(host=HOST, port=443)
     client.loop_start()
 
     value = 20

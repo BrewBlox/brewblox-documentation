@@ -31,7 +31,7 @@ client.tls_insecure_set(True)
 def publish():
 
     try:
-        client.connect(host=HOST, port=443)
+        client.connect_async(host=HOST, port=443)
         client.loop_start()
 
         # https://brewblox.netlify.app/dev/reference/event_logging.html
