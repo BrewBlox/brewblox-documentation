@@ -168,7 +168,7 @@ Event data must be a serialized JSON object, with the following schema:
       "type": "string"
     },
     "data": {
-      "type": "object"
+      "type": ["object", "array"]
     }
   },
   "required": [
