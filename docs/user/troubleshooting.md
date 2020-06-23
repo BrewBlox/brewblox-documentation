@@ -19,7 +19,20 @@ We keep this list updated with the issues we're aware of, but haven't yet perman
 
 **During update, my Pi hangs while creating services**
 
-It's not yet clear why this happens, but it can be fixed by power cycling the Pi (unplug and replug), and restarting the update.
+The most likely cause for this is overflow in swap memory.
+
+Especially if you have a Pi 3 or 4, you may see improvements when disabling swap memory altogether:
+
+```
+dphys-swapfile swapoff
+dphys-swapfile uninstall
+update-rc.d dphys-swapfile remove
+rm -f /etc/init.d/dphys-swapfile
+
+service dphys-swapfile stop
+systemctl disable dphys-swapfile.service
+sudo reboot
+```
 
 **My Pi suddenly reboots**
 
