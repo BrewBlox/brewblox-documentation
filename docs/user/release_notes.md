@@ -7,6 +7,30 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2020/06/23
+
+**firmware release date: 2020/06/23**
+
+To fix issues with potential hangups in DS2413/DS2408 extension boards, we rewrote the code for OneWire devices to be simpler and better testable.
+
+Down the line, this also allows for using simulated OneWire blocks in the firmware sim, and better feedback for when faulty devices are connected to the bus.
+
+**Changes**
+
+- (improve) OneWire classes for DS18B20, DS2413 and DS2408 have been rewritten from scratch.
+- (improve) Mock implementations of these devices and a mocked OneWire bus have been added.
+- (improve) Simulation and unit testing of OneWire hardware is now possible and has been added.
+- (improve) OneWire communication errors are now simulated and tested
+  - Details: https://github.com/BrewBlox/brewblox-firmware/pull/234
+- (improve) Added the `--no-pull` option to `brewblox-ctl setup`. This can be used for configurations that explicitly want to use locally built or retagged images.
+- (fix) Fixed sizing and alignment for some icons in Builder parts.
+
+**Automation changes**
+
+- (fix) Blocks with only readonly fields can now be used in Block Value conditions.
+- (improve) Changed "exit process" tooltip in automation widget to "close and remove process".
+- (feature) Request headers are now editable in the Webhook action.
+
 ## Brewblox release 2020/06/15
 
 **Firmware release date: 2020/06/07**
