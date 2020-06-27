@@ -5,7 +5,7 @@ In order for the system to make use of this data, services must be able to push 
 
 ## Eventbus
 
-To avoid tight integration between publishers and consumers of service data, broadcasting is done using a RabbitMQ eventbus.
+To avoid tight integration between publishers and consumers of service data, broadcasting is done using a broker.
 
 Services can freely publish their data to a constant address, without having to be aware of who (if anyone) is listening.
 
@@ -152,7 +152,10 @@ Everything after `brewcast/state` is ignored by clients.
 
 ### State data formatting
 
-Event data must be a serialized JSON object, with the following schema:
+Event data must be a serialized JSON object, or empty.
+Empty messages are used to clear [retained messages](https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/) set for a topic.
+
+If message data is set, it must conform to this schema:
 
 ```json
 {
@@ -224,4 +227,5 @@ Stick with simple formats such as '1min' or '60s' to be safe.
   * Remove non-number values
 * State data
   * Topic: **brewcast/state**
+  * Content empty or JSON object.
   * Required message fields: **key**, **type**, **ttl**, **data**
