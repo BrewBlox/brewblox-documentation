@@ -15,6 +15,12 @@ To fix issues with potential hangups in DS2413/DS2408 extension boards, we rewro
 
 Down the line, this also allows for using simulated OneWire blocks in the firmware sim, and better feedback for when faulty devices are connected to the bus.
 
+**Hotfix 2020/07/01**
+
+- Fixed a typo in the reference enum (setting / measured) for the SetpointDriver block
+- If saving a widget or dashboard causes a datastore error, an error message is shown, and the object is rolled back to the latest state in the datastore. You can then retry the change.
+- Empty event messages sent by disconnecting services no longer cause an error in the UI.
+
 **Changes**
 
 - (improve) OneWire classes for DS18B20, DS2413 and DS2408 have been rewritten from scratch.
