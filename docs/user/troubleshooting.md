@@ -24,38 +24,68 @@ The most likely cause for this is overflow in swap memory.
 Especially if you have a Pi 3 or 4, you may see improvements when disabling swap memory altogether:
 
 ```
-dphys-swapfile swapoff
-dphys-swapfile uninstall
-update-rc.d dphys-swapfile remove
-rm -f /etc/init.d/dphys-swapfile
+sudo dphys-swapfile swapoff
+sudo dphys-swapfile uninstall
+sudo update-rc.d dphys-swapfile remove
+sudo rm -f /etc/init.d/dphys-swapfile
 
-service dphys-swapfile stop
-systemctl disable dphys-swapfile.service
+sudo service dphys-swapfile stop
+sudo systemctl disable dphys-swapfile.service
 sudo reboot
 ```
 
-**My Pi suddenly reboots**
-
-This is often caused by underpowered chargers, especially if the Pi reboots while pulling or starting Docker images.
-For more information, see [the official power requirements page](https://www.raspberrypi.org/documentation/hardware/raspberrypi/power/README.md).
-
 ## Frequently asked questions
 
-**My service can't connect to my Spark over Wifi**
+**No Spark controller detected (in service, or in brewblox-ctl)**
 
 For reference, you can find the full guide on connection settings guide [here](./connect_settings.md).
 
-Assuming you're still using the default settings (haven't added device-specific arguments to `docker-compose.yml`), 
-you can use the following steps to troubleshoot your connection.
+*Is the Spark screen completely white, or completely black (but status LED is on)?*
 
-Is the Spark connected to Wifi?
+This happens when the bootloader is outdated or not present.
+To flash the bootloader, run:
+```
+brewblox-ctl particle -c flash-bootloader
+```
+
+The Spark screen should show six boxes on a dark background.
+
+*USB: is the cable connected?*
+
+Never hurts to check.
+
+*USB: what is the output from the `lsusb` command?*
+
+`lsusb` lists currently connected USB devices.
+
+Example output:
+
+```
+pi@washberry:~ $ lsusb
+Bus 001 Device 005: ID 2b04:c008
+Bus 001 Device 004: ID 0781:5583 SanDisk Corp. Ultra Fit
+Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
+Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+```
+
+The `xxxx:xxxx` section after `ID` is the relevant bit. This is the VID:PID (Vendor ID, Product ID) of each device.
+
+The VID:PID for a Spark 2 is `2b04:c006`. <br>
+The VID:PID for a Spark 3 is `2b04:c008`.
+
+In the example, Bus 001 Device 005 is a Spark 3.
+
+If your Spark is connected, but does not show up in this list, check again with a different USB cable.
+
+*Wifi: is the Spark connected to Wifi?*
 
 - Did you run `brewblox-ctl wifi`?
 - Does the Spark LCD show an IP address?
 
 If the answer to either is no: run `brewblox-ctl wifi`.
 
-Is the Spark accessible from your computer and the Raspberry Pi?
+*Wifi: is the Spark accessible from your computer and the Raspberry Pi?*
 
 - Can you visit the Spark IP in your browser? It should show a short placeholder message.
 - If you run `brewblox-ctl http get <SPARK_IP>`, do you see the html for the placeholder message?
@@ -92,3 +122,7 @@ The old name will disappear from the Graph widget settings 24 hours after the bl
 Units are part of the field name. For 24 hours after changing units from Celsius to Fahrenheit, 
 you'll see both `spark-one/block/value[degC]` and `spark-one/block/value[degF]` in the Graph settings.
 
+**My Pi suddenly reboots**
+
+This is often caused by underpowered chargers, especially if the Pi reboots while pulling or starting Docker images.
+For more information, see [the official power requirements page](https://www.raspberrypi.org/documentation/hardware/raspberrypi/power/README.md).
