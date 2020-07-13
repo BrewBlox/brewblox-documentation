@@ -118,7 +118,7 @@ We want to simultaneously display data from (including all members):
 
 ## Data Schema
 
-For a detailed description of how controller values are serialized to the database, see [the event logging document.](../reference/event_logging.md)
+For a detailed description of how controller values are serialized to the database, see [the event logging document.](../reference/event_logging)
 
 Default configuration is to create a measurement per activity.
 Optional, depending on volume: measurement per controller block

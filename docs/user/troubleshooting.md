@@ -1,6 +1,6 @@
 # Troubleshooting
 
-We're happy to help with any problems or questions that arise when using Brewblox. You can reach us on the forum: https://community.brewpi.com
+We're happy to help with any problems or questions that arise when using Brewblox. You can reach us on the [forum](https://community.brewpi.com).
 
 Our first reply often consists of the same handful of questions. To save you some time, you may want to run through this checklist first.
 
@@ -80,10 +80,11 @@ If your Spark is connected, but does not show up in this list, check again with 
 
 *Wifi: is the Spark connected to Wifi?*
 
-- Did you run `brewblox-ctl wifi`?
-- Does the Spark LCD show an IP address?
-
-If the answer to either is no: run `brewblox-ctl wifi`.
+If the Spark LCD does not show an IP address, connect to it using USB, and configure Wifi:
+- Open the Brewblox UI
+- Go to the Spark service page
+- Go to the actions menu in the top right corner
+- Choose "Configure Wifi"
 
 *Wifi: is the Spark accessible from your computer and the Raspberry Pi?*
 

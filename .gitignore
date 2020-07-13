@@ -77,3 +77,5 @@ docs/.vuepress/dist
 # Generated files
 docs/.vuepress/generated/*
 !docs/.vuepress/generated/.gitkeep
+.cache/
+.temp/

@@ -89,7 +89,7 @@ A solution is to perform the following steps:
 
 ## Trigger conditions
 
-The current development flow (`automated_releases.md`) assumes that all contributors have their own fork, but allows larger feature branches to be pushed to the central repository.
+The current [development flow](./20180306_automated_release) assumes that all contributors have their own fork, but allows larger feature branches to be pushed to the central repository.
 
 An approach to automation is to release a develop version for every push to the central repository. Release versions are created when a new tag is pushed.
 
