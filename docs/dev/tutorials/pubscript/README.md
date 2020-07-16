@@ -51,3 +51,16 @@ docker run --rm --tty pubscript
 ```
 
 This is exactly the same as the command in [the dockerized script tutorial](../brewscript/).
+
+
+## Testing
+
+It's often useful to listen in on what messages the eventbus actually received.
+
+You can do so using https://mitsuruog.github.io/what-mqtt/.
+Connect to `wss://PI_ADDRESS:HTTPS_PORT/eventbus`, and listen to your published topic.
+
+Example address: `wss://192.168.2.11:443/eventbus`.
+Example topic: `brewcast/history/pubscript` (default in script.py)
+
+You can also listen to all messages published to history by subscribing to `brewcast/history/#`. This will get very spammy if there are multiple services publishing data.

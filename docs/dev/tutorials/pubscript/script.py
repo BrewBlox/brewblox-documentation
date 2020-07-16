@@ -17,7 +17,11 @@ from paho.mqtt import client as mqtt
 HOST = '172.17.0.1'
 
 # This is a constant value. You never need to change it.
-TOPIC = 'brewcast/history'
+HISTORY_TOPIC = 'brewcast/history'
+
+# The history service is subscribed to all topics starting with 'brewcast/history'
+# We can make our topic more specific to help debugging
+TOPIC = HISTORY_TOPIC + '/pubscript'
 
 # Create a websocket MQTT client
 client = mqtt.Client(transport='websockets')
