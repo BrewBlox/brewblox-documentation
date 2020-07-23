@@ -75,6 +75,7 @@ module.exports = {
                         'decisions/20200318_crosscompilation_buildx',
                         'decisions/20200530_mqtt_events',
                         'decisions/20200606_replacing_rabbitmq',
+                        'decisions/20200723_typed_fields',
                     ],
                 },
             ],
