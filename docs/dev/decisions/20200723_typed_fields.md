@@ -34,20 +34,20 @@ The data format is still limited by what can be serialized to JSON.
 If we can identify the "type" of JSON objects, we can apply the correct processing function in consumers (UI and Spark service).
 
 A simple way to do this is to add a magic field to each object.
-The name is not too important, as long as it's consistent, and reasonably unique. In this case, it will be `__bloxfield`.
+The name is not too important, as long as it's consistent, and reasonably unique. In this case, it will be `__bloxtype`.
 
-Based on the value of `__bloxfield`, other fields are expected in the object.
+Based on the value of `__bloxtype`, other fields are expected in the object.
 
 ```typescript
 interface Unit {
-    __bloxfield: 'Unit';
+    __bloxtype: 'Unit';
     value: number | null;
     unit: string;
     readonly?: boolean;
 }
 
 interface Link {
-    __bloxfield: 'Link':
+    __bloxtype: 'Link':
     id: string | null;
     type: string;
     driven?: boolean;
@@ -58,13 +58,13 @@ Example objects (not including optional fields):
 
 ```typescript
 const unit: Unit = {
-    __bloxfield: 'Unit',
+    __bloxtype: 'Unit',
     value: 20,
     unit: 'degC',
 };
 
 const link: Link = {
-    __bloxfield: 'Link',
+    __bloxtype: 'Link',
     id: 'sensor-1',
     type: 'TempSensorOneWire',
 };
