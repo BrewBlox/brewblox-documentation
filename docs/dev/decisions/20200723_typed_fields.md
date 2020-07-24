@@ -8,8 +8,9 @@ Spark block data includes two types of special fields: Quantities and Links.
 A Quantity may be `20 degC`, and a Link could be `TempSensorOneWire sensor-1`.
 
 The implementation and required fields are different, but both share some characteristics:
-- They are serialized as a single value in Protobuf
-- They require metadata (unit, object type) to be meaningful
+- They are serialized as a single value in Protobuf.
+- They must be converted to match the firmware expectations.
+- They require metadata (unit, object type) to be meaningful.
 - The additional fields are mutable, and required when JSON data is converted to Protobuf input.
 
 In the case of quantities, the metadata is also highly relevant when storing the value as history data: 20 degC != 20 degF.
