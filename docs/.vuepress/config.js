@@ -92,6 +92,7 @@ module.exports = {
                 'connect_settings',
                 'builder_guide',
                 'automation_guide',
+                'automation_sandbox',
                 'backup_guide',
                 'blocks_in_depth',
                 'removing_things',
