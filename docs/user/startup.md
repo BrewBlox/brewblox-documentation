@@ -57,6 +57,7 @@ For Windows users, [Lee Bussy](https://community.brewpi.com/u/lbussy/summary) cr
 ![HeadlessPi](https://i2.wp.com/www.brewpiremix.com/wp-content/uploads/2019/02/HeadlessPiScreenshot.png?w=580&ssl=1)
 
 You can download it [here](https://github.com/lbussy/headless-pi/releases/latest).
+If you get a warning that Microsoft SmartScreen blocked the application, follow [these instructions](https://www.windowscentral.com/how-disable-smartscreen-trusted-app-windows-10).
 :::
 
 After writing the image, your SD card will be recognized by the computer as a removable drive with two partitions. Download [this archive](/pi-files.zip) and extract the contents into the `boot` partition.
