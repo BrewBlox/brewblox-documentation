@@ -118,6 +118,20 @@ print(blocks);
 ```
 
 ---
+### events
+
+`events` is a list of cached [state or history events](https://brewblox.netlify.app/dev/reference/event_logging.html).
+
+The data also includes published topic, and time received.
+Only the last received event for a given topic is included.
+If you want to read events published by your service here, it is advised to publish to a unique topic.
+
+Example:
+```javascript
+print(events)
+```
+
+---
 ### qty(field) / qty(value, unit) / qty(duration)
 
 Many block fields are Quantities. This means that they have both a *value* (eg. `10`), and a *unit* (eg. `degC`).
