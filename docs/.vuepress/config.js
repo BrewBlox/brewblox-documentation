@@ -77,6 +77,7 @@ module.exports = {
                         'decisions/20200606_replacing_rabbitmq',
                         'decisions/20200723_typed_fields',
                         'decisions/20200726_automation_sandbox',
+                        'decisions/20200804_ui_bloxfield',
                     ],
                 },
             ],
