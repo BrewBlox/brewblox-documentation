@@ -102,6 +102,20 @@ network={
 }
 ```
 
+## Getting the IP address of your Pi
+
+We recommend to use the Pi as a headless device: no monitor, no keyboard.
+Running a desktop environment takes memory and processing power on the Pi, and reduces the reliability of the system.
+
+The UI is viewed in your browser anyway, and you can use SSH to remotely connect to your Pi's terminal.
+
+This requires you to know the address of your Pi.
+The most reliable approach is to find and use the Pi's IP address.
+
+We like the [Fing](https://www.fing.com/products) app (available on both [iOS](https://apps.apple.com/us/app/fing-network-scanner/id430921107) and [Android](https://play.google.com/store/apps/details?id=com.overlook.android.fing&hl=en)), but you can also use your router's web interface to find the addresses of all connected devices.
+A tutorial for that can be found [here](https://helpdeskgeek.com/how-to/determine-computers-connected-to-wireless-network/).
+
+
 ## Step 3: Connect to the Raspberry Pi
 
 ::: warning
