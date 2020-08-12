@@ -78,7 +78,7 @@ console.log('value 1', 1234, {key: 'value'}, ['value1', 'value2']);
 `getBlock()` finds a currently active block with the requested ID. <br>
 It returns `null` if the block was not found.
 
-For a description of how a block looks like, see the *Data* section.
+For a description of how a block looks like, see the [block types documentation](../dev/reference/block_types).
 
 In the editor is a snippet that lets you select a block from a dropdown, and then generates the `getBlock()` call.
 
@@ -94,7 +94,7 @@ print(block);
 Often you don't need the full block, but only a specific value. <br>
 `getBlockField(serviceId, blockId, fieldName)` returns that value.
 
-For a description of what fields are available for each block type, see the *Data* section.
+For a description of what fields are available for each block type, see the [block types documentation](../dev/reference/block_types).
 
 In the editor is a snippet that lets you select a block and a field from dropdown menus, and then generates the `getBlockField()` call.
 
@@ -110,7 +110,7 @@ print(field);
 `blocks` is a list of block objects. It contains all blocks from all Spark services. <br>
 Typically you want to use `getBlock()` or `getBlockField()` if you want a specific value.
 
-For a description of how a block looks like, see the *Data* section.
+For a description of how a block looks like, see the [block types documentation](../dev/reference/block_types).
 
 Example:
 ```javascript

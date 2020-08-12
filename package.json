@@ -24,5 +24,7 @@
     "plantuml-encoder": "^1.4.0",
     "vuepress": "^1.5.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "typescript-string-enums": "^1.0.0"
+  }
 }

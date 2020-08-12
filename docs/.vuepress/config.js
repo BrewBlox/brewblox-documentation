@@ -40,6 +40,7 @@ module.exports = {
                         'reference/event_logging',
                         'reference/controlbox_spark_protocol',
                         'reference/spark_commands',
+                        'reference/block_types',
                     ],
                 },
                 {
