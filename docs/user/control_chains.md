@@ -48,6 +48,18 @@ A PWM value of 40% will turn ON for 1.6 seconds and OFF for 2.4 seconds and repe
 This turns the digital ON/OFF actuator into an 'analog' numeric actuator with a range between 0% and 100%.
 
 
+## Control chains in the UI
+
+In this guide, we'll be using diagrams to show the relations within control chains.
+
+You can also show block relations in the Spark service page.
+In the top right corner there is a button that lets you toggle between blocks as list, and blocks as diagram.
+
+The below example shows blocks on a service after running the Fermentation Fridge quickstart wizard.
+
+Click on any of the nodes to open a dialog with block settings.
+
+![Service page block diagram](../images/ui-fridge-relations-diagram.png)
 
 ## Heating and cooling a Fridge
 
