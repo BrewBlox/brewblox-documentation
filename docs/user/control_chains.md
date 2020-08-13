@@ -57,7 +57,8 @@ In the top right corner there is a button that lets you toggle between blocks as
 
 The below example shows blocks on a service after running the Fermentation Fridge quickstart wizard.
 
-Click on any of the nodes to open a dialog with block settings.
+Click on any of the nodes to open a dialog with block settings,
+or double click on the background to create a new block.
 
 ![Service page block diagram](../images/ui-fridge-relations-diagram.png)
 
