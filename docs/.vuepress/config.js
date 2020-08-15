@@ -41,6 +41,7 @@ module.exports = {
                         'reference/controlbox_spark_protocol',
                         'reference/spark_commands',
                         'reference/block_types',
+                        'reference/spark_events',
                     ],
                 },
                 {

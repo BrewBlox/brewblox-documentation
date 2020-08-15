@@ -22,7 +22,7 @@
   "devDependencies": {
     "axios": "^0.19.2",
     "plantuml-encoder": "^1.4.0",
-    "vuepress": "^1.5.2"
+    "vuepress": "^1.5.3"
   },
   "dependencies": {
     "typescript-string-enums": "^1.0.0"
