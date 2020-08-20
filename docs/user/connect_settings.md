@@ -31,17 +31,19 @@ These arguments can be used both in the `docker-compose.yml` file, and with the 
 
 Every Spark controller has a unique serial number that can be used as device ID. The Spark service can use this ID to check that it doesn't accidentally connect to the wrong Spark controller.
 
-The simplest way to find the controller device ID is to use `brewblox-ctl discover`. This will scan for devices: both over USB, and Wifi.
+The simplest way to find the controller device ID is to use `brewblox-ctl discover-spark`. This will scan for devices: both over USB, and Wifi.
 
 The output format is `connection type` + `device ID` + `additional values`.
 
 Example output:
 
 ```bash
-pi@fridgepi:~/brewblox $ brewblox-ctl discover
-usb 280038000847343337373738 Photon
-wifi 280038000847343337373738 192.168.0.57 8332
-wifi 240024000451353432383931 192.168.0.86 8332
+pi@washberry:~/brewblox $ brewblox-ctl discover-spark
+INFO       Discovering devices...
+INFO       usb  30003D001947383434353030 P1
+INFO       wifi 30003D001947383434353030 192.168.2.2 8332
+INFO       wifi 240024000451353432383931 192.168.0.86 8332
+INFO       Done!
 ```
 
 In the example, two devices were found. We know this because there are only two unique device IDs in the list. The first can be reached over both USB and Wifi, the second is only reachable over Wifi.
@@ -63,15 +65,14 @@ Example configuration with `--device-id` set:
 
 ```yaml
   spark-two:
-    image: brewblox/brewblox-devcon-spark:rpi-${BREWBLOX_RELEASE:-stable}
+    image: brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
     privileged: true
     restart: unless-stopped
     labels:
       - "traefik.port=5000"
       - "traefik.frontend.rule=PathPrefix: /spark-two"
-    command: >
+    command: >-
       --name=spark-two
-      --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
       --device-id=300045000851353532343835
 ```
 
@@ -91,15 +92,14 @@ Example configuration with `--device-host` set:
 
 ```yaml
   spark-two:
-    image: brewblox/brewblox-devcon-spark:rpi-${BREWBLOX_RELEASE:-stable}
+    image: brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
     privileged: true
     restart: unless-stopped
     labels:
       - "traefik.port=5000"
       - "traefik.frontend.rule=PathPrefix: /spark-two"
-    command: >
+    command: >-
       --name=spark-two
-      --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
       --device-host=192.168.0.101
 ```
 
@@ -121,15 +121,14 @@ Example configuration to only discover USB devices:
 
 ```yaml
   spark-two:
-    image: brewblox/brewblox-devcon-spark:rpi-${BREWBLOX_RELEASE:-stable}
+    image: brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
     privileged: true
     restart: unless-stopped
     labels:
       - "traefik.port=5000"
       - "traefik.frontend.rule=PathPrefix: /spark-two"
-    command: >
+    command: >-
       --name=spark-two
-      --mdns-port=${BREWBLOX_PORT_MDNS:-5000}
       --device-id=300045000851353532343835
       --discovery=usb
 ```
@@ -197,13 +196,13 @@ Examples:
 ```yaml
   spark-one:
     ...
-    command: >
+    command: >-
       --device-host=192.168.0.60
 ```
 ```yaml
   spark-one:
     ...
-    command: >
+    command: >-
       --device-serial=/dev/ttyACM0
 ```
 
@@ -218,14 +217,14 @@ Specific device, over Wifi or USB:
 ```yaml
   spark-one:
     ...
-    command: >
+    command: >-
       --device-id=300045000851353532343835
 ```
 Specific device, USB only:
 ```yaml
   spark-one:
     ...
-    command: >
+    command: >-
       --discovery=usb
       --device-id=300045000851353532343835
 ```
@@ -233,6 +232,6 @@ First discovered device, Wifi only:
 ```yaml
   spark-one:
     ...
-    command: >
+    command: >-
       --discovery=wifi
 ```

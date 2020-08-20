@@ -129,7 +129,7 @@ When you install Brewblox, it generates a `docker-compose.yml` file for you. Thi
     image: brewblox/brewblox-devcon-spark:rpi-${BREWBLOX_RELEASE}
     privileged: true
     restart: unless-stopped
-    command: '--name=spark-one --mdns-port=${BREWBLOX_PORT_MDNS}'
+    command: '--name=spark-one'
     labels:
       - traefik.port=5000
       - 'traefik.frontend.rule=PathPrefix: /spark-one'
@@ -165,7 +165,7 @@ These settings are the same for every Spark service (and many other services).
 ---
 ```yaml
   ...
-  command: '--name=spark-one --mdns-port=${BREWBLOX_PORT_MDNS}'
+  command: '--name=spark-one'
 ```
 
 The `command` setting contains arguments for the software running *inside* the service.
@@ -191,7 +191,7 @@ Not all services need this. For example: Tilt, iSpindel, and Plaato services don
 **The `PathPrefix` setting in the label must match the service name.** If you add the `spark-two` service, the second label must be: `"traefik.frontend.rule=PathPrefix: /spark-two"`
 
 ::: tip
-The service name is mentioned three times in the YAMl for a Spark service. It must be the same each time.
+The service name is mentioned three times in the YAML for a Spark service. It must be the same each time.
 - at the top (`spark-one:`)
 - in the labels (`PathPrefix: /spark-one`)
 - in the command (`--name=spark-one`)
