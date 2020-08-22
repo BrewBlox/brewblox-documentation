@@ -78,6 +78,7 @@ module.exports = {
                         'decisions/20200723_typed_fields',
                         'decisions/20200726_automation_sandbox',
                         'decisions/20200804_ui_bloxfield',
+                        'decisions/20200822_avahi_reflection.md',
                     ],
                 },
             ],
