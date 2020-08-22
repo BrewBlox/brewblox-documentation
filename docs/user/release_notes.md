@@ -17,8 +17,8 @@ but we're also working towards having a stable and well-documented API
 that can be used for hobby projects or third-party applications.
 
 To make the automation service more flexible,
-we're introducing automation scripts.
-You can choose for each action or condition whether you'd rather configure it with a dropdown, or using JavaScript.
+we're introducing scripted actions and conditions.
+These provide an alternative to the existing UI-based configuration.
 
 Brewblox is gradually becoming more stable,
 and we decided now is a good time to add public documentation for block data types. <br>
@@ -35,8 +35,8 @@ We also added two more Quickstart wizards, and gave the block / block widget wiz
 
 While implementing automation functionality,
 the limitations of a fully UI-based configuration became noticeable.
-To support very repetitive or complex configuration,
-the UI would have to become exceedingly complex.
+If the action or condition is repetitive, complicated, or uncommon,
+then it quickly becomes cumbersome or even impossible to configure.
 
 Our solution is to implement an optional [JavaScript sandbox](https://brewblox.netlify.app/user/automation_sandbox.html) for actions and conditions.
 
@@ -45,7 +45,11 @@ Some of the highlights:
 - The scripting API is optional.
 
 Scripts are not a replacement for UI-based configuration.
-We want the automation service to be fully functional without users having to write a line of code.
+They are an extension of the Brewblox design philosophy,
+where build everything to be flexible and accessible,
+but add shortcuts to make the popular easy.
+Here, scripts provide the flexibility,
+and the UI-based options are the shortcuts.
 
 - The UI code editor helps.
 
@@ -76,39 +80,68 @@ In the 2020/06/15 release, we started to migrate from the AMQP event protocol to
 This release we're making the MQTT-only Mosquitto broker the default image for the `eventbus` service.
 
 We're not aware of any third-party service still relying on AMQP,
-but until the end of the deprecation period (2020/09/15), you can switch back to using RabbitMQ / AMQP by adding the following service override to your docker-compose.yml file:
+but you can switch back to using RabbitMQ if you want to.
+
+To do so: add the following service override to your docker-compose.yml file.
 
 ```yaml
   eventbus:
     image: brewblox/rabbitmq:${BREWBLOX_RELEASE}
 ```
 
+Do note that the deprecation period for AMQP support ends 2020/09/15.
+After that, all AMQP events will be ignored.
+
 ### Wizardry
 
-This release includes two more Quick Start 
+This release includes two more Quick Start wizards: *Brew kettle*, and *Non-fermentation Fridge*.
+
+*Brew kettle* produces a control chain for a single input/output heater,
+comparable to the BK in a HERMS setup.
+
+*Non-fermentation Fridge* produces the same output as the *Fermentation fridge* wizard,
+but without the beer mode controls.
+This is useful if you wish to (temporarily) use your fermentation chamber as a normal fridge.
+
+A common issue when running Quick Start wizards was that you'd arrive at the hardware step,
+and then had to figure out if your beer sensor was `New|TempSensorOneWire-1` or `New|TempSensorOneWire-2`.
+
+We can't magically decide what the purpose is of a newly discovered sensor,
+but we can help with identification. <br>
+Most wizards now start with a discovery step.
+Here you are shown the current status and measured value of available OneWire sensors and chips,
+with prominent "change block name" buttons. <br>
+Unplug a device, and one of these blocks will suddenly have a *disconnected* status.
+
+Block (widget) wizards were somewhat clunky, so we reworked those,
+and added a *New Block* option to wizardry. <br>
+In the *New Widget* wizard you can create a widget that is based on either a new, or an existing block. <br>
+In the *New Block* wizard you can create a new block,
+and optionally add a widget for displaying your block on a dashboard.
 
 **Changes**
-- (debugging) The Spark service logs now include the last actions of the controller before it shut down. This will help us debug controller crashes.
-- (improve) Changed the default eventbus image from RabbitMQ to Mosquitto.
+- (feature) The last controller actions before shutdown are now logged when the Spark service connects. This will help us debug controller crashes.
+- (improve) Changed the default eventbus broker from RabbitMQ to Mosquitto.
 - (improve) The UI now immediately shows updated status if the Spark service stops or crashes.
 - (improve) If the Spark service is unable to connect to a controller, it will gradually increase the retry interval.
 - (improve) The Spark service no longer relies on the `mdns` service for Wifi device discovery.
 - (fix) The history service now correctly discards invalid data points received from history events.
 - (improve) Generated (default) labels in Graph/Metrics widgets now support degree units other dan Celsius/Fahrenheit/Kelvin.
+  - For example: `sensor/value[degP]` will have the default graph label `[sensor] value °P`.
 - (fix) Fixed a bug where min/max range overrides in the Graph were converted to string values.
-- (deprecation) Removed support for UI plugins.
+- (remove) Removed support for UI plugins.
 - (feature) The legend in graphs now shows the latest value for each field.
 - (improve) Improved dialogs for selecting blocks / block fields.
-- (feature) In dashboard edit mode, you can now move widgets by selecting them and using the arrow keys.
+- (feature) In dashboard edit mode, you can now move selected widgets by using the arrow keys.
 - (feature) In Brewery Builder, you can now move selected parts by using arrow keys.
 - (fix) Dashboard widgets no longer make sudden large jumps when being dragged.
 - (feature) Quick Start wizards now have a step for identifying and renaming discovered blocks.
-- (feature) Added the Brew Kettle Quick Start wizard.
-- (feature) Added the Fridge-only Quick Start wizard.
-- (fix) The Setpoint Profile graph is no longer sometimes initially rendered much smaller than the widget.
+- (feature) Added the *Brew kettle* Quick Start wizard.
+- (feature) Added the *Non-fermentation fridge* Quick Start wizard.
+- (fix) The *Setpoint Profile* graph is no longer sometimes initially rendered much smaller than the widget.
 - (feature) You can now double click on widgets to toggle between Basic and Full modes.
-- (feature) Added a Builder part for the Setpoint Driver block.
-- (feature) Wizardry now has a top level entry for creating new blocks.
+- (feature) Added a Builder part for the *Setpoint Driver* block.
+- (feature) Added the *New Block* wizard to the Wizardry menu.
 - (improve) Improved the block wizard and block widget wizard layout.
 - (improve) Overlaid dialogs now show a "back" button instead of a "close" button.
 - (feature) Added the `brewblox-ctl makecert` command to generate SSL certificates.
@@ -116,36 +149,36 @@ This release includes two more Quick Start
 - (improve) Tweaked Influx settings to reduce SD card wear and tear.
 - (debugging) Added `dmesg` to the log generated by `brewblox-ctl log`.
 - (improve) `brewblox-ctl add-spark` now shows a warning if an existing Spark service is found that has no `--device-id` or `--device-host` flag set. This prevents errors where both services attempt to connect to the same controller.
-- (feature) `brewblox-ctl setup` and `brewblox-ctl update` now check the avahi-daemon settings, and set the `enable-reflection` flag. This removes the need for a separate `mdns` service.
-  - You can disable this behavior with the `--no-avahi-config` flag for both commands.
+- (feature) `brewblox-ctl setup` and `brewblox-ctl update` now check the [avahi-daemon configuration](https://linux.die.net/man/5/avahi-daemon.conf), and set `enable-reflection=yes`. This removes the need for a separate `mdns` service.
+  - If you previously had set `enable-reflection=no`, this will be respected.
 - (remove) Removed the `mdns` service. Brewblox now no longer uses the 5000 port on the host.
-- (improve) `brewblox-ctl` no longer pulls a docker container to discover Spark devices.
-- (remove) `brewblox-ctl setup` no longer create the Home dashboard and spark-one service in the UI.
+- (improve) Spark device discovery in `brewblox-ctl` no longer requires pulling and running the `brewblox-mdns` Docker image.
+- (improve) `brewblox-ctl setup` no longer create the Home dashboard and spark-one service in the UI.
   - Normal flow is to run a quick start wizard, making the dashboard redundant.
   - The spark-one service will be immediately discovered anyway.
 - (fix) Fixed a bug where Spark blocks were not correctly logged in `brewblox-ctl log`.
-- (improve) Made `brewblox-ctl update` quieter when updating brewblox-ctl itself.
+- (improve) Added the `--quiet` flag when installing Python packages in `brewblox-ctl update`.
 - (documentation) Added documentation for the state/history events published by the Spark service.
   - These events are now considered a public interface, meaning we'll strive to make any changes backwards compatible. A deprecation period will be used if this is impossible.
 - (documentation) Added documentation for block types. You can find it at https://brewblox.netlify.app/dev/reference/block_types.html.
   - Blocks are now also considered a public interface spec.
 - (fix) Moving widgets no longer causes a document update conflict in the datastore.
-- (improve) If the digital actuator state is pending, the Valve part will now show a spinner. This mirrors behavior in the digital actuator ON/OFF button.
+- (improve) If the digital actuator state is pending, the Valve part will now show a spinner. This mirrors behavior of the ON/OFF button shown in digital actuator / valve / pin array blocks.
 - (fix) The shelf height in the Fridge part is now editable again.
-- (improve) The enable/disable toggle in blocks is now more consistent, and mentions which driven block is affected.
+- (improve) The enable/disable toggle in blocks is now more consistent, and mentions which block is (or isn't) driven.
 - (improve) The PID now has a toggle button to disable the block.
 
 **Automation changes**
 - (improve) Improved visibility for inactive automation elements.
-- (improve) Title is now editable when adding a new automation action/condition.
-- (improve) The automation editor is now available for mobile.
-- (fix) The automation editor now shows the correct template when loading a `<address>/ui/automation/<template-id>` URL.
-- (feature) Added the `User Script` action.
-- (feature) Added the `User Script` condition.
-- (feature) Added code snippet generators for user scripts.
-- (improve) Block Value conditions now correctly convert quantity values (eg. degC/degF) if the condition and block use different units.
+- (improve) The title property is now editable when adding a new automation action/condition.
+- (improve) The automation editor is now enabled on mobile or small screens.
+- (fix) The automation editor now shows the correct template when loading a `/ui/automation/<template-id>` URL.
+- (feature) Added `Scripted action`.
+- (feature) Added `Scripted condition`.
+- (feature) Added code snippet generators to the script editor.
+- (improve) *Block value* conditions now correctly convert quantity values (eg. degC/degF) if the condition and block use different units.
 - (fix) HTTP Request action errors now show the error, and not just "request failed with status code XXX".
-- (fix) Changing block links in BlockPatch no longer causes an error.
+- (fix) Changing block links in the *Block change* action no longer causes an error.
 
 ## Brewblox release 2020/06/23
 
