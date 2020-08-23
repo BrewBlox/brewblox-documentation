@@ -167,6 +167,7 @@ and optionally add a widget for displaying your block on a dashboard.
 - (fix) The shelf height in the Fridge part is now editable again.
 - (improve) The enable/disable toggle in blocks is now more consistent, and mentions which block is (or isn't) driven.
 - (improve) The PID now has a toggle button to disable the block.
+- (update) Updated traefik and traefik label syntax to v2.
 
 **Automation changes**
 - (improve) Improved visibility for inactive automation elements.
