@@ -68,9 +68,6 @@ Example configuration with `--device-id` set:
     image: brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
     privileged: true
     restart: unless-stopped
-    labels:
-      - "traefik.port=5000"
-      - "traefik.frontend.rule=PathPrefix: /spark-two"
     command: >-
       --name=spark-two
       --device-id=300045000851353532343835
@@ -95,9 +92,6 @@ Example configuration with `--device-host` set:
     image: brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
     privileged: true
     restart: unless-stopped
-    labels:
-      - "traefik.port=5000"
-      - "traefik.frontend.rule=PathPrefix: /spark-two"
     command: >-
       --name=spark-two
       --device-host=192.168.0.101
@@ -124,9 +118,6 @@ Example configuration to only discover USB devices:
     image: brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
     privileged: true
     restart: unless-stopped
-    labels:
-      - "traefik.port=5000"
-      - "traefik.frontend.rule=PathPrefix: /spark-two"
     command: >-
       --name=spark-two
       --device-id=300045000851353532343835

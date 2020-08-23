@@ -16,10 +16,8 @@ Before then, you can enable it by adding the following service to your `docker-c
 ```yaml
   automation:
     image: brewblox/brewblox-automation:${BREWBLOX_RELEASE}
+    restart: unless-stopped
     init: true
-    labels:
-      - "traefik.port=5000"
-      - "traefik.frontend.rule=PathPrefix: /automation"
 ```
 
 ## Context

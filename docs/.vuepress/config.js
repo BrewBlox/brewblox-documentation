@@ -21,15 +21,12 @@ module.exports = {
                         'tutorials/serialscript/',
                         'tutorials/pubscript/',
                         'tutorials/scheduledscript/',
+                        'tutorials/subrouting',
                     ],
                 },
                 {
                     title: 'Contributing',
                     children: [
-                        'contributing/docker',
-                        'contributing/raspberry',
-                        'contributing/using_service',
-                        'contributing/tools_tricks',
                         'contributing/release_tools',
                         'contributing/profiling',
                     ],

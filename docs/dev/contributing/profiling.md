@@ -49,9 +49,6 @@ Or edit the config in your docker-compose.yml file:
     # ------ pre-existing --------------
     restart: unless-stopped
     privileged: true
-    labels:
-      - "traefik.port=5000"
-      - "traefik.frontend.rule=PathPrefix: /sparkey"
     volumes:
       - ./dev/simulator__sparkey:/app/simulator
     command: --name=sparkey --simulation --device-id=123456789012345678901234

@@ -130,9 +130,6 @@ When you install Brewblox, it generates a `docker-compose.yml` file for you. Thi
     privileged: true
     restart: unless-stopped
     command: '--name=spark-one'
-    labels:
-      - traefik.port=5000
-      - 'traefik.frontend.rule=PathPrefix: /spark-one'
 ```
 
 This configuration is more advanced than what we've seen so far. To make sense of it, we'll look at the individual settings.
@@ -174,25 +171,8 @@ The `--name` argument must (again) be the same as the service name.
 
 For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./connect_settings.md)
 
----
-```yaml
-  ...
-  labels:
-    - traefik.port=5000
-    - 'traefik.frontend.rule=PathPrefix: /spark-one'
-```
-
-Labels are used by the Traefik gateway service. With these settings, Traefik will forward all HTTP requests to addresses beginning with `/spark-one` to this service at port 5000.
-
-This way, multiple services can share the same base address: requests to `https://my-pi-address/spark-one` and requests to `https://my-pi-address/spark-two` will be forwarded to different services.
-
-Not all services need this. For example: Tilt, iSpindel, and Plaato services don't have their own widgets in the UI. They send data to the history service, and the history service sends that data to the UI.
-
-**The `PathPrefix` setting in the label must match the service name.** If you add the `spark-two` service, the second label must be: `"traefik.frontend.rule=PathPrefix: /spark-two"`
-
 ::: tip
-The service name is mentioned three times in the YAML for a Spark service. It must be the same each time.
+The service name is mentioned two times in the YAML for a Spark service. The values must match.
 - at the top (`spark-one:`)
-- in the labels (`PathPrefix: /spark-one`)
 - in the command (`--name=spark-one`)
 :::
