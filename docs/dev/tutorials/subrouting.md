@@ -89,27 +89,44 @@ The used SSL certs are placed in `./traefik`, along with a `traefik-cert.yaml` c
 `/var/run/docker.sock:/var/run/docker.sock` allows access to the Docker socket.
 This is required in order to autodetect active Docker containers.
 
+There are quire a few arguments in the `command` section.
+We'll look at it a few lines at a time.
+
 ```yaml
     command: >-
       --api.dashboard=true
+```
+This enables the Traefik dashboard at `/dashboard/`.
+
+```yaml
       --providers.docker=true
       --providers.docker.constraints="Label(`com.docker.compose.project`, `${COMPOSE_PROJECT_NAME}`)"
       --providers.docker.defaultrule="PathPrefix(`/{{ index .Labels \"com.docker.compose.service\" }}`)"
+```
+`--providers.docker` means Traefik scans the Docker socket for active containers.
+
+To avoid trying to route to any and all containers on the host, we add constraints.
+Docker-compose sets the `com.docker.compose.project` label on managed containers.
+The value equals that of the `COMPOSE_PROJECT_NAME` that is set in the `brewblox/.env` file.
+
+The default routing rule for Brewblox services is to use the service name as prefix.
+eg. `<ADDRESS>/spark-one/blocks` should be routed to the `spark-one` service.
+We can get service name from another container label set by docker-compose: `com.docker.compose.service`.
+
+```yaml
       --providers.file.directory=/config
+```
+`/config` is a mounted volume that leads to `brewblox/traefik`.
+There's a configuration file and SSL certificates in there.
+
+```yaml
       --entrypoints.web.address=:${BREWBLOX_PORT_HTTP}
       --entrypoints.web.http.redirections.entrypoint.to=websecure
       --entrypoints.websecure.address=:${BREWBLOX_PORT_HTTPS}
       --entrypoints.websecure.http.tls=true
 ```
-
-There are multiple things going on here.
-- We want to automatically detect and use Brewblox containers, and only Brewblox containers. The easy way to do so is to check a label set by docker-compose: `com.docker.compose.project`
-  - By default, this is the dir name, but we set it to always be `brewblox` by adding `COMPOSE_PROJECT_NAME=brewblox` to the .env file.
-- The default routing rule for Brewblox (`--providers.docker.defaultrule`) is prefix-based.
-  - eg. `<ADDRESS>/spark-one/blocks` should be routed to the `spark-one` service.
-  - We can get service name from a container label set by docker-compose: `com.docker.compose.service`.
-- We have two entrypoints: one for HTTP (`web`), and one for HTTPS (`websecure`).
-  - The only job for the `web` entrypoint is to redirect queries to `websecure`.
+There are two entrypoints: one for HTTP (`web`), and one for HTTPS (`websecure`).
+The only job for the `web` entrypoint is to redirect all requests to `websecure`.
 
 ## Traefik dashboard
 
