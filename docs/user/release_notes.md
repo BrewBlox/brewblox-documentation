@@ -29,6 +29,9 @@ Recently, we switched from AMQP events to MQTT.
 We're very happy with how this turned out, and are now updating the `eventbus` service to run Mosquitto.
 This lets us use some very useful MQTT features that were not available in RabbitMQ.
 
+The infrastructure for Spark discovery over Wifi has been improved,
+resulting in the removal of the `mdns` service.
+
 We also added two more Quickstart wizards, and gave the block / block widget wizards an overhaul.
 
 ### Automation scripts
@@ -92,6 +95,20 @@ To do so: add the following service override to your docker-compose.yml file.
 Do note that the deprecation period for AMQP support ends 2020/09/15.
 After that, all AMQP events will be ignored.
 
+### mDNS changes
+
+Previously, Brewblox used a separate service to do Wifi discovery of Spark controllers.
+We've revisited this design, and replaced it with a change to the avahi-daemon configuration on the host.
+
+This means we now have one less service, and **no longer use port 5000**.
+For more details, see [the decision document](https://brewblox.netlify.app/dev/decisions/20200822_avahi_reflection.html).
+
+This change does depend on the host environment and network layout.
+The change to Avahi settings is kept optional, and we mapped multiple alternatives.
+If you want to run Brewblox on a system without Avahi,
+or are having problems with the new settings,
+feel free to drop us a message.
+
 ### Wizardry
 
 This release includes two more Quick Start wizards: *Brew kettle*, and *Non-fermentation Fridge*.
@@ -120,54 +137,54 @@ In the *New Block* wizard you can create a new block,
 and optionally add a widget for displaying your block on a dashboard.
 
 **Changes**
-- (feature) The last controller actions before shutdown are now logged when the Spark service connects. This will help us debug controller crashes.
 - (improve) Changed the default eventbus broker from RabbitMQ to Mosquitto.
+- (remove) Removed support for UI plugins.
+- (feature) Added the *New Block* wizard to the Wizardry menu.
+- (feature) Quick Start wizards now have a step for identifying and renaming discovered blocks.
+- (feature) Added the *Brew kettle* Quick Start wizard.
+- (feature) Added the *Non-fermentation fridge* Quick Start wizard.
+- (feature) Added a Builder part for the *Setpoint Driver* block.
+- (feature) `brewblox-ctl setup` and `brewblox-ctl update` [enable reflection in the avahi-daemon config](https://brewblox.netlify.app/dev/decisions/20200822_avahi_reflection.html). This removes the need for a separate `mdns` service.
+- (remove) Removed the `mdns` service.
+- (improve) The Spark service no longer relies on the `mdns` service for Wifi device discovery.
+- (improve) Spark device discovery in `brewblox-ctl` no longer requires pulling and running an `mdns` container.
+- (improve) Removed the `--mdns-port` setting from `brewblox-ctl service ports`.
+- (documentation) Added documentation for the state/history events published by the Spark service.
+  - These events are now considered a public interface, meaning we'll strive to make any changes backwards compatible. A deprecation period will be used if this is impossible.
+- (documentation) Added documentation for block types. You can find it at https://brewblox.netlify.app/dev/reference/block_types.html.
+  - Blocks are now also considered a public interface spec.
+- (improve) Updated traefik and traefik label syntax to v2.
+- (feature) The last controller actions before shutdown are now logged when the Spark service connects. This will help us debug controller crashes.
 - (improve) The UI now immediately shows updated status if the Spark service stops or crashes.
 - (improve) If the Spark service is unable to connect to a controller, it will gradually increase the retry interval.
-- (improve) The Spark service no longer relies on the `mdns` service for Wifi device discovery.
-- (fix) The history service now correctly discards invalid data points received from history events.
+  - The minimum interval is 2s, the maximum is 30s. After 20 failed attempts, the service increases the interval, and restarts.
+  - The retry interval is reset when a connection attempt succeeds.
 - (improve) Generated (default) labels in Graph/Metrics widgets now support degree units other dan Celsius/Fahrenheit/Kelvin.
   - For example: `sensor/value[degP]` will have the default graph label `[sensor] value °P`.
-- (fix) Fixed a bug where min/max range overrides in the Graph were converted to string values.
-- (remove) Removed support for UI plugins.
+  - This change is not applied retroactively. To update the default label, remove and re-add the field.
 - (feature) The legend in graphs now shows the latest value for each field.
 - (improve) Improved dialogs for selecting blocks / block fields.
 - (feature) In dashboard edit mode, you can now move selected widgets by using the arrow keys.
 - (feature) In Brewery Builder, you can now move selected parts by using arrow keys.
-- (fix) Dashboard widgets no longer make sudden large jumps when being dragged.
-- (feature) Quick Start wizards now have a step for identifying and renaming discovered blocks.
-- (feature) Added the *Brew kettle* Quick Start wizard.
-- (feature) Added the *Non-fermentation fridge* Quick Start wizard.
-- (fix) The *Setpoint Profile* graph is no longer sometimes initially rendered much smaller than the widget.
 - (feature) You can now double click on widgets to toggle between Basic and Full modes.
-- (feature) Added a Builder part for the *Setpoint Driver* block.
-- (feature) Added the *New Block* wizard to the Wizardry menu.
 - (improve) Improved the block wizard and block widget wizard layout.
 - (improve) Overlaid dialogs now show a "back" button instead of a "close" button.
 - (feature) Added the `brewblox-ctl makecert` command to generate SSL certificates.
 - (feature) Added the `brewblox-ctl libs` command to reload the release-specific commands.
 - (improve) Tweaked Influx settings to reduce SD card wear and tear.
-- (debugging) Added `dmesg` to the log generated by `brewblox-ctl log`.
+- (improve) Added `dmesg` to the log generated by `brewblox-ctl log`.
 - (improve) `brewblox-ctl add-spark` now shows a warning if an existing Spark service is found that has no `--device-id` or `--device-host` flag set. This prevents errors where both services attempt to connect to the same controller.
-- (feature) `brewblox-ctl setup` and `brewblox-ctl update` now check the [avahi-daemon configuration](https://linux.die.net/man/5/avahi-daemon.conf), and set `enable-reflection=yes`. This removes the need for a separate `mdns` service.
-  - If you previously had set `enable-reflection=no`, this will be respected.
-- (remove) Removed the `mdns` service. Brewblox now no longer uses the 5000 port on the host.
-- (improve) Spark device discovery in `brewblox-ctl` no longer requires pulling and running the `brewblox-mdns` Docker image.
-- (improve) `brewblox-ctl setup` no longer create the Home dashboard and spark-one service in the UI.
-  - Normal flow is to run a quick start wizard, making the dashboard redundant.
-  - The spark-one service will be immediately discovered anyway.
-- (fix) Fixed a bug where Spark blocks were not correctly logged in `brewblox-ctl log`.
+- (improve) `brewblox-ctl setup` no longer create the Home dashboard and spark-one service in the UI. Quick Start wizards and service autodiscovery made presets redundant.
 - (improve) Added the `--quiet` flag when installing Python packages in `brewblox-ctl update`.
-- (documentation) Added documentation for the state/history events published by the Spark service.
-  - These events are now considered a public interface, meaning we'll strive to make any changes backwards compatible. A deprecation period will be used if this is impossible.
-- (documentation) Added documentation for block types. You can find it at https://brewblox.netlify.app/dev/reference/block_types.html.
-  - Blocks are now also considered a public interface spec.
-- (fix) Moving widgets no longer causes a document update conflict in the datastore.
 - (improve) If the digital actuator state is pending, the Valve part will now show a spinner. This mirrors behavior of the ON/OFF button shown in digital actuator / valve / pin array blocks.
-- (fix) The shelf height in the Fridge part is now editable again.
 - (improve) The enable/disable toggle in blocks is now more consistent, and mentions which block is (or isn't) driven.
-- (improve) The PID now has a toggle button to disable the block.
-- (update) Updated traefik and traefik label syntax to v2.
+- (fix) The history service now correctly discards invalid history event data.
+- (fix) Fixed a bug where min/max range overrides in the Graph were converted to string values.
+- (fix) Dashboard widgets no longer make sudden large jumps when being dragged.
+- (fix) The *Setpoint Profile* graph is no longer sometimes initially rendered much smaller than the widget.
+- (fix) Fixed a bug where Spark blocks were not correctly logged in `brewblox-ctl log`.
+- (fix) Moving widgets no longer causes a document update conflict in the datastore.
+- (fix) The shelf height in the Fridge part is now editable again.
 
 **Automation changes**
 - (improve) Improved visibility for inactive automation elements.
