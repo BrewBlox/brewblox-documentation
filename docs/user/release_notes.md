@@ -154,6 +154,7 @@ and optionally add a widget for displaying your block on a dashboard.
 - (documentation) Added documentation for block types. You can find it at https://brewblox.netlify.app/dev/reference/block_types.html.
   - Blocks are now also considered a public interface spec.
 - (improve) Updated traefik and traefik label syntax to v2.
+- (feature) The *DS2408* block can now toggle between Valve mode and Actuator mode.
 - (feature) The last controller actions before shutdown are now logged when the Spark service connects. This will help us debug controller crashes.
 - (improve) The UI now immediately shows updated status if the Spark service stops or crashes.
 - (improve) If the Spark service is unable to connect to a controller, it will gradually increase the retry interval.
@@ -169,6 +170,7 @@ and optionally add a widget for displaying your block on a dashboard.
 - (feature) You can now double click on widgets to toggle between Basic and Full modes.
 - (improve) Improved the block wizard and block widget wizard layout.
 - (improve) Overlaid dialogs now show a "back" button instead of a "close" button.
+- (feature) Added the `brewblox-ctl add-plaato` command to add a service for the Plaato digital airlock.
 - (feature) Added the `brewblox-ctl makecert` command to generate SSL certificates.
 - (feature) Added the `brewblox-ctl libs` command to reload the release-specific commands.
 - (improve) Tweaked Influx settings to reduce SD card wear and tear.
