@@ -193,9 +193,19 @@ Referenced enum values:
 
 **Discovered object**
 
-*DS2408* provides *IoPin* objects for valves.
+*DS2408* provides *IoPin* objects for valves or actuators.
+
+Valves and actuators should not be mixed, as they make different use of the available pins.
+The *connectMode* field indicates current usage.
+
+If the DS2408 is used by a MotorValve,
+only pins 1 and 4 should be used as *startChannel* in the MotorValve block.
 
 <<< @/docs/dev/types/block-types.ts#DS2408
+
+Referenced enum values:
+
+<<< @/docs/dev/types/block-enums.ts#DS2408ConnectMode
 
 ## DS2413
 
