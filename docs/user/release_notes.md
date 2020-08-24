@@ -178,6 +178,10 @@ and optionally add a widget for displaying your block on a dashboard.
 - (improve) Added the `--quiet` flag when installing Python packages in `brewblox-ctl update`.
 - (improve) If the digital actuator state is pending, the Valve part will now show a spinner. This mirrors behavior of the ON/OFF button shown in digital actuator / valve / pin array blocks.
 - (improve) The enable/disable toggle in blocks is now more consistent, and mentions which block is (or isn't) driven.
+- (update) Updated device-os in firmware to 1.5.2, with fix for uninitialized variable in network handler.
+- (improve) Improved test coverage tooling in firmware.
+- (fix) Fix rounding errors when converting Celsius to Fahrenheit in firmware.
+- (fix) Reduced impact of OneWire disconnects and communication errors in firmware, so they do not slow down the system.
 - (fix) The history service now correctly discards invalid history event data.
 - (fix) Fixed a bug where min/max range overrides in the Graph were converted to string values.
 - (fix) Dashboard widgets no longer make sudden large jumps when being dragged.
