@@ -12,18 +12,12 @@ Relevant links:
 **firmware release date: 2020/??/??**
 
 This release is bigger (and took longer) than usual.
-We're introducing new features,
-but we're also working towards having a stable and well-documented API
-that can be used for hobby projects or third-party applications.
+We're introducing new features, but we're also working towards having a stable and well-documented API that can be used for hobby projects or third-party applications.
 
-To make the automation service more flexible,
-we're introducing scripted actions and conditions.
-These provide an alternative to the existing UI-based configuration.
+To make the automation service more flexible, we're introducing scripted actions and conditions. These provide an alternative to the existing UI-based configuration.
 
-Brewblox is gradually becoming more stable,
-and we decided now is a good time to add public documentation for block data types. <br>
-This will help anyone who wants to listen in on block state events
-or use their own service, script, or application to read or write blocks.
+Brewblox is gradually becoming more stable, and we decided now is a good time to add public documentation for block data types. <br>
+This will help anyone who wants to listen in on block state events or use their own service, script, or application to read or write blocks.
 
 Recently, we switched from AMQP events to MQTT.
 We're very happy with how this turned out, and are now updating the `eventbus` service to run Mosquitto.
@@ -36,10 +30,8 @@ We also added two more Quickstart wizards, and gave the block / block widget wiz
 
 ### Automation scripts
 
-While implementing automation functionality,
-the limitations of a fully UI-based configuration became noticeable.
-If the action or condition is repetitive, complicated, or uncommon,
-then it quickly becomes cumbersome or even impossible to configure.
+While implementing automation functionality, the limitations of a fully UI-based configuration became noticeable.
+If the action or condition is repetitive, complicated, or uncommon, then it quickly becomes cumbersome or even impossible to configure.
 
 Our solution is to implement an optional [JavaScript sandbox](https://brewblox.netlify.app/user/automation_sandbox.html) for actions and conditions.
 
@@ -48,11 +40,8 @@ Some of the highlights:
 - The scripting API is optional.
 
 Scripts are not a replacement for UI-based configuration.
-They are an extension of the Brewblox design philosophy,
-where build everything to be flexible and accessible,
-but add shortcuts to make the popular easy.
-Here, scripts provide the flexibility,
-and the UI-based options are the shortcuts.
+They are an extension of the Brewblox design philosophy, where we build everything to be flexible and accessible, but add shortcuts to make the popular easy.
+Here, scripts provide the flexibility, and the UI-based options are the shortcuts.
 
 - The UI code editor helps.
 
