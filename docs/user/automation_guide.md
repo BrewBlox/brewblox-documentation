@@ -16,10 +16,8 @@ Before then, you can enable it by adding the following service to your `docker-c
 ```yaml
   automation:
     image: brewblox/brewblox-automation:${BREWBLOX_RELEASE}
+    restart: unless-stopped
     init: true
-    labels:
-      - "traefik.port=5000"
-      - "traefik.frontend.rule=PathPrefix: /automation"
 ```
 
 ## Context
@@ -195,6 +193,44 @@ If step 1 has a task condition, and step 2 transitions back to step 1, the task 
 
 You can reset the task status in the task condition if the user must mark the task every time the step repeats.
 :::
+
+## Scripting Sandbox
+
+For complex or repetitive conditions and actions, a UI-based configuration quickly becomes cumbersome and restrictive.
+In addition to UI-based configuration, you can define conditions and actions as script.
+
+As an example, to check measured temperature:
+
+``` javascript
+const value = getBlockField('spark-one', 'Ferment Fridge Sensor', 'value');
+return qty(value).isGreaterThan(20, 'degC');
+```
+
+To close all valves:
+
+``` javascript
+const valves = [
+    'valve1',
+    'valve2',
+    'valve3',
+    // etc
+];
+
+for (const valve of valves) {
+    const block = getBlock('spark-one', valve);
+    block.data.desiredState = 'VALVE_CLOSED';
+    await saveBlock(block);
+}
+```
+
+The sandbox is not meant to replace UI configuration, but to offer an alternative.
+The editor in the UI offers snippet wizards that ask you some questions (which service / block / field?),
+and then generate the required code.
+
+You can freely edit and combine multiple snippets to get the desired condition.
+The editor offers a preview function to help inspect and test your code.
+
+For more information, see the [documentation page](./automation_sandbox) for the automation sandbox.
 
 ## Coming Soon
 

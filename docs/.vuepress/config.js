@@ -21,15 +21,12 @@ module.exports = {
                         'tutorials/serialscript/',
                         'tutorials/pubscript/',
                         'tutorials/scheduledscript/',
+                        'tutorials/subrouting',
                     ],
                 },
                 {
                     title: 'Contributing',
                     children: [
-                        'contributing/docker',
-                        'contributing/raspberry',
-                        'contributing/using_service',
-                        'contributing/tools_tricks',
                         'contributing/release_tools',
                         'contributing/profiling',
                     ],
@@ -40,6 +37,8 @@ module.exports = {
                         'reference/event_logging',
                         'reference/controlbox_spark_protocol',
                         'reference/spark_commands',
+                        'reference/block_types',
+                        'reference/spark_events',
                     ],
                 },
                 {
@@ -94,6 +93,7 @@ module.exports = {
                 'connect_settings',
                 'builder_guide',
                 'automation_guide',
+                'automation_sandbox',
                 'backup_guide',
                 'blocks_in_depth',
                 'removing_things',
