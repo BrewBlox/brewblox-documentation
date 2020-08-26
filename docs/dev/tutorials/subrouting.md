@@ -89,14 +89,14 @@ The used SSL certs are placed in `./traefik`, along with a `traefik-cert.yaml` c
 `/var/run/docker.sock:/var/run/docker.sock` allows access to the Docker socket.
 This is required in order to autodetect active Docker containers.
 
-There are quire a few arguments in the `command` section.
+There are quite a few arguments in the `command:` section.
 We'll look at it a few lines at a time.
 
 ```yaml
     command: >-
       --api.dashboard=true
 ```
-This enables the Traefik dashboard at `/dashboard/`.
+This enables the Traefik dashboard at `/dashboard/` (the trailing `/` is required).
 
 ```yaml
       --providers.docker=true
@@ -131,7 +131,7 @@ The only job for the `web` entrypoint is to redirect all requests to `websecure`
 ## Traefik dashboard
 
 You can check the Traefik dashboard by navigating to `<ADDRESS>/dashboard/`.
-The last `/` is important.
+The trailing `/` is required.
 
 Here you'll see all Routers, Services, and Middlewares that are currently active.
 

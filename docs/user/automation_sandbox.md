@@ -153,110 +153,6 @@ You can call `qty()` in four different ways:
 - With a time string: `qty('1d2h8m')`
 - Another `Quantity` object: `qty(qty(20, 'degC'))`
 
-You can then use the functions in Quantity to compare, convert, or change the values while keeping track of the units.
-
-For more information, see the *Quantity* section below.
-
-Examples:
-```javascript
-const field = getBlockField('spark-one', 'Ferment Fridge sensor', 'value');
-return qty(field).isGreaterThan(20, 'degC');
-```
-
-```javascript
-qty(20, 'degC').gt(50, 'degF'); // true
-qty(20, 'degC').gt(20, 'delta_degC'); // error: Incompatible units
-```
-
-```javascript
-const time1 = qty('1h10m');
-const time2 = qty(55, 'min');
-
-print(time1.value, time1.unit); // [ 4200, 's' ]
-print(time2.value, time2.unit); // [ 55, 'min' ]
-
-time1.gt(time2); // true
-time1.gt(time2.plus('2d')); // false
-```
-
-```javascript
-const time1 = qty('1h10m');
-const time2 = time1.to('min');
-
-print(time1.value, time1.unit); // [ 4200, 's' ]
-print(time2.value, time2.unit); // [ 70, 'min' ]
-```
-
-```javascript
-const time1 = qty(30, 'min');
-const time2 = time1.plus(1, 'h');
-
-print(time2.value, time2.unit); // [ 90, 'min' ]
-```
-
----
-### saveBlock(block)
-
-To change a block on a Spark, you need to explicitly save it.
-
-It will write all values in the block data you send, except for readonly fields. Those are ignored.
-
-This is an `async` function, and must be called using `await`.
-
-Example:
-```javascript
-const block = getBlock('spark-one', 'Ferment Fridge setpoint');
-block.data.storedSetting = qty(20, 'degC');
-await saveBlock(block);
-```
-
----
-### publishEvent(topic, payload)
-
-You can publish arbitrary MQTT events with the `publishEvent()` function.
-
-You can send objects or lists as payload. They will be automatically converted to a JSON string.
-
-This is an `async` function, and must be called using `await`.
-
-Example:
-```javascript
-await publishEvent('brewcast/history/my-process', {
-  key: 'my-process',
-  data: {
-    'value': 1234,
-  },
-});
-```
-
-Everything after `brewcast/history` in the topic is optional, but recommended.
-It makes it easier to identify and listen to your events while debugging.
-
----
-### axios
-
-[Axios](https://www.npmjs.com/package/axios#example) is a popular JavaScript library for making HTTP requests.
-It comes pre-installed in the automation sandbox.
-
-HTTP requests are always made from the automation service, both when the process is running, and when you are previewing your script.
-
-Example:
-```javascript
-const resp = await axios.get('https://www.example.com');
-print(resp);
-return resp.status === 200;
-```
-
-## Quantity
-
-When you call the `qty()` function, it returns a Quantity object.
-
-You can call `qty()` in four different ways:
-- With a block field that is a quantity object: `qty(getBlockField(...))`
-- With a value and a unit: `qty(20, 'degC')`
-- With a time string: `qty('1d2h8m')`
-- Another `Quantity` object: `qty(qty(20, 'degC'))`
-
 You can compare two quantities if the units are compatible. `degC` and `degF` are compatible, but `degC` and `delta_degC` are not.
 
 Available comparison functions are:
@@ -323,4 +219,57 @@ const other = qty(20, 'delta_degF');
 const result = original.plus(other);
 print(original.value, original.unit); // [ 20, 'degC' ]
 print(result.value, result.unit); // [ 31.11111, 'degC' ]
+```
+
+---
+### saveBlock(block)
+
+To change a block on a Spark, you need to explicitly save it.
+
+It will write all values in the block data you send, except for readonly fields. Those are ignored.
+
+This is an `async` function, and must be called using `await`.
+
+Example:
+```javascript
+const block = getBlock('spark-one', 'Ferment Fridge setpoint');
+block.data.storedSetting = qty(20, 'degC');
+await saveBlock(block);
+```
+
+---
+### publishEvent(topic, payload)
+
+You can publish arbitrary MQTT events with the `publishEvent()` function.
+
+You can send objects or lists as payload. They will be automatically converted to a JSON string.
+
+This is an `async` function, and must be called using `await`.
+
+Example:
+```javascript
+await publishEvent('brewcast/history/my-process', {
+  key: 'my-process',
+  data: {
+    'value': 1234,
+  },
+});
+```
+
+Everything after `brewcast/history` in the topic is optional, but recommended.
+It makes it easier to identify and listen to your events while debugging.
+
+---
+### axios
+
+[Axios](https://www.npmjs.com/package/axios#example) is a popular JavaScript library for making HTTP requests.
+It comes pre-installed in the automation sandbox.
+
+HTTP requests are always made from the automation service, both when the process is running, and when you are previewing your script.
+
+Example:
+```javascript
+const resp = await axios.get('https://www.example.com');
+print(resp);
+return resp.status === 200;
 ```
