@@ -134,7 +134,7 @@ print(events)
 ---
 ### qty(field) / qty(value, unit) / qty(duration)
 
-Many block fields are Quantities. This means that they have both a *value* (eg. `10`), and a *unit* (eg. `degC`).
+Many block fields are quantities. This means that they have both a *value* (eg. `10`), and a *unit* (eg. `degC`).
 
 If you print them, they will look like
 ```json
@@ -191,7 +191,7 @@ qty(20, 'degC').compareTo(15, 'degC'); // 1
 ```
 
 To convert a quantity to another compatible quantity, you can use the `to(unit)` function.
-When converting a quantity, the original quantity is unchanged.
+When converting a quantity, the original is unchanged.
 
 Examples:
 ```javascript
@@ -207,7 +207,7 @@ print(converted.value, converted.unit); // [ 67.9999, 'degF' ]
 ```
 
 You can also add or subtract one quantity from another.
-As with conversion, all mathematical operations return a new Quantity, and leave the original unchanged. The new Quantity has the original's unit.
+As with conversion, all mathematical operations return a new quantity, and leave the original unchanged. The new quantity has the original's unit.
 
 When modifying absolute temperatures (`degC`, `degF`), the argument must be a relative value (`delta_degC`, `delta_degF`).
 
