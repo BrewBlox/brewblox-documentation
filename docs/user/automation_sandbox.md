@@ -221,13 +221,16 @@ This is an `async` function, and must be called using `await`.
 
 Example:
 ```javascript
-await publishEvent('/brewcast/history/processed', {
+await publishEvent('brewcast/history/my-process', {
   key: 'my-process',
   data: {
     'value': 1234,
   },
 });
 ```
+
+Everything after `brewcast/history` in the topic is optional, but recommended.
+It makes it easier to identify and listen to your events while debugging.
 
 ---
 ### axios
