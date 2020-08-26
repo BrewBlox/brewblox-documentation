@@ -176,10 +176,14 @@ qty('1h10m').eq(qty(70, 'min')); // true
 qty(20, 'degC').lt(50, 'degF'); // false
 qty(20, 'degC').isLessThan(50, 'degF'); // false
 
+qty(20, 'degC').lte(20, 'degC'); // true
+qty(20, 'degC').lte(21, 'degC'); // true
+
 qty(20, 'degC').gt(50, 'degF'); // true
 qty(20, 'degC').isGreaterThan(50, 'degF'); // true
 
 qty(20, 'degC').gte(20, 'degC'); // true
+qty(20, 'degC').gte(19, 'degC'); // true
 
 qty(10, 'degC').compareTo(15, 'degC'); // -1
 qty(15, 'degC').compareTo(15, 'degC'); // 0
