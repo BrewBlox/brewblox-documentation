@@ -7,9 +7,9 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
-## Brewblox release 2020/??/??
+## Brewblox release 2020/08/26
 
-**firmware release date: 2020/??/??**
+**firmware release date: 2020/08/24**
 
 This release is bigger (and took longer) than usual.
 We're introducing new features, but we're also working towards having a stable and well-documented API that can be used for hobby projects or third-party applications.
