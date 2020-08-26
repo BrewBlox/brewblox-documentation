@@ -6,6 +6,8 @@ Blocks are combined to build [control chains](./control_chains.md) to run on the
 In the UI, they can be displayed by widgets on a dashboard. For more information on blocks vs widgets, see the [Blocks in depth guide](./blocks_in_depth.md).
 
 For a description of widgets, see the [Widget types page](./all_widgets.md).
+
+Block data reference documentation for developers can be found [here](../dev/reference/block_types.md).
 :::
 
 ## Sensors
@@ -84,12 +86,9 @@ This block is added by clicking 'Discover new OneWire block' in the Spark servic
 
 ### DS2408 Chip
 The DS2408 is used on the Motor Valve Expansion board.
-It has 8 pins, which can be used by two Motor Valve blocks: each Motor Valve requires four pins.
+It has 8 pins, which can be used by 8 Digital Actuator blocks, or by two Motor Valve blocks: each Motor Valve requires four pins.
 
 This block is added by clicking 'Discover new OneWire block' in the Spark service page menu.
-
-Technically, you can connect Digital Actuators to DS2408 Chips.
-There is an [issue](https://github.com/Brewblox/brewblox-firmware/issues/152) on the backlog for improving the distinction between DS2408 chips that are used for valves, and those used for actuators.
 
 ### Motor Valve
 The *Motor Valve* functions like a Digital Actuator, but is a special block to be used with our Motor Valve expansion board and the DS2408 Block.
@@ -308,7 +307,7 @@ Td is the *derivative time constant*, roughly the duration of overshoot that is 
 The derivative is taken from a filtered value of the input. The duration over which the derivative is calculated depends on Td.
 
 #### Boil mode
-Boil mode is an optional feature of the PID. 
+Boil mode is an optional feature of the PID.
 Boil mode lets the PID approach the boil temperature at full power and maintain a minimum output when it is reached.
 
 Normal PID behavior is to stop heating when the temperature gets close to the setpoint.

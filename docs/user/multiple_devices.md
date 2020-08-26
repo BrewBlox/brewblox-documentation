@@ -126,7 +126,7 @@ When you install Brewblox, it generates a `docker-compose.yml` file for you. Thi
 
 ```yaml
   spark-one:
-    image: brewblox/brewblox-devcon-spark:rpi-${BREWBLOX_RELEASE}
+    image: brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
     privileged: true
     restart: unless-stopped
     command: '--name=spark-one'
@@ -138,7 +138,7 @@ This configuration is more advanced than what we've seen so far. To make sense o
 ---
 ```yaml
 spark-one:
-  image: brewblox/brewblox-devcon-spark:rpi-${BREWBLOX_RELEASE}
+  image: brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
   ...
 ```
 
