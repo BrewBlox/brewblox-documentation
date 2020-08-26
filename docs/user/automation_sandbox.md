@@ -174,7 +174,7 @@ qty('1h10m').eq(70, 'min'); // true
 qty('1h10m').eq(qty(70, 'min')); // true
 
 qty(20, 'degC').lt(50, 'degF'); // false
-qty(20, 'degC').isLessThan(50, 'degF'); // true
+qty(20, 'degC').isLessThan(50, 'degF'); // false
 
 qty(20, 'degC').gt(50, 'degF'); // true
 qty(20, 'degC').isGreaterThan(50, 'degF'); // true
