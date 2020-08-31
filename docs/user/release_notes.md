@@ -7,6 +7,20 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2020/08/31
+
+**firmware release date: 2020/08/24**
+
+This is a small update to the 2020/08/26 release.
+
+**Changes**
+- (fix) Session log graph notes no longer incorrectly show an error that end date is before start date.
+- (fix) Restored the pause/resume autoconnect button in the Spark troubleshooter.
+- (fix) The `traefik` service now correctly restarts after a Pi reboot.
+- (feature) Added the `brewblox-ctl service pull` command, that can be used for updating single services without performing a full `brewblox-ctl update`.
+- (improve) Added current status for Brewblox service containers to `brewblox-ctl log` output.
+- (improve) `avahi-daemon` is added to the list of apt packages installed by `brewblox-ctl install`.
+
 ## Brewblox release 2020/08/26
 
 **firmware release date: 2020/08/24**
