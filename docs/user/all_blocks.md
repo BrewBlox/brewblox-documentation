@@ -25,6 +25,10 @@ You can apply a calibration offset to a OneWire sensor in its settings.
 This is a simulated sensor that allows you to manually set the 'measured' value.
 You can use it to play with the system, to see how it will respond.
 
+### Temp Sensor (Combi)
+Sensor values can be aggregated using this block.
+You can set multiple sensors as input, and choose whether to set output to the average, min, or max value of the linked sensors.
+
 ## Setpoints
 A Setpoint holds the target value for a specific sensor. It used as input for a PID.
 

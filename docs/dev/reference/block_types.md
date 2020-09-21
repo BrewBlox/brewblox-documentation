@@ -339,6 +339,20 @@ Referenced enum values:
 
 <<< @/docs/dev/types/block-enums.ts#SparkPlatform
 
+## TempSensorCombi
+
+Accepts other temp sensors as input, and sets value to average/min/max of all connected sensors.
+Disconnected or unknown sensors are ignored.
+
+A maximum of 8 sensors can be set.
+A TempSensorCombi can use other TempSensorCombi blocks as input.
+
+<<< @/docs/dev/types/block-types.ts#TempSensorCombi
+
+Referenced enum values:
+
+<<< @/docs/dev/types/block-enums.ts#SensorCombiFunc
+
 ## TempSensorMock
 
 Can be used interchangeably with the *TempSensorOneWire* block,
