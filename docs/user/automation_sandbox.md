@@ -158,9 +158,9 @@ You can compare two quantities if the units are compatible. `degC` and `degF` ar
 Available comparison functions are:
 - `eq(other)` or `isEqualTo(other)`
 - `lt(other)` or `isLessThan(other)`
-- `lte(other)`
+- `lte(other)` or `isLessThanEqual(other)`
 - `gt(other)` or `isGreaterThan(other)`
-- `gte(other)`
+- `gte(other)` or `isGreaterThanEqual(other)`
 - `compareTo(other)`
 
 The argument(s) for all comparison functions are the same as that for `qty()` itself.
