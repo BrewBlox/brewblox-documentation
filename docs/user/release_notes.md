@@ -29,11 +29,13 @@ If not, you can follow the instructions in `brewblox-ctl flash`.
 - (feature) Added the *Temp Sensor (Combined)* block.
 - (migrate) Replaced the CouchDB datastore implementation with Redis.
 - (remove) Removed deprecated AMQP listener in brewblox-history.
-- (remove) Removed deprecated `brewcast/state/NAME/blocks` publish in Spark service.
+- (remove) Removed deprecated `brewcast/state/{SERVICE}/blocks` publish in Spark service.
 - (improve) Setpoint blocks now always show their enable/disable toggle.
 - (improve) Builder no longer opens the editor when double clicking.
-- (improve) When using a touchscreen, you need to long press Builder parts to interact with them.
+- (improve) When using a touchscreen, interaction with Builder parts now requires a long press.
+- (improve) Added hint of how and when to flash the bootloader to the output of `brewblox-ctl flash`.
 - (update) Updated the firmware system layer from 1.5.2 to 2.0.0-rc1.
+- (fix) Graphs no longer show a line between the last and the first point after config changes.
 
 **Automation changes**
 - (improve) Added `isLessThanEqual(other)` alias for the `qty().lte()` function in automation sandbox.
