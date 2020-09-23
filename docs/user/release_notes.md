@@ -41,6 +41,7 @@ The fix for this is included in the new firmware. To get this update you'll have
 - (fix) Improved stability of firmware / bootloader updates.
 - (fix) Graphs no longer show a line between the last and the first point after config changes.
 - (fix) If you open a new update dialog while the update is in progress, it will now receive update log messages.
+- (fix) Fixed default values in the Spark wifi config menu.
 
 **Automation changes**
 - (improve) Added `isLessThanEqual(other)` alias for the `qty().lte()` function in automation sandbox.
