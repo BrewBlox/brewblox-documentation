@@ -262,10 +262,10 @@ brewblox-ctl flash
 
 Follow the instructions until the menu exits. You should now see a dark screen with six empty boxes. 
 
-We ship new Sparks with the bootloader pre-flashed. 
-If you are upgrading an older Spark, and the screen is completely black, or completely white, you may need to flash the bootloader.
+We ship new Sparks with the bootloader pre-flashed.
+If you are upgrading an older Spark, you may need to flash the bootloader.
 
-**Only if you are not seeing six boxes on the Spark LCD** , run:
+**Only if your LED is blinking blue after the firmware is flashed**, run:
 ```bash
 brewblox-ctl particle -c flash-bootloader
 ```

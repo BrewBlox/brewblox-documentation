@@ -7,9 +7,9 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
-## Brewblox release 2020/09/22
+## Brewblox release 2020/09/23
 
-**firmware release date: 2020/09/09**
+**firmware release date: 2020/09/22**
 
 After one too many "Waiting for datastore..." notification, we decided to go looking for a replacement.
 [We evaluated multiple candidates](https://brewblox.netlify.app/dev/decisions/20200902_redis_datastore.html), and decided to try Redis as a replacement.
@@ -22,8 +22,11 @@ Your data will be migrated automatically, and the old CouchDB data will be moved
 We also added a new block: *Temp Sensor (Combined)*. This is a sensor where the value is the min/max/average value of multiple other sensors.
 
 This release includes a new system layer and bootloader.
-If your Spark is connected to Wifi, this will be updated automatically.
-If not, you can follow the instructions in `brewblox-ctl flash`.
+If your Spark is connected to a Wifi network, the bootloader will be updated automatically.
+If not, you can follow the instructions in `brewblox-ctl flash` to update the bootloader.
+
+If your Spark is connected to the service using USB, then the UI update will throw an error.
+The fix for this is included in the new firmware. To get this update you'll have to use `brewblox-ctl flash`.
 
 **Changes**
 - (feature) Added the *Temp Sensor (Combined)* block.
@@ -35,7 +38,9 @@ If not, you can follow the instructions in `brewblox-ctl flash`.
 - (improve) When using a touchscreen, interaction with Builder parts now requires a long press.
 - (improve) Added hint of how and when to flash the bootloader to the output of `brewblox-ctl flash`.
 - (update) Updated the firmware system layer from 1.5.2 to 2.0.0-rc1.
+- (fix) Improved stability of firmware / bootloader updates.
 - (fix) Graphs no longer show a line between the last and the first point after config changes.
+- (fix) If you open a new update dialog while the update is in progress, it will now receive update log messages.
 
 **Automation changes**
 - (improve) Added `isLessThanEqual(other)` alias for the `qty().lte()` function in automation sandbox.
