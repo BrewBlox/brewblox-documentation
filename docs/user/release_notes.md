@@ -28,6 +28,13 @@ If not, you can follow the instructions in `brewblox-ctl flash` to update the bo
 If your Spark is connected to the service using USB, then the UI update will throw an error.
 The fix for this is included in the new firmware. To get this update you'll have to use `brewblox-ctl flash`.
 
+**Changes 2020/09/28**
+- (feature) Added Spark service action to reboot the service.
+- (improve) Non-fullscreen graphs are now static on mobile.
+- (feature) Long press on graph widget to open fullscreen.
+- (fix) Creating a Setpoint with default settings no longer causes an "invalid magnitude for Quantity" error.
+- (fix) Resolved a bug where fetching graph data would fail for some users.
+
 **Changes**
 - (feature) Added the *Temp Sensor (Combined)* block.
 - (migrate) Replaced the CouchDB datastore implementation with Redis.
