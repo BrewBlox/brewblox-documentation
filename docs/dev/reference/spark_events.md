@@ -19,7 +19,7 @@ The `data` field contains all blocks on the controller and volatile service stat
 
 ## SparkStateEvent
 
-<<< @/docs/dev/types/service-types.ts#SparkStateEvent
+<<< @/shared-types/spark-service-types.ts#SparkStateEvent
 
 The top-level fields (*key*, *type*, *ttl*, *data*) are mandated by the [state events spec](./event_logging).
 
@@ -32,8 +32,8 @@ If `data.status` is null, the service is currently offline.
 
 ## Spark status
 
-<<< @/docs/dev/types/service-types.ts#ApiSparkStatus
-<<< @/docs/dev/types/service-types.ts#SparkFirmwareInfo
+<<< @/shared-types/spark-service-types.ts#ApiSparkStatus
+<<< @/shared-types/spark-service-types.ts#SparkFirmwareInfo
 
 `device_address`, `connection_kind`, `device_info`, and `handshake_info`
 all describe the currently connected controller, and will be null if no controller is connected.

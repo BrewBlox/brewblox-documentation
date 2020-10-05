@@ -14,7 +14,7 @@ The [TypeScript interface syntax](https://www.typescriptlang.org/docs/handbook/i
 *Block* is the base type for all blocks.
 The shared fields are defined here, and each block type extends this interface with more specific typings for `type` and `data`.
 
-<<< @/docs/dev/types/block-types.ts#Block
+<<< @/shared-types/spark-block-types.ts#Block
 
 ## BloxField (typed objects)
 
@@ -34,7 +34,7 @@ Link objects are fields in block data that refer to other blocks.
 Each link field has a fixed type.
 This can be a block type (*Pid*), but also a block interface type (*TempSensorInterface*).
 
-<<< @/docs/dev/types/block-types.ts#BloxField
+<<< @/shared-types/spark-block-types.ts#BloxField
 
 ## IoPin
 
@@ -46,12 +46,12 @@ Pins used by *DigitalActuator* blocks share the IoPin interface.
 An *IoPin* object will only ever contain a single key/value pair.
 The key is the pin name.
 
-<<< @/docs/dev/types/block-types.ts#IoPin
+<<< @/shared-types/spark-block-types.ts#IoPin
 
 Referenced enum values:
 
-<<< @/docs/dev/types/block-enums.ts#ChannelConfig
-<<< @/docs/dev/types/block-enums.ts#DigitalState
+<<< @/shared-types/spark-block-enums.ts#ChannelConfig
+<<< @/shared-types/spark-block-enums.ts#DigitalState
 
 Example IoPin:
 
@@ -75,14 +75,14 @@ Digital actuators (*DigitalActuator*, *MotorValve*) have digital constraints, an
 Typically, actuators have a *desiredSetting* and a *setting* field.
 *desiredSetting* is the before, and *setting* is after constraints are evaluated.
 
-<<< @/docs/dev/types/block-types.ts#Constraints
+<<< @/shared-types/spark-block-types.ts#Constraints
 
 ## ActuatorAnalogMock
 
 This block can be used as a dummy replacement for an *ActuatorPwm*,
 or as input block for an *ActuatorLogic*.
 
-<<< @/docs/dev/types/block-types.ts#ActuatorAnalogMock
+<<< @/shared-types/spark-block-types.ts#ActuatorAnalogMock
 
 ## ActuatorLogic
 
@@ -100,11 +100,11 @@ and *AnalogCompare* objects are lettered `A` through `Z`.
 If a compare is removed from the array, the letter designation of all
 subsequent compares will shift.
 
-<<< @/docs/dev/types/block-types.ts#ActuatorLogic
+<<< @/shared-types/spark-block-types.ts#ActuatorLogic
 
 Referenced enum values:
 
-<<< @/docs/dev/types/block-enums.ts#Logic
+<<< @/shared-types/spark-block-enums.ts#Logic
 
 ## ActuatorOffset (Setpoint Driver)
 
@@ -131,11 +131,11 @@ If *desiredSetting* is 10, reference setting is 50,
 and measured value of target block is 55,
 then *value* will be 5.
 
-<<< @/docs/dev/types/block-types.ts#ActuatorOffset
+<<< @/shared-types/spark-block-types.ts#ActuatorOffset
 
 Referenced enum values:
 
-<<< @/docs/dev/types/block-enums.ts#ReferenceKind
+<<< @/shared-types/spark-block-enums.ts#ReferenceKind
 
 ## ActuatorPwm
 
@@ -144,7 +144,7 @@ The percentage of time spent ON will match the analog setting.
 
 It drives a digital actuator, and has analog constraints.
 
-<<< @/docs/dev/types/block-types.ts#ActuatorPwm
+<<< @/shared-types/spark-block-types.ts#ActuatorPwm
 
 ## Balancer
 
@@ -153,13 +153,13 @@ based on their desired setting.
 
 It is linked to an actuator using the *Balanced* analog constraint.
 
-<<< @/docs/dev/types/block-types.ts#Balancer
+<<< @/shared-types/spark-block-types.ts#Balancer
 
 ## DeprecatedObject
 
 *DeprecatedObject* blocks are stub object: the block itself exists, but the type is no longer supported.
 
-<<< @/docs/dev/types/block-types.ts#DeprecatedObject
+<<< @/shared-types/spark-block-types.ts#DeprecatedObject
 
 ## DigitalActuator
 
@@ -167,11 +167,11 @@ Turns an *IoPin* ON or OFF.
 
 The actuator itself is typically driven by a PWM, and supports digital constraints.
 
-<<< @/docs/dev/types/block-types.ts#DigitalActuator
+<<< @/shared-types/spark-block-types.ts#DigitalActuator
 
 Referenced enum values:
 
-<<< @/docs/dev/types/block-enums.ts#DigitalState
+<<< @/shared-types/spark-block-enums.ts#DigitalState
 
 ## DisplaySettings
 
@@ -183,11 +183,11 @@ and has its own independent temperature unit setting.
 *widgets* is an array of at most 6 slots.
 Slots can be set in any order. The *pos* field determines the on-screen position.
 
-<<< @/docs/dev/types/block-types.ts#DisplaySettings
+<<< @/shared-types/spark-block-types.ts#DisplaySettings
 
 Referenced enum values:
 
-<<< @/docs/dev/types/block-enums.ts#DisplayTempUnit
+<<< @/shared-types/spark-block-enums.ts#DisplayTempUnit
 
 ## DS2408
 
@@ -201,11 +201,11 @@ The *connectMode* field indicates current usage.
 If the DS2408 is used by a MotorValve,
 only pins 1 and 4 should be used as *startChannel* in the MotorValve block.
 
-<<< @/docs/dev/types/block-types.ts#DS2408
+<<< @/shared-types/spark-block-types.ts#DS2408
 
 Referenced enum values:
 
-<<< @/docs/dev/types/block-enums.ts#DS2408ConnectMode
+<<< @/shared-types/spark-block-enums.ts#DS2408ConnectMode
 
 ## DS2413
 
@@ -213,19 +213,19 @@ Referenced enum values:
 
 *DS2408* provides *IoPin* objects for digital actuators.
 
-<<< @/docs/dev/types/block-types.ts#DS2413
+<<< @/shared-types/spark-block-types.ts#DS2413
 
 ## InactiveObject
 
 **Deprecated**
 
-<<< @/docs/dev/types/block-types.ts#InactiveObject
+<<< @/shared-types/spark-block-types.ts#InactiveObject
 
 ## Groups
 
 **Deprecated, system object**
 
-<<< @/docs/dev/types/block-types.ts#Groups
+<<< @/shared-types/spark-block-types.ts#Groups
 
 ## MockPins
 
@@ -234,7 +234,7 @@ Referenced enum values:
 This is useful for simulator services,
 but also for use in *ActuatorLogic* configurations where a digital actuator is only used as input, and is not expected to control hardware.
 
-<<< @/docs/dev/types/block-types.ts#MockPins
+<<< @/shared-types/spark-block-types.ts#MockPins
 
 ## MotorValve
 
@@ -244,12 +244,12 @@ It must be connected to a *DS2408*, and requires 4 *IoPin* channels to function.
 
 The start channel is configured, and it will automatically claim the next three channels.
 
-<<< @/docs/dev/types/block-types.ts#MotorValve
+<<< @/shared-types/spark-block-types.ts#MotorValve
 
 Referenced enum values:
 
-<<< @/docs/dev/types/block-enums.ts#DigitalState
-<<< @/docs/dev/types/block-enums.ts#ValveState
+<<< @/shared-types/spark-block-enums.ts#DigitalState
+<<< @/shared-types/spark-block-enums.ts#ValveState
 
 ## Mutex
 
@@ -260,13 +260,13 @@ It is configured by setting a *Mutexed* constraint on two or more digital actuat
 If *extraHoldTime* is set in a mutexed constraint,
 it will override the *differentActuatorWait* value.
 
-<<< @/docs/dev/types/block-types.ts#Mutex
+<<< @/shared-types/spark-block-types.ts#Mutex
 
 ## OneWireBus
 
 **System object**
 
-<<< @/docs/dev/types/block-types.ts#OneWireBus
+<<< @/shared-types/spark-block-types.ts#OneWireBus
 
 ## Pid
 
@@ -275,11 +275,11 @@ and calculates desired output for an analog actuator.
 
 For a more in-depth explanation of how to use it, see the [blocks guide](../../user/all_blocks).
 
-<<< @/docs/dev/types/block-types.ts#Pid
+<<< @/shared-types/spark-block-types.ts#Pid
 
 Referenced enum values:
 
-<<< @/docs/dev/types/block-enums.ts#FilterChoice
+<<< @/shared-types/spark-block-enums.ts#FilterChoice
 
 ## SetpointProfile
 
@@ -287,7 +287,7 @@ The *SetpointProfile* drives a *SetpointSensorPair* to gradually change its sett
 
 For a more in-depth explanation of how to use it, see the [blocks guide](../../user/all_blocks).
 
-<<< @/docs/dev/types/block-types.ts#SetpointProfile
+<<< @/shared-types/spark-block-types.ts#SetpointProfile
 
 ## SetpointSensorPair
 
@@ -299,11 +299,11 @@ The *storedSetting* field contains the last user-set setting.
 
 The measured value is filtered to reduce jitter, but allows setting a step threshold to improve response time if the value has a legitimate sudden change.
 
-<<< @/docs/dev/types/block-types.ts#SetpointSensorPair
+<<< @/shared-types/spark-block-types.ts#SetpointSensorPair
 
 Referenced enum values:
 
-<<< @/docs/dev/types/block-enums.ts#FilterChoice
+<<< @/shared-types/spark-block-enums.ts#FilterChoice
 
 ## Spark2Pins
 
@@ -312,11 +312,11 @@ Referenced enum values:
 The *Spark2Pins* object is only found on Spark 2 controllers,
 and provides an array of *IoPin* objects.
 
-<<< @/docs/dev/types/block-types.ts#Spark2Pins
+<<< @/shared-types/spark-block-types.ts#Spark2Pins
 
 Referenced enum values:
 
-<<< @/docs/dev/types/block-enums.ts#Spark2Hardware
+<<< @/shared-types/spark-block-enums.ts#Spark2Hardware
 
 ## Spark3Pins
 
@@ -325,7 +325,7 @@ Referenced enum values:
 The *Spark3Pins* object is only found on Spark 3 controllers,
 and provides an array of *IoPin* objects, along with settings regulating voltage.
 
-<<< @/docs/dev/types/block-types.ts#Spark3Pins
+<<< @/shared-types/spark-block-types.ts#Spark3Pins
 
 ## SysInfo
 
@@ -333,11 +333,11 @@ and provides an array of *IoPin* objects, along with settings regulating voltage
 
 Basic device info can be found here.
 
-<<< @/docs/dev/types/block-types.ts#SysInfo
+<<< @/shared-types/spark-block-types.ts#SysInfo
 
 Referenced enum values:
 
-<<< @/docs/dev/types/block-enums.ts#SparkPlatform
+<<< @/shared-types/spark-block-enums.ts#SparkPlatform
 
 ## TempSensorCombi
 
@@ -347,11 +347,11 @@ Disconnected or unknown sensors are ignored.
 A maximum of 8 sensors can be set.
 A TempSensorCombi can use other TempSensorCombi blocks as input.
 
-<<< @/docs/dev/types/block-types.ts#TempSensorCombi
+<<< @/shared-types/spark-block-types.ts#TempSensorCombi
 
 Referenced enum values:
 
-<<< @/docs/dev/types/block-enums.ts#SensorCombiFunc
+<<< @/shared-types/spark-block-enums.ts#SensorCombiFunc
 
 ## TempSensorMock
 
@@ -360,7 +360,7 @@ except that its setting is user-defined.
 
 Fluctuations can be configured for improved simulation of real-world conditions.
 
-<<< @/docs/dev/types/block-types.ts#TempSensorMock
+<<< @/shared-types/spark-block-types.ts#TempSensorMock
 
 ## TempSensorOneWire
 
@@ -369,7 +369,7 @@ Fluctuations can be configured for improved simulation of real-world conditions.
 The basic temperature sensor.
 An offset can be configured for calibration purposes.
 
-<<< @/docs/dev/types/block-types.ts#TempSensorOneWire
+<<< @/shared-types/spark-block-types.ts#TempSensorOneWire
 
 ## Ticks
 
@@ -378,17 +378,17 @@ An offset can be configured for calibration purposes.
 Keeps track of system time.
 *secondsSinceEpoch* is automatically set by the Spark service.
 
-<<< @/docs/dev/types/block-types.ts#Ticks
+<<< @/shared-types/spark-block-types.ts#Ticks
 
 ## TouchSettings
 
 **System object**
 
-<<< @/docs/dev/types/block-types.ts#TouchSettings
+<<< @/shared-types/spark-block-types.ts#TouchSettings
 
 Referenced enum values:
 
-<<< @/docs/dev/types/block-enums.ts#TouchCalibrated
+<<< @/shared-types/spark-block-enums.ts#TouchCalibrated
 
 ## WiFiSettings
 
@@ -396,8 +396,8 @@ Referenced enum values:
 
 Wifi setting values are write-only, and will always be empty when read.
 
-<<< @/docs/dev/types/block-types.ts#WiFiSettings
+<<< @/shared-types/spark-block-types.ts#WiFiSettings
 
 Referenced enum values:
 
-<<< @/docs/dev/types/block-enums.ts#Wifi
+<<< @/shared-types/spark-block-enums.ts#Wifi
