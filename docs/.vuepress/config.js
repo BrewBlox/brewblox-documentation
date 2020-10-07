@@ -99,6 +99,7 @@ module.exports = {
                 'blocks_in_depth',
                 'removing_things',
                 'release_notes',
+                'system_upgrades',
                 'troubleshooting',
             ],
         },
