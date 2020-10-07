@@ -1,20 +1,26 @@
 # Upgrading your system
 
 Brewblox is designed to be compatible with the majority of Linux-based systems.
-but there still are dependencies, and those have their own End of Life dates.
+To achieve this, it has two major dependencies: Docker, and Python.
+Both are available on most operating systems, but released versions have an End of Life date.
+Beyond this date, they are no longer supported, and compatibility is no longer guaranteed.
+
+For us, that means that after an End of Life date, tooling or dependencies may suddenly break.
+This can be errors during development, or during installation, but the end result is the same:
+software we use, but have no control over no longer works.
 
 When your system is (soon to be) no longer supported, we strongly recommend upgrading.
 In the long run, it takes much more effort to keep an old system running than it is to upgrade.
 
-To assist with upgrades, `brewblox-ctl` can save and load snapshots of your installation.
-This lets you easily move your configuration between systems.
+To assist with reinstalls, `brewblox-ctl` can save and load snapshots of your installation.
+This lets you easily move your Brewblox installation between hosts or operating systems.
 
 ## Deprecation schedule
 
 We track two deprecation schedules: Debian (the base of the Raspberry Pi OS), and Python.
 Linux distros come with a built-in version of Python.
 For some systems, it's doable to upgrade Python versions.
-For the Raspberry Pi, it's significantly easier and faster to upgrade the entire OS.
+For the Raspberry Pi, it's significantly easier and faster to reinstall the OS.
 
 ### Raspberry Pi OS
 
@@ -50,7 +56,7 @@ For reference, these are the default Python versions for various distros:
 - Ubuntu 20.04: Python 3.8
 
 If you are using Synology, MacOS, or one of the many flavours of Linux,
-then the Python version is the most important indicator of compatibility.
+then the Python version is the most important factor for compatibility.
 
 ## Upgrading Brewblox
 
@@ -86,7 +92,7 @@ Then run:
 ```
 brewblox-ctl install --snapshot brewblox.tar.gz
 cd brewblox
-brewblox-ctl up
+brewblox-ctl update
 ```
 
 You can then skip the rest of the Startup Guide: your system is now configured exactly as it was before.
