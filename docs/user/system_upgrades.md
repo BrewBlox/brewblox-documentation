@@ -2,12 +2,11 @@
 
 Brewblox is designed to be compatible with the majority of Linux-based systems.
 To achieve this, it has two major dependencies: Docker, and Python.
-Both are available on most operating systems, but released versions have an End of Life date.
+Both are available on most operating systems, but released versions have an End of Life (EOL) date.
 Beyond this date, they are no longer supported, and compatibility is no longer guaranteed.
 
-For us, that means that after an End of Life date, tooling or dependencies may suddenly break.
-This can be errors during development, or during installation, but the end result is the same:
-software we use, but have no control over no longer works.
+After an EOL date, tooling or dependencies may suddenly break.
+This means that we cannot guarantee an error-free experience on a system with outdated dependencies.
 
 When your system is (soon to be) no longer supported, we strongly recommend upgrading.
 In the long run, it takes much more effort to keep an old system running than it is to upgrade.
@@ -27,9 +26,9 @@ For the Raspberry Pi, it's significantly easier and faster to reinstall the OS.
 The Raspberry Pi OS is based on Debian,
 and we support the releases based on the [stable Debian version](https://wiki.debian.org/DebianReleases).
 Debian versions become stable a year after release.
-This means their End of Life date is *one year after the release of the next version*.
+This means their EOL date is *one year after the release of the next version*.
 
-The End of Life dates for the last three Debian versions are:
+The EOL dates for the last three Debian versions are:
 - Buster: ~2022
 - Stretch: 2020/07/06
 - Jessie: 2018/06/17
@@ -41,7 +40,7 @@ Python versions are active for five years after release.
 
 New versions may have some compatibility problems immediately after release.
 
-The End of Life dates for the last Python versions are:
+The EOL dates for the last Python versions are:
 - 3.9: ~2025
 - 3.8: 2024/10
 - 3.7: 2023/06
