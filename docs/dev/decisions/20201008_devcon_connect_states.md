@@ -285,7 +285,7 @@ fork again
         :synchronize controller time;
         :collect controller tracing;
         if (exception?) then (yes)
-            #cyan:set state to disconnected;
+            :close connection;
         else (no)
             #cyan:set state to synchronized;
         endif
