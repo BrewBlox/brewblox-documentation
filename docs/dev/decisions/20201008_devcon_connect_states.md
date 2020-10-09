@@ -40,6 +40,10 @@ or that act as watchdog (*broadcaster.py*).
 All features are started when the service start.
 Partitions indicate where a feature executes certain actions in specific phases.
 
+Blocking behavior is implied for transitions between partitions in the diagram. Some behavior is the same during multiple phases, and is expressed in the partition label.
+
+For example, *communication.py* behaves exactly the same throughout the Connected, Acknowledged, and Synchronized phases.
+
 At diagram stop symbols, an `aiohttp.web.GracefulExit()` exception is raised, which will cause the service to shut down.
 
 ```plantuml
@@ -48,8 +52,7 @@ At diagram stop symbols, an `aiohttp.web.GracefulExit()` exception is raised, wh
 fork
     :communication.py startup;
     partition Disconnected {
-        while (autoconnecting?) is (no)
-        endwhile (yes)
+        :wait for autoconnecting flag;
         if (retry attempts exhausted?) then (yes)
             stop
         endif
@@ -61,16 +64,20 @@ fork
             endif
         endif
         :connect;
-        #cyan:set connected state;
+        #cyan:set state to connected;
     }
-    partition "Connected / Acknowledged / Synchronized" {
+    partition "Connected OR Acknowledged OR Synchronized" {
         while (connection) is (open)
             :read from connection;
         endwhile (closed)
         if (retry attempts exhausted?) then (yes)
+            :increase retry interval
+            and save value to datastore;
             stop
+        else (no)
+            #cyan:set state to disconnected;
+            detach
         endif
-        #cyan:set disconnected state;
     }
 
 fork again
@@ -84,7 +91,7 @@ fork again
             :send noop command;
         endwhile (received)
         :check handshake;
-        #cyan:set acknowledged state;
+        #cyan:set state to acknowledged;
     }
     partition Acknowledged {
         :synchronize block store;
@@ -93,22 +100,24 @@ fork again
         if (timeout or unhandled exception) then (caught)
             stop
         endif
-        #cyan:set synchronized state;
+        #cyan:set state to synchronized;
     }
-    partition Synchronized {
-    }
+    detach
 
 fork again
     :broadcaster.py startup;
-    partition "Disconnected / Connected / Acknowledged" {
+
+    partition "Disconnected OR Connected OR Acknowledged" {
         :publish service state;
     }
     partition Synchronized {
-        :publish service state, blocks, and history;
-        if (timeout error) then (caught)
+        if (timeout error) then (yes)
             stop
+        else (no)
         endif
+        :publish service state, blocks, and history;
     }
+    detach
 
 endfork
 
@@ -204,9 +213,10 @@ fork
     :connection.py startup;
     note: Name changed from communication.py
     partition Disconnected {
-        while (autoconnecting?) is (no)
-        endwhile (yes)
+        :wait for autoconnecting flag;
         if (retry attempts exhausted?) then (yes)
+            :increase retry interval,
+            and save value to datastore;
             stop
         endif
         if (device_host or device_serial set?) then (yes)
@@ -225,15 +235,19 @@ fork
             endwhile (yes)
         endif
         :connect;
-        #cyan:set connected state;
+        #cyan:set state to connected;
     }
-    partition "Connected / Acknowledged / Synchronized" {
+    partition "Connected OR Acknowledged OR Synchronized" {
         while (connection) is (open)
             :read from connection;
         endwhile (closed)
-        #cyan:set disconnected state;
         if (retry attempts exhausted?) then (yes)
+            :increase retry interval,
+            and save value to datastore;
             stop
+        else (no)
+            #cyan:set state to disconnected;
+            detach
         endif
     }
 
@@ -248,16 +262,16 @@ fork again
             :send noop command;
         endwhile (received)
         :check handshake;
-        #cyan:set acknowledged state;
+        #cyan:set state to acknowledged;
     }
     partition Acknowledged {
         :synchronize block store;
         :synchronize controller time;
         :collect controller tracing;
         if (exception) then (yes)
-            #cyan:set disconnected state;
+            #cyan:set state to disconnected;
         else (no)
-            #cyan:set synchronized state;
+            #cyan:set state to synchronized;
         endif
         :wait disconnected;
         floating note
@@ -268,9 +282,7 @@ fork again
             connection.py will then attempt to reconnect.
         end note
     }
-    partition Synchronized {
-        
-    }
+    detach
 
 endfork
 
