@@ -97,7 +97,7 @@ fork again
         :synchronize block store;
         :synchronize controller time;
         :collect controller tracing;
-        if (timeout or unhandled exception) then (caught)
+        if (exception?) then (yes)
             stop
         endif
         #cyan:set state to synchronized;
@@ -111,7 +111,7 @@ fork again
         :publish service state;
     }
     partition Synchronized {
-        if (timeout error) then (yes)
+        if (timeout error?) then (yes)
             stop
         else (no)
         endif
@@ -268,7 +268,7 @@ fork again
         :synchronize block store;
         :synchronize controller time;
         :collect controller tracing;
-        if (exception) then (yes)
+        if (exception?) then (yes)
             #cyan:set state to disconnected;
         else (no)
             #cyan:set state to synchronized;
