@@ -54,6 +54,8 @@ fork
     partition Disconnected {
         :wait for autoconnecting flag;
         if (retry attempts exhausted?) then (yes)
+            :increase retry interval
+            and save value to datastore;
             stop
         endif
         if (device_host or device_serial set?) then (yes)
