@@ -108,14 +108,18 @@ fork again
     :broadcaster.py startup;
 
     partition "Disconnected OR Connected OR Acknowledged" {
+        repeat
         :publish service state;
+        repeat while
     }
     partition Synchronized {
+        repeat
         if (timeout error?) then (yes)
             stop
         else (no)
         endif
         :publish service state, blocks, and history;
+        repeat while
     }
     detach
 
