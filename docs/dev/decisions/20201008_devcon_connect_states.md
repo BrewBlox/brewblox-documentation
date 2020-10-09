@@ -109,16 +109,18 @@ fork again
 
     partition "Disconnected OR Connected OR Acknowledged" {
         repeat
-        :publish service state;
+            :publish service state;
         repeat while
     }
     partition Synchronized {
         repeat
-        if (timeout error?) then (yes)
-            stop
-        else (no)
-        endif
-        :publish service state, blocks, and history;
+            if (timeout error?) then (yes)
+                stop
+            else (no)
+            endif
+            :publish service state;
+            :publish blocks;
+            :publish history;
         repeat while
     }
     detach
