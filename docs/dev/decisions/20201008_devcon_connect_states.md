@@ -65,8 +65,12 @@ fork
             else (yes)
             endif
         endif
-        :connect;
-        #cyan:set state to connected;
+        if (connect ok?) then (yes)
+            #cyan:set state to connected;
+        else (no)
+            :retry;
+            detach
+        endif
     }
     partition "Connected OR Acknowledged OR Synchronized" {
         while (connection) is (open)
@@ -242,8 +246,12 @@ fork
                 endif
             endwhile (yes)
         endif
-        :connect;
-        #cyan:set state to connected;
+        if (connect ok?) then (yes)
+            #cyan:set state to connected;
+        else (no)
+            :retry;
+            detach
+        endif
     }
     partition "Connected OR Acknowledged OR Synchronized" {
         while (connection) is (open)
