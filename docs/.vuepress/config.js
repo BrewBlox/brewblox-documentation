@@ -25,10 +25,16 @@ module.exports = {
                     ],
                 },
                 {
+                    title: 'Using brewblox-service',
+                    children: [
+                        'service/architecture',
+                        'service/profiling',
+                    ],
+                },
+                {
                     title: 'Contributing',
                     children: [
                         'contributing/release_tools',
-                        'contributing/profiling',
                     ],
                 },
                 {
