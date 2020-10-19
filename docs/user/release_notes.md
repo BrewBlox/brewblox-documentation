@@ -7,6 +7,58 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2020/10/19
+
+**firmware release date: 2020/10/11**
+
+*brewblox-ctl* uses Python. Python 3.5, the default version for Raspbian Stretch, was discontinued in september.
+Raspbian does not support upgrading Python versions.
+If you are not yet running the latest Raspbian (Buster), we strongly recommend re-flashing your SD card.
+For those unsure of which Raspbian version they're using: *brewblox-ctl* will warn you if your Python version is unsupported.
+
+*brewblox-ctl* still works on Raspbian Stretch,
+but depends on other software projects that have announced they will soon no longer be compatible with Python 3.5.
+
+We added commands to *brewblox-ctl* to make it easy to move your Brewblox installation without losing any settings or history data.
+For more information, see [our system upgrade guide](https://brewblox.netlify.app/user/system_upgrades).
+
+The PWM block has also received a minor rework, both in firmware, and in the UI.
+In the firmware, we fixed an issue where the PWM overcompensated for setting changes after it had spent a long period at either 0% or 100%.
+In the UI, we reworked the widget to improve visibility of desired setting, actual setting, and achieved value.
+We also added a slider to the Basic version of the widget,
+making it much easier to control.
+
+In response to [this thread](https://community.brewpi.com/t/integrating-brewblox-with-home-assistant/4628),
+we created an experimental [service for sharing data with Home Assistant](https://github.com/BrewBlox/brewblox-hass).
+It will be some time before we find the time to significantly extend this service, but the concept is promising.
+
+**Changes**
+- (docs) Added system upgrade guide.
+  - https://brewblox.netlify.app/user/system_upgrades
+- (docs) Added service architecture doc.
+  - https://brewblox.netlify.app/dev/service/architecture
+- (feature) Added the `brewblox-ctl init` command. This creates a brewblox dir. It is also part of `brewblox-ctl install`.
+- (feature) Added the `brewblox-ctl snapshot save` command. This zips the entire brewblox dir. It is more complete, but also takes much more space than `brewblox-ctl backup save`.
+- (feature) Added the `brewblox-ctl snapshot load` command. This restores snapshots created by `brewblox-ctl snapshot save`. You can also use `brewblox-ctl install --snapshot ARCHIVE`.
+- (improve) `brewblox-ctl` now shows a warning if the Python version is unsupported (currently 3.5 or earlier).
+- (feature) Added the *Stopwatch* widget.
+- (improve) Reworked the PWM widget.
+  - Desired setting is now set by using a slider.
+  - It clearly shows when the PWM is driven, and setting can't be set manually.
+  - Improved rendering of desired setting, actual setting, and achieved value.
+- (feature) Added the brewblox-hass service as proof of concept for Home Assistant integration.
+  - https://github.com/BrewBlox/brewblox-hass
+- (improve) Reworked discover/connect behavior in the Spark service to reboot the service less frequently.
+- (improve) Invalid `command` arguments in services now generate a warning, but do not immediately cause the service to exit.
+- (improve) The UI now shows the Spark Troubleshooter if the service is running, but does not respond to status requests.
+- (improve) The Spark Troubleshooter now shows whether a firmware update is in progress.
+- (improve) Increased brightness for some text elements on the Spark display screen.
+- (improve) System objects with no persistent data are no longer stored in persistent memory.
+- (fix) Possibly fixed a bug where the UI would show its "waiting for datastore" notification even when the datastore already is available.
+  - We're not sure about this one, as we couldn't consistently reproduce the error.
+- (fix) The PWM no longer overcompensates for setting changes after spending a long time at 0% or 100%.
+- (fix) If changing block settings would cause the Spark to run out of persistent memory, the old block settings are retained.
+
 ## Brewblox release 2020/09/23
 
 **firmware release date: 2020/09/22**

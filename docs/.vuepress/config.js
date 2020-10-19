@@ -25,10 +25,16 @@ module.exports = {
                     ],
                 },
                 {
+                    title: 'Using brewblox-service',
+                    children: [
+                        'service/architecture',
+                        'service/profiling',
+                    ],
+                },
+                {
                     title: 'Contributing',
                     children: [
                         'contributing/release_tools',
-                        'contributing/profiling',
                     ],
                 },
                 {
@@ -79,6 +85,7 @@ module.exports = {
                         'decisions/20200804_ui_bloxfield',
                         'decisions/20200822_avahi_reflection',
                         'decisions/20200902_redis_datastore',
+                        'decisions/20201008_devcon_connect_states',
                     ],
                 },
             ],
@@ -99,6 +106,7 @@ module.exports = {
                 'blocks_in_depth',
                 'removing_things',
                 'release_notes',
+                'system_upgrades',
                 'troubleshooting',
             ],
         },
