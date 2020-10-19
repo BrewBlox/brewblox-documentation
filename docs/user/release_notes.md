@@ -11,18 +11,19 @@ Relevant links:
 
 **firmware release date: 2020/10/11**
 
-Part of long-term support is setting a date for when the support ends.
-In practical terms that means you will have to re-flash your Raspberry Pi every few years to upgrade your system.
-On our end we added commands to *brewblox-ctl* to make it easier to move your Brewblox installation without losing any settings or history data.
+*brewblox-ctl* uses Python. Python 3.5, the default version for Raspbian Stretch, was discontinued in september.
+Raspbian does not support upgrading Python versions.
+If you are not yet running the latest Raspbian (Buster), we strongly recommend re-flashing your SD card.
+For those unsure of which Raspbian version they're using: *brewblox-ctl* will warn you if your Python version is unsupported.
 
-We described this in more detail in [our system upgrade guide](https://brewblox.netlify.app/user/system_upgrades),
-but the short version is that **Raspbian Stretch is no longer supported**.
-The Python version installed on Stretch (3.5) was deprecated in september.
-On our end we'll try to avoid making changes that are incompatible with Python 3.5,
-but multiple software projects that we depend on already have declared their intention to drop Python 3.5 support soon.
+*brewblox-ctl* still works on Raspbian Stretch,
+but depends on other software projects that have announced they will soon no longer be compatible with Python 3.5.
+
+We added commands to *brewblox-ctl* to make it easy to move your Brewblox installation without losing any settings or history data.
+For more information, see [our system upgrade guide](https://brewblox.netlify.app/user/system_upgrades).
 
 The PWM block has also received a minor rework, both in firmware, and in the UI.
-In the firmware, we fixed some issues caused by prolonged time spent *on* or *off*.
+In the firmware, we fixed an issue where the PWM overcompensated for setting changes after it had spent a long period at either 0% or 100%.
 In the UI, we reworked the widget to improve visibility of desired setting, actual setting, and achieved value.
 We also added a slider to the Basic version of the widget,
 making it much easier to control.
@@ -51,11 +52,12 @@ It will be some time before we find the time to significantly extend this servic
 - (improve) Invalid `command` arguments in services now generate a warning, but do not immediately cause the service to exit.
 - (improve) The UI now shows the Spark Troubleshooter if the service is running, but does not respond to status requests.
 - (improve) The Spark Troubleshooter now shows whether a firmware update is in progress.
+- (improve) Increased brightness for some text elements on the Spark display screen.
+- (improve) System objects with no persistent data are no longer stored in persistent memory.
 - (fix) Possibly fixed a bug where the UI would show its "waiting for datastore" notification even when the datastore already is available.
   - We're not sure about this one, as we couldn't consistently reproduce the error.
-- (fix) Improved PWM calculations in firmware.
-  - Setting changes are now handled better.
-  - Very long on/off times no longer cause the PWM to overcompensate.
+- (fix) The PWM no longer overcompensates for setting changes after spending a long time at 0% or 100%.
+- (fix) If changing block settings would cause the Spark to run out of persistent memory, the old block settings are retained.
 
 ## Brewblox release 2020/09/23
 
