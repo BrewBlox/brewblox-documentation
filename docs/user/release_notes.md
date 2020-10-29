@@ -31,6 +31,7 @@ As a bonus, we improved UI load times for everyone.
 - (improve) Reduced UI startup time.
 - (api) Renamed `/history/query/*` routes to `/history/history/*`.
   - `/history/query/*` is still supported for now, but will be deprecated in a future update.
+- (fix) `brewblox-ctl snapshot load` now makes sure the target directory exists before extracting the archive.
 
 ## Brewblox release 2020/10/19
 
