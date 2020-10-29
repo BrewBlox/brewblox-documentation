@@ -7,6 +7,31 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2020/10/29
+
+**firmware release date: 2020/10/11**
+
+On recent versions of iOS, browsers refuse to connect to WebSockets that use a self-signed SSL certificate, even if the user explicitly marks the certificate as trusted.
+Brewblox uses self-signed SSL certificates and WebSockets.
+
+It appears that Apple has no intentions of fixing this bug anytime soon, so we implemented a workaround on our side.
+We originally switched to HTTPS-only because of technical limitations imposed by browsers on HTTP connections.
+
+This workaround doesn't fix WebSockets over HTTPS, but it enables using the UI over HTTP.
+If you are using an iOS device, then the UI should be functional when using HTTP.
+If you are using anything else, either HTTP or HTTPS will work.
+
+As a bonus, we improved UI load times for everyone.
+
+**Changes**
+- (feature) Made the UI functional when using HTTP.
+- (feature) Disabled automatic redirection of HTTP to HTTPS.
+- (fix) Fixed datastore check when UI loads.
+  - Still not 100% sure whether this solves all variants of the problem.
+- (improve) Reduced UI startup time.
+- (api) Renamed `/history/query/*` routes to `/history/history/*`.
+  - `/history/query/*` is still supported for now, but will be deprecated in a future update.
+
 ## Brewblox release 2020/10/19
 
 **firmware release date: 2020/10/11**
