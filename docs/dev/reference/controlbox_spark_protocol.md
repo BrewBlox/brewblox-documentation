@@ -5,12 +5,13 @@
 The primary controller for the Brewblox stack is the Spark.
 Communication between the controller and the device connector service can be done over USB, or WiFi.
 
-Design currently specifies a decoupled transport and object protocol. 
-This because while the transport protocol is expected to remain constant, new objects will be continuously added.
+The transport and object data protocol are separated.
+This is done because new object types are continuously added, while the transport protocol is expected to be very static.
 
-The transport protocol uses Controlbox logic, while the objects will be encoded using [Protobuf][1].
+The transport protocol uses Controlbox logic, while the objects will be encoded using [Protobuf](https://github.com/google/protobuf).
 
-Due to the nature of serial communication, requests are inherently decoupled from their response, and need to be matched.
+Due to the nature of serial communication, there is no concept of "messages" at the transport layer.
+The application layer is responsible for parsing messages, and matching responses to requests.
 
 ## Message delimiting
 
@@ -43,14 +44,18 @@ Example:
 
 On startup, the controller will send a welcome message. This message is defined by the application.
 
-The Brewblox firmware sends an event prefixed with `BREWBLOX,`, containing in order and comma separated:
+The Brewblox firmware sends a comma-separated event containing the following values:
 
+- Application name ("BREWBLOX")
 - Firmware version (git sha)
 - Protocol version (git sha)
-- Firmware release date
-- Protocol release date
-- Reset reason, hex encoded
-- Reset data, hex encoded (in case of a user reset triggered by our firmware on purpose)
+- Firmware release date (YYYY-MM-DD)
+- Protocol release date (YYYY-MM-DD)
+- System library version (string)
+- Platform ("photon" | "p1")
+- Reset reason (hex-encoded enum)
+- Reset data (hex-encoded enum)
+- Unique device ID
 
 The reset reasons defined by the firmware are:
 
@@ -74,7 +79,19 @@ The reset reasons defined by the firmware are:
     RESET_REASON_USER = 140 // User-requested reset
 ```
 
-Example: `<!BREWBLOX,ed70d66f0,3f2243a,2019-06-18,2019-06-18,78,00>`
+The reset data values defined by the firmware are:
+
+```c
+RESET_REASON_NOT_SPECIFIED = 0,
+RESET_REASON_WATCHDOG = 1,
+RESET_REASON_CBOX_RESET = 2,
+RESET_REASON_CBOX_FACTORY_RESET = 3,
+RESET_REASON_FIRMWARE_UPDATE_FAILED = 4,
+RESET_REASON_LISTENING_MODE_EXIT = 5,
+RESET_REASON_FIRMWARE_UPDATE_SUCCESS = 6
+```
+
+Example: `<!BREWBLOX,7bbca3e6,695cdbf1,2020-10-11,2020-10-08,2.0.0-rc.1,p1,9=8C,06>`
 
 ## Annotation nesting
 
@@ -131,21 +148,20 @@ We can use this to retrieve our original byte array without any confusion as to 
 
 ## Requests
 
-Requests are always formatted as the desired action + arguments.
+Requests are always formatted as index number + the desired action + arguments + CRC.
 Each defined controller action has an opcode: a numerical identifier of the action.
+For more information on how requests are formatted, and a complete list of opcodes, see the [spark commands doc](./spark_commands).
 
-Opcodes and arguments are treated as data, and are encoded as described in the Encoding section: first to bytes, then to hexadecimal string.
+Index numbers, opcodes and arguments are treated as data, and are encoded as described in the Encoding section: first to bytes, then to hexadecimal string.
 
-For an up-to-date list of available opcodes and their arguments, see the `brewblox-devcon-spark` or `firmware` source code.
-
-For example, we want to perform the `WRITE_VALUE` command.
+For example, we want to perform the `WRITE_OBJECT` command.
 
 Its opcode is `2`, and it has some arguments:
 
-* id: a list of nested IDs in range 0-127
-* type: the object type we're writing
-* size: the size (in bytes) that should be reserved for the object
-* data: a byte array with the encoded object we want to write
+* objectId: the numeric block ID.
+* groups: an 8-bit mask flag denoting group membership.
+* type: the type ID of the object we're writing.
+* data: a byte array with the object payload (encoded using protobuf).
 
 Let's encode:
 
@@ -154,35 +170,39 @@ from binascii import hexlify
 
 >>> request = b''
 
+# Index is a 16-bit value
+>>> index = 1
+>>> request += hexlify(index.to_bytes(2, 'little'))
+
 >>> opcode = 2 # 0x02
->>> request += hexlify(bytes([opcode]))
+>>> request += hexlify(opcode.to_bytes(1, 'little'))
 
 >>> print(request)
-b'02'
+b'010002'
 
->>> id_arg = [127, 7] # 0x7F 0x07
->>> request += hexlify(bytes(id_arg))
-
->>> print(request)
-b'027f07'
-
->>> type_arg = 6 # 0x06
->>> request += hexlify(bytes([type_arg]))
+# Object ID is a 16-bit value
+>>> object_id = 400
+>>> request += hexlify(object_id.to_bytes(2, 'little'))
 
 >>> print(request)
-b'027f0706'
+b'0100029001'
 
->>> size_arg = 10 # 0x0A
->>> request += hexlify(bytes([size_arg]))
-
->>> print(request)
-b'027f07060a'
-
->>> data_arg = [255] * 10 # 0xFF * 10
->>> request += hexlify(bytes(data_arg))
+# Object is member of groups 1 and 3
+>>> groups = 0x00 | 0b1 | 0b100
+>>> request += hexlify(groups.to_bytes(1, 'little'))
 
 >>> print(request)
-b'027f07060affffffffffffffffffff'
+b'010002900105'
+
+>>> object_data = [255] * 10 # 0xFF * 10
+>>> request += hexlify(bytes(object_data))
+
+# We'll skip the actual CRC calculation for now
+>>> crc = 0x1a
+>>> request += hexlify(crc.to_bytes(1, 'little'))
+
+>>> print(request)
+b'010002900105ffffffffffffffffffff1a'
 
 ```
 
@@ -196,30 +216,22 @@ The request and response are separated by a `|` character.
 
 The first byte of the response is always the errorcode: positive means ok, negative indicates an error.
 
+The last byte of the response is always another CRC, calculated solely using the response bytes.
+
 Action ok, no return value (using the write value request):
 ```python
-b'027f07060affffffffffffffffffff|00'
+b'010002900105ffffffffffffffffffff1a|0000'
 ```
 
 Action not ok, no further return value:
 ```python
-b'027f07060affffffffffffffffffff|81'
+b'010002900105ffffffffffffffffffff1a|81d2'
 ```
 
-If the response has return values, they are encoded in the same way as the request arguments. These return values should not be parsed if the error code is negative: they're probably not there.
+If the response has return values, they are encoded in the same way as the request arguments. If the error code is set (not 0), the response will only include the error code and its CRC.
 
 ## Object encoding (codecs)
 
 As you may have noticed, we sent already encoded values for object type, and object data. This is because the controlbox protocol is not responsible for encoding and decoding objects - it just transports them.
 
 Objects are handled by Protobuf. Each protobuf object type has a number, which is used to select the correct decoder that can convert the byte array into a Pythonic object.
-
-
-
-
-[1]: https://github.com/google/protobuf
-
-
-## References:
-
-* https://github.com/google/protobuf
