@@ -8,7 +8,6 @@ Dependencies:
 
 import json
 from random import random
-from ssl import CERT_NONE
 from time import sleep
 
 import schedule
@@ -17,6 +16,9 @@ from paho.mqtt import client as mqtt
 # 172.17.0.1 is the default IP address for the host running the Docker container
 # Change this value if Brewblox is installed on a different computer
 HOST = '172.17.0.1'
+
+# 80 is the default port for HTTP, but this can be changed in brewblox env settings.
+PORT = 80
 
 # This is a constant value. You never need to change it.
 HISTORY_TOPIC = 'brewcast/history'
@@ -28,14 +30,12 @@ TOPIC = HISTORY_TOPIC + '/scheduledscript'
 # Create a websocket MQTT client
 client = mqtt.Client(transport='websockets')
 client.ws_set_options(path='/eventbus')
-client.tls_set(cert_reqs=CERT_NONE)
-client.tls_insecure_set(True)
 
 
 def publish():
 
     try:
-        client.connect_async(host=HOST, port=443)
+        client.connect_async(host=HOST, port=PORT)
         client.loop_start()
 
         # https://brewblox.netlify.app/dev/reference/event_logging.html

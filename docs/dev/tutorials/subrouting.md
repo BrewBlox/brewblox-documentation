@@ -50,7 +50,6 @@ If you check `brewblox/docker-compose.shared.yml`, you'll find the `traefik` ser
       --providers.docker.defaultrule="PathPrefix(`/{{ index .Labels \"com.docker.compose.service\" }}`)"
       --providers.file.directory=/config
       --entrypoints.web.address=:${BREWBLOX_PORT_HTTP}
-      --entrypoints.web.http.redirections.entrypoint.to=websecure
       --entrypoints.websecure.address=:${BREWBLOX_PORT_HTTPS}
       --entrypoints.websecure.http.tls=true
 ```
@@ -121,12 +120,10 @@ There's a configuration file and SSL certificates in there.
 
 ```yaml
       --entrypoints.web.address=:${BREWBLOX_PORT_HTTP}
-      --entrypoints.web.http.redirections.entrypoint.to=websecure
       --entrypoints.websecure.address=:${BREWBLOX_PORT_HTTPS}
       --entrypoints.websecure.http.tls=true
 ```
 There are two entrypoints: one for HTTP (`web`), and one for HTTPS (`websecure`).
-The only job for the `web` entrypoint is to redirect all requests to `websecure`.
 
 ## Traefik dashboard
 

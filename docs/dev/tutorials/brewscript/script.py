@@ -8,7 +8,6 @@ Dependencies:
 from time import sleep
 
 import requests
-import urllib3
 from requests.exceptions import ConnectionError, HTTPError
 
 # 172.17.0.1 is the default IP address for the host running the Docker container
@@ -16,19 +15,15 @@ from requests.exceptions import ConnectionError, HTTPError
 HOST = '172.17.0.1'
 
 # The Spark service name. Change it if yours is called something else.
-SERVICE = 'spark-one'
-URL = f'https://{HOST}/{SERVICE}/logged_objects'
-
-# Brewblox uses a self-signed SSL certificate
-# This causes a warning
-urllib3.disable_warnings()
+SPARK_SERVICE = 'spark-one'
+URL = f'http://{HOST}/{SPARK_SERVICE}/blocks/all/read/logged'
 
 print(f'Polling {URL}. To exit press Ctrl+C')
 
 while True:
     try:
         sleep(10)
-        resp = requests.get(URL, verify=False)
+        resp = requests.post(URL)
         resp.raise_for_status()
 
         # For now we just print the response data

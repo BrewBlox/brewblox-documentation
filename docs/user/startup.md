@@ -340,10 +340,10 @@ You can use brewblox-ctl to easily manage your system, and perform common action
 brewblox-ctl up
 ```
 
-After the project is done starting up, you can use the Brewblox UI at `https://raspberrypi` (or your Raspberry Pi's IP address) to configure and monitor your Spark.
+After the project is done starting up, you can use the Brewblox UI at `http://raspberrypi` (or your Raspberry Pi's IP address) to configure and monitor your Spark.
 
 ::: tip
-Because we're using a local (self-signed) SSL certificate, your browser will display a warning the first time you visit the page.
+Because we're using a local (self-signed) SSL certificate, your browser will display a warning the first time you visit the page when using HTTPS.
 
 There's no need to panic. Click advanced, and proceed to the page.
 ![Brewblox UI](../images/ssl-error-chrome.png)
