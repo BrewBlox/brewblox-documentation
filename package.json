@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vuepress dev docs --host localhost --temp .temp --cache .cache",
+    "dev": "bash fix-reload-err.sh && vuepress dev docs",
     "build": "vuepress build docs"
   },
   "repository": {
@@ -22,7 +22,7 @@
   "devDependencies": {
     "axios": "^0.19.2",
     "plantuml-encoder": "^1.4.0",
-    "vuepress": "^1.5.3"
+    "vuepress": "^1.7.1"
   },
   "dependencies": {
     "typescript-string-enums": "^1.0.0"
