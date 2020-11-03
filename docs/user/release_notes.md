@@ -7,6 +7,23 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2020/11/03
+
+**firmware release date: 2020/11/02**
+
+A smaller release again, prompted by us fixing a critical bug.
+
+Also included is the option to show older fields in the Graph settings.
+By default, only fields that published data the last 24h are included.
+You can now check the "include old fields" option to show any and all fields that ever published to the history database.
+
+**Changes**
+- (feature) Graph settings now have a toggle button to show all fields present in the database (including stale ones).
+- (feature) Blocks now have a toolbar action to add their fields to a Graph widget.
+- (improve) When choosing a new block for one of the LCD screen display slots, you will also be asked to update its label.
+- (improve) In Quickstart wizards, improved visibility for the section that lets you choose block names.
+- (fix) Fixed a bug in firmware where setting a 100hz PWM to 0 did not turn off the actuator.
+
 ## Brewblox release 2020/10/29
 
 **firmware release date: 2020/10/11**

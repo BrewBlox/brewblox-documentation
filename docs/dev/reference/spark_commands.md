@@ -10,6 +10,7 @@ The interpretation of `ObjectData` is left to each object individually. The obje
 All data is sent and received as hex encoded uppercase ASCII strings. This allows us to use special characters outside of the [0-9A-F] range for stream handling.
 
 A request always starts with a 2-byte message id, then a 1-byte opcode, followed by opcode specific arguments.
+For more information on how requests are encoded, see the [controlbox reference doc](./controlbox_spark_protocol).
 
 The response consists of three parts:
 - Echoed request
