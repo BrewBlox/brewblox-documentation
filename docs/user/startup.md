@@ -102,41 +102,51 @@ network={
 }
 ```
 
-## Getting the IP address of your Pi
-
-We recommend to use the Pi as a headless device: no monitor, no keyboard.
-Running a desktop environment takes memory and processing power on the Pi, and reduces the reliability of the system.
-
-The UI is viewed in your browser anyway, and you can use SSH to remotely connect to your Pi's terminal.
-
-This requires you to know the address of your Pi.
-The most reliable approach is to find and use the Pi's IP address.
-
-We like the [Fing](https://www.fing.com/products) app (available on both [iOS](https://apps.apple.com/us/app/fing-network-scanner/id430921107) and [Android](https://play.google.com/store/apps/details?id=com.overlook.android.fing&hl=en)), but you can also use your router's web interface to find the addresses of all connected devices.
-A tutorial for that can be found [here](https://helpdeskgeek.com/how-to/determine-computers-connected-to-wireless-network/).
-
-
 ## Step 3: Connect to the Raspberry Pi
 
 ::: warning
 Make sure the power supply is **disconnected** at this point.
 :::
 
-On your desktop computer, you need an SSH client. This is already available on Linux and OSX, but must be installed on Windows. <br>
-Popular choices are [PuTTY](https://www.putty.org/) and [Git Bash](https://git-scm.com/download/win). If you're unfamiliar with SSH, [this tutorial](https://www.howtogeek.com/311287/how-to-connect-to-an-ssh-server-from-windows-macos-or-linux/) might help.
+We recommend to use the Pi as a headless device: no monitor, no keyboard.
+Running a desktop environment takes memory and processing power on the Pi, and reduces the reliability of the system.
+
+The UI is viewed in your browser anyway, and you can use SSH to remotely connect to your Pi's terminal.
+
+On your desktop computer, you need an SSH client. On Linux and OSX, the `ssh` command is available by default.
+On Windows, you can install [Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab) from the Windows Store.
+
+If you're unfamiliar with SSH, [this tutorial](https://www.howtogeek.com/311287/how-to-connect-to-an-ssh-server-from-windows-macos-or-linux/) might help.
 
 After you installed your SSH client, insert the microSD card into your Pi, and connect the power supply. The Pi will start automatically.
 
 Wait for the Pi to finish starting up, and connect to it using your SSH client.
+The default user name is `pi`, and the default password is `raspberry`.
+It is strongly advised to change the password immediately.
 
-The default user name is `pi`, and the default password is `raspberry`. It is strongly advised to change the password immediately.
+```bash
+ssh pi@raspberrypi
+```
+
+If `raspberrypi` is not a recognized host or address, you can use the instructions below to get the IP address of your Pi.
+
+## Getting the IP address of your Pi
+
+Connecting to your Pi using SSH requires you to know its address.
+Often, your network already knows the address for the `raspberrypi` name.
+
+If using the name doesn't work, there are multiple tools to discover the IP address.
+
+We like the [Fing](https://www.fing.com/products) app (available on both [iOS](https://apps.apple.com/us/app/fing-network-scanner/id430921107) and [Android](https://play.google.com/store/apps/details?id=com.overlook.android.fing&hl=en)), but you can also use your router's web interface to find the addresses of all connected devices.
+A tutorial for that can be found [here](https://helpdeskgeek.com/how-to/determine-computers-connected-to-wireless-network/).
 
 ## Step 4: Install Brewblox
 
 To execute the commands that follow, copy them and paste them in your SSH client.
 Trying to type them yourself is frustrating and error prone.
 
-If you use Putty, you can paste the contents of your clipboard with the right mouse button.
+For Windows Terminal, the default shortcuts to copy/paste in a terminal window are `ctrl+shift+C` and `ctrl+shift+V`.
+You can also right click on the terminal window, and select the desired option from the dropdown menu.
 
 First, we have to fix some SSH settings on the Pi.
 In your SSH terminal, run the following commands (one at a time):
@@ -147,7 +157,7 @@ sudo systemctl restart ssh
 exit
 ```
 
-This will exit your SSH session. That's fine: just open a new one. It will use the changed settings.
+This will exit your SSH session. When you reconnect, it will use the new settings.
 
 In your new SSH terminal, run the following commands:
 
