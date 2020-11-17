@@ -22,7 +22,8 @@
   "devDependencies": {
     "axios": "^0.19.2",
     "plantuml-encoder": "^1.4.0",
-    "vuepress": "^1.7.1"
+    "vuepress": "^1.7.1",
+    "vuepress-plugin-mathjax": "^1.2.8"
   },
   "dependencies": {
     "typescript-string-enums": "^1.0.0"
