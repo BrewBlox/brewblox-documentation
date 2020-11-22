@@ -1,7 +1,7 @@
-# Widget types
+# Widgets
 
 ::: tip
-For a description of block widgets, see the [Block types page](./all_blocks.md).
+For a description of blocks and their widgets, see the [blocks page](./all_blocks.md).
 :::
 
 ## Brewery Builder
@@ -45,11 +45,23 @@ It is often used for combining fields from multiple blocks, or showing data from
 
 Quick Actions are shortcuts for making multiple changes to Spark blocks with one click.
 
-They are useful for automating common configuration toggles that involve multiple blocks. Common examples are: switching between beer and fridge mode in fermentation setups, or rerouting flow by opening or closing multiple valves.
+They are useful for automating common configuration toggles that involve multiple blocks.
+Common examples are: switching between beer and fridge mode in fermentation setups, or rerouting flow by opening or closing multiple valves.
 
-The widget keeps track of the current state of blocks. A Quick Action is considered "Active" if its changes would not change the current state. Active Quick Actions are rendered in green. Hover over the Quick Action to see a comparison of its changes with the current state.
+The widget keeps track of the current state of blocks.
+A Quick Action is considered "Active" if its changes would not change the current state.
+Active Quick Actions are rendered in green.
+Hover over the Quick Action to see a comparison of its changes with the current state.
 
 After applying a Quick Action, you can still manually edit any of the changed blocks.
+
+## Quick Values
+
+![Quick Values](../images/widget-quick-values.png)
+
+Where the Quick Actions widget is used for changing multiple blocks at once,
+the Quick Values widget lets you define multiple preset values for the same block field.
+This lets you toggle between common values without having to use a (virtual) keyboard.
 
 ## Session Log
 
@@ -67,5 +79,19 @@ Text notes can be seen as a replacement for the chalkboard in your brewery: a pl
 
 ![Session Log text note](../images/widget-session-log-text.png)
 
-
 Graph notes are configured just like the Graph widget: pick any history field you want. Click on the note to view the graph.
+
+## Spark Sim Display
+
+![Spark Sim Display](../images/widget-spark-sim-display.png)
+
+When using a simulation Spark service, this widget will show what would be rendered on the physical controller's LCD screen.
+
+**This widget is only available for simulation services.**
+
+## Stopwatch
+
+![Stopwatch](../images/widget-stopwatch.png)
+
+A simple, but useful widget.
+The timer will keep running when the UI is reloaded, or opened on another device.
