@@ -86,6 +86,7 @@ module.exports = {
                         'decisions/20200822_avahi_reflection',
                         'decisions/20200902_redis_datastore',
                         'decisions/20201008_devcon_connect_states',
+                        'decisions/20201125_automation_revision',
                     ],
                 },
             ],
