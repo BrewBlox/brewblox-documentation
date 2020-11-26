@@ -47,6 +47,10 @@ Code-based solutions are already supported in the shape of services,
 and users liked the graphical editor.
 We'll want to stick with that for automation v2.
 
+The removal of the state machine requirement makes our requirements much more generic,
+and more suitable for integration with a third-party platform.
+If we outsource "building a low/no code platform", we are free to spend more time on implementing core Brewblox features.
+
 There are quite a lot of [Visual Programming Languages](https://en.wikipedia.org/wiki/Visual_programming_language).
 
 Apart from the conclusion that the automation service needs a major overhaul or replacement, requirements are still fluid.
