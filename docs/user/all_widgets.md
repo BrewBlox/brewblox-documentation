@@ -63,6 +63,12 @@ Where the Quick Actions widget is used for changing multiple blocks at once,
 the Quick Values widget lets you define multiple preset values for the same block field.
 This lets you toggle between common values without having to use a (virtual) keyboard.
 
+Every value added to the *Preset values* input field will be rendered as a button in the Basic mode.
+
+In the *Preset sliders* input field you can define sliders. Sliders have a min, a max, and a step value.
+You can define them as either `max`, `min:max`, or `min:max:step`.
+`min` and `step` will be auto-filled as `0` / `1` if not given.
+
 ## Session Log
 
 ![Session Log](../images/widget-session-log.png)
@@ -95,3 +101,20 @@ When using a simulation Spark service, this widget will show what would be rende
 
 A simple, but useful widget.
 The timer will keep running when the UI is reloaded, or opened on another device.
+
+## Web Frame
+
+![Stopwatch](../images/widget-web-frame.png)
+
+The HTML [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) element lets you embed web pages.
+This widget is a simple wrapper around an iframe.
+
+It's very useful for arbitrary embedding, but comes with two warnings.
+
+The first is that websites can block being embedded in an iframe.
+If this is the case, you'll see the error message "[URL] refused to connect".
+For example: `https://www.google.com` is one such site.
+
+The second warning is that you are rendering two independent web pages at once.
+The brewblox UI is technically a website, but is quite heavy.
+Embedding the UI in a Web Frame widget is possible, but terrible for performance.
