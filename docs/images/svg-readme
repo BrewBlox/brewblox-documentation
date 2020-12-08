@@ -1,0 +1,18 @@
+Work-in-Progress SVG standards for BrewPi documentation website
+
+Inkscape settings:
+Page margins: 1pt (all sides)
+Font: Roboto (Google android Font from repository*)
+
+*sudo apt install fonts-roboto
+
+- Markdown does not have native support for sizing images. This can be done in HTML. Currently image sizes are used as is or automatically resized (reduced) to line width upon load.
+- Technical drawings originating from PDF are converted to SVG with Draw and modified in Inkscape
+- Big SVG-files (i.e. from converted PDF files) are compressed with vecta.io/nano or https://jakearchibald.github.io/svgomg/
+    - vecta is more efficient for big files, but prone to errors (objects missing, quote (") in text is converted to &quot, maybe more...)
+    - svgomg is less efficient, but reliable
+- SVG uncompressed originals are stored in ..\svg-originals\ for future modification
+
+
+Workflow:
+Create SVG (Inkscape) -> store original -> compress big svg's -> website
