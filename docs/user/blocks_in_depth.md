@@ -3,6 +3,8 @@
 :::tip
 This page describes the how and why of blocks throughout the system.
 
+For an overview of available blocks, see the [blocks page](./all_blocks.md).
+
 For a how-to guide on resetting the blocks on your system, see the [guide to removing things](./removing_things.md).
 :::
 

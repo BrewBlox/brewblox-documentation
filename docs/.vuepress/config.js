@@ -38,11 +38,16 @@ module.exports = {
         },
         {
           title: 'Using brewblox-service',
-          children: ['service/architecture', 'service/profiling'],
+          children: [
+            'service/architecture',
+            'service/profiling',
+          ],
         },
         {
           title: 'Contributing',
-          children: ['contributing/release_tools'],
+          children: [
+            'contributing/release_tools',
+          ],
         },
         {
           title: 'Reference Documents',
@@ -93,6 +98,7 @@ module.exports = {
             'decisions/20200822_avahi_reflection',
             'decisions/20200902_redis_datastore',
             'decisions/20201008_devcon_connect_states',
+            'decisions/20201125_automation_revision',
           ],
         },
       ],
@@ -116,14 +122,18 @@ module.exports = {
         'system_upgrades',
         'troubleshooting',
       ],
-      '/hardware/': ['heating_elements', 'todo'],
+      '/hardware/': [
+        'heating_elements',
+        'todo'
+      ],
     },
     repo: 'brewblox/brewblox-documentation',
     docsDir: 'docs',
+    docsBranch: 'develop',
     lastUpdated: 'Last Updated',
     editLinks: true,
   },
-  chainMarkdown: (config) => {
+  chainMarkdown: config => {
     const opts = config.options;
     // Pass the default function as backup to plantuml highlight
     opts.set('highlight', plantuml.highlight(opts.get('highlight')));

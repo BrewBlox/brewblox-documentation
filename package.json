@@ -21,6 +21,8 @@
   "homepage": "https://github.com/BrewBlox/brewblox-documentation#readme",
   "devDependencies": {
     "axios": "^0.19.2",
+    "eslint": "^7.15.0",
+    "eslint-plugin-vue": "^7.2.0",
     "plantuml-encoder": "^1.4.0",
     "vuepress": "^1.7.1",
     "vuepress-plugin-mathjax": "^1.2.8"

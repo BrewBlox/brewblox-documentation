@@ -7,6 +7,59 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2020/12/02
+
+**firmware release date: 2020/11/02**
+
+We added three new widgets this release, and updated the default settings for BK PIDs.
+
+The *Web Frame* widget is a wrapper around the HTML [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) element.
+
+The *Quick Values* widget lets you set multiple buttons and sliders for a single field to easily toggle between multiple settings without having to enter a new value.
+
+The *Spark Sim Display* is built for simulation services.
+It will render the Spark LCD screen on your dashboard.
+For technical reasons, this widget is only available for simulation services.
+
+For more information (and screenshots), see the [Widgets](https://brewblox.netlify.app/user/all_widgets) page.
+
+We updated the default settings for some PIDs in HERMS, RIMS, and Brew Kettle wizards.
+If you're still using the default settings after running one of these wizards, you may want to apply the new settings manually:
+
+- Brew Kettle
+  - Kettle PID
+    - Ti: 10m
+    - Td: 10s
+- HERMS
+  - HLT PID
+    - Td: 10s
+  - BK PID
+    - Ti: 10m
+    - Td: 10s
+- RIMS:
+  - Kettle PID
+    - Td: 10s
+
+Windows recently released [Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab).
+This comes with a built-in `ssh` command, which functions like `ssh` on Linux/Mac.
+To keep instructions consistent, we now recommend Terminal in our install guide, but PuTTY/Git Bash still work just fine.
+
+**Changes**
+- (feature) Added *Web Frame* widget. 
+- (feature) Added *Quick Values* widget.
+- (feature) Added *Spark Sim Display* widget.
+- (feature) Added `brewblox-ctl add-node-red` command.
+- (docs) The startup guide now recommends Windows Terminal.
+- (improve) Block changes are now published immediately to other clients.
+- (improve) The Quick Actions editor now shows a warning if Block was not found.
+- (improve) Updated PID default settings for PIDs in HERMS, RIMS, and Brew Kettle wizards.
+- (fix) Increased Spark command timeout to handle wifi channel switches.
+- (fix) Datastore writes no longer fail if the eventbus is not connected.
+- (fix) The Spark Device Info widget is now visible again on the service page.
+- (fix) Widgets no longer respond to arrow keys when dashboard is not editable.
+- (fix) Dashboards no longer show a scroll bar if the contents fit on screen.
+- (fix) Added help text for `brewblox-ctl add-plaato` command.
+
 ## Brewblox release 2020/11/03
 
 **firmware release date: 2020/11/02**
