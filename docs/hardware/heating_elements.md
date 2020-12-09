@@ -32,7 +32,7 @@ The examples are listed in the table below for an overview.
 
 Most probably the fuse in your fuse box serves as an overcurrent protection for a number of outlets near your brewing location. When selecting your element, leave some room for other small electrical applicances like a lamp or a radio for a nice time during your brewing day. If you plan on upgrading your mains outlet to a higher rated power, you might want to select your element accordingly. 
 
-\*Vraag Elco: hoe sluit je een hoog vermogen element aan op een aansluiting die dat vermogen niet kan leveren? Voltage omlaag, trafo ervoor?
+\*Vraag Elco: hoe sluit je een hoog vermogen element aan op een aansluiting die dat vermogen niet kan leveren? Voltage omlaag, trafo ervoor? Of bij een 3-fase element eerst maar 1-2 weerstanden aansluiten?
 
 ## Heating water
 
@@ -76,9 +76,9 @@ Straight BrewPi heating elements come in two types; foldback and tri-clamp. Fold
 
 #### Foldback
 
-Details about our foldback heating elements are listed in the table below. The element length (see figure for a definition) determines the minimum kettle size (Min. ⌀) required for mounting. The element power is defined at a nominal voltage of 230V. Both foldback elements have a low watt density of 11 W/cm<sup>2</sup> and consist of 1 resistor. These elements can be connected to 1 and 2-phase outlets, and come with a 1" BSP thread. Note: do not forget to buy your element mounting kit to add grounding protection and a safety cover for the electrical wiring.
+Details about our foldback heating elements are listed in the table below. The element length (see figure) determines the minimum kettle size (Min. ⌀) required for mounting. The element power is defined at a nominal voltage of 230V. Both foldback elements have a low watt density of 11 W/cm<sup>2</sup> and consist of 1 resistor. These elements can be connected to 1 and 2-phase outlets, and come with a 1" BSP thread. Note: do not forget to buy your element mounting kit to add grounding protection and a safety cover for the electrical wiring.
 
-![Heating elements-foldback](../images/heat-element-foldback.jpg)
+![Heating elements-foldback](../images/heat-element-foldback.svg)
 
 Plaatje nog aanpassen - Is dit het origineel Elco?
 
@@ -91,9 +91,9 @@ X* BrewPi part. no. nog aanpassen
 
 #### Tri-clamp
 
-Details of our tri-clamp heating elements are listed below. The tri-clamp fitting is hygenic and useful when frequent removal of the element from the kettle is required. They do require a 2" tri-clamp ferrule (64mm OD) mounted on your kettle. The element length (see figure for a definition) determines the minimum kettle diameter (Min. ⌀) required for mounting. The elements are available in a big power range (2800 - 10000W), and have low watt density ($\leq$ 12 W/cm<sup>2</sup>). 2 resistor elements can be connected in a 1 and 2-phase parallel configuration, 3 resistor elements can be connected in a 1 phase parallel, and 3-phase star configuration.
+Details of our tri-clamp heating elements are listed below. The tri-clamp fitting is hygenic and useful when frequent removal of the element from the kettle is required. They do require a 2" tri-clamp ferrule (64mm OD) mounted on your kettle. The element length (see figure) determines the minimum kettle diameter (Min. ⌀) required for mounting. The elements are available in a big power range (2800 - 10000W), and have low watt density ($\leq$ 12 W/cm<sup>2</sup>). 2 resistor elements can be connected in a 1 and 2-phase parallel configuration, 3 resistor elements can be connected in a 1 phase parallel, and 3-phase star configuration.
 
-![Heating elements-triclamp](../images/heat-element-triclamp.jpg)
+![Heating elements-triclamp](../images/heat-element-triclamp.svg)
 
 Plaatje nog aanpassen - Is dit het origineel Elco?
 
@@ -110,7 +110,7 @@ Element power is defined at a nominal voltage of 230V.
 
 ### Round
 
-At BrewPi we sell custom designed round heating elements. The element Diameter and Length (see figure for a definition) determine the minimum required kettle diameter (Min. ⌀). The element round shape is least obstructive to the flow when whirlpooling in a kettle with the design diameter (Design ⌀). The heating elements come in two types; 1-phase elements with one resistor per flange, and 3-phase elements with 3 resistors. Especially the 3-phase elements have an extremely low watt density, which makes scorching your mash / wort practically impossible. All elements come with a mounting kit, and have a 1.5" BSP thread. Technical details of the heating elements  can be found in the tables below.
+At BrewPi we sell custom designed round heating elements. The element Diameter and Length (see figure) determine the minimum required kettle diameter (Min. ⌀). The element round shape is least obstructive to the flow when whirlpooling in a kettle with the design diameter (Design ⌀). The heating elements come in two types; 1-phase elements with one resistor per flange, and 3-phase elements with 3 resistors. Especially the 3-phase elements have an extremely low watt density, which makes scorching your mash / wort practically impossible. All elements come with a mounting kit, and have a 1.5" BSP thread. Technical details of the heating elements  can be found in the tables below.
 
 ![Heating elements-round](../images/heat-element-round.jpg)
 
