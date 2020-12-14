@@ -17,7 +17,18 @@ We quickly fix most bugs we find. Some of them can't be fixed immediately, but h
 We keep this list updated with the issues we're aware of, but haven't yet permanently resolved.
 :::
 
-**During update, my Pi hangs while creating services**
+**Graphs and widgets don't show on iOS**
+
+There is a bug on iOS where Websockets always fail to connect if the backend is using a self-signed SSL certificate.
+Brewblox uses Websockets to stream graph data, and by default uses self-signed SSL certificates.
+
+When using Brewblox in a local network, the simplest solution is to switch to HTTP when using iOS.
+The UI will automatically suggest this if it fails to make a Websocket connection when using iOS + HTTPS.
+
+Do note that its suggested redirect is not perfect: if you are using non-standard ports for HTTP/HTTPS, you will be redirected to an invalid page.
+In that case, manually navigate to `http://address:port`.
+
+**During updates, my Pi hangs while creating services**
 
 The most likely cause for this is overflow in swap memory.
 
@@ -91,16 +102,16 @@ If the Spark LCD does not show an IP address, connect to it using USB, and confi
 - Can you visit the Spark IP in your browser? It should show a short placeholder message.
 - If you run `brewblox-ctl http get <SPARK_IP>`, do you see the html for the placeholder message?
 
-If the answer to either is no, your Spark and Pi are likely using different subnets in your home network. 
+If the answer to either is no, your Spark and Pi are likely using different subnets in your home network.
 Check your router configuration to allow them to communicate.
 
 If the answer to all questions is yes, but the service still can't find your Spark, it may be a problem with mDNS.
 
-By default, we use [multicast DNS](https://en.wikipedia.org/wiki/Multicast_DNS) to discover Sparks that are not connected over USB. 
+By default, we use [multicast DNS](https://en.wikipedia.org/wiki/Multicast_DNS) to discover Sparks that are not connected over USB.
 In most - but not all - routers, mDNS is enabled by default. Check your router configuration for settings related to multicast DNS.
 
-If you can't solve the problem in your router settings, it may be preferable to skip discovery, 
-and add `--device-host=SPARK_IP` to your docker-compose.yml file. 
+If you can't solve the problem in your router settings, it may be preferable to skip discovery,
+and add `--device-host=SPARK_IP` to your docker-compose.yml file.
 You can find the syntax in the [connection settings guide](./connect_settings.md).
 
 When doing so, it is advised to assign a fixed IP address to the Spark in your router settings. (Also called "static DHCP lease").
@@ -115,12 +126,12 @@ This can be set separately for Spark service.
 
 **Why can removed or renamed blocks still be selected in the Graph Widget settings?**
 
-History data is not changed when a block changes name. 
+History data is not changed when a block changes name.
 After a name change, the service simply starts publishing data under the new name.
 
 The old name will disappear from the Graph widget settings 24 hours after the block is removed or renamed.
 
-Units are part of the field name. For 24 hours after changing units from Celsius to Fahrenheit, 
+Units are part of the field name. For 24 hours after changing units from Celsius to Fahrenheit,
 you'll see both `spark-one/block/value[degC]` and `spark-one/block/value[degF]` in the Graph settings.
 
 **My Pi suddenly reboots**
