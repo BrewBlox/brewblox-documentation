@@ -18,4 +18,7 @@ features:
 footer: Copyright © 2018 BrewPi
 ---
 
+
+<IOSChecker />
+
 ![Brewblox UI](./images/dashboard.gif)
