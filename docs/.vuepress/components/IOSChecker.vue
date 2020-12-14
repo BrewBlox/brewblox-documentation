@@ -7,11 +7,13 @@
 <script>
 export default {
   name: 'IOSChecker',
-  computed: {
-    isIOS () {
-      return /iPad|iPhone|iPod/.test(navigator.platform)
+  data: () => ({
+    isIOS: null,
+  }),
+  mounted() {
+    this.isIOS =
+      /iPad|iPhone|iPod/.test(navigator.platform)
         || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    },
   },
 };
 </script>
