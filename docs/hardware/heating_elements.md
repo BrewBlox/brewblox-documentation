@@ -32,7 +32,7 @@ The examples are listed in the table below for an overview.
 
 Most probably the fuse in your fuse box serves as an overcurrent protection for a number of outlets near your brewing location. When selecting your element, leave some room for other small electrical applicances like a lamp or a radio for a nice time during your brewing day. If you plan on upgrading your mains outlet to a higher rated power, you might want to select your element accordingly. 
 
-\*Vraag Elco: hoe sluit je een hoog vermogen element aan op een aansluiting die dat vermogen niet kan leveren? Voltage omlaag, trafo ervoor?
+TODO - verwijderen: Vraag Elco: hoe sluit je een hoog vermogen element aan op een aansluiting die dat vermogen niet kan leveren? Voltage omlaag, trafo ervoor?
 
 ## Heating water
 
@@ -46,7 +46,8 @@ $$\Delta t = \frac{c_p \times M \times \Delta T}{P}$$
 
 45 + 80 minutes adds more than two hours of waiting time to your brewing day. Select a higher power heating element when your mains outlet allows for it. You can calculate the heating time in your situation with the calculator below. The calculator works with SI derived units of litres (L) and degrees celcius (C) by default, but takes US gallon (US Gal) and degree Fahrenheit (F) as well.
 
-### calculator
+TODO
+<!-- ### calculator
 
 Bob vragen interactieve heating time calculator te maken in vuepress.
 
@@ -62,11 +63,11 @@ $$\Delta t = \frac{c_p \cdot M \cdot \Delta T}{P \cdot 60} = \text{XX min}$$
 | $\Delta T$ | Mash temperature difference                          | C / F, 1C = 5/9F                                             | interactive value + unit - default: (65 - 20) = 45 C |
 | $P$        | Power heating element                                | W                                                            | interactive value - default: 3600W                   |
 
-Default example: It takes 45 (44.8) mins to heat 50L of water 45C (20 to 65C) with a 3500W heating element.
+Default example: It takes 45 (44.8) mins to heat 50L of water 45C (20 to 65C) with a 3500W heating element. -->
 
 ## Elements
 
-At BrewPi we sell low watt density ($\leq$ 12 W/cm<sup>2</sup>) heating elements to prevent scorching your mash / wort. At the same time this prevents encrusting your elements and makes them really easy to clean after brewing. All elements are made from stainless steel for durability and hygenic reasons.
+At BrewPi we sell low watt density ($\leq$ 12 W/cm<sup>2</sup>) heating elements to prevent scorching your mash / wort. At the same time this prevents encrusting your elements and makes them really easy to clean after brewing. All elements are made from stainless steel for durability and hygiene reasons.
 
 BrewPi heating elements come in two geometries; straight and round. Straight elements are the cheaper option in general. Round elements heat your mash / wort more homogeneous, are minimally blocking your flow when whirpooling and have a even lower watt density. Technical details of the different elements can be found in the sections below.
 
@@ -80,31 +81,31 @@ Details about our foldback heating elements are listed in the table below. The e
 
 ![Heating elements-foldback](../images/heat-element-foldback.jpg)
 
-Plaatje nog aanpassen - Is dit het origineel Elco?
+TODO: Plaatje nog aanpassen - Is dit het origineel Elco?
 
-|  # | Length (cm) | Min. ⌀ (cm) | Power (W) | No. Resistors | Watt density (W/cm<sup>2</sup>) |
-|:--:|------------:|------------:|----------:|--------------:|--------------------------------:|
-| X* |          27 |          30 |      2800 |             1 |                            11.0 |
-| X* |          32 |          35 |      3200 |             1 |                            11.0 |
+|  # | Length (cm) | Min. kettle ⌀ (cm) | Power (W) | No. Resistors | Watt density (W/cm<sup>2</sup>) |
+|:--:|------------:|-------------------:|----------:|--------------:|--------------------------------:|
+| X* |          27 |                 30 |      2800 |             1 |                            11.0 |
+| X* |          32 |                 35 |      3200 |             1 |                            11.0 |
 
-X* BrewPi part. no. nog aanpassen
+TODO: X* BrewPi part. no. nog aanpassen
 
 #### Tri-clamp
 
-Details of our tri-clamp heating elements are listed below. The tri-clamp fitting is hygenic and useful when frequent removal of the element from the kettle is required. They do require a 2" tri-clamp ferrule (64mm OD) mounted on your kettle. The element length (see figure for a definition) determines the minimum kettle diameter (Min. ⌀) required for mounting. The elements are available in a big power range (2800 - 10000W), and have low watt density ($\leq$ 12 W/cm<sup>2</sup>). 2 resistor elements can be connected in a 1 and 2-phase parallel configuration, 3 resistor elements can be connected in a 1 phase parallel, and 3-phase star configuration.
+Details of our tri-clamp heating elements are listed below. The tri-clamp fitting is hygienic and useful when frequent removal of the element from the kettle is required. It does require a 2" tri-clamp ferrule (64mm OD) mounted on your kettle. The element length (see figure for a definition) determines the minimum kettle diameter (Min. ⌀) required for mounting. The elements are available in a big power range (2800 - 10000W), and have low watt density ($\leq$ 12 W/cm<sup>2</sup>). 2 resistor elements can be connected in a 1 and 2-phase parallel configuration, 3 resistor elements can be connected in a 1 phase parallel, and 3-phase star configuration.
 
 ![Heating elements-triclamp](../images/heat-element-triclamp.jpg)
 
-Plaatje nog aanpassen - Is dit het origineel Elco?
+TODO: Plaatje nog aanpassen - Is dit het origineel Elco?
 
-|  # | Length (cm) | Min. ⌀ (cm) | Power (W) | No. Resistors | Watt density (W/cm<sup>2</sup>) |
-|:--:|------------:|------------:|----------:|--------------:|--------------------------------:|
-| 11 |          32 |          32 |      5500 |             3 |                            10.6 |
-| 12 |          42 |          42 |      8500 |             3 |                            11.7 |
-| 13 |          52 |          52 |     10000 |             3 |                            10.7 |
-| 14 |          30 |          30 |      2800 |             2 |                             8.8 |
-| 15 |          35 |          35 |      3200 |             2 |                             8.3 |
-| 16 |          42 |          42 |      5000 |             2 |                            10.3 |
+|  # | Length (cm) | Min. kettle ⌀ (cm) | Power (W) | No. Resistors | Watt density (W/cm<sup>2</sup>) |
+|:--:|------------:|-------------------:|----------:|--------------:|--------------------------------:|
+| 11 |          32 |                 32 |      5500 |             3 |                            10.6 |
+| 12 |          42 |                 42 |      8500 |             3 |                            11.7 |
+| 13 |          52 |                 52 |     10000 |             3 |                            10.7 |
+| 14 |          30 |                 30 |      2800 |             2 |                             8.8 |
+| 15 |          35 |                 35 |      3200 |             2 |                             8.3 |
+| 16 |          42 |                 42 |      5000 |             2 |                            10.3 |
 
 Element power is defined at a nominal voltage of 230V.
 
@@ -114,36 +115,37 @@ At BrewPi we sell custom designed round heating elements. The element Diameter a
 
 ![Heating elements-round](../images/heat-element-round.jpg)
 
-Plaatje nog aanpassen - Is dit het origineel Elco?
+TODO: Plaatje nog aanpassen - Is dit het origineel Elco?
 
 #### 1-phase
 
-|  # | Diameter (cm) | Length (cm) | Min. ⌀ (cm) | Design ⌀ (cm) | Power (W) | Watt density (W/cm<sup>2</sup>) |
-|:--:|--------------:|------------:|------------:|--------------:|----------:|--------------------------------:|
-|  6 |            30 |          35 |          36 |            40 |      3500 |                            10.7 |
-|  7 |            35 |          40 |          41 |            45 |      3500 |                             9.2 |
-| 11 |          25.5 |        30.5 |          32 |            35 |     *2800 |                            10.3 |
+|  # | Diameter (cm) | Length (cm) | Min. kettle ⌀ (cm) | Design kettle ⌀ (cm) | Power (W) | Watt density (W/cm<sup>2</sup>) |
+|:--:|--------------:|------------:|-------------------:|---------------------:|----------:|--------------------------------:|
+|  6 |            30 |          35 |                 36 |                   40 |      3500 |                            10.7 |
+|  7 |            35 |          40 |                 41 |                   45 |      3500 |                             9.2 |
+| 11 |          25.5 |        30.5 |                 32 |                   35 |     *2800 |                            10.3 |
 
 Element power is defined at a nominal voltage of 230V.
 
-*Nog aanpassen als nieuwe order op 3200W is gedimensioneerd.
+TODO: *Nog aanpassen als nieuwe order op 3200W is gedimensioneerd.
 
 #### 3-phase
 
-|  # | Diameter (cm) | Length (cm) | Min. ⌀ (cm) | Design ⌀ (cm) | Power (W) | Watt density (W/cm<sup>2</sup>) |
-|:--:|--------------:|------------:|------------:|--------------:|----------:|--------------------------------:|
-|  1 |            35 |          40 |          41 |            45 |      8500 |                             7.5 |
-|  2 |            40 |          45 |          46 |            50 |      8500 |                             6.5 |
-|  3 |            50 |        56.5 |        57.5 |            63 |     10000 |                             6.1 |
-|  4 |            60 |          66 |          67 |            72 |     10000 |                             5.1 |
-|  5 |            80 |        86.5 |        87.5 |            93 |     15000 |                             5.8 |
-|  8 |            25 |          30 |          31 |            35 |      5500 |                             6.8 |
-|  9 |            30 |          35 |          36 |            40 |      5500 |                             5.6 |
-| 10 |            35 |          40 |          41 |            45 |      5500 |                             4.8 |
+|  # | Diameter (cm) | Length (cm) | Min. kettle ⌀ (cm) | Design kettle ⌀ (cm) | Power (W) | Watt density (W/cm<sup>2</sup>) |
+|:--:|--------------:|------------:|-------------------:|---------------------:|----------:|--------------------------------:|
+|  1 |            35 |          40 |                 41 |                   45 |      8500 |                             7.5 |
+|  2 |            40 |          45 |                 46 |                   50 |      8500 |                             6.5 |
+|  3 |            50 |        56.5 |               57.5 |                   63 |     10000 |                             6.1 |
+|  4 |            60 |          66 |                 67 |                   72 |     10000 |                             5.1 |
+|  5 |            80 |        86.5 |               87.5 |                   93 |     15000 |                             5.8 |
+|  8 |            25 |          30 |                 31 |                   35 |      5500 |                             6.8 |
+|  9 |            30 |          35 |                 36 |                   40 |      5500 |                             5.6 |
+| 10 |            35 |          40 |                 41 |                   45 |      5500 |                             4.8 |
 
 Element power is defined at a nominal voltage of 230V.
 
-## Connecting
+TODO
+<!--- ## Connecting
 
 Mains power is distributed to your local wall outlet in different systems characterized by the number of phases to distribute the power.
 Mains voltage, frequency, and number of phases to distribute electrical power differ all over the world, see [Wikipedia](https://en.wikipedia.org/wiki/Mains_electricity_by_country) for an example. 
@@ -178,5 +180,5 @@ USA by outlet
 - power density
 
 ## Connecting
-## Operation
+## Operation -->
 
