@@ -67,7 +67,7 @@ Default example: It takes 45 (44.8) mins to heat 50L of water 45C (20 to 65C) wi
 
 ## Elements
 
-At BrewPi we sell low watt density ($\leq$ 12 W/cm<sup>2</sup>) heating elements to prevent scorching your mash / wort. At the same time this prevents encrusting your elements and makes them really easy to clean after brewing. All elements are made from stainless steel for durability and hygiene reasons.
+At BrewPi we sell low watt density ($\leq$ 13 W/cm<sup>2</sup>) heating elements to prevent scorching your mash / wort. At the same time this prevents encrusting your elements and makes them really easy to clean after brewing. All elements are made from stainless steel for durability and hygiene reasons.
 
 BrewPi heating elements come in two geometries; straight and round. Straight elements are the cheaper option in general. Round elements heat your mash / wort more homogeneous, are minimally blocking your flow when whirpooling and have a even lower watt density. Technical details of the different elements can be found in the sections below.
 
@@ -77,75 +77,39 @@ Straight BrewPi heating elements come in two types; foldback and tri-clamp. Fold
 
 #### Foldback
 
-Details about our foldback heating elements are listed in the table below. The element length (see figure for a definition) determines the minimum kettle size (Min. ⌀) required for mounting. The element power is defined at a nominal voltage of 230V. Both foldback elements have a low watt density of 11 W/cm<sup>2</sup> and consist of 1 resistor. These elements can be connected to 1 and 2-phase outlets, and come with a 1" BSP thread. Note: do not forget to buy your element mounting kit to add grounding protection and a safety cover for the electrical wiring.
+Details about our foldback heating elements are listed in the interactive table below. In the table you can toggle the length unit (cm / inch), and the nominal voltage (230V / 240V) of your mains. The element length (see figure for a definition) determines the minimum kettle size (Min. kettle ⌀) required for mounting. Both foldback elements have a low watt density of $\leq$ 12 W/cm<sup>2</sup>, even at a nominal voltage of 240V. Both elements consist of 1 resistor. These elements can be connected to 1 and 2-phase outlets, and come with a 1" BSP thread. Note: do not forget to buy your element mounting kit to add grounding protection and a safety cover for the electrical wiring.
 
 ![Heating elements-foldback](../images/heat-element-foldback.jpg)
 
 TODO: Plaatje nog aanpassen - Is dit het origineel Elco?
 
-|  # | Length (cm) | Min. kettle ⌀ (cm) | Power (W) | No. Resistors | Watt density (W/cm<sup>2</sup>) |
-|:--:|------------:|-------------------:|----------:|--------------:|--------------------------------:|
-| X* |          27 |                 30 |      2800 |             1 |                            11.0 |
-| X* |          32 |                 35 |      3200 |             1 |                            11.0 |
+<TableFoldback/>
 
-TODO: X* BrewPi part. no. nog aanpassen
+TODO: XX BrewPi part. no. nog aanpassen
 
 #### Tri-clamp
 
-Details of our tri-clamp heating elements are listed below. The tri-clamp fitting is hygienic and useful when frequent removal of the element from the kettle is required. It does require a 2" tri-clamp ferrule (64mm OD) mounted on your kettle. The element length (see figure for a definition) determines the minimum kettle diameter (Min. ⌀) required for mounting. The elements are available in a big power range (2800 - 10000W), and have low watt density ($\leq$ 12 W/cm<sup>2</sup>). 2 resistor elements can be connected in a 1 and 2-phase parallel configuration, 3 resistor elements can be connected in a 1 phase parallel, and 3-phase star configuration.
+Details of our tri-clamp heating elements are listed in the table below. The table length unit (cm / inch) and nominal voltage (230V / 240V) can be toggled on click. The tri-clamp fitting is hygienic and useful when frequent removal of the element from the kettle is required. It does require a 2" tri-clamp ferrule (64mm OD) mounted on your kettle. The element length (see figure for a definition) determines the minimum kettle diameter (Min. kettle ⌀) required for mounting. The elements are available in a big power range (2800 - 11000W), and have low watt density ($\leq$ 13 W/cm<sup>2</sup>). 2 resistor elements can be connected in a 1 and 2-phase parallel configuration, 3 resistor elements can be connected in a 1 phase parallel, and 3-phase star configuration. More information about how to connect your element can be found in: TODO link naar Sec. connecting the elements.
 
 ![Heating elements-triclamp](../images/heat-element-triclamp.jpg)
 
 TODO: Plaatje nog aanpassen - Is dit het origineel Elco?
 
-|  # | Length (cm) | Min. kettle ⌀ (cm) | Power (W) | No. Resistors | Watt density (W/cm<sup>2</sup>) |
-|:--:|------------:|-------------------:|----------:|--------------:|--------------------------------:|
-| 11 |          32 |                 32 |      5500 |             3 |                            10.6 |
-| 12 |          42 |                 42 |      8500 |             3 |                            11.7 |
-| 13 |          52 |                 52 |     10000 |             3 |                            10.7 |
-| 14 |          30 |                 30 |      2800 |             2 |                             8.8 |
-| 15 |          35 |                 35 |      3200 |             2 |                             8.3 |
-| 16 |          42 |                 42 |      5000 |             2 |                            10.3 |
-
-Element power is defined at a nominal voltage of 230V.
+<TableTriclamp/>
 
 ### Round
 
-At BrewPi we sell custom designed round heating elements. The element Diameter and Length (see figure for a definition) determine the minimum required kettle diameter (Min. ⌀). The element round shape is least obstructive to the flow when whirlpooling in a kettle with the design diameter (Design ⌀). The heating elements come in two types; 1-phase elements with one resistor per flange, and 3-phase elements with 3 resistors. Especially the 3-phase elements have an extremely low watt density, which makes scorching your mash / wort practically impossible. All elements come with a mounting kit, and have a 1.5" BSP thread. Technical details of the heating elements  can be found in the tables below.
+At BrewPi we sell custom designed round heating elements. The element Diameter and Length (see figure for a definition) determine the minimum required kettle diameter (Min. kettle ⌀). The element round shape is least obstructive to the flow when whirlpooling in a kettle with the design diameter (Design kettle ⌀). The elements come in two types; 1-phase elements with one resistor per flange, and 3-phase elements with 3 resistors. Especially the 3-phase elements have an extremely low watt density, which makes scorching your mash / wort practically impossible. All elements come with a mounting kit, and have a 1.5" BSP thread. Technical details of the heating elements can be found in the interactive tables below. The table length unit (cm / inch) and nominal voltage (230V / 240V) are toggle on click.
 
 ![Heating elements-round](../images/heat-element-round.jpg)
 
 TODO: Plaatje nog aanpassen - Is dit het origineel Elco?
 
-#### 1-phase
+<TableRound/>
 
-|  # | Diameter (cm) | Length (cm) | Min. kettle ⌀ (cm) | Design kettle ⌀ (cm) | Power (W) | Watt density (W/cm<sup>2</sup>) |
-|:--:|--------------:|------------:|-------------------:|---------------------:|----------:|--------------------------------:|
-|  6 |            30 |          35 |                 36 |                   40 |      3500 |                            10.7 |
-|  7 |            35 |          40 |                 41 |                   45 |      3500 |                             9.2 |
-| 11 |          25.5 |        30.5 |                 32 |                   35 |     *2800 |                            10.3 |
+TODO write connecting, operation, etc. + remove comments.
 
-Element power is defined at a nominal voltage of 230V.
-
-TODO: *Nog aanpassen als nieuwe order op 3200W is gedimensioneerd.
-
-#### 3-phase
-
-|  # | Diameter (cm) | Length (cm) | Min. kettle ⌀ (cm) | Design kettle ⌀ (cm) | Power (W) | Watt density (W/cm<sup>2</sup>) |
-|:--:|--------------:|------------:|-------------------:|---------------------:|----------:|--------------------------------:|
-|  1 |            35 |          40 |                 41 |                   45 |      8500 |                             7.5 |
-|  2 |            40 |          45 |                 46 |                   50 |      8500 |                             6.5 |
-|  3 |            50 |        56.5 |               57.5 |                   63 |     10000 |                             6.1 |
-|  4 |            60 |          66 |                 67 |                   72 |     10000 |                             5.1 |
-|  5 |            80 |        86.5 |               87.5 |                   93 |     15000 |                             5.8 |
-|  8 |            25 |          30 |                 31 |                   35 |      5500 |                             6.8 |
-|  9 |            30 |          35 |                 36 |                   40 |      5500 |                             5.6 |
-| 10 |            35 |          40 |                 41 |                   45 |      5500 |                             4.8 |
-
-Element power is defined at a nominal voltage of 230V.
-
-TODO
-<!--- ## Connecting
+<!-- ## Connecting
 
 Mains power is distributed to your local wall outlet in different systems characterized by the number of phases to distribute the power.
 Mains voltage, frequency, and number of phases to distribute electrical power differ all over the world, see [Wikipedia](https://en.wikipedia.org/wiki/Mains_electricity_by_country) for an example. 
@@ -181,4 +145,3 @@ USA by outlet
 
 ## Connecting
 ## Operation -->
-

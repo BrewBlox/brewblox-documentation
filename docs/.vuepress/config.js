@@ -117,8 +117,8 @@ module.exports = {
                 "troubleshooting",
             ],
             "/hardware/": [
-                "heating_elements",
-                "todo"],
+                "heating_elements"
+            ],
         },
         repo: "brewblox/brewblox-documentation",
         docsDir: "docs",
