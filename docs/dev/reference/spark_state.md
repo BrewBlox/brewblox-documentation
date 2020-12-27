@@ -1,34 +1,26 @@
-# Spark service events
+# Spark service state
 
-Every few seconds, the Spark service publishes [history and state events](./event_logging).
-This document serves as reference for the content of these events.
+Every few seconds, the Spark services publishes its current [state](./state_events).
+This document serves as reference for the topic and payload schemas used.
 
 All referenced code snippets use the [TypeScript interface syntax](https://www.typescriptlang.org/docs/handbook/interfaces.html).
 
-## History
+## Spark state events
 
-The Spark history events are published to the `brewcast/history/<service_name>` MQTT topic.
-
-The `data` field is an array containing a subset of all block data. Fields with non-numeric, invalid, or constant values are omitted.
-
-## State
-
-The Spark state events are published to the `brewcast/state/<service_name>` MQTT topic.
-
-The `data` field contains all blocks on the controller and volatile service state.
-
-## SparkStateEvent
+The main Spark state event is published to the `brewcast/state/<Service ID>` topic.
+This includes service state, and current block settings and values.
 
 <<< @/shared-types/spark-service-types.ts#SparkStateEvent
 
-The top-level fields (*key*, *type*, *ttl*, *data*) are mandated by the [state events spec](./event_logging).
+`key` is always set to the Service ID (eg. `spark-one`). This will match the slug in the topic.
+
+`type` is a constant string, used to verify events.
+
+`data.status` describes the currently connected controller (if any), and whether it is compatible with the service.
+If `data.status` is null, the service is currently offline.
 
 `data.blocks` lists all blocks on the controller.
 The interfaces for all block types are documented [here](./block_types).
-
-`data.status` describes the currently connected controller (if any), and whether it is compatible with the service.
-
-If `data.status` is null, the service is currently offline.
 
 ## Spark status
 
@@ -43,7 +35,7 @@ The service will wait until it is `true` before it attemps to discover and conne
 
 `is_connected`, `is_acknowledged`, and `is_synchronized` indicate the current status of the service <-> controller connection.
 
-First, the service attempts to connect to a controller. 
+First, the service attempts to connect to a controller.
 This process is described in the [Spark connection settings guide](../../user/connect_settings).
 
 After the service is connected, the controller will send a handshake message. This is a plaintext string with device information. The contents are stored in the `status.device_info` field. More on this below.
@@ -53,7 +45,7 @@ If the handshake message is received, the `is_acknowledged` flag is set.
 If the controller is compatible (more on this below),
 the service performs additional synchronization steps.
 
-Some examples: 
+Some examples:
 - Setting controller date/time.
 - Getting block names from the datastore.
 - Collecting trace logs from the controller.
@@ -83,3 +75,37 @@ the controller is still considered compatible.
 The UI is responsible for prompting the user to update his/her firmware.
 
 Synchronization is also aborted if the controller device ID does not match the desired device ID (set with the `--device-id` flag).
+
+## Spark patch events
+
+Whenever a single block is changed or removed, a patch event is published. Patch events implicitly modify the last published Spark state event.
+
+Clients are free to ignore patch events, and wait for the next published Spark state event.
+
+Patch events are published to the `brewcast/state/<Service ID>/patch` topic.
+
+<<< @/shared-types/spark-service-types.ts#SparkPatchEvent
+
+`key` is always set to the Service ID (eg. `spark-one`). This will match the slug in the topic.
+
+`type` is a constant string, used to verify events.
+
+`data.changed` will be a list of [blocks](./block_types) where settings were changed since the last state event.
+Changes to sensor values will not trigger a patch event.
+
+`data.deleted` is a list of block IDs matching blocks that were removed since the last state event.
+
+## Spark update events
+
+During firmware updates, progress is published using state events.
+This does not apply to firmware updates triggered by `brewblox-ctl flash`.
+
+Patch events are published to the `brewcast/state/<Service ID>/update` topic.
+
+<<< @/shared-types/spark-service-types.ts#SparkUpdateEvent
+
+`key` is always set to the Service ID (eg. `spark-one`). This will match the slug in the topic.
+
+`type` is a constant string, used to verify events.
+
+`data.log` contains new progress messages.
