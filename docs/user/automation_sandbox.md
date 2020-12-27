@@ -45,7 +45,7 @@ const value = await asyncFunction();
 Example:
 ```javascript
 const block = getBlock('spark-one', 'Ferment Fridge Setpoint');
-block.data.setting = qty(20, 'degC'); 
+block.data.setting = qty(20, 'degC');
 await saveBlock(block); // change value on other service -> async
 ```
 
@@ -120,7 +120,7 @@ print(blocks);
 ---
 ### events
 
-`events` is a list of cached [state or history events](https://brewblox.netlify.app/dev/reference/event_logging.html).
+`events` is a list of cached [Spark state](../dev/reference/spark_state) or [history](../dev/reference/history_events) events.
 
 The data also includes published topic, and time received.
 Only the last received event for a given topic is included.
@@ -168,7 +168,7 @@ The argument(s) for all comparison functions are the same as that for `qty()` it
 All comparison functions except `compareTo()` return a boolean true/false. <br>
 `compareTo()` returns `-1`, `0`, or `1`, depending on whether the base or compared quantity is higher.
 
-Examples: 
+Examples:
 ```javascript
 qty('1h10m').eq(70, 'min'); // true
 qty('1h10m').eq(qty(70, 'min')); // true
