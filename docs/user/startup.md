@@ -270,7 +270,7 @@ Navigate to the Brewblox install directory (default: `cd ~/brewblox`), and run t
 brewblox-ctl flash
 ```
 
-Follow the instructions until the menu exits. You should now see a dark screen with six empty boxes. 
+Follow the instructions until the menu exits. You should now see a dark screen with six empty boxes.
 
 We ship new Sparks with the bootloader pre-flashed.
 If you are upgrading an older Spark, you may need to flash the bootloader.
@@ -341,7 +341,7 @@ Commands:
   update          Download and apply updates.
   log             Generate and share log file for bug reports.
   backup          Save or load backups.
-pi@raspberrypi:~/brewblox $ 
+pi@raspberrypi:~/brewblox $
 ```
 
 You can use brewblox-ctl to easily manage your system, and perform common actions. Run the following command to start your system:
@@ -362,14 +362,11 @@ There's no need to panic. Click advanced, and proceed to the page.
 ## Step 8: Use the system
 
 By default, temperature values are in Celsius. If you prefer Fahrenheit, now is a good time to configure that.
-The unit settings can be found under the `Actions` button in the Spark service page.
+The unit settings can be found on the Settings page, accessible through the sidebar.
 
-![Spark actions](../images/spark-actions.png)
-
-You can also use the Actions menu to configure Wifi on the Spark.
+You can also use the settings page to connect your Spark to your Wifi network.
 
 To easily replicate functionality from the original BrewPi, you can run the `Fermentation Fridge` wizard.
-
 This will generate a set of blocks and widgets, configured to let you control the brew in your fridge.
 
 ![Start Ferment wizard](../images/ferment-wizard.gif)
