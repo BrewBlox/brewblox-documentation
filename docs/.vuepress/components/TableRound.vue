@@ -42,70 +42,22 @@ export default {
           {
             title: 'Diameter (in)',
             onClick: this.toggleLength,
-            values: [
-              11.8,
-              13.8,
-              10,
-              13.8,
-              15.7,
-              19.7,
-              23.6,
-              31.5,
-              9.8,
-              11.8,
-              13.8,
-            ],
+            values: [11.8, 13.8, 10, 13.8, 15.7, 19.7, 23.6, 31.5, 9.8, 11.8, 13.8],
           },
           {
             title: 'Length (in)',
             onClick: this.toggleLength,
-            values: [
-              13.8,
-              15.7,
-              '12.0',
-              15.7,
-              17.7,
-              22.2,
-              '26.0',
-              34.1,
-              11.8,
-              13.8,
-              15.7,
-            ],
+            values: [13.8, 15.7, '12.0', 15.7, 17.7, 22.2, '26.0', 34.1, 11.8, 13.8, 15.7],
           },
           {
             title: 'Min. kettle ⌀ (in)',
             onClick: this.toggleLength,
-            values: [
-              14.2,
-              16.1,
-              12.6,
-              16.1,
-              18.1,
-              22.6,
-              26.4,
-              34.4,
-              12.2,
-              14.2,
-              16.1,
-            ],
+            values: [14.2, 16.1, 12.6, 16.1, 18.1, 22.6, 26.4, 34.4, 12.2, 14.2, 16.1],
           },
           {
             title: 'Design kettle ⌀ (in)',
             onClick: this.toggleLength,
-            values: [
-              15.7,
-              17.7,
-              13.8,
-              17.7,
-              19.7,
-              24.8,
-              28.3,
-              36.6,
-              13.8,
-              15.7,
-              17.7,
-            ],
+            values: [15.7, 17.7, 13.8, 17.7, 19.7, 24.8, 28.3, 36.6, 13.8, 15.7, 17.7],
           }
         );
       }
@@ -119,36 +71,12 @@ export default {
           {
             title: 'Current (A)',
             onClick: this.toggleVoltage,
-            values: [
-              15.2,
-              15.2,
-              12.2,
-              12.3,
-              12.3,
-              14.5,
-              14.5,
-              21.7,
-              '8.0',
-              '8.0',
-              '8.0',
-            ],
+            values: [15.2, 15.2, 12.2, 12.3, 12.3, 14.5, 14.5, 21.7, '8.0', '8.0', '8.0'],
           },
           {
             title: 'Power (W)',
             onClick: this.toggleVoltage,
-            values: [
-              3500,
-              3500,
-              2800,
-              8500,
-              8500,
-              10000,
-              10000,
-              15000,
-              5500,
-              5500,
-              5500,
-            ],
+            values: [3500, 3500, 2800, 8500, 8500, 10000, 10000, 15000, 5500, 5500, 5500],
           },
           {
             title: 'Watt density (W/cm²)',
@@ -162,63 +90,24 @@ export default {
           {
             title: 'Current (A)',
             onClick: this.toggleVoltage,
-            values: [
-              15.9,
-              15.9,
-              12.7,
-              38.6,
-              38.6,
-              45.4,
-              45.4,
-              68.1,
-              '25.0',
-              '25.0',
-              '25.0',
-            ],
+            values: [15.9, 15.9, 12.7, 38.6, 38.6, 45.4, 45.4, 68.1, '25.0', '25.0', '25.0'],
           },
           {
             title: 'Power (W)',
             onClick: this.toggleVoltage,
-            values: [
-              3810,
-              3810,
-              3050,
-              9260,
-              9260,
-              10890,
-              10890,
-              16330,
-              5990,
-              5990,
-              5990,
-            ],
+            values: [3810, 3810, 3050, 9260, 9260, 10890, 10890, 16330, 5990, 5990, 5990],
           },
           {
             title: 'Watt density (W/cm²)',
             onClick: this.toggleVoltage,
-            values: [
-              11.7,
-              '10.0',
-              11.2,
-              8.2,
-              7.1,
-              6.6,
-              5.6,
-              6.3,
-              7.4,
-              6.1,
-              5.2,
-            ],
+            values: [11.7, '10.0', 11.2, 8.2, 7.1, 6.6, 5.6, 6.3, 7.4, 6.1, 5.2],
           }
         );
       }
       return table;
     },
     numRows() {
-      return this.tableValues.reduce(
-        (max, col) => Math.max(max, col.values.length),
-        0
-      );
+      return this.tableValues.reduce((max, col) => Math.max(max, col.values.length), 0);
     },
   },
   methods: {
@@ -257,11 +146,7 @@ export default {
     </tr>
     <!-- column values -->
     <tr v-for="rowNum in numRows" :key="'row-' + rowNum">
-      <td
-        style="text-align:right"
-        v-for="(col, colIdx) in tableValues"
-        :key="'col-' + colIdx"
-      >
+      <td style="text-align:right" v-for="(col, colIdx) in tableValues" :key="'col-' + colIdx">
         {{ col.values[rowNum - 1] }}
       </td>
     </tr>

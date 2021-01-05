@@ -10,7 +10,7 @@ Always consult an electrician for advice and help with wiring your elements. Und
 
 ## Mains power
 
-Voltage, rated power and number of phases of mains outles differ all over the world. In terms of mains voltage we can divide the world in two main voltage blocks; the European 230V based system, and the US 120V system. See [Wikipedia](https://en.wikipedia.org/wiki/Mains_electricity_by_country) for a world map. BrewPi heating elements are designed for an operating voltage of 230 / 240V and can be connected in both systems. The rated power of your mains outlet is important as it is the maximum power your outlet can sustain contiuously, and thus the maximum power of the heating element you can connect safely. In this section we talk you through how to calculate the rated power of an outlet and give you an example of a 1, 2, and 3-phase system. You can calculate the rated power of your mains with the formula:
+Voltage, rated power and number of phases of mains outlets differ all over the world. In terms of mains voltage we can divide the world in two main voltage blocks; the European 230V based system, and the US 120V system. See [Wikipedia](https://en.wikipedia.org/wiki/Mains_electricity_by_country) for a world map. BrewPi heating elements are designed for an operating voltage of 230 / 240V and can be connected in both systems. The rated power of your mains outlet is important as it is the maximum power your outlet can sustain continuously, and thus the maximum power of the heating element you can connect safely. In this section we talk you through how to calculate the rated power of an outlet and give you an example of a 1, 2, and 3-phase system. You can calculate the rated power of your mains with the formula:
 
 $$\text{Rated power} = \text{Nominal voltage} \times \text{Rated current}$$
 $$P_N = V \times I_N$$
@@ -30,13 +30,13 @@ The examples are listed in the table below for an overview.
 | 2-Phase |       2x120 |                25 |            6000 |
 | 3-Phase |         230 |      3x16<br>3x25 |  11040<br>17250 |
 
-Most probably the fuse in your fuse box serves as an overcurrent protection for a number of outlets near your brewing location. When selecting your element, leave some room for other small electrical applicances like a lamp or a radio for a nice time during your brewing day. If you plan on upgrading your mains outlet to a higher rated power, you might want to select your element accordingly. 
+Most probably the fuse in your fuse box serves as an overcurrent protection for a number of outlets near your brewing location. When selecting your element, leave some room for other small electrical appliances like a lamp or a radio for a nice time during your brewing day. If you plan on upgrading your mains outlet to a higher rated power, you might want to select your element accordingly. 
 
-TODO - verwijderen: Vraag Elco: hoe sluit je een hoog vermogen element aan op een aansluiting die dat vermogen niet kan leveren? Voltage omlaag, trafo ervoor?
+TODO - verwijderen: Vraag Elco: hoe sluit je een hoog vermogen element aan op een aansluiting die dat vermogen niet kan leveren? Maar 1 van de weerstanden aansluiten? Voltage omlaag, trafo ervoor?
 
 ## Heating water
 
-Water is a high heat capacity fluid. It takes 4180J to heat 1kg of water by 1C (2320J per kg F). Neglecting losses we can calculate the time it takes a heating element to heat water to the desired temperature with the formula:
+Water is a high heat capacity fluid. It takes 4180J to heat 1kg of water by 1C (2320J per kg F TODO: is dit de juiste eenheid voor US?). Neglecting heat loss to the environment we can calculate the time it takes a heating element to heat water to the desired temperature with the formula:
 
 $$\text{Heating time} = \frac{\text{Specific heat capacity} \times \text{Mass} \times \text{Temperature difference}}{\text{Power heating element}}$$ 
 
@@ -44,12 +44,10 @@ $$\Delta t = \frac{c_p \times M \times \Delta T}{P}$$
 
 **Example:** In The Netherlands a typical residential mains outlet is rated at a maximum power of 3680W. With a heating element of 3500W it would take 45 minutes to heat a kettle with 50L of water to 65C for mashing ($\Delta T$ = 45C), or 80 minutes to boil ($\Delta T$ = 80C).
 
-45 + 80 minutes adds more than two hours of waiting time to your brewing day. Select a higher power heating element when your mains outlet allows for it. You can calculate the heating time in your situation with the calculator below. The calculator works with SI derived units of litres (L) and degrees celcius (C) by default, but takes US gallon (US Gal) and degree Fahrenheit (F) as well.
+ Heating water with this setup adds more than two hours (45 + 80 = 125 minutes) of waiting time to your brewing day. Select a higher power heating element when your mains outlet allows for it. You can calculate the expected heating time in your situation with the calculator below. The calculator works with SI derived units of litres (L) and degrees celsius (C) by default, but takes US gallon (US Gal) and degree Fahrenheit (F) as well.
 
-TODO
+TODO: Bob vragen interactieve heating time calculator te maken in vuepress.
 <!-- ### calculator
-
-Bob vragen interactieve heating time calculator te maken in vuepress.
 
 ### Formula:
 
@@ -67,17 +65,17 @@ Default example: It takes 45 (44.8) mins to heat 50L of water 45C (20 to 65C) wi
 
 ## Elements
 
-At BrewPi we sell low watt density ($\leq$ 13 W/cm<sup>2</sup>) heating elements to prevent scorching your mash / wort. At the same time this prevents encrusting your elements and makes them really easy to clean after brewing. All elements are made from stainless steel for durability and hygiene reasons.
+At BrewPi we sell low watt density ($\leq$ 13 W/cm<sup>2</sup>) heating elements to prevent scorching your mash / wort. At the same time this prevents encrusting of sugars on your elements and ensures they are really easy to clean after brewing. All elements are made from stainless steel for durability and hygiene reasons.
 
-BrewPi heating elements come in two geometries; straight and round. Straight elements are the cheaper option in general. Round elements heat your mash / wort more homogeneous, are minimally blocking your flow when whirpooling and have a even lower watt density. Technical details of the different elements can be found in the sections below.
+BrewPi heating elements come in two geometries; straight and round. Straight elements are the cheaper option in general. Round elements heat your mash / wort more homogeneous, are minimally blocking your flow when whirlpooling and have a even lower watt density. Technical details of the different elements can be found in the sections below.
 
 ### Straight
 
-Straight BrewPi heating elements come in two types; foldback and tri-clamp. Foldback elements are the most simple elements you can find, and are the best option on a budget. Tri-clamp elements are fixed in your kettle with a tri-clamp fitting. These fittings consist of two flanges, an O-ring, and a clamp band (hence *tri*-clamp) and are the best option if you want to be able to easily remove the element from the kettle. This comes in handy when you want to change your element frequently, or want to clean it thourougly outside the kettle. 
+Straight BrewPi heating elements come in two types; foldback and tri-clamp. Foldback elements are the most simple elements you can find, and are the best option on a budget. Tri-clamp elements are fixed in your kettle with a tri-clamp fitting. These fittings consist of two flanges, an O-ring, and a clamp band (hence *tri*-clamp) and are the best option if you want to be able to easily remove the element from the kettle. This comes in handy when you want to change your element frequently, or want to clean it thoroughly outside the kettle. 
 
 #### Foldback
 
-Details about our foldback heating elements are listed in the interactive table below. In the table you can toggle the length unit (cm / inch), and the nominal voltage (230V / 240V) of your mains. The element length (see figure for a definition) determines the minimum kettle size (Min. kettle ⌀) required for mounting. Both foldback elements have a low watt density of $\leq$ 12 W/cm<sup>2</sup>, even at a nominal voltage of 240V. Both elements consist of 1 resistor. These elements can be connected to 1 and 2-phase outlets, and come with a 1" BSP thread. Note: do not forget to buy your element mounting kit to add grounding protection and a safety cover for the electrical wiring.
+Details about our foldback heating elements are listed in the interactive table below. In the table you can toggle the length unit (cm / inch), and the nominal voltage (230V / 240V) of your mains by clicking on the respective property. The element length (see figure for a definition) determines the minimum kettle size (Min. kettle ⌀) required for mounting. Both foldback elements have a low watt density of $\leq$ 12 W/cm<sup>2</sup>, even at a nominal voltage of 240V. Both elements consist of 1 resistor. These elements can be connected to 1 and 2-phase outlets, and come with a 1" BSP thread. Note: do not forget to buy your element mounting kit to add grounding protection and a safety cover for the electrical wiring.
 
 ![Heating elements-foldback](../images/heat-element-foldback.jpg)
 
@@ -89,7 +87,7 @@ TODO: XX BrewPi part. no. nog aanpassen
 
 #### Tri-clamp
 
-Details of our tri-clamp heating elements are listed in the table below. The table length unit (cm / inch) and nominal voltage (230V / 240V) can be toggled on click. The tri-clamp fitting is hygienic and useful when frequent removal of the element from the kettle is required. It does require a 2" tri-clamp ferrule (64mm OD) mounted on your kettle. The element length (see figure for a definition) determines the minimum kettle diameter (Min. kettle ⌀) required for mounting. The elements are available in a big power range (2800 - 11000W), and have low watt density ($\leq$ 13 W/cm<sup>2</sup>). 2 resistor elements can be connected in a 1 and 2-phase parallel configuration, 3 resistor elements can be connected in a 1 phase parallel, and 3-phase star configuration. More information about how to connect your element can be found in: TODO link naar Sec. connecting the elements.
+Details of our tri-clamp heating elements are listed in the table below. The table length unit (cm / inch) and nominal voltage (230V / 240V) can be toggled on click. The tri-clamp fitting is hygienic and useful when frequent removal of the element from the kettle is required. It does require a 2" tri-clamp ferrule (64mm OD) mounted on your kettle. The element length (see figure for a definition) determines the minimum kettle diameter (Min. kettle ⌀) required for mounting. The elements are available in a big power range (2800 - 11000W), and have low watt density ($\leq$ 13 W/cm<sup>2</sup>). For 2 resistor elements, the drawn current is calculated for 1-phase 230V and 2-phase 240V parallel configuration. For 3 resistor elements a 3-phase star configuration is assumed. More information about how to connect your element can be found in: TODO link naar Sec. connecting the elements.
 
 ![Heating elements-triclamp](../images/heat-element-triclamp.jpg)
 
@@ -99,7 +97,7 @@ TODO: Plaatje nog aanpassen - Is dit het origineel Elco?
 
 ### Round
 
-At BrewPi we sell custom designed round heating elements. The element Diameter and Length (see figure for a definition) determine the minimum required kettle diameter (Min. kettle ⌀). The element round shape is least obstructive to the flow when whirlpooling in a kettle with the design diameter (Design kettle ⌀). The elements come in two types; 1-phase elements with one resistor per flange, and 3-phase elements with 3 resistors. Especially the 3-phase elements have an extremely low watt density, which makes scorching your mash / wort practically impossible. All elements come with a mounting kit, and have a 1.5" BSP thread. Technical details of the heating elements can be found in the interactive tables below. The table length unit (cm / inch) and nominal voltage (230V / 240V) are toggle on click.
+At BrewPi we sell custom designed round heating elements. The element Diameter and Length (see figure for a definition) determine the minimum required kettle diameter (Min. kettle ⌀). The element round shape is least obstructive to the flow when whirlpooling in a kettle with the design diameter (Design kettle ⌀). The elements come in two types; 1-phase elements with one resistor per flange, and 3-phase elements with 3. Currents for the 1-phase elements are calculated assuming a 1/2-phase 230/240V parallel configuration. The currents for the 3-phase elements are calculated assuming a 3-phase star configuration. Especially the 3-phase elements have an extremely low watt density, which makes scorching your mash practically impossible. All elements come with a mounting kit, and have a 1.5" BSP thread. Technical details of the heating elements can be found in the interactive tables below. You can toggle the table length unit (cm / inch) and nominal voltage (230V / 240V) on click.
 
 ![Heating elements-round](../images/heat-element-round.jpg)
 
