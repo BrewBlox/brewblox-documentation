@@ -65,7 +65,7 @@ Default example: It takes 45 (44.8) mins to heat 50L of water 45C (20 to 65C) wi
 
 ## Elements
 
-At BrewPi we sell low watt density ($\leq$ 13 W/cm<sup>2</sup>) heating elements to prevent scorching your mash / wort. At the same time this prevents encrusting of sugars on your elements and ensures they are really easy to clean after brewing. All elements are made from stainless steel for durability and hygiene reasons.
+At BrewPi we sell low watt density ($\leq$ 13 W/cm<sup>2</sup>) heating elements. The low watt density prevents scorching your elements with mash sugars, and ensures they are easy to clean after brewing. At the same time it prevents scorching your brew and the production of burnt off-flavors that might ruin your beer. All elements are made from stainless steel for durability and hygiene reasons.
 
 BrewPi heating elements come in two geometries; straight and round. Straight elements are the cheaper option in general. Round elements heat your mash / wort more homogeneous, are minimally blocking your flow when whirlpooling and have a even lower watt density. Technical details of the different elements can be found in the sections below.
 
@@ -75,7 +75,7 @@ Straight BrewPi heating elements come in two types; foldback and tri-clamp. Fold
 
 #### Foldback
 
-Details about our foldback heating elements are listed in the interactive table below. In the table you can toggle the length unit (cm / inch), and the nominal voltage (230V / 240V) of your mains by clicking on the respective property. The element length (see figure for a definition) determines the minimum kettle size (Min. kettle ⌀) required for mounting. Both foldback elements have a low watt density of $\leq$ 12 W/cm<sup>2</sup>, even at a nominal voltage of 240V. Both elements consist of 1 resistor. These elements can be connected to 1 and 2-phase outlets, and come with a 1" BSP thread. Note: do not forget to buy your element mounting kit to add grounding protection and a safety cover for the electrical wiring.
+Details about our foldback heating elements are listed in the interactive table below. In the table you can toggle the length unit (cm / inch), and the nominal voltage (230V / 240V) of your mains by clicking on the respective property. The element length (see figure for a definition) determines the minimum kettle size (Min. kettle ⌀) required for mounting. Both foldback elements have a low watt density of $\leq$ 12 W/cm<sup>2</sup>, even at a nominal voltage of 240V. Both elements consist of 1 resistor. These elements can be connected to 1 and 2-phase outlets, and come with a 1" BSP thread. Note: our foldback elements come without a locknut or mounting kit. For proper installation either of these needs to be bought separately. The mounting kit is custom designed and adds ground fault protection to the element while serving as a safety cover for the electrical wiring.
 
 ![Heating elements-foldback](../images/heat-element-foldback.svg)
 
@@ -87,7 +87,7 @@ TODO: XX BrewPi part. no. nog aanpassen
 
 #### Tri-clamp
 
-Details of our tri-clamp heating elements are listed in the table below. The table length unit (cm / inch) and nominal voltage (230V / 240V) can be toggled on click. The tri-clamp fitting is hygienic and useful when frequent removal of the element from the kettle is required. It does require a 2" tri-clamp ferrule (64mm OD) mounted on your kettle. The element length (see figure for a definition) determines the minimum kettle diameter (Min. kettle ⌀) required for mounting. The elements are available in a big power range (2800 - 11000W), and have low watt density ($\leq$ 13 W/cm<sup>2</sup>). For 2 resistor elements, the drawn current is calculated for 1-phase 230V and 2-phase 240V parallel configuration. For 3 resistor elements a 3-phase star configuration is assumed. More information about how to connect your element can be found in: TODO link naar Sec. connecting the elements.
+Details of our tri-clamp heating elements are listed in the table below. The table length unit (cm / inch) and nominal voltage (230V / 240V) can be toggled on click. The tri-clamp fitting is hygienic and useful when frequent removal of the element from the kettle is required. It does require a 2" tri-clamp ferrule (64mm OD) mounted on your kettle. The element length (see figure for a definition) determines the minimum kettle diameter (Min. kettle ⌀) required for mounting. The elements are available in a big power range (2800 - 11000W), and have low watt density ($\leq$ 13 W/cm<sup>2</sup>). For 2 resistor elements, the drawn current is calculated for 1-phase 230V and 2-phase 240V parallel configuration. For 3 resistor elements a 3-phase star configuration is assumed. More information about how to connect your element can be found in the respective [Section](#connecting) below.
 
 ![Heating elements-triclamp](../images/heat-element-triclamp.svg)
 
@@ -105,41 +105,52 @@ TODO: Plaatje nog aanpassen - Is dit het origineel Elco?
 
 <TableRound/>
 
-TODO write connecting, operation, etc. + remove comments.
+TODO write connecting, installation?, operation, etc. + remove comments.
 
-<!-- ## Connecting
+## Connecting
 
-Mains power is distributed to your local wall outlet in different systems characterized by the number of phases to distribute the power.
-Mains voltage, frequency, and number of phases to distribute electrical power differ all over the world, see [Wikipedia](https://en.wikipedia.org/wiki/Mains_electricity_by_country) for an example.
+Now you have selected your element(s) 
+
+::: danger Note
+Always consult an electrician for advice and help with wiring your elements. Under no circumstances should these be used without proper wiring, ground fault circuit protection and overcurrent circuit protection.
+:::
 
 ### 1-Phase system
 
 ![1-Phase power](../images/1-phase.svg)
 
+- example flange like in store?
+- example flange 2/3-phase elements?
+
 ### 2-Phase system
 
 ![2-Phase power](../images/2-phase.svg)
+
+- example flange like in store?
 
 ### 3-Phase system
 
 ![3-Phase power](../images/3-phase.svg)
 
-NL 1-phase 230V / 16A max. 3680W
-NL 3-phase 230V (400V L-L) / 16A = 11040W proxy mainland Western-Europe
-USA by outlet
- - 1-phase 120V 15A = 1800W not enough power (NEMA 1-15 / 5-15)
- - split-phase 240V 30 / 50A = 7200 / 12000W (NEMA 14-30 / 14-50)
+- example flange like in store?
 
-## Element Type
+## Installation
 
-- shape
-  - foldback
-  - round
-  - triclamp
-- mounting options
-- dimensions
-- materials
-- power density
+TODO: vraag - hoort er bij?
 
-## Connecting
-## Operation -->
+- Buy kettle
+- Buy hole punch
+- Make hole in kettle with hole punch
+- Install
+- Dry fire protection - float sensor (hier of bij connecting)
+
+- staat al in pdf?
+  - link pdf foldback
+  - link pdf tri-clamp?
+  - link pdf round?
+
+## Operation
+
+- Switching element with SSR's
+- Operating element for temperature control, connecting to Spark, etc.
+- Operating multiple elements on one mains outlet
