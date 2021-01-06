@@ -47,11 +47,13 @@ module.exports = {
         {
           title: "Reference Documents",
           children: [
-            "reference/event_logging",
-            "reference/controlbox_spark_protocol",
-            "reference/spark_commands",
-            "reference/block_types",
-            "reference/spark_events",
+            'reference/events',
+            'reference/history_events',
+            'reference/state_events',
+            'reference/spark_state',
+            'reference/block_types',
+            'reference/controlbox_spark_protocol',
+            'reference/spark_commands',
           ],
         },
         {

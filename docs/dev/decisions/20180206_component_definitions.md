@@ -83,7 +83,7 @@ Specing of serialization and schemas of service <-> UI data transfer is still TO
 
 ### Component Serialization
 
-For the purposes of serialization, views, and UI blocks should all be capable of serialization without their parents. 
+For the purposes of serialization, views, and UI blocks should all be capable of serialization without their parents.
 Two modes of serialization should be offered: with and without hardware associations.
 
 View persistence requires saving hardware associations, but configurations shared between users should not have to assume that hardware mappings are perfectly identical.
@@ -118,7 +118,7 @@ We want to simultaneously display data from (including all members):
 
 ## Data Schema
 
-For a detailed description of how controller values are serialized to the database, see [the event logging document.](../reference/event_logging)
+For a detailed description of how controller values are serialized to the database, see [the history events spec](../reference/history_events).
 
 Default configuration is to create a measurement per activity.
 Optional, depending on volume: measurement per controller block

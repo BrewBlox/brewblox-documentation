@@ -36,7 +36,7 @@ try:
     value = 20
 
     while True:
-        # https://brewblox.netlify.app/dev/reference/event_logging.html
+        # https://brewblox.netlify.app/dev/reference/history_events.html
         value += ((random() - 0.5) * 10)
         message = {
             'key': 'pubscript',
