@@ -42,7 +42,7 @@ export default {
           {
             title: 'Diameter (in)',
             onClick: this.toggleLength,
-            values: [11.8, 13.8, 10, 13.8, 15.7, 19.7, 23.6, 31.5, 9.8, 11.8, 13.8],
+            values: [11.8, 13.8, '10.0', 13.8, 15.7, 19.7, 23.6, 31.5, 9.8, 11.8, 13.8],
           },
           {
             title: 'Length (in)',
@@ -71,7 +71,19 @@ export default {
           {
             title: 'Current (A)',
             onClick: this.toggleVoltage,
-            values: [15.2, 15.2, 12.2, 12.3, 12.3, 14.5, 14.5, 21.7, '8.0', '8.0', '8.0'],
+            values: [
+              '1x15.2',
+              '1x15.2',
+              '1x12.2',
+              '3x12.3',
+              '3x12.3',
+              '3x14.5',
+              '3x14.5',
+              '3x21.7',
+              '3x 8.0',
+              '3x 8.0',
+              '3x 8.0',
+            ],
           },
           {
             title: 'Power (W)',
@@ -90,7 +102,19 @@ export default {
           {
             title: 'Current (A)',
             onClick: this.toggleVoltage,
-            values: [15.9, 15.9, 12.7, 38.6, 38.6, 45.4, 45.4, 68.1, '25.0', '25.0', '25.0'],
+            values: [
+              '1x15.9',
+              '1x15.9',
+              '1x12.7',
+              '3x12.9',
+              '3x12.9',
+              '3x15.1',
+              '3x15.1',
+              '3x22.7',
+              '3x 8.3',
+              '3x 8.3',
+              '3x 8.3',
+            ],
           },
           {
             title: 'Power (W)',
