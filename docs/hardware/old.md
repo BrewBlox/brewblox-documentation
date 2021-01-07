@@ -1,4 +1,4 @@
-# Heating elements
+# Old
 
 Brewing involves heating a lot of water. To reduce waiting time on your brewing day you are best advised to select the highest power heating element your mains outlet can power. Obviously, the element should fit your kettle so these two characteristics are the main criteria for element selection.
 
