@@ -119,7 +119,7 @@ export default {
           {
             title: 'Power (W)',
             onClick: this.toggleVoltage,
-            values: [3810, 3810, 3050, 9260, 9260, 10890, 10890, 16330, 5990, 5990, 5990],
+            values: [3800, 3800, 3050, 9250, 9250, 10900, 10900, 16350, 6000, 6000, 6000],
           },
           {
             title: 'Watt density (W/cm²)',
