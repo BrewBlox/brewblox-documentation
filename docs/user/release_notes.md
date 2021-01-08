@@ -12,7 +12,7 @@ Relevant links:
 **firmware release date: 2020/11/02**
 
 The various setting and configurable options suffered from being scattered throughout the UI.
-To remedy this, we introduced the *config* page.
+To remedy this, we introduced the *admin* page.
 Settings and actions for the system itself, and all dashboards, services, and Builder layouts can be found here.
 
 For example, we merged all the temperature unit settings into a single menu.
@@ -22,7 +22,7 @@ This page is useful for kiosk mode or wall-mounted monitors, but unintuitive to 
 To remedy this, Builder layouts are shown alongside dashboards and services in the sidebar. Builder layout pages can be set as homepage for the brewblox UI.
 
 We recognize this may be unwanted clutter for those who already have a lot of dashboards, and included the option to not display some or all Builder layouts in the sidebar.
-These options can be edited using the new config page.
+These options can be edited using the new admin page.
 
 For those using a touch screen and kiosk mode for Brewblox, virtual keyboards offered as browser extension or host application proved to be bugged, unworkable, or plain ugly.
 
@@ -41,21 +41,24 @@ To improve visibility for a popular service, we added a UI service and widget fo
 The service page will show all currently publishing Tilt devices.
 
 **Changes**
-- (feature) Added a centralized config page. The settings for dashboards, services, and builder layouts can be found here.
+- (feature) Added a centralized admin page. The settings for dashboards, services, and builder layouts can be found here.
 - (feature) The back button will now first attempt to close a single open dialog instead of navigating to the previous page.
-- (feature) Added virtual keyboard support for input fields. The keyboard layout is configurable using the config page.
+- (feature) Added virtual keyboard support for input fields. The keyboard layout is configurable using the admin page.
 - (feature) Added the Tilt service page.
 - (feature) Added the Tilt widget.
 - (feature) Content of the Webframe widget is now scalable.
 - (feature) A popup is now shown to iOS+HTTPS users when the UI fails to make a websocket connection. The popup offers to redirect to HTTP.
 - (feature) Builder layouts are now selectable from the sidebar.
-- (feature) Added option to config page to not show Builder layouts on sidebar.
+- (feature) Added option to admin page to not show Builder layouts on sidebar.
 - (feature) Added option to Builder layout actions to not show layout on sidebar.
 - (feature) You can now toggle to show the Spark relations diagram scaled to fit the page.
-- (feature) Added a menu to the config page for configuring all service temperature settings.
+- (feature) Added a menu to the admin page for configuring all service temperature settings.
 - (feature) Builder value display parts now have a setting to toggle rendering the part border.
 - (feature) Node-red data is now included in `brewblox-ctl backup save`.
+- (feature) The touch delay in brewery layouts is now configurable using the admin page. Options are: *Always*, *Never*, *Only on mobile*.
 - (docs) Updated and split the documentation for [history](https://brewblox.netlify.app/dev/reference/history_events) and [state](https://brewblox.netlify.app/dev/reference/state_events) events.
+- (docs) Added a [Fermentation fridge guide](https://brewblox.netlify.app/user/ferment_guide) for new users.
+- (enhancement) Replaced the "Waiting for datastore" notification with a spinner shown in the current page.
 - (enhancement) The Setpoint Driver widget now also shows the setting field.
 - (enhancement) Improved error messages when network calls failed.
 - (enhancement) Improved scroll bar positions on pages.
