@@ -362,15 +362,12 @@ There's no need to panic. Click advanced, and proceed to the page.
 ## Step 8: Use the system
 
 By default, temperature values are in Celsius. If you prefer Fahrenheit, now is a good time to configure that.
-The unit settings can be found on the Settings page, accessible through the sidebar.
+The unit settings can be found on the *admin* page, accessible through the sidebar.
 
-You can also use the settings page to connect your Spark to your Wifi network.
+You can also use the admin page to connect your Spark to your Wifi network.
 
-To easily replicate functionality from the original BrewPi, you can run the `Fermentation Fridge` wizard.
+To easily replicate functionality from the original BrewPi, you can click the *Get Started* button, and run* the `Fermentation Fridge` wizard.
 This will generate a set of blocks and widgets, configured to let you control the brew in your fridge.
-
-![Start Ferment wizard](../images/ferment-wizard.gif)
-
 
 ## Later: Updating
 
