@@ -17,6 +17,9 @@ Settings and actions for the system itself, and all dashboards, services, and Bu
 
 For example, we merged all the temperature unit settings into a single menu.
 
+The *Wizardry* button has been moved to the admin page.
+To help new users, a prominent "Get Started" button is displayed if there are no dashboards.
+
 The *Brewery* page already made it possible to show a maximized Builder layout.
 This page is useful for kiosk mode or wall-mounted monitors, but unintuitive to find.
 To remedy this, Builder layouts are shown alongside dashboards and services in the sidebar. Builder layout pages can be set as homepage for the brewblox UI.
