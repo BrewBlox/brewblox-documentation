@@ -21,13 +21,13 @@ The contents of your fridge will now be heated or cooled to make measured value 
 They will not be turned on by the system.
 If they were on, they will be turned off.
 
-**Constant fridge temperature** switches PID control to monitor your fridge temperature. Your PID settings will be adjusted.
+**Manage fridge temperature** switches PID control to monitor your fridge temperature. Your PID settings will be adjusted.
 This does not automatically enable control.
 
-**Constant beer temperature** switches PID control to monitor your beer temperature. Your PID settings will be adjusted.
+**Manage beer temperature** switches PID control to monitor your beer temperature. Your PID settings will be adjusted.
 This does not automatically enable control.
 
-**Start profile** enables the *Setpoint Profile*. This block will automatically adjust your setpoint setting to follow the configured profile. (more on this below)
+**Enable profile** enables the *Setpoint Profile*. This block will automatically adjust your setpoint setting to follow the configured profile. (more on this below)
 
 **Disable profile** disables the *Setpoint Profile* block.
 You can now manually edit the setpoint setting again, and the setting will not change over time.
@@ -37,23 +37,22 @@ You can now manually edit the setpoint setting again, and the setting will not c
 ### Bring beer to a constant 20°C
 
 - Set the beer setpoint setting to 20°C
-- Use **Constant beer temperature**
+- Use **Manage beer temperature**
 - Use **Enable control**
 
-![Enable static control](../images/enable-static-control.gif)
+![Enable static control](../images/enable-beer-control.gif)
 
 ### Bring the fridge to a constant 20°C
 
 - Set the fridge setpoint setting to 20°C
-- Use **Constant fridge temperature**
+- Use **Manage fridge temperature**
 - Use **Enable control**
 
-![Enable static control](../images/enable-static-control.gif)
+![Enable fridge control](../images/enable-fridge-control.gif)
 
 ### Start a temperature profile
 
-- Use **Enable control**
-- Use **Start profile**
+- Use **Enable profile**, and set start time to the desired value.
 
 ![Enable temperature profile](../images/enable-profile-control.gif)
 
