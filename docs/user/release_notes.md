@@ -58,7 +58,7 @@ The service page will show all currently publishing Tilt devices.
 - (feature) Added a menu to the admin page for configuring all service temperature settings.
 - (feature) Builder value display parts now have a setting to toggle rendering the part border.
 - (feature) Node-red data is now included in `brewblox-ctl backup save`.
-- (feature) The touch delay in brewery layouts is now configurable using the admin page. Options are: *Always*, *Never*, *Only on mobile*.
+- (feature) The touch delay in brewery layouts is now configurable using the admin page. Options are: *Always*, *Never*, *Only on mobile*. It defaults to *Only on mobile*.
 - (docs) Updated and split the documentation for [history](https://brewblox.netlify.app/dev/reference/history_events) and [state](https://brewblox.netlify.app/dev/reference/state_events) events.
 - (docs) Added a [Fermentation fridge guide](https://brewblox.netlify.app/user/ferment_guide) for new users.
 - (enhancement) Replaced the "Waiting for datastore" notification with a spinner shown in the current page.
