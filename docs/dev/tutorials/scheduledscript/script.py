@@ -38,7 +38,7 @@ def publish():
         client.connect_async(host=HOST, port=PORT)
         client.loop_start()
 
-        # https://brewblox.netlify.app/dev/reference/event_logging.html
+        # https://brewblox.netlify.app/dev/reference/history_events.html
         value = 20 + ((random() - 0.5) * 10)
         message = {
             'key': 'scheduledscript',

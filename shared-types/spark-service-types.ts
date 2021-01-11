@@ -45,12 +45,32 @@ export interface ApiSparkStatus {
 
 // #region SparkStateEvent
 export interface SparkStateEvent {
-  key: string;
+  key: string; // Service ID
   type: 'Spark.state';
-  ttl: string;
   data: {
     status: ApiSparkStatus | null;
     blocks: Block[];
   };
 }
 // #endregion SparkStateEvent
+
+// #region SparkUpdateEvent
+export interface SparkUpdateEvent {
+  key: string; // Service ID
+  type: 'Spark.update';
+  data: {
+    log: string[];
+  };
+}
+// #endregion SparkUpdateEvent
+
+// #region SparkPatchEvent
+export interface SparkPatchEvent {
+  key: string; // Service ID
+  type: 'Spark.patch';
+  data: {
+    changed: Block[];
+    deleted: string[];
+  };
+}
+// #endregion SparkPatchEvent
