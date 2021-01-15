@@ -97,7 +97,7 @@ Straight BrewPi heating elements come in two types; foldback and tri-clamp. Fold
 
 Details about our foldback heating elements are listed in the interactive table below. In the table you can toggle the length unit (cm / inch), and the mains voltage (230V / 240V) by clicking on the respective property. The element length (see figure for a definition) determines the minimum kettle size (Min. kettle ⌀) required for mounting. Both foldback elements have a low watt density of $\leq$ 12 W/cm<sup>2</sup>, even at a mains voltage of 240V. Both elements consist of 1 resistor, and come with a 1" BSP thread. Note: our foldback elements come without a locknut or mounting kit. For proper installation either of these needs to be bought separately. The mounting kit is custom designed and adds ground fault protection to the element while -at the same time- serving as a safety cover for the electrical wiring.
 
-![Heating elements-foldback](../images/heat-element-foldback.svg)
+![Heating elements-foldback](../images/heat-element-foldback.jpg)
 
 TODO: Plaatje nog aanpassen - Is dit het origineel Elco?
 
@@ -107,9 +107,9 @@ TODO: XX BrewPi part. no. nog aanpassen
 
 #### Tri-clamp
 
-Details of our tri-clamp heating elements are listed in the table below. The table length unit (cm / inch) and mains voltage (230V / 240V) can be toggled on click. The tri-clamp fitting is approved for food-grade hygiene standards and useful when frequent removal of the element from the kettle is required. It does require a 2" tri-clamp ferrule (64mm OD) mounted on your kettle. The element length (see figure for a definition) determines the minimum kettle diameter (Min. kettle ⌀) required for mounting. The elements are available in a big power range (2800 - 11000W), and have low watt density ($\leq$ 13 W/cm<sup>2</sup>). The current drawn by the elements (Current) is written in the format: (current per resistor)x(no. resistors). The maximum current is dependent on how it is connected to the outlet. More information about how to connect your element and how to determine the maximum current can be found in the section [Connecting](#connecting).
+Details of our tri-clamp heating elements are listed in the table below. The table length unit (cm / inch) and mains voltage (230V / 240V) can be toggled on click. The tri-clamp fitting is approved for food-grade hygiene standards and useful when frequent removal of the element from the kettle is required. It does require a 2" tri-clamp ferrule (64mm OD) mounted on your kettle. The element length (see figure for a definition) determines the minimum kettle diameter (Min. kettle ⌀) required for mounting. The elements are available in a big power range (2800 - 11000W), and have low watt density ($\leq$ 13 W/cm<sup>2</sup>). The current drawn by the elements (Current) is written in the format: (current per resistor)x(no. resistors). The maximum current is dependent on how it is connected to the outlet. More information about how to connect your element and how to determine the maximum current can be found in section [Connecting](#connecting).
 
-![Heating elements-triclamp](../images/heat-element-triclamp.svg)
+![Heating elements-triclamp](../images/heat-element-triclamp.jpg)
 
 TODO: Plaatje nog aanpassen - Is dit het origineel Elco?
 
@@ -117,7 +117,7 @@ TODO: Plaatje nog aanpassen - Is dit het origineel Elco?
 
 ### Round
 
-At BrewPi we sell custom designed round heating elements. Technical details of the heating elements can be found in the interactive table below. You can toggle the table length unit (cm / inch) and mains voltage (230V / 240V) on click. The element Diameter and Length (see figure for a definition) determine the minimum required kettle diameter (Min. kettle ⌀). The element round shape is least obstructive to the flow when whirlpooling in a kettle with the design diameter (Design kettle ⌀). The elements come in two types; 1-phase elements with one resistor per flange, and 3-phase elements with 3. Especially the 3-phase elements have an extremely low watt density, which makes scorching your element practically impossible. All elements come with a mounting kit, and have a 1.5" BSP thread. The element current (Current) is written in the format: (current per resistor)x(no. resistors). The maximum current is dependent on how it is connected to the outlet. More information about how to connect your element and how to determine the maximum current can be found in the section [Connecting](#connecting) below.
+At BrewPi we sell custom designed round heating elements. Technical details of the heating elements can be found in the interactive table below. You can toggle the table length unit (cm / inch) and mains voltage (230V / 240V) on click. The element Diameter and Length (see figure for a definition) determine the minimum required kettle diameter (Min. kettle ⌀). The element round shape is least obstructive to the flow when whirlpooling in a kettle with the design diameter (Design kettle ⌀). The elements come in two types; 1-phase elements with one resistor per flange, and 3-phase elements with 3. Especially the 3-phase elements have an extremely low watt density, which makes scorching your element practically impossible. All elements come with a mounting kit, and have a 1.5" BSP thread. The element current (Current) is written in the format: (current per resistor)x(no. resistors). The maximum current is dependent on how it is connected to the outlet. More information about how to connect your element and how to determine the maximum current can be found in section [Connecting](#connecting) below.
 
 ![Heating elements-round](../images/heat-element-round.jpg)
 

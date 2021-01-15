@@ -77,7 +77,7 @@ Straight BrewPi heating elements come in two types; foldback and tri-clamp. Fold
 
 Details about our foldback heating elements are listed in the interactive table below. In the table you can toggle the length unit (cm / inch), and the nominal voltage (230V / 240V) of your mains by clicking on the respective property. The element length (see figure for a definition) determines the minimum kettle size (Min. kettle ⌀) required for mounting. Both foldback elements have a low watt density of $\leq$ 12 W/cm<sup>2</sup>, even at a nominal voltage of 240V. Both elements consist of 1 resistor. These elements can be connected to 1 and 2-phase outlets, and come with a 1" BSP thread. Note: our foldback elements come without a locknut or mounting kit. For proper installation either of these needs to be bought separately. The mounting kit is custom designed and adds ground fault protection to the element while serving as a safety cover for the electrical wiring.
 
-![Heating elements-foldback](../images/heat-element-foldback.svg)
+![Heating elements-foldback](../images/heat-element-foldback.jpg)
 
 TODO: Plaatje nog aanpassen - Is dit het origineel Elco?
 
@@ -89,7 +89,7 @@ TODO: XX BrewPi part. no. nog aanpassen
 
 Details of our tri-clamp heating elements are listed in the table below. The table length unit (cm / inch) and nominal voltage (230V / 240V) can be toggled on click. The tri-clamp fitting is hygienic and useful when frequent removal of the element from the kettle is required. It does require a 2" tri-clamp ferrule (64mm OD) mounted on your kettle. The element length (see figure for a definition) determines the minimum kettle diameter (Min. kettle ⌀) required for mounting. The elements are available in a big power range (2800 - 11000W), and have low watt density ($\leq$ 13 W/cm<sup>2</sup>). For 2 resistor elements, the drawn current is calculated for 1-phase 230V and 2-phase 240V parallel configuration. For 3 resistor elements a 3-phase star configuration is assumed. More information about how to connect your element can be found in the respective [Section](#connecting) below.
 
-![Heating elements-triclamp](../images/heat-element-triclamp.svg)
+![Heating elements-triclamp](../images/heat-element-triclamp.jpg)
 
 TODO: Plaatje nog aanpassen - Is dit het origineel Elco?
 
