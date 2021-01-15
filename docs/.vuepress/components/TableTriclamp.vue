@@ -51,7 +51,7 @@ export default {
           {
             title: 'Current (A)',
             onClick: this.toggleVoltage,
-            values: ['2x 6.1', '2x 7.0', '2x10.9', '3x 8.0', '3x12.3', '3x14.5'],
+            values: ['6.1x2', '7.0x2', '10.9x2', '8.0x3', '12.3x3', '14.5x3'],
           },
           {
             title: 'Power (W)',
@@ -70,7 +70,7 @@ export default {
           {
             title: 'Current (A)',
             onClick: this.toggleVoltage,
-            values: ['2x 6.4', '2x 7.3', '2x11.3', '3x 8.3', '3x12.9', '3x15.1'],
+            values: ['6.4x2', '7.3x2', '11.3x2', '8.3x3', '12.9x3', '15.1x3'],
           },
           {
             title: 'Power (W)',
