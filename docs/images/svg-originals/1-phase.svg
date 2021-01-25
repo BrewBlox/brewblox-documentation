@@ -101,8 +101,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="4"
-     inkscape:cx="83.124198"
-     inkscape:cy="102.71112"
+     inkscape:cx="71.608326"
+     inkscape:cy="89.099065"
      inkscape:document-units="mm"
      inkscape:current-layer="g1084"
      inkscape:document-rotation="0"
@@ -111,9 +111,9 @@
      fit-margin-left="1"
      fit-margin-right="1"
      fit-margin-bottom="1"
-     inkscape:window-width="2560"
-     inkscape:window-height="1375"
-     inkscape:window-x="1920"
+     inkscape:window-width="1280"
+     inkscape:window-height="959"
+     inkscape:window-x="1440"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      lock-margins="true"
@@ -172,15 +172,15 @@
       <text
          xml:space="preserve"
          style="font-size:4.23334px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:center;text-anchor:middle;stroke-width:0.529166"
-         x="80.231277"
-         y="-114.58541"
+         x="77.021088"
+         y="-114.61617"
          id="text1992"
          transform="rotate(90)"><tspan
            sodipodi:role="line"
            id="tspan1990"
-           x="80.231277"
-           y="-114.58541"
-           style="text-align:start;text-anchor:start;stroke-width:0.529166">230V</tspan></text>
+           x="77.021088"
+           y="-114.61617"
+           style="text-align:start;text-anchor:start;stroke-width:0.529166">230V AC</tspan></text>
       <g
          id="Resistor-2"
          transform="matrix(0,0.52916666,-0.52916666,0,317.45735,48.169201)">

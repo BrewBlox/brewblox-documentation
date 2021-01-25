@@ -10,9 +10,9 @@ Always consult an electrician for advice and help with wiring your elements. Und
 
 ## Heating water
 
-Water is a high heat capacity fluid, therefore it takes a lot of energy (power and time) to heat. For example: in The Netherlands a typical residential mains outlet is rated at a maximum power of 3680W. With a heating element of 3500W it would take 45 minutes to heat a kettle with 50L of water to 65C for mashing ($\Delta T$ = 45C), or 80 minutes to boil ($\Delta T$ = 80C).
+Water is a high heat capacity fluid, therefore it takes a lot of energy (power and time) to heat. For example: in The Netherlands a typical residential mains outlet operates at 230V AC and is rated at a maximum current of 16A. Such an outlet has a maximum power of 3680W ($P = U \times I). With a heating element of 3500W it would take 18 minutes to heat 20L of water to 65C for mashing (20 - 65C), or 32 minutes to boil (20 - 100C).
 
-Heating water with this setup already adds more than two hours (45 + 80 = 125 minutes) of waiting time to your brewing day. Select a higher power heating element when your mains outlet allows for it. You can calculate the expected heating time in your situation with the calculator below. The calculator works with SI derived units of litres (L) and degrees celsius (C) by default, but takes US gallon (US Gal) and degree Fahrenheit (F) as well.
+Heating water with this setup adds 50 minutes of waiting time to your brewing day. 50 minutes is a reasonable time, and there is not much to be gained by selecting a higer power heating element. However, if you were to switch to 50L batches, the waiting time already adds up to more than two hours. Select a higher power heating element when your mains outlet allows. You can calculate the expected heating time in your situation with the calculator below.
 
 TODO: Bob vragen interactieve heating time calculator te maken in vuepress.
 
@@ -34,44 +34,52 @@ Default example: It takes 45 (44.8) mins to heat 50L of water 45C (20 to 65C) wi
 
 ## Mains electricity
 
-To power your heating element it has to be connected to your local mains. Characteristics of mains electricity differ from country to country, see [Wikipedia](https://en.wikipedia.org/wiki/Mains_electricity_by_country) for a list or consult your local electrician for details. BrewPi heating elements can be operated at 230 or 240V and can be used all over the world. In this section we talk you through the three main connection configurations with examples from Europe (NL) and North-America (US). In the last part of this section we will discuss how to determine the maximum power (current) of the heating element you still can connect safely.
+BrewPi heating elements work at 230 / 240 V AC. How the elements are connected to your mains depends on where you live. In this section we talk you through the three main mains configurations and tell you how to determine the maximum power of the heating element you can connect safely. When unsure about the details and regulations of your electricity provider, consult a local electrician.
 
 ### Single phase
 
-Most residential mains outlets outside of North- and Central-America are single phase outlets operating at 230V. How to connect your heating element is shown in the figure below. The heating element (rectangle) is connected between the live (L) and neutral (N) wire. The live wire is held at a voltage of 230V while the neutral is at zero. The voltage powering the element is 230 - 0 = 230V.
+With the exception of North- and Central-America most residential mains outlets worldwide are single phase outlets operating at 230V AC. The heating element (rectangle) is connected between the phase (L) and neutral (N) wire, see figure.
 
 ![1-Phase power](../images/1-phase.svg)
 
-TODO: Elco, ground aangeven in plaatje?
+In most places, 230V single phase outlets are protected by 16A circuit breakers.
 
 ### Split phase
 
-In the US and related countries mains electricity operates at 120V. For high-power electrical appliances (like heating elements, stoves, etc.) houses in the US are equipped with split phase outlets like [NEMA 14](https://en.wikipedia.org/wiki/NEMA_connector#NEMA_14). In split phase outlets two live wires (L1 and L2) at 120V are combined in a special configuration to supply 120 + 120 = 240V to the heating element (rectangle). See the figure below.
+In the US, Canada and some other countries mains electricity operates at 120V AC. For high-power electrical appliances (like heating elements, stoves, etc.) houses in the US are equipped with split phase outlets. In split phase outlets two phases (L1 and L2) at 120V are combined to 240V AC. The heating element is connected between phase L1 and L2, see figure.
 
 ![2-Phase power](../images/2-phase.svg)
 
-TODO: Elco, ground aangeven in plaatje?
+In the US, split phase outlets are typically protected by a 25A circuit breaker.
 
 ### Three phase
 
-Three phase mains connections are the high-power electrical connections outside North- and Central-America and generally operate at 230V. These connections can be found in many commercial and some residential buildings around the world. A three phase connection consists of three phases (three live wires) and in general can provide about 3 times the power of a single phase connection. To make full use of a three phase connection requires an heating element with 3 resistors. Each resistor is connected between a live wire (L1 - L3) and neutral (N) in a star configuration, see the figure below. Since BrewPi 3-phase heating elements contain equal power resistors, the neutral can be omitted and the line is dashed in the figure.
+Three phase mains connections are the high-power electrical connections outside North- and Central-America. They consist of three phases (L1 - L3) and a neutral (N) wire. To fully utilize the available power of a three phase mains outlet requires a three phase heating element. Essentially a three phase heating element consists of three single phase elements combined in a single flange.
+
+Three phase heating elements can be connected to three phase outlets in two configurations; Star and Delta discussed next.
+**Star:** in a three phase star configuration the individual elements are connected between a phase (L1 - L3) and neutral (N). The voltage over each element is 230V AC. In some countries the neutral (N) wire is omitted from the outlet. If so, you can get away with not connecting the neutral wire as BrewPi heating elements are balanced in power. In star configuration currents from the three individual elements cancel in the center, and the neutral wire can be omitted.
+**Delta:** in a three phase delta configuration the individual heating elements are connected between two adjacent phases. For example: element 1 is connected between L1 and L2, element two between L2 and L3, etc. The voltage over each element is 400V AC. BrewPi heating elements are dimensioned to operate at 230 - 240 V AC. Operation at 400V AC draws too much current (power) and is unsafe (fire hazard). BrewPi three phase heating elements cannot be used in three phase delta configuration.
 
 ![3-Phase power](../images/3-phase.svg)
 
-TODO: Elco, ground aangeven in plaatje?
+In the Netherlands three phase connections operate at 230V AC and are protected by 3x16 or 3x25A circuit breakers.
+
+### Protective Earth
+
+For a safe working environment on your brewing day all electrical equipment should be grounded. To ground your kettle BrewPi heating elements are equipped with a protective earth (PE) connection. When connected, you are protected from 230 / 240V in case of a defect in the wiring, connections or equipment. Current drawn from the outlet will run to ground and trip your ground-fault circuit protector, instead of hurting you.
 
 ### Maximum current
 
 To protect the electric circuit in your building from an overload or short circuit (fire hazard) it is protected by a circuit breaker (fuse) on the distribution board. The circuit breaker limits the current that can be drawn from a mains outlet and determines the maximum power of the heating element your can safely connect.
 
-To reduce waiting time at your brewing day, we at BrewPi, would advise you to buy the highest power heating element your mains outlet can power. Therefore you should find the maximum current ($I_{max}$) of the circuit breaker behind the outlet on your brewing location. Ask your electrician when you are unsure about the details of your electrical installation.
+To reduce waiting time at your brewing day we would advise you to buy the highest power heating element your mains outlet can power. Therefore you should find the maximum current ($I_{max}$) of the circuit breaker behind the outlet on your brewing location. Ask your electrician when you are unsure about the details of your electrical installation.
 
 You can select your heating element based on the maximum current or maximum power ($P_{max}$) of the outlet you plan to use. The maximum power is determined by multiplying the voltage of your mains ($U$) by the maximum current; $P_{max} = U \times I_{max}$.
 
 **Examples:**
-- **Single phase:** typical residential mains outlets in the Netherlands are protected by a circuit breaker with a maximum current of 16A. Operating at 230V, outlets have a maximum power of 3680W.
-- **Split phase:** typical split phase outlets in the US are protected by a circuit breaker with a maximum current of 25A. Operating at 240V these outlets have a maximum power of 6000W.
-- **Three phase:** residential three phase connections in the Netherlands come in two flavors; 3x16 and 3x25A rated current. At 230V these connections have a maximum power of 11040 or 17250W respectively.
+- **Single phase:** typical residential mains outlets in the Netherlands are protected by a circuit breaker with a maximum current of 16A. Operating at 230V AC, outlets have a maximum power of 3680W.
+- **Split phase:** typical split phase outlets in the US are protected by a circuit breaker with a maximum current of 25A. Operating at 240V AC these outlets have a maximum power of 6000W.
+- **Three phase:** residential three phase connections in the Netherlands come in two flavors; 3x16 and 3x25A rated current. At 230V AC these connections have a maximum power of 11040 or 17250W respectively.
 
 The examples are listed in the table below for an overview.
 

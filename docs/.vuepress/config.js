@@ -120,7 +120,7 @@ module.exports = {
       ],
       "/hardware/": [
         "heating_elements",
-        "TODO: old"
+        "TODO_old"
       ],
     },
     repo: 'brewblox/brewblox-documentation',

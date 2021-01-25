@@ -380,6 +380,76 @@
          d="M 5.77,0 -2.88,5 V -5 Z"
          id="path2267-2" />
     </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1515-5-6-3-8-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="DotM"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.4,0,0,0.4,2.96,0.4)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         id="path1513-3-7-1-6-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1664-5-5-9-8-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="DotM"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.4,0,0,0.4,2.96,0.4)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         id="path1662-6-3-4-8-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker2048-4-7"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="TriangleInM"
+       inkscape:isstock="true">
+      <path
+         transform="scale(-0.4)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path2046-3-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker2467-7-1-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="DotM"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.4,0,0,0.4,2.96,0.4)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         id="path2465-8-4-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="TriangleOutM-9-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="TriangleOutM"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.4)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path2267-2-9" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -388,9 +458,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="347.42227"
-     inkscape:cy="11.615132"
+     inkscape:zoom="2.8"
+     inkscape:cx="118.32074"
+     inkscape:cy="91.373385"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -399,9 +469,9 @@
      fit-margin-left="1"
      fit-margin-right="1"
      fit-margin-bottom="1"
-     inkscape:window-width="2560"
-     inkscape:window-height="1375"
-     inkscape:window-x="1920"
+     inkscape:window-width="1280"
+     inkscape:window-height="959"
+     inkscape:window-x="1440"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      units="pt"
@@ -420,7 +490,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -454,15 +524,15 @@
     <text
        xml:space="preserve"
        style="font-size:4.23333px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:center;text-anchor:middle;stroke-width:0.529167"
-       x="107.99258"
+       x="104.79398"
        y="-76.782799"
        id="text1992-9-5-2"
        transform="rotate(90)"><tspan
          sodipodi:role="line"
          id="tspan1990-3-5-6"
-         x="107.99258"
+         x="104.79398"
          y="-76.782799"
-         style="text-align:start;text-anchor:start;stroke-width:0.529167">240V</tspan></text>
+         style="text-align:start;text-anchor:start;stroke-width:0.529167">240V AC</tspan></text>
     <g
        id="Resistor-2-6-4-6"
        transform="matrix(0,0.52916667,-0.52916667,0,275.12401,75.950459)">
