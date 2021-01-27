@@ -31,7 +31,7 @@ export default {
             values: [36, 41, 32, 41, 46, 57.5, 67, 87.5, 31, 36, 41],
           },
           {
-            title: 'Design kettle ⌀ (cm)',
+            title: 'Designed for kettle ⌀ (cm)',
             onClick: this.toggleLength,
             values: [40, 45, 35, 45, 50, 63, 72, 93, 35, 40, 45],
           }
@@ -55,7 +55,7 @@ export default {
             values: [14.2, 16.1, 12.6, 16.1, 18.1, 22.6, 26.4, 34.4, 12.2, 14.2, 16.1],
           },
           {
-            title: 'Design kettle ⌀ (in)',
+            title: 'Designed for kettle ⌀ (in)',
             onClick: this.toggleLength,
             values: [15.7, 17.7, 13.8, 17.7, 19.7, 24.8, 28.3, 36.6, 13.8, 15.7, 17.7],
           }

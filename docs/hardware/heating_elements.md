@@ -34,7 +34,7 @@ Default example: It takes 45 (44.8) mins to heat 50L of water 45C (20 to 65C) wi
 
 ## Mains electricity
 
-BrewPi heating elements work at 230 / 240 V AC. How the elements are connected to your mains depends on where you live. In this section we talk you through the three main mains configurations and tell you how to determine the maximum power of the heating element you can connect safely. When unsure about the details and regulations of your electricity provider, consult a local electrician.
+BrewPi heating elements work at 230 / 240 V AC. How the elements are connected to your mains depends on where you live. In this section we talk you through the three main configurations and tell you how to determine the maximum power of the heating element you can connect safely. When unsure about the details and regulations of your electricity provider, consult a local electrician.
 
 ### Single phase
 
@@ -54,10 +54,10 @@ In the US, split phase outlets are typically protected by a 25A circuit breaker.
 
 ### Three phase
 
-Three phase mains connections are the high-power electrical connections outside North- and Central-America. They consist of three phases (L1 - L3) and a neutral (N) wire. To fully utilize the available power of a three phase mains outlet requires a three phase heating element. Essentially a three phase heating element consists of three single phase elements combined in a single flange.
+Three phase mains connections are the high-power electrical connections outside North- and Central-America. They consist of three phases (L1 - L3) and a neutral (N) wire. To fully utilize the available power of a three phase outlet requires a three phase heating element. Essentially a three phase heating element consists of three single phase elements combined in a single flange. Three phase heating elements can be connected to three phase outlets in two configurations; Star and Delta.
 
-Three phase heating elements can be connected to three phase outlets in two configurations; Star and Delta discussed next.
 **Star:** in a three phase star configuration the individual elements are connected between a phase (L1 - L3) and neutral (N). The voltage over each element is 230V AC. In some countries the neutral (N) wire is omitted from the outlet. If so, you can get away with not connecting the neutral wire as BrewPi heating elements are balanced in power. In star configuration currents from the three individual elements cancel in the center, and the neutral wire can be omitted.
+
 **Delta:** in a three phase delta configuration the individual heating elements are connected between two adjacent phases. For example: element 1 is connected between L1 and L2, element two between L2 and L3, etc. The voltage over each element is 400V AC. BrewPi heating elements are dimensioned to operate at 230 - 240 V AC. Operation at 400V AC draws too much current (power) and is unsafe (fire hazard). BrewPi three phase heating elements cannot be used in three phase delta configuration.
 
 ![3-Phase power](../images/3-phase.svg)
@@ -66,7 +66,7 @@ In the Netherlands three phase connections operate at 230V AC and are protected 
 
 ### Protective Earth
 
-For a safe working environment on your brewing day all electrical equipment should be grounded. To ground your kettle BrewPi heating elements are equipped with a protective earth (PE) connection. When connected, you are protected from 230 / 240V in case of a defect in the wiring, connections or equipment. Current drawn from the outlet will run to ground and trip your ground-fault circuit protector, instead of hurting you.
+For a safe working environment on your brewing day all electrical equipment should be grounded. To ground your kettle BrewPi heating elements are equipped with a protective earth (PE) connection. When connected, you are protected from 230 / 240V in case of a defect in the wiring, connections or equipment. Current drawn from the outlet will run to ground and trip your ground-fault circuit protector instead of hurting you.
 
 ### Maximum current
 
@@ -74,7 +74,7 @@ To protect the electric circuit in your building from an overload or short circu
 
 To reduce waiting time at your brewing day we would advise you to buy the highest power heating element your mains outlet can power. Therefore you should find the maximum current ($I_{max}$) of the circuit breaker behind the outlet on your brewing location. Ask your electrician when you are unsure about the details of your electrical installation.
 
-You can select your heating element based on the maximum current or maximum power ($P_{max}$) of the outlet you plan to use. The maximum power is determined by multiplying the voltage of your mains ($U$) by the maximum current; $P_{max} = U \times I_{max}$.
+You can select your heating element based on the maximum current or maximum power ($P_{max}$) of the outlet you plan to use. The maximum power is determined by multiplying the voltage of your mains ($U$) by the maximum current of the circuit breaker; $P_{max} = U \times I_{max}$.
 
 **Examples:**
 - **Single phase:** typical residential mains outlets in the Netherlands are protected by a circuit breaker with a maximum current of 16A. Operating at 230V AC, outlets have a maximum power of 3680W.
@@ -93,17 +93,19 @@ The examples are listed in the table below for an overview.
 
 ## Elements
 
-At BrewPi we sell low watt density (4 - 13 W/cm<sup>2</sup>) heating elements. The low watt density prevents scorching your elements with mash sugars, and ensures they are easy to clean after brewing. At the same time it prevents scorching your brew and the possible production of burnt off-flavors that might ruin your beer. All elements are made from stainless steel for durability and hygiene reasons.
+At BrewPi we sell low watt density (4 - 13 W/cm<sup>2</sup>) heating elements. Heating elements produce heat, and heat production is measured in watts. A low watt density heating element produces a low amount of heat per element surface area. This prevents scorching your elements with mash sugars, and ensures they are easy to clean after brewing. At the same time it prevents scorching your brew and the possible production of burnt off-flavors that might ruin your beer. BrewPi heating elements come in three types, round, foldback and tri-clamp. All elements are made from stainless steel for durability and hygiene reasons.
 
-BrewPi heating elements come in two geometries; straight and round. Straight elements are the cheaper option in general. Round elements heat your mash / wort more homogeneous, are minimally blocking your flow when whirlpooling and have a even lower watt density. Technical details of the different elements can be found in the sections below.
+### Round
 
-### Straight
+At BrewPi we sell custom designed round heating elements. Round elements heat your mash / wort more homogeneous, are minimally blocking the flow when whirlpooling and have the lowest watt density of all the elements we sell. Technical details of the heating elements can be found in the interactive table below. You can toggle the table length unit (cm / inch) and mains voltage (230V / 240V) on click. When mounted in a kettle with the design diameter there is a 5cm (2in) gap between the element and the kettle. The elements come in two types; 1-phase elements with one resistor per flange, and 3-phase elements with 3. Especially the 3-phase elements have an extremely low watt density, which makes scorching your element practically impossible. All elements come with a mounting kit and have a 1.5" BSP thread. The element current is listed in the format: (current per resistor)x(no. resistors) as the total current drawn by the element depends on the connection to your mains. More about connecting your element in the [next](#connecting) section.
 
-Straight BrewPi heating elements come in two types; foldback and tri-clamp. Foldback elements are the most simple elements you can find, and are the best option on a budget. Tri-clamp elements are fixed in your kettle with a tri-clamp fitting. These fittings consist of two flanges, an O-ring, and a clamp band (hence *tri*-clamp) and are the best option if you want to be able to easily remove the element from the kettle. This comes in handy when you want to change your element frequently, or want to clean it thoroughly outside the kettle.
+![Heating elements-round](../images/heat-element-round.jpg)
 
-#### Foldback
+<TableRound/>
 
-Details about our foldback heating elements are listed in the interactive table below. In the table you can toggle the length unit (cm / inch), and the mains voltage (230V / 240V) by clicking on the respective property. The element length (see figure for a definition) determines the minimum kettle size (Min. kettle ⌀) required for mounting. Both foldback elements have a low watt density of $\leq$ 12 W/cm<sup>2</sup>, even at a mains voltage of 240V. Both elements consist of 1 resistor, and come with a 1" BSP thread. Note: our foldback elements come _without_ a locknut or mounting kit. For proper installation either of these needs to be bought separately. The mounting kit is custom designed and adds ground fault protection to the element while -at the same time- serving as a safety cover for the electrical wiring.
+### Foldback
+
+Foldback heating elements are straight elements fold back, hence the name. The fold increases the element surface area, thereby lowering the watt density and risk of scorching. Details about our foldback elements are listed in the interactive table below. In the table you can toggle the length unit (cm / inch), and the mains voltage (230V / 240V) by clicking on the respective property. Both foldback elements have a low watt density of $\leq$ 12 W/cm<sup>2</sup>, even at a mains voltage of 240V. The elements consist of 1 resistor, and come with a 1" BSP thread.
 
 ![Heating elements-foldback](../images/heat-element-foldback.jpg)
 
@@ -111,63 +113,65 @@ Details about our foldback heating elements are listed in the interactive table 
 
 TODO: XX BrewPi part. no. nog aanpassen
 
+#### Mounting kit
+
+The basic design of these foldback elements does not provide a protective earth connection, nor a cover for the wiring. To overcome these deficiencies we have designed a custom mounting kit, see photos below. The mounting kit is sold separately, and can be found in the BrewPi store. With the mounting kit installed your electrical wiring is safe from liquids, and your kettle is grounded.
+
+![Foldback-mounting kit](../images/mounting-kit.jpg)
+
 #### Tri-clamp
 
-Details of our tri-clamp heating elements are listed in the table below. The table length unit (cm / inch) and mains voltage (230V / 240V) can be toggled on click. The tri-clamp fitting is approved for food-grade hygiene standards and useful when frequent removal of the element from the kettle is required. It does require a 2" tri-clamp ferrule (64mm OD) mounted on your kettle. The element length (see figure for a definition) determines the minimum kettle diameter (Min. kettle ⌀) required for mounting. The elements are available in a big power range (2800 - 11000W), and have low watt density ($\leq$ 13 W/cm<sup>2</sup>). The current drawn by the elements (Current) is written in the format: (current per resistor)x(no. resistors). The maximum current is dependent on how you connect the element to your mains. More information about how to connect your element and how to determine the maximum current can be found in section [Connecting](#connecting).
+Tri-clamp elements are fixed in your kettle with a tri-clamp fitting. These fittings consist of two flanges, an O-ring, and a clamp band (hence *tri*-clamp) and are the best option if you want to be able to easily remove the element from the kettle. This comes in handy when you want to change your element frequently, or want to clean it thoroughly outside the kettle.
+
+Details of our tri-clamp heating elements are listed in the table below. The table length unit (cm / inch) and mains voltage (230V / 240V) can be toggled on click. The tri-clamp fitting is approved for food-grade hygiene standards and useful when frequent removal of the element from the kettle is required. It does require a 2" tri-clamp ferrule (64mm OD, 43mm ID) mounted on your kettle. The elements are available in a big power range (2800 - 11000W), and have low watt density ($\leq$ 13 W/cm<sup>2</sup>). The element current is written in the format: (current per resistor)x(no. resistors) as the total current drawn by the element is dependent on the connection to your mains. More about how to connect your element in the [next](#connecting) section.
 
 ![Heating elements-triclamp](../images/heat-element-triclamp.jpg)
 
 <TableTriclamp/>
 
-### Round
-
-At BrewPi we sell custom designed round heating elements. Technical details of the heating elements can be found in the interactive table below. You can toggle the table length unit (cm / inch) and mains voltage (230V / 240V) on click. The element Diameter and Length (see figure for a definition) determine the minimum required kettle diameter (Min. kettle ⌀). The element round shape is least obstructive to the flow when whirlpooling in a kettle with the design diameter (Design kettle ⌀). The elements come in two types; 1-phase elements with one resistor per flange, and 3-phase elements with 3. Especially the 3-phase elements have an extremely low watt density, which makes scorching your element practically impossible. All elements come with a mounting kit, and have a 1.5" BSP thread. The element current (Current) is written in the format: (current per resistor)x(no. resistors). The maximum current is dependent the element is connected to your mains. More information about how to connect your element and how to determine the maximum current can be found in section [Connecting](#connecting) below.
-
-![Heating elements-round](../images/heat-element-round.jpg)
-
-<TableRound/>
-
 ## Connecting
 
-Now you have selected your element(s) we can discuss how to connect them to your mains and how to determine the maximum current needed for your circuit breaker. Connecting your element to a single or split phase outlet requires a 3 wire cable, connecting to a three phase outlet requires a 5 wire cable. Both can be found in the BrewPi store (TODO: link naar store).
-
-- TODO: verhaal over kleur codes? (https://www.allaboutcircuits.com/textbook/reference/chpt-2/wiring-color-codes-infographic/)
+Now you have selected your element(s) we can discuss how to connect them to your mains. The connection to your mains determines the current in the electrical cables and circuit breaker and their minimum dimensions. All will be discussed in this section.
 
 ::: danger Note
 Always consult an electrician for advice and help with wiring your elements. Under no circumstances should these be used without proper wiring, ground fault circuit protection and overcurrent circuit protection.
 :::
 
-### Single / split phase outlet
+### Single phase outlet
 
-To connect an heating element to a single- or split phase outlet requires connecting three wires; 2 active, and one passive. The active wires transport the electrical power (voltage and current), the passive protective earth (PE) wire is for personal protection in case of a faulty element. The naming scheme of the active wires differs between single phase and split phase connections and can be found in the table below.
-
-| Type         | Active                   | Passive               |
-|--------------|--------------------------|-----------------------|
-| Single phase | live (L), neutral (N)    | protective earth (PE) |
-| Split phase  | live 1 (L1), live 2 (L2) | protective earth (PE) |
-
-BrewPi heating elements have 1,2 or 3 resistors per element. All elements can be connected in parallel to single and split phase outlets at the cost of increasing the maximum current required for your circuit breaker. How to connect your element is show in the figure below, how to calculate the maximum current is described in the examples.
+To connect an heating element to a single phase outlet requires connecting three wires; phase (L), neutral (N) and protective earth (PE). BrewPi heating elements have 1, 2 or 3 resistors per element, all of which can be connected to a single phase outlet. The 2 and 3 resistor elements come with metal strips to connect the resistors in parallel. Connecting multiple resistors in parallel to an outlet comes at the cost of increasing the current in your wires and circuit breaker. These should be dimensioned accordingly. How to connect your element is shown schematically in the figure below, with photos showing the configuration of the metal strips. How to determine the current the element draws is described in the examples.
 
 ![1-2-phase-connect-123](../images/1-2-phase-connect-123.svg)
 
 **Examples:**
 - Round BrewPi heating element #7 has one resistor and draws a current of 15.2A per resistor at 230V. When connected to a 230V single phase outlet the maximum current is 1 x 15.2 = 15.2A.
-- Tri-clamp element #14 has two resistors and draws a current of 6.4A per resistor at 240V. When connected to a 240V split phase outlet the maximum current is 2 x 6.4 = 12.8A.
+- Tri-clamp element #14 has two resistors and draws a current of 6.1A per resistor at 230V. When connected to a 230V single phase outlet the maximum current is 2 x 6.1 = 12.2A.
 - Round heating element #2 has three resistors and draws a current of 12.3A per resistor at 230V. When connected to a 230V single phase outlet the maximum current is 3 x 12.3 = 36.9A.
 
-- TODO: Bob, Elco vragen SVG letter spacing vuepress
-- TODO: Flensen nog kwartslag draaien in lijn met schema's? Lettertype groter?
+The wires connected to your element should be of sufficient gauge (diameter) to transport the current, and the current should not exceed the maximum current of your circuit breaker. More about wire gauge can be found [here](#wire-gauge).
+
+### Split phase outlet
+
+In connecting your element to a 240V split phase outlet you have the same options and procedure as when connecting it to the single phase outlet discussed previously. Just replace phase (L) with phase 1 (L1), and neutral (N) with phase 2 (L2) in the wiring. In determining the total current drawn by the element you base it on the current per resistor values at 240V from the tables in the [Elements](Elements) section.
 
 ### Three phase outlet
 
-Connecting a 3 resistor element to a three phase outlet requires a 5 wire cable. The cable consists of 4 active wires, live 1-3 (L1 - L3) and neutral (N), and a passive protective earth (PE). How to connect your element is shown in the figure below. Since BrewPi 3 resistor heating elements contain equal power resistors, the neutral can be omitted and the line is dashed in the figure.
+Connecting a 3 resistor element to a three phase outlet requires connecting 5 wires; phase 1-3 (L1 - L3), neutral (N) and protective earth. How to connect your element is shown in the figure below, with a photo showing how to configure the metal strips. How to determine the current drawn by the element is described in the example. As discussed in the [Mains](#three-phase) section, always connect your BrewPi 3-phase heating elements in the star configuration shown here. The 400V AC of the delta configuration will draw too much current and fry your element (fire hazard). When your 3 phase outlet comes without a neutral (N), it can be omitted as discussed [before](#three-phase).
 
 ![3-Phase power](../images/3-phase-connect-3.svg)
 
 **Example:**
 - Round BrewPi heating element #4 has three resistor and draws a current of 14.5A per resistor at 230V. When connected to a 230V three phase outlet the maximum current is 14.5A.
 
+The wires connected to your element should be of sufficient gauge (diameter) to transport the current, and the current should not exceed the maximum current of your circuit breaker. More about wire gauge [here](#wire-gauge).
+
 1 and 2 resistor elements can be connected to a 3 phase outlet by simply only connecting the resistors you have. In this situation, connecting the neutral (N) wire is mandatory however.
+
+### Wire gauge
+
+Wires carrying electrical current will heat up due to their low, but finite resistivity. A bigger diameter (lower gauge) wire has a lower resistivity and can carry more current before the enclosing plastic will melt. Hence electrical wires and cables have a maximum current they can carry safely called *rated amperage*. Make sure the rated amperage of the cable connecting the heating elements to your mains exceeds the current drawn by the element.
+
+In the US and Canada diameters of electrical wires are standardized in the American Wire Gauge (AWG). Bigger diameter wires get a lower number. Typical 14-gauge wires and cables can carry 15A of current, 12-gauge can carry 20A. In Europe and most of the rest of the world, electrical wires are specified by their cross-sectional area measured in square millimeters (mm<sup>2</sup>). For instance, the 3 and 5 wire cables we sell at BrewPi consist of 2.5mm<sup>2</sup> wires and have a rated amperage of 16A.
 
 TODO write installation?, operation, etc. + remove comments.
 
