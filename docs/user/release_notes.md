@@ -45,7 +45,7 @@ The only thing that does not work out of the box is the Spark firmware simulator
   - Brew kettle
   - Fridge without beer sensor
 - (feature) Modified accidental touch prevention in Builder Widget / Layout page. Instead of holding, you now click once to highlight the part, and click again to confirm.
-- (enhancement) The Web Frame widget now is rendered at 100% screen height on mobile devices.
+- (enhancement) The Web Frame widget now is rendered at 100% screen height on mobile devices. This matches Graph widget behavior.
 - (enhancement) Added Apple Touch icon.
 - (fix) Docker no longer warns about unset image architecture when updating brewblox-ctl libs.
 
