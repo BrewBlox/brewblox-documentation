@@ -1,4 +1,4 @@
-# Getting started: Fermentation fridge
+# Getting started: fermentation fridge
 
 While going through the [startup guide](./startup.md), you may have run the *Fermentation fridge* quick start wizard. This wizard asked you some questions, and then generated a dashboard and some widgets.
 
@@ -6,62 +6,28 @@ This guide walks you through the basics of using these widgets to monitor and co
 
 ![Ferment Fridge page](../images/fermentation-fridge-dashboard.png)
 
-## Quick actions
+## Ferment Assistant
 
-For high-level control of your setup, there is a *Quick Actions* widget on your dashboard.
+![Temp Control Assistant](../images/ferment-assistant.png)
 
-You can use this to start or stop fermentation control.
+The Temp Control Assistant widget groups the most common settings, and makes it easy to switch between fridge and beer modes.
 
-![Ferment Fridge actions](../images/fermentation-fridge-actions.png)
+**Control modes** keep track of the PID settings for Beer and Fridge modes.
+When changing modes, your system will adjust the PID settings, and start using the other temperature sensor.
 
-**Enable control** enables PID control of your heater and cooler.
-The contents of your fridge will now be heated or cooled to make measured value equal to the setpoint setting.
+The **Setpoint enabled** toggle indicates whether your system is active at all.
+If the Setpoint is disabled, your PIDs will be inactive, and your actuators will not cool or heat.
 
-**Disable control** disables PID control of your heater and cooler.
-They will not be turned on by the system.
-If they were on, they will be turned off.
+If the **Setpoint driven by Profile** toggle is enabled, your Setpoint and Setpoint profile are both enabled.
+More on temperature profiles below.
 
-**Manage fridge temperature** switches PID control to monitor your fridge temperature. Your PID settings will be adjusted.
-This does not automatically enable control.
+The **Check for problems** button verifies your block settings, and offers to fix any and all problems it found.
 
-**Manage beer temperature** switches PID control to monitor your beer temperature. Your PID settings will be adjusted.
-This does not automatically enable control.
+::: tip
+If you are still using a fermentation fridge setup with a Quick Actions widget, you can also manually add a Temp Control Assistant widget.
 
-**Enable profile** enables the *Setpoint Profile*. This block will automatically adjust your setpoint setting to follow the configured profile. (more on this below)
-
-**Disable profile** disables the *Setpoint Profile* block.
-You can now manually edit the setpoint setting again, and the setting will not change over time.
-
-## Quick actions: examples
-
-### Bring beer to a constant 20°C
-
-- Set the beer setpoint setting to 20°C
-- Use **Manage beer temperature**
-- Use **Enable control**
-
-![Enable static control](../images/enable-beer-control.gif)
-
-### Bring the fridge to a constant 20°C
-
-- Set the fridge setpoint setting to 20°C
-- Use **Manage fridge temperature**
-- Use **Enable control**
-
-![Enable fridge control](../images/enable-fridge-control.gif)
-
-### Start a temperature profile
-
-- Use **Enable profile**, and set start time to the desired value.
-
-![Enable temperature profile](../images/enable-profile-control.gif)
-
-### Turn off heating and cooling
-
-- Use **Disable profile**
-- Use **Disable control**
-
-![Disable control](../images/disable-control.gif)
+Link it to your blocks, and it will automatically show a button to store PID settings as mode.
+:::
 
 ## Temperature profiles
 
@@ -76,7 +42,7 @@ You can also create, load, and save profiles from the action menu.
 
 The profile is stored on the Spark itself. The Setpoint Profile continues to run if the Spark has no connection to the server (the Pi).
 
-When you use the **Start profile** quick action, you will be prompted to set the profile start time.
+The Ferment Assistant shows a **Setpoint driven by Profile** toggle that indicates the current state of the Setpoint Profile.
 
 ## Graphs
 
