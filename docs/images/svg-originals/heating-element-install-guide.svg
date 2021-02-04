@@ -23,7 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -40,13 +40,13 @@
      inkscape:window-height="959"
      id="namedview2511"
      showgrid="true"
-     inkscape:zoom="1"
-     inkscape:cx="188.99984"
-     inkscape:cy="181.17147"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="201.69885"
+     inkscape:cy="1143.325"
      inkscape:window-x="1440"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="surface1673"
+     inkscape:current-layer="g5132"
      lock-margins="true"
      fit-margin-top="1"
      fit-margin-left="1"
@@ -5035,20 +5035,30 @@
          xml:space="preserve"
          style="font-weight:bold;font-size:9.99997px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.749999"
          x="56.277554"
-         y="1013.226"
+         y="1006.8397"
          id="text2114"><tspan
            sodipodi:role="line"
            id="tspan2112"
            x="56.277554"
-           y="1013.226"
-           style="font-size:9.99997px;stroke-width:0.749999">Screw <tspan
+           y="1006.8397"
+           style="font-size:9.99997px;stroke-width:0.749999"
+           dx="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Roboto;-inkscape-font-specification:Roboto"
+   id="tspan2074"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Roboto;-inkscape-font-specification:'Roboto Bold'"
+   id="tspan2087">Install</tspan> mounting kit.</tspan> Screw <tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Roboto;-inkscape-font-specification:Roboto;stroke-width:0.749999"
-   id="tspan2116">lid onto housing first, then</tspan></tspan><tspan
+   id="tspan2116">lid onto</tspan></tspan><tspan
            sodipodi:role="line"
            x="56.277554"
-           y="1025.726"
+           y="1019.3397"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.99997px;font-family:Roboto;-inkscape-font-specification:Roboto;stroke-width:0.749999"
-           id="tspan2118">tighten cable gland dome.</tspan></text>
+           id="tspan2118">housing first, then tighten cable gland</tspan><tspan
+           sodipodi:role="line"
+           x="56.277554"
+           y="1031.8396"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.99997px;font-family:Roboto;-inkscape-font-specification:Roboto;stroke-width:0.749999"
+           id="tspan2085">dome.</tspan></text>
     </g>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.999997;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1"

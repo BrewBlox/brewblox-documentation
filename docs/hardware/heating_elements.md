@@ -169,7 +169,7 @@ The wires connected to your element should be of sufficient gauge (diameter) to 
 
 ### Wire gauge
 
-Wires carrying electrical current will get warm due to their low, but finite resistivity. A bigger diameter (lower gauge) wire has a lower resistivity and can carry more current before the enclosing plastic will melt. You don't want your electrical wires to short-circuit (fire hazard) hence wires and cables have a maximum current they can carry safely before getting too hot. This maximum current is called: *rated amperage*. Make sure the rated amperage of the cable connecting the heating elements to your mains exceeds the current drawn by the element. Ask your local electrician or hardware store when unsure.
+Wires carrying electrical current will get warm due to their low, but finite resistivity. A bigger diameter (lower gauge) wire has a lower resistivity and can carry more current before the enclosing plastic will melt. Without the enclosing plastic, wires will short-circuit. You don't want a short-circuit in your house (fire hazard), hence wires and cables have a maximum current they can carry safely before getting too hot. This maximum current is called: *rated amperage*. Make sure the rated amperage of the cable connecting the heating elements to your mains exceeds the current drawn by the element. Ask your local electrician or hardware store when unsure.
 
 In the US and Canada diameters of electrical wires are standardized in the American Wire Gauge (AWG). Bigger diameter wires get a lower number. Typical 14-gauge wires and cables can carry 15A of current, 12-gauge can carry 20A. In Europe and most of the rest of the world, electrical wires are specified by their cross-sectional area measured in square millimeters (mm<sup>2</sup>). For instance, the 3 and 5 wire cables we sell at BrewPi consist of 2.5mm<sup>2</sup> wires and have a rated amperage of 16A.
 
@@ -178,17 +178,23 @@ TODO write installation?, operation, etc. + remove comments.
 
 ## Installation
 
-- Buy kettle
-  - stainless steel or aluminium kettle, iron enamel kettle will rust, produce off-flavors for beer and finally leak.
-- Buy hole punch
-  - round: 1.5" BSP - 47mm hole punch, tri-clamp: requires welding tri-clamp ferrule (64mm OD, 43mm ID), foldback: 1" BSP - 32.5mm hole punch
-  - install heating element, follow guide. Verhaal over heating element height?
+Now it is time to install the heating element in the kettle. Make sure your kettle has the right dimensions for your intended batch size, like 20/50L (5/15 gal), and fits your element. We did not discuss kettles before, but there are a few remarks to be made about kettle materials. We would recommend getting a stainless steel or aluminium kettle as they last, are easy to clean, hardly ever corrode (rust) and hence do *not* produce off-flavours in your beer. We would advise against getting an iron enamel kettle as the enamel will crack invariably when drilling. With the wear and tear of heating and cooling, small cracks in the enamel will grow over time and expose the iron below. Iron will rust easily in the hot, wet and slightly acidic brewing environment and only alleviate the problem. Do **not** get an iron enamel kettle.
+
+To create a nice, clean cut hole in your kettle wall we would recommend getting an hole punch. 1 - 1.5" metal drill bits are not available to the average consumer, nor are the professional high torque drills they require to operate. Sheet metal hole punches require a small pilot hole and can be pulled through the metal kettle wall with a bolt and a wrench.
+
+Our round heating elements have a 1.5" BSP thread, we sell a 47mm hole punch to make the required hole in the kettle wall. The hole punch diameter is a little over 1.5" to accommodate the thread. The foldback heating elements have a 1" BSP thread, and we sell a 32.5mm hole punch to create the required hole. For tri-clamp elements we assume you buy a kettle with a preinstalled tri-clamp ferrule, or know what you are doing when welding one on there.
+
+Next is a step-by-step guide to create the hole in the kettle wall, and install your element. For foldback elements you want to connect the wiring before installation. Keep a 9.5mm metal cutting drill bit, a hand held drill (low speed, high torque), and a 40mm adjustable wrench at hand. For stainless steel kettles we recommend a cobalt head drill bit.
+
+TODO: Verhaal over heating element height? Elco, verhaal correct?
 
 ![Install-element-1](../images/heating-element-install-guide.svg)
 
-**Note:** the procedure shown in the install guide above is for foldback elements. Round elements have their locknut on the outside of the kettle wall.
+**Note:** the procedure shown in the install guide above is for foldback elements. Round elements have their locknut on the outside of the kettle wall. The rest of the procedure is the same.
 
-#### Water level float switch
+TODO: vraag Elco, wordt er een handleiding meegeleverd bij de elementen?
+
+#### Dry fire protection
 
  Our heating elements are designed to heat water and will overheat and scorch when fired in air. Hence you want to install a water level float switch (float switch) in your kettle to add dry fire protection to your heating element. Make sure the switch switches only *after* the heating element is fully submerged. How to include the float switch in your control loop will be discussed in the [next](#operation) section. For automated brewing setups you might want a to add float switch at the top of your kettle too, to prevent it from overflowing.
 
