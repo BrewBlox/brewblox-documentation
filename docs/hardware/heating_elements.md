@@ -174,7 +174,6 @@ Wires carrying electrical current will get warm due to their low, but finite res
 In the US and Canada diameters of electrical wires are standardized in the American Wire Gauge (AWG). Bigger diameter wires get a lower number. Typical 14-gauge wires and cables can carry 15A of current, 12-gauge can carry 20A. In Europe and most of the rest of the world, electrical wires are specified by their cross-sectional area measured in square millimeters (mm<sup>2</sup>). For instance, the 3 and 5 wire cables we sell at BrewPi consist of 2.5mm<sup>2</sup> wires and have a rated amperage of 16A.
 
 TODO: rated amperage staat niet in de store, hoe mee om gaan?
-TODO write installation?, operation, etc. + remove comments.
 
 ## Installation
 
@@ -182,11 +181,11 @@ Now it is time to install the heating element in the kettle. Make sure your kett
 
 To create a nice, clean cut hole in your kettle wall we would recommend getting an hole punch. 1 - 1.5" metal drill bits are not available to the average consumer, nor are the professional high torque drills they require to operate. Sheet metal hole punches require a small pilot hole and can be pulled through the metal kettle wall with a bolt and a wrench.
 
-Our round heating elements have a 1.5" BSP thread, we sell a 47mm hole punch to make the required hole in the kettle wall. The hole punch diameter is a little over 1.5" to accommodate the thread. The foldback heating elements have a 1" BSP thread, and we sell a 32.5mm hole punch to create the required hole. For tri-clamp elements we assume you buy a kettle with a preinstalled tri-clamp ferrule, or know what you are doing when welding one on there.
+Our round heating elements have a 1.5" BSP thread, we sell a 47mm hole punch to make the required hole in the kettle wall. The hole punch diameter is a little over 1.5" to accommodate the thread. The foldback heating elements have a 1" BSP thread and we sell a 32.5mm hole punch to create the required hole. For tri-clamp elements we assume you buy a kettle with a preinstalled tri-clamp ferrule, or know what you are doing when welding one on there.
 
 Next is a step-by-step guide to create the hole in the kettle wall, and install your element. For foldback elements you want to connect the wiring before installation. Keep a 9.5mm metal cutting drill bit, a hand held drill (low speed, high torque), and a 40mm adjustable wrench at hand. For stainless steel kettles we recommend a drill bit with a cobalt head.
 
-TODO: Verhaal over heating element height? Elco, verhaal correct?
+TODO: Verhaal over heating element hoogte boven de bodem?
 
 ![Install-element-1](../images/heating-element-install-guide.svg)
 
@@ -200,31 +199,27 @@ TODO: vraag Elco, wordt er een handleiding meegeleverd bij de elementen? Vergeli
 
  ![Float-sensor](../images/float-switch.jpg)
 
- TODO: vraag Elco, gat grootte float switches belangrijk? Float switches onderbreken + draad van de spark?
+ TODO: vraag Elco, gat grootte float switches belangrijk? Is er een conventie welke draad de float switches moeten onderbreken (+/-)?
 
 ## Operation
 
-In many steps of the brewing process, temperature is critical. For instance, during mashing you typically want your mash to be about 65C (~150F), dependent on the type of grain you use, and the style of beer you brew. Maintaining the mash temperature at 65C requires switching the AC voltage to your heating element as keeping it on continuously will overheat the mash. Relays allow you to switch high AC voltages with a small DC voltage and can be used to build a control loop to keep your mash at a steady temperature.
+In many steps of the brewing process, temperature is critical. For instance, during mashing you typically want your mash to be about 65C (~150F), dependent on the type of grain you use, and the style of beer you brew. Maintaining the mash temperature at 65C requires switching the AC voltage to your heating element as keeping it on continuously will overheat the mash. Relays allow you to switch high AC voltages with a small DC voltage and can be used to build a control loop to get your mash to 65C and keep it there.
 
 ### Solid State Relays
 
 Traditional relays are mechanical switches with (for example) an electromagnet and a spring. A small DC voltage activates the electromagnet, and closes the switch. The spring opens the switch when the DC voltage is absent. At BrewPi we sell Solid-State Relays (SSRs) which are based on semiconductor technology. SSRs have a longer operational lifetime and the added benefit that they can switch at the zero-crossing of the AC voltage. Switching at the zero-crossing prevents the possibility of high inrush currents that plague mechanical relays and cause voltage dips. Voltage dips are not so nice for the rest of your electrical equipment near your brewing location and can cause malfunction, or worse.
 
-Next to the heating element and the SSR, the control loop consists of a temperature sensor installed in your kettle to keep an eye on the mash temperature, and a controller. The controller interprets the temperature from the sensor, and switches the heating element by providing a small DC voltage to the SSR when needed.
+Next to the heating element and the SSR, the control loop consists of a temperature sensor installed in your kettle to keep an eye on the mash temperature, and a controller. The controller interprets the temperature from the sensor, and switches the heating element by providing a small DC voltage to the SSR when needed. The BrewPi Spark is especially designed for this purpose, and can be found in the store.
 
 TODO: PWM vermelden? Plaatje (grafiek) PWM maken? Bestaat die niet al?
 
-- Switching element with SSR's
-- Operating element for temperature control, connecting to Spark, etc.
-- Operating multiple elements on one mains outlet
-
 ### Connecting your SSR
 
-The SSR is used to switch the AC voltage to your heating element and thus needs to be installed in the cable in between the element and your mains outlet (see photo). Single phase SSRs (left) can be used to switch AC voltages from single phase outlets. Just interrupt one of the current carrying wires (L or N) with the AC voltage terminals 1 and 2 or the SSR. Make sure the protective earth (PE) remains connected to your element. Split phase outlets have the same basic configuration. Just interrupt wire L1 or L2. For elements connected to three phase outlets we sell three phase SSRs (right). Three pase SSRs are mounted in between the actual phases (L1 - L3), and wires N and PE remain uninterrupted.
+The SSR is used to switch the AC voltage to your heating element and thus needs to be installed in the cable in between the element and your mains outlet (see photo). Single phase SSRs (left) can be used to switch AC voltages from single phase outlets. Just interrupt one of the current carrying wires (L or N) with the AC voltage terminals 1 and 2 on the SSR. Make sure the protective earth (PE) wire remains connected to your element. Split phase outlets have the same basic configuration. Just interrupt wire L1 or L2. For elements connected to three phase outlets we sell three phase SSRs (right). Three phase SSRs are mounted in between the actual phases (L1 - L3), and wires N and PE remain uninterrupted.
 
 ![Connect-SSR](../images/1-3-phase-SSR.jpg)
 
-Make sure the maximum current of the SSR exceeds the current drawn by your specific element-mains configuration. All our SSRs come with a LED switch status indication. LED ON = switch closed.
+Make sure the maximum current of the SSR exceeds the current drawn by your specific element-mains configuration. In the store we sell single phase SSRs with a maximum current of 10 and 40A, three phase SSRs with a maximum current of 20 and 30A. Next to that we sell a 10A DC voltage SSR to switch DC heaters, pumps and fans. All our SSRs come with a LED switch status indication. LED ON = switch closed.
 
 #### Heat sink
 
