@@ -22,6 +22,7 @@ module.exports = {
             'tutorials/pubscript/',
             'tutorials/scheduledscript/',
             'tutorials/subrouting',
+            'tutorials/chronograf',
           ],
         },
         {
