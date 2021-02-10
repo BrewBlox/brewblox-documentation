@@ -66,13 +66,31 @@ export default {
 <template>
   <div>
     <div class="table-container">
+      <div class="button-prefix">
+        Length unit:
+      </div>
       <div class="table-button" @click="toggleLength">
-        Length: {{ activeLength }}
+        <template v-if="activeLength === 'cm'">
+          <b>cm</b> / inch
+        </template>
+        <template v-else>
+          cm / <b>inch</b>
+        </template>
+      </div>
+
+      <div class="button-prefix">
+        Voltage:
       </div>
       <div class="table-button" @click="toggleVoltage">
-        Voltage: {{ activeVoltage }}
+        <template v-if="activeVoltage === '230V'">
+          <b>230V</b> / 240V
+        </template>
+        <template v-else>
+          230V / <b>240V</b>
+        </template>
       </div>
     </div>
+
     <div class="table-container">
       <div
         v-for="c in tableValues"
@@ -104,11 +122,10 @@ export default {
   display: flex;
   flex-flow: column nowrap;
   flex: 1 0 auto;
-  border-left: 0.1em solid #bbbbbb;
   margin: 0.5em 0;
 }
-.column:last-child {
-  border-right: 0.1em solid #bbbbbb;
+.column:not(:first-child) {
+  border-left: 0.1em solid #bbbbbb;
 }
 .column > div:nth-child(odd) {
   background: #dddddd;
@@ -116,6 +133,11 @@ export default {
 .table > div {
   padding: 3px 5px;
   flex: 1 0 0;
+}
+
+.button-prefix {
+  padding: 0.2em 0.5em 0.2em 0;
+  align-self: center;
 }
 
 .table-button {
