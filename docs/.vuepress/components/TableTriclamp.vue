@@ -49,9 +49,14 @@ export default {
       if (this.voltageType === '230V') {
         table.push(
           {
-            title: 'Current (A)',
+            title: 'Current per resistor (A)',
             onClick: this.toggleVoltage,
-            values: ['6.1x2', '7.0x2', '10.9x2', '8.0x3', '12.3x3', '14.5x3'],
+            values: [6.1, '7.0', 10.9, '8.0', 12.3, 14.5],
+          },
+          {
+            title: 'Power per resistor (W)',
+            onClick: this.toggleVoltage,
+            values: [1400, 1600, 2500, 1833, 2833, 3333],
           },
           {
             title: 'Power (W)',
@@ -68,9 +73,14 @@ export default {
       if (this.voltageType === '240V') {
         table.push(
           {
-            title: 'Current (A)',
+            title: 'Current per resistor (A)',
             onClick: this.toggleVoltage,
-            values: ['6.4x2', '7.3x2', '11.3x2', '8.3x3', '12.9x3', '15.1x3'],
+            values: [6.4, 7.3, 11.3, 8.3, 12.9, 15.1],
+          },
+          {
+            title: 'Power per resistor (W)',
+            onClick: this.toggleVoltage,
+            values: [1525, 1750, 2725, 2000, 3083, 3633],
           },
           {
             title: 'Power (W)',
@@ -114,7 +124,7 @@ export default {
       <!-- no. resistors -->
       <th />
       <!-- voltage -->
-      <th class="clickable" colspan="3" @click="toggleVoltage">
+      <th class="clickable" colspan="4" @click="toggleVoltage">
         {{ voltageType }}
       </th>
     </tr>

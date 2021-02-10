@@ -136,6 +136,20 @@ Always consult an electrician for advice and help with wiring your elements. Und
 
 ## Installation
 
+Now it is time to install the heating element in the kettle. Make sure your kettle has the right dimensions for your intended batch size, like 20/50L (5/15 gal), and fits your element. We did not discuss kettles before, but there are a few remarks to be made about kettle materials. We would recommend getting a stainless steel or aluminium kettle as they last, are easy to clean, hardly ever corrode (rust) and hence do *not* produce off-flavours in your beer. We would advise against getting an iron enamel kettle as the enamel will crack invariably when drilling. With the wear and tear of heating and cooling, small cracks in the enamel will grow over time and expose the iron below. Iron will rust easily in the hot, wet and slightly acidic brewing environment and only alleviate the problem. Do **not** get an iron enamel kettle.
+
+To create a nice, clean cut hole in your kettle wall we would recommend getting an hole punch. 1 - 1.5" metal drill bits are not available to the average consumer, nor are the professional high torque drills they require to operate. Sheet metal hole punches require a small pilot hole and can be pulled through the metal kettle wall with a bolt and a wrench.
+
+
+
+Next is a step-by-step guide to create the hole in the kettle wall, and install your element. For foldback elements you want to connect the wiring before installation. Keep a 9.5mm metal cutting drill bit, a hand held drill (low speed, high torque), and a 40mm adjustable wrench at hand. For stainless steel kettles we recommend a drill bit with a cobalt head.
+
+
+
+![Install-element-1](../images/heating-element-install-guide.svg)
+
+**Note:** the procedure shown in the install guide above is for foldback elements. Round elements have their locknut on the outside of the kettle wall. The rest of the procedure is the same.
+
 TODO: vraag - hoort er bij?
 
 - Buy kettle

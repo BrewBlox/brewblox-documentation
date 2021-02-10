@@ -69,21 +69,14 @@ export default {
       if (this.voltageType === '230V') {
         table.push(
           {
-            title: 'Current (A)',
+            title: 'Current per resistor (A)',
             onClick: this.toggleVoltage,
-            values: [
-              '15.2x1',
-              '15.2x1',
-              '12.2x1',
-              '12.3x3',
-              '12.3x3',
-              '14.5x3',
-              '14.5x3',
-              '21.7x3',
-              '8.0x3',
-              '8.0x3',
-              '8.0x3',
-            ],
+            values: [15.2, 15.2, 12.2, 12.3, 12.3, 14.5, 14.5, 21.7, '8.0', '8.0', '8.0'],
+          },
+          {
+            title: 'Power per resistor (W)',
+            onClick: this.toggleVoltage,
+            values: [3500, 3500, 2800, 2833, 2833, 3333, 3333, 5000, 1833, 1833, 1833],
           },
           {
             title: 'Power (W)',
@@ -100,21 +93,14 @@ export default {
       if (this.voltageType === '240V') {
         table.push(
           {
-            title: 'Current (A)',
+            title: 'Current per resistor (A)',
             onClick: this.toggleVoltage,
-            values: [
-              '15.9x1',
-              '15.9x1',
-              '12.7x1',
-              '12.9x3',
-              '12.9x3',
-              '15.1x3',
-              '15.1x3',
-              '22.7x3',
-              '8.3x3',
-              '8.3x3',
-              '8.3x3',
-            ],
+            values: [15.9, 15.9, 12.7, 12.9, 12.9, 15.1, 15.1, 22.7, 8.3, 8.3, 8.3],
+          },
+          {
+            title: 'Power per resistor (W)',
+            onClick: this.toggleVoltage,
+            values: [3800, 3800, 3050, 3083, 3083, 3633, 3633, 5450, 2000, 2000, 2000],
           },
           {
             title: 'Power (W)',
@@ -158,7 +144,7 @@ export default {
       <!-- no. resistors -->
       <th />
       <!-- voltage -->
-      <th class="clickable" colspan="3" @click="toggleVoltage">
+      <th class="clickable" colspan="4" @click="toggleVoltage">
         {{ voltageType }}
       </th>
     </tr>
