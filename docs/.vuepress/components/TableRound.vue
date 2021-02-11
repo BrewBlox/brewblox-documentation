@@ -52,21 +52,9 @@ export default {
         values: [1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3],
       },
       {
-        title: 'Current (A)',
+        title: 'Current per resistor (A)',
         voltage: '230V',
-        values: [
-          '15.2x1',
-          '15.2x1',
-          '12.2x1',
-          '12.3x3',
-          '12.3x3',
-          '14.5x3',
-          '14.5x3',
-          '21.7x3',
-          '8.0x3',
-          '8.0x3',
-          '8.0x3',
-        ],
+        values: [15.2, 15.2, 12.2, 12.3, 12.3, 14.5, 14.5, 21.7, 8.0, 8.0, 8.0].map((v) => v.toFixed(1)),
       },
       {
         title: 'Power (W)',
@@ -79,21 +67,9 @@ export default {
         values: [10.7, 9.2, 10.3, 7.5, 6.5, 6.1, 5.1, 5.8, 6.8, 5.6, 4.8],
       },
       {
-        title: 'Current (A)',
+        title: 'Current per resistor (A)',
         voltage: '240V',
-        values: [
-          '15.9x1',
-          '15.9x1',
-          '12.7x1',
-          '12.9x3',
-          '12.9x3',
-          '15.1x3',
-          '15.1x3',
-          '22.7x3',
-          '8.3x3',
-          '8.3x3',
-          '8.3x3',
-        ],
+        values: [15.9, 15.9, 12.7, 12.9, 12.9, 15.1, 15.1, 22.7, 8.3, 8.3, 8.3].map((v) => v.toFixed(1)),
       },
       {
         title: 'Power (W)',
@@ -111,5 +87,5 @@ export default {
 </script>
 
 <template>
-  <HardwareTable :columns="values" />
+  <HardwareTableTemplate :columns="values" />
 </template>

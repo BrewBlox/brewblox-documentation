@@ -98,7 +98,7 @@ At BrewPi we sell low watt density (4 - 13 W/cm<sup>2</sup>) heating elements. H
 
 ### Round
 
-At BrewPi we sell custom designed round heating elements. Round elements heat your mash / wort more homogeneous, are minimally blocking the flow when whirlpooling and have the lowest watt density of all the elements we sell. When mounted in a kettle with the design diameter there is a 5cm (2in) gap between the element and the kettle wall, see photo.  The elements come in two types; 1-phase elements with one resistor per flange, and 3-phase elements with 3. Especially the 3-phase elements have an extremely low watt density, which makes scorching your element practically impossible. All elements have a protective earth terminal, and come with a mounting kit to protect the electrical wiring from liquids.
+At BrewPi we sell custom designed round heating elements. Round elements heat your mash / wort more homogeneous, are minimally blocking the flow when whirlpooling and have the lowest watt density of all the elements we sell. When mounted in a kettle with the design diameter there is a 5cm (2in) gap between the element and the kettle wall, see photo. The elements come in two types; 1-phase elements with one resistor per flange, and 3-phase elements with 3. Especially the 3-phase elements have an extremely low watt density, which makes scorching your element practically impossible. All elements have a protective earth terminal, and come with a mounting kit to protect the electrical wiring from liquids.
 
 ![Heating elements-round](../images/heat-element-round.jpg)
 
@@ -106,7 +106,7 @@ TODO: Elco, foto rond element in ketel nog maken.
 
 <TableRound/>
 
-TODO: visual toggle cm / inch, 230V / 240V, Bob vragen?
+TODO: Elco - power per resistor weggehaald, te veel data.
 
 ### Foldback
 
@@ -116,7 +116,6 @@ Foldback heating elements are straight elements fold back, hence the name. The f
 
 <TableFoldback/>
 
-TODO: visual toggle cm / inch, 230V / 240V, Bob vragen?
 TODO: XX BrewPi part. no. nog aanpassen
 
 #### Mounting kit
@@ -132,8 +131,6 @@ Tri-clamp elements are fixed in your kettle with a tri-clamp fitting. These fitt
 ![Heating elements-triclamp](../images/heat-element-triclamp.jpg)
 
 <TableTriclamp/>
-
-TODO: visual toggle cm / inch, 230V / 240V, Bob vragen?
 
 ## Connecting
 
