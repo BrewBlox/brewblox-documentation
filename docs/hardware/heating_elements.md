@@ -207,6 +207,7 @@ In many steps of the brewing process, temperature is critical. For instance, dur
 
 ### Pulse Width Modulation
 
+![PWM](../images/PWM.svg)
 
 ### Solid State Relays
 
@@ -218,15 +219,15 @@ TODO: PWM vermelden? Plaatje (grafiek) PWM maken? Bestaat die niet al?
 
 #### Heat sink
 
-Single phase SSRs transporting over 2A of current will get hot, and require a heat sink for continuous operation. Three phase SSRs are only used for switching high amounts of electrical power, and always require a heat sink. Low-profile heat sinks can be found in the BrewPi store (TODO: link naar store).
+When in use, SSRs will get hot from the electrical current and require a heat sink for continuous operation. An example of an SSR with a high-profile heat sink is shown in the photo below (left). We sell low-profile heat sinks too. All heat sinks can be found in the [store](https://store.brewpi.com/temperature-control/solid-state-relays-ssr).
 
-![SSR-heat-sink](../images/SSR-heat-sink.jpg)
+![heat-sink-float-switch](../images/heat-sink-float-switch.jpg)
 
 #### Dry fire protection
 
- Our heating elements are designed to heat water and will overheat and scorch when fired in air. Hence you want to install a water level float switch (float switch) in your kettle to add dry fire protection to your heating element. Make sure the switch switches only *after* the heating element is fully submerged. How to include the float switch in your control loop will be discussed in the [next](#operation) section. For automated brewing setups you might want a to add float switch at the top of your kettle too, to prevent it from overflowing.
+ Our heating elements are designed to heat water and will overheat and scorch when fired in air. You want to install a water level float switch (float switch) in your kettle to add dry fire protection to your heating element. An example of a float switch is shown in the photo above (right). The switch is open with the floater in the 'low' position, as shown in the photo. The switch is closed when the floater hits the 'high' position. These switches are perfect to interrupt the low-voltage DC control signal of the SSR. Make sure the switch switches after the heating element is fully submerged. How to include the float switch in your control loop will be discussed in the next section.
 
- ![Float-sensor](../images/float-switch.jpg)
+TODO: Elco, werking float switch correct?
 
 ### Connecting your SSR
 
@@ -248,6 +249,8 @@ The SSR is used to switch the AC voltage to your heating element and thus needs 
 Make sure the maximum current of the SSR exceeds the current drawn by your specific element-mains configuration. In the store we sell single phase SSRs with a maximum current of 10 and 40A, three phase SSRs with a maximum current of 20 and 30A. Next to that we sell a 10A DC voltage SSR to switch DC heaters, pumps and fans. All our SSRs come with a LED switch status indication. LED ON = switch closed.
 
 ### Two elements, one outlet
+
+![Double-PWM](../images/double-PWM.svg)
 
 TODO: plaatje (schema) van element met SSR, flow switch, spark maken?
 TODO: plaatje (schema) van 2 elementen, 2 SSR's, etc. maken?
