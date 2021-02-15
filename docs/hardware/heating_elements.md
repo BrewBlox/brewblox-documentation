@@ -216,6 +216,12 @@ Next to the heating element and the SSR, the control loop consists of a temperat
 
 TODO: PWM vermelden? Plaatje (grafiek) PWM maken? Bestaat die niet al?
 
+#### Heat sink
+
+Single phase SSRs transporting over 2A of current will get hot, and require a heat sink for continuous operation. Three phase SSRs are only used for switching high amounts of electrical power, and always require a heat sink. Low-profile heat sinks can be found in the BrewPi store (TODO: link naar store).
+
+![SSR-heat-sink](../images/SSR-heat-sink.jpg)
+
 #### Dry fire protection
 
  Our heating elements are designed to heat water and will overheat and scorch when fired in air. Hence you want to install a water level float switch (float switch) in your kettle to add dry fire protection to your heating element. Make sure the switch switches only *after* the heating element is fully submerged. How to include the float switch in your control loop will be discussed in the [next](#operation) section. For automated brewing setups you might want a to add float switch at the top of your kettle too, to prevent it from overflowing.
@@ -226,17 +232,22 @@ TODO: PWM vermelden? Plaatje (grafiek) PWM maken? Bestaat die niet al?
 
 The SSR is used to switch the AC voltage to your heating element and thus needs to be installed in the cable in between the element and your mains outlet (see photo). Single phase SSRs (left) can be used to switch AC voltages from single phase outlets. Just interrupt one of the current carrying wires (L or N) with the AC voltage terminals 1 and 2 on the SSR. Make sure the protective earth (PE) wire remains connected to your element. Split phase outlets have the same basic configuration. Just interrupt wire L1 or L2. For elements connected to three phase outlets we sell three phase SSRs (right). Three phase SSRs are mounted in between the actual phases (L1 - L3), and wires N and PE remain uninterrupted.
 
-![Connect-SSR](../images/1-3-phase-SSR.jpg)
+#### Single phase
+
+![Connect-1-phase-SSR](../images/Connect-1-phase-SSR.svg)
+
+#### Split phase
+
+![Connect-2-phase-SSR](../images/Connect-2-phase-SSR.svg)
+
+#### Three phase
+
+![Connect-3-phase-SSR](../images/Connect-3-phase-SSR.svg)
+
 
 Make sure the maximum current of the SSR exceeds the current drawn by your specific element-mains configuration. In the store we sell single phase SSRs with a maximum current of 10 and 40A, three phase SSRs with a maximum current of 20 and 30A. Next to that we sell a 10A DC voltage SSR to switch DC heaters, pumps and fans. All our SSRs come with a LED switch status indication. LED ON = switch closed.
 
-#### Heat sink
-
-Single phase SSRs transporting over 2A of current will get hot, and require a heat sink for continuous operation. Three phase SSRs are only used for switching high amounts of electrical power, and always require a heat sink. Low-profile heat sinks can be found in the BrewPi store (TODO: link naar store).
-
-![SSR-heat-sink](../images/SSR-heat-sink.jpg)
-
-### Operating two elements on one outlet
+### Two elements, one outlet
 
 TODO: plaatje (schema) van element met SSR, flow switch, spark maken?
 TODO: plaatje (schema) van 2 elementen, 2 SSR's, etc. maken?

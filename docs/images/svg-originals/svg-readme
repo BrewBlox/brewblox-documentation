@@ -1,19 +1,21 @@
-Work-in-Progress SVG standards for BrewPi documentation website
+Work-in-Progress image standards for BrewPi documentation website
 
-Inkscape settings:
-Page margins: vector: 1pt (all sides), raster: none
 Font: Roboto (Google android Font from repository: sudo apt install fonts-roboto)
 
 - Markdown does not have native support for sizing images. This can be done in HTML. Currently image sizes are used as is or automatically resized (reduced) to line width upon load.
-- Technical drawings originating from PDF are converted to SVG with Draw and modified in Inkscape
-- Big SVG-files (i.e. from converted PDF files) are compressed with vecta.io/nano or https://jakearchibald.github.io/svgomg/
-    - vecta is more efficient for big files, but prone to errors (objects missing, quote (") in text is converted to &quot, maybe more...)
-    - svgomg is less efficient, but reliable
+
+Vector:
+- vector images are created in Inkscape and stored as SVG
+  - Inkscape page margins: 1pt (all sides)
+- Big SVG-files are compressed with https://jakearchibald.github.io/svgomg/ were effective
 - SVG uncompressed originals are stored in ..\svg-originals\ for future modification
-- JPG files are exported in GIMP at 90% quality level
+
+Raster:
+- raster images are stored as JPG for use on the website
+- JPG files are exported in GIMP at 90-95% quality level
 - full page width raster images are stored at 1200px width, 96 dpi
 
 
 Workflow:
-Vector: Create SVG (Inkscape) -> store original -> compress big svg's -> website
-Raster: Create SVG (Inkscape) -> store original -> export jpg (GIMP) -> website
+Vector: Create SVG (Inkscape) -> store original -> compress big SVG's -> website
+Raster: Manipulate original (GIMP) -> store as XCF -> export JPG -> website
