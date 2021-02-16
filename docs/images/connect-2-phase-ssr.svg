@@ -14,7 +14,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.0.1 (0767f8302a, 2020-10-17)"
-   sodipodi:docname="Connect-2-phase-SSR.svg">
+   sodipodi:docname="connect-2-phase-ssr.svg">
   <defs
      id="defs2">
     <marker
@@ -436,14 +436,14 @@
     <text
        xml:space="preserve"
        style="font-size:6.35px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:center;text-anchor:middle;stroke-width:0.264583"
-       x="58.99641"
+       x="58.801075"
        y="137.58337"
        id="text2577"><tspan
          sodipodi:role="line"
          id="tspan2575"
-         x="58.99641"
+         x="58.801075"
          y="137.58337"
-         style="font-size:6.35px;stroke-width:0.264583">Control</tspan></text>
+         style="font-size:6.35px;stroke-width:0.264583">Controller</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4.70958px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:start;text-anchor:start;stroke-width:0.264583"

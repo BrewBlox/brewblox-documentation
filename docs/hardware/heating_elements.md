@@ -176,7 +176,7 @@ The wires connected to your element should be of sufficient gauge (diameter) to 
 
 ### Wire gauge
 
-The wires connected to your element should be of sufficient diameter (gauge) to transport the current drawn by your element. In the US and Canada diameters of electrical wires are standardized in the American Wire Gauge (AWG). Bigger diameter wires get a lower number. Typical 14-gauge wires and cables can carry 15A of current, 12-gauge can carry 20A. In Europe and most of the rest of the world, electrical wires are specified by their cross-sectional area measured in square millimeters (mm<sup>2</sup>). For instance, the 3 and 5 wire cables we [sell](https://store.brewpi.com/temperature-control/cables) at BrewPi consist of 2.5mm<sup>2</sup> wires and can carry 16A of current. When unsure, ask your local hardware store or electrician about the required cable diameter for your element.
+The wires connected to your element should be of sufficient diameter (gauge) to transport the current drawn by your element. In the US and Canada diameters of electrical wires are standardized in the American Wire Gauge (AWG) standard. Bigger diameter wires get a lower number. Typical 14-gauge wires and cables can carry 15A of current, 12-gauge can carry 20A. In Europe and most of the rest of the world, electrical wires are specified by their cross-sectional area measured in square millimeters (mm<sup>2</sup>). For instance, the 3 and 5 wire cables we [sell](https://store.brewpi.com/temperature-control/cables) at BrewPi consist of 2.5mm<sup>2</sup> wires and can carry 16A of current. When unsure, ask your local hardware store or electrician about the required cable diameter for your element.
 
 TODO: maximum kabel stroom staat niet in de store, hoe mee om gaan?
 
@@ -203,19 +203,23 @@ TODO: vraag Elco, maximale wanddikte hole punch noemen? Beetje laag...
 
 ## Operation
 
-In many steps of the brewing process, temperature is critical. For instance, during mashing you typically want your mash to be about 65C (~150F), dependent on the type of grain you use, and the style of beer you brew. Maintaining the mash temperature at 65C requires switching the AC voltage to your heating element as keeping it on continuously will overheat the mash. Relays allow you to switch high AC voltages with a small DC voltage and can be used to build a control loop to get your mash to 65C and keep it there.
+In your brewing setup, the heating element will be used to ramp up the temperature of the mash / wort and keep it there for some time dependent on your receipt. For instance during mashing you typically want your mash temperature somewhere in the region of 65C (150F) for some 10s of minutes. To keep the mash at a steady temperature we will switch the element on for short periods of time to reduce its effective power. This technique is called Pulse Width Modulation (PWM). In this section we will show you what hardware you need, and how to connect it to your element and mains. The remainder of the control loop requires a controller and a temperature sensor. For the controller you can use the [BrewPi Spark](https://store.brewpi.com/temperature-control/brewpi-spark-3), temperature sensors can be found in the [store](https://store.brewpi.com/temperature-control/temperature-sensors).
+
+TODO: Elco, verwijzing naar informatie hoe de control loop te bouwen met de Spark?
 
 ### Pulse Width Modulation
+
+With Pulse Width Modulation you switch the power to the heating element on for short times within a modulation period (pulse). By modifying the power-on-time (pulse width) you can control the effective power of the element, hence the name *Pulse Width Modulation*. Modulation schemes for 25, 50 and 75% effective power are shown in the figure below. Pulse width modulation works when the modulation period is much shorter than the process you want to control. Heating 10s of liters of water is a relatively slow process that takes 10s of seconds to minutes for an effective temperature change. A modulation period in the order of seconds (typically 4s) is fine to control the effective power of your heating element when brewing.
 
 ![PWM](../images/pwm.svg)
 
 ### Solid State Relays
 
-Traditional relays are mechanical switches with (for example) an electromagnet and a spring. A small DC voltage activates the electromagnet, and closes the switch. The spring opens the switch when the DC voltage is absent. At BrewPi we sell Solid-State Relays (SSRs) which are based on semiconductor technology. SSRs have a longer operational lifetime and the added benefit that they can switch at the zero-crossing of the AC voltage. Switching at the zero-crossing prevents the possibility of high inrush currents that plague mechanical relays and cause voltage dips. Voltage dips are not so nice for the rest of your electrical equipment near your brewing location and can cause malfunction, or worse.
+To switch the AC voltages and currents that power your heating element you need an electric device called a relay. Traditional relays are mechanical switches with (for example) an electromagnet and a spring. A small DC voltage activates the electromagnet, and closes the switch. The spring opens the switch when the DC voltage is absent. In this way you can control the electric power to your element. At BrewPi we [sell](https://store.brewpi.com/temperature-control/solid-state-relays-ssr) Solid-State Relays (SSRs) which are based on semiconductor technology. Compared to mechanic relays, SSRs have a longer operational lifetime and the added benefit that they can switch at the zero-crossing of the AC voltage. Switching at the zero-crossing prevents the possibility of high inrush currents, which are bad for your electrical equipment.
 
-Next to the heating element and the SSR, the control loop consists of a temperature sensor installed in your kettle to keep an eye on the mash temperature, and a controller. The controller interprets the temperature from the sensor, and switches the heating element by providing a small DC voltage to the SSR when needed. The BrewPi Spark is especially designed for this purpose, and can be found in the store.
+An example of a single phase SSR (left), and a three phase SSR (right) is shown in the photo below. Single phase SSRs can be used to switch heating elements connected to split phase outlets as well. SSRs have a maximum current rating. Make sure the maximum current of your SSR exceeds the current drawn by your element.
 
-TODO: PWM vermelden? Plaatje (grafiek) PWM maken? Bestaat die niet al?
+![Single-three-phase-SSR](../images/ssr-1-3.jpg)
 
 #### Heat sink
 
@@ -225,29 +229,39 @@ When in use, SSRs will get hot from the electrical current and require a heat si
 
 #### Dry fire protection
 
- Our heating elements are designed to heat water and will overheat and scorch when fired in air. You want to install a water level float switch (float switch) in your kettle to add dry fire protection to your heating element. An example of a float switch is shown in the photo above (right). The switch is open with the floater in the 'low' position, as shown in the photo. The switch is closed when the floater hits the 'high' position. These switches are perfect to interrupt the low-voltage DC control signal of the SSR. Make sure the switch switches after the heating element is fully submerged. How to include the float switch in your control loop will be discussed in the next section.
+ Our heating elements are designed to heat water and will overheat and scorch when fired in air. You want to install a water level float switch (float switch) in your kettle to add dry fire protection to your heating element. An example of a float switch we sell in the [store](https://store.brewpi.com/temperature-control/solid-state-relays-ssr/water-level-float-switch-dry-fire-protection-for-heating-element) is shown in the photo above (right). The switch is open with the floater in the 'low' position, as shown in the photo. The switch is closed when the floater hits the 'high' position. These switches are perfect to interrupt the low-voltage DC control signal of the SSR, and make sure your heating element does not fire without water. Make sure the switch switches after the heating element is fully submerged. How to include the float switch in your control loop will be discussed in the next section.
 
 TODO: Elco, werking float switch correct?
 
 ### Connecting your SSR
 
-The SSR is used to switch the AC voltage to your heating element and thus needs to be installed in the cable in between the element and your mains outlet (see photo). Single phase SSRs (left) can be used to switch AC voltages from single phase outlets. Just interrupt one of the current carrying wires (L or N) with the AC voltage terminals 1 and 2 on the SSR. Make sure the protective earth (PE) wire remains connected to your element. Split phase outlets have the same basic configuration. Just interrupt wire L1 or L2. For elements connected to three phase outlets we sell three phase SSRs (right). Three phase SSRs are mounted in between the actual phases (L1 - L3), and wires N and PE remain uninterrupted.
+The SSR is used to switch the AC voltage to your heating element and thus needs to be installed in the cable in between the element and your mains. Connection schemes for heating elements connected to single, split, and three phase outlets are discussed below.
 
 #### Single phase
 
+Cables connecting heating elements to single phase outlets have three wires; phase (L), neutral (N) and protective earth (PE). To switch the AC voltage to the heating element you interrupt the phase (L) wire with the AC terminals of the single phase SSR. The neutral and protective earth wires go to your element directly. The DC terminals of the SSR are connected to the respective terminals of the controller. To add dry fire protection to your setup you interrupt the + wire of the DC voltage coming from the controller with the float switch. Do not forget to add a circuit breaker to your control panel when required at your location.
+
 ![Connect-1-phase-SSR](../images/connect-1-phase-ssr.svg)
 
+For many mains outlet types around the world the difference between the phase (L) and neutral (N) wire is not specified. Just interrupt either of the two wires with the SSR, as it will block the flow of current to your element either way.
+
+TODO: Elco, max. - min. AC / DC voltages SSRs noemen?
+
 #### Split phase
+
+The scheme for connecting your SSR in the case of a split phase outlet is shown below. The scheme is the same as for single phase configuration discussed previously, only the naming of the wires is different. Just interrupt either phase 1 (L1) or phase 2 (L2) with the AC terminals of the SSR. The +/- wires coming from the controller are connected to the SSR DC terminals. Interrupt the + wire with a float switch to add dry fire protection. Do not forget to add a circuit breaker to your control panel when required at your location.
 
 ![Connect-2-phase-SSR](../images/connect-2-phase-ssr.svg)
 
 #### Three phase
 
+The cable connecting your three phase heating element to a three phase outlet has 5 wires; phase 1-3 (L1 - L3), neutral (N) and protective earth (PE). To install your three phase SSR you interrupt the three phases with the AC terminals of the SSR. Interrupt wire L1 with SSR terminals A1 and A2, L2 with B1 and B2, etc. The neutral and protective earth wire are directly connected to your element, uninterrupted. To control your SSR you connect the + and - wire of the controller to the DC terminals of the SSR. You interrupt the + wire with the float switch to add dry fire protection to your setup. Do not forget to add a circuit breaker to your control panel when required at your location.
+
 ![Connect-3-phase-SSR](../images/connect-3-phase-ssr.svg)
 
-Make sure the maximum current of the SSR exceeds the current drawn by your specific element-mains configuration. In the store we sell single phase SSRs with a maximum current of 10 and 40A, three phase SSRs with a maximum current of 20 and 30A. Next to that we sell a 10A DC voltage SSR to switch DC heaters, pumps and fans. All our SSRs come with a LED switch status indication. LED ON = switch closed.
-
 ### Two elements, one outlet
+
+TODO: Elco schrijven.
 
 ![Double-PWM](../images/double-pwm.svg)
 
