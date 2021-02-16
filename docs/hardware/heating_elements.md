@@ -2,7 +2,7 @@
 
 Brewing involves heating a lot of water. To reduce waiting time on your brewing day you are best advised to select the highest power heating element your mains outlet can power. Obviously, the element should fit your kettle so these two characteristics are the main criteria for element selection.
 
-In this document we talk you through the pros and cons of different heating elements, how to connect them to your mains, and install them in your kettle.
+In this document we talk you through the pros and cons of different heating elements, how to install them in your kettle and connect them to your mains and control equipment.
 
 ::: danger Note
 Always consult an electrician for advice and help with wiring your elements. Under no circumstances should they be used without proper wiring, ground fault circuit protection and overcurrent circuit protection.
@@ -75,7 +75,7 @@ To protect the electric circuit in your building from an overload or short circu
 
 To reduce waiting time at your brewing day we would advise you to buy the highest power heating element your mains outlet can power. Therefore you should find the maximum current ($I_{max}$) of the circuit breaker behind the outlet on your brewing location. Ask your electrician when you are unsure about the details of your electrical installation.
 
-You can select your heating element based on the maximum current or maximum power ($P_{max}$) of the outlet you plan to use. The maximum power is determined by multiplying the voltage of your mains ($U$) by the maximum current of the circuit breaker; $P_{max} = U \times I_{max}$.
+You can select your heating element based on the maximum current ($I_{max}$) or maximum power ($P_{max}$) of the outlet you plan to use. The maximum power is determined by multiplying the voltage of your mains ($U$) by the maximum current of the circuit breaker; $P_{max} = U \times I_{max}$.
 
 **Examples:**
 - **Single phase:** typical residential mains outlets in the Netherlands are protected by a circuit breaker with a maximum current of 16A. Operating at 230V AC, outlets have a maximum power of 3680W.
@@ -90,7 +90,7 @@ The examples are listed in the table below for an overview.
 | Split phase  |       2x120 |               25 |           6000 |        US|
 | Three phase  |         230 |     3x16<br>3x25 | 11040<br>17250 |        NL|
 
-**Note:** typically a circuit breaker protects a group of outlets in a building. BrewPi heating elements are intentionally dimensioned a few 100W below the maximum power of most common circuit breakers. This allows connecting some other small electrical appliances like a pump, light, or radio to the same group without problems.
+**Note:** typically a circuit breaker protects a group of outlets in a building. BrewPi heating elements are intentionally dimensioned a few 100W below the maximum power of most common circuit breakers to allow connecting some other small electrical appliances like a pump, light, or radio to the same group without problems.
 
 ## Elements
 
@@ -120,7 +120,7 @@ TODO: XX BrewPi part. no. nog aanpassen
 
 #### Mounting kit
 
-The basic design of these foldback elements does not provide a protective earth terminal, nor a cover for the wiring. To overcome these deficiencies we have designed a custom mounting kit, see photos below. The mounting kit is sold separately, and can be found in the ![store](https://store.brewpi.com/mashing/stainless-steel-heating-elements/heating-element-mounting-kit). With the mounting kit installed your element and kettle are grounded, and the wiring is safe from liquids.
+The basic design of these foldback elements does not provide a protective earth terminal, nor a cover for the wiring. To overcome these deficiencies we have designed a custom mounting kit, see photos below. The mounting kit is sold separately, and can be found in the [store](https://store.brewpi.com/mashing/stainless-steel-heating-elements/heating-element-mounting-kit). With the mounting kit installed your element and kettle are grounded, and the wiring is safe from liquids.
 
 ![Foldback-mounting kit](../images/mounting-kit.jpg)
 
@@ -146,7 +146,7 @@ To connect an heating element to a single phase outlet requires connecting three
 
 ![1-phase-connect-123](../images/1-phase-connect-123.svg)
 
-TODO: Elco mening over PE-terminal? Locatie feitelijk niet helemaal correct...
+TODO: Elco mening over PE-terminal bolletje? Locatie feitelijk niet helemaal correct...
 
 **Examples:**
 - Round BrewPi heating element [#7](#round) has one resistor and draws a current of 15.2A when connected to a 230V outlet.
@@ -172,7 +172,7 @@ Connecting a 3 resistor element to a three phase outlet requires connecting 5 wi
 **Example:**
 - Round BrewPi heating element [#4](#round) has three resistors and draws a current of 14.5A per phase when connected to a 230V three phase outlet.
 
-The wires connected to your element should be of sufficient gauge (diameter) to transport the current, and the current should not exceed the maximum current of your circuit breaker. More about wire gauge in the [next](#wire-gauge) section.
+The wires connected to your element should be of sufficient gauge (diameter) to transport the current, and the current should not exceed the maximum current of your circuit breaker. More about wire gauge in the next section.
 
 ### Wire gauge
 
@@ -186,7 +186,7 @@ To install the heating element in your kettle requires creating a 1-2" hole in t
 
 ![Hole Punch](../images/hole-punch.jpg)
 
-We sell hole punches in the [store](https://store.brewpi.com/), which one you should get is listed in the table below. The hole punches are a little bigger to accommodate the thread of the element. For tri-clamp elements we assume you have a kettle with a tri-clamp ferrule preinstalled, or know what you are doing when welding one on there.
+We sell hole punches in the [store](https://store.brewpi.com/mashing/tools), which one you should get is listed in the table below. The hole punches are a little bigger to accommodate the thread of the element. For tri-clamp elements we assume you have a kettle with a tri-clamp ferrule preinstalled, or know what you are doing when welding one on there.
 
 | Element type |   Thread |         Hole punch |
 |--------------|---------:|-------------------:|
@@ -199,7 +199,7 @@ Hole punches require a small pilot hole for the bolt that pulls the cutter throu
 [HP32-5mm]: https://store.brewpi.com/mashing/tools/q-max-sheet-metal-hole-punch-32-5mm
 
 TODO: Verhaal over heating element hoogte boven de bodem?
-TODO: vraag Elco, wordt er een handleiding meegeleverd bij de elementen? Vergelijkbaar met handleiding foldback mounting kits? Maximale wanddikte hole punch noemen? Beetje laag...
+TODO: vraag Elco, maximale wanddikte hole punch noemen? Beetje laag...
 
 ## Operation
 
@@ -207,7 +207,7 @@ In many steps of the brewing process, temperature is critical. For instance, dur
 
 ### Pulse Width Modulation
 
-![PWM](../images/PWM.svg)
+![PWM](../images/pwm.svg)
 
 ### Solid State Relays
 
@@ -235,22 +235,20 @@ The SSR is used to switch the AC voltage to your heating element and thus needs 
 
 #### Single phase
 
-![Connect-1-phase-SSR](../images/Connect-1-phase-SSR.svg)
+![Connect-1-phase-SSR](../images/connect-1-phase-ssr.svg)
 
 #### Split phase
 
-![Connect-2-phase-SSR](../images/Connect-2-phase-SSR.svg)
+![Connect-2-phase-SSR](../images/connect-2-phase-ssr.svg)
 
 #### Three phase
 
-![Connect-3-phase-SSR](../images/Connect-3-phase-SSR.svg)
-
+![Connect-3-phase-SSR](../images/connect-3-phase-ssr.svg)
 
 Make sure the maximum current of the SSR exceeds the current drawn by your specific element-mains configuration. In the store we sell single phase SSRs with a maximum current of 10 and 40A, three phase SSRs with a maximum current of 20 and 30A. Next to that we sell a 10A DC voltage SSR to switch DC heaters, pumps and fans. All our SSRs come with a LED switch status indication. LED ON = switch closed.
 
 ### Two elements, one outlet
 
-![Double-PWM](../images/double-PWM.svg)
+![Double-PWM](../images/double-pwm.svg)
 
-TODO: plaatje (schema) van element met SSR, flow switch, spark maken?
 TODO: plaatje (schema) van 2 elementen, 2 SSR's, etc. maken?
