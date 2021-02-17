@@ -131,11 +131,13 @@ The basic design of these foldback elements does not provide a protective earth 
 
 #### Tri-clamp
 
-Tri-clamp elements are fixed in your kettle with a tri-clamp fitting. These fittings consist of two flanges, an O-ring, and a clamp band (hence *tri*-clamp) and are the best option if you want to be able to easily remove the element from the kettle. This comes in handy when you want to change your element frequently, or want to clean it thoroughly outside the kettle. Our tri-clamp heating elements come with a mounting kit, and require a 2" tri-clamp ferrule (64mm OD, 43mm ID) installed on your kettle.
+Tri-clamp elements are fixed in your kettle with a tri-clamp fitting. These fittings consist of two flanges, an O-ring, and a clamp band (hence *tri*-clamp) and are the best option if you want to be able to easily remove the element from the kettle. This comes in handy when you want to change your element frequently, or want to clean it thoroughly outside the kettle. Our tri-clamp heating elements come with a mounting kit, and require a 2" tri-clamp ferrule with a large 43mm inner diameter installed on your kettle.
 
 ![Heating elements-triclamp](../images/heat-element-triclamp.jpg)
 
 <TableTriclamp/>
+
+TODO: test table scroll
 
 ## Connecting
 
