@@ -494,38 +494,5 @@
          x="58.514114"
          y="137.58337"
          style="font-size:6.35px;stroke-width:0.264583">Controller</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:4.70958px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:end;text-anchor:end;stroke-width:0.264583"
-       x="83.688507"
-       y="60.408836"
-       id="text901-7"><tspan
-         sodipodi:role="line"
-         id="tspan899-5"
-         x="83.688507"
-         y="60.408836"
-         style="text-align:end;text-anchor:end;stroke-width:0.264583">L1</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:4.70958px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:end;text-anchor:end;stroke-width:0.264583"
-       x="83.690865"
-       y="69.68174"
-       id="text905-9"><tspan
-         sodipodi:role="line"
-         id="tspan903-2"
-         x="83.690865"
-         y="69.68174"
-         style="text-align:end;text-anchor:end;stroke-width:0.264583">L2</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:4.70958px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:end;text-anchor:end;stroke-width:0.264583"
-       x="83.688263"
-       y="78.947304"
-       id="text909-2"><tspan
-         sodipodi:role="line"
-         id="tspan907-8"
-         x="83.688263"
-         y="78.947304"
-         style="text-align:end;text-anchor:end;stroke-width:0.264583">L3</tspan></text>
   </g>
 </svg>
