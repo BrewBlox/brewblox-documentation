@@ -122,6 +122,7 @@ Foldback heating elements are straight elements fold back, hence the name. The f
 <TableFoldback/>
 
 TODO: XX BrewPi part. no. nog aanpassen
+TODO: test table scroll
 
 #### Mounting kit
 
@@ -135,9 +136,9 @@ Tri-clamp elements are fixed in your kettle with a tri-clamp fitting. These fitt
 
 ![Heating elements-triclamp](../images/heat-element-triclamp.jpg)
 
-<TableTriclamp/>
+TODO - Elco: Guillaume plaatje triclamp poort vragen - de huidige is van Toronto Breweries.ca
 
-TODO: test table scroll
+<TableTriclamp/>
 
 ## Connecting
 
@@ -198,7 +199,7 @@ We sell hole punches in the [store](https://store.brewpi.com/mashing/tools), whi
 | Round        | 1.5" BSP |     [47mm][HP47mm] |
 | Foldback     |   1" BSP | [32.5mm][HP32-5mm] |
 
-The hole punches require a 14mm pilot hole for the M12 bolt that pulls the cutter through the wall. The bolt itself requires a 10mm Allen key to tighten. When drilling in stainless steel we advise you to get a cobalt head drill bit, and a low-speed, high-torque drill. We advise you to cool your drill bit with running oil / water while drilling.
+The hole punches require a 12mm pilot hole for the M12 bolt that pulls the cutter through the wall. The bolt itself requires a 10mm hex key to tighten. When drilling in stainless steel we advise you to get a cobalt head drill bit, and a low-speed, high-torque drill. We advise you to cool your drill bit with running oil / water while drilling.
 
 TODO: Frank sleutelgrootte controleren
 
