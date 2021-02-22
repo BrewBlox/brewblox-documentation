@@ -40,20 +40,20 @@ export default {
     activeVoltage: '230V',
   }),
   computed: {
-    tableValues () {
+    tableValues() {
       return this.columns
         .map((c, idx) => ({ ...c, key: `col-${idx}-${c.title}` }))
         .filter((c) => (!c.voltage && !c.length) || c.voltage === this.activeVoltage || c.length === this.activeLength);
     },
-    numRows () {
+    numRows() {
       return Math.max(...this.columns.map((c) => c.values.length));
     },
   },
   methods: {
-    toggleLength () {
+    toggleLength() {
       this.activeLength = this.activeLength === 'cm' ? 'inch' : 'cm';
     },
-    toggleVoltage () {
+    toggleVoltage() {
       this.activeVoltage = this.activeVoltage === '230V' ? '240V' : '230V';
     },
   },
@@ -67,24 +67,16 @@ export default {
         Length unit:
       </div>
       <div class="table-button" @click="toggleLength">
-        <template v-if="activeLength === 'cm'">
-          <b>cm</b> / in
-        </template>
-        <template v-else>
-          cm / <b>in</b>
-        </template>
+        <template v-if="activeLength === 'cm'"> <b>cm</b> / in </template>
+        <template v-else> cm / <b>in</b> </template>
       </div>
 
       <div class="button-prefix">
         Voltage:
       </div>
       <div class="table-button" @click="toggleVoltage">
-        <template v-if="activeVoltage === '230V'">
-          <b>230V</b> / 240V
-        </template>
-        <template v-else>
-          230V / <b>240V</b>
-        </template>
+        <template v-if="activeVoltage === '230V'"> <b>230V</b> / 240V </template>
+        <template v-else> 230V / <b>240V</b> </template>
       </div>
     </div>
 
@@ -107,7 +99,6 @@ export default {
   justify-content: flex-start;
   align-items: stretch;
   overflow-x: auto;
-  position: relative;
 }
 .column {
   display: flex;
