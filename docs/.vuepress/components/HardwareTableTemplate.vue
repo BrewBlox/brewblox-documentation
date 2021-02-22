@@ -67,16 +67,24 @@ export default {
         Length unit:
       </div>
       <div class="table-button" @click="toggleLength">
-        <template v-if="activeLength === 'cm'"> <b>cm</b> / in </template>
-        <template v-else> cm / <b>in</b> </template>
+        <template v-if="activeLength === 'cm'">
+          <b>cm</b> / in
+        </template>
+        <template v-else>
+          cm / <b>in</b>
+        </template>
       </div>
 
       <div class="button-prefix">
         Voltage:
       </div>
       <div class="table-button" @click="toggleVoltage">
-        <template v-if="activeVoltage === '230V'"> <b>230V</b> / 240V </template>
-        <template v-else> 230V / <b>240V</b> </template>
+        <template v-if="activeVoltage === '230V'">
+          <b>230V</b> / 240V
+        </template>
+        <template v-else>
+          230V / <b>240V</b>
+        </template>
       </div>
     </div>
 
@@ -99,6 +107,7 @@ export default {
   justify-content: flex-start;
   align-items: stretch;
   overflow-x: auto;
+  position: relative;
 }
 .column {
   display: flex;
