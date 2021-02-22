@@ -21,13 +21,13 @@ TODO: Bob vragen interactieve heating time calculator te maken in vuepress.
 
 $$\Delta t = \frac{c_p \cdot M \cdot \Delta T}{P \cdot 60} = \text{XX min}$$
 
-| Variable   | Description                                          | Unit(s) / Value(s)                                           | Interactive use                                      |
-|:----------:|------------------------------------------------------|--------------------------------------------------------------|------------------------------------------------------|
+|  Variable  | Description                                          | Unit(s) / Value(s)                                           | Interactive use                                      |
+| :--------: | ---------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------- |
 | $\Delta t$ | heating time (time difference)                       | min (round to int sufficient)                                | result                                               |
-| $c_{p}$    | Specific heat capacity (isobaric mass heat capacity) | 4.18 kJ / (kg * K) for water (l)                             | constant                                             |
-| $M$        | Mash (water) mass                                    | kg, calculate from L / Gal (US Gal), 1L = 1kg, 1Gal = 3.79kg | interactive value + unit - default: 40 L             |
+|  $c_{p}$   | Specific heat capacity (isobaric mass heat capacity) | 4.18 kJ / (kg * K) for water (l)                             | constant                                             |
+|    $M$     | Mash (water) mass                                    | kg, calculate from L / Gal (US Gal), 1L = 1kg, 1Gal = 3.79kg | interactive value + unit - default: 40 L             |
 | $\Delta T$ | Mash temperature difference                          | C / F, 1C = 5/9F                                             | interactive value + unit - default: (65 - 20) = 45 C |
-| $P$        | Power heating element                                | W                                                            | interactive value - default: 3600W                   |
+|    $P$     | Power heating element                                | W                                                            | interactive value - default: 3600W                   |
 
 Default example: It takes 45 (44.8) mins to heat 50L of water 45C (20 to 65C) with a 3500W heating element. -->
 
@@ -90,10 +90,10 @@ Find the maximum current ($I_{max}$) of the circuit breaker behind the outlet on
 The examples are listed in the table below for an overview.
 
 | Type         | Voltage (V) | Max. current (A) | Max. power (W) | Location |
-|--------------|------------:|-----------------:|---------------:|---------:|
-| Single phase |         230 |               16 |           3680 |        NL|
-| Split phase  |       2x120 |               25 |           6000 |        US|
-| Three phase  |         230 |     3x16<br>3x25 | 11040<br>17250 |        NL|
+| ------------ | ----------: | ---------------: | -------------: | -------: |
+| Single phase |         230 |               16 |           3680 |       NL |
+| Split phase  |       2x120 |               25 |           6000 |       US |
+| Three phase  |         230 |     3x16<br>3x25 | 11040<br>17250 |       NL |
 
 **Note:** typically a circuit breaker protects a group of outlets in a building. Our heating elements are intentionally dimensioned a few hundred watts below the maximum power of most common circuit breakers to allow connecting some other small electrical appliances like a pump, light, or radio to the same group without problems.
 
@@ -122,7 +122,6 @@ Foldback heating elements are straight elements fold back, hence the name. The f
 <TableFoldback/>
 
 TODO: XX BrewPi part. no. nog aanpassen
-TODO: test table scroll
 
 #### Mounting kit
 
@@ -195,7 +194,7 @@ To install the heating element in your kettle requires creating a 32.5 or 47mm h
 We sell hole punches in the [store](https://store.brewpi.com/mashing/tools), which one you should get is listed in the table below. The hole punches can be used for a wall thickness up to 1.6mm in stainless steel, 2.0mm in softer metals. For tri-clamp elements we assume you have a kettle with a tri-clamp ferrule preinstalled, or know what you are doing when welding one on there.
 
 | Element type |   Thread |         Hole punch |
-|--------------|---------:|-------------------:|
+| ------------ | -------: | -----------------: |
 | Round        | 1.5" BSP |     [47mm][HP47mm] |
 | Foldback     |   1" BSP | [32.5mm][HP32-5mm] |
 
@@ -205,21 +204,24 @@ TODO: Frank sleutelgrootte controleren
 
 #### Element position
 
-The flange of the heating element is flat, and your kettle wall is round. Hence the kettle wall will flatten when tightening the heat element locknut during installation. For a proper seal, the kettle wall should be able to flex a little. The edge where the kettle floor transitions into the side wall is very rigid. Install the heating element (center point / pilot hole) about 10cm (4in) above the kettle floor to allow for a proper flex of the kettle wall.
+The flange of the heating element is flat, and your kettle wall is round. Hence the kettle wall will flatten when tightening the heating element locknut during installation. For a proper seal, the kettle wall should be able to flex a little. The bend where the side wall transitions into the kettle bottom is very rigid. Install the heating element with the center point about 10cm (4in) above the kettle bottom to allow for a proper flex of the kettle wall.
 
-TODO: Elco foto maken vervlakte ketelwand, risico scheuren ketelwand noemen?
+TODO - Elco: foto maken vervlakte ketelwand.
 
 [HP47mm]: https://store.brewpi.com/mashing/tools/q-max-sheet-metal-hole-punch-47mm
 [HP32-5mm]: https://store.brewpi.com/mashing/tools/q-max-sheet-metal-hole-punch-32-5mm
 
 ## Operation
 
-In your brewing setup, the heating element will be used to ramp up the temperature of the mash / wort and keep it there for some time dependent on your receipt. For instance during mashing you typically want your mash temperature somewhere in the region of 65C (150F) for some 10s of minutes. To keep the mash at a steady temperature we will switch the element on for short periods of time to reduce its effective power. This technique is called Pulse Width Modulation (PWM). In this section we will show you what hardware you need, and how to connect it to your element and mains. The remainder of the control loop requires a controller and a temperature sensor. For the controller you can use the [BrewPi Spark](https://store.brewpi.com/temperature-control/brewpi-spark-3), temperature sensors can be found in the [store](https://store.brewpi.com/temperature-control/temperature-sensors).
+In your brewing setup, the heating element will be used to ramp up the temperature of the mash / wort and keep it there for some time dependent on your recipe. For instance during mashing you typically want your mash temperature somewhere in the region of 65C (150F) for some 10s of minutes. To keep the mash at a steady temperature we will switch the element on for short periods of time to reduce its effective power. This technique is called Pulse Width Modulation (PWM). In this section we will show you what hardware you need, and how to connect it to your element and mains. The remainder of the control loop requires a controller and a temperature sensor. For the controller you can use the [BrewPi Spark](https://store.brewpi.com/temperature-control/brewpi-spark-3), temperature sensors can be found in the [store](https://store.brewpi.com/temperature-control/temperature-sensors).
 
-TODO: Elco, verwijzing naar informatie hoe de control loop te bouwen met de Spark?
+TODO - Elco: redigeren.
 
 ### Pulse Width Modulation
 
+Pulse Width Modulation is a technique to reduce the effective power of your heating element. Within a
+
+By pulsing the power to the heating element within a short time span of, for example, 4s. We can reduce the effective average power of the element. By modulating the pulse width, e.g. the element power-on time, we control the element
 With Pulse Width Modulation you switch the power to the heating element on for short times within a modulation period (pulse). By modifying the power-on-time (pulse width) you can control the effective power of the element, hence the name *Pulse Width Modulation*. Modulation schemes for 25, 50 and 75% effective power are shown in the figure below. Pulse width modulation works when the modulation period is much shorter than the process you want to control. Heating 10s of liters of water is a relatively slow process that takes 10s of seconds to minutes for an effective temperature change. A modulation period in the order of seconds (typically 4s) is fine to control the effective power of your heating element when brewing.
 
 ![PWM](../images/pwm.svg)
