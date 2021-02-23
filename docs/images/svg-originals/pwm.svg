@@ -7,9 +7,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="433.36136pt"
-   height="201.81667pt"
-   viewBox="0 0 152.88026 71.196435"
+   width="434.34528pt"
+   height="199.15619pt"
+   viewBox="0 0 153.22736 70.257878"
    version="1.1"
    id="svg8"
    inkscape:version="1.0.1 (0767f8302a, 2020-10-17)"
@@ -68,8 +68,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.9899495"
-     inkscape:cx="348.61912"
-     inkscape:cy="114.53034"
+     inkscape:cx="371.76694"
+     inkscape:cy="77.210788"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -81,15 +81,15 @@
      fit-margin-right="1"
      fit-margin-bottom="1"
      inkscape:window-width="1280"
-     inkscape:window-height="959"
+     inkscape:window-height="900"
      inkscape:window-x="1440"
      inkscape:window-y="0"
-     inkscape:window-maximized="1">
+     inkscape:window-maximized="0">
     <inkscape:grid
        type="xygrid"
        id="grid833"
-       originx="16.530433"
-       originy="-9.8542619" />
+       originx="16.593134"
+       originy="-9.8542616" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -107,26 +107,26 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(16.530432,-9.8542632)">
+     transform="translate(16.593133,-9.8542632)">
     <path
        style="fill:none;stroke:#808080;stroke-width:0.6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.8, 1.8;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 112.59491,10.207041 V 80.697918"
+       d="M 112.59491,10.207041 V 78.052084"
        id="path1010-0" />
     <path
        style="fill:none;stroke:#808080;stroke-width:0.6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.8, 1.8;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 72.809413,10.207041 V 80.697918"
+       d="M 72.809413,10.207041 V 78.052084"
        id="path1010-7" />
     <path
        style="fill:none;stroke:#808080;stroke-width:0.6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.8, 1.8;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 33.023915,10.207041 V 80.697914"
+       d="M 33.023915,10.207041 V 78.052085"
        id="path1010-2" />
     <path
        style="fill:none;stroke:#808080;stroke-width:0.6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.8, 1.8;stroke-dashoffset:0;stroke-opacity:1"
-       d="M -6.761584,10.207043 V 80.697918"
+       d="M -6.761584,10.207043 V 78.052085"
        id="path1010" />
     <text
        xml:space="preserve"
-       style="font-size:9.53675px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.53675px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583"
        x="118.35317"
        y="45.753609"
        id="text841"
@@ -135,7 +135,7 @@
          id="tspan839"
          x="118.35317"
          y="45.753609"
-         style="stroke-width:0.264583;-inkscape-font-specification:'Roboto Bold';font-family:Roboto;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;">50%</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583">50%</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.9;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m -6.761584,46.280133 v -7.9375 h 19.892749 v 7.937502 h 19.89275 v -0.417764"
@@ -153,7 +153,7 @@
        sodipodi:nodetypes="ccccc" />
     <text
        xml:space="preserve"
-       style="font-size:9.53675px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.53675px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583"
        x="118.49287"
        y="21.556946"
        id="text837"
@@ -162,7 +162,7 @@
          id="tspan835"
          x="118.49287"
          y="21.556946"
-         style="stroke-width:0.264583;-inkscape-font-specification:'Roboto Bold';font-family:Roboto;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;">25%</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583">25%</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.9;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M -6.761584,22.113291 V 14.17579 h 9.9463743 v 7.937501 H 33.023915 v -0.417765"
@@ -179,7 +179,7 @@
        sodipodi:nodetypes="cccccc" />
     <text
        xml:space="preserve"
-       style="font-size:9.53675px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.53675px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583"
        x="118.53012"
        y="70.106346"
        id="text845"
@@ -188,7 +188,7 @@
          id="tspan843"
          x="118.53012"
          y="70.106346"
-         style="stroke-width:0.264583;-inkscape-font-specification:'Roboto Bold';font-family:Roboto;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;">75%</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583">75%</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.9;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m -6.761584,70.602882 v -7.9375 H 23.07754 v 7.9375 h 9.946375 v -0.417765"
@@ -226,7 +226,7 @@
        id="path1049" />
     <text
        xml:space="preserve"
-       style="font-size:4.93889px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583"
        x="-15.874999"
        y="15.101849"
        id="text880"><tspan
@@ -234,10 +234,10 @@
          id="tspan878"
          x="-15.874999"
          y="15.101849"
-         style="font-size:4.93889px;stroke-width:0.264583;-inkscape-font-specification:'Roboto Bold';font-family:Roboto;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;">on</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583">on</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:4.93889px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583"
        x="-16.399513"
        y="24.382158"
        id="text884"><tspan
@@ -245,10 +245,10 @@
          id="tspan882"
          x="-16.399513"
          y="24.382158"
-         style="font-size:4.93889px;stroke-width:0.264583;-inkscape-font-specification:'Roboto Bold';font-family:Roboto;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;">off</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.93889px;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583">off</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:4.9389px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.9389px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583"
        x="-15.875003"
        y="39.141132"
        id="text880-3"><tspan
@@ -256,10 +256,10 @@
          id="tspan878-6"
          x="-15.875003"
          y="39.141132"
-         style="font-size:4.9389px;stroke-width:0.264583;-inkscape-font-specification:'Roboto Bold';font-family:Roboto;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;">on</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.9389px;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583">on</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:4.9389px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.9389px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583"
        x="-16.399519"
        y="48.42144"
        id="text884-7"><tspan
@@ -267,10 +267,10 @@
          id="tspan882-5"
          x="-16.399519"
          y="48.42144"
-         style="font-size:4.9389px;stroke-width:0.264583;-inkscape-font-specification:'Roboto Bold';font-family:Roboto;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;">off</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.9389px;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583">off</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:4.9389px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.9389px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583"
        x="-15.875003"
        y="63.520599"
        id="text880-35"><tspan
@@ -278,10 +278,10 @@
          id="tspan878-62"
          x="-15.875003"
          y="63.520599"
-         style="font-size:4.9389px;stroke-width:0.264583;-inkscape-font-specification:'Roboto Bold';font-family:Roboto;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;">on</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.9389px;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583">on</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:4.9389px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.9389px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583"
        x="-16.399519"
        y="72.800911"
        id="text884-9"><tspan
@@ -289,6 +289,6 @@
          id="tspan882-1"
          x="-16.399519"
          y="72.800911"
-         style="font-size:4.9389px;stroke-width:0.264583;-inkscape-font-specification:'Roboto Bold';font-family:Roboto;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;">off</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.9389px;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';stroke-width:0.264583">off</tspan></text>
   </g>
 </svg>

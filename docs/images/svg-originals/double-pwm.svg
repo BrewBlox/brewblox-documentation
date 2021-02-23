@@ -73,9 +73,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="252.18183"
-     inkscape:cy="133.81798"
+     inkscape:zoom="3.959798"
+     inkscape:cx="532.88746"
+     inkscape:cy="325.09246"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -86,11 +86,11 @@
      fit-margin-left="1"
      fit-margin-right="1"
      fit-margin-bottom="1"
-     inkscape:window-width="1280"
+     inkscape:window-width="1346"
      inkscape:window-height="959"
-     inkscape:window-x="1440"
+     inkscape:window-x="1374"
      inkscape:window-y="0"
-     inkscape:window-maximized="1">
+     inkscape:window-maximized="0">
     <inkscape:grid
        type="xygrid"
        id="grid833"
@@ -120,19 +120,19 @@
        style="font-weight:bold;font-size:4.23333px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:'Roboto Bold';white-space:pre;shape-inside:url(#rect1166);" />
     <path
        style="fill:none;stroke:#808080;stroke-width:0.6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.8, 1.8;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 112.67292,4.2539095 V 109.80208"
+       d="M 112.67292,4.2539095 V 107.15625"
        id="path1010-0" />
     <path
        style="fill:none;stroke:#808080;stroke-width:0.6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.8, 1.8;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 72.835417,4.2539095 V 109.80208"
+       d="M 72.835417,4.2539095 V 107.15625"
        id="path1010-7" />
     <path
        style="fill:none;stroke:#808080;stroke-width:0.6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.8, 1.8;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 32.997917,4.2539095 V 109.80208"
+       d="M 32.997917,4.2539095 V 107.15625"
        id="path1010-2" />
     <path
        style="fill:none;stroke:#808080;stroke-width:0.6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.8, 1.8;stroke-dashoffset:0;stroke-opacity:1"
-       d="M -6.8395824,4.253908 V 109.80208"
+       d="M -6.8395824,4.253908 V 107.15625"
        id="path1010" />
     <text
        xml:space="preserve"
