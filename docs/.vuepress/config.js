@@ -22,6 +22,7 @@ module.exports = {
             'tutorials/pubscript/',
             'tutorials/scheduledscript/',
             'tutorials/subrouting',
+            'tutorials/chronograf',
           ],
         },
         {
@@ -42,6 +43,7 @@ module.exports = {
           children: [
             'reference/events',
             'reference/history_events',
+            'reference/influx_downsampling',
             'reference/state_events',
             'reference/spark_state',
             'reference/block_types',
