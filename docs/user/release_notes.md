@@ -8,6 +8,31 @@ Relevant links:
 - Code repositories: https://github.com/Brewblox
 
 
+## Brewblox release 2021/02/25
+
+**firmware release date: 2021/02/25**
+
+This release fixes controller hangups when using Wifi, and provides a more permanent fix for IPv6-related issues.
+
+When Wifi connections were less than perfect, the controller would slow down and freeze.
+This was caused by the controller being slow to handle reconnects, which in turn caused memory issues.
+
+We fixed the immediate problem, and improved handling for future out-of-memory errors.
+
+Previously, `brewblox-ctl disable-ipv6` was available as an optional command.
+We kept it optional because it changed network settings for the host, and we'd rather not automatically edit those.
+The new fix only edits the Docker daemon settings, and can thus be applied automatically.
+The fix is applied during `brewblox-ctl install`, and once during `brewblox-ctl upgrade`. It is also available as `brewblox-ctl enable-ipv6`.
+
+**Changes:**
+- (feature) Added `brewblox-ctl enable-ipv6`. This function also runs during install and once during your next upgrade.
+- (docs) Added reference doc on how Influx data is stored and downsampled: https://brewblox.netlify.app/dev/reference/influx_downsampling
+- (docs) Added tutorial for setting up Chronograf to view raw history data: https://brewblox.netlify.app/dev/tutorials/chronograf
+- (enhancement) Improved `brewblox-ctl log` output, and made inclusion of system diagnostics optional.
+- (fix) All open connections in firmware are processed immediately.
+- (fix) Number of firmware Controlbox connections is limited to 4.
+- (fix) The controller now resets if it runs out of memory.
+
 ## Brewblox release 2021/02/03
 
 **firmware release date: 2020/11/02**
