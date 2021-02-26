@@ -16,16 +16,21 @@ This release fixes controller hangups when using Wifi, and provides a more perma
 
 When Wifi connections were less than perfect, the controller would slow down and freeze.
 This was caused by the controller being slow to handle reconnects, which in turn caused memory issues.
-
 We fixed the immediate problem, and improved handling for future out-of-memory errors.
 
-Previously, `brewblox-ctl disable-ipv6` was available as an optional command.
-We kept it optional because it changed network settings for the host, and we'd rather not automatically edit those.
-The new fix only edits the Docker daemon settings, and can thus be applied automatically.
-The fix is applied during `brewblox-ctl install`, and once during `brewblox-ctl upgrade`. It is also available as `brewblox-ctl enable-ipv6`.
+We've been aware for a while now that there's a bug in Docker where if your router supports IPv6, starting a container will cause all network interfaces to be reset.
+This often leads to the Pi freezing up completely.
+
+Previously, we fixed this by disabling IPv6 completely (`brewblox-ctl disable-ipv6`).
+The problem with this approach is that it also disabled IPv6 for all other applications on the server.
+
+An alternative solution is much less invasive, and only requires a [change to the Docker settings](https://docs.docker.com/config/daemon/ipv6/).
+This fix is applied during `brewblox-ctl install`, and during the next `brewblox-ctl upgrade`. It is also available as `brewblox-ctl enable-ipv6`.
+Your next upgrade will also revert the configuration changes (if any) made by `brewblox-ctl disable-ipv6`.
 
 **Changes:**
 - (feature) Added `brewblox-ctl enable-ipv6`. This function also runs during install and once during your next upgrade.
+- (removed) Removed `brewblox-ctl disable-ipv6`.
 - (docs) Added reference doc on how Influx data is stored and downsampled: https://brewblox.netlify.app/dev/reference/influx_downsampling
 - (docs) Added tutorial for setting up Chronograf to view raw history data: https://brewblox.netlify.app/dev/tutorials/chronograf
 - (enhancement) Improved `brewblox-ctl log` output, and made inclusion of system diagnostics optional.
