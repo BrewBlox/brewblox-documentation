@@ -12,24 +12,9 @@ Always consult an electrician for advice and help with wiring your elements. Und
 
 Heating water takes a lot of energy. For example: with a heating element of 3500W it would take 18 minutes to heat 20L of water to 65C for mashing (20 - 65C), or 32 minutes to boil (20 - 100C). Heating water with this setup adds 50 minutes of waiting time to your brewing day. However, if you were to switch to 50L batches, the waiting time already adds up to more than two hours. Select a higher power heating element when your mains outlet allows. You can calculate the expected heating time in your situation with the calculator below.
 
+<HeatCalculator/>
+
 TODO: Elco vragen stuk schrijven over waarom hoog-vermogen elementen, ramp-up tijden, etc.
-TODO: Bob vragen interactieve heating time calculator te maken in vuepress.
-
-<!-- ### calculator
-
-### Formula:
-
-$$\Delta t = \frac{c_p \cdot M \cdot \Delta T}{P \cdot 60} = \text{XX min}$$
-
-|  Variable  | Description                                          | Unit(s) / Value(s)                                           | Interactive use                                      |
-| :--------: | ---------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------- |
-| $\Delta t$ | heating time (time difference)                       | min (round to int sufficient)                                | result                                               |
-|  $c_{p}$   | Specific heat capacity (isobaric mass heat capacity) | 4.18 kJ / (kg * K) for water (l)                             | constant                                             |
-|    $M$     | Mash (water) mass                                    | kg, calculate from L / Gal (US Gal), 1L = 1kg, 1Gal = 3.79kg | interactive value + unit - default: 40 L             |
-| $\Delta T$ | Mash temperature difference                          | C / F, 1C = 5/9F                                             | interactive value + unit - default: (65 - 20) = 45 C |
-|    $P$     | Power heating element                                | W                                                            | interactive value - default: 3600W                   |
-
-Default example: It takes 45 (44.8) mins to heat 50L of water 45C (20 to 65C) with a 3500W heating element. -->
 
 ## Mains electricity
 
