@@ -7,6 +7,19 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2021/03/09
+
+**firmware release date: 2021/03/09**
+
+The previous release fixed multiple Wifi-related issues, and added improved error handling. The latter lead us to another pre-existing bug, which is fixed by this release.
+
+We now also support Spark simulation services on 64-bit ARM.
+
+**Changes:**
+- (feature) Added the ARM64 Spark simulator. Setup for simulators is the same on all platforms: https://brewblox.netlify.app/user/adding_spark_sim.html
+- (fix) Fixed a bug where the Spark would end up with too many open connections when connected to a Wifi repeater.
+- (fix) Fixed the block list being emptied when clearing the search field on the Spark service page.
+
 
 ## Brewblox release 2021/02/25
 
