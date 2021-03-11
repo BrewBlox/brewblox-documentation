@@ -14,7 +14,7 @@ Heating water takes a lot of energy. For example: with a heating element of 3500
 
 <HeatCalculator/>
 
-TODO: Elco vragen stuk schrijven over waarom hoog-vermogen elementen, ramp-up tijden, etc.
+TODO: Elco vragen stuk schrijven over waarom hoog-vermogen elementen, ramp-up tijden, etc. TODO: Elco feedback calculator.
 
 ## Mains electricity
 
@@ -44,7 +44,7 @@ Three phase mains connections are the high-power electrical connections outside 
 
 The second connection option is the delta configuration. With the exception of Norway, our heating elements should **never** be connected in delta configuration as it will fry your element.
 
-**Delta configuration:** in a three phase delta configuration the individual heating elements are connected between two adjacent phases. For example: element 1 is connected between L1 and L2, element two between L2 and L3, etc. The voltage over each element is 400V AC. Our heating elements are dimensioned to operate at 230 - 240 V AC, operation at 400V AC draws too much current (power) and is unsafe. Our heating elements cannot be used in three phase delta configuration. **Exception:** in some parts of Norway electrical power is distributed over three phase connections with a voltage of 230V AC phase to phase (instead of 400V AC). In this case connecting your element in delta configuration is safe.
+**Delta configuration:** in a three phase delta configuration the individual heating elements are connected between two adjacent phases. For example: element 1 is connected between L1 and L2, element two between L2 and L3, etc. The voltage over each element is 400V AC. Our heating elements are dimensioned to operate at 230 - 240 V AC, operation at 400V AC draws too much current (power) and is unsafe. Our heating elements *cannot* be used in three phase delta configuration. **Exception:** in some parts of Norway electrical power is distributed over three phase connections with a voltage of 230V AC phase to phase (instead of 400V AC). In this case connecting your element in delta configuration is safe.
 
 ![3-Phase power](../images/3-phase.svg)
 
@@ -103,7 +103,7 @@ Foldback heating elements are straight elements fold back, hence the name. The f
 
 <TableFoldback/>
 
-TODO: XX BrewPi part. no. nog aanpassen
+TODO: XX BrewPi part. no. nog invullen
 
 #### Mounting kit
 
@@ -117,7 +117,7 @@ Tri-clamp elements are fixed in your kettle with a tri-clamp fitting. These fitt
 
 ![Heating elements-triclamp](../images/heat-element-triclamp.jpg)
 
-TODO - Elco: Guillaume plaatje triclamp poort vragen - de huidige is van torontobreweries.ca
+TODO - Elco: Guillaume plaatje triclamp poort vragen - de huidige is van torontobreweries.ca en niet geschikt voor publicatie
 
 <TableTriclamp/>
 
@@ -191,7 +191,7 @@ TODO: Elco foto maken vervlakte ketelwand.
 
 In your brewing setup, the heating element will be used to ramp up the temperature of the mash / wort and keep it there for some time dependent on your receipt. For instance during mashing you typically want your mash temperature somewhere in the region of 65C (150F) for some 10s of minutes. To keep the mash at a steady temperature we will switch the element on for short periods of time to reduce its effective power. This technique is called Pulse Width Modulation (PWM). In this section we will show you what hardware you need, and how to connect it to your element and mains. The remainder of the control loop requires a controller and a temperature sensor. For the controller you can use the [BrewPi Spark](https://store.brewpi.com/temperature-control/brewpi-spark-3), temperature sensors can be found in the [store](https://store.brewpi.com/temperature-control/temperature-sensors).
 
-TODO - Elco: redigeren.
+TODO - Elco: herschrijven.
 
 ### Pulse Width Modulation
 
