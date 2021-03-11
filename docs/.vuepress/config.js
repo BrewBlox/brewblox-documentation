@@ -3,11 +3,24 @@ const plantuml = require('./plantuml');
 module.exports = {
   title: 'Brewblox',
   description: 'Build your brewery, your way',
+  plugins: [
+    [
+      'vuepress-plugin-mathjax',
+      {
+        target: 'svg',
+        macros: {
+          '*': '\\times',
+        },
+      },
+    ],
+  ],
   themeConfig: {
     logo: '/favicon-96x96.png',
     nav: [
       { text: 'User guides', link: '/user/startup' },
       { text: 'Developer docs', link: '/dev/' },
+      // Hardware section commented out for update / review Elco
+      // { text: 'Hardware', link: '/hardware/' },
       { text: 'BrewPi', link: 'https://www.brewpi.com/' },
     ],
     sidebar: {
@@ -114,6 +127,10 @@ module.exports = {
         'system_upgrades',
         'troubleshooting',
       ],
+      // Hardware section commented out for review / update Elco
+      // '/hardware/': [
+      //   'heating_elements',
+      // ],
     },
     repo: 'brewblox/brewblox-documentation',
     docsDir: 'docs',

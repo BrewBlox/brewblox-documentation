@@ -1,38 +1,38 @@
 <script>
 export default {
-  name: 'HardwareTable',
+  name: 'HardwareTableTemplate',
   props: {
     columns: {
       type: Array,
-      default: () => ([
+      default: () => [
         {
           title: '#',
-          values: [0, 9, 8, 7, 6],
+          values: [0, 9],
           // no length / voltage property -> always shown
         },
         {
           title: 'Diameter (cm)',
-          values: [1, 2, 3],
+          values: [1, 2],
           length: 'cm', // Only shown if activeLength === 'cm'
           // No voltage property set -> shown regardless of active voltage
         },
         {
           title: 'Diameter (in)',
-          values: [4, 5, 6],
+          values: [4, 5],
           length: 'inch',
         },
         {
           title: 'Power (W)',
-          values: [1, 2, 3],
+          values: [1, 2],
           voltage: '230V', // Only shown if activeVoltage === '230V'
           // No length property set -> shown regardless of active length
         },
         {
           title: 'Power (W)',
-          values: [4, 5, 6],
+          values: [4, 5],
           voltage: '240V',
         },
-      ]),
+      ],
     },
   },
   data: () => ({
@@ -40,23 +40,20 @@ export default {
     activeVoltage: '230V',
   }),
   computed: {
-    tableValues () {
+    tableValues() {
       return this.columns
         .map((c, idx) => ({ ...c, key: `col-${idx}-${c.title}` }))
-        .filter(c =>
-          (!c.voltage && !c.length)
-          || c.voltage === this.activeVoltage
-          || c.length === this.activeLength);
+        .filter((c) => (!c.voltage && !c.length) || c.voltage === this.activeVoltage || c.length === this.activeLength);
     },
-    numRows () {
-      return Math.max(...this.columns.map(c => c.values.length));
+    numRows() {
+      return Math.max(...this.columns.map((c) => c.values.length));
     },
   },
   methods: {
-    toggleLength () {
+    toggleLength() {
       this.activeLength = this.activeLength === 'cm' ? 'inch' : 'cm';
     },
-    toggleVoltage () {
+    toggleVoltage() {
       this.activeVoltage = this.activeVoltage === '230V' ? '240V' : '230V';
     },
   },
@@ -71,10 +68,10 @@ export default {
       </div>
       <div class="table-button" @click="toggleLength">
         <template v-if="activeLength === 'cm'">
-          <b>cm</b> / inch
+          <b>cm</b> / in
         </template>
         <template v-else>
-          cm / <b>inch</b>
+          cm / <b>in</b>
         </template>
       </div>
 
@@ -92,16 +89,9 @@ export default {
     </div>
 
     <div class="table-container">
-      <div
-        v-for="c in tableValues"
-        :key="c.key"
-        class="column table"
-      >
+      <div v-for="c in tableValues" :key="c.key" class="column table">
         <div>{{ c.title }}</div>
-        <div
-          v-for="num in numRows"
-          :key="`${c.key}-value-${num}`"
-        >
+        <div v-for="num in numRows" :key="`${c.key}-value-${num}`">
           {{ c.values[num - 1] }}
         </div>
       </div>
@@ -117,6 +107,7 @@ export default {
   justify-content: flex-start;
   align-items: stretch;
   overflow-x: auto;
+  position: relative;
 }
 .column {
   display: flex;
@@ -131,8 +122,14 @@ export default {
   background: #dddddd;
 }
 .table > div {
+  text-align: center;
+  font-weight: bold;
   padding: 3px 5px;
   flex: 1 0 0;
+}
+.table > div:not(:first-child) {
+  text-align: right;
+  font-weight: normal;
 }
 
 .button-prefix {
