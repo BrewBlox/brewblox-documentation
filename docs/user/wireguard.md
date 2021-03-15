@@ -245,6 +245,8 @@ To get it, connect to your Pi, and run:
 sudo cat /etc/wireguard/public.key
 ```
 
+You can set **allowed IPs** for the server to `0.0.0.0/0`. This functions as a wildcard: all IPs are fine.
+
 Your client is now configured to connect to the server, but the server won't accept the client yet.
 For this to happen, we need to edit the Wireguard configuration on the server.
 
