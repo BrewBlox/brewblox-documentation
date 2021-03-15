@@ -123,6 +123,7 @@ module.exports = {
         'backup_guide',
         'blocks_in_depth',
         'removing_things',
+        'wireguard',
         'release_notes',
         'system_upgrades',
         'troubleshooting',
