@@ -82,7 +82,7 @@ The host field should be `sftp://IP_ADDRESS`. Username / password are the same a
 
 ### Using a snapshot during installation
 
-You can now follow the [Startup Guide](./startup), until step 4 (Install Brewblox).
+You can now follow the [Startup Guide](./startup), until step 3 (Install Brewblox).
 
 Follow the instructions, but do not yet run `brewblox-ctl install`.
 

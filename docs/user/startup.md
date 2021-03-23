@@ -37,7 +37,7 @@ When connecting the BrewPi Spark
 You can also install Brewblox on a Synology NAS, desktop computer, or laptop - as long as it's using Linux.
 :::
 
-## Step 1: Prepare the microSD card
+## Step 1: Format the microSD card
 
 Download the [Raspberry Pi Imager](https://www.raspberrypi.org/downloads/)
 
@@ -49,13 +49,11 @@ Select Raspberry Pi OS Lite (32-bit), select your SD card, and hit **'Ctrl-Shift
 
 ![RPi-imager-adv](../images/rpi-imager-adv.png)
 
-REVIEW: plaatje van het advanced menu van de RPi website. Zelf een plaatje maken kan, maar is veel werk i.v.m. scrollbar en geen 'automatic scrollbar screen capture' gevonden op linux.
-
 In the advanced menu you want to define a few settings:
-- **Set hostname:** set a hostname to easily connect to your Pi on your network. Clear and short names work best. Default hostname is `raspberrypi`.
-- **Enable SSH:** you want to enable SSH to remotely connect to your Pi through a terminal. Select *Use password authentification* and set your password.
-- **Configure wifi:** here you configure the network name (SSID) & password of your wifi (if applicable). Set the Wifi country setting to your country to match the wifi channels of your access point.
-- **Set locale settings:** set your locale settings to define the system time of your Pi and the layout of your keyboard.
+- **Set hostname:** a hostname is used to easily connect to your Pi on your network. Clear and short names work best. The default hostname is `raspberrypi`.
+- **Enable SSH:** you connect remotely to the terminal of your Pi through SSH. Select *Use password authentication* and set your password.
+- **Configure wifi:** here you configure the network name (SSID) & password of your wifi. Set the wifi country setting to your country to match the wifi channels of your access point. Omit if you plan to use USB.
+- **Set locale settings:** define the system time of your Pi and the layout of your keyboard.
 
 Hit **SAVE** to exit the menu, and **WRITE** to write the image to your SD card.
 
@@ -80,20 +78,18 @@ If you're unfamiliar with SSH, [this tutorial](https://www.howtogeek.com/311287/
 After you installed your SSH client, insert the microSD card into your Pi, and connect the power supply. The Pi will start automatically.
 
 Wait for the Pi to finish starting up, and connect to it using your SSH client.
-The default user name is `pi`, and the hostname and password are what you defined at [step 1](#step-1-prepare-the-microsd-card).
+The default user name is `pi`, and the hostname and password are what you defined in the RPi Imager advanced menu at [Step 1](#step-1-prepare-the-microsd-card). The default hostname `raspberrypi` is used in the example below.
 
 ```bash
-ssh pi@custom_hostname
+ssh pi@raspberrypi
 ```
 
 If the hostname of your Pi is not recognized on your network, you can use the instructions below to get the IP address of your Pi.
 
-REVIEW: betere manier om, om te gaan met het custom hostname verhaal?
-
 ## Getting the IP address of your Pi
 
 Connecting to your Pi using SSH requires you to know its address.
-Often, your network already knows the address of your Pi by its hostname. If your haven't changed it at step [1](#step-1-prepare-the-microsd-card), the default hostname of your Pi is `raspberrypi`.
+Often, your network already knows the address of your Pi by its hostname. If your haven't changed it at [Step 1](#step-1-prepare-the-microsd-card), the default hostname of your Pi is `raspberrypi`.
 
 If using the name doesn't work, there are multiple tools to discover the IP address.
 
@@ -241,7 +237,7 @@ brewblox-ctl particle -c flash-bootloader
 ```
 
 ::: tip
-The Spark supports Wifi. You can set this up using the UI in Step 8.
+The Spark supports wifi. You can set this up using the UI in [Step 7](#step-7-use-the-system).
 :::
 
 ## Step 6: Start the system
@@ -290,7 +286,7 @@ Commands:
   kill            Stop and remove all containers on this computer.
   install         Create Brewblox directory; install system dependencies;...
   flash           Flash firmware on Spark.
-  wifi            DISABLED: Configure Spark Wifi settings.
+  wifi            DISABLED: Configure Spark wifi settings.
   particle        Start a Docker container with access to the Particle CLI.
   disable-ipv6    Disable IPv6 support on the host machine.
   env             List, get, or set env values.
@@ -324,7 +320,7 @@ There's no need to panic. Click advanced, and proceed to the page.
 By default, temperature values are in Celsius. If you prefer Fahrenheit, now is a good time to configure that.
 The unit settings can be found on the *admin* page, accessible through the sidebar.
 
-You can also use the admin page to connect your Spark to your Wifi network.
+You can also use the admin page to connect your Spark to your wifi network.
 
 To easily replicate functionality from the original BrewPi, you can click the *Get Started* button, and run* the `Fermentation Fridge` wizard.
 This will generate a set of blocks and widgets, configured to let you control the brew in your fridge.
