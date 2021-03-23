@@ -20,7 +20,7 @@ module.exports = {
       { text: 'User guides', link: '/user/startup' },
       { text: 'Developer docs', link: '/dev/' },
       // Hardware section commented out for update / review Elco
-      // { text: 'Hardware', link: '/hardware/' },
+      { text: 'Hardware', link: '/hardware/' },
       { text: 'BrewPi', link: 'https://www.brewpi.com/' },
     ],
     sidebar: {
@@ -129,9 +129,9 @@ module.exports = {
         'troubleshooting',
       ],
       // Hardware section commented out for review / update Elco
-      // '/hardware/': [
-      //   'heating_elements',
-      // ],
+      '/hardware/': [
+        'heating_elements',
+      ],
     },
     repo: 'brewblox/brewblox-documentation',
     docsDir: 'docs',
