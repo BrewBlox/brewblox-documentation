@@ -52,8 +52,8 @@ Select Raspberry Pi OS Lite (32-bit), select your SD card, and hit **'Ctrl-Shift
 In the advanced menu you want to define a few settings:
 - **Set hostname:** a hostname is used to easily connect to your Pi on your network. Clear and short names work best. The default hostname is `raspberrypi`.
 - **Enable SSH:** you connect remotely to the terminal of your Pi through SSH. Select *Use password authentication* and set your password.
-- **Configure wifi:** here you configure the network name (SSID) & password of your wifi. Set the wifi country setting to your country to match the wifi channels of your access point. Omit if you plan to use USB.
-- **Set locale settings:** define the system time of your Pi and the layout of your keyboard.
+- **Configure wifi:** here you configure the network name (SSID) & password of your wifi. Set the wifi country setting to your country to match the wifi channels of your access point.
+- **Set locale settings:** define the system time zone of your Pi and the layout of your keyboard.
 
 Hit **SAVE** to exit the menu, and **WRITE** to write the image to your SD card.
 
@@ -89,7 +89,7 @@ If the hostname of your Pi is not recognized on your network, you can use the in
 ## Getting the IP address of your Pi
 
 Connecting to your Pi using SSH requires you to know its address.
-Often, your network already knows the address of your Pi by its hostname. If your haven't changed it at [Step 1](#step-1-prepare-the-microsd-card), the default hostname of your Pi is `raspberrypi`.
+Often, your network already knows the address of your Pi by its hostname. If you haven't changed it at [Step 1](#step-1-prepare-the-microsd-card), the default hostname of your Pi is `raspberrypi`.
 
 If using the name doesn't work, there are multiple tools to discover the IP address.
 
