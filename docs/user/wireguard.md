@@ -1,5 +1,8 @@
 # Remote access
 
+It's nice to be able to check up on the status of your brew while away from home, or edit block settings.
+Because this involves the internet, this must be done safely and securely - you don't want strangers in control of your brew.
+
 When you visit a website (or the Brewblox UI), your browser sends multiple requests to the server.
 This includes requests for current block values and graph data, but also requests for block changes.
 For this to be safe, the server must be able to trust the client.
@@ -9,9 +12,9 @@ This is no longer true when connected to the internet.
 Here, every single request must include some form of authentication to confirm that the sender can be trusted.
 
 Secure password-protected remote access is something we'd like to implement sometime in the future, but we're not there yet.
-In the meantime, a safe alternative is to install and use a Virtual Private Network (VPN).
+In the meantime, a alternative for safely connecting to your Pi is to install and use a Virtual Private Network (VPN).
 
-This tutorial uses [Wireguard](https://www.wireguard.com/) because it's fast, and easy to set up.
+This tutorial uses the [Wireguard](https://www.wireguard.com/) software because it's fast, and easy to set up.
 
 ::: tip
 This guide was written for Raspberry Pi OS or Ubuntu.
@@ -21,9 +24,9 @@ Synology users can follow [this guide](https://github.com/runfalk/synology-wireg
 
 ## What is a VPN?
 
-A VPN creates a secure tunnel between your device and the server.
+A VPN creates a secure tunnel between a client (your phone) and the server (your Pi).
 Where before you needed to send authentication for every request, you now only need to do so once: when creating the tunnel.
-All requests and responses are sent through this tunnel, and the server can trust all requests that come through the tunnel.
+All data to and from the server goes through this tunnel, and can't read or edited by others.
 
 This tunnel can be used both for the Brewblox UI, and SSH terminals.
 
@@ -49,10 +52,10 @@ You can find a more in-depth explanation [here](https://ssd.eff.org/en/module/de
 
 ## Server installation
 
-We need to install the software, create the [public and private encryption keys](https://ssd.eff.org/en/module/deep-dive-end-end-encryption-how-do-public-key-encryption-systems-work),
+We need to install the software, create the public and private encryption keys,
 and create the configuration for our tunnel.
 
-Open a terminal on the server (probably your Pi), and we'll run some terminal commands.
+Open a terminal on the server (your Pi), and we'll run some terminal commands.
 
 Install Wireguard:
 ```bash
