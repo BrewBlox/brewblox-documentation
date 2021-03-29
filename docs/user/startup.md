@@ -53,7 +53,7 @@ In the advanced menu you want to define a few settings:
 - **Set hostname:** a hostname is used to easily connect to your Pi on your network. Clear and short names work best. The default hostname is `raspberrypi`.
 - **Enable SSH:** you connect remotely to the terminal of your Pi through SSH. Select *Use password authentication* and set your password.
 - **Configure wifi:** here you configure the network name (SSID) & password of your wifi. Set the wifi country setting to your country to match the wifi channels of your access point.
-- **Set locale settings:** define the system time zone of your Pi and the layout of your keyboard.
+- **Set locale settings:** define your time zone and [keyboard layout](https://keyshorts.com/blogs/blog/44712961-how-to-identify-laptop-keyboard-localization).
 
 Hit **SAVE** to exit the menu, and **WRITE** to write the image to your SD card.
 
@@ -149,7 +149,7 @@ pi@raspberrypi:~ $
 This is the shell prompt, and it consists of three parts:
 
 - `pi` is the current user. `pi` is the default user for a Raspberry Pi.
-- `raspberrypi` is the computer host name. Again, `raspberrypi` is the default.
+- `raspberrypi` is the computer hostname. Again, `raspberrypi` is the default.
 - `~` is the current directory.
 
 `~` is a special character for the user home directory. When opening a new SSH terminal, you will start in this directory. You can use the `pwd` command to show the complete path, replacing the special character with directory names.
@@ -248,7 +248,7 @@ To list all possible commands, navigate to the Brewblox install directory (defau
 brewblox-ctl --help
 ```
 
-Example output:
+::: details Example output
 ```
 pi@raspberrypi:~ $ cd brewblox
 pi@raspberrypi:~/brewblox $ brewblox-ctl --help
@@ -285,20 +285,27 @@ Commands:
   follow          Show logs for one or more services.
   kill            Stop and remove all containers on this computer.
   install         Create Brewblox directory; install system dependencies;...
+  init            Create and init Brewblox directory.
   flash           Flash firmware on Spark.
-  wifi            DISABLED: Configure Spark wifi settings.
+  wifi            DISABLED: Configure Spark Wifi settings.
   particle        Start a Docker container with access to the Particle CLI.
-  disable-ipv6    Disable IPv6 support on the host machine.
+  enable-ipv6     Enable IPv6 support on the host machine.
+  snapshot        Save or load snapshots.
   env             List, get, or set env values.
+  makecert        Generate a self-signed SSL certificate.
   setup           Run first-time setup in Brewblox directory.
   discover-spark  Discover available Spark controllers.
   add-spark       Create or update a Spark service.
+  add-plaato      Create a service for the Plaato airlock.
+  add-node-red    Create a service for Node-RED.
   service         Show or edit services in docker-compose.yml.
+  libs            Reinstall local libs.
   update          Download and apply updates.
   log             Generate and share log file for bug reports.
   backup          Save or load backups.
 pi@raspberrypi:~/brewblox $
 ```
+:::
 
 You can use brewblox-ctl to easily manage your system, and perform common actions. Run the following command to start your system:
 
@@ -318,11 +325,11 @@ There's no need to panic. Click advanced, and proceed to the page.
 ## Step 7: Use the system
 
 By default, temperature values are in Celsius. If you prefer Fahrenheit, now is a good time to configure that.
-The unit settings can be found on the *admin* page, accessible through the sidebar.
+After you add a service to the UI, the unit settings can be found on the *admin* page, accessible through the sidebar.
 
 You can also use the admin page to connect your Spark to your wifi network.
 
-To easily replicate functionality from the original BrewPi, you can click the *Get Started* button, and run* the `Fermentation Fridge` wizard.
+To easily replicate functionality from the original BrewPi, you can click the *Get Started* button, and run the `Fermentation Fridge` wizard.
 This will generate a set of blocks and widgets, configured to let you control the brew in your fridge.
 
 ## Later: Updating

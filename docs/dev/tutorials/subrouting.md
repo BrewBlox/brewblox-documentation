@@ -14,9 +14,9 @@ Traefik service discovery is an issue, and port sharing is (again) an issue.
 - System includes an active and accessible Brewblox system.
 - System includes one or more non-Brewblox containers.
 - Both Brewblox and non-Brewblox containers are accessible on port 80/443.
-- Top-level routing is based on host name.
-- Brewblox has a dedicated host name.
-- Host name routing logic is extensible: 2..N host names must be recognized as routing rules.
+- Top-level routing is based on hostname.
+- Brewblox has a dedicated hostname.
+- Hostname routing logic is extensible: 2..N hostnames must be recognized as routing rules.
 
 ## Brewblox routing
 
@@ -62,7 +62,7 @@ This is a big blob of configuration at once, so we'll go through it section by s
       - "${BREWBLOX_PORT_HTTPS}:${BREWBLOX_PORT_HTTPS}"
 ```
 
-`BREWBLOX_PORT_HTTP` and `BREWBLOX_PORT_HTTPS` are set in the `brewblox/.env` file. 
+`BREWBLOX_PORT_HTTP` and `BREWBLOX_PORT_HTTPS` are set in the `brewblox/.env` file.
 Their default values are 80 and 443, but we can change that later.
 
 ```yaml
@@ -175,7 +175,7 @@ Notes:
 
 So much for the default settings. Time for change!
 
-## Adding DNS host names
+## Adding DNS hostnames
 
 Let's add another service: `webby`.
 We want to be routed to `webby` if we navigate to `webby.local`.
