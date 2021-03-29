@@ -1,6 +1,7 @@
 # Getting started: fermentation fridge
 
-While going through the [startup guide](./startup.md), you may have run the *Fermentation fridge* quick start wizard. This wizard asked you some questions, and then generated a dashboard and some widgets.
+While going through the [startup guide](./startup.md), you may have run the *Fermentation fridge* quick start wizard.
+The wizard asked you some questions, and then generated a dashboard and four widgets.
 
 This guide walks you through the basics of using these widgets to monitor and control your fridge.
 
@@ -14,6 +15,7 @@ The Temp Control Assistant widget groups the most common settings, and makes it 
 
 **Control modes** keep track of the PID settings for Beer and Fridge modes.
 When changing modes, your system will adjust the PID settings, and start using the other temperature sensor.
+For more information, click on the control mode.
 
 The **Setpoint enabled** toggle indicates whether your system is active at all.
 If the Setpoint is disabled, your PIDs will be inactive, and your actuators will not cool or heat.
@@ -26,7 +28,7 @@ The **Check for problems** button verifies your block settings, and offers to fi
 ::: tip
 If you are still using a fermentation fridge setup with a Quick Actions widget, you can also manually add a Temp Control Assistant widget.
 
-Link it to your blocks, and it will automatically show a button to store PID settings as mode.
+Configure it to use the PIDs from your fridge, and it will automatically show a button to store PID settings as mode.
 :::
 
 ## Temperature profiles
@@ -74,17 +76,23 @@ There's a lot more you can do with the builder.
 See the [Brewery Builder guide](./builder_guide) for more details.
 :::
 
-## Advanced settings
+## Blocks
+
+The wizard placed widgets on your dashboard to control common functionality such as updating a setpoint setting, or starting a profile.
+If you want to customize, extend, or tweak your setup, then there is a lot of freedom to do so.
+
+The fermentation setup uses a set of interdependent *Blocks* that run on your Spark controller.
+You can mix and match blocks at will, and blocks for multiple setups can be active simultaneously.
+To see all blocks on your controller, open the side bar, and go to the service page for your Spark.
+
+The toggle button in the top right corner lets you switch between showing blocks in a list, and showing them in a relations diagram.
 
 ![Relations](../images/ferment-relations.png)
 
-The fermentation setup uses a set of interdependent *Blocks* that run on your Spark controller.
+## Further reading
 
-Your dashboard offers you shortcuts to make changes to your block settings such as updating a setpoint setting, or starting a profile.
-If you want to customize, extend, or tweak your setup, then there is a lot of freedom to do so.
+If you want to discover what more you can do with Brewblox, we have other guides that may prove useful:
 
-The [control chains guide](./control_chains) is a good place to get an understanding of how blocks can be combined.
-
-There are also other [widgets](./all_widgets) that may prove useful to add to your dashboard.
-
-A single Spark can control multiple fermentation setups, but sometimes it's more convenient to [add another Spark](./adding_spark).
+- The [control chains guide](./control_chains) is a good place to get an understanding of how blocks can be combined.
+- More [widgets](./all_widgets) and [blocks](./all_blocks) can be added to customize your setup.
+- A single Spark can control multiple fermentation setups, but sometimes it's more convenient to [add another Spark](./adding_spark).
