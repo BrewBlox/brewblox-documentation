@@ -24,14 +24,14 @@ Currently, clients practice [client-side discovery][2]. They announce themselves
 
 Currently, we use the [Janus][5] gateway. This is configured by making a REST request to its admin API.
 
-One problem is that each service announces itself to the gateway, and has to supply an URL at which it can be reached. The problem is: we're not entirely sure about which url or host name can be used by the gateway to reach the service.
+One problem is that each service announces itself to the gateway, and has to supply an URL at which it can be reached. The problem is: we're not entirely sure about which url or hostname can be used by the gateway to reach the service.
 
 ## HAProxy
 
 In a [previous project][4], I used [HAProxy][3] for load balancing in a docker environment.
 This worked well, but did not have the same requirements as we have here: traffic must be routed based on the first part of the url.
 
-The dockercloud HAProxy container supports individual services registering their "virtual host". 
+The dockercloud HAProxy container supports individual services registering their "virtual host".
 This allows services to share a port, and have requests matching a filter redirected to them.
 
 ```yaml
@@ -70,7 +70,7 @@ The `history` service declares to the gateway that its handling requests at port
 
 ## Peer discovery
 
-The history service in the example has two peer dependencies: `eventbus` and `influx`. 
+The history service in the example has two peer dependencies: `eventbus` and `influx`.
 
 We could add url arguments for them to the command line arguments (or config).
 
@@ -160,7 +160,7 @@ During implementation of consul-based service discovery, we reached the conclusi
 Not impossible, but it would certainly decrease maintainability and robustness of the system.
 
 Given how we're increasingly certain we'll only be deploying to containerized environments, there was another alternative.
-We hardcode the host names in Python code, and configure the environment to meet those expectations.
+We hardcode the hostnames in Python code, and configure the environment to meet those expectations.
 
 The resulting configuration is suddenly much simpler:
 
