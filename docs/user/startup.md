@@ -324,17 +324,19 @@ There's no need to panic. Click advanced, and proceed to the page.
 
 ## Step 7: Use the system
 
-By default, temperature values are in Celsius. If you prefer Fahrenheit, now is a good time to configure that.
-After you add a service to the UI, the unit settings can be found on the *admin* page, accessible through the sidebar.
+Brewblox itself is now installed and running. The next step is to put it in charge of your fridges, kettles, and conicals.
 
-You can also use the admin page to connect your Spark to your wifi network.
+You can build your configuration from scratch, or use one of the wizards.
+To start a wizard, click the big *Get Started* button, and select the *Quick Start* option.
 
-To easily replicate functionality from the original BrewPi, you can click the *Get Started* button, and run the `Fermentation Fridge` wizard.
-This will generate a set of blocks and widgets, configured to let you control the brew in your fridge.
+If you are upgrading from the old BrewPi software, the *Fermentation fridge* wizard will replicate its functionality.
+
+To edit the settings of your system and controllers, go to the *Admin* page, accessible through the sidebar.
+For example, you can use the Spark service settings to connect your Spark controller to your wifi network.
 
 ## Later: Updating
 
-Brewblox receives regular updates. Whenever a new update is released, the release notes are posted on [the forum](https://community.brewpi.com/), and added to the [overview](./release_notes.md).
+Brewblox receives regular updates. Whenever a new update is released, the release notes are posted on [the forum](https://community.brewpi.com/), and added to the [overview](./release_notes).
 
 To update, close the UI, and run the following command:
 
