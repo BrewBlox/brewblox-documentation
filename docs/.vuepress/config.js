@@ -60,6 +60,7 @@ module.exports = {
             'reference/state_events',
             'reference/spark_state',
             'reference/block_types',
+            'reference/datastore',
             'reference/controlbox_spark_protocol',
             'reference/spark_commands',
           ],
