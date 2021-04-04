@@ -3,14 +3,13 @@
 Brewblox uses two shared databases: a [Time-Series Database](./influx_downsampling) for [history data](./history_events),
 and a key/value [Redis](https://redis.io/) database for configuration.
 
-We [selected](../decisions/20200902_redis_datastore) Redis because it is a lightweight schemaless database.
-Redis is a straightforward key/value datastore without much frills.
-This works well for us, but also required us to add some custom functionality to fully implement desired features.
+We [selected](../decisions/20200902_redis_datastore) Redis because it is a lightweight schemaless database without frills.
+This works well for us, but we had to add some custom functionality in the API to fully implement desired features.
 
 ## API service
 
 The `history` service implements the REST-based API wrapper for performing CRUD operations.
-Services are not supposed to directly connect to the Redis database itself.
+Services are not supposed to connect to the Redis database itself.
 
 The history service offers the following endpoints:
 - GET `/history/datastore/ping`
@@ -50,16 +49,15 @@ interface Document {
 }
 ```
 
-The *id* field can only contain URL-safe characters:
-letters, numbers, and `-` / `.` / `_` / `~` characters.
+The *id* field can only contain letters, numbers, and `-` / `.` / `_` / `~` characters.
 
-*namespace* can contain the same characters, but also `:`.
+*namespace* can also include `:`.
 
 It is valid for *namespace* to be empty, but not for *id*.
 
 The relevant regular expressions would be:
 - id: `^[\w\-\.~]+$`
-- namespace: `^[\w\-\.\:~]*$`
+- namespace: `^[\w\-\.~\:]*$`
 
 ::: details Example documents
 ```json
@@ -154,7 +152,7 @@ Topic: `brewcast/datastore/brewblox-ui-store`
 ```
 :::
 
-## Namespaces used by official services
+## Avoiding namespace collisions
 
 We strongly recommend picking an explicit namespace that is unique to your service.
 **Do NOT use** a generic term such as `settings`, `config` or `_` as top-level namespace.
@@ -164,4 +162,3 @@ The namespaces used by services maintained by BrewPi are:
 - `brewblox-ui-store`
 - `brewblox-automation`
 - `spark-service`
-
