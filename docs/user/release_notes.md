@@ -39,11 +39,13 @@ We're still planning to support secure remote access natively, but a VPN is a de
 - (feature) The Spark service diagram is now the default/initial mode for the Spark service page.
 - (feature) The Spark service diagram now supports drag and zoom. Use the scroll wheel to zoom, and click and drag to reposition.
 - (feature) Replaced the toggle in the Spark service diagram with a button that resets zoom and position.
+- (feature) Added menu action to export Session Log widget graphs to CSV.
 - (feature) The 1883 eventbus port is now exposed by default.
 - (feature) You can use `brewblox-ctl service ports --mqtt [PORT]` to change the eventbus port. Alternatively, you can edit the `BREWBLOX_PORT_MQTT` variable in `brewblox/.env`.
 - (feature) The [brewblox-hass service](https://github.com/BrewBlox/brewblox-hass) now automatically publishes Tilt measurements to Home Assistant.
 - (feature) Additional [Mosquitto configuration](https://mosquitto.org/man/mosquitto-conf-5.html) can now be defined by placing `.conf` files in `brewblox/mosquitto/`.
   - This is useful for sharing MQTT events between brokers, or defining additional (password-protected) listener ports.
+- (enhancement) Quick start wizards now check for Spark services that were detected but not yet added to the UI.
 - (enhancement) `brewblox-ctl backup` commands will now also include config files in `brewblox/mosquitto`.
 - (enhancement) `brewblox-ctl update` no longer prompts whether to prune docker images and volumes. The default is true, but can be disabled with `--no-prune`.
 - (docs) Added a guide for setting up a local VPN for safe remote access. You can find it at https://brewblox.netlify.app/user/wireguard.html.
@@ -54,9 +56,7 @@ We're still planning to support secure remote access natively, but a VPN is a de
 - (fix) Dashboard grid no longer is shifted if a widget is wider than the screen.
 - (fix) Dashboard grid now correctly extends to the edge of the rightmost widget.
 - (fix) Fixed a bug where the dashboard would not respond to adding / removing a widget.
-- (feature) Added menu action to export Session Log widget graphs to CSV.
 - (fix) The dot indicators in the Logic Actuator widget now correctly toggle between red/green to show condition result.
-- (enhancement) Quick start wizards now check for Spark services that were detected but not yet added to the UI.
 - (fix) Disabled tooltips for the Quick Actions apply buttons in touch mode to prevent unwanted overlap. We'll be looking at a more comprehensive fix to the underlying problem.
 - (fix) Temp Control Assistant no longer warns about undefined pin channels when using a Motor Valve block.
 - (fix) Long URLs in the Web Frame widget no longer cause the input field to grow wider than the widget.
