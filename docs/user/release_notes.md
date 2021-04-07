@@ -7,6 +7,62 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2021/04/07
+
+**firmware release date: 2021/03/09**
+
+For this release, we've been looking at how to improve the general user experience.
+The biggest change is that Brewblox now uses one single temperature unit setting.
+This setting is automatically applied to the Spark display as well.
+
+When you first open the UI after installing or updating Brewblox, it will prompt you to choose between Celsius and Fahrenheit.
+The setting can also be found in the Admin page if you want to change it later.
+Some limitations still apply: existing Graph / Metrics widget settings have to be updated manually after changing the temperature setting.
+
+We have also made some improvements to the Spark service diagram view.
+You can now use the scroll wheel to zoom in and out, and click and drag to reposition.
+Pinch and drag is supported for touch screens.
+
+The diagram is now the default mode when first opening the service page.
+We feel that this provides better overview for novice users, but any and all feedback on this is welcome.
+
+On the backend, the MQTT eventbus port (1883) is now exposed by default to reduce required setup steps for various integrations.
+If this causes a port conflict (or you simply don't want to expose the port) you can override this setting using brewblox-ctl or the docker-compose.yml file.
+
+For those wishing for remote access, we added a [tutorial for setting up a Wireguard VPN](https://brewblox.netlify.app/user/wireguard.html).
+Many thanks to Douwe Houvast for the preparatory work!
+
+We're still planning to support secure remote access natively, but a VPN is a decent workaround until we find the time to do it right.
+
+**Changes:**
+- (feature) Added global configuration setting for preferred temperature unit (Celsius / Fahrenheit). This setting is used by the UI and all Spark and Tilt services.
+- (feature) The Spark service diagram is now the default/initial mode for the Spark service page.
+- (feature) The Spark service diagram now supports drag and zoom. Use the scroll wheel to zoom, and click and drag to reposition.
+- (feature) Replaced the toggle in the Spark service diagram with a button that resets zoom and position.
+- (feature) Added menu action to export Session Log widget graphs to CSV.
+- (feature) The 1883 eventbus port is now exposed by default.
+- (feature) You can use `brewblox-ctl service ports --mqtt [PORT]` to change the eventbus port. Alternatively, you can edit the `BREWBLOX_PORT_MQTT` variable in `brewblox/.env`.
+- (feature) The [brewblox-hass service](https://github.com/BrewBlox/brewblox-hass) now automatically publishes Tilt measurements to Home Assistant.
+- (feature) Additional [Mosquitto configuration](https://mosquitto.org/man/mosquitto-conf-5.html) can now be defined by placing `.conf` files in `brewblox/mosquitto/`.
+  - This is useful for sharing MQTT events between brokers, or defining additional (password-protected) listener ports.
+- (enhancement) Quick start wizards now check for Spark services that were detected but not yet added to the UI.
+- (enhancement) `brewblox-ctl backup` commands will now also include config files in `brewblox/mosquitto`.
+- (enhancement) `brewblox-ctl update` no longer prompts whether to prune docker images and volumes. The default is true, but can be disabled with `--no-prune`.
+- (docs) Added a guide for setting up a local VPN for safe remote access. You can find it at https://brewblox.netlify.app/user/wireguard.html.
+- (docs) Updated the startup guide to use the Raspberry Pi Imager for SSH/Wifi configuration on a new Pi.
+- (docs) Added developer reference doc for using the datastore. You can find it at https://brewblox/netlify/app/dev/reference/datastore/html.
+- (removed) Removed alternative `/history/query/XXXXX` routes for the `/history/history/XXXXX` endpoints. The API is otherwise unchanged.
+- (fix) Removed blocks now immediately disappear from the Spark service page.
+- (fix) Dashboard grid no longer is shifted if a widget is wider than the screen.
+- (fix) Dashboard grid now correctly extends to the edge of the rightmost widget.
+- (fix) Fixed a bug where the dashboard would not respond to adding / removing a widget.
+- (fix) The dot indicators in the Logic Actuator widget now correctly toggle between red/green to show condition result.
+- (fix) Disabled tooltips for the Quick Actions apply buttons in touch mode to prevent unwanted overlap. We'll be looking at a more comprehensive fix to the underlying problem.
+- (fix) Temp Control Assistant no longer warns about undefined pin channels when using a Motor Valve block.
+- (fix) Long URLs in the Web Frame widget no longer cause the input field to grow wider than the widget.
+- (fix) Fixed a bug where the edges of blocks in the Spark service diagram were not clickable.
+- (fix) The Spark service diagram now updates when a block without links is added or removed.
+
 ## Brewblox release 2021/03/09
 
 **firmware release date: 2021/03/09**
