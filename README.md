@@ -4,13 +4,6 @@
 
 This is the code repository for the Brewblox documentation website. These docs are built with vuepress and written in markdown.
 
-## Local changes
-
-VuePress has a [persistent bug that breaks HMR](https://github.com/vuejs/vuepress/issues/2254).
-
-A temporary fix is to manually edit `node_modules/@vuepress/core/lib/node/createTemp.js`,
-and comment `fs.emptyDirSync(tempPath)`.
-
 ## Editing
 
 Recommended tools:
@@ -30,7 +23,7 @@ You might want to add these lines to your user Settings:
 In the root of this repo, run:
 
 ```
-npm install
+npm ci -d
 ```
 
 To build the docs with hot reloading:

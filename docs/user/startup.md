@@ -43,66 +43,23 @@ Download the [Raspberry Pi Imager](https://www.raspberrypi.org/downloads/)
 
 Insert your microSD card in the card reader, and connect the reader to your computer.
 
-Select Raspberry Pi OS Lite (32-bit), and write it to your SD card.
+![RPi-imager](../images/rpi-imager.png)
 
-![Imager](../images/imager.png)
+Select Raspberry Pi OS Lite (32-bit), select your SD card, and hit **'Ctrl-Shift-X'** for the advanced menu. The advanced menu is available in the Raspberry Pi Imager v1.6 and higher.
 
-For more information, see the [official Raspberry install guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
+![RPi-imager-adv](../images/rpi-imager-adv.png)
 
-## Step 2: Enable SSH and WiFi
+In the advanced menu you want to define a few settings:
+- **Set hostname:** a hostname is used to easily connect to your Pi on your network. Clear and short names work best. The default hostname is `raspberrypi`.
+- **Enable SSH:** you connect remotely to the terminal of your Pi through SSH. Select *Use password authentication* and set your password.
+- **Configure wifi:** here you configure the network name (SSID) & password of your wifi. Set the wifi country setting to your country to match the wifi channels of your access point.
+- **Set locale settings:** define your time zone and [keyboard layout](https://keyshorts.com/blogs/blog/44712961-how-to-identify-laptop-keyboard-localization).
 
-::: tip
-For Windows users, [Lee Bussy](https://community.brewpi.com/u/lbussy/summary) created a tool to automate this step.
+Hit **SAVE** to exit the menu, and **WRITE** to write the image to your SD card.
 
-![HeadlessPi](https://i2.wp.com/www.brewpiremix.com/wp-content/uploads/2019/02/HeadlessPiScreenshot.png?w=580&ssl=1)
+For more information, see the [official Raspberry Pi install guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
 
-You can download it [here](https://github.com/lbussy/headless-pi/releases/latest).
-If you get a warning that Microsoft SmartScreen blocked the application, follow [these instructions](https://www.windowscentral.com/how-disable-smartscreen-trusted-app-windows-10).
-:::
-
-After writing the image, your SD card will be recognized by the computer as a removable drive with two partitions. Download [this archive](/pi-files.zip) and extract the contents into the `boot` partition.
-
-It contains two files: `ssh`, and `wpa_supplicant.conf`.
-
-The `ssh` file enables SSH, just by being there.
-
-To configure WiFi, open `wpa_supplicant.conf` in a text editor. The file contents should be:
-
-```
-country=YOUR_COUNTRY_CODE
-
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-
-update_config=1
-
-network={
-   ssid="YOUR_WIFI_NAME"
-   psk="YOUR_WIFI_PASSWORD"
-}
-```
-
-Replace `YOUR_COUNTRY_CODE`, `YOUR_WIFI_NAME`, and `YOUR_WIFI_PASSWORD` with the relevant values.
-
-`YOUR_COUNTRY_CODE` should be the 2-letter acronym of your country (eg. US, GB, DE). You can use [this list](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements) to look up your country. <br>
-`YOUR_WIFI_NAME` is the name of your WiFi network. <br>
-`YOUR_WIFI_PASSWORD` is the password you use to log in to your WiFi network.
-
-Example file after editing:
-
-```
-country=NL
-
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-
-update_config=1
-
-network={
-   ssid="The Promised LAN"
-   psk="SuperSecret1234"
-}
-```
-
-## Step 3: Connect to the Raspberry Pi
+## Step 2: Connect to the Raspberry Pi
 
 ::: warning
 Make sure the power supply is **disconnected** at this point.
@@ -121,26 +78,25 @@ If you're unfamiliar with SSH, [this tutorial](https://www.howtogeek.com/311287/
 After you installed your SSH client, insert the microSD card into your Pi, and connect the power supply. The Pi will start automatically.
 
 Wait for the Pi to finish starting up, and connect to it using your SSH client.
-The default user name is `pi`, and the default password is `raspberry`.
-It is strongly advised to change the password immediately.
+The default user name is `pi`, and the hostname and password are what you defined in the RPi Imager advanced menu at [Step 1](#step-1-prepare-the-microsd-card). The default hostname `raspberrypi` is used in the example below.
 
 ```bash
 ssh pi@raspberrypi
 ```
 
-If `raspberrypi` is not a recognized host or address, you can use the instructions below to get the IP address of your Pi.
+If the hostname of your Pi is not recognized on your network, you can use the instructions below to get the IP address of your Pi.
 
 ## Getting the IP address of your Pi
 
 Connecting to your Pi using SSH requires you to know its address.
-Often, your network already knows the address for the `raspberrypi` name.
+Often, your network already knows the address of your Pi by its hostname. If you haven't changed it at [Step 1](#step-1-prepare-the-microsd-card), the default hostname of your Pi is `raspberrypi`.
 
 If using the name doesn't work, there are multiple tools to discover the IP address.
 
 We like the [Fing](https://www.fing.com/products) app (available on both [iOS](https://apps.apple.com/us/app/fing-network-scanner/id430921107) and [Android](https://play.google.com/store/apps/details?id=com.overlook.android.fing&hl=en)), but you can also use your router's web interface to find the addresses of all connected devices.
 A tutorial for that can be found [here](https://helpdeskgeek.com/how-to/determine-computers-connected-to-wireless-network/).
 
-## Step 4: Install Brewblox
+## Step 3: Install Brewblox
 
 To execute the commands that follow, copy them and paste them in your SSH client.
 Trying to type them yourself is frustrating and error prone.
@@ -193,7 +149,7 @@ pi@raspberrypi:~ $
 This is the shell prompt, and it consists of three parts:
 
 - `pi` is the current user. `pi` is the default user for a Raspberry Pi.
-- `raspberrypi` is the computer host name. Again, `raspberrypi` is the default.
+- `raspberrypi` is the computer hostname. Again, `raspberrypi` is the default.
 - `~` is the current directory.
 
 `~` is a special character for the user home directory. When opening a new SSH terminal, you will start in this directory. You can use the `pwd` command to show the complete path, replacing the special character with directory names.
@@ -242,7 +198,7 @@ pi@raspberrypi:~/brewblox/deeply/nested $
 
 If you'd like some more explanation, this [guide to linux commands](https://www.raspberrypi.org/documentation/linux/usage/commands.md) explains how to use the most common commands on a Raspberry Pi.
 
-## Step 5: First-time setup
+## Step 4: First-time setup
 
 To finish the installation, and initialize your system, run the setup command.
 
@@ -254,7 +210,7 @@ brewblox-ctl setup
 
 Follow the instructions until the menu exits.
 
-## Step 6: Flash the firmware
+## Step 5: Flash the firmware
 
 ::: tip
 If you want to try out Brewblox, you can use the Spark simulation instead.
@@ -281,10 +237,10 @@ brewblox-ctl particle -c flash-bootloader
 ```
 
 ::: tip
-The Spark supports Wifi. You can set this up using the UI in Step 8.
+The Spark supports wifi. You can set this up using the UI in [Step 7](#step-7-use-the-system).
 :::
 
-## Step 7: Start the system
+## Step 6: Start the system
 
 To list all possible commands, navigate to the Brewblox install directory (default: `cd ~/brewblox`), and run:
 
@@ -292,7 +248,7 @@ To list all possible commands, navigate to the Brewblox install directory (defau
 brewblox-ctl --help
 ```
 
-Example output:
+::: details Example output
 ```
 pi@raspberrypi:~ $ cd brewblox
 pi@raspberrypi:~/brewblox $ brewblox-ctl --help
@@ -329,20 +285,27 @@ Commands:
   follow          Show logs for one or more services.
   kill            Stop and remove all containers on this computer.
   install         Create Brewblox directory; install system dependencies;...
+  init            Create and init Brewblox directory.
   flash           Flash firmware on Spark.
   wifi            DISABLED: Configure Spark Wifi settings.
   particle        Start a Docker container with access to the Particle CLI.
-  disable-ipv6    Disable IPv6 support on the host machine.
+  enable-ipv6     Enable IPv6 support on the host machine.
+  snapshot        Save or load snapshots.
   env             List, get, or set env values.
+  makecert        Generate a self-signed SSL certificate.
   setup           Run first-time setup in Brewblox directory.
   discover-spark  Discover available Spark controllers.
   add-spark       Create or update a Spark service.
+  add-plaato      Create a service for the Plaato airlock.
+  add-node-red    Create a service for Node-RED.
   service         Show or edit services in docker-compose.yml.
+  libs            Reinstall local libs.
   update          Download and apply updates.
   log             Generate and share log file for bug reports.
   backup          Save or load backups.
 pi@raspberrypi:~/brewblox $
 ```
+:::
 
 You can use brewblox-ctl to easily manage your system, and perform common actions. Run the following command to start your system:
 
@@ -359,19 +322,21 @@ There's no need to panic. Click advanced, and proceed to the page.
 ![Brewblox UI](../images/ssl-error-chrome.png)
 :::
 
-## Step 8: Use the system
+## Step 7: Use the system
 
-By default, temperature values are in Celsius. If you prefer Fahrenheit, now is a good time to configure that.
-The unit settings can be found on the *admin* page, accessible through the sidebar.
+Brewblox itself is now installed and running. The next step is to put it in charge of your fridges, kettles, and conicals.
 
-You can also use the admin page to connect your Spark to your Wifi network.
+You can build your configuration from scratch, or use one of the wizards.
+To start a wizard, click the big *Get Started* button, and select the *Quick Start* option.
 
-To easily replicate functionality from the original BrewPi, you can click the *Get Started* button, and run* the `Fermentation Fridge` wizard.
-This will generate a set of blocks and widgets, configured to let you control the brew in your fridge.
+If you are upgrading from the old BrewPi software, the *Fermentation fridge* wizard will replicate its functionality.
+
+To edit the settings of your system and controllers, go to the *Admin* page, accessible through the sidebar.
+For example, you can use the Spark service settings to connect your Spark controller to your wifi network.
 
 ## Later: Updating
 
-Brewblox receives regular updates. Whenever a new update is released, the release notes are posted on [the forum](https://community.brewpi.com/), and added to the [overview](./release_notes.md).
+Brewblox receives regular updates. Whenever a new update is released, the release notes are posted on [the forum](https://community.brewpi.com/), and added to the [overview](./release_notes).
 
 To update, close the UI, and run the following command:
 

@@ -20,7 +20,7 @@ MQTT can use TCP or websockets as transport layer.
 
 TCP can only be used from inside a Brewblox network.
 
-The eventbus host name is always `eventbus`. It listens for MQTT messages on port 1883.
+The eventbus hostname is always `eventbus`. It listens for MQTT messages on port 1883.
 
 ```bash
 # Inside the network
