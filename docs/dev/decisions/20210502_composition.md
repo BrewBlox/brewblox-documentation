@@ -4,8 +4,8 @@ Date: 2021/05/02
 
 ## Context
 
-The Brewblox UI is as Single Page Application (SPA) built using the Vue and Quasar frameworks.
-Vue is in the process of releasing a [new major version](https://v3.vuejs.org/guide/introduction.html#what-is-vue-js).
+The Brewblox UI is a Single Page Application (SPA) built using the Vue and Quasar frameworks.
+At the time of writing, [Vue 3](https://v3.vuejs.org/guide/introduction.html#what-is-vue-js) is about to be released.
 
 The advertised benefits of Vue 3 match our use cases quite well.
 Typescript support is now a core feature, and the new composition API aims to improve code reuse for larger codebases.
@@ -19,14 +19,15 @@ and the resulting changes to component architecture and design patterns.
 ## Class components
 
 In the Vue 2 version, the Brewblox UI combines Typescript with [vue class components](https://github.com/kaorun343/vue-property-decorator).
-This solves some of the issues identified and fixed by Vue 3 setup functions, but suffers from its own set of drawbacks.
+This solves some of the issues identified and fixed by Vue 3 [composition API](https://v3.vuejs.org/guide/composition-api-introduction.html),
+but suffers from its own set of drawbacks.
 
 The advantages are that it produces cleaner code (less nesting) and improved Typescript support.
-It also allows for grouping code by concern, as fields (data), getters (computed), and methods can be placed in any order throughout the class.
+It also allows for grouping code by concern, as fields (data), getters (computed), and methods can be declared in any order throughout the class.
 
-The disadvantages are that it is an additional layer that developers and transpilers must account for,
-and that it is a second-class citizen when it comes to tooling and IDE support.
+The biggest disadvantage is that it is an additional layer that developers and transpilers must account for.
 When writing non-trivial components, developers must understand both the class-based API, and the underlying Vue options API.
+As it is an alternative syntax, IDE support will lag behind.
 
 In this regard, the Vue 3 composition API promises the best of both worlds: typed component definitions as a native and recommended feature.
 
@@ -39,25 +40,12 @@ This introduced a new class of bugs: objects that were unexpectedly (non-)reacti
 [Vue 3 reactivity](https://v3.vuejs.org/guide/reactivity.html) solves this by using Proxy objects.
 We can now create reactive primitives and objects by using [ref() and reactive()](https://www.danvega.dev/blog/2020/02/12/vue3-ref-vs-reactive/).
 
-An interesting benefit of `Ref` values is that they clearly signal intent.
-Refs accepted or returned by functions can probably be watched or used to synchronize data.
+The explicit declaration and typing helps to signal intent to developers.
+A `Ref<T>` returned by a function can be immediately identified as being reactive.
 
 ## Refactoring inheritance
 
-The Brewblox UI made extensive use of class inheritance to implement code reuse, with the following abstract base classes being defined:
-- PartBase
-- FieldBase
-- ValEditBase
-- DialogBase
-- WidgetBase
-- BlockWidgetBase
-- CrudComponent
-- BlockCrudComponent
-- WizardBase
-- WidgetWizardBase
-- QuickstartTaskBase
-- AutomationItemBase
-
+The Brewblox UI made extensive use of class inheritance to implement code reuse.
 These abstract base classes can introduce props, data, computed properties, and functions.
 Some of them inherit from other abstract base classes.
 
@@ -66,24 +54,33 @@ Properties magically appear in the `this` namespace, with them being defined in 
 Base classes may also inherit from each other, and then overwrite their parent's properties.
 This only makes the transparency issues worse.
 
-For the Vue 3 rework, most base classes were broken up, and their functionality moved to wherever it made the most sense.
-We'll discuss the most common destinations for the code previously present in base classes.
+Base classes encourage putting all functionality together, to avoid further fragmentation.
+For the rework, we used a much more modular approach to avoid God Objects.
+
+This lead to functionality being moved to stateless utility functions,
+composition functions, the new Provide / Inject feature, or it being removed entirely.
 
 ### Utility functions
 
 Functions that depended on two or fewer local properties were moved to utility modules.
-This includes functions like `startRemoveWidget(widget: Widget)`, and `startAddBlockToDisplay(block: Block)`.
+This commonly included functions that take a single object as input, have no output,
+and modify the VueX store as side effect.
 
-Of all approaches, this one was the most straightforward, and thus preferable where possible.
+This includes functions like `startChangeBlockId(block: Block)`, `startRemoveWidget(widget: Widget)`,
+and `startAddBlockToDisplay(block: Block)`.
+
+Of all solutions, this one was the most straightforward, and thus preferable where possible.
 
 ### Composition
 
-Composition functions can define props, emitted events, and functions that should be called during setup.
-To prevent the same transparency issues that plagued base classes,
-composition-defined props and emits were kept to an absolute minimum.
+Composition functions can define props, emitted events, and setup functions.
+For syntax, we took inspiration from [Quasar's useDialogPluginComponent](https://next.quasar.dev/vue-composables/use-dialog-plugin-component).
 
 In contrast with base classes, composition functions can be kept small and modular.
 Where multiple inheritance is a cause for concern, usage of multiple composition functions is both easy and safe.
+
+To prevent the same transparency issues that plagued base classes,
+composition-defined props and emits were kept to an absolute minimum.
 
 This change in scope and functionality required the introduction of new design patterns, and changes to the ones used previously.
 More on this below.
@@ -101,8 +98,8 @@ Previously, we solved this using [prop drilling](https://kentcdodds.com/blog/pro
 and [Crud components](./20190625_crud_component).
 
 With the introduction of Provide / Inject, we can skip the drilled prop, and use an injected variable instead.
-By combining Provide / Inject and composition functions, we can fully replicate the functionality offered by Crud components.
 The composition function injects a provided ID, and uses it to fetch data from VueX and provide computed properties to the component.
+By combining Provide / Inject and composition functions like this, we fully replicate the functionality offered by Crud components.
 
 The immediate advantage of this approach is that it significantly reduced the number of boilerplate props floating around.
 
@@ -129,7 +126,7 @@ This first results in a patchwork of ad-hoc solutions. During refactoring, reusa
 
 The new reactivity model has proven to be very helpful for making these patterns explicit.
 Where the Vue 2 solutions were based on observed behavior of reactive objects,
-Vue 3 lets us add or remove reactivity at will.
+Vue 3 lets us add or remove reactivity at will, and return objects that are explicitly reactive.
 
 Below, we'll discuss three design patterns that we introduced during the rework.
 
@@ -206,8 +203,8 @@ In the case of blocks, the service publishes updates every few seconds.
 Widgets are typically more stable, but changes made by one user are still synchronized to all other active clients.
 This requires us to have a robust system for two-way data synchronization between VueX and individual components.
 
-If external clients can modify widgets, they can also remove them.
-Widget components should have a robust solution for their `Widget` suddenly becoming null.
+If other components and clients can modify widgets, they can also remove them.
+Widget components must have a robust solution for their `Widget` suddenly becoming null.
 This solution preferably does not involve `if (widget.value !== null)` checks in every single function and computed property.
 
 By design, VueX requires us to send the entire configuration blob (eg. `Widget`, `Block`) when making a change.
@@ -238,12 +235,21 @@ block.value.data.enabled = true;
 saveBlock();
 ```
 
+A related issue is that the basic [state management pattern](https://vuex.vuejs.org/#what-is-a-state-management-pattern) from VueX
+becomes jittery if no caching is done during the datastore roundtrip.
+If you make a change, send it off to the datastore, and only render the change after the datastore confirms the change,
+it noticeably degrades the user experience.
+Values are set, revert to the previous value for a second, and then jump to the desired value again.
+
 A solution that addresses all these concerns is to use a locally cached copy of the object fetched from VueX.
 We can replace the value any time the store object changes.
 At the same time, the component can incrementally change the cached value before explicitly committing the changes.
+We render these local changes until the datastore / service roundtrip is complete,
+and we replace our local copy with authorative new data from VueX.
 
-If the store object is removed, we keep the cached copy to avoid errors during the evaluation of computed properties.
-To get rid of the defunct component tree, an `invalidate` function is injected.
+If the VueX object is removed, we do not remove our local copy.
+This avoids computed properties throwing errors when attempting to access nested values.
+To get rid of the defunct component tree, an injected `invalidate` function is called.
 
 As a case study, we'll use the `useWidget` composition function.
 
@@ -258,7 +264,7 @@ export interface UseWidgetComponent<WidgetT extends Widget> {
 export const WidgetIdKey: InjectionKey<string> = Symbol('$widgetId');
 export const InvalidateKey: InjectionKey<() => void> = Symbol('$invalidate');
 
-export function useWidget<WidgetT extends Widget>() {
+export function useWidget<WidgetT extends Widget>(): UseWidgetComponent<WidgetT> {
   // Both injected fields are mandatory.
   // Them not being set is a code-time bug.
   const widgetId = inject(WidgetIdKey);
@@ -267,7 +273,7 @@ export function useWidget<WidgetT extends Widget>() {
   // The owning component is responsible for pulling the plug.
   const invalidate = inject(InvalidateKey);
 
-  // We use the ! operator to pretend that the widget is never null.
+  // We use the ! operator to pretend that `widget` is never null.
   // We'll manually check it below.
   const widget = ref<WidgetT>(widgetStore.widgetById<WidgetT>(widgetId)!);
 
@@ -292,7 +298,7 @@ export function useWidget<WidgetT extends Widget>() {
     await widgetStore.saveWidget(w);
   }
 
-  // Replace the local object whenever the store object changes to a new non-null value.
+  // Replace `widget` whenever the store object changes to a new non-null value.
   // If the new object is null, we keep the last-known value,
   // and invalidate the component tree.
   watch(
@@ -328,6 +334,9 @@ and to place a watcher on this property that calls a debounced function to calcu
 This pattern is built on top of component-local caching,
 not because we expect regular external changes, but because we expect burst changes to `layout`.
 Without a debounce, the race condition in datastore roundtrips would noticeably degrade UX.
+
+This is the most variable of the patterns discussed.
+Other implementations may have subtly different requirements for what must be cached, and what must be debounced.
 
 ```ts
 export interface UseFlowPartsComponent {
@@ -413,7 +422,8 @@ export function useFlowParts(layoutId: Ref<string | null>): UseFlowPartsComponen
     },
 
     // 500ms is a ballpark guess that may require later tuning.
-    // We'd prefer to use an adaptive value based on actual performance.
+    // We'd prefer to use an adaptive value based on actual performance,
+    // but this is not supported by the lodash debounce function.
     500,
 
     // Here, we want single changes to trigger immediately,
@@ -447,3 +457,7 @@ export function useFlowParts(layoutId: Ref<string | null>): UseFlowPartsComponen
   };
 }
 ```
+
+## Comments and further work
+
+There are several flaws in the patterns discussed above
