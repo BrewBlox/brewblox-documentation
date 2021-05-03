@@ -70,6 +70,8 @@ module.exports = {
           children: [
             'decisions/',
             // Decisions are sorted descending by date.
+            'decisions/20210502_volatile_widgets',
+            'decisions/20210502_composition',
             'decisions/20201125_automation_revision',
             'decisions/20201008_devcon_connect_states',
             'decisions/20200902_redis_datastore',
