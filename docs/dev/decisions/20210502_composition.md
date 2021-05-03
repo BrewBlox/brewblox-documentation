@@ -457,7 +457,3 @@ export function useFlowParts(layoutId: Ref<string | null>): UseFlowPartsComponen
   };
 }
 ```
-
-## Comments and further work
-
-There are several flaws in the patterns discussed above
