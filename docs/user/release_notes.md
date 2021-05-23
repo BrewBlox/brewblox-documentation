@@ -45,7 +45,7 @@ There are plenty of use cases for this, ranging from recipe integration to autom
 Backlog estimates, and our experience making the main UI more user-friendly paint a less rosy picture.
 The runtime engine for executing custom automation functionality is relatively simple.
 Building an editor UI to handle all desired native and custom functionality is not complicated either, but it is *a lot* of work.
-Making said UI intuitive and user-friendly while handling complex control logic takes even more time, and many iterations.
+Making said UI intuitive and user-friendly while handling complex control logic takes even more work.
 
 Brewblox is process control software with an emphasis on brewing. Adding a generic low-code platform would be a prime example of the [Not Invented Here](https://en.wikipedia.org/wiki/Not_invented_here) syndrome.
 
