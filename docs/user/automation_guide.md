@@ -1,30 +1,54 @@
-# (PREVIEW) Automation guide
+# (Deprecated) Automation guide
 
-::: warning
-The automation service is currently in alpha.
+::: danger
+The automation service is deprecated, and will be disabled in a future update.
 
-It is not feature complete, and there will be bugs.
-Use at your own risk.
+::: details
+We've taken a long hard look at our automation service and its backlog, and concluded that we need to drastically curtail our ambitions here.
+
+The purpose of the automation service is to support custom functionality that is not (yet) provided by the Spark firmware.
+There are plenty of use cases for this, ranging from recipe integration to automated alerts to custom sensors and actuators.
+
+Backlog estimates, and our experience making the main UI more user-friendly paint a less rosy picture.
+The runtime engine for executing custom automation functionality is relatively simple.
+Building an editor UI to handle all desired native and custom functionality is not complicated either, but it is *a lot* of work.
+Making said UI intuitive and user-friendly while handling complex control logic takes even more work.
+
+Brewblox is process control software with an emphasis on brewing. Adding a generic low-code platform would be a prime example of the [Not Invented Here](https://en.wikipedia.org/wiki/Not_invented_here) syndrome.
+
+A happy compromise is to make our software compatible with one or more off-the-shelf low-code platforms.
+The important thing is that users should not have to switch UIs when brewing.
+This can be accomplished if the external editor is only required for creating the custom subroutines, and the Brewblox UI is used to start/stop/monitor them.
+
+We've had good experiences with our prototype integration with Node-RED, and will continue development there.
+Integrations with Brewfather, Home Assistant, and IFTTT are also under consideration.
+
+To summarize:
+- We are ending development of the current automation service.
+- We will keep developing automation functionality.
+- You can use a third-party editor to create and edit automation subroutines.
+- You should not have to switch UIs during brew days or active fermentations.
 :::
 
 ## Getting started
 
-The automation service will be added to `docker-compose.shared.yml` when it leaves alpha.
-
-Before then, you can enable it by adding the following service to your `docker-compose.yml` file:
+You can enable the automation services by adding the following services to your `docker-compose.yml` file:
 
 ```yaml
   automation:
     image: brewblox/brewblox-automation:${BREWBLOX_RELEASE}
     restart: unless-stopped
     init: true
+  automation-ui:
+    image: brewblox/brewblox-automation-ui:${BREWBLOX_RELEASE}
+    restart: unless-stopped
 ```
 
 ## Context
 
 The Spark controller is built to keep your system in a steady state.
 You set a desired temperature, and add a sensor to measure actual temperature. <br>
-The UI lets you change what is desired. 
+The UI lets you change what is desired.
 The Spark ensures actual becomes desired.
 
 If this behavior is what you need, it works great.
