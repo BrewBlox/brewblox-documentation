@@ -7,6 +7,107 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2021/05/??
+
+**firmware release date: 2021/03/09**
+
+For this release, we've made some significant improvements to the Builder editor, and adjusted our long-term plans for automation features.
+For the latter, we decided to stop development on our own automation service, and focus on integration with third-party platforms such as [Node-RED](https://nodered.org/).
+More on this below.
+
+### Builder improvements
+
+Until now, the Builder editor was unusable on mobile devices, to the point where we disabled it on small screens.
+We tackled some of the biggest deficiencies, and reworked the tools to improve compatibility with touch devices.
+The result is a much improved experience for everyone.
+
+The Builder editor, widget, and page now all support mousewheel / pinch zooming.
+You can drag to pan the view, eliminating the need for scroll bars.
+
+To simplify navigation, the editor now uses the default sidebar.
+You can select the active layout in the left sidebar, and editor tools from a sidebar on the right side.
+
+Editor tools and mouse actions have been merged. Select a tool in the sidebar, and click or drag to manipulate part(s).
+Keyboard shortcuts are still available, and act on hovered or selected parts.
+
+With the ability to arbitrarily zoom and drag the layout, we have also repurposed the grid.
+Parts can now be placed or moved anywhere, but the Builder widget will set the initial zoom level to make the grid fit the widget.
+You can use this to manipulate the default placement and zoom level.
+To help with this, we added a new editor tool: *Resize grid*. With this tool, you can click and drag to define a new grid area.
+
+### Automation service deprecation
+
+We've taken a long hard look at our automation service and its backlog, and concluded that we need to drastically curtail our ambitions here.
+
+The purpose of the automation service is to support custom functionality that is not (yet) provided by the Spark firmware.
+There are plenty of use cases for this, ranging from recipe integration to automated alerts to custom sensors and actuators.
+
+Backlog estimates, and our experience making the main UI more user-friendly paint a less rosy picture.
+The runtime engine for executing custom automation functionality is relatively simple.
+Building an editor UI to handle all desired native and custom functionality is not complicated either, but it is *a lot* of work.
+Making said UI intuitive and user-friendly while handling complex control logic takes even more time, and many iterations.
+
+Brewblox is process control software with an emphasis on brewing. Adding a generic low-code platform would be a prime example of the [Not Invented Here](https://en.wikipedia.org/wiki/Not_invented_here) syndrome.
+
+A happy compromise is to make our software compatible with one or more off-the-shelf low-code platforms.
+The important thing is that users should not have to switch UIs when brewing.
+This can be accomplished if the external editor is only required for creating the custom subroutines, and the Brewblox UI is used to start/stop/monitor them.
+
+We've had good experiences with our prototype integration with Node-RED, and will continue development there.
+Integrations with Brewfather, Home Assistant, and IFTTT are also under consideration.
+
+To summarize:
+- We are ending development of the current automation service.
+- We will keep developing automation functionality.
+- You can use a third-party editor to create and edit automation subroutines.
+- You should not have to switch UIs during brew days or active fermentations.
+
+### Automation editor deprecation
+
+The UI components for the automation editor came with heavy dependencies.
+We don't want to yank the rug out from underneath the users that already make use of the service, so we settled on forking the editor components to a separate service.
+The new *automation-ui* service is added automatically if you have an *automation* service in your docker-compose.yml file.
+You can access it by navigating to `/automation-ui`.
+The *Automation* widget still exists, and will open the editor UI in a new tab if you click on a "edit process" button.
+
+**Changes:**
+- (feature) The Builder editor is now enabled on mobile.
+- (feature) The Builder editor now uses the default sidebar.
+- (feature) Added the *Pan* tool to the Builder editor.
+- (feature) Added the *Resize grid* tool to Builder editor. Drag to define the new grid area.
+- (feature) The Builder grid area is now used to set the default shown area in Builder widgets. Parts can be placed outside the grid.
+- (feature) Scroll or pinch to adjust zoom in the Builder editor, Builder layout page, and Builder widget.
+- (feature) Merged Builder editor *Mouse actions* and *Tools*.
+- (feature) Placed Builder tools in the right-hand sidebar. Swipe to collapse/expand the sidebar.
+- (feature) Reworked Builder tools to be compatible with both mouse/keyboard and touch-based interfaces.
+- (feature) The *Valve* and *Actuator Valve* parts in Builder are merged into *Valve*. The valve is controlled manually if unlinked.
+- (feature) Added drag-to-pan to the Builder layout page and Builder widget.
+- (feature) Added toggleable scroll blocking overlays for the Builder widget on mobile dashboards.
+- (feature) Renamed the *Display Settings* block to *Spark Display*.
+- (feature) Spark system blocks can now be shown on dashboards. This includes:
+  - *Spark System Info*
+  - *Spark Display* (previously *Display Settings*)
+  - *Spark 2 Pins*
+  - *Spark 3 Pins*
+- (feature) Changes in *Quick Actions* are automatically converted whenever the system temperature unit changes.
+- (feature) Markdown-formatted text in session log notes is now rendered in the widget.
+- (feature) The session log note editor now shows a Markdown preview to the side.
+- (feature) Click on the dashboard/service/layout title in the top bar to edit.
+- (deprecation) Deprecated the Automation service.
+- (deprecation) Moved the Automation editor from the UI to a separate `automation-ui` service.
+- (deprecation) The `automation-ui` service is added if the `automation` service is detected during updates.
+- (deprecation) The *Automation* widget now links to the external editor at `/automation-ui`.
+- (enhancement) When removing a block on the Spark page, the option is given to automatically remove dedicated widgets from dashboards.
+- (enhancement) Improved responsiveness of dialog sizes.
+- (enhancement) The block actions menu now shows what Spark service the block belongs to.
+- (enhancement) Added custom styling for the dashboard page scrollbar.
+- (enhancement) The message log in the bottom bar now renders html formatting.
+- (enhancement) dashboard/service/layout titles are now shown centered in the top bar.
+- (enhancement) All arguments to `brewblox-ctl up/down/restart` are passed through to the underlying docker-compose command.
+- (fix) After running `brewblox-ctl service remove`, the removed service is also stopped.
+- (fix) The *RIMS* Builder part now has a minimum width of 3.
+- (fix) Builder parts now show an error if the linked block is of an incompatible type.
+
 ## Brewblox release 2021/04/07
 
 **firmware release date: 2021/03/09**
