@@ -7,7 +7,7 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
-## Brewblox release 2021/05/??
+## Brewblox release 2021/05/25
 
 **firmware release date: 2021/03/09**
 
@@ -104,9 +104,12 @@ The *Automation* widget still exists, and will open the editor UI in a new tab i
 - (enhancement) The message log in the bottom bar now renders html formatting.
 - (enhancement) dashboard/service/layout titles are now shown centered in the top bar.
 - (enhancement) All arguments to `brewblox-ctl up/down/restart` are passed through to the underlying docker-compose command.
+- (enhancement) Date/Time pickers now use system-native input fields.
+- (enhancement) Improved start/end date handling for graphs in the *Session Log* widget.
 - (fix) After running `brewblox-ctl service remove`, the removed service is also stopped.
 - (fix) The *RIMS* Builder part now has a minimum width of 3.
 - (fix) Builder parts now show an error if the linked block is of an incompatible type.
+- (fix) The *Stopwatch* widget now shows the correct time if the dashboard is reloaded while the timer is stopped.
 
 ## Brewblox release 2021/04/07
 
