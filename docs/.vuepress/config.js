@@ -36,12 +36,14 @@ module.exports = {
             'tutorials/scheduledscript/',
             'tutorials/subrouting',
             'tutorials/chronograf',
+            'tutorials/blocks_api',
           ],
         },
         {
           title: 'Using brewblox-service',
           children: [
             'service/architecture',
+            'service/routing',
             'service/profiling',
           ],
         },
