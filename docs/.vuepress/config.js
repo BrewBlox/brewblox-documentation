@@ -42,6 +42,8 @@ module.exports = {
           title: 'Using brewblox-service',
           children: [
             'service/architecture',
+            'service/routing',
+            'service/blocks_api',
             'service/profiling',
           ],
         },
