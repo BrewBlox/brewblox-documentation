@@ -8,6 +8,11 @@ This works well for us, but we had to add some custom functionality in the API t
 
 ## API service
 
+:::tip
+Service endpoints are documented using Swagger.
+For comprehensive endpoint documentation, navigate to `http://{HOST}/history/api/doc` in your browser.
+:::
+
 The `history` service implements the REST-based API wrapper for performing CRUD operations.
 Services are not supposed to connect to the Redis database itself.
 
@@ -19,8 +24,6 @@ The history service offers the following endpoints:
 - POST `/history/datastore/mset`
 - POST `/history/datastore/delete`
 - POST `/history/datastore/mdelete`
-
-For more detailed information on the API, see the `/history/api/doc` page.
 
 ## Namespaces
 

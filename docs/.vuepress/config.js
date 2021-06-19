@@ -36,7 +36,6 @@ module.exports = {
             'tutorials/scheduledscript/',
             'tutorials/subrouting',
             'tutorials/chronograf',
-            'tutorials/blocks_api',
           ],
         },
         {
@@ -44,6 +43,7 @@ module.exports = {
           children: [
             'service/architecture',
             'service/routing',
+            'service/blocks_api',
             'service/profiling',
           ],
         },
