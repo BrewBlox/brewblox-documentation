@@ -29,7 +29,8 @@ module.exports = {
         {
           title: 'Tutorials',
           children: [
-            'tutorials/remote_scripts',
+            'tutorials/dev_platform',
+            'tutorials/deployment',
             'tutorials/brewscript/',
             'tutorials/serialscript/',
             'tutorials/pubscript/',
@@ -45,12 +46,6 @@ module.exports = {
             'service/routing',
             'service/blocks_api',
             'service/profiling',
-          ],
-        },
-        {
-          title: 'Contributing',
-          children: [
-            'contributing/release_tools',
           ],
         },
         {
