@@ -17,7 +17,6 @@ module.exports = {
   themeConfig: {
     logo: '/favicon-96x96.png',
     nav: [
-      { text: 'Blog', link: '/blog/2021-06-30-this-is-the-brewblox-spark-4/' },
       { text: 'User guides', link: '/user/startup' },
       { text: 'Developer docs', link: '/dev/' },
       // Hardware section commented out for update / review Elco
