@@ -157,12 +157,21 @@ Please contact us if you have ideas for new sensors and would like to collaborat
 
 ## How will the Spark 4 fit in your brewery?
 As you can see, the Spark 4 will be very flexible. It will fit almost any brewery.
-This hardware upgrade brings the Spark in line with the flexibility in our new Brewblox software platform.
+
+### Our Brewblox software
+This hardware upgrade brings the Spark in line with the flexibility of our new Brewblox software platform.
 Brewblox lets you fully customize your control schemes, graphs, dashboards, interactive flow diagrams, and more.
 
 Each brewery will have a central Brewblox server, which you can run on a Raspberry Pi or a bigger Linux server.
 Multiple Spark 4 controllers can all connect to this central server to show you an overview of your entire brewery in one place.
 
+Introducing all the new functionality in Brewblox is a topic for another post.
+We will slowly phase out the BrewPi name and transition to our name Brewblox.
+
+The Spark is not based on the Raspberry Pi, the Raspberry Pi is just one of the hardware options for the Brewblox server.
+The Brewblox name aligns better with our modular approach to brewery control.
+
+### One or more Sparks?
 For maximum reliability, we recommend to keep sensor and actuator wires short: put the controller close to the tank.
 We recommend a Spark 4 per 1 or 2 tanks for professional breweries. Just the network cable should go to the central hub.
 Don't misuse the module system to wire your entire brewery to a single point.
@@ -178,7 +187,8 @@ That is why you can also opt to buy the Spark 4 without them, which saves costs 
 With simple brackets, the Spark and the I/O modules can be clicked onto on a DIN rail inside your box.
 
 
-
+## What do you think?
+Let us know your thoughts [on our community forum](https://community.brewpi.com/t/this-is-the-spark-4/).
 
 
 
