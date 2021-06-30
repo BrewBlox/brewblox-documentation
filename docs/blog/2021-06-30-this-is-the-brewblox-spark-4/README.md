@@ -146,3 +146,7 @@ Pressure sensors will allow level sensing and carbonation control.
 ### Chemical sensors
 We have also created prototypes for chemical sensors and are testing sensing acidity (PH) sensing and oxygen reducing potential (ORP).
 For both the chemical and the pressure sensors, we are designing a custom hygienic stainless steel probe.
+
+### DIY I/O modules
+With the I2C and SPI pins directly available on the bottom of the Spark 4, it will be easier to add prototype your own custom sensors.
+Contact us if you have ideas for this and we can help you get started. If we like your proposal, we might even make it a new officially supported and available I/O module.
