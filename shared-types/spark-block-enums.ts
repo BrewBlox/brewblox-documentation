@@ -21,12 +21,15 @@ export const BlockIntfType = Enum(
 );
 
 export const SystemBlockType = Enum(
-  'SysInfo',
+  'DisplaySettings',
   'Groups',
   'OneWireBus',
+  'SysInfo',
   'Ticks',
-  'WiFiSettings',
   'TouchSettings',
+  'WiFiSettings',
+  'Spark2Pins',
+  'Spark3Pins',
 );
 
 export const UserBlockType = Enum(
@@ -37,7 +40,6 @@ export const UserBlockType = Enum(
   'Balancer',
   'DeprecatedObject',
   'DigitalActuator',
-  'DisplaySettings',
   'DS2408',
   'DS2413',
   'InactiveObject',
@@ -47,8 +49,6 @@ export const UserBlockType = Enum(
   'Pid',
   'SetpointProfile',
   'SetpointSensorPair',
-  'Spark2Pins',
-  'Spark3Pins',
   'TempSensorCombi',
   'TempSensorMock',
   'TempSensorOneWire',

@@ -11,8 +11,10 @@ This reference document assumes a familiarity with [InfluxDB 1.8 concepts](https
 The latest InfluxDB version 2.0, which is a major upgrade from 1.8.
 This includes a rework of some storage paradigms, and the new Flux query language.
 
-A blocking issue is that [2.0 does not support 32-bit architectures](https://docs.influxdata.com/influxdb/v2.0/upgrade/v1-to-v2/).
+A problem is that [Influx 2.0 will not support 32-bit architectures](https://www.influxdata.com/blog/influxdb-oss-and-enterprise-roadmap-update-from-influxdays-emea/).
 Raspberry Pi OS uses the ARM32 architecture, making this a dealbreaker for Brewblox.
+
+InfluxDB 1.8 is supported until the end of 2021. We are actively looking at alternatives to replace it.
 
 ## Downsampling and retention policies
 

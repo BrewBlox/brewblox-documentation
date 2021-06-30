@@ -1,11 +1,8 @@
-# Writing code remotely
+# Modifying files on the Pi
 
-By default we recommend to install the "lite" version of Raspbian, and connect to your Pi over SSH.
+The [Development platform doc](./dev_platform) lists the options for writing new services and scripts.
 
-Other tutorials contain instructions for running code on your Pi.
-There are terminal-based text editors, but they have a very steep learning curve.
-A good solution is to write the code on your own computer, and then copy it to the Pi to run.
-
+At some point, you'll want to copy files to or from the machine you're using to run Brewblox.
 Below we outline some solutions for easily doing this. We'll stick with free solutions.
 
 ## FileZilla
@@ -28,8 +25,12 @@ To get started, you can follow [this guide](https://linuxize.com/post/how-to-use
 
 For directly editing and running files on your Pi, you can also use the [Remote Development plugin](https://code.visualstudio.com/docs/remote/remote-overview) for [VS Code](https://code.visualstudio.com/).
 
-We use VS Code as our primary editor (we write code in Python / TypeScript / C++ / bash), and so far we've been very happy with it.
-
 It must be noted that this approach is to be used for remotely edit and run code. If you need to copy other files (eg. backups), you'll still need to use `scp` or FileZilla.
+
+::: warning
+The Pi is not a powerful platform - performance of any compilation or build step will be terrible.
+
+For writing services, take a look at the options listed by the [development platform doc](./dev_platform).
+:::
 
 ![VSCode Remote](../../images/vscode-remote.png)
