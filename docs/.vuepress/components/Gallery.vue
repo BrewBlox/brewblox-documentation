@@ -19,6 +19,10 @@ export default {
       'https://placekitten.com/807/800',
       ],
     },
+    thumbSize: {
+      type: String,
+      default: () => '100px',
+    },
   },
   data: () => ({
       index: null,
@@ -33,6 +37,7 @@ export default {
       :key="i"
       class="image"
       :src="image"
+      :style="{width: thumbSize, height: thumbSize}"
       @click="index = i"
     >
     <vue-gallery-slideshow
@@ -45,8 +50,6 @@ export default {
 
 <style scoped>
 .image {
-  width: 100px;
-  height: 100px;
   background-size: cover;
   cursor: pointer;
   margin: 5px;
