@@ -1,10 +1,12 @@
 <script>
 import VueGallerySlideshow from 'vue-gallery-slideshow';
+import NoSSR from 'vue-no-ssr';
 
 export default {
   name: 'Gallery',
   components: {
     VueGallerySlideshow,
+    'no-ssr': NoSSR,
   },
   props: {
     images: {
@@ -21,7 +23,7 @@ export default {
     },
     thumbSize: {
       type: String,
-      default: () => '100px',
+      default: '100px',
     },
   },
   data: () => ({
@@ -40,11 +42,13 @@ export default {
       :style="{width: thumbSize, height: thumbSize}"
       @click="index = i"
     >
-    <vue-gallery-slideshow
-      :images="images"
-      :index="index"
-      @close="index = null"
-    />
+    <no-ssr>
+      <vue-gallery-slideshow
+        :images="images"
+        :index="index"
+        @close="index = null"
+      />
+    </no-ssr>
   </div>
 </template>
 
