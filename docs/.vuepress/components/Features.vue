@@ -22,7 +22,7 @@ export default {
 <template>
   <div class="container">
     <div class="feature-card text-center">
-      <mdiViewGridPlus class="icon" />
+      <mdiViewGridPlus class="icon" :size="80" />
       <div class="card-title pt-none">
         Flexible
       </div>
@@ -33,8 +33,7 @@ export default {
     </div>
     <div class="feature-card text-center">
       <div>
-        <mdiHexagonMultipleOutline class="icon" />
-        <!-- <q-icon :name="icons.multiple" /> -->
+        <mdiHexagonMultipleOutline class="icon" :size="80" />
       </div>
       <div class="card-title pt-none">
         Multiple processes
@@ -46,8 +45,7 @@ export default {
     </div>
     <div class="feature-card text-center">
       <div>
-        <mdiMonitorDashboard class="icon" />
-        <!-- <q-icon :name="icons.dashboard" /> -->
+        <mdiMonitorDashboard class="icon" :size="80" />
       </div>
       <div class="card-title pt-none">
         One dashboard
@@ -59,8 +57,7 @@ export default {
     </div>
     <div class="feature-card text-center">
       <div>
-        <mdiChartBellCurveCumulative class="icon" />
-        <!-- <q-icon :name="icons.chart" /> -->
+        <mdiChartBellCurveCumulative class="icon" :size="80" />
       </div>
       <div class="card-title pt-none">
         Charts of everything
@@ -73,8 +70,7 @@ export default {
     </div>
     <div class="feature-card text-center">
       <div>
-        <mdiOpenSourceInitiative class="icon" />
-        <!-- <q-icon :name="icons.openSource" /> -->
+        <mdiOpenSourceInitiative class="icon" :size="80" />
       </div>
       <div class="card-title pt-none">
         Open Source
@@ -86,8 +82,7 @@ export default {
     </div>
     <div class="feature-card text-center">
       <div>
-        <mdiCloudOffOutline class="icon" />
-        <!-- <q-icon :name="icons.noCloud" /> -->
+        <mdiCloudOffOutline class="icon" :size="80" />
       </div>
       <div class="card-title pt-none">
         No cloud
@@ -118,10 +113,6 @@ export default {
 .icon
   color: $blue-grey-4
   margin: 20px
-
-  svg
-    width: 80px
-    height: 80px
 
 .card-title
   padding: 5px
