@@ -138,7 +138,7 @@ module.exports = {
     repo: 'brewblox/brewblox-documentation',
     docsDir: 'docs',
     docsBranch: 'develop',
-    lastUpdated: 'Last Updated',
+    // lastUpdated: 'Last Updated',
     editLinks: true,
   },
   chainMarkdown: config => {
