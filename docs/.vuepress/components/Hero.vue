@@ -43,7 +43,6 @@
 .hero-card
   width: 100%
   max-width: 640px
-  min-width: 480px
 
 .logo
   width: 100%

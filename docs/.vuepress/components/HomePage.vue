@@ -22,10 +22,7 @@
   margin: auto
 
 .section
-  padding: 100px 0px
-
-.section.hero
-  padding-top: 100px
+  padding: calc(min(5vh, 100px)) 0px
 
 .usecases
   background: lighten($blue-grey, 50%)
