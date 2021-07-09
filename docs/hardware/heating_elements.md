@@ -10,7 +10,7 @@ Always consult an electrician for advice and help with wiring your elements. Und
 
 ## Heating water
 
-Heating water takes a lot of energy. For example: with a heating element of 3500W it would take 18 minutes to heat 20L of water to 65C for mashing (20 - 65C), or 32 minutes to boil (20 - 100C). Heating water with this setup adds 50 minutes of waiting time to your brewing day. However, if you were to switch to 50L batches, the waiting time already adds up to more than two hours. Select a higher power heating element when your mains outlet allows. You can calculate the expected heating time in your situation with the calculator below.
+Heating water takes a lot of energy. For example: with a heating element of 3500W it would take 18 minutes to heat 20L of water to 65°C for mashing (20 - 65°C), or 32 minutes to boil (20 - 100°C). Heating water with this setup adds 50 minutes of waiting time to your brewing day. However, if you were to switch to 50L batches, the waiting time already adds up to more than two hours. Select a higher power heating element when your mains outlet allows. You can calculate the expected heating time in your situation with the calculator below.
 
 <HeatCalculator/>
 
@@ -44,7 +44,7 @@ Three phase mains connections are the high-power electrical connections outside 
 
 The second connection option is the delta configuration. With the exception of Norway, our heating elements should **never** be connected in delta configuration as it will fry your element.
 
-**Delta configuration:** in a three phase delta configuration the individual heating elements are connected between two adjacent phases. For example: element 1 is connected between L1 and L2, element two between L2 and L3, etc. The voltage over each element is 400V AC. Our heating elements are dimensioned to operate at 230 - 240 V AC, operation at 400V AC draws too much current (power) and is unsafe. Our heating elements *cannot* be used in three phase delta configuration. **Exception:** in some parts of Norway electrical power is distributed over three phase connections with a voltage of 230V AC phase to phase (instead of 400V AC). In this case connecting your element in delta configuration is safe.
+**Delta configuration:** in a three phase delta configuration the individual heating elements are connected between two adjacent phases. For example: element 1 is connected between L1 and L2, element two between L2 and L3, etc. The voltage over each element is 400V AC. Our heating elements are dimensioned to operate at 230 - 240V AC, operation at 400V AC draws too much current (power) and is unsafe. Our heating elements *cannot* be used in three phase delta configuration. **Exception:** in some parts of Norway electrical power is distributed over three phase connections with a voltage of 230V AC phase to phase (instead of 400V AC). In this case connecting your element in delta configuration is safe.
 
 ![3-Phase power](../images/3-phase.svg)
 
@@ -103,8 +103,6 @@ Foldback heating elements are straight elements fold back, hence the name. The f
 
 <TableFoldback/>
 
-TODO: XX BrewPi part. no. nog invullen
-
 #### Mounting kit
 
 The basic design of these foldback elements does not provide a protective earth terminal, nor a cover for the wiring. To overcome these deficiencies we have designed a custom mounting kit, see photos below. The mounting kit is sold separately, and can be found in the [store](https://store.brewpi.com/mashing/stainless-steel-heating-elements/heating-element-mounting-kit). With the mounting kit installed your element and kettle are grounded, and the wiring is safe from liquids.
@@ -136,9 +134,9 @@ To connect an heating element to a single phase outlet requires connecting three
 ![1-phase-connect-123](../images/1-phase-connect-123.svg)
 
 **Examples:**
-- Round heating element [#7](#round) has one resistor and draws a current of 15.2A when connected to a 230V outlet.
-- Tri-clamp element [#14](#tri-clamp) has two resistors and draws a current of 6.1A per resistor at 230V. When connected in parallel to a 230V single phase outlet the element will draw a current of 2 x 6.1 = 12.2A.
-- Round heating element [#2](#round) has three resistors and draws a current of 12.3A per resistor at 230V. When connected in parallel to a 230V single phase outlet the element will draw a current of 3 x 12.3 = 36.9A.
+- Round heating element [BPI_007](#round) has one resistor and draws a current of 15.2A when connected to a 230V outlet.
+- Tri-clamp element [BPI_TC_2800](#tri-clamp) has two resistors and draws a current of 6.1A per resistor at 230V. When connected in parallel to a 230V single phase outlet the element will draw a current of 2 x 6.1 = 12.2A.
+- Round heating element [BPI_002](#round) has three resistors and draws a current of 12.3A per resistor at 230V. When connected in parallel to a 230V single phase outlet the element will draw a current of 3 x 12.3 = 36.9A.
 
 The wires connected to your element should be of sufficient diameter to transport the current, and the current should not exceed the maximum current of your circuit breaker. More about wire diameter [here](#wire-gauge).
 
@@ -155,7 +153,7 @@ Connecting a 3 resistor element to a three phase outlet requires connecting 5 wi
 ![3-Phase power](../images/3-phase-connect-3.svg)
 
 **Example:**
-- Round heating element [#4](#round) has three resistors and draws a current of 14.5A per phase when connected to a 230V three phase outlet.
+- Round heating element [BPI_004](#round) has three resistors and draws a current of 14.5A per phase when connected to a 230V three phase outlet.
 
 The wires connected to your element should be of sufficient diameter to transport the current, and the current should not exceed the maximum current of your circuit breaker. More about wire diameter in the next section.
 
@@ -189,7 +187,7 @@ TODO: Elco foto maken vervlakte ketelwand.
 
 ## Operation
 
-In your brewing setup, the heating element will be used to ramp up the temperature of the mash / wort and keep it there for some time dependent on your receipt. For instance during mashing you typically want your mash temperature somewhere in the region of 65C (150F) for some 10s of minutes. To keep the mash at a steady temperature we will switch the element on for short periods of time to reduce its effective power. This technique is called Pulse Width Modulation (PWM). In this section we will show you what hardware you need, and how to connect it to your element and mains. The remainder of the control loop requires a controller and a temperature sensor. For the controller you can use the [BrewPi Spark](https://store.brewpi.com/temperature-control/brewpi-spark-3), temperature sensors can be found in the [store](https://store.brewpi.com/temperature-control/temperature-sensors).
+In your brewing setup, the heating element will be used to ramp up the temperature of the mash / wort and keep it there for some time dependent on your receipt. For instance during mashing you typically want your mash temperature somewhere in the region of 65C (150F) for some 10s of minutes. To keep the mash at a steady temperature we will switch the element on for short periods of time to reduce its effective power. This technique is called Pulse Width Modulation (PWM). In this section we will show you what hardware you need, and how to connect it to your element and mains. The remainder of the control loop requires a controller and a temperature sensor. For the controller you can use the [Brewblox Spark](https://store.brewpi.com/temperature-control/brewpi-spark-3), temperature sensors can be found in the [store](https://store.brewpi.com/temperature-control/temperature-sensors).
 
 TODO - Elco: herschrijven.
 
