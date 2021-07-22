@@ -37,7 +37,6 @@ module.exports = {
             'tutorials/pubscript/',
             'tutorials/scheduledscript/',
             'tutorials/subrouting',
-            'tutorials/chronograf',
           ],
         },
         {
@@ -54,7 +53,6 @@ module.exports = {
           children: [
             'reference/events',
             'reference/history_events',
-            'reference/influx_downsampling',
             'reference/state_events',
             'reference/spark_state',
             'reference/block_types',
@@ -126,6 +124,7 @@ module.exports = {
         'backup_guide',
         'blocks_in_depth',
         'removing_things',
+        'grafana',
         'wireguard',
         'release_notes',
         'system_upgrades',
