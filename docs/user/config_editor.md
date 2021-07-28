@@ -1,15 +1,12 @@
-# Remotely editing files
+# Getting started: config editor
 
 Brewblox service configuration is defined in various files placed in your installation directory (default `~/brewblox`).
 
-*brewblox-ctl* includes commands for common configuration changes such as [adding a Spark service](./adding_spark),
-but occasionally you'll want to inspect or edit the files themselves.
+*brewblox-ctl* has commands for common configuration changes.
+If you need to change something, be sure to check there first.
 
-If you're logged in using SSH, you can't open files in a graphical text editor.
-Terminal-based editors such as *nano* or *vim* are perfectly serviceable, but take some getting used to.
-
-An alternative is to use [Visual Studio Code](https://code.visualstudio.com/) with a remote editor plugin.
-This way you can use your Windows/Mac computer to read and edit files on your Brewblox service host.
+If you have to read or edit configuration files, we recommend [Visual Studio Code](https://code.visualstudio.com/) with a remote editor plugin.
+This way, you can use a graphical text editor, and the absolute minimum of terminal commands.
 
 ## Installation
 
