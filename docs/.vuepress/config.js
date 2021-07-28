@@ -112,6 +112,7 @@ module.exports = {
       '/user/': [
         'startup',
         'ferment_guide',
+        'config_editor',
         'control_chains',
         'all_widgets',
         'all_blocks',
