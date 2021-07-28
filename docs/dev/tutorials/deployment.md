@@ -23,7 +23,7 @@ To get started, you can follow [this guide](https://linuxize.com/post/how-to-use
 
 ## Visual Studio Code Remote Development
 
-For directly editing and running files on your Pi, you can also use [Visual Studio Code with the SSH Remote plugin](../../user/remote_editor).
+For directly editing and running files on your Pi, you can also use [Visual Studio Code with the SSH Remote plugin](../../user/config_editor).
 
 It must be noted that this approach is best used for editing text files and running terminal commands. If you need to copy other files (eg. backups), you'll still need to use `scp` or FileZilla.
 
