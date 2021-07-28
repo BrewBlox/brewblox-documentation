@@ -33,7 +33,7 @@ Some services are used for shared functionality: The **history service** collect
 
 Some examples of supported devices:
 - The [BrewPi Spark](./adding_spark.md)
-- The [Tilt hydrometer](https://github.com/j616/brewblox-tilt)
+- The [Tilt hydrometer](https://github.com/BrewBlox/brewblox-tilt)
 - The [iSpindel hydrometer ](https://github.com/bdelbosc/brewblox-ispindel)
 - The [Plaato digital airlock](https://github.com/Brewblox/brewblox-plaato)
 
@@ -69,6 +69,7 @@ SvcTilt -right-> DevTilt
 ## Service configuration
 
 Services are configured using the `docker-compose.yml` file. [YAML](https://learnxinyminutes.com/docs/yaml/) is a markup language that uses indentation to show nested values.
+You can follow [this guide](./config_editor) to install a graphical text editor for your configuration files.
 
 A shortened configuration file:
 
@@ -104,7 +105,7 @@ services:
     image: brewblox-image-one
 ```
 
-BAD: 
+BAD:
 ```yaml
 services:
   service-one:
@@ -155,7 +156,7 @@ The basic principles still apply. When you want to control multiple Spark device
 
 These settings are the same for every Spark service (and many other services).
 
-`privileged` services can use USB connections. 
+`privileged` services can use USB connections.
 
 `restart: unless-stopped` does what it says: when your service crashes, it will automatically restart.
 

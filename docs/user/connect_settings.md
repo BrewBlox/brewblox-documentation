@@ -3,6 +3,7 @@
 The Spark service can connect to the controller using either Wifi, or USB. Once connected, there is no difference.
 
 Connection settings are specified by editing the Spark service arguments in the `docker-compose.yml` file, or by using the `brewblox-ctl add-spark` command.
+You can follow [this guide](./config_editor) to install a graphical text editor for your configuration files.
 
 See the [Multiple Devices](./multiple_devices.md) guide for an explanation on service configuration.
 
@@ -72,6 +73,10 @@ Example configuration with `--device-id` set:
       --name=spark-two
       --device-id=300045000851353532343835
 ```
+
+:::tip
+In YAML, `>-` indicates the start of a [multi-line string](https://yaml-multiline.info/).
+:::
 
 ## `--device-host`
 
@@ -202,7 +207,7 @@ Because USB devices are more specific, they will always be checked first.
 
 `device-id` is used to disqualify discovered devices. If `--device-id` is not set, all discovered devices are valid.
 
-The argument value is the unique device ID of your Spark controller. 
+The argument value is the unique device ID of your Spark controller.
 
 Specific device, over Wifi or USB:
 ```yaml
