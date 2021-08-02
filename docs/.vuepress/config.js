@@ -40,6 +40,12 @@ module.exports = {
           ],
         },
         {
+          title: 'Migration tools',
+          children: [
+            'migration/influxdb',
+          ],
+        },
+        {
           title: 'Using brewblox-service',
           children: [
             'service/architecture',
@@ -49,7 +55,7 @@ module.exports = {
           ],
         },
         {
-          title: 'Reference Documents',
+          title: 'Reference documents',
           children: [
             'reference/events',
             'reference/history_events',
@@ -62,7 +68,7 @@ module.exports = {
           ],
         },
         {
-          title: 'Design Decisions',
+          title: 'Design decisions',
           children: [
             'decisions/',
             // Decisions are sorted descending by date.
