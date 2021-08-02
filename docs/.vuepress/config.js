@@ -23,6 +23,7 @@ module.exports = {
       // Hardware section commented out for update / review Elco
       // { text: 'Hardware', link: '/hardware/' },
       { text: 'BrewPi', link: 'https://www.brewpi.com/' },
+      { text: 'Discord', link: 'https://discord.gg/WaFYD2jaaT' },
     ],
     sidebar: {
       '/dev/': [
@@ -37,7 +38,12 @@ module.exports = {
             'tutorials/pubscript/',
             'tutorials/scheduledscript/',
             'tutorials/subrouting',
-            'tutorials/chronograf',
+          ],
+        },
+        {
+          title: 'Migration tools',
+          children: [
+            'migration/influxdb',
           ],
         },
         {
@@ -50,11 +56,10 @@ module.exports = {
           ],
         },
         {
-          title: 'Reference Documents',
+          title: 'Reference documents',
           children: [
             'reference/events',
             'reference/history_events',
-            'reference/influx_downsampling',
             'reference/state_events',
             'reference/spark_state',
             'reference/block_types',
@@ -64,10 +69,11 @@ module.exports = {
           ],
         },
         {
-          title: 'Design Decisions',
+          title: 'Design decisions',
           children: [
             'decisions/',
             // Decisions are sorted descending by date.
+            'decisions/20210718_victoria_metrics',
             'decisions/20210502_volatile_widgets',
             'decisions/20210502_composition',
             'decisions/20201125_automation_revision',
@@ -112,6 +118,7 @@ module.exports = {
       '/user/': [
         'startup',
         'ferment_guide',
+        'config_editor',
         'control_chains',
         'all_widgets',
         'all_blocks',
@@ -125,6 +132,7 @@ module.exports = {
         'backup_guide',
         'blocks_in_depth',
         'removing_things',
+        'grafana',
         'wireguard',
         'release_notes',
         'system_upgrades',

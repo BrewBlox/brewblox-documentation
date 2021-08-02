@@ -7,6 +7,80 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2021/08/02
+
+**firmware release date: 2021-05-27**
+
+Our planning has been upset somewhat lately, with Elco taking parental leave a lot earlier than expected.
+To compensate, we've shifted a non-firmware task forward: the replacement of our history database.
+
+### New history database
+
+InfluxDB announced that they will drop support for 32-bit architectures on 1/1/2022.
+This is a deal-breaker for us, as Raspberry Pi OS has a 32-bit architecture.
+
+We decided to go with [Victoria Metrics](https://github.com/VictoriaMetrics/VictoriaMetrics) as replacement,
+as it had the best combination of features and small CPU/RAM/disk footprint.
+For a more detailed explanation, you can find the decision document [here](https://brewblox.netlify.app/dev/decisions/20210718_victoria_metrics).
+
+Database migrations are always a big step, but we're pretty happy with this one.
+Broadly speaking, it's twice as fast, and uses half the memory.
+
+Where the InfluxDB data required some custom handling,
+the Victoria Metrics model is much simpler.
+It's simple enough that you can [add a Grafana service](https://brewblox.netlify.app/user/grafana), and have it work as expected out of the box.
+
+Your system will be immediately functional after updating, and will log data into Victoria Metrics. Older data will have to be copied from InfluxDB to Victoria.
+For this, we made a [data migration command](https://brewblox.netlify.app/dev/migration/influxdb)
+
+You can run the migrate command in the background. Depending on how much data you have, the migration takes minutes to hours.
+Migrations can safely be stopped and restarted or resumed.
+After the migration is done, you'll still have all your old history data in the `brewblox/influxdb/` directory.
+
+### Tilt Service
+
+James Sandford's brewblox-tilt service has been very popular for some years now, and we've decided to make it official.
+James was happy for us to take over development and maintenance, so we [forked his service](https://github.com/BrewBlox/brewblox-tilt).
+The new service comes with support for the Tilt Pro.
+
+You can install the new Tilt service by running `brewblox-ctl add-tilt -f`.
+
+### Graphical config editor
+
+For common configuration changes, we add commands to brewblox-ctl.
+You'll still sometimes have to edit the configuration files themselves.
+
+Terminal text editors have a pretty steep learning curve, but by now the *Remote - SSH* plugin for Visual Studio Code is stable enough that we're happy recommending it.
+This way you read and edit text files from the comfort of your own computer.
+
+You can find the install guide [here](https://brewblox.netlify.app/user/config_editor.html).
+
+**Changes:**
+- (feature) Changed history database from InfluxDB to Victoria Metrics.
+- (feature) Added `/victoria` endpoint. `/victoria/api/v1` is compatible with the [Prometheus HTTP API](https://prometheus.io/docs/prometheus/latest/querying/api/).
+- (feature) Added `/history/timeseries` endpoints. For an overview, see `/history/api/doc`
+- (feature) The "hide after" period for Graph and Metrics fields is now customizable. The default is still 1d.
+- (feature) The maximized Graph widget is now a separate page with its own URL.
+  - Refreshing the page will no longer close the graph.
+  - You can bookmark the page to instantly visit the maximized graph.
+- (feature) We now maintain the Tilt service.
+- (feature) The Tilt service now supports the Tilt Pro.
+- (feature) Added `brewblox-ctl add-tilt`.
+- (feature) Added `brewblox-ctl database from-couchdb` command.
+- (feature) Added `brewblox-ctl database from-influxdb` command.
+- (docs) Added user guide for VSCode with SSH Remote plugin.
+- (docs) Updated Troubleshooting guide.
+- (docs) Added Grafana service install guide.
+- (docs) Documented advanced usage of `brewblox-ctl database from-influxdb`.
+- (improve) Added Apple PWA headers to the UI.
+- (improve) `brewblox-ctl service remove` no longer requires the `-n/--name` option for services, and can remove multiple services at once.
+  - OLD: `brewblox-ctl service remove -n spark-one`.
+  - NEW: `brewblox-ctl service remove spark-one`.
+- (deprecation) Removed the `brewblox-ctl service editor` command.
+- (deprecation) Removed `/history/history` endpoints.
+- (fix) The side pane graph in block widgets now correctly re-renders when the duration is changed.
+- (fix) The builder layout is now always correctly centered when opening the widget dialog.
+
 ## Brewblox release 2021/05/25
 
 **firmware release date: 2021/03/09**

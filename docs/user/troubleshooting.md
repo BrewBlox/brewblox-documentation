@@ -45,6 +45,56 @@ sudo systemctl disable dphys-swapfile.service
 sudo reboot
 ```
 
+**My Pi suddenly reboots**
+
+This is often caused by underpowered chargers, especially if the Pi reboots while pulling or starting Docker images.
+For more information, see [the official power requirements page](https://www.raspberrypi.org/documentation/hardware/raspberrypi/power/README.md).
+
+**After a crash, I get a "port already allocated" error**
+
+:::details Example error
+```
+pi@raspberrypi:~/brewblox$ brewblox-ctl up
+Starting brewblox_redis_1 …
+Starting brewblox_spark-one_1 …
+Starting brewblox_eventbus_1 …
+Starting brewblox_ui_1 …
+Starting brewblox_influx_1 …
+Starting brewblox_redis_1 … done
+Starting brewblox_spark-one_1 … done
+Starting brewblox_eventbus_1 … done
+Starting brewblox_ui_1 … done
+Starting brewblox_influx_1 … done
+Starting brewblox_history_1 … done
+d340b): Bind for 0.0.0.0:443 failed: port is already allocated
+
+ERROR: for traefik Cannot start service traefik: driver failed programming external connec
+y on endpoint brewblox_traefik_1 (10330d14f76b330f33ad4aa17947be57c452f3b2f32521fe08a4ed9ca
+0b): Bind for 0.0.0.0:443 failed: port is already allocated
+ERROR: Encountered errors while bringing up the project.
+Command ‘docker-compose up -d --remove-orphans’ returned non-zero exit status 1.
+```
+:::
+
+This is caused by leftover zombie processes created by Docker.
+To forcibly remove them, run:
+
+```
+brewblox-ctl kill --zombies
+```
+
+**My Pi is no longer accessible as [HOSTNAME].local**
+
+The Pi itself publishes the `[HOSTNAME].local` DNS record.
+Sometimes the DNS record is still active when the name service start.
+
+To reset, access the Pi by using the IP address or `[HOSTNAME]-2.local` (eg. *raspberrypi-2.local*),
+and restart the name service by running:
+
+```
+sudo service restart avahi-daemon
+```
+
 ## Frequently asked questions
 
 **No Spark controller detected (in service, or in brewblox-ctl)**
@@ -116,13 +166,14 @@ You can find the syntax in the [connection settings guide](./connect_settings.md
 
 When doing so, it is advised to assign a fixed IP address to the Spark in your router settings. (Also called "static DHCP lease").
 
-**How do I display temperature in Fahrenheit?**
+**How do I display temperature values in Fahrenheit?**
 
-This can be set separately for Spark service.
+In the UI, go to the *Admin* page. This can be accessed at the top of the sidebar.
 
-- Go to the Spark service page
-- In the top right corner, click on the Actions button (three vertical dots).
-- Click on `Configure used units`, and set desired values for the UI and the Spark Display.
+Here, go to *General settings* -> *Temperature units*, and select Fahrenheit.
+
+History data field names include the unit.
+If you have active graphs, you will need to reconfigure them to use the Fahrenheit values.
 
 **Why can removed or renamed blocks still be selected in the Graph Widget settings?**
 
@@ -134,7 +185,3 @@ The old name will disappear from the Graph widget settings 24 hours after the bl
 Units are part of the field name. For 24 hours after changing units from Celsius to Fahrenheit,
 you'll see both `spark-one/block/value[degC]` and `spark-one/block/value[degF]` in the Graph settings.
 
-**My Pi suddenly reboots**
-
-This is often caused by underpowered chargers, especially if the Pi reboots while pulling or starting Docker images.
-For more information, see [the official power requirements page](https://www.raspberrypi.org/documentation/hardware/raspberrypi/power/README.md).
