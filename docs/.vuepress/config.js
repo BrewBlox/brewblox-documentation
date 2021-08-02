@@ -37,7 +37,6 @@ module.exports = {
             'tutorials/pubscript/',
             'tutorials/scheduledscript/',
             'tutorials/subrouting',
-            'tutorials/chronograf',
           ],
         },
         {
@@ -54,7 +53,6 @@ module.exports = {
           children: [
             'reference/events',
             'reference/history_events',
-            'reference/influx_downsampling',
             'reference/state_events',
             'reference/spark_state',
             'reference/block_types',
@@ -68,6 +66,7 @@ module.exports = {
           children: [
             'decisions/',
             // Decisions are sorted descending by date.
+            'decisions/20210718_victoria_metrics',
             'decisions/20210502_volatile_widgets',
             'decisions/20210502_composition',
             'decisions/20201125_automation_revision',
@@ -126,6 +125,7 @@ module.exports = {
         'backup_guide',
         'blocks_in_depth',
         'removing_things',
+        'grafana',
         'wireguard',
         'release_notes',
         'system_upgrades',

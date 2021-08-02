@@ -1,7 +1,7 @@
 # Publishing history data
 
 Services commonly generate sensor data that should be stored in a Time-Series Database (TSDB).
-Brewblox uses [InfluxDb](https://www.influxdata.com/) as its TSDB for history data, and [MQTT events](./events) as publisher protocol.
+Brewblox uses [Victoria Metrics](https://github.com/VictoriaMetrics/VictoriaMetrics) as its TSDB for history data, and [MQTT events](./events) as publisher protocol.
 
 The `history` service acts as database interface layer for both publishing and querying data.
 
@@ -13,7 +13,7 @@ The history service is subscribed to `brewcast/history/#`.
 This means that events should be published to a topic starting with `brewcast/history`.
 
 ::: tip
-For debugging purposes, we recommend to append the service name to the topic.
+For debugging purposes, we recommend appending the service name to the topic.
 You can then use an MQTT client to subscribe to eg. `brewcast/history/my-service`, and avoid noise from unrelated other services.
 :::
 
@@ -62,10 +62,7 @@ For example:
 ```
 
 The data is flattened before it is inserted into the database.
-The `key` field is considered the data source name, and becomes the InfluxDB measurement name.
-
-The `data` field is flattened.
-The key to all values is set as a /-separated path that includes the key of all parent objects.
+The name of all values is set as a /-separated path that includes the `key` field, and the key of all parent objects.
 
 The data in this event...
 
@@ -76,10 +73,10 @@ The data in this event...
         "block1": {
             "sensor1": {
                 "settings": {
-                    "setting": "setting"
+                    "setting": 10
                 },
                 "values": {
-                    "value": "val",
+                    "value": 5,
                     "other": 1
                 }
             }
@@ -92,13 +89,25 @@ The data in this event...
 
 ```json
 {
-    "block1/sensor1/settings/setting": "setting",
-    "block1/sensor1/values/value": "val",
-    "block1/sensor1/values/other": 1
+    "controller1/block1/sensor1/settings/setting": 10,
+    "controller1/block1/sensor1/values/value": 5,
+    "controller1/block1/sensor1/values/other": 1
 }
 ```
 
-::: warning
-Services are expected to sanitize data before publishing.
-**Any non-numerical values will be set to NULL in the history database**. Remove these values beforehand to prevent empty columns.
-:::
+The database only supports numeric values.
+The history service will attempt to convert values to `float` before insertion,
+and ignores all values that can't be converted.
+
+**VALID**:
+- `10`
+- `1.234`
+- `true` (converted to `1`)
+- `false` (converted to `0`)
+- `"8"`
+
+**IGNORED**:
+- `"test"`
+- `"true"`
+- `"1.2.3"`
+- `null`
