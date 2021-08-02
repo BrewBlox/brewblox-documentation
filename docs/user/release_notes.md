@@ -7,7 +7,7 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
-## Brewblox release 2021/08/??
+## Brewblox release 2021/08/02
 
 **firmware release date: 2021-05-27**
 
@@ -30,8 +30,8 @@ Where the InfluxDB data required some custom handling,
 the Victoria Metrics model is much simpler.
 It's simple enough that you can [add a Grafana service](https://brewblox.netlify.app/user/grafana), and have it work as expected out of the box.
 
-Your system will be immediately functional after updating, but you will not yet be able to access your old history data.
-For this, we made a [data migration command](https://brewblox.netlify.app/dev/migration/influxdb).
+Your system will be immediately functional after updating, and will log data into Victoria Metrics. Older data will have to be copied from InfluxDB to Victoria.
+For this, we made a [data migration command](https://brewblox.netlify.app/dev/migration/influxdb)
 
 You can run the migrate command in the background. Depending on how much data you have, the migration takes minutes to hours.
 Migrations can safely be stopped and restarted or resumed.
@@ -59,7 +59,7 @@ You can find the install guide [here](https://brewblox.netlify.app/user/config_e
 - (feature) Changed history database from InfluxDB to Victoria Metrics.
 - (feature) Added `/victoria` endpoint. `/victoria/api/v1` is compatible with the [Prometheus HTTP API](https://prometheus.io/docs/prometheus/latest/querying/api/).
 - (feature) Added `/history/timeseries` endpoints. For an overview, see `/history/api/doc`
-- (feature) The "stale after" period for Graph fields is now customizable. The default is still 1d.
+- (feature) The "hide after" period for Graph and Metrics fields is now customizable. The default is still 1d.
 - (feature) The maximized Graph widget is now a separate page with its own URL.
   - Refreshing the page will no longer close the graph.
   - You can bookmark the page to instantly visit the maximized graph.
@@ -79,6 +79,7 @@ You can find the install guide [here](https://brewblox.netlify.app/user/config_e
 - (deprecation) Removed the `brewblox-ctl service editor` command.
 - (deprecation) Removed `/history/history` endpoints.
 - (fix) The side pane graph in block widgets now correctly re-renders when the duration is changed.
+- (fix) The builder layout is now always correctly centered when opening the widget dialog.
 
 ## Brewblox release 2021/05/25
 
