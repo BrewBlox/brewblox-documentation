@@ -23,6 +23,7 @@ module.exports = {
       // Hardware section commented out for update / review Elco
       // { text: 'Hardware', link: '/hardware/' },
       { text: 'BrewPi', link: 'https://www.brewpi.com/' },
+      { text: 'Discord', link: 'https://discord.gg/WaFYD2jaaT' },
     ],
     sidebar: {
       '/dev/': [
