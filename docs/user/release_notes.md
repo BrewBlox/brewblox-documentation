@@ -21,7 +21,7 @@ This is a deal-breaker for us, as Raspberry Pi OS has a 32-bit architecture.
 
 We decided to go with [Victoria Metrics](https://github.com/VictoriaMetrics/VictoriaMetrics) as replacement,
 as it had the best combination of features and small CPU/RAM/disk footprint.
-For a more detailed explanation, you can find the decision document [here](https://brewblox.netlify.app/dev/decisions/dev/decisions/20210718_victoria_metrics).
+For a more detailed explanation, you can find the decision document [here](https://brewblox.netlify.app/dev/decisions/20210718_victoria_metrics).
 
 Database migrations are always a big step, but we're pretty happy with this one.
 Broadly speaking, it's twice as fast, and uses half the memory.
@@ -31,7 +31,7 @@ the Victoria Metrics model is much simpler.
 It's simple enough that you can [add a Grafana service](https://brewblox.netlify.app/user/grafana), and have it work as expected out of the box.
 
 Your system will be immediately functional after updating, but you will not yet be able to access your old history data.
-For this, we made a [data migration command](https://brewblox-dev.netlify.app/dev/migration/influxdb).
+For this, we made a [data migration command](https://brewblox.netlify.app/dev/migration/influxdb).
 
 You can run the migrate command in the background. Depending on how much data you have, the migration takes minutes to hours.
 Migrations can safely be stopped and restarted or resumed.
@@ -43,7 +43,7 @@ James Sandford's brewblox-tilt service has been very popular for some years now,
 James was happy for us to take over development and maintenance, so we [forked his service](https://github.com/BrewBlox/brewblox-tilt).
 The new service comes with support for the Tilt Pro.
 
-You can install the new Tilt service by running `brewblox-ctl add-tilt`.
+You can install the new Tilt service by running `brewblox-ctl add-tilt -f`.
 
 ### Graphical config editor
 
@@ -61,18 +61,18 @@ You can find the install guide [here](https://brewblox.netlify.app/user/config_e
 - (feature) Added `/history/timeseries` endpoints. For an overview, see `/history/api/doc`
 - (feature) The "stale after" period for Graph fields is now customizable. The default is still 1d.
 - (feature) The maximized Graph widget is now a separate page with its own URL.
+  - Refreshing the page will no longer close the graph.
+  - You can bookmark the page to instantly visit the maximized graph.
 - (feature) We now maintain the Tilt service.
 - (feature) The Tilt service now supports the Tilt Pro.
 - (feature) Added `brewblox-ctl add-tilt`.
 - (feature) Added `brewblox-ctl database from-couchdb` command.
 - (feature) Added `brewblox-ctl database from-influxdb` command.
 - (docs) Added user guide for VSCode with SSH Remote plugin.
-- (docs) Updated Troubleshooting doc.
-- (docs) Added Grafana service tutorial.
-- (docs) Added doc for advanced usage of `brewblox-ctl database from-influxdb`.
+- (docs) Updated Troubleshooting guide.
+- (docs) Added Grafana service install guide.
+- (docs) Documented advanced usage of `brewblox-ctl database from-influxdb`.
 - (improve) Added Apple PWA headers to the UI.
-  - Refreshing the page will no longer close the graph.
-  - You can bookmark the page to instantly visit the maximized graph.
 - (improve) `brewblox-ctl service remove` no longer requires the `-n/--name` option for services, and can remove multiple services at once.
   - OLD: `brewblox-ctl service remove -n spark-one`.
   - NEW: `brewblox-ctl service remove spark-one`.
