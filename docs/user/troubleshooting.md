@@ -92,7 +92,7 @@ To reset, access the Pi by using the IP address or `[HOSTNAME]-2.local` (eg. *ra
 and restart the name service by running:
 
 ```
-sudo service restart avahi-daemon
+sudo service avahi-daemon restart
 ```
 
 ## Frequently asked questions
