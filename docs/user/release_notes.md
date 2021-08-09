@@ -16,6 +16,7 @@ This is a minor bugfix release as follow-up to the *2021/08/02* release.
 
 **Changes:**
 - (improve) Slightly reduced memory usage for `brewblox-ctl database from-influxdb`
+- (improve) Improved efficiency when polling the Spark for history/state data.
 - (fix) Widgets can no longer exceed screen width on mobile devices.
 - (fix) *Date to now* mode for graphs no longer fails to yield data.
 - (fix) The PWM duty setting field in the Quick Actions widget no longer immediately resets values.
