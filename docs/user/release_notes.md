@@ -3,9 +3,22 @@
 Relevant links:
 
 - User guides: https://brewblox.netlify.app/
+- Discord server: https://discord.gg/WaFYD2jaaT
 - Previous release notes: https://brewblox.netlify.app/user/release_notes.html
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
+
+## Brewblox release 2021/08/09
+
+**firmware release date: 2021-05-27**
+
+This is a minor bugfix release as follow-up to the *2021/08/02* release.
+
+**Changes:**
+- (improve) Slightly reduced memory usage for `brewblox-ctl database from-influxdb`
+- (fix) Widgets can no longer exceed screen width on mobile devices.
+- (fix) *Date to now* mode for graphs no longer fails to yield data.
+- (fix) The PWM duty setting field in the Quick Actions widget no longer immediately resets values.
 
 ## Brewblox release 2021/08/02
 
