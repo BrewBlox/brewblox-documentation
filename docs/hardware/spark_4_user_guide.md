@@ -5,35 +5,35 @@
 ## Getting started
 
 ### General description 
-Welcome to the Brewblox Spark 4 and 1-Wire general-purpose I/O (GPIO) module user guide! Thank you for your purchase! 
+Welcome to the Brewblox Spark 4 and 1-Wire general-purpose I/O (GPIO) module user guide. Thank you for your purchase! 
 With the Brewblox Spark 4, our I/O modules and the Brewblox software you are ready to take (home) brewing to the next level.
-**To Do:** Nog wat meer inleiding over de Spark 4?
+**TODO** Nog wat meer inleiding over de Spark 4?
 
 This guide will provide you with a quick overview of the hardware installation process of the Spark 4 and 1-Wire GPIO module. 
 
 Happy brewing!
 
-**Geke, Bob, Felix and Elco, of Team Brewblox, of Elco Jacobs? wat zou je hier willen?**
+**TODO Geke, Bob, Felix and Elco, of Team Brewblox, of Elco Jacobs? wat zou je hier willen?**
 
 ### What’s in the box
 Your Spark 4 will come shipped with the following components. 
 
 1x Spark 4
 ![Spark-4-PCB](../images/spark4/Spark4-PCB.jpg)
-1x DIN rail adapter (optional)
-![Spark-4-DIN-rail-adapter]
-1x 3,5 inch 320x420 pixels TFT LCD Color Display with casing (optional)
-![Spark-4-screen-and-casing](../images/spark4/Spark4-casing.jpg)
+1x DIN rail bracket (optional)
+![Spark-4-DIN-rail-adapter]()
+1x 3,5 inch 320x420 pixels TFT LCD Color Display enclosure (optional)
+![Spark-4-screen-enclosure](../images/spark4/Spark4-casing.jpg)
 
 Your 1-Wire GPIO module will come shipped with the following components.
 
 1x 1-Wire GPIO module
 ![1-Wire-GPIO-module-PCB](../images/spark4/1-Wire-module-PCB.jpg)
-1x Casing (optional)
-![1-Wire-GPIO-module-casing](../images/spark4/1-Wire-module-casing.jpg)
-5x **hoe noemen we deze?** Actuator connectors
-![Actuator-connector]
-1x DIN rail adapter (optional)
+1x 1-Wire GPIO module enclosure (optional)
+![1-Wire-GPIO-module-enclosure](../images/spark4/1-Wire-module-casing.jpg)
+5x Actuator connectors
+![Actuator-connector]()
+1x DIN rail bracket (optional)
 ![1-Wire-GPIO-module-DIN-rail-adapter]
 
 When you unpack please ensure you check everything is there, and if any parts are missing please contact us immediately.
@@ -65,8 +65,8 @@ We also have a guide available about how to install the Brewblox software on you
 
 ### Plug in the power supply
 - *USB-C:* Connect the USB-C cable to the USB port on the Spark 4, and plug the other side of the cable into a suitable adapter or the server. 
-- *PoE:* Plug in the ethernet cable. Make sure the switch on the other end of the ethernet cable supports PoE.
-- *I/O connector for power supply:* Connect the actuator plug with the power supply cable, then plug the actuator plug in the separated 2 pin GPIO block. **to do** meer uitleg geven hoe dit in zijn werk gaat.
+- *Passive PoE:* Plug in the ethernet cable. Make sure the switch on the other end of the ethernet cable supports Passive PoE, or use a Passive PoE injector.<br>**WARNING** With Passive PoE the power is always on! Do not plug the ethernet cable in an other device than the Spark 4 when using Passive PoE. This may cause damage to the other device!
+- *I/O connector for power supply:* Connect the actuator plug with the power supply cable, then plug the actuator plug in the separated 2-pin GPIO block. **TODO** meer uitleg geven hoe dit in zijn werk gaat.
 
 ### Turning on the Spark 4
 When the Spark 4 has power it turns itself on. The OK and R buttons should start blinking in cyan and blue, and you should hear a ‘beep’.
@@ -81,20 +81,21 @@ Press the R button to reboot the Spark 4. When successful you should hear a ‘b
 You can use either Wi-Fi or a LAN (Ethernet) cable to connect your Spark 4 to your network.
 
 #### Ethernet
-Plug in the LAN (Ethernet) cable to connect your Spark 4 to the ethernet network. Make sure that the other end of your Ethernet cable is connected to a functioning switch. To remove the LAN (Ethernet) cable you have to use the lever on the casing of the Spark 4. 
+Plug in the LAN (Ethernet) cable to connect your Spark 4 to the ethernet network. Make sure that the other end of your Ethernet cable is connected to a functioning switch. To remove the LAN (Ethernet) cable you have to use the lever on the enclosure of the Spark 4. 
 
 #### Wi-Fi
-1. Open the Brewblox UI
-2. Go to the Spark service page, accessible through the sidebar
-3. Go to the actions menu in the top right corner
-4. Choose "Configure Wi-Fi"
+1. Install the ESP BLE Provisioning app for [Android](https://play.google.com/store/apps/details?id=com.espressif.provble) or ESP SoftAP Provisioning app for [iOS](https://apps.apple.com/in/app/esp-softap-provisioning/id1474040630) on your mobile phone.  
+2. Open the app on your mobile phone.
+3. Scan the QR code shown on the display of your Spark 4, or provided with your Spark 4.
+4. Follow the instructions in the app. The app will ask for Wi-Fi credentials and send them to the ESP32 over BLE.
+5. If succeeded, you can see your IP adress in the upper left corner of the display.
    
 ### Inserting your Micro-SD card
 Insert your Micro-SD card in the Micro-SD slot. The Micro-SD card is inserted label side up. The Micro-SD slot is located on the lower side of the Spark 4.
 
 ## Compatibility
 The 1-Wire GPIO module lets you plug in 4 of **our** temperature sensors, using DS18B20. We **cannot** guarantee other 1-Wire sensors will work, because 1-Wire is not a standardized protocol.
-The 1-Wire GPIO module also has green terminal blocks, in a block of 8 and a block of 2 pins. The 2-pin block is for (optional) external power at 12V or 24V. 
+The 1-Wire GPIO module also has two green terminal blocks, a block of 8 pins and a block of 2 pins. The 2-pin block can be used for external power at 12V or 24V. 
 The 8-pin terminal block is for GPIO. For each 1-Wire GPIO module, you can configure whether I/O should be at 5V or the external input voltage (12V or 24V).
 
 Each of the 8 GPIO pins is a configurable half H-bridge with fault detection. Which means that each pin can be one of the following:
@@ -115,15 +116,15 @@ If you have valves that automatically close when they lose power, you can even u
 
 The 1-Wire GPIO module is **not** compatible with thermocouples and RTDs like a PT-100 or PT-1000.
 
-**todo** aanvullen waar wel/niet mee compatible bv. boards, sensoren, valves etc.
+**TODO** aanvullen waar wel/niet mee compatible bv. boards, sensoren, valves etc.
 
 ## Maintenance
 
 ### Spark 4 and I/O module(s)
-When dirty, you can clean the casing of the Spark 4 and I/O module(s) with a dry or damp cloth.
-The Spark and I/O module(s) and casings are not waterproof, so do not use a wet cloth or immerse them in water. 
+When dirty, you can clean the enclosure of the Spark 4 and I/O module(s) with a dry or damp cloth.
+The Spark and I/O module(s) and enclosures are not waterproof, so do not use a wet cloth or immerse them in water. 
 
-When you use the Spark or I/O module(s) without casing we advise you to use compressed air. 
+When you use the Spark or I/O module(s) without enclosure we advise you to use compressed air. 
 
 ### Touchscreen
 It is best to first attempt to clean with a dry microfiber cloth. Wipe the screen using a circular motion with slight pressure. There should not be a need to press hard on the display.
@@ -134,18 +135,15 @@ Never use bleach, ammonia or other abrasive cleaners to clean the touchscreen. A
 In case your Spark 4 might break or stops working properly we strongly recommend contacting us. For more information about our warranty, see below.
 The only part you can replace yourself, is the touchscreen. 
 
-### Replacing the Screen
+### Replacing the screen
 To replace the touchscreen you can follow the next instructions.
 
 1. Disconnect the Spark 4 and I/O module(s) from the power supply.
 2. Remove the I/O module(s) from the Spark 4.
-3. Unscrew the 4 phillips head screws on the back of the Spark 4.
-4. Remove the casing from the Spark 4, by gently pulling the right side of the screen placement casing outside and forwards.
-5. Unlock the cable that connects the screen to the board by clicking the lever that holds the cable upwards.
-6. Now you can remove the screen.
-7. Place the new screen and follow the previous steps backwards to install the screen and casing again.
-
-**to do** klopt dit of ontbreken er stappen/stappen te veel?
+3. Remove the screen placement enclosure from the Spark 4, by gently pulling the right side of the screen placement enclosure outside and forwards.
+4. Unlock the cable that connects the screen to the board by clicking the lever that holds the cable upwards.
+5. Now you can remove the screen.
+6. Place the new screen and follow the previous steps backwards to install the screen and enclosure again.
 
 ## How to dispose of the product
 
@@ -163,11 +161,11 @@ For more information, other problems or questions we advise you to check our web
 The Spark 4 supports up to four I/O modules. When you connect more than four modules, the fifth module will overwrite the board address from the first module. The sixth module will overwrite the address from the second module, etc. This can result in conflicts between the boards, and the Spark 4 might stop working properly.
 
 ### Wi-Fi not working: is the Spark connected to Wi-Fi?
-If the Spark LCD does not show an IP address, connect to it using USB, and configure Wi-Fi:
-1. Open the Brewblox UI
-2. Go to the Spark service page
-3. Go to the actions menu in the top right corner
-4. Choose "Configure Wi-Fi"
+If the Spark LCD does not show an IP address, you can try to reset the Wi-Fi first. 
+
+#### Reset Wi-Fi
+1. Push the reset button on the Spark 4.
+2. When restarting push the OK button on the Spark 4 for 5 seconds.
 
 ### Wi-Fi not working: is the Spark accessible from your computer and the server?
 Can you visit the Spark IP in your browser? It should show a short placeholder message.
@@ -192,13 +190,14 @@ This can be set separately for the Spark service.
 - To protect against fire, electric shock and injury, do not immerse the Brewblox Spark 4, I/O module(s) or plugs in water or other liquid.
 - The Brewblox Spark 4 and I/O module(s) are not intended for use by young children or infirm persons without supervision.
 - Do not use the Brewblox Spark 4 and I/O module(s) for anything other than the intended use.
-- **to do** Iets over de power supply aansluiting, of max power?
+- Do not plug in the ethernet cable to an other device than the Spark 4 when using Passive PoE. This may cause damage to the other device!
 - Please ensure that the system is completely disconnected from the electrical supply before attempting to remove or replace any parts or I/O modules.
 - Do seek expert advice if you are at all unsure about the safety of your electrical installation.
 - Do not scratch hard objects against the display as this may cause damage.
 - Save these instructions for future reference.
+- **TODO** Iets over de power supply aansluiting, of max power?
 
-**Note** Not following the safety instructions above could result in injuries and may void your product’s warranty.
+**NOTE** Not following the safety instructions above could result in injuries and may void your product’s warranty.
 
 ## Technical specifications
 
@@ -206,9 +205,9 @@ This can be set separately for the Spark service.
 
 | Feature          	       | Brewblox Spark 4                                                                                                      |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------:|
-| Product Dimensions       | 66 x 58 x 11 mm without screen and casing<br>99 x 61.5 x 20 mm with screen and casing                                 |
-| Product Weight           | 21g without screen and casing<br>82g with screen and casing                                                           |
-| Power Supply Input       | USB-C, PoE or through the Board-to-Board connector                                                                    |
+| Product Dimensions       | 66 x 58 x 11 mm without screen and enclosure<br>99 x 61.5 x 20 mm with screen and enclosure                           |
+| Product Weight           | 21g without screen and enclosure<br>82g with screen and enclosure                                                     |
+| Power Supply Input       | USB-C, Passive PoE or through the Board-to-Board connector                                                            |
 | Power Supply Output      | ...V through the Board-to-Board connector                                                                             |
 | Ports                    | 1x USB-C<br>1x 100 Mbps ethernet<br>1x Micro-SD<br>1x Board-to-Board connector with pins for I2C, SPI, UART, and GPIO |
 | WiFi                     | 802.11b/g/n; 802.11n up to 150 Mbps                                                                                   | 
@@ -217,20 +216,18 @@ This can be set separately for the Spark service.
 | Product Compliance       | CE                                                                                                                    |
 | Country of Manufacture   | The Netherlands                                                                                                       |
 
-
 ### 1-Wire GPIO Module
 
 | Feature          	       | 1-Wire GPIO module                                                                                                    |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------:|
-| Product Dimensions       | 66 x 58 x 17 mm without casing<br>68 x 63 x 20 mm with casing                                                         |
-| Product Weight           | 30g without casing<br>50g with casing                                                                                 |
+| Product Dimensions       | 66 x 58 x 17 mm without enclosure<br>68 x 63 x 20 mm with enclosure                                                   |
+| Product Weight           | 30g without enclosure<br>50g with enclosure                                                                           |
 | Power Supply Input       | 12V or 24V GPIO pin input or ...V through the Board-to-Board connector                                                |
 | Power Supply Output      | 5, 12 or 24V through the GPIO pins<br> ...V through the Board-to-Board connector                                      |
 | Ports                    | 8x GPIO pin<br>2x GPIO pin for power supply<br>4x RJ12<br>2x Board-to-Board connector with pins for I2C, SPI, UART, and GPIO|
 | Limited Lifetime Warranty| Yes, 2 years                                                                                                          |
 | Product Compliance       | CE                                                                                                                    |
 | Country of Manufacture   | The Netherlands                                                                                                       |
-
 
 ## Warranty
 Brewblox warrants this product/these products to be free from defects in workmanship and materials, under normal use and conditions, for a period of two (2) years from the original invoice date. Shipping and handling fees are to be paid for by the customer. To obtain warranty service, you must have a return authorization. To request a return authorization, you can contact us.
