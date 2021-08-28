@@ -325,15 +325,15 @@ If the setpoint is below the configured boil temperature, boil mode does nothing
 Of course, if the minimum output is 0%, boil mode also does nothing.
 
 ## Logic Actuator
-The Logic Actuator allows to toggle a Digital Actuator based on a combination of comparisons.
-Examples of comparisons are: `beer temperature >= 20`, `frige setpoint <= 10`, `heater == ON`.
+The Logic Actuator allows toggling a Digital Actuator based on a combination of comparisons.
+Examples of comparisons are: `beer temperature >= 20`, `fridge setpoint <= 10`, `heater == ON`.
 
-For controlling temperature, the PID block is almost always a better choice. The Logic Actuator is for additional behavior while the PID controls the temperature.
+For controlling temperature, a PID block is almost always the better choice. The Logic Actuator is for additional behavior while the PID controls the temperature.
 
 Some examples of when the Logic Actuator can be used:
 - Multiple fermenters sharing a glycol pump. Each individual fermenter controls a valve connecting its own coil from a shared loop, and the pump should be active if one or more valves are open.
 - Turning on a fan in a fridge to circulate the air when either the heater or the cooler is ON.
-- Turning on a fan if the PWM setting of a heater is over a limit. The fan might not be needed if the heater is under 10%, it is good to circulate air if the heater is running at higher power.
+- Turning on a fan if the PWM setting of a heater is over a limit. The additional air circulation may not be required if the heater setting is below 10%.
 - Turning on a warning light if a temperature exceeds a threshold.
 
 ![Logic Actuator Full mode](../images/block-logic-full.png)
