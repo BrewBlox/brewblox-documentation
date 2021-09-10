@@ -36,33 +36,21 @@ This can be a block type (*Pid*), but also a block interface type (*TempSensorIn
 
 <<< @/shared-types/spark-block-types.ts#BloxField
 
-## IoPin
+## IoChannel
 
-Pins used by *DigitalActuator* blocks share the IoPin interface.
-*DS2408*, *DS2413*, *Spark2Pins*, *Spark3Pins*, *MockPins* all provide arrays of *IoPin* objects.
+An IoChannel is the software representation of a group of IO pins.
+Channels are provided by blocks that implement *IoArray*, and are used by digital actuators.
 
-*DigitalActuator* has settings for which block it uses, and the pin number in that block's array.
+*DS2408*, *DS2413*, *Spark2Pins*, *Spark3Pins*, *MockPins*, *OneWireGpioModule* all implement *IoArray*.
 
-An *IoPin* object will only ever contain a single key/value pair.
-The key is the pin name.
+By default, channels are constant and cannot be modified.
+There are two exceptions:
+- *OneWireGpioModule* channels are completely user-defined
+- *DS2408* will report different channels based on the value of its `connectMode` field (valve or actuator).
 
-<<< @/shared-types/spark-block-types.ts#IoPin
+*DigitalActuator* and *MotorValve* blocks use channels as output. This is configured as a combination of a link to to an *IoArray* block, and a `channel` or `startChannel` field.
 
-Referenced enum values:
-
-<<< @/shared-types/spark-block-enums.ts#ChannelConfig
-<<< @/shared-types/spark-block-enums.ts#DigitalState
-
-Example IoPin:
-
-```typescript
-const pin: IoPin = {
-  bottom1: {
-    config: 'CHANNEL_ACTIVE_HIGH',
-    state: 'STATE_ACTIVE',
-  },
-};
-```
+<<< @/shared-types/spark-block-types.ts#IoChannel
 
 ## Constraints
 
@@ -163,7 +151,7 @@ It is linked to an actuator using the *Balanced* analog constraint.
 
 ## DigitalActuator
 
-Turns an *IoPin* ON or OFF.
+Turns an *IoChannel* ON or OFF.
 
 The actuator itself is typically driven by a PWM, and supports digital constraints.
 
@@ -193,13 +181,13 @@ Referenced enum values:
 
 **Discovered object**
 
-*DS2408* provides *IoPin* objects for valves or actuators.
+*DS2408* provides *IoChannel* objects for valves or actuators.
 
 Valves and actuators should not be mixed, as they make different use of the available pins.
-The *connectMode* field indicates current usage.
+Based on the value of the *connectMode* field, different IO channels are available.
 
-If the DS2408 is used by a MotorValve,
-only pins 1 and 4 should be used as *startChannel* in the MotorValve block.
+In actuator mode, channels 1-8 can be used.
+In valve mode, (start) channels 1 and 5 are available.
 
 <<< @/shared-types/spark-block-types.ts#DS2408
 
@@ -207,13 +195,42 @@ Referenced enum values:
 
 <<< @/shared-types/spark-block-enums.ts#DS2408ConnectMode
 
+Channel mapping:
+```js
+{
+  [DS2408ConnectMode.CONNECT_ACTUATOR]: {
+    1: 'A',
+    2: 'B',
+    3: 'C',
+    4: 'D',
+    5: 'E',
+    6: 'F',
+    7: 'G',
+    8: 'H',
+  },
+  [DS2408ConnectMode.CONNECT_VALVE]: {
+    1: 'B',
+    5: 'A',
+  },
+}
+```
+
 ## DS2413
 
 **Discovered object**
 
-*DS2408* provides *IoPin* objects for digital actuators.
+*DS2408* provides *IoChannel* objects for digital actuators.
 
 <<< @/shared-types/spark-block-types.ts#DS2413
+
+Channel mapping:
+
+```js
+{
+  1: 'A',
+  2: 'B',
+}
+```
 
 ## InactiveObject
 
@@ -229,20 +246,36 @@ Referenced enum values:
 
 ## MockPins
 
-*MockPins* provides dummy *IoPin* objects for digital actuators.
+*MockPins* provides dummy *IoChannel* objects for digital actuators.
 
 This is useful for simulator services,
 but also for use in *ActuatorLogic* configurations where a digital actuator is only used as input, and is not expected to control hardware.
 
 <<< @/shared-types/spark-block-types.ts#MockPins
 
+Channel mapping:
+
+```js
+{
+  1: 'A',
+  2: 'B',
+  3: 'C',
+  4: 'D',
+  5: 'E',
+  6: 'F',
+  7: 'G',
+  8: 'H',
+}
+```
+
 ## MotorValve
 
 *MotorValve* is a special kind of digital actuator.
 
-It must be connected to a *DS2408*, and requires 4 *IoPin* channels to function.
+It must be connected to a *DS2408*, and technically requires 4 IO channels to function.
 
 The start channel is configured, and it will automatically claim the next three channels.
+To make this explicit, *DS2408* only reports valid start channels when set to valve mode.
 
 <<< @/shared-types/spark-block-types.ts#MotorValve
 
@@ -267,6 +300,29 @@ it will override the *differentActuatorWait* value.
 **System object**
 
 <<< @/shared-types/spark-block-types.ts#OneWireBus
+
+## OneWireGpioModule
+
+**Discovered object**
+
+*OneWireGpioModule* is the software representation of a Spark 4 GPIO module.
+There will be one block per attached module, up to a maximum of 4.
+
+In contrast with other *IoArray* blocks, all channels are user-defined.
+
+*GpioModuleChannel* objects define a pin mask to claim 0-8 of the available pins.
+The number of claimed pins should be either 0, or match the value of `GpioModuleChannel.width`.
+Only continuous blocks of pins can be claimed for a single channel, and channels cannot overlap.
+
+If no pins are claimed, the channel is still a valid target for a digital actuator.
+
+The `GpioModuleStatus` and `GpioPins` enums are [8-bit masks](https://basarat.gitbook.io/typescript/type-system/enums#number-enums-as-flags).
+
+<<< @/shared-types/spark-block-types.ts#OneWireGpioModule
+
+Referenced enum values:
+
+<<< @/shared-types/spark-block-enums.ts#Gpio
 
 ## Pid
 
@@ -310,7 +366,7 @@ Referenced enum values:
 **System object**
 
 The *Spark2Pins* object is only found on Spark 2 controllers,
-and provides an array of *IoPin* objects.
+and provides an array of *IoChannel* objects.
 
 <<< @/shared-types/spark-block-types.ts#Spark2Pins
 
@@ -318,14 +374,35 @@ Referenced enum values:
 
 <<< @/shared-types/spark-block-enums.ts#Spark2Hardware
 
+Channel mapping:
+```js
+{
+  1: 'Bottom 1',
+  2: 'Bottom 2',
+  3: 'Bottom 3',
+  4: 'Bottom 4',
+}
+```
+
 ## Spark3Pins
 
 **System object**
 
 The *Spark3Pins* object is only found on Spark 3 controllers,
-and provides an array of *IoPin* objects, along with settings regulating voltage.
+and provides an array of *IoChannel* objects, along with settings regulating voltage.
 
 <<< @/shared-types/spark-block-types.ts#Spark3Pins
+
+Channel mapping:
+```js
+{
+  1: 'Top 1',
+  2: 'Top 2',
+  3: 'Top 3',
+  4: 'Bottom 1',
+  5: 'Bottom 2',
+}
+```
 
 ## SysInfo
 
@@ -395,6 +472,7 @@ Referenced enum values:
 **System object**
 
 Wifi setting values are write-only, and will always be empty when read.
+This block is only present on Spark 2 and 3 controllers.
 
 <<< @/shared-types/spark-block-types.ts#WiFiSettings
 
