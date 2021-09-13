@@ -27,6 +27,10 @@ These arguments can be used both in the `docker-compose.yml` file, and with the 
 **If: you only want to use USB, even if Wifi is connected**
 - Use `--discovery=usb`
 
+:::warn
+The Spark 4 does not support USB connections.
+`--discovery=wifi` is compatible with both ethernet and Wifi.
+:::
 
 ## Finding the device ID
 

@@ -8,6 +8,24 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2021/09/13
+
+**firmware release date: 2021-09-13**
+
+The first batch of Spark orders have been handed over to FedEx, and with this release, the Spark 4 is live.
+
+**Changes:**
+- (feature) Added the *OneWire GPIO Module* block and widget.
+- (feature) Added a step to Quick Start wizards for setting pin assignments for GPIO channels (if any).
+- (feature) Added timezone setting to admin page. For now, this setting is only relevant for the Spark 4 display.
+- (documentation) Updated documentation to reflect differences between Spark 2/3 and 4:
+  - The Spark 4 does not support USB connections. (Ethernet and Wifi only).
+  - Spark 4 Wifi configuration is done using Bluetooth and the "ESP BLE Provisioning" Android/iOS app.
+  - The Spark 4 never requires a separate bootloader flash.
+- (dev) Updated block data types for all IoArray blocks. This is not a breaking change when loading backups.
+- (improve) The controller will now attempt to automatically recover from OneWire errors caused by faulty devices.
+- (improve) Under the hood, there are significant changes to the shared firmware code. These shouldn't be noticeable.
+
 ## Brewblox release 2021/08/09
 
 **firmware release date: 2021-05-27**

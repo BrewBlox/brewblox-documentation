@@ -48,13 +48,13 @@ You configure it by setting a temperature value at specific dates / times. The f
 In the example above, the Setpoint Profile is between point 1 and 2, changing temperature from 0°C to 50°C.
 It is about halfway, so the Setpoint is set to 27.27°C.
 
-All points are saved as an offset from the start time, so you can easily re-use profiles. 
+All points are saved as an offset from the start time, so you can easily re-use profiles.
 Change the start time, and all other points will be shifted.
 You can also create, load, and save profiles from the action menu.
 
 The profile is stored on the Spark itself. The Setpoint Profile continues to run if the Spark has no connection to the server.
 
-When the Spark loses power, it forgets the date and time. 
+When the Spark loses power, it forgets the date and time.
 The profile is on hold until the Spark reconnects and receives the actual date and time.
 
 ## Digital Actuators
@@ -62,11 +62,13 @@ Actuators act on things in the real world, like temperature or water flow.
 Digital actuators turn things ON or OFF: a heater, cooler, pump or valve.
 For all of these, the *Digital Actuator* block can be used.
 
-A few blocks provide digital output pins.
-These blocks are *Spark Pins*, *DS2413 Chip*, and *DS2408 Chip*. 
+A few blocks provide digital output channels.
+These blocks are *Spark Pins*, *DS2413 Chip*, *DS2408 Chip*, and *OneWire GPIO Module*.
 They are automatically detected and represent hardware elements.
+If you wish to have a digital actuator that is not linked to physical pins, you can also use the *Mock Pins* block.
 
-A *Digital Actuator* is a software block that manages a single digital output pin. The *Minimum ON time*, *Minimum OFF time*, and *Mutually exclusive* constraints can be set.
+A *Digital Actuator* is a software block that manages a single digital output channel.
+The *Minimum ON time*, *Minimum OFF time*, and *Mutually exclusive* constraints can be set.
 
 ### Spark Pins
 The *Spark 2 Pins* / *Spark 3 Pins* block is a system block and cannot be deleted.
@@ -74,12 +76,27 @@ Through this block, the (physical) green digital outputs on the Spark itself can
 
 ![Spark Pins](../images/block-spark-pins.png)
 
-Digital output pins can't be toggled without a Digital Actuator block, but the Spark Pins widget will show the current state of driving actuators.
+Digital output channels can't be toggled without a Digital Actuator block,
+but the Spark Pins widget will show the current state of driving actuators.
 If you click on the toggle button here, it will toggle the desired setting in the actuator.
 
 On the Spark 3, you can also see the current values of the 5V and 12V power supply.
 Putting 12V on the RJ12 connectors can be enabled or disabled here.
 If you don't have motor valve expansion boards, leave it disabled to avoid any damage if things are connected wrongly.
+
+### OneWire GPIO Module
+On the Spark 4, IO is more flexible, with the possibility of attaching up to four GPIO extension modules.
+Such modules are represented by the *OneWire GPIO Module* block.
+
+Like the *Spark 2 Pins* / *Spark 3 Pins* blocks, digital output channels are listed here.
+Where the Spark 2/3 channels were fixed, GPIO module channels can be customized for specific device types.
+
+Channels can be freely assigned to the physical IO pins.
+In the below screenshot, the **Ferment cooler** channel is mapped to pins 1 and 2, and **Ferment glycol** to pins 3 and 4.
+
+To change pin assignment, you can click the channel and select its new start position.
+
+![GPIO Module](../images/block-gpio-full.png)
 
 ### DS2413 Chip
 The DS2413 is used on the SSR extension board and DC Switch extension board.
@@ -90,13 +107,13 @@ This block is added by clicking 'Discover new OneWire block' in the Spark servic
 
 ### DS2408 Chip
 The DS2408 is used on the Motor Valve Expansion board.
-It has 8 pins, which can be used by 8 Digital Actuator blocks, or by two Motor Valve blocks: each Motor Valve requires four pins.
+It has 8 channels, which can be used by 8 Digital Actuator blocks, or by two Motor Valve blocks: each Motor Valve requires four channels.
 
 This block is added by clicking 'Discover new OneWire block' in the Spark service page menu.
 
 ### Motor Valve
 The *Motor Valve* functions like a Digital Actuator, but is a special block to be used with our Motor Valve expansion board and the DS2408 Block.
-The board uses 4 pins per valve to drive the motor bidirectionally and to read open/closed feedback pins.
+The board uses 4 channels per valve to drive the motor bidirectionally and to read open/closed feedback pins.
 
 If you use valves that take a single digital signal, like solenoid valves for example, you should just use the Digital Actuator block.
 Both the *Digital Actuator* and the *Motor Valve* block can be linked to a valve in the Brewery Builder.
@@ -104,13 +121,14 @@ Both the *Digital Actuator* and the *Motor Valve* block can be linked to a valve
 The Motor Valve block can be driven by a PWM block. It also supports the *Minimum ON*, *Minimum OFF*, and *Mutexed* constraints.
 
 ### Mock Pins
-Used for testing, or in combination with the Logic Actuator block, there also is the *Mock Pins* block. It has 8 virtual pins that can be used as target for a Digital Actuator.
+Used for testing, or in combination with the Logic Actuator block, there also is the *Mock Pins* block.
+It has 8 virtual channels that can be used as target for a Digital Actuator.
 
 ## Analog Actuators
 Analog actuators have a numeric output value, between a minimum and maximum.
 A PID requires an analog actuator as output.
 
-We currently have three types of analog actuator: 
+We currently have three types of analog actuator:
 - *PWM*
 - *Setpoint Driver*
 - *Analog Actuator (Mock)*
@@ -124,7 +142,7 @@ This is the function of the PWM block.
 It toggles a Digital Actuator target repeatedly to achieve an average ON percentage.
 The duration of each ON-OFF cycle is the period.
 
-PWM stands for [Pulse Width Modulation](https://en.wikipedia.org/wiki/Pulse-width_modulation). 
+PWM stands for [Pulse Width Modulation](https://en.wikipedia.org/wiki/Pulse-width_modulation).
 
 ::: tip Example
 The period is configured to be 4 seconds.
@@ -166,7 +184,7 @@ The PID calculated that HLT setpoint should be 6.72°C higher than the MT setpoi
 The Setpoint Driver applied this by changing the HLT setpoint to: 66.7°C + 6.72°C = 73.4°C.
 
 The effect of a driven HLT setpoint can be seen in the graph below.
-With the <span style="color: red">MT temperature</span> well under <span style="color: green">MT setting</span>, the <span style="color: purple">HLT setting</span> was set to its maximum. 
+With the <span style="color: red">MT temperature</span> well under <span style="color: green">MT setting</span>, the <span style="color: purple">HLT setting</span> was set to its maximum.
 
 The HLT was heated quickly until its <span style="color: #804643">temperature</span> approached the <span style="color: purple">setting</span>.
 When the <span style="color: red">MT temperature</span> approached the <span style="color: green">MT setting</span>, the <span style="color: purple">HLT setting</span> was lowered to minimize overshoot.
@@ -260,7 +278,7 @@ QuickStart wizards create preconfigured PID blocks that need little to no change
 Settings are divided in three sections:
 
 #### Input / Output
-You can choose which Setpoint is used as input here and assign which Analog Actuator is driven by the PID. 
+You can choose which Setpoint is used as input here and assign which Analog Actuator is driven by the PID.
 By Clicking on the *Setting* button, you can also directly edit setting of the Setpoint block.
 
 Below the input and output, the math of the PID algorithm is shown.
@@ -286,8 +304,8 @@ The result is that the time it takes for **I** to rise to the same value as **P*
 The purpose of the integral is to slowly move the process to the desired value, when the process is constantly losing energy to the environment.
 
 ::: tip Example
-When you are fermenting a beer in a cold room, the heater might need to run at 10% to offset the heat lost to the environment. 
-With a setpoint of 20°C and Kp at 20, the actuator will be set to 10% when the beer reaches 19.5°C. 
+When you are fermenting a beer in a cold room, the heater might need to run at 10% to offset the heat lost to the environment.
+With a setpoint of 20°C and Kp at 20, the actuator will be set to 10% when the beer reaches 19.5°C.
 At this point the energy added will be equal to energy lost.
 
 Without the integrator, the beer would stay at 19.5°C, but with the integrator, the small error slowly accumulates in the integral and raises the **I** part of PID.
@@ -298,7 +316,7 @@ If Ti is too short, the integral will accumulate before equilibrium is reached a
 
 Note that the algorithm does not increase the integral if the output value cannot be achieved by the actuator.
 This is called anti-windup.
-::: 
+:::
 
 #### Derivative
 The last equation calculates the derivative part of PID, or **D**.
@@ -317,7 +335,7 @@ Boil mode lets the PID approach the boil temperature at full power and maintain 
 Normal PID behavior is to stop heating when the temperature gets close to the setpoint.
 When you are boiling, you want to keep heating when the temperature reaches 100°C (212 °F) to maintain the boil.
 
-When the *minimum output when boiling* is set, the output value will never drop under the configured minimum if the setpoint is at or above the boil temperature. 
+When the *minimum output when boiling* is set, the output value will never drop under the configured minimum if the setpoint is at or above the boil temperature.
 
 The minimum output is automatically applied based on the value of the setpoint.
 If the setpoint is below the configured boil temperature, boil mode does nothing.
@@ -325,15 +343,15 @@ If the setpoint is below the configured boil temperature, boil mode does nothing
 Of course, if the minimum output is 0%, boil mode also does nothing.
 
 ## Logic Actuator
-The Logic Actuator allows to toggle a Digital Actuator based on a combination of comparisons.
-Examples of comparisons are: `beer temperature >= 20`, `frige setpoint <= 10`, `heater == ON`.
+The Logic Actuator allows toggling a Digital Actuator based on a combination of comparisons.
+Examples of comparisons are: `beer temperature >= 20`, `fridge setpoint <= 10`, `heater == ON`.
 
-For controlling temperature, the PID block is almost always a better choice. The Logic Actuator is for additional behavior while the PID controls the temperature.
+For controlling temperature, a PID block is almost always the better choice. The Logic Actuator is for additional behavior while the PID controls the temperature.
 
 Some examples of when the Logic Actuator can be used:
 - Multiple fermenters sharing a glycol pump. Each individual fermenter controls a valve connecting its own coil from a shared loop, and the pump should be active if one or more valves are open.
 - Turning on a fan in a fridge to circulate the air when either the heater or the cooler is ON.
-- Turning on a fan if the PWM setting of a heater is over a limit. The fan might not be needed if the heater is under 10%, it is good to circulate air if the heater is running at higher power.
+- Turning on a fan if the PWM setting of a heater is over a limit. The additional air circulation may not be required if the heater setting is below 10%.
 - Turning on a warning light if a temperature exceeds a threshold.
 
 ![Logic Actuator Full mode](../images/block-logic-full.png)
@@ -342,7 +360,7 @@ Some examples of when the Logic Actuator can be used:
 
 The Logic Actuator drives a Digital Actuator, and evaluates one or more *comparisons* to determine whether the result is ON or OFF.
 
-You can add comparisons based on Digital Actuator, Motor Valve, Setpoint, and PWM blocks. 
+You can add comparisons based on Digital Actuator, Motor Valve, Setpoint, and PWM blocks.
 Each comparison compares the value or setting of the block to a value configured in the comparison.
 The result is displayed as a green dot for comparisons that are `true` and red for `false`.
 
@@ -410,5 +428,5 @@ Sensors, setpoints, PWMs, and PIDs can be shown on the display.
 You can use the *Display Settings* block to add blocks to the screen and edit how they are displayed.
 Eligible blocks also have an *Add to Spark display* action in their action menu (top right button in the widget).
 
-The *Display Settings* block has its own temperature unit setting, separate from the service unit setting. 
+The *Display Settings* block has its own temperature unit setting, separate from the service unit setting.
 This only sets the display unit on the Spark. If you wish to configure your system to use Fahrenheit, you will need to edit both settings.
