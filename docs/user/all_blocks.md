@@ -91,6 +91,13 @@ Such modules are represented by the *OneWire GPIO Module* block.
 Like the *Spark 2 Pins* / *Spark 3 Pins* blocks, digital output channels are listed here.
 Where the Spark 2/3 channels were fixed, GPIO module channels can be customized for specific device types.
 
+Channels can be freely assigned to the physical IO pins.
+In the below screenshot, the **Ferment cooler** channel is mapped to pins 1 and 2, and **Ferment glycol** to pins 3 and 4.
+
+To change pin assignment, you can click the channel and select its new start position.
+
+![GPIO Module](../images/block-gpio-full.png)
+
 ### DS2413 Chip
 The DS2413 is used on the SSR extension board and DC Switch extension board.
 It makes two extra digital outputs available for use via OneWire.
