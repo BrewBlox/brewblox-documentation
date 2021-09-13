@@ -26,11 +26,10 @@ brewblox-ctl down
 Make sure no other Sparks are connected over USB while you're flashing your controller.
 :::
 
-In your Brewblox directory (default: `./brewblox`), run these command:
+In your Brewblox directory (default: `./brewblox`), run this command:
 
 ```bash
 brewblox-ctl flash
-brewblox-ctl wifi
 ```
 
 Follow the instructions until the menu exits.

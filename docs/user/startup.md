@@ -31,7 +31,7 @@ Always:
 When connecting the BrewPi Spark
 
 - BrewPi Spark
-- Micro-USB to USB cable
+- (Spark 2 or 3 only) Micro-USB to USB cable
 
 ::: tip
 You can also install Brewblox on a Synology NAS, desktop computer, or laptop - as long as it's using Linux.
@@ -210,13 +210,15 @@ brewblox-ctl setup
 
 Follow the instructions until the menu exits.
 
-## Step 5: Flash the firmware
+## Step 5: Spark setup
 
 ::: tip
 If you want to try out Brewblox, you can use the Spark simulation instead.
 
 Skip this step, and follow the instructions [here](./adding_spark_sim.md).
 :::
+
+### Spark 2 or 3 - Flash the firmware
 
 For this step, your Spark should be connected to your Raspberry Pi over USB.
 
@@ -226,19 +228,40 @@ Navigate to the Brewblox install directory (default: `cd ~/brewblox`), and run t
 brewblox-ctl flash
 ```
 
-Follow the instructions until the menu exits. You should now see a dark screen with six empty boxes.
+Follow the instructions until the menu exits.
 
-We ship new Sparks with the bootloader pre-flashed.
 If you are upgrading an older Spark, you may need to flash the bootloader.
 
-**Only if your LED is blinking blue after the firmware is flashed**, run:
+**Only if you have a Spark 2 or 3, and the LED is blinking blue after the firmware is flashed**, run:
 ```bash
 brewblox-ctl particle -c flash-bootloader
 ```
 
-::: tip
-The Spark supports wifi. You can set this up using the UI in [Step 7](#step-7-use-the-system).
-:::
+For now, keep the USB cable connected. You can configure Wifi in the UI during [Step 7](#step-7-use-the-system).
+
+### Spark 4 - Network setup
+
+To use the Spark 4, it needs to be connected to your network. Ethernet and Wifi are both supported.
+
+Setting up ethernet is as simple as plugging in a cable.
+Wifi credentials are set over Bluetooth, using the **ESP BLE Provisioning** app.
+The app is available on [Android](https://play.google.com/store/apps/details?id=com.espressif.provble)
+and [iOS](https://apps.apple.com/us/app/esp-ble-provisioning/id1473590141).
+
+To set Wifi credentials:
+- Press the <b>(R)ESET</b> button on your Spark.
+- While the Spark restarts, press and hold the <b>OK</b> button for five seconds.
+- The Spark is ready for provisioning if its buttons are blinking blue.
+- Download the <b>ESP BLE Provisioning</b> app.
+- Enable Bluetooth in your phone settings.
+- Open the app.
+- Click <b>Provision New Device</b>.
+- Click <b>I don't have a QR code</b>.
+- Select the <b>PROV_BREWBLOX_</b> device.
+- Select your Wifi network, and enter your credentials.
+
+The app will now set Wifi credentials for your Spark. An additional IP
+address will be shown in the top left corner of the Spark display.
 
 ## Step 6: Start the system
 
