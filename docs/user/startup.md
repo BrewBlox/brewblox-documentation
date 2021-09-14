@@ -355,7 +355,7 @@ To start a wizard, click the big *Get Started* button, and select the *Quick Sta
 If you are upgrading from the old BrewPi software, the *Fermentation fridge* wizard will replicate its functionality.
 
 To edit the settings of your system and controllers, go to the *Admin* page, accessible through the sidebar.
-For example, you can use the Spark service settings to connect your Spark controller to your wifi network.
+For example, this page can be used to set your preferred temperature unit and timezone.
 
 ## Later: Updating
 
