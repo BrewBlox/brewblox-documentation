@@ -8,6 +8,23 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2021/09/20
+
+**firmware release date: 2021-09-20**
+
+This release includes an important bugfix for Spark 4 firmware,
+and a re-implementation of the `brewblox-ctl wifi` command.
+
+**Changes:**
+- (feature) The `brewblox-ctl` wifi command works again.
+  - For Spark 2 / 3, it triggers listening mode (blue blinking LED), and starts the built-in Wifi wizard.
+  - For Spark 4, it prints instructions for Wifi provisioning over bluetooth.
+- (feature) GPIO pin layout (- / + / GND / PWR) is now shown in the GPIO channel editor and widget.
+- (feature) `brewblox-ctl update` now also tries to run `sudo apt update && sudo apt upgrade`.
+- (improve) `brewblox-ctl add-spark` / `add-tilt` / `add-node-red` `add-plaato` now show a confirmation prompt if the service already exists.
+- (improve) Added `--discovery=lan` as alias to `--discovery=wifi` for Spark service configuration.
+- (fix) Spark 4 GPIO channels no longer affect other pins on the GPIO module.
+
 ## Brewblox release 2021/09/13
 
 **firmware release date: 2021-09-13**
