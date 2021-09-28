@@ -56,6 +56,45 @@ The service will now read/write blocks on the controller.
 The `is_connected`, `is_acknowledged`, and `is_synchronized` flags are always set in order:
 it is impossible for the service to be synchronized without it being connected.
 
+## Block relations
+
+<<< @/shared-types/spark-service-types.ts#BlockRelation
+
+Relevant links between blocks are analyzed, and published as part of the service state.
+The relations can be used to map the active control chains.
+For an example of this, see the relations view on the Spark service page in the UI.
+
+While typically the block that defines the link is considered the relation *source*, this is not guaranteed.
+For example, the *PID* block has a link to its input *Setpoint*,
+but for the purposes of the control chain, the Setpoint is considered the source, and the PID the target.
+
+## Drive chains
+
+<<< @/shared-types/spark-service-types.ts#BlockDriveChain
+
+When one block is actively and exclusively controlling another block, this is referred to as *driving*.
+Driving blocks may in turn be driven by another block (a *Digital Actuator* is driven by a *PWM* which is driven by a *PID*).
+
+These drive chains are analyzed, and published as part of the service state.
+A chain is generated for every combination of driven block and initial driver (a driving block that is not driven).
+
+Given a typical fermentation control scheme with these blocks...
+- Heat PID
+- Heat PWM
+- Heat Actuator
+- Cool PID
+- Cool PWM
+- Cool Actuator
+- Spark Pins
+
+...the following drive chains will be generated
+- target=Spark Pins, source=Heat PID, intermediate=[Heat Actuator, Heat PWM]
+- target=Heat Actuator, source=Heat PID, intermediate=[Heat PWM]
+- target=Heat PWM, source=Heat PID, intermediate=[]
+- target=Spark Pins, source=Cool PID, intermediate=[Cool Actuator, Cool PWM]
+- target=Cool Actuator, source=Cool PID, intermediate=[Cool PWM]
+- target=Cool PWM, source=Cool PID, intermediate=[]
+
 ## Firmware compatibility
 
 The Spark service is shipped with binaries for the controller,
