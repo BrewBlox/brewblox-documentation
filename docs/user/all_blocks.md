@@ -96,6 +96,19 @@ In the below screenshot, the **Ferment cooler** channel is mapped to pins 1 and 
 
 To change pin assignment, you can click the channel and select its new start position.
 
+**Multiplication**
+
+There is a maximum of 1A per **+** pin. If you have a motor that draws 2.5A, you will have to multiply the pins x3 in the channel settings,
+and then connect the 6 pins (3x **-**, 3x **+**) to your motor.
+
+Alternatively, you can multiply the pins to control parallel devices with the same digital actuator.
+
+**Polarity**
+
+When assigned, the Widget shows the **-** / **+** / **GND** / **PWR** mapping of the pins within the channels.
+**-** pins are always on the left side, and **+** pins on the right side.
+If the channel is multiplied, all **-** pins will be to the left, and all **+** pins to the right.
+
 ![GPIO Module](../images/block-gpio-full.png)
 
 ### DS2413 Chip
