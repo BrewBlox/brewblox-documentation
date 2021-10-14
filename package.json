@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/BrewBlox/brewblox-documentation#readme",
   "devDependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "eslint": "^7.29.0",
     "eslint-plugin-vue": "^7.12.1",
     "plantuml-encoder": "^1.4.0",

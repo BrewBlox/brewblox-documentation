@@ -8,6 +8,29 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2021/10/14
+
+**firmware release date: 2021-09-20**
+
+Due to popular demand, we added the *Countdown* widget.
+Apart from this, and some minor usability improvements, we've taken the time to improve things under the hood.
+
+We've been thinking for a while about making more use of the relations diagram in the Spark service page,
+and have now implemented a new library that will let us do just that.
+For now, everything looks pretty much the same, but you can expect some improvements here in future updates.
+
+**Changes:**
+- (feature) Added the *Countdown* widget.
+- (feature) Switched to a new library for calculating the layout of relation diagrams.
+- (improve) The relation between OneWire temp sensors and the OneWire bus is hidden in relation diagrams.
+- (improve) Added - / + labels to the power block for the *OneWire GPIO Module* block.
+- (docs) Added pin mapping and multiplication to the *OneWire GPIO Module* block documentation.
+- (dev) Updated Python-based services to Python 3.9.
+- (dev) Block relations and drive chains are now calculated server-side, and broadcast as part of the Spark state.
+- (fix) Resolved an error where exporting channel / sensor names would crash when removing all blocks.
+- (fix) `brewblox-ctl update` now makes sure the udev rules directory exists before copying files to it.
+- (fix) `brewblox-ctl add-tilt` now correctly sets a flag to disable traefik routing, as the Tilt service has no REST API.
+
 ## Brewblox release 2021/09/20
 
 **firmware release date: 2021-09-20**
