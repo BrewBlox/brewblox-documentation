@@ -93,4 +93,4 @@ brewblox-ctl snapshot load
 brewblox-ctl update
 ```
 
-Your system is now configured exactly as it was before.
+Your system is now configured exactly as it was at the time of the snapshot.

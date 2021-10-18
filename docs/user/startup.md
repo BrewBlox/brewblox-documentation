@@ -276,11 +276,11 @@ Commands:
   add-plaato      Create a service for the Plaato airlock.
   add-node-red    Create a service for Node-RED.
   service         Edit or remove services in docker-compose.yml.
-  flash           Flash firmware on Spark.
+  flash           Flash Spark firmware over USB.
   wifi            Configure Spark Wifi settings.
   particle        Start a Docker container with access to the Particle CLI.
   log             Generate and share log file for bug reports.
-  fix             Host configuration fixes
+  fix             Fix configuration on the host system.
   database        Database migration commands.
   backup          Save or load backups.
   snapshot        Save or load snapshots.
@@ -305,7 +305,7 @@ There's no need to panic. Click advanced, and proceed to the page.
 
 ## Step 6: Use the system
 
-Brewblox itself is now installed and running. The next step is to put it in charge of your fridges, kettles, and conicals.
+Brewblox is now installed and running. The next step is to put it in charge of your fridges, kettles, and conicals.
 
 You can build your configuration from scratch, or use one of the wizards.
 To start a wizard, click the big *Get Started* button, and select the *Quick Start* option.
