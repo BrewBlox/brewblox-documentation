@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "docs/.vuepress/dist"
+
+[[redirects]]
+  from = "/install"
+  to = "https://raw.githubusercontent.com/BrewBlox/brewblox-ctl/edge/bootstrap-install.sh"
+  status = 301
+  force = true
