@@ -51,10 +51,11 @@ For reference, these are the default Python versions for various distros:
 
 - Debian Stretch: Python 3.5
 - Debian Buster: Python 3.7
+- Debian Bullseye: Python 3.9
 - Ubuntu 18.04: Python 3.6
 - Ubuntu 20.04: Python 3.8
 
-If you are using Synology, MacOS, or one of the many flavours of Linux,
+If you are using Synology, MacOS, or one of the many other flavours of Linux,
 then the Python version is the most important factor for compatibility.
 
 ## Upgrading Brewblox
@@ -64,13 +65,13 @@ This is done by making a snapshot of your installation directory, and loading it
 
 ### Creating a Snapshot
 
-To make a snapshot, run this command in your home directory (the one containing your brewblox directory):
+To make a snapshot, navigate to your Brewblox directory, and run:
 
 ```
 brewblox-ctl snapshot save
 ```
 
-This will create the *brewblox.tar.gz* archive.
+This will create the *brewblox.tar.gz* archive in the parent directory of the Brewblox directory. By default, this will be *~/brewblox.tar.gz*.
 
 ### Exporting the snapshot
 
@@ -82,16 +83,14 @@ The host field should be `sftp://IP_ADDRESS`. Username / password are the same a
 
 ### Using a snapshot during installation
 
-You can now follow the [Startup Guide](./startup), until step 3 (Install Brewblox).
+Follow the [Startup Guide](./startup) to install Brewblox.
+Then use FileZilla to copy your *brewblox.tar.gz* snapshot to the /home/pi directory on your Pi.
 
-Follow the instructions, but do not yet run `brewblox-ctl install`.
+When this is done, navigate to your Brewblox directory, and run:
 
-First use FileZilla to copy your *brewblox.tar.gz* snapshot to the /home/pi directory your Pi.
-Then run:
 ```
-brewblox-ctl install --snapshot brewblox.tar.gz
-cd brewblox
+brewblox-ctl snapshot load
 brewblox-ctl update
 ```
 
-You can then skip the rest of the Startup Guide: your system is now configured exactly as it was before.
+Your system is now configured exactly as it was before.
