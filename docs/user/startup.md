@@ -104,12 +104,20 @@ Trying to type them yourself is frustrating and error prone.
 For Windows Terminal, the default shortcuts to copy/paste in a terminal window are `ctrl+shift+C` and `ctrl+shift+V`.
 You can also right click on the terminal window, and select the desired option from the dropdown menu.
 
-To download and run the Brewblox installer:
+To install package updates:
 ```
-wget -qO - https://brewblox.com/install | bash
+sudo apt update && sudo apt upgrade -y
+sudo reboot
 ```
 
-After the installation is done, the system will restart. Reconnect the SSH client to continue.
+The last command will restart your system. Reconnect the SSH client to continue.
+
+To download and run the Brewblox installer:
+```
+wget -qO - https://www.brewblox.com/install | bash
+```
+
+After the installation is done, the system will restart again. Reconnect the SSH client to continue.
 
 By default, `~/brewblox` is used as install directory.
 
