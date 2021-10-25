@@ -110,14 +110,14 @@ sudo apt update && sudo apt upgrade -y
 sudo reboot
 ```
 
-The last command will restart your system. Reconnect the SSH client to continue.
+The `sudo reboot` command will restart your Pi. Reconnect the SSH client to continue.
 
 To download and run the Brewblox installer:
 ```
 wget -qO - https://www.brewblox.com/install | bash
 ```
 
-After the installation is done, the system will restart again. Reconnect the SSH client to continue.
+After the installation is done, the Pi will restart again. Reconnect the SSH client to continue.
 
 By default, `~/brewblox` is used as install directory.
 
