@@ -8,7 +8,7 @@ const hashCode = s =>
   s.split('').reduce((a, b) => (((a << 5) - a) + b.charCodeAt(0)) | 0, 0);
 
 const download = async (encoded, dest) => {
-  const url = `https://www.plantuml.com/plantuml/png/${encoded}`;
+  const url = `http://www.plantuml.com/plantuml/png/${encoded}`;
   const writer = fs.createWriteStream(path.resolve(__dirname, 'public', dest));
   const response = await axios({
     url,
