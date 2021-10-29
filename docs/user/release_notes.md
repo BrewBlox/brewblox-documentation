@@ -14,6 +14,7 @@ Relevant links:
 
 Multiple users have recently reported frequent hangups. This is something we're actively working on, but so far have failed to consistently reproduce.
 We identified two prime suspects in the firmware code, and fixed or improved the code there.
+This includes the mDNS implementation, and the display rendering code.
 
 Under the hood, brewblox-ctl was split in two parts: the generic *brewblox-ctl*, and the release-specific *brewblox-ctl-lib*.
 This complicated releases, and required us to split the installation process in two commands:
@@ -39,8 +40,9 @@ For existing installs, `brewblox-ctl update` will automatically migrate your sys
 - (fix) Resolved an issue where temperature unit settings would not be applied correctly if timezone was not specified.
 - (fix) The Setpoint Profile display part in Builder now shows the correct current value.
 - (fix) Restored "Import layout" to the Builder action menu.
-- (fix) Fixed memory errors in the firmware mDNS implementation.
-- (fix) Fixed glitches on the Spark 4 display.
+- (fix) Made MDNS implementation on Spark 2 and 3 more robust.
+- (fix) Resolved yield in display DMA completion wait function on Spark 3.
+- (fix) Fixed display glitches on the Spark 4 when ethernet is connected.
 
 ## Brewblox release 2021/10/14
 
