@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
+pushd "$(dirname "$0")" > /dev/null
 
 # Args: relative directory of brewblox-ui repo
 DIR=${1:-"../brewblox-ui"}
-
-# Push script dir
-pushd "$(dirname "$0")" > /dev/null
 
 echo "Using $(pwd)/${DIR}"
 

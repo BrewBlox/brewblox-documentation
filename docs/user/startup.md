@@ -104,35 +104,21 @@ Trying to type them yourself is frustrating and error prone.
 For Windows Terminal, the default shortcuts to copy/paste in a terminal window are `ctrl+shift+C` and `ctrl+shift+V`.
 You can also right click on the terminal window, and select the desired option from the dropdown menu.
 
-First, we have to fix some SSH settings on the Pi.
-In your SSH terminal, run the following commands (one at a time):
-
-```bash
-sudo sed -i 's/^AcceptEnv LANG LC/# AcceptEnv LANG LC/g' /etc/ssh/sshd_config
-sudo systemctl restart ssh
-exit
+To install package updates:
+```
+sudo apt update && sudo apt upgrade -y
+sudo reboot
 ```
 
-This will exit your SSH session. When you reconnect, it will use the new settings.
+The `sudo reboot` command will restart your Pi. Reconnect the SSH client to continue.
 
-In your new SSH terminal, run the following commands:
-
-```bash
-sudo apt update
-sudo apt upgrade -y
-sudo apt install -y python3-pip
-pip3 install --user setuptools brewblox-ctl
-exec $SHELL --login
+To download and run the Brewblox installer:
+```
+wget -qO - https://brewblox.com/install | bash
 ```
 
-These commands installed `brewblox-ctl`, a menu for installing and managing your Brewblox system. <br>
-To install a new system, run this command:
+After the installation is done, the Pi will restart again. Reconnect the SSH client to continue.
 
-```bash
-brewblox-ctl install
-```
-
-This will walk you through the relevant choices, and then create the Brewblox install directory.
 By default, `~/brewblox` is used as install directory.
 
 ## Interlude: Navigating Linux directories
@@ -198,19 +184,7 @@ pi@raspberrypi:~/brewblox/deeply/nested $
 
 If you'd like some more explanation, this [guide to linux commands](https://www.raspberrypi.org/documentation/linux/usage/commands.md) explains how to use the most common commands on a Raspberry Pi.
 
-## Step 4: First-time setup
-
-To finish the installation, and initialize your system, run the setup command.
-
-Navigate to the Brewblox install directory (default: `cd ~/brewblox`), and run this command:
-
-```bash
-brewblox-ctl setup
-```
-
-Follow the instructions until the menu exits.
-
-## Step 5: Spark setup
+## Step 4: Spark setup
 
 ::: tip
 If you want to try out Brewblox, you can use the Spark simulation instead.
@@ -263,7 +237,7 @@ To set Wifi credentials:
 The app will now set Wifi credentials for your Spark. An additional IP
 address will be shown in the top left corner of the Spark display.
 
-## Step 6: Start the system
+## Step 5: Start the system
 
 To list all possible commands, navigate to the Brewblox install directory (default: `cd ~/brewblox`), and run:
 
@@ -274,18 +248,10 @@ brewblox-ctl --help
 ::: details Example output
 ```
 pi@raspberrypi:~ $ cd brewblox
-pi@raspberrypi:~/brewblox $ brewblox-ctl --help
-Usage: brewblox-ctl [OPTIONS] COMMAND [ARGS]...
+pi@raspberrypi:~/brewblox$ brewblox-ctl --help
+Usage: python -m brewblox_ctl [OPTIONS] COMMAND [ARGS]...
 
   The Brewblox management tool.
-
-  It can be used to create and control Brewblox configurations. More
-  commands are available when used in a Brewblox installation directory.
-
-  If the command you're looking for was not found, please check your current
-  directory.
-
-  By default, Brewblox is installed to ~/brewblox.
 
   Example calls:
 
@@ -304,29 +270,29 @@ Options:
 Commands:
   up              Start all services.
   down            Stop all services.
-  restart         Stop and start all services.
+  restart         Recreates all services.
   follow          Show logs for one or more services.
-  kill            Stop and remove all containers on this computer.
-  install         Create Brewblox directory; install system dependencies;...
-  init            Create and init Brewblox directory.
-  flash           Flash firmware on Spark.
-  wifi            DISABLED: Configure Spark Wifi settings.
-  particle        Start a Docker container with access to the Particle CLI.
-  enable-ipv6     Enable IPv6 support on the host machine.
-  snapshot        Save or load snapshots.
-  env             List, get, or set env values.
+  kill            Stop and remove all containers on this host.
+  install         Install Brewblox and its dependencies.
   makecert        Generate a self-signed SSL certificate.
-  setup           Run first-time setup in Brewblox directory.
+  env             List, get, or set env values.
+  update          Download and apply updates.
+  update-ctl      Download and update brewblox-ctl itself.
   discover-spark  Discover available Spark controllers.
   add-spark       Create or update a Spark service.
+  add-tilt        Create a service for the Tilt hydrometer.
   add-plaato      Create a service for the Plaato airlock.
   add-node-red    Create a service for Node-RED.
-  service         Show or edit services in docker-compose.yml.
-  libs            Reinstall local libs.
-  update          Download and apply updates.
+  service         Edit or remove services in docker-compose.yml.
+  flash           Flash Spark firmware over USB.
+  wifi            Configure Spark Wifi settings.
+  particle        Start a Docker container with access to the Particle CLI.
   log             Generate and share log file for bug reports.
+  fix             Fix configuration on the host system.
+  database        Database migration commands.
   backup          Save or load backups.
-pi@raspberrypi:~/brewblox $
+  snapshot        Save or load snapshots.
+pi@raspberrypi:~/brewblox$
 ```
 :::
 
@@ -345,9 +311,9 @@ There's no need to panic. Click advanced, and proceed to the page.
 ![Brewblox UI](../images/ssl-error-chrome.png)
 :::
 
-## Step 7: Use the system
+## Step 6: Use the system
 
-Brewblox itself is now installed and running. The next step is to put it in charge of your fridges, kettles, and conicals.
+Brewblox is now installed and running. The next step is to put it in charge of your fridges, kettles, and conicals.
 
 You can build your configuration from scratch, or use one of the wizards.
 To start a wizard, click the big *Get Started* button, and select the *Quick Start* option.

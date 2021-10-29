@@ -12,7 +12,7 @@ This is no longer true when connected to the internet.
 Here, every single request must include some form of authentication to confirm that the sender can be trusted.
 
 Secure password-protected remote access is something we'd like to implement sometime in the future, but we're not there yet.
-In the meantime, a alternative for safely connecting to your Pi is to install and use a Virtual Private Network (VPN).
+In the meantime, an alternative for safely connecting to your Pi is to install and use a Virtual Private Network (VPN).
 
 This tutorial uses the [Wireguard](https://www.wireguard.com/) software because it's fast, and easy to set up.
 
@@ -372,5 +372,5 @@ Start the Wireguard interface on your client, and you're done.
 
 ## Using the VPN
 
-After all this is installed, configured, and started, you can now visit the Brewblox UI at `10.0.0.1`,
+After all this is installed, configured, and started, you can visit the Brewblox UI at `10.0.0.1`,
 even when not at home.

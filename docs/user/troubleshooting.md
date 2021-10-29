@@ -17,6 +17,12 @@ We quickly fix most bugs we find. Some of them can't be fixed immediately, but h
 We keep this list updated with the issues we're aware of, but haven't yet permanently resolved.
 :::
 
+**brewblox-ctl keeps asking to re-install shared libraries**
+
+If you made an alias for "brewblox-ctl", it may disrupt the use of the new unified brewblox-ctl application.
+
+Remove the alias, reload your shell, and try again.
+
 **Graphs and widgets don't show on iOS**
 
 There is a bug on iOS where Websockets always fail to connect if the backend is using a self-signed SSL certificate.

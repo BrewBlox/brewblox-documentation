@@ -8,6 +8,42 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2021/10/29
+
+**firmware release date: 2021-10-29**
+
+Multiple users have recently reported frequent hangups. This is something we're actively working on, but so far have failed to consistently reproduce.
+We identified two prime suspects in the firmware code, and fixed or improved the code there.
+This includes the mDNS implementation, and the display rendering code.
+
+Under the hood, brewblox-ctl was split in two parts: the generic *brewblox-ctl*, and the release-specific *brewblox-ctl-lib*.
+This complicated releases, and required us to split the installation process in two commands:
+`brewblox-ctl install`, and `brewblox-ctl setup`.
+We've now unified brewblox-ctl, and switched to installing brewblox-ctl and all its dependencies in the Brewblox directory itself.
+This makes the installation process cleaner and reduces the need for custom steps on non-standard platforms like Synology.
+A minimal wrapper script is placed in `$HOME/.local/bin` or `/usr/local/bin` to keep the `brewblox-ctl` a valid command.
+
+For fresh installs we created a downloadable install script at https://www.brewblox.com/install.
+The startup guide provides the commands to download and execute it.
+Once you have installed Brewblox, you can reinstall it by removing the Brewblox directory, and running `brewblox-ctl install`.
+
+For existing installs, `brewblox-ctl update` will automatically migrate your system.
+
+**Important: if you manually created a bash alias for the brewblox-ctl command, you will need to remove or update it**
+
+**Changes:**
+- (feature) Unified brewblox-ctl and its shared library (brewblox-ctl-lib).
+- (feature) Merged `brewblox-ctl install` and `brewblox-ctl setup`.
+- (feature) Added downloadable script to simplify first-time installation.
+- (feature) The Logic Actuator can now be enabled/disabled as part of a Quick Action.
+- (improve) Reduced the Spark service docker image in size.
+- (fix) Resolved an issue where temperature unit settings would not be applied correctly if timezone was not specified.
+- (fix) The Setpoint Profile display part in Builder now shows the correct current value.
+- (fix) Restored "Import layout" to the Builder action menu.
+- (fix) Made MDNS implementation on Spark 2 and 3 more robust.
+- (fix) Resolved yield in display DMA completion wait function on Spark 3.
+- (fix) Fixed display glitches on the Spark 4 when ethernet is connected.
+
 ## Brewblox release 2021/10/14
 
 **firmware release date: 2021-09-20**
