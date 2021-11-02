@@ -114,7 +114,7 @@ The `sudo reboot` command will restart your Pi. Reconnect the SSH client to cont
 
 To download and run the Brewblox installer:
 ```
-wget -qO - https://brewblox.com/install | bash
+wget -qO - https://www.brewblox.com/install | bash
 ```
 
 After the installation is done, the Pi will restart again. Reconnect the SSH client to continue.
