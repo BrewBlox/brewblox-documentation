@@ -30,6 +30,7 @@ Existing calibration files are compatible with the first generated name. If you 
 The field names in the Tilt history data have changed. You will need to update the used fields in Graph widgets.
 - `Temperature[degF]` / `Temperature[degC]` -> `temperature[degF]` / `temperature[degC]`
 - `Specific gravity` -> `specificGravity`
+- `Plato[degP]` -> `plato[degP]`
 
 Before, the `Calibrated temperature` and `Calibrated specific gravity` fields would be added if calibration data was present.
 Now, if calibration data is present, the default fields (`temperature`, `specificGravity`, `plato`) will show calibrated data,
