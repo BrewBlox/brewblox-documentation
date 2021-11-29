@@ -8,6 +8,72 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2021/11/29
+
+**firmware release date: 2021-11-29**
+
+On the firmware side of things, we have made progress hunting down the bug that causes hangups on the Spark 2/3.
+We're still having problems consistently reproducing it, but have narrowed down the scope, and identified a likely fix.
+The problem appears to be triggered by Wifi disconnects. This includes the router stopping or restarting, but also channel and repeater changes.
+
+We improved the code that handles Wifi disconnects. The immediate effect is that the Spark no longer requires a fixed Wifi channel,
+but we're not sure whether this resolves all hangups. Please let us know if you continue to experience them.
+
+Apart from firmware bug hunts, we have also reworked the Tilt service to support custom and unique device names.
+Previously, if multiple Tilt devices of the same color were detected, their data would be arbitrarily mixed.
+Now, a unique name is generated for every Tilt. The default name is still the color, but after the first, it will increment the name.
+For example, if you have three red Tilts, you will end up with the device names *Red*, *Red-2*, and *Red-3*.
+You can set custom device names for all Tilts in the UI.
+
+Existing calibration files are compatible with the first generated name. If you only have a single Tilt, you do not need to make changes.
+
+The field names in the Tilt history data have changed. You will need to update the used fields in Graph widgets.
+- `Temperature[degF]` / `Temperature[degC]` -> `temperature[degF]` / `temperature[degC]`
+- `Specific gravity` -> `specificGravity`
+- `Plato[degP]` -> `plato[degP]`
+
+Before, the `Calibrated temperature` and `Calibrated specific gravity` fields would be added if calibration data was present.
+Now, if calibration data is present, the default fields (`temperature`, `specificGravity`, `plato`) will show calibrated data,
+and the `uncalibratedTemperature` / `uncalibratedSpecificGravity` / `uncalibratedPlato` fields are added to show raw data.
+
+The UI now also supports setting a preferred unit for Specific Gravity values: unitless Specific Gravity, or degrees Plato.
+The new *Display: Tilt* Builder part will show temperature and gravity in the preferred units.
+Values for all units are still included in history data.
+
+For a comprehensive overview of changes, see https://github.com/BrewBlox/brewblox-tilt/issues/2.
+For setup and calibration instructions, see https://github.com/BrewBlox/brewblox-tilt.
+
+**Note:** if Tilt data does not show up in the UI after updating, you may still be using the original third-party Tilt service.
+To fix this, run `brewblox-ctl add-tilt -f`.
+
+**Changes:**
+- (feature) The Tilt service now generates unique names if multiple devices with the same color are detected.
+- (feature) The Tilt service now supports custom device names.
+- (feature) Added the *Steam Condenser* Builder part.
+- (feature) Added the *Tilt Display* Builder part.
+- (feature) Added *Ground* and *Power Only* channel types to the *OneWire GPIO Module* editor.
+- (feature) The last used action in *Quick Actions* is now highlighted.
+- (feature) Updated field names in history data published by the Tilt service.
+- (feature) Preferred Specific Gravity units are now configurable in the admin page. The choices are SG and Plato.
+- (feature) Blank lines and comments in `docker-compose.yml` will no longer be overwritten during `brewblox-ctl update`.
+- (feature) Added the `brewblox-ctl termbin {FILE}` command. This generates a shareable termbin.com URL for a given text file (as used in `brewblox-ctl log`).
+- (improve) brewblox-ctl will now explicitly disable IPv6 in avahi daemon configuration.
+- (improve) brewblox-ctl no longer depends on `nc` being installed system-wide. This helps with running `brewblox-ctl log` on Synology systems.
+- (improve) The brewblox install script lists required Apt packages if `apt-get` is not detected.
+- (improve) brewblox-ctl no longer depends on `netstat` being installed system-wide.
+- (improve) Removed `tio` and `net-tools` from installed apt packages.
+- (improve) `brewblox-ctl http {METHOD} {URL} --pretty` now generates valid JSON.
+- (improve) Generated mounted volumes in `docker-compose.yml` and `docker-compose.shared.yml` now use the more explicit syntax.
+- (improve) Tilt data is now included when running `brewblox-ctl backup save`.
+- (improve) Renamed `brewblox-ctl fix avahi-reflection` to `brewblox-ctl fix avahi`.
+- (improve) The Tilt service now waits on startup until a Bluetooth dongle or chip is detected on the host.
+- (fix) Resolved firmware hangups in the Spark 2/3 when the Wifi access point switches channels.
+- (fix) Fixed a bug when importing a Builder layout that references a non-existent Spark service.
+- (fix) Service overrides in `docker-compose.yml` that do not have a `image` field do no longer cause Spark discovery to crash.
+- (fix) `brewblox-ctl` and the brewblox install script now use `apt-get` instead of `apt` to avoid conflicts on MacOS.
+- (fix) `brewblox-ctl wifi` now correctly uses `pyserial-miniterm` instead of `miniterm.py`. Same program, different name.
+- (fix) Tilt Bluetooth events no longer get drowned out by other non-Tilt Bluetooth Low Energy devices.
+
 ## Brewblox release 2021/10/29
 
 **firmware release date: 2021-10-29**

@@ -11,11 +11,23 @@ Our first reply often consists of the same handful of questions. To save you som
 
 ## Known issues / workarounds
 
-::: tip
-We quickly fix most bugs we find. Some of them can't be fixed immediately, but have a temporary workaround.
+**Installation fails with "E: Package 'python3-venv' has no installation candidate"**
 
-We keep this list updated with the issues we're aware of, but haven't yet permanently resolved.
-:::
+For example:
+```
+Package python3-venv is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+E: Package 'python3-venv' has no installation candidate
+```
+
+The `python3-venv` package is found in the [universe Apt repository](https://askubuntu.com/questions/58364/whats-the-difference-between-multiverse-universe-restricted-and-main).
+If the installation fails with the above error, it is likely you need to enable *universe* packages by running:
+
+```
+sudo add-apt-repository universe
+sudo apt update --fix-missing
+```
 
 **brewblox-ctl keeps asking to re-install shared libraries**
 
