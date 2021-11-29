@@ -57,6 +57,7 @@ To fix this, run `brewblox-ctl add-tilt -f`.
 - (feature) Preferred Specific Gravity units are now configurable in the admin page. The choices are SG and Plato.
 - (feature) Blank lines and comments in `docker-compose.yml` will no longer be overwritten during `brewblox-ctl update`.
 - (feature) Added the `brewblox-ctl termbin {FILE}` command. This generates a shareable termbin.com URL for a given text file (as used in `brewblox-ctl log`).
+- (feature) Services and dashboards can now be hidden from view in the sidebar. You can toggle this setting in the admin page.
 - (improve) brewblox-ctl will now explicitly disable IPv6 in avahi daemon configuration.
 - (improve) brewblox-ctl no longer depends on `nc` being installed system-wide. This helps with running `brewblox-ctl log` on Synology systems.
 - (improve) The brewblox install script lists required Apt packages if `apt-get` is not detected.
