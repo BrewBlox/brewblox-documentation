@@ -33,6 +33,7 @@ module.exports = {
           children: [
             'tutorials/dev_platform',
             'tutorials/deployment',
+            'tutorials/analyzing_logs',
             'tutorials/brewscript/',
             'tutorials/serialscript/',
             'tutorials/pubscript/',
