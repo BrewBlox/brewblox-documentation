@@ -1,4 +1,4 @@
-# Viewing history data with Grafana
+# Grafana
 
 UI graphs and CSV exports provide a convenient and straightforward way to view history data.
 For notifications or more advanced data analysis,
@@ -63,7 +63,7 @@ brewblox-ctl up
 If you navigate to `http://{ADDRESS}/grafana`, you will be greeted by a login screen.
 The default username and password are **admin** / **admin**.
 
-![Grafana login](../images/grafana-login.png)
+![Grafana login](../../images/grafana-login.png)
 
 ## Setup
 
@@ -73,12 +73,12 @@ To do so, click on the cog wheel in the left sidebar.
 Then, in the *Data sources* tab, click the *Add data source* button.
 Here, select the *Prometheus* option.
 
-![Add datasource](../images/grafana-add-source.png)
+![Add datasource](../../images/grafana-add-source.png)
 
 The HTTP URL field must be `http://victoria:8428/victoria`.
 All other values can be left default.
 
-![Setup datasource](../images/grafana-datasource.png)
+![Setup datasource](../../images/grafana-datasource.png)
 
 :::tip
 Grafana can also be installed somewhere else, as long as it can reach your Brewblox service host.
@@ -97,11 +97,11 @@ Click on the *Metrics browser* button to show a list of known fields.
 Because it is common for Brewblox fields to contain spaces,
 the resulting selector is often invalid.
 
-![Invalid selector](../images/grafana-invalid-selector.png)
+![Invalid selector](../../images/grafana-invalid-selector.png)
 
 You can fix this by using the `__name__` argument inside the `{}` brackets.
 
 **BAD**: `service/block name/value{}`<br>
 **GOOD**: `{__name__:"service/block name/value"}`
 
-![Valid selector](../images/grafana-valid-selector.png)
+![Valid selector](../../images/grafana-valid-selector.png)
