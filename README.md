@@ -10,26 +10,18 @@ Recommended tools:
 - Visual Studio Code
 - [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) plugin.
 
-You might want to add these lines to your user Settings:
-
-```
-"markdown.extension.toc.githubCompatibility": true,
-"markdown.extension.preview.autoShowPreviewToSide": true,
-"markdown.extension.print.absoluteImgPath": false
-```
-
 ## Building
 
 In the root of this repo, run:
 
 ```
-npm ci -d
+yarn ci
 ```
 
 To build the docs with hot reloading:
 
 ```
-npm run dev
+yarn dev
 ```
 
 The docs will be served at `http://localhost:8080`

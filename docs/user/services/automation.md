@@ -1,4 +1,4 @@
-# (Deprecated) Automation guide
+# (Deprecated) Automation service
 
 ::: danger
 The automation service is deprecated, and will be disabled in a future update.
