@@ -8,6 +8,33 @@ Relevant links:
 - Project board: https://github.com/orgs/Brewblox/projects/1
 - Code repositories: https://github.com/Brewblox
 
+## Brewblox release 2022/01/21
+
+**firmware release date: 2022-01-21**
+
+The Spark 2 and 3 have suffered from intermittent hangups for some months now.
+This problem turned out to be a combination of issues: the Spark deals badly with Wifi network changes,
+and these errors were not handled correctly, causing the Spark to freeze instead of reboot.
+
+We're still working on getting the underlying issue resolved for all scenarios, but we tracked the hangups to a bug in the system layer.
+Particle has now released a fixed version of the system layer, so with this release we're hopefully rid of the hangups.
+
+**Changes:**
+- (improve) Graph fields now automatically use the default label when added.
+- (improve) The Tilt service now becomes immediately visible in the UI, and not on first device update.
+- (improve) The PID widget boil mode setting is now a single value, and not an offset from 100\*C.
+- (improve) The PID widget now shows a quantity editor for minimum boil mode output if the target is a Setpoint Driver.
+- (improve) Added Avahi and Docker daemon logs to `brewblox-ctl log` output.
+- (docs) Added primer for analyzing `brewblox-ctl log` output.
+- (docs) Added a separate section for service guides in user docs.
+- (docs) Added Tilt and Plaato service guides.
+- (dev) Updated brewblox-service to now make use of Pydantic for endpoint documentation.
+- (fix) The Spark 2 and 3 should again reboot instead of freeze on hardfault.
+- (fix) Tilt page is now scrollable.
+- (fix) The Quick Actions diff is no longer erronously saved to the datastore.
+- (fix) The UrlDisplay Builder part now functions correctly for relative paths.
+- (fix) The installation of brewblox-ctl no longer sometimes fails because the Rust compiler is not available.
+
 ## Brewblox release 2021/11/29
 
 **firmware release date: 2021-11-29**
