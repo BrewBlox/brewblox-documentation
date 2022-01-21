@@ -4,17 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "ci": "rm -rf node_modules; yarn install --frozen-lockfile",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vuepress dev docs",
     "build": "vuepress build docs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BrewBlox/brewblox-documentation"
-  },
+  "repository": "git+https://github.com/BrewBlox/brewblox-documentation",
   "keywords": [],
   "author": "BrewPi",
-  "license": "GPLv3",
+  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/BrewBlox/brewblox-documentation/issues"
   },
