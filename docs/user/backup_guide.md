@@ -68,7 +68,7 @@ crontab -u $USER -e
 Choose Nano as editor, and append the following line to the file:
 
 ```
-@weekly (cd $HOME/brewblox; /usr/bin/python3 -m brewblox_ctl backup save)
+@weekly (cd $HOME/brewblox; $HOME/.local/bin/brewblox-ctl backup save)
 ```
 
 Press ctrl+X to save and exit.
