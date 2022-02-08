@@ -16,35 +16,6 @@ The Tilt service will appear automatically in the UI.
 brewblox-ctl add-tilt
 ```
 
-## Installation on a remote machine
-
-The Tilt service does not have to be installed on the same server as the rest of Brewblox.
-This is useful if it is not convenient to place the main Brewblox server within Bluetooth range of all your Tilts.
-
-On the remote machine in the directory you wish to install the service, create a `docker-compose.yml` file like this with the relevant IP address for the brewblox host.
-
-```yaml
-version: '3.7'
-services:
-  tilt:
-    image: brewblox/brewblox-tilt:${BREWBLOX_RELEASE:-edge}
-    restart: unless-stopped
-    privileged: true
-    network_mode: host
-    volumes: ['./tilt:/share']
-    command: --mqtt-host=<brewblox_hostname/IP>
-```
-
-Create the directory for the tilt files
-```bash
-mkdir ./tilt
-```
-
-Start the service with the following command
-```bash
-docker-compose up -d
-```
-
 ## Configure ports
 
 By default, the Tilt services uses MQTT over WSS (HTTPS websockets).
@@ -130,6 +101,118 @@ Black,75,76
 Calibrated values will be logged in Brewblox separately to uncalibrated values. If you don't provide calibration values for a given colour of Tilt, only uncalibrated values will be logged. You don't need to calibrate both temperature and SG. If you only want to provide calibration values for SG, that works fine. Calibrated temp values would not be generated in this case but calibrated SG values would be.
 
 It is also recommended that you re-calibrate SG whenever you change your battery. Different batteries and different placements of the sled inside the Tilt can affect the calibration.
+
+## Installation on a remote machine
+
+The Tilt service does not have to be installed on the same server as the rest of Brewblox.
+This is useful if it is not convenient to place the main Brewblox server within Bluetooth range of all your Tilts.
+
+On the remote machine in the directory you wish to install the service, create a `docker-compose.yml` file like this with the relevant IP address for the brewblox host.
+
+```yaml
+version: '3.7'
+services:
+  tilt:
+    image: brewblox/brewblox-tilt:${BREWBLOX_RELEASE:-edge}
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    volumes: ['./tilt:/share']
+    command: --mqtt-host=<brewblox_hostname/IP>
+```
+
+Create the directory for the tilt files
+```bash
+mkdir ./tilt
+```
+
+Start the service with the following command
+```bash
+docker-compose up -d
+```
+
+## Installation on a Pi Zero W
+
+Due to its small size and built-in Bluetooth, the Pi Zero W can be easily installed close to the Tilt itself.
+It does require a different installation process, as its processor architecture (ARMv6) is not supported by our Docker images.
+The solution is to install and run the Python package directly.
+
+**Warning: because there are no pre-built Python packages available, the installation process can take multiple hours.**
+
+To install, run:
+```sh
+# Install system packages
+sudo apt update
+sudo apt install -y git python3-pip libbluetooth-dev python3-venv
+sudo setcap 'cap_net_raw,cap_net_admin+eip' "$(which python3)"
+
+# Install poetry - a python package manager
+curl -sSL https://install.python-poetry.org | python3 -
+
+# The calibration files for the tilt service are stored here
+sudo mkdir /share
+sudo chown $USER /share
+
+# Clone the service repository
+git clone https://github.com/BrewBlox/brewblox-tilt.git
+cd brewblox-tilt
+git checkout edge
+
+# Install python packages
+# This step can take multiple hours
+export PATH="~/.local/bin:$PATH"
+poetry install
+```
+
+To test the service`, run:
+```sh
+poetry run python3 -m brewblox_tilt --mqtt-host=${BREWBLOX_HOST_IP}
+```
+Replace `${BREWBLOX_HOST_IP}` with the host or IP address of the server that runs your other Brewblox services.
+
+We want the service to start in the background when the Pi starts.
+This is done using a systemd service.
+
+Create the */etc/systemd/system/brewblox-tilt.service* file, with as content:
+```ini
+[Unit]
+Description=Brewblox Tilt Service
+
+Wants=network.target
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/pi/brewblox-tilt
+ExecStart=/home/pi/.local/bin/poetry run python3 -m brewblox_tilt --mqtt-host=${BREWBLOX_HOST_IP}
+User=pi
+Group=pi
+Restart=on-failure
+RestartSec=10
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+```
+Again, replace `${BREWBLOX_HOST_IP}` with the Brewblox server address.
+
+To enable and start the service, run:
+```sh
+sudo chmod 640 /etc/systemd/system/brewblox-tilt.service
+sudo systemctl daemon-reload
+sudo systemctl enable brewblox-tilt
+sudo systemctl start brewblox-tilt
+sudo systemctl status brewblox-tilt
+```
+
+Later, to update the service, run:
+```sh
+cd brewblox-tilt
+git pull
+poetry install
+sudo systemctl restart brewblox-tilt
+sudo systemctl status brewblox-tilt
+```
 
 ## Limitations
 
