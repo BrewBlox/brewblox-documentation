@@ -32,7 +32,7 @@ On the server, we need some software to talk to individual devices. To make it e
 Some services are used for shared functionality: The **history service** collects data from device services, and stores it for later use in graphs. Others are used to control individual devices.
 
 Some examples of supported devices:
-- The [BrewPi Spark](./adding_spark.md)
+- The [BrewPi Spark](./services/spark)
 - The [Tilt hydrometer](https://github.com/BrewBlox/brewblox-tilt)
 - The [iSpindel hydrometer ](https://github.com/bdelbosc/brewblox-ispindel)
 - The [Plaato digital airlock](https://github.com/Brewblox/brewblox-plaato)
@@ -170,7 +170,7 @@ The `command` setting contains arguments for the software running *inside* the s
 
 The `--name` argument must (again) be the same as the service name.
 
-For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./connect_settings.md)
+For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./services/spark#spark-connection-settings)
 
 ::: tip
 The service name is mentioned two times in the YAML for a Spark service. The values must match.

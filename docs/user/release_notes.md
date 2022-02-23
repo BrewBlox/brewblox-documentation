@@ -230,7 +230,7 @@ Broadly speaking, it's twice as fast, and uses half the memory.
 
 Where the InfluxDB data required some custom handling,
 the Victoria Metrics model is much simpler.
-It's simple enough that you can [add a Grafana service](https://brewblox.netlify.app/user/grafana), and have it work as expected out of the box.
+It's simple enough that you can [add a Grafana service](https://brewblox.netlify.app/user/services/grafana), and have it work as expected out of the box.
 
 Your system will be immediately functional after updating, and will log data into Victoria Metrics. Older data will have to be copied from InfluxDB to Victoria.
 For this, we made a [data migration command](https://brewblox.netlify.app/dev/migration/influxdb)
@@ -842,7 +842,7 @@ We also added two more Quickstart wizards, and gave the block / block widget wiz
 While implementing automation functionality, the limitations of a fully UI-based configuration became noticeable.
 If the action or condition is repetitive, complicated, or uncommon, then it quickly becomes cumbersome or even impossible to configure.
 
-Our solution is to implement an optional [JavaScript sandbox](https://brewblox.netlify.app/user/automation_sandbox.html) for actions and conditions.
+Our solution is to implement an optional [JavaScript sandbox](https://brewblox.netlify.app/user/services/automation_sandbox) for actions and conditions.
 
 Some of the highlights:
 
@@ -1102,7 +1102,7 @@ The automation service is and will be completely optional.
 We'll make an announcement when the automation service is sufficiently polished and stable for general release.
 For now you'll see release notes split between regular changes, and those concerning automation.
 
-For those wanting to try the preview version, we added a short [guide](https://brewblox.netlify.app/user/automation_guide.html).
+For those wanting to try the preview version, we added a short [guide](https://brewblox.netlify.app/user/services/automation).
 
 **Changes**
 - (improve) Widgets now show hints / get started buttons when empty.
@@ -1321,7 +1321,7 @@ This release includes a collection of quick fixes to problems introduced or unco
 We're happy to announce the release of the Logic Actuator block.
 You can use this block to toggle a Digital Actuator based on the state of other Digital Actuator, Motor Valve, Setpoint, or PWM blocks.
 
-For a more in-depth explanation, see the [blocks page](https://brewblox.netlify.com/user/all_blocks.md).
+For a more in-depth explanation, see the [blocks page](https://brewblox.netlify.com/user/all_blocks).
 
 To assist with this feature, we also added the Mock Pins block, and constraints for delaying the ON or OFF switch on digital actuators.
 
@@ -1625,8 +1625,7 @@ wifi 240024000451353432383931 192.168.0.86 8332
 `brewblox-ctl add-spark` will create a new Spark service in `docker-compose.yml`.
 It accepts multiple arguments, some mandatory, some optional.
 
-For reference, see the updated docs for [adding a spark](https://brewblox.netlify.com/user/adding_spark.html) and [connection settings](https://brewblox.netlify.com/user/connect_settings.html).
-
+For reference, see the updated docs for [adding a spark](https://brewblox.netlify.com/user/adding_spark.html) and [connection settings](https://brewblox.netlify.com/user/service/spark#spark-connection-settings)
 Example call:
 ```
 steersbob@BrewBox:~/brewblox$ brewblox-ctl add-spark

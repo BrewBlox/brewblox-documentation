@@ -1,6 +1,6 @@
 # Configuration datastore
 
-Brewblox uses two shared databases: a [Time-Series Database](./influx_downsampling) for [history data](./history_events),
+Brewblox uses two shared databases: a [Victoria Metrics](https://victoriametrics.com/) Time-Series Database for [history data](./history_events),
 and a key/value [Redis](https://redis.io/) database for configuration.
 
 We [selected](../decisions/20200902_redis_datastore) Redis because it is a lightweight schemaless database without frills.

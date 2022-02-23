@@ -189,7 +189,7 @@ If you'd like some more explanation, this [guide to linux commands](https://www.
 ::: tip
 If you want to try out Brewblox, you can use the Spark simulation instead.
 
-Skip this step, and follow the instructions [here](./adding_spark_sim.md).
+Skip this step, and follow the instructions [here](./services/spark_sim).
 :::
 
 ### Spark 2 or 3 - Flash the firmware

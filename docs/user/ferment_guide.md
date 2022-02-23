@@ -95,4 +95,4 @@ If you want to discover what more you can do with Brewblox, we have other guides
 
 - The [control chains guide](./control_chains) is a good place to get an understanding of how blocks can be combined.
 - More [widgets](./all_widgets) and [blocks](./all_blocks) can be added to customize your setup.
-- A single Spark can control multiple fermentation setups, but sometimes it's more convenient to [add another Spark](./adding_spark).
+- A single Spark can control multiple fermentation setups, but sometimes it's more convenient to [add another Spark](./services/spark).
