@@ -16,7 +16,7 @@ In order to build ARM images on an AMD host, you need:
 - A cross-compiler enabled during build
 
 Some of the more popular images in the Docker Hub standard library (including Python) have ARM versions. <br>
-The problem is, however, that they automatically select the correct version based on your computer's platform and architecture. 
+The problem is, however, that they automatically select the correct version based on your computer's platform and architecture.
 
 When pulling `python:latest` on a Linux desktop, it will pull the image suitable for `linux/amd64` from [here][python-amd]. When pulling on a Raspberry Pi, it will select the `linux/arm32v7` image from [here][python-arm].
 
@@ -106,7 +106,7 @@ After creating our images we could upgrade all our services to Python 3.7. While
 [xcompile-1]: ./20180314_docker_crosscompilation
 [xcompile-2]: ./20180522_crosscompilation_revisited
 [manifest]: https://docs.docker.com/edge/engine/reference/commandline/manifest/
-[build-guide]: https://www.hotblackrobotics.com/en/blog/2018/01/22/docker-images-arm/
+[build-guide]: https://web.archive.org/web/20181222113756/https://www.hotblackrobotics.com/en/blog/2018/01/22/docker-images-arm/
 [docker-cli]: https://docs.docker.com/engine/reference/commandline/build/#options
 [python-amd]: https://hub.docker.com/r/amd64/python/
 [python-arm]: https://hub.docker.com/r/arm32v7/python/

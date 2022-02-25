@@ -17,7 +17,7 @@ You reinstall your Pi, and your container is guaranteed to work out of the box, 
 ## Getting started
 
 ::: tip
-This tutorial involves running code on your Raspberry Pi. [The remote development tutorial](../remote_scripts) explains how to easily copy files, or edit them directly on the Pi.
+This tutorial involves running code on your Raspberry Pi. [The remote development tutorial](../deployment) explains how to easily copy files, or edit them directly on the Pi.
 :::
 
 Create a new directory called `brewscript`. You can do this on your Pi by using `mkdir brewscript`.

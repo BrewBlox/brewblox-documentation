@@ -36,7 +36,7 @@ The service will wait until it is `true` before it attemps to discover and conne
 `is_connected`, `is_acknowledged`, and `is_synchronized` indicate the current status of the service <-> controller connection.
 
 First, the service attempts to connect to a controller.
-This process is described in the [Spark connection settings guide](../../user/connect_settings).
+This process is described in the [Spark connection settings guide](../../user/services/spark.html#spark-connection-settings).
 
 After the service is connected, the controller will send a handshake message. This is a plaintext string with device information. The contents are stored in the `status.device_info` field. More on this below.
 

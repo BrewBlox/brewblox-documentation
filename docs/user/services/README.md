@@ -63,7 +63,7 @@ SvcTilt -right-> DevTilt
 ## Service configuration
 
 Services are configured using the `docker-compose.yml` file. [YAML](https://learnxinyminutes.com/docs/yaml/) is a markup language that uses indentation to show nested values.
-You can follow [this guide](./config_editor) to install a graphical text editor for your configuration files.
+You can follow [this guide](../config_editor) to install a graphical text editor for your configuration files.
 
 A shortened configuration file:
 
@@ -164,7 +164,7 @@ The `command` setting contains arguments for the software running *inside* the s
 
 The `--name` argument must (again) be the same as the service name.
 
-For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./connect_settings.md)
+For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./spark#spark-connection-settings)
 
 ::: tip
 The service name is mentioned two times in the YAML for a Spark service. The values must match.

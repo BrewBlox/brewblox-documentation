@@ -33,7 +33,7 @@ The steps in bold are now done manually, and should be automated.
 
 ## Git Flow
 
-[Git Flow][1] is currently one of the more [popular][2] implementations of a distributed workflow.
+[Git Flow][1] is currently one of the more popular implementations of a distributed workflow.
 
 It proscribes two long-lived branches, with other, shorter, branches forking from one, and merging back into one, or both.
 
@@ -145,7 +145,6 @@ Some features will possibly be relevant in the future, but are not specified or 
 
 
 [1]: https://jeffkreeftmeijer.com/git-flow
-[2]: https://devblog.dwarvesf.com/post/git-best-practices/
 [3]: https://semver.org/
 [4]: https://docs.travis-ci.com/user/deployment/pypi/
 [5]: https://github.com/c4urself/bump2version
@@ -162,7 +161,6 @@ Some features will possibly be relevant in the future, but are not specified or 
 ## References
 
 * https://jeffkreeftmeijer.com/git-flow
-* https://devblog.dwarvesf.com/post/git-best-practices/
 * https://semver.org/
 * https://docs.travis-ci.com/user/deployment/pypi/
 * https://github.com/c4urself/bump2version

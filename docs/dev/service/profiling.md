@@ -2,7 +2,7 @@
 
 A profiler is one of the more useful tools for finding performance bottlenecks in code.
 
-There are multiple profilers available for Python. We'll be using the [profiling]([package](https://github.com/what-studio/profiling)) package, as it works well with our "web server in a docker container" runtime.
+There are multiple profilers available for Python. We'll be using the [profiling package](https://github.com/what-studio/profiling), as it works well with our "web server in a docker container" runtime.
 
 ## Setting up
 
