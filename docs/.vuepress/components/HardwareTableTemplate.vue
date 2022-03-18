@@ -6,7 +6,7 @@ export default {
       type: Array,
       default: () => [
         {
-          title: '#',
+          title: 'Name',
           values: [0, 9],
           // no length / voltage property -> always shown
         },
@@ -90,9 +90,14 @@ export default {
 
     <div class="table-container">
       <div v-for="c in tableValues" :key="c.key" class="column table">
-        <div>{{ c.title }}</div>
+        <div style="white-space: pre;">{{ c.title }}</div>
         <div v-for="num in numRows" :key="`${c.key}-value-${num}`">
+          <template v-if="c.values.length >= num && c.url">
+            <a :href="c.values[num - 1].url" target="_blank">{{ c.values[num - 1].title }}</a>
+          </template>
+          <template v-else>
           {{ c.values[num - 1] }}
+          </template> 
         </div>
       </div>
     </div>
