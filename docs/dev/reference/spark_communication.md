@@ -1,11 +1,5 @@
 # Spark communication protocol
 
-- context
-- Message types
-- Encoding
-- Events
-- Commands
-
 ## Context
 
 The primary controller for the Brewblox stack is the Spark.
