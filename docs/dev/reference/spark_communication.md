@@ -20,33 +20,32 @@ Messages are sub-divided in three types:
 **Commands** are the primary message type. The service sends a request, and the controller responds.
 Both requests and responses are terminated by newline (`\n`) characters. Responses may be sent as comma-separated chunks. More on this below.
 
-**Annotations** are asynchronous controller-to-service messages that are not linked to a particular request.
+**Annotations** are asynchronous controller-to-service messages that are not correlated with a specific request.
 Most annotations are for logging purposes only, and do not have a functional meaning.
 
-Annotations are contained within `< >` characters. Annotations can interrupt commands, but not the other way around.
+Annotations are contained within `< >` characters. Annotations can be placed in the middle of a command. Commands, and their terminating newline, can not be placed within annotations.
 
-**Events** are annotations with a functional meaning.
-Typically, they are sent as plain-text annotation to ensure backward and forward compatibility with the service.
+**Events** are annotations with a functional meaning and a pre-defined specification.
+Typically, they are encoded as plaintext to improve backward and forward compatibility with the service.
 
 Events are distinguished from plain annotations by using `!` as first character inside the `< >` tags.
-
-For example, the handshake message lists the firmware version numbers, so the service may check whether it is compatible.
-The currently used event messages are listed below.
 
 ## Encoding
 
 While annotations and events are encoded as UTF-8 plaintext, commands are encoded using [Protobuf](https://github.com/google/protobuf).
-The binary output from the protobuf encoding step is then encoded as base-64 to make it compatible with serial streams.
+The binary output from the protobuf encoding step is then encoded as [base-64](https://en.wikipedia.org/wiki/Base64) to make it compatible with text-based serial streams.
 
 Responses can be sent as comma-separated chunks. Each chunk should be decoded from base-64 to bytes separatedly, and the output bytes should be concatenated and decoded as a single protobuf message.
 
-Chunks from multiple messages will never be mixed, and the message will always be terminated by a newline character, regardless of whether it is sent as chunks.
+Chunks from multiple messages will never be mixed, and chunked messages will still be terminated by a `\n` character.
 
 ## Events
 
 Two event messages are currently in use: the controller handshake, and the firmware update handshake.
 
-The **Controller handshake** is a comma-separated list of fields that is used to determine controller-service compatibility.
+### Controller handshake
+
+The handshake message is a comma-separated list of fields that is used to determine controller-service compatibility.
 The service will prompt and read this message immediately after it connects to the controller.
 
 Example message:
@@ -103,10 +102,12 @@ FIRMWARE_UPDATE_SUCCESS = '06'
 OUT_OF_MEMORY = '07'
 ```
 
-The **Firmware update handshake** is a comma-separated list of fields, sent after the controller entered OTA firmware update mode.
-This mode is only available for the (physical) Spark 2 / 3.
+### Firmware updater handshake
 
-In this mode, the controller will not respond to normal commands.
+The updater handshake is a comma-separated list of fields, sent after the controller entered OTA firmware update mode.
+This mode is only available for the `photon` and `p1` platforms.
+
+In firmware update mode, the controller will not respond to normal commands.
 
 Example message:
 
@@ -148,9 +149,9 @@ message Response {
 ```
 
 Requests and Responses are matched by having the same `msgId` value.
-The `opcode` describes the requested action, and the `error` lists the reason for failure (if any).
+The request `opcode` describes the requested action, and the response `error` field is >0 if the command failed for any reason.
 
-The `Payload` message contains the raw data of a block message, along with the metadata required to identify the block and its type.
+The `Payload` object contains the raw data of a block protobuf message, along with the metadata required to identify the block and its type.
 
 ```protobuf
 message Payload {
@@ -168,8 +169,8 @@ As with the top-level `Request`/`Response` messages, the protobuf-encoded bytes 
 Because `payload` is a field in both `Request` and `Response`,
 block data in `payload.content` is technically encoded four times:
 
-- The block is protobuf-encoded using its own protobuf message.
-- The protobuf-encoded bytes are encoded to base-64.
+- The block data is protobuf-encoded using its own protobuf message.
+- The protobuf-encoded bytes are encoded to a base-64 string.
 - The `Request` or `Response` that includes the payload object (and its base-64 `content` field) is protobuf-encoded.
 - The protobuf-encoded request/response bytes are encoded to base-64.
 
