@@ -25,7 +25,8 @@ The controller simply doesn't have space for block names. It uses 16-bit numbers
 ## Spark service: data conversion
 
 Whenever the Spark service reads block data from the controller, it does the following:
-- Convert data from the [controlbox protocol](../dev/reference/controlbox_spark_protocol.md) to JSON.
+
+- Convert data from the [controlbox protocol](../dev/reference/spark_communication) to JSON.
 - Convert values to user units (the controller always uses Celsius).
 - Find the block name (`SID`, or `String IDentifier`) associated with the block `NID`.
 
@@ -47,6 +48,7 @@ The same goes for Builder parts. A reference is stored, and used to find the blo
 ## Creating and discovering blocks
 
 Roughly speaking, there are three kinds of blocks:
+
 - System blocks
 - Discovered blocks
 - Created blocks
@@ -57,7 +59,6 @@ Broadly speaking, whenever you plug in a OneWire sensor or extension board, a ne
 The server will generate a name for it when it next reads blocks from the controller. Some examples of discovered blocks are: `OneWire Temp Sensor`, `DS2413 Chip`, `DS2408 Chip`.
 
 All other blocks are created in the UI - either by you, or by a quickstart wizard.
-
 
 ## Consequences
 

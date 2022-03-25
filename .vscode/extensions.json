@@ -2,7 +2,8 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "octref.vetur",
-    "yzhang.markdown-all-in-one"
+    "yzhang.markdown-all-in-one",
+    "DavidAnson.vscode-markdownlint"
   ],
   "unwantedRecommendations": [
     "hookyqr.beautify",

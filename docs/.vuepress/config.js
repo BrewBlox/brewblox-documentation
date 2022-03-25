@@ -66,8 +66,7 @@ module.exports = {
             'reference/tilt_state',
             'reference/block_types',
             'reference/datastore',
-            'reference/controlbox_spark_protocol',
-            'reference/spark_commands',
+            'reference/spark_communication',
           ],
         },
         {
