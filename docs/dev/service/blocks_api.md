@@ -3,7 +3,7 @@
 A central component of Brewblox systems is the Spark controller.
 Custom services that wish to read or write blocks will typically interface with the Spark service API to do so.
 
-This document assumes familiarity with the [Block data types](../reference/block_types).
+This document assumes familiarity with the [Block data types](../reference/block_types.md).
 
 :::tip
 Spark service endpoints are documented using Swagger.
@@ -13,7 +13,7 @@ For comprehensive endpoint documentation, navigate to `http://{HOST}/{SERVICE_ID
 ## Hostname
 
 From a Brewblox service, you can access Spark service endpoints at `http://{SERVICE_ID}:5000`.
-This is explained in more detail in the [routing doc](./routing).
+This is explained in more detail in the [routing doc](./routing.md).
 
 ## Declarative configuration
 
@@ -92,13 +92,14 @@ Logged and stored data for one or more blocks can be fetched using the following
 
 ## Using State / history events
 
-The Spark service periodically emits [State](../reference/spark_state) and [History](../reference/history_events) events.
+The Spark service periodically emits [State](../reference/spark_state.md) and [History](../reference/history_events.md) events.
 The full spec is described in their respective documents, but there are some implications for using them in other services.
 
 State events are emitted every ~5s, and whenever the service disconnects.
 This makes them useful for implementation of value-based triggers.
 
 History events are also emitted every ~5s, but there are some critical differences with State events that make them less suitable for general purpose usage:
+
 - History events only include logged data. This is a subset that does not include relevant information such as links.
 - History events are not [retained](https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/).
 - No History event is published to notify clients of a service shutdown.
@@ -110,6 +111,7 @@ To support scenarios where clients are connected to the eventbus,
 but are unable or unwilling to use the REST API, a rudimentary block API can be used by publishing MQTT events.
 
 Spark services listen to the following MQTT topics:
+
 - `brewcast/spark/blocks/create`
 - `brewcast/spark/blocks/write`
 - `brewcast/spark/blocks/patch`

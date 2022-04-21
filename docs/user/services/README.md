@@ -63,7 +63,7 @@ SvcTilt -right-> DevTilt
 ## Service configuration
 
 Services are configured using the `docker-compose.yml` file. [YAML](https://learnxinyminutes.com/docs/yaml/) is a markup language that uses indentation to show nested values.
-You can follow [this guide](../config_editor) to install a graphical text editor for your configuration files.
+You can follow [this guide](../config_editor.md) to install a graphical text editor for your configuration files.
 
 A shortened configuration file:
 
@@ -83,6 +83,7 @@ services:
 ```
 
 There are three services here:
+
 * history
 * spark-one
 * spark-two
@@ -90,6 +91,7 @@ There are three services here:
 All of them have a unique name, but `spark-one` and `spark-two` share the same type. That's ok: as long as the name is unique, services can have the same settings.
 
 GOOD:
+
 ```yaml
 services:
   service-one:
@@ -100,6 +102,7 @@ services:
 ```
 
 BAD:
+
 ```yaml
 services:
   service-one:
@@ -129,8 +132,8 @@ When you install Brewblox, it generates a `docker-compose.yml` file for you. Thi
 
 This configuration is more advanced than what we've seen so far. To make sense of it, we'll look at the individual settings.
 
-
 ---
+
 ```yaml
 spark-one:
   image: brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
@@ -142,6 +145,7 @@ This is like the short service configurations we saw earlier. The two most impor
 The basic principles still apply. When you want to control multiple Spark devices, you'll need one service per device. Every service will have the same `image`, but a different name.
 
 ---
+
 ```yaml
   ...
   privileged: true
@@ -155,6 +159,7 @@ These settings are the same for every Spark service (and many other services).
 `restart: unless-stopped` does what it says: when your service crashes, it will automatically restart.
 
 ---
+
 ```yaml
   ...
   command: '--name=spark-one'
@@ -164,10 +169,12 @@ The `command` setting contains arguments for the software running *inside* the s
 
 The `--name` argument must (again) be the same as the service name.
 
-For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./spark#spark-connection-settings)
+For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./spark.md#spark-connection-settings)
 
 ::: tip
 The service name is mentioned two times in the YAML for a Spark service. The values must match.
-- at the top (`spark-one:`)
-- in the command (`--name=spark-one`)
+
+* at the top (`spark-one:`)
+* in the command (`--name=spark-one`)
+
 :::

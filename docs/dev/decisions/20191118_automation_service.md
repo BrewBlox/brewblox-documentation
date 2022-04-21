@@ -5,6 +5,7 @@ Date: 2019/11/18
 ## Context
 
 Right now, the core functionality of Brewblox as fermentation control system is mostly complete. Users can:
+
 - Keep brews at a desired temperature - or temperature profile
 - Manually control secondary actuators (valves)
 - View process data in graphs
@@ -43,6 +44,7 @@ The functionality clearly falls outside the scope of what the `brewblox-devcon-s
 In terms of software architecture, an automation service is nothing more than a user-defined state machine.
 
 To keep things simple, we'll keep the number of configurable fields in each step to a minimum. Steps have:
+
 - Actions (automatically performed on entry)
 - Conditions (must evaluate True in order to leave the step)
 - Notes (user-defined text fields)

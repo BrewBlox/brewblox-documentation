@@ -36,6 +36,7 @@ This is the same `ssh [USER]@[ADDRESS]` command you normally use to connect to t
 The `-A` argument is optional.
 
 Example command:
+
 ```sh
 ssh pi@192.168.1.1
 ```
@@ -56,7 +57,7 @@ You can always check your connection status with the remote host in the bottom l
 
 ## Brewblox files
 
-Once you are connected, select **File** -> **Open **Folder**** in the top bar.
+Once you are connected, select **File** -> **Open**Folder**** in the top bar.
 Select the *brewblox* directory, and click **OK**.
 
 ![Open brewblox dir](../images/ssh-open-brewblox.gif)

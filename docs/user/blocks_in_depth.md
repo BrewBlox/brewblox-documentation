@@ -26,7 +26,7 @@ The controller simply doesn't have space for block names. It uses 16-bit numbers
 
 Whenever the Spark service reads block data from the controller, it does the following:
 
-- Convert data from the [controlbox protocol](../dev/reference/spark_communication) to JSON.
+- Convert data from the [controlbox protocol](../dev/reference/spark_communication.md) to JSON.
 - Convert values to user units (the controller always uses Celsius).
 - Find the block name (`SID`, or `String IDentifier`) associated with the block `NID`.
 

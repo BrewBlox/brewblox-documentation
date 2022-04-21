@@ -4,9 +4,9 @@ Date: 2020/05/30
 
 ## Context
 
-Inter-service communication is done [using a combination of sync and async calls](./20180216_communication_options).
+Inter-service communication is done [using a combination of sync and async calls](./20180216_communication_options.md).
 
-[Originally, we picked AMQP as async event protocol](./20180220_eventbus).
+[Originally, we picked AMQP as async event protocol](./20180220_eventbus.md).
 One of the requirements at the time was that the eventbus would only be used by interal services. This is no longer true.
 It is common (and now even suggested in tutorials) to expose the 5672 RabbitMQ port on the host.
 
@@ -47,15 +47,15 @@ This service is relatively simple, but we want to limit the Brewblox footprint, 
 ## MQTT
 
 The alternative protocol for event messages is MQTT / MQTT over websockets.
-For a more detailed comparison, see: https://vasters.com/blog/From-MQTT-to-AMQP-and-back/.
+For a more detailed comparison, see: <https://vasters.com/blog/From-MQTT-to-AMQP-and-back/>.
 
 For us, the relevant advantages are:
+
 - MQTT over websockets can be proxied by Traefik.
 - MQTT over websockets can be used in a web browser (the UI).
 - Its wire protocol is somewhat lighter than AMQP.
 - MQTT is natively supported by RabbitMQ.
 - RabbitMQ offers interoperability between AMQP and MQTT events.
-
 
 ## Data formatting
 
@@ -68,6 +68,7 @@ This requires a breaking change for publishing history data, as it meaningfully 
 State data uses the exchange (`brewcast.state`), but could use any value as routing key. Metadata is included in the message itself.
 
 The required schema for state messages is:
+
 ```json
 {
   "type": "object",
@@ -94,6 +95,7 @@ The required schema for state messages is:
 ```
 
 The proposed changes are:
+
 - Message topics become the predefined const values `brewcast/history` and `brewcast/state`.
 - History messages must adhere to a schema:
 
@@ -144,9 +146,10 @@ The UI will now first receive data when the source next publishes its state.
 
 One possible implementation is for the UI to request republishing the most recent state data.
 Values are cached by either:
-  - Every publishing service.
-  - A new service.
-  - An existing service (history?).
+
+- Every publishing service.
+- A new service.
+- An existing service (history?).
 
 Another option is to leverage the [retain flag](https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/) on MQTT messages.
 

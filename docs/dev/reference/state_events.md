@@ -6,18 +6,20 @@ This state tends to be a superset of the published history data, and may include
 We reserved topic space for these messages under `brewcast/state`.
 Because detailed state data requires support from consuming clients, we do not define a global payload format for messages.
 
-The payload schema for Spark state events can be found [here](./spark_state).
+The payload schema for Spark state events can be found [here](./spark_state.md).
 
 ## Topic
 
 Service state events should be published to a topic matching `brewcast/state/<Service ID>`. You should NOT publish directly to the `brewcast/state` topic.
 
 GOOD:
+
 - `brewcast/state/my-service-one`
 - `brewcast/state/my-service-one/subtype`
 - `brewcast/state/my-service-one/my-service/subtype`
 
 BAD:
+
 - `brewcast/state`
 - `my-service`
 - `my-service/my-service-one`

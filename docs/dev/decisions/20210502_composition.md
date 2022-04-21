@@ -95,7 +95,7 @@ Any given widget component will have multiple descendants that need access to th
 This includes toolbars, generic action menus, and various `ExampleWidgetFull` / `ExampleWidgetBasic` components.
 
 Previously, we solved this using [prop drilling](https://kentcdodds.com/blog/prop-drilling)
-and [Crud components](./20190625_crud_component).
+and [Crud components](./20190625_crud_component.md).
 
 With the introduction of Provide / Inject, we can skip the drilled prop, and use an injected variable instead.
 The composition function injects a provided ID, and uses it to fetch data from VueX and provide computed properties to the component.

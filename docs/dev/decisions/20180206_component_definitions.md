@@ -9,13 +9,13 @@ Components as defined by the controller firmware are not fully suited for use by
 In order to adjust software to the user (and not the other way around), it's good to keep in mind what aspects are important for the user:
 
 * Objects should match user expectations as to what "belongs together"
-    * If it has a plug, it's a thing.
-    * If it has a distinct task, it's a thing.
-    * If you'd buy it together as a single item, it's a thing.
-    * Things can be grouped or combined in another thing.
+  * If it has a plug, it's a thing.
+  * If it has a distinct task, it's a thing.
+  * If you'd buy it together as a single item, it's a thing.
+  * Things can be grouped or combined in another thing.
 * Feedback is important
-    * When linking a UI block to a piece of hardware, you should know immediately if you picked the wrong one.
-    * When one item suddenly starts malfunctioning, it should tell you what went wrong, and what part is responsible
+  * When linking a UI block to a piece of hardware, you should know immediately if you picked the wrong one.
+  * When one item suddenly starts malfunctioning, it should tell you what went wrong, and what part is responsible
 
 ## Relations
 
@@ -40,6 +40,7 @@ All discrete objects in the UI are widgets. UI blocks display state and actions,
 The same widget can be present on multiple views.
 
 ### UI block (eg. PID, actuator, mutex)
+
 ```plantuml
 @startuml Block diagram
     class View
@@ -93,6 +94,7 @@ View persistence requires saving hardware associations, but configurations share
 Data is collected by the service layer, and persisted using InfluxDB.
 
 We are interested in the following data points:
+
 * Controller measurement values
 * Controller block connected/disconnected
 * UI block association with controller block added/removed
@@ -102,6 +104,7 @@ We are interested in the following data points:
 * Controller acknowledges command
 
 We want to filter on the following data points / properties:
+
 * events
 * UI blocks
 * hardware blocks
@@ -112,27 +115,31 @@ We want to filter on the following data points / properties:
 * time points
 
 We want to simultaneously display data from (including all members):
+
 * views
 * UI blocks
 * hardware blocks
 
 ## Data Schema
 
-For a detailed description of how controller values are serialized to the database, see [the history events spec](../reference/history_events).
+For a detailed description of how controller values are serialized to the database, see [the history events spec](../reference/history_events.md).
 
 Default configuration is to create a measurement per activity.
 Optional, depending on volume: measurement per controller block
 Future enhancement: allow users to create a measurement per process, or per UI block
 
 Values:
+
 * Key: controller block name
 * Value: measurement
 
 Tags:
+
 * Keys: `connection_events`, `association_events`, `configuration_events`, `annotation`, `command_events`, `status_events`, `data_source`
 * Values: string representations. In case of multiple simultaneous events of the same type, they can be separated by `;`
 
 Notes:
+
 * Saving data using controller representation of objects requires later matching of UI block <-> controller block
 * So far little practical data on how often events would overlap
 * How efficient is string matching `;`-separated values when filtering for events?

@@ -1,9 +1,9 @@
 # Configuration datastore
 
-Brewblox uses two shared databases: a [Victoria Metrics](https://victoriametrics.com/) Time-Series Database for [history data](./history_events),
+Brewblox uses two shared databases: a [Victoria Metrics](https://victoriametrics.com/) Time-Series Database for [history data](./history_events.md),
 and a key/value [Redis](https://redis.io/) database for configuration.
 
-We [selected](../decisions/20200902_redis_datastore) Redis because it is a lightweight schemaless database without frills.
+We [selected](../decisions/20200902_redis_datastore.md) Redis because it is a lightweight schemaless database without frills.
 This works well for us, but we had to add some custom functionality in the API to fully implement desired features.
 
 ## API service
@@ -17,6 +17,7 @@ The `history` service implements the REST-based API wrapper for performing CRUD 
 Services are not supposed to connect to the Redis database itself.
 
 The history service offers the following endpoints:
+
 - GET `/history/datastore/ping`
 - POST `/history/datastore/get`
 - POST `/history/datastore/mget`
@@ -33,6 +34,7 @@ The last section of the key is considered the document ID.
 
 A key may include zero, one, or multiple namespaces.
 Examples of some valid key names:
+
 - `id`
 - `group:id`
 - `group:subgroup:id`
@@ -45,6 +47,7 @@ All documents are expected to be valid JSON objects, and are stored as string.
 Consequently, the datastore does not support queries based on the content of documents.
 
 Documents must implement the following interface:
+
 ```typescript
 interface Document {
   id: string;
@@ -59,10 +62,12 @@ The *id* field can only contain letters, numbers, and `-` / `.` / `_` / `~` char
 It is valid for *namespace* to be empty, but not for *id*.
 
 The relevant regular expressions would be:
+
 - id: `^[\w\-\.~]+$`
 - namespace: `^[\w\-\.~\:]*$`
 
 ::: details Example documents
+
 ```json
 {
   "namespace": "brewblox-ui-store:dashboard-items",
@@ -78,6 +83,7 @@ The relevant regular expressions would be:
   "cols": 4
 }
 ```
+
 ```json
 {
   "namespace": "brewblox-global",
@@ -85,6 +91,7 @@ The relevant regular expressions would be:
   "temperature": "degC"
 }
 ```
+
 ```json
 {
   "namespace": "spark-service",
@@ -95,6 +102,7 @@ The relevant regular expressions would be:
   }
 }
 ```
+
 :::
 
 ## Change events
@@ -106,6 +114,7 @@ Change events are grouped by top-level namespace, and the top-level namespace is
 
 For example, if a call to `history/datastore/mset` changes documents in `namespaceA`,
 `namespaceA:subgroup` and in `namespaceB`, two separate events are published:
+
 - `brewcast/datastore/namespaceA`
 - `brewcast/datastore/namespaceB`
 
@@ -132,6 +141,7 @@ If no documents were changed or deleted, no event is published.
 
 ::: details Example events
 Topic: `brewcast/datastore/brewblox-global`
+
 ```json
 {
   "changed": [
@@ -145,6 +155,7 @@ Topic: `brewcast/datastore/brewblox-global`
 ```
 
 Topic: `brewcast/datastore/brewblox-ui-store`
+
 ```json
 {
   "deleted": [
@@ -153,6 +164,7 @@ Topic: `brewcast/datastore/brewblox-ui-store`
   ]
 }
 ```
+
 :::
 
 ## Avoiding namespace collisions
@@ -161,6 +173,7 @@ We strongly recommend picking an explicit namespace that is unique to your servi
 **Do NOT use** a generic term such as `settings`, `config` or `_` as top-level namespace.
 
 The namespaces used by services maintained by BrewPi are:
+
 - `brewblox-global`
 - `brewblox-ui-store`
 - `brewblox-automation`

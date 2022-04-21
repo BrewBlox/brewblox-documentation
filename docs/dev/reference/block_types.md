@@ -8,7 +8,6 @@ Block data is serialized as JSON, and will not include classes, functions, or ot
 
 The [TypeScript interface syntax](https://www.typescriptlang.org/docs/handbook/interfaces.html) is used to define types, with the exception of enums, for which the [typescript-string-enums](https://github.com/dphilipson/typescript-string-enums) library is used.
 
-
 ## Block (base type)
 
 *Block* is the base type for all blocks.
@@ -45,6 +44,7 @@ Channels are provided by blocks that implement *IoArray*, and are used by digita
 
 By default, channels are constant and cannot be modified.
 There are two exceptions:
+
 - *OneWireGpioModule* channels are completely user-defined
 - *DS2408* will report different channels based on the value of its `connectMode` field (valve or actuator).
 
@@ -78,7 +78,7 @@ Evaluates a boolean expression to get a true/false result.
 Drives a *DigitalActuator* - state is set to match the evaluation result.
 
 The expression may contain references to digital or analog comparisons.
-For a detailed explanation, see the [Blocks guide](../../user/all_blocks).
+For a detailed explanation, see the [Blocks guide](../../user/all_blocks.md).
 
 All expressions are assigned a letter based on their type and array index.
 
@@ -196,6 +196,7 @@ Referenced enum values:
 <<< @/shared-types/spark-block-enums.ts#DS2408ConnectMode
 
 Channel mapping:
+
 ```js
 {
   [DS2408ConnectMode.CONNECT_ACTUATOR]: {
@@ -329,7 +330,7 @@ Referenced enum values:
 *Pid* reads a *SetpointSensorPair* setting and measured value,
 and calculates desired output for an analog actuator.
 
-For a more in-depth explanation of how to use it, see the [blocks guide](../../user/all_blocks).
+For a more in-depth explanation of how to use it, see the [blocks guide](../../user/all_blocks.md).
 
 <<< @/shared-types/spark-block-types.ts#Pid
 
@@ -341,7 +342,7 @@ Referenced enum values:
 
 The *SetpointProfile* drives a *SetpointSensorPair* to gradually change its setting over time.
 
-For a more in-depth explanation of how to use it, see the [blocks guide](../../user/all_blocks).
+For a more in-depth explanation of how to use it, see the [blocks guide](../../user/all_blocks.md).
 
 <<< @/shared-types/spark-block-types.ts#SetpointProfile
 
@@ -375,6 +376,7 @@ Referenced enum values:
 <<< @/shared-types/spark-block-enums.ts#Spark2Hardware
 
 Channel mapping:
+
 ```js
 {
   1: 'Bottom 1',
@@ -394,6 +396,7 @@ and provides an array of *IoChannel* objects, along with settings regulating vol
 <<< @/shared-types/spark-block-types.ts#Spark3Pins
 
 Channel mapping:
+
 ```js
 {
   1: 'Top 1',

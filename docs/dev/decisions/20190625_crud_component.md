@@ -13,6 +13,7 @@ Many components are aware they're directly acting on one or both of these.
 <br> As even some deeply nested components can update widgets or blocks, the natural thing is to let them dispatch a VueX action, and VueX updates (commits) the reactive object used by everyone else.
 
 This approach breaks down when we start using volatile widgets or blocks. This happens in the following scenarios:
+
 - The Spark Service page generates a local widget for each block reported by the controller.
 - Wizards generate a local widget and/or block to allow configuration before creation.
 - Block form dialogs generate a local widget to allow re-using the form to edit an arbitrary block.
@@ -44,7 +45,7 @@ The child components inherit from either `CrudComponent` or `BlockCrudComponent`
 `BlockCrud` is an extension of `Crud`: it can also be used by a direct descendant of `CrudComponent`
 
 ```plantuml
-@startuml Crud Components 
+@startuml Crud Components
 allowmixing
 
 package showBlockDialog #cyan
@@ -98,7 +99,8 @@ BlockFormToolbar .down.> BlockActions
 @enduml
 ```
 
-The above diagram is a practical example of components relate. 
+The above diagram is a practical example of components relate.
+
 - `PidWidget` is the dashboard item.
 - `PidForm` is the main block dialog that allows editing the Pid widget and Block.
 - Both the widget and the form have a toolbar with actions.
@@ -113,33 +115,41 @@ The resulting prop passing is straightforward:
 ...
 <PidForm :crud="crud"/>
 ```
+
 ```vue
 ...
 <BlockFormToolbar :crud="crud"/>
 ```
+
 ```vue
 ...
 <WidgetActions :crud="crud"/>
 ```
+
 ```vue
 ...
 <RenameWidgetActions :crud="crud"/>
 ```
 
 In our example, when we click on the "rename widget" action, the following things happen:
+
 - `RenameWidgetAction` calls `super.renameWidget()`.
 - `CrudComponent` starts the block renaming dialog.
 - When the dialog is done, `CrudComponent` calls `this.crud.saveWidget(renamedWidget)`
 - Here the call tree forks, based on who originally created the `Crud` object.
   - `showBlockDialog` defines `saveWidget` as:
+
   ```typescript
   saveWidget: (widget: DashboardItem) => { localWidget = widget; },
   ```
+
   - `PidWidget` defines `saveWidget` as:
+
   ```typescript
   saveWidget: (widget: DashboardItem) => this.$emit('update:widget', widget),
   ```
-    - What will happen to the emitted widget is up to the Dashboard or Service page.
+
+  - What will happen to the emitted widget is up to the Dashboard or Service page.
 
 The end result is that the save widget call was immediately handled by the correct function, without `RenameWidgetAction` having to be aware of what would happen.
 

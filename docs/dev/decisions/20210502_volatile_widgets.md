@@ -12,7 +12,7 @@ This complicates the data flow for widget components.
 We don't want an if statement to guard every single `saveWidget()` call.
 We need a centralized arbiter above component level that decides how and where volatile widgets and blocks are saved.
 
-Previously, this was handled by injecting a save function as part of the [Crud](./20190625_crud_component) object.
+Previously, this was handled by injecting a save function as part of the [Crud](./20190625_crud_component.md) object.
 As part of the Vue 3 rework, we are dropping Crud components in favor of a solution that uses Provide / Inject.
 
 This requires us to re-evaluate our strategy for mixing persistent and volatile widgets.

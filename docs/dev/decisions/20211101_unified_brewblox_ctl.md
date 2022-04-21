@@ -21,6 +21,7 @@ When installing or updating *edge* Brewblox, brewblox-ctl would pull the `brewbl
 ## Drawbacks
 
 The described process came with multiple drawbacks:
+
 - The architecture was very unusual, and thus less maintainable.
 - *brewblox-ctl* had to be compatible with multiple versions of *brewblox-ctl-lib*.
 - Docker had to be installed on the host before *brewblox-ctl-lib* could be installed.
@@ -81,6 +82,7 @@ With this change, *brewblox-ctl* is no longer installed as package on the host, 
 We still want the `brewblox-ctl` command to be available in a directory that's in `$PATH`, but it also has to be compatible with multiple parallel installations.
 
 The solution is to add a very thin shell script called `brewblox-ctl` to the `~/.local/bin/` directory that:
+
 - Checks if cwd is a Brewblox directory.
 - Installs brewblox-ctl in a virtualenv if cwd is a Brewblox directory without brewblox-ctl.
 - Activates the virtualenv.

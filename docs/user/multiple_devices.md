@@ -3,7 +3,7 @@
 :::tip
 This page explains how and why the service configuration works.
 
-If you prefer to get started immediately with setting up a second Spark: you can skip forward to [Adding a Spark service](./adding_spark.md).
+If you prefer to get started immediately with setting up a second Spark: you can skip forward to [Adding a Spark service](./services/spark.md).
 :::
 
 Brewblox is designed to let you control multiple devices with a single application.
@@ -32,9 +32,10 @@ On the server, we need some software to talk to individual devices. To make it e
 Some services are used for shared functionality: The **history service** collects data from device services, and stores it for later use in graphs. Others are used to control individual devices.
 
 Some examples of supported devices:
-- The [BrewPi Spark](./services/spark)
+
+- The [BrewPi Spark](./services/spark.md)
 - The [Tilt hydrometer](https://github.com/BrewBlox/brewblox-tilt)
-- The [iSpindel hydrometer ](https://github.com/bdelbosc/brewblox-ispindel)
+- The [iSpindel hydrometer](https://github.com/bdelbosc/brewblox-ispindel)
 - The [Plaato digital airlock](https://github.com/Brewblox/brewblox-plaato)
 
 ```plantuml
@@ -69,7 +70,6 @@ SvcTilt -right-> DevTilt
 ## Service configuration
 
 Services are configured using the `docker-compose.yml` file. [YAML](https://learnxinyminutes.com/docs/yaml/) is a markup language that uses indentation to show nested values.
-You can follow [this guide](./config_editor) to install a graphical text editor for your configuration files.
 
 A shortened configuration file:
 
@@ -89,13 +89,15 @@ services:
 ```
 
 There are three services here:
-* history
-* spark-one
-* spark-two
+
+- history
+- spark-one
+- spark-two
 
 All of them have a unique name, but `spark-one` and `spark-two` share the same type. That's ok: as long as the name is unique, services can have the same settings.
 
 GOOD:
+
 ```yaml
 services:
   service-one:
@@ -106,6 +108,7 @@ services:
 ```
 
 BAD:
+
 ```yaml
 services:
   service-one:
@@ -135,8 +138,8 @@ When you install Brewblox, it generates a `docker-compose.yml` file for you. Thi
 
 This configuration is more advanced than what we've seen so far. To make sense of it, we'll look at the individual settings.
 
-
 ---
+
 ```yaml
 spark-one:
   image: brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
@@ -148,6 +151,7 @@ This is like the short service configurations we saw earlier. The two most impor
 The basic principles still apply. When you want to control multiple Spark devices, you'll need one service per device. Every service will have the same `image`, but a different name.
 
 ---
+
 ```yaml
   ...
   privileged: true
@@ -161,6 +165,7 @@ These settings are the same for every Spark service (and many other services).
 `restart: unless-stopped` does what it says: when your service crashes, it will automatically restart.
 
 ---
+
 ```yaml
   ...
   command: '--name=spark-one'
@@ -170,10 +175,11 @@ The `command` setting contains arguments for the software running *inside* the s
 
 The `--name` argument must (again) be the same as the service name.
 
-For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./services/spark#spark-connection-settings)
+For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./services/spark.md#spark-connection-settings)
 
 ::: tip
 The service name is mentioned two times in the YAML for a Spark service. The values must match.
+
 - at the top (`spark-one:`)
 - in the command (`--name=spark-one`)
 :::

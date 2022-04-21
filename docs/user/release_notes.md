@@ -2,11 +2,11 @@
 
 Relevant links:
 
-- User guides: https://brewblox.netlify.app/
-- Discord server: https://discord.gg/WaFYD2jaaT
-- Previous release notes: https://brewblox.netlify.app/user/release_notes.html
-- Project board: https://github.com/orgs/Brewblox/projects/1
-- Code repositories: https://github.com/Brewblox
+- User guides: <https://brewblox.netlify.app/>
+- Discord server: <https://discord.gg/WaFYD2jaaT>
+- Previous release notes: <https://brewblox.netlify.app/user/release_notes.html>
+- Project board: <https://github.com/orgs/Brewblox/projects/1>
+- Code repositories: <https://github.com/Brewblox>
 
 ## Brewblox release 2022/01/21
 
@@ -20,6 +20,7 @@ We're still working on getting the underlying issue resolved for all scenarios, 
 Particle has now released a fixed version of the system layer, so with this release we're hopefully rid of the hangups.
 
 **Changes:**
+
 - (improve) Graph fields now automatically use the default label when added.
 - (improve) The Tilt service now becomes immediately visible in the UI, and not on first device update.
 - (improve) The PID widget boil mode setting is now a single value, and not an offset from 100\*C.
@@ -55,6 +56,7 @@ You can set custom device names for all Tilts in the UI.
 Existing calibration files are compatible with the first generated name. If you only have a single Tilt, you do not need to make changes.
 
 The field names in the Tilt history data have changed. You will need to update the used fields in Graph widgets.
+
 - `Temperature[degF]` / `Temperature[degC]` -> `temperature[degF]` / `temperature[degC]`
 - `Specific gravity` -> `specificGravity`
 - `Plato[degP]` -> `plato[degP]`
@@ -67,13 +69,14 @@ The UI now also supports setting a preferred unit for Specific Gravity values: u
 The new *Display: Tilt* Builder part will show temperature and gravity in the preferred units.
 Values for all units are still included in history data.
 
-For a comprehensive overview of changes, see https://github.com/BrewBlox/brewblox-tilt/issues/2.
-For setup and calibration instructions, see https://github.com/BrewBlox/brewblox-tilt.
+For a comprehensive overview of changes, see <https://github.com/BrewBlox/brewblox-tilt/issues/2>.
+For setup and calibration instructions, see <https://github.com/BrewBlox/brewblox-tilt>.
 
 **Note:** if Tilt data does not show up in the UI after updating, you may still be using the original third-party Tilt service.
 To fix this, run `brewblox-ctl add-tilt -f`.
 
 **Changes:**
+
 - (feature) The Tilt service now generates unique names if multiple devices with the same color are detected.
 - (feature) The Tilt service now supports custom device names.
 - (feature) Added the *Steam Condenser* Builder part.
@@ -117,7 +120,7 @@ We've now unified brewblox-ctl, and switched to installing brewblox-ctl and all 
 This makes the installation process cleaner and reduces the need for custom steps on non-standard platforms like Synology.
 A minimal wrapper script is placed in `$HOME/.local/bin` or `/usr/local/bin` to keep the `brewblox-ctl` a valid command.
 
-For fresh installs we created a downloadable install script at https://www.brewblox.com/install.
+For fresh installs we created a downloadable install script at <https://www.brewblox.com/install>.
 The startup guide provides the commands to download and execute it.
 Once you have installed Brewblox, you can reinstall it by removing the Brewblox directory, and running `brewblox-ctl install`.
 
@@ -126,6 +129,7 @@ For existing installs, `brewblox-ctl update` will automatically migrate your sys
 **Important: if you manually created a bash alias for the brewblox-ctl command, you will need to remove or update it**
 
 **Changes:**
+
 - (feature) Unified brewblox-ctl and its shared library (brewblox-ctl-lib).
 - (feature) Merged `brewblox-ctl install` and `brewblox-ctl setup`.
 - (feature) Added downloadable script to simplify first-time installation.
@@ -150,6 +154,7 @@ and have now implemented a new library that will let us do just that.
 For now, everything looks pretty much the same, but you can expect some improvements here in future updates.
 
 **Changes:**
+
 - (feature) Added the *Countdown* widget.
 - (feature) Switched to a new library for calculating the layout of relation diagrams.
 - (improve) The relation between OneWire temp sensors and the OneWire bus is hidden in relation diagrams.
@@ -169,6 +174,7 @@ This release includes an important bugfix for Spark 4 firmware,
 and a re-implementation of the `brewblox-ctl wifi` command.
 
 **Changes:**
+
 - (feature) The `brewblox-ctl` wifi command works again.
   - For Spark 2 / 3, it triggers listening mode (blue blinking LED), and starts the built-in Wifi wizard.
   - For Spark 4, it prints instructions for Wifi provisioning over bluetooth.
@@ -185,6 +191,7 @@ and a re-implementation of the `brewblox-ctl wifi` command.
 The first batch of Spark orders have been handed over to FedEx, and with this release, the Spark 4 is live.
 
 **Changes:**
+
 - (feature) Added the *OneWire GPIO Module* block and widget.
 - (feature) Added a step to Quick Start wizards for setting pin assignments for GPIO channels (if any).
 - (feature) Added timezone setting to admin page. For now, this setting is only relevant for the Spark 4 display.
@@ -203,6 +210,7 @@ The first batch of Spark orders have been handed over to FedEx, and with this re
 This is a minor bugfix release as follow-up to the *2021/08/02* release.
 
 **Changes:**
+
 - (improve) Slightly reduced memory usage for `brewblox-ctl database from-influxdb`
 - (improve) Improved efficiency when polling the Spark for history/state data.
 - (fix) Widgets can no longer exceed screen width on mobile devices.
@@ -258,6 +266,7 @@ This way you read and edit text files from the comfort of your own computer.
 You can find the install guide [here](https://brewblox.netlify.app/user/config_editor.html).
 
 **Changes:**
+
 - (feature) Changed history database from InfluxDB to Victoria Metrics.
 - (feature) Added `/victoria` endpoint. `/victoria/api/v1` is compatible with the [Prometheus HTTP API](https://prometheus.io/docs/prometheus/latest/querying/api/).
 - (feature) Added `/history/timeseries` endpoints. For an overview, see `/history/api/doc`
@@ -333,6 +342,7 @@ We've had good experiences with our prototype integration with Node-RED, and wil
 Integrations with Brewfather, Home Assistant, and IFTTT are also under consideration.
 
 To summarize:
+
 - We are ending development of the current automation service.
 - We will keep developing automation functionality.
 - You can use a third-party editor to create and edit automation subroutines.
@@ -347,6 +357,7 @@ You can access it by navigating to `/automation-ui`.
 The *Automation* widget still exists, and will open the editor UI in a new tab if you click on a "edit process" button.
 
 **Changes:**
+
 - (feature) The Builder editor is now enabled on mobile.
 - (feature) The Builder editor now uses the default sidebar.
 - (feature) Added the *Pan* tool to the Builder editor.
@@ -415,6 +426,7 @@ Many thanks to Douwe Houvast for the preparatory work!
 We're still planning to support secure remote access natively, but a VPN is a decent workaround until we find the time to do it right.
 
 **Changes:**
+
 - (feature) Added global configuration setting for preferred temperature unit (Celsius / Fahrenheit). This setting is used by the UI and all Spark and Tilt services.
 - (feature) The Spark service diagram is now the default/initial mode for the Spark service page.
 - (feature) The Spark service diagram now supports drag and zoom. Use the scroll wheel to zoom, and click and drag to reposition.
@@ -428,9 +440,9 @@ We're still planning to support secure remote access natively, but a VPN is a de
 - (enhancement) Quick start wizards now check for Spark services that were detected but not yet added to the UI.
 - (enhancement) `brewblox-ctl backup` commands will now also include config files in `brewblox/mosquitto`.
 - (enhancement) `brewblox-ctl update` no longer prompts whether to prune docker images and volumes. The default is true, but can be disabled with `--no-prune`.
-- (docs) Added a guide for setting up a local VPN for safe remote access. You can find it at https://brewblox.netlify.app/user/wireguard.html.
+- (docs) Added a guide for setting up a local VPN for safe remote access.
 - (docs) Updated the startup guide to use the Raspberry Pi Imager for SSH/Wifi configuration on a new Pi.
-- (docs) Added developer reference doc for using the datastore. You can find it at https://brewblox/netlify/app/dev/reference/datastore/html.
+- (docs) Added developer reference doc for using the datastore.
 - (removed) Removed alternative `/history/query/XXXXX` routes for the `/history/history/XXXXX` endpoints. The API is otherwise unchanged.
 - (fix) Removed blocks now immediately disappear from the Spark service page.
 - (fix) Dashboard grid no longer is shifted if a widget is wider than the screen.
@@ -452,10 +464,10 @@ The previous release fixed multiple Wifi-related issues, and added improved erro
 We now also support Spark simulation services on 64-bit ARM.
 
 **Changes:**
-- (feature) Added the ARM64 Spark simulator. Setup for simulators is the same on all platforms: https://brewblox.netlify.app/user/adding_spark_sim.html
+
+- (feature) Added the ARM64 Spark simulator. Setup for simulators is the same on all platforms.
 - (fix) Fixed a bug where the Spark would end up with too many open connections when connected to a Wifi repeater.
 - (fix) Fixed the block list being emptied when clearing the search field on the Spark service page.
-
 
 ## Brewblox release 2021/02/25
 
@@ -478,10 +490,11 @@ This fix is applied during `brewblox-ctl install`, and during the next `brewblox
 Your next upgrade will also revert the configuration changes (if any) made by `brewblox-ctl disable-ipv6`.
 
 **Changes:**
+
 - (feature) Added `brewblox-ctl enable-ipv6`. This function also runs during install and once during your next upgrade.
 - (removed) Removed `brewblox-ctl disable-ipv6`.
-- (docs) Added reference doc on how Influx data is stored and downsampled: https://brewblox.netlify.app/dev/reference/influx_downsampling
-- (docs) Added tutorial for setting up Chronograf to view raw history data: https://brewblox.netlify.app/dev/tutorials/chronograf
+- (docs) Added reference doc on how Influx data is stored and downsampled.
+- (docs) Added tutorial for setting up Chronograf to view raw history data.
 - (enhancement) Improved `brewblox-ctl log` output, and made inclusion of system diagnostics optional.
 - (fix) All open connections in firmware are processed immediately.
 - (fix) Number of firmware Controlbox connections is limited to 4.
@@ -495,6 +508,7 @@ To add some more convenience for anyone using (mostly) unmodified fermentation s
 This widget replaces the Quick Actions widget generated by most wizards.
 
 The assistant provides a centralized UI for the most common user actions:
+
 - Set Setpoint setting.
 - Enable / disable all temperature control.
 - Enable / disable the Setpoint Profile.
@@ -516,6 +530,7 @@ Practically speaking, this means you can now flash your Raspberry Pi 4 with 64-b
 The only thing that does not work out of the box is the Spark firmware simulator. We'll add ARM64 support for this in a later update.
 
 **Changes**
+
 - (feature) Brewblox now also support 64-bit ARM (aarch64).
 - (feature) Added the *Temp Control Assistant* widget.
 - (feature) Replace the Quick Actions widget with a Temp Control Assistant in multiple quick start wizards:
@@ -557,6 +572,7 @@ On mobile, the most intuitive way to close a settings dialog is to press the Bac
 Sadly, this does not work well when combined with dialogs that are shown without the page URL changing.
 
 We have now implemented our own workaround to ensure that if you press the Back button, the UI behaves as expected:
+
 - If a dialog is open, the dialog is closed.
 - If multiple dialogs are open, only the top-most dialog is closed.
 - If no dialogs are open, the browser navigates to the previous page.
@@ -565,6 +581,7 @@ To improve visibility for a popular service, we added a UI service and widget fo
 The service page will show all currently publishing Tilt devices.
 
 **Changes**
+
 - (feature) Added a centralized admin page. The settings for dashboards, services, and builder layouts can be found here.
 - (feature) The back button will now first attempt to close a single open dialog instead of navigating to the previous page.
 - (feature) Added virtual keyboard support for input fields. The keyboard layout is configurable using the admin page.
@@ -618,8 +635,6 @@ The *Spark Sim Display* is built for simulation services.
 It will render the Spark LCD screen on your dashboard.
 For technical reasons, this widget is only available for simulation services.
 
-For more information (and screenshots), see the [Widgets](https://brewblox.netlify.app/user/all_widgets) page.
-
 We updated the default settings for some PIDs in HERMS, RIMS, and Brew Kettle wizards.
 If you're still using the default settings after running one of these wizards, you may want to apply the new settings manually:
 
@@ -642,6 +657,7 @@ This comes with a built-in `ssh` command, which functions like `ssh` on Linux/Ma
 To keep instructions consistent, we now recommend Terminal in our install guide, but PuTTY/Git Bash still work just fine.
 
 **Changes**
+
 - (feature) Added *Web Frame* widget.
 - (feature) Added *Quick Values* widget.
 - (feature) Added *Spark Sim Display* widget.
@@ -668,6 +684,7 @@ By default, only fields that published data the last 24h are included.
 You can now check the "include old fields" option to show any and all fields that ever published to the history database.
 
 **Changes**
+
 - (feature) Graph settings now have a toggle button to show all fields present in the database (including stale ones).
 - (feature) Blocks now have a toolbar action to add their fields to a Graph widget.
 - (improve) When choosing a new block for one of the LCD screen display slots, you will also be asked to update its label.
@@ -691,6 +708,7 @@ If you are using anything else, either HTTP or HTTPS will work.
 As a bonus, we improved UI load times for everyone.
 
 **Changes**
+
 - (feature) Made the UI functional when using HTTP.
 - (feature) Disabled automatic redirection of HTTP to HTTPS.
 - (fix) Fixed datastore check when UI loads.
@@ -726,10 +744,11 @@ we created an experimental [service for sharing data with Home Assistant](https:
 It will be some time before we find the time to significantly extend this service, but the concept is promising.
 
 **Changes**
+
 - (docs) Added system upgrade guide.
-  - https://brewblox.netlify.app/user/system_upgrades
+  - <https://brewblox.netlify.app/user/system_upgrades>
 - (docs) Added service architecture doc.
-  - https://brewblox.netlify.app/dev/service/architecture
+  - <https://brewblox.netlify.app/dev/service/architecture>
 - (feature) Added the `brewblox-ctl init` command. This creates a brewblox dir. It is also part of `brewblox-ctl install`.
 - (feature) Added the `brewblox-ctl snapshot save` command. This zips the entire brewblox dir. It is more complete, but also takes much more space than `brewblox-ctl backup save`.
 - (feature) Added the `brewblox-ctl snapshot load` command. This restores snapshots created by `brewblox-ctl snapshot save`. You can also use `brewblox-ctl install --snapshot ARCHIVE`.
@@ -740,7 +759,7 @@ It will be some time before we find the time to significantly extend this servic
   - It clearly shows when the PWM is driven, and setting can't be set manually.
   - Improved rendering of desired setting, actual setting, and achieved value.
 - (feature) Added the brewblox-hass service as proof of concept for Home Assistant integration.
-  - https://github.com/BrewBlox/brewblox-hass
+  - <https://github.com/BrewBlox/brewblox-hass>
 - (improve) Reworked discover/connect behavior in the Spark service to reboot the service less frequently.
 - (improve) Invalid `command` arguments in services now generate a warning, but do not immediately cause the service to exit.
 - (improve) The UI now shows the Spark Troubleshooter if the service is running, but does not respond to status requests.
@@ -774,6 +793,7 @@ If your Spark is connected to the service using USB, then the UI update will thr
 The fix for this is included in the new firmware. To get this update you'll have to use `brewblox-ctl flash`.
 
 **Changes 2020/09/28**
+
 - (feature) Added Spark service action to reboot the service.
 - (improve) Non-fullscreen graphs are now static on mobile.
 - (feature) Long press on graph widget to open fullscreen.
@@ -781,6 +801,7 @@ The fix for this is included in the new firmware. To get this update you'll have
 - (fix) Resolved a bug where fetching graph data would fail for some users.
 
 **Changes**
+
 - (feature) Added the *Temp Sensor (Combined)* block.
 - (migrate) Replaced the CouchDB datastore implementation with Redis.
 - (remove) Removed deprecated AMQP listener in brewblox-history.
@@ -796,11 +817,11 @@ The fix for this is included in the new firmware. To get this update you'll have
 - (fix) Fixed default values in the Spark wifi config menu.
 
 **Automation changes**
+
 - (improve) Added `isLessThanEqual(other)` alias for the `qty().lte()` function in automation sandbox.
 - (improve) Added `isGreaterThanEqual(other)` alias for the `qty().gte()` function in automation sandbox.
 - (improve) Set a timeout of 10 seconds for automation sandbox scripts.
 - (fix) Signficantly reduced memory usage of automation service.
-
 
 ## Brewblox release 2020/08/31
 
@@ -809,6 +830,7 @@ The fix for this is included in the new firmware. To get this update you'll have
 This is a small update to the 2020/08/26 release.
 
 **Changes**
+
 - (fix) Session log graph notes no longer incorrectly show an error that end date is before start date.
 - (fix) Restored the pause/resume autoconnect button in the Spark troubleshooter.
 - (fix) The `traefik` service now correctly restarts after a Pi reboot.
@@ -935,6 +957,7 @@ In the *New Block* wizard you can create a new block,
 and optionally add a widget for displaying your block on a dashboard.
 
 **Changes**
+
 - (improve) Changed the default eventbus broker from RabbitMQ to Mosquitto.
 - (remove) Removed support for UI plugins.
 - (feature) Added the *New Block* wizard to the Wizardry menu.
@@ -952,7 +975,7 @@ and optionally add a widget for displaying your block on a dashboard.
 - (improve) Removed the `--mdns-port` setting from `brewblox-ctl service ports`.
 - (documentation) Added documentation for the state/history events published by the Spark service.
   - These events are now considered a public interface, meaning we'll strive to make any changes backwards compatible. A deprecation period will be used if this is impossible.
-- (documentation) Added documentation for block types. You can find it at https://brewblox.netlify.app/dev/reference/block_types.html.
+- (documentation) Added documentation for block types. You can find it at <https://brewblox.netlify.app/dev/reference/block_types.html>.
   - Blocks are now also considered a public interface spec.
 - (improve) Updated traefik and traefik label syntax to v2.
 - (feature) The *DS2408* block can now toggle between Valve mode and Actuator mode.
@@ -994,6 +1017,7 @@ and optionally add a widget for displaying your block on a dashboard.
 - (fix) The shelf height in the Fridge part is now editable again.
 
 **Automation changes**
+
 - (improve) Improved visibility for inactive automation elements.
 - (improve) The title property is now editable when adding a new automation action/condition.
 - (improve) The automation editor is now enabled on mobile or small screens.
@@ -1025,7 +1049,7 @@ Down the line, this also allows for using simulated OneWire blocks in the firmwa
 - (improve) Mock implementations of these devices and a mocked OneWire bus have been added.
 - (improve) Simulation and unit testing of OneWire hardware is now possible and has been added.
 - (improve) OneWire communication errors are now simulated and tested
-  - Details: https://github.com/BrewBlox/brewblox-firmware/pull/234
+  - Details: <https://github.com/BrewBlox/brewblox-firmware/pull/234>
 - (improve) Added the `--no-pull` option to `brewblox-ctl setup`. This can be used for configurations that explicitly want to use locally built or retagged images.
 - (fix) Fixed sizing and alignment for some icons in Builder parts.
 
@@ -1054,6 +1078,7 @@ The immediate advantage is that Brewblox needs one less Docker container: the *e
 The UI can now subscribe directly to MQTT events, eliminating the need for the emitter service.
 
 **Changes**
+
 - (feature) Brewblox now uses the MQTT protocol for history events. AMQP is still supported, but will be disabled in three months.
 - (improve) Removed the emitter service.
 - (improve) The integral in the PID now adds P+D every interval instead of only P.
@@ -1071,6 +1096,7 @@ The UI can now subscribe directly to MQTT events, eliminating the need for the e
 - (fix) Fixed too much config being imported when adding a block to the graph widget.
 
 **Changes (automation)**
+
 - The Webhook action now has a "Try it" button in the template editor.
 
 ## Brewblox release 2020/05/27
@@ -1105,6 +1131,7 @@ For now you'll see release notes split between regular changes, and those concer
 For those wanting to try the preview version, we added a short [guide](https://brewblox.netlify.app/user/services/automation).
 
 **Changes**
+
 - (improve) Widgets now show hints / get started buttons when empty.
 - (feature) Some builder parts are now scalable. This applies to parts that did not previously have size sliders, and do not include tubing.
 - (feature) Merged the PwmPump and Pump parts in Builder. If you had a PwmPump, it is automatically migrated.
@@ -1112,13 +1139,13 @@ For those wanting to try the preview version, we added a short [guide](https://b
 - (feature) The Graph Widget now has an action to quickly add fields from specific blocks.
 
 **Automation changes**
+
 - (feature) Added webhook action
 - (improve) Changed Create Task to Edit Task.
 - (improve) Condition tasks are now created at step start.
 - (improve) Steps and focused phase (conditions / actions / transitions) are now shown side by side.
 - (fix) You can now use readonly fields as a condition.
 - (feature) You can now select all options when changing task status.
-
 
 ## Brewblox release 2020/05/14
 
@@ -1131,9 +1158,10 @@ We also added a new command to brewblox-ctl: `brewblox-ctl service expose`. This
 So far, the most common use case is to expose the eventbus port.
 You can do this by running `brewblox-ctl service expose eventbus 5672:5672`.
 
-Earlier this week, we also published some tutorials for adding straightforward scripts that interact with Brewblox. You can check them out at https://brewblox.netlify.app/dev/.
+Earlier this week, we also published some tutorials for adding straightforward scripts that interact with Brewblox. You can check them out at <https://brewblox.netlify.app/dev/>.
 
 **Changes:**
+
 - (feature) Spark services can now be paused. The service will wait with discovering / connecting a controller until the status is cleared.
 - (feature) Constraints are now settable in Quick Actions.
 - (feature) Added a scale slider to the Brewery Page. This allows rendering the same layout in a sensible size in both the Builder Widget, and the Brewery Page.
@@ -1147,19 +1175,19 @@ Earlier this week, we also published some tutorials for adding straightforward s
 
 **Firmware release date: 2020/05/03**
 
-#### Spark simulator
+### Spark simulator
 
 We now officially support Spark simulation on the Raspberry Pi.
 This means that you can run a fully simulated Spark, instead of the actual hardware, to experiment with settings, or try before you buy.
 The code used by the simulator is the actual firmware code running on the Spark, with some changes for simulation of course.
 
-You can find instructions on how to add and use it at https://brewblox.netlify.app/user/adding_spark_sim.html.
 From now on, the simulator is embedded in the devcon container. If you used the preview simulator, please update by running
-```
+
+```sh
 brewblox-ctl add-spark --name spark-sim --force --simulation
 ```
 
-#### New MDNS library (firmware)
+### New MDNS library (firmware)
 
 We found out that one of the reasons for instability was running out of memory.
 A big consumer of memory was a third party MDNS library. MDNS resolves .local addresses and automatically finds your Sparks on the network.
@@ -1169,7 +1197,7 @@ It is [available here](https://github.com/BrewBlox/particle-mdns/tree/develop) t
 
 [PR #217](https://github.com/BrewBlox/brewblox-firmware/pull/217)
 
-#### Interpolate values in output of slower filter stages (firmware)
+### Interpolate values in output of slower filter stages (firmware)
 
 Sensor data runs through max 6 filter stages. Each stage runs at a slower update rate as the previous.
 This resulted in blocky output for slow filters.
@@ -1180,7 +1208,7 @@ See the image below for the before and after.
 
 [PR #225](https://github.com/BrewBlox/brewblox-firmware/pull/225)
 
-#### PID improvements to make the derivative much more usable (firmware)
+### PID improvements to make the derivative much more usable (firmware)
 
 The PID reads the derative from a certain filter stage depending on the value of the Td time constant.
 The default filter it selected was very slow, larger than Td, to not have much noise.
@@ -1193,31 +1221,31 @@ You'll find that the derivative part of the PID is now a lot more predictable an
 
 [PR #226](https://github.com/BrewBlox/brewblox-firmware/pull/226)
 
-#### PWM improvements to look more towards the future (firmware)
+### PWM improvements to look more towards the future (firmware)
 
 The calculations for the achieved PWM value only looked back, not ahead. This meant the PWM value always lagged the setting.
+
 - The PWM now looks ahead for what it can achieve and limits how far it looks back.
 - When at 0% or 100%, the achived value now also slowly changes.
 - A minimal low/high time is introduced to prevent two short bursts when the setting increases quickly.
 
 [PR #217](https://github.com/BrewBlox/brewblox-firmware/pull/217)
 
-#### Reduce memory used by filters in setpoints (firmware)
+### Reduce memory used by filters in setpoints (firmware)
 
 Another change to reduce memory use is to create filter stages on demand.
 When you change the filtering in a setpoint, or the Td value of a PID, the setpoint will create only the needed filter stages.
 
 [PR #223](https://github.com/BrewBlox/brewblox-firmware/pull/223)
 
-#### Fix fluctuations in mock sensors (firmware)
+### Fix fluctuations in mock sensors (firmware)
 
 For testing, you can add periodic fluctuations in a simulated mock sensor.
 I fixed some bugs and they now work as expected.
 
 [PR #224](https://github.com/BrewBlox/brewblox-firmware/pull/224) and [PR #218](https://github.com/BrewBlox/brewblox-firmware/pull/218)
 
-
-#### Other changes
+### Other changes
 
 - (feature) Added indicator icons for connection type (wifi | usb | simulation) in sidebar.
 - (feature) UI temperature units and display settings units are now settable in the same dialog. The dialog can be accessed from both the Display Settings block and the service actions.
@@ -1238,6 +1266,7 @@ This release includes fixes for a few nasty out-of-memory errors that would mani
 
 In the UI, we focused on improving usability.
 This includes fixes for scenarios such as:
+
 - "I don't see any dashboards or services" (show notification while waiting for datastore, automatically reload page when available)
 - "Controller out of memory in Quickstart wizard" (prompt if existing control blocks are found on controller)
 - "I picked the wrong sensor in Quickstart" (swap addresses of sensor blocks)
@@ -1246,8 +1275,8 @@ For the majority of changes, we'd be happy if nobody notices them, and they Just
 
 We also added the L-Valve Builder part.
 
-
 **Changes**
+
 - (fix) The outOfMemory handler in the firmware could cause a crash.
 - (fix) Reduced firmware memory use to avoid crashes in listening mode.
 - (fix) Removed firmware lock on serial connection to avoid crash in listening mode.
@@ -1290,7 +1319,6 @@ We also added the L-Valve Builder part.
 - (fix) Graphs with a start time earlier than 24h ago will now never use the realtime dataset (only kept for 24h).
 - (improve) When the service can connect, but does not receive a handshake, the troubleshooter suggests to flash the bootloader.
 
-
 ## Brewblox release 2020/04/06
 
 **Firmware release date: 2020/04/06**
@@ -1299,8 +1327,8 @@ This release includes a collection of quick fixes to problems introduced or unco
 
 **Important: we fixed a problem with updating brewblox-ctl. To make use of the fix, please run brewblox-ctl update twice**. The correct version of brewblox-ctl for this release is 0.18.0.
 
-
 **Changes**
+
 - (fix) The Spark LCD now uses the correct formula for converting Celsius to Fahrenheit.
 - (fix) PID integral is now reset Ti is set to 0.
 - (fix) Two consecutive operators (`a|&b`) in Logic Actuator now trigger an error result in firmware.
@@ -1313,15 +1341,12 @@ This release includes a collection of quick fixes to problems introduced or unco
 - (improvement) The Logic Actuator error display now has a fixed height. Lower-placed elements will now consistently render in the same place.
 - (fix) When loading the UI, a notification will appear if the datastore could not yet be reached. It is common for the datastore to be much slower to start up than the UI. This results in a UI without any available dashboards or services.
 
-
 ## Brewblox release 2020/04/02
 
 **Firmware release date: 2020/04/02**
 
 We're happy to announce the release of the Logic Actuator block.
 You can use this block to toggle a Digital Actuator based on the state of other Digital Actuator, Motor Valve, Setpoint, or PWM blocks.
-
-For a more in-depth explanation, see the [blocks page](https://brewblox.netlify.com/user/all_blocks).
 
 To assist with this feature, we also added the Mock Pins block, and constraints for delaying the ON or OFF switch on digital actuators.
 
@@ -1356,8 +1381,8 @@ This change will make it possible to move your system between a desktop computer
 **Changes**
 
 - Added the `Brewery` page mode, for full-screen display of a single Builder layout.
-- Added [documentation page](https://brewblox.netlify.com/user/all_widgets.md) describing all widget types.
-- Added [documentation page](https://brewblox.netlify.com/user/all_blocks.md) describing all block types.
+- Added [documentation page](https://brewblox.netlify.com/user/all_widgets) describing all widget types.
+- Added [documentation page](https://brewblox.netlify.com/user/all_blocks) describing all block types.
 - Timeout values for Spark services are now configurable in docker-compose.yml.
 - Refactored part settings dialogs in Builder.
 - Fixed a bug where no block was selectable as link in the Temp Sensor part.
@@ -1597,7 +1622,7 @@ To make it easier to find sessions, they can now have tags. When selecting sessi
 - Fixed a bug where side graphs would not resize when basic/full mode was toggled in a block dialog.
 - Added help text to `discover` and `add-spark` commands
 - The plaato service now has an install script.
-  - https://github.com/Brewblox/brewblox-plaato
+  - <https://github.com/Brewblox/brewblox-plaato>
 - `brewblox-ctl update` will prompt for pruning images at the start, not halfway in.
   - Due to how brewblox-ctl updates itself, this will take effect in the next update.
 - Improved rendering when there is a large number of dashboards.
@@ -1615,7 +1640,8 @@ To counteract this we moved some configuration, and added two commands to brewbl
 `brewblox-ctl discover` scans USB/Wifi for devices, and will print the ones it found.
 
 Example:
-```
+
+```sh
 pi@fridgepi:~/brewblox $ brewblox-ctl discover
 usb 280038000847343337373738 Photon
 wifi 280038000847343337373738 192.168.0.57 8332
@@ -1625,9 +1651,10 @@ wifi 240024000451353432383931 192.168.0.86 8332
 `brewblox-ctl add-spark` will create a new Spark service in `docker-compose.yml`.
 It accepts multiple arguments, some mandatory, some optional.
 
-For reference, see the updated docs for [adding a spark](https://brewblox.netlify.com/user/adding_spark.html) and [connection settings](https://brewblox.netlify.com/user/service/spark#spark-connection-settings)
+For reference, see the updated docs for adding a spark and connection settings.
 Example call:
-```
+
+```sh
 steersbob@BrewBox:~/brewblox$ brewblox-ctl add-spark
 How do you want to call this service? The name must be unique: new-spark
 Discovering devices...
@@ -1649,9 +1676,6 @@ For those cases when `docker-compose.yml` still needs to be changed, we moved th
 - Added `brewblox-ctl add-spark`
 - Moved system services to their own file (`docker-compose.shared.yml`)
 - Added / updated documentation for adding and using multiple services
-  - https://brewblox.netlify.com/user/multiple_devices.html
-  - https://brewblox.netlify.com/user/adding_spark.html
-  - https://brewblox.netlify.com/user/connect_settings.html
 - The `--device-id` flag in the Spark service configuration is now checked when connecting to a controlller.
   - This allows it to be used in combination with `--device-host`.
 - Prettified Quick Actions editor
@@ -1757,11 +1781,13 @@ We often saw users being surprised by what happened when they clicked in the gri
 To combat this, we split the tools between `modes`, and `tools`.
 
 `modes` function like tools used to: a persistent mode that determines what happens when you click or drag in the grid.
+
 - `Select`: click or drag to select or unselect part. (No changes here).
 - `Interact`: click on parts to interact with them - this toggles valves or opens block dialogs. (No changes here either).
 
 `tools` are now immediate actions that modify parts that are currently selected or under the cursor.
 You can trigger a tool by either selecting the target parts and clicking on the button, or selecting/hovering target parts and using the keyboard shortcut.
+
 - `New`: immediately opens the block catalog. After selecting a part in the catalog, click in the grid to place it.
 - `Move`: selected or hovered parts are attached to the cursor. Click in the grid to place them.
 - `Copy`: same as `Move`, except that parts are copied.
@@ -1774,6 +1800,7 @@ You can trigger a tool by either selecting the target parts and clicking on the 
 On the whole, this should offer a smoother and more intuitive editing experience.
 
 **Changes**
+
 - Overhauled Builder editor tools.
   - Split tools in `modes` and `tools` (described above).
   - Automatically detect when the editor loses focus, to clearly display when keyboard shortcuts won't register.
@@ -1786,9 +1813,7 @@ On the whole, this should offer a smoother and more intuitive editing experience
 - Quick Start wizards now always create a new dashboard.
 - Added a toggle to the Spark service page, to show blocks either in a list (previous behaviour), or in a relations diagram.
 - Added a build date to the debug menu in the sidebar, to help identify the currently installed release.
-- When visiting the Spark IP in the browser, it now also shows its unique device ID.
-  - This should make it easier to setup a configuration that uses multiple Sparks connected over Wifi.
-  - See https://brewblox.netlify.com/user/connect_settings.html#spark-connection-settings for how this device ID can be used.
+- When visiting the Spark IP in the browser, it now also shows its unique device ID. This should make it easier to setup a configuration that uses multiple Sparks connected over Wifi.
 - Fixed a bug in the Glycol wizard that would not allow the user to create a configuration without a glycol sensor.
 
 ## Brewblox release 2019/10/10
@@ -1802,6 +1827,7 @@ To fix this, we reworked how widgets are rendered. Most widgets can now easily t
 Toolbar buttons have been tweaked to make accessing settings smoother.
 
 In the coming weeks, we will be reviewing all widgets.
+
 - The basic view is for day-to-day use: settings and values that you want to see during a brew day.
 - The full view is for configuration: setting up and tuning your system.
 
@@ -1809,6 +1835,7 @@ While we were at it, we also improved the Spark service page. The index and the 
 When selecting a widget in the index, the displayed widget will automatically scroll in view.
 
 **Changes**
+
 - All widgets can now toggle between Basic and Full mode
   - The settings button on the widget toolbar will now toggle the widget to Full.
   - Clicking the settings button again will open the settings in a dialog.
@@ -1834,7 +1861,6 @@ When selecting a widget in the index, the displayed widget will automatically sc
   - Placed the plugins button at the bottom, next to the debug button.
 - Added a button in the Builder Editor to create a widget showing the current layout.
 
-
 ## Brewblox release 2019/10/01
 
 **Firmware release date: 2019/09/16**
@@ -1848,7 +1874,6 @@ We added two this release:
 **RIMS Brew-in-a-Bag** uses a single kettle and a RIMS tube.
 
 **Glycol Fermentation** generates a fermentation setup where cooling is done by pumping glycol through a coil.
-
 
 - Added `RIMS Brew-in-a-Bag` and `Glycol Fermentation` quick start wizards.
 - You can now export graph data to CSV from the Graph widget actions.
@@ -1867,7 +1892,6 @@ We added two this release:
 - Settings in quickstart wizards are now remembered if you go back in the wizard.
 - Setpoint displays in the builder can now be placed inline in tubes.
   - Each edge is connected to all other edges.
-
 
 ## Brewblox release 2019/09/12
 
@@ -1888,6 +1912,7 @@ This is part of the ongoing approach to reduce the number of elements initially 
 As it's a relevant feature for HERMS, we added Boil Mode support to the PID. When the setpoint is higher than a configurable value (default 100 celsius or equivalent), the integrator is disabled. A minimum output during boil mode can also be set.
 
 **Changes**
+
 - Renamed "Arrangement" to Quick Start.
 - Added HERMS Quick Start wizard.
 - Reworked flow calculations.
@@ -1981,7 +2006,7 @@ No dramatic new features this week, just a steady stream of iterative improvemen
 **Firmware release date: 2019/08/06**
 
 The UI now supports third-party plugins. If you want to add your own custom widgets, you can now do so.
-We created the example repository https://github.com/Brewblox/brewblox-plugin to get developers started.
+We created the example repository <https://github.com/Brewblox/brewblox-plugin> to get developers started.
 
 **Changes**
 
@@ -2062,7 +2087,7 @@ critical issues while he's still here.
 
 This release does include a pretty exciting change: we can now update firmware over Wifi! You can even run it from the UI, without having to restart your services.
 
-### IMPORTANT: If you skipped the last update, you'll need to run `brewblox-ctl flash` to enable updates in the UI.
+### IMPORTANT: If you skipped the last update, you'll need to run `brewblox-ctl flash` to enable updates in the UI
 
 The new mechanism is experimental, and may require a retry before it works. There are multiple checks in place to ensure that if an update fails halfway, the current firmware is not corrupted.
 
@@ -2197,7 +2222,7 @@ If you are running a pretty standard fridge setup, you probably want to restart 
 
 - Reworked the Classic BrewPi wizard.
   - It's now called "Fermentation Fridge".
-  - Added documentation page at https://brewblox.netlify.com/user/ferment_guide.html
+  - Added documentation page at <https://brewblox.netlify.com/user/ferment_guide.html>
   - Generates fewer and more useful widgets on the new dashboard.
   - Simplified the Beer constant mode: it now directly uses the beer setpoint.
   - A Process View widget is added, displaying fridge/beer setpoints, and PID output.
@@ -2327,7 +2352,7 @@ We (hopefully) fixed the reboot issues people were experiencing, and added the S
   - Previously a re-init was tried at every read error. This is a slow operation, which really slowed down the system when configured sensors were disconnected.
 - When using 100Hz PWM, unregister interrupt handler before PWM block destruction (fixed hard fault SOS).
 - Handle WiFi status and IP address display in system event handler.
-  - A [major bug](https://github.com/particle-iot/device-os/issues/1805) in particle device-os could cause a hard fault SOS when WiFi was connecting in the system thread while the application thread was trying to read the IP address.
+  - A bug in particle device-os could cause a hard fault SOS when WiFi was connecting in the system thread while the application thread was trying to read the IP address.
 
 ## Brewblox release 2019/05/28
 
@@ -2599,7 +2624,7 @@ Changes:
   - OneWire actuators still have a minimum period of 1s.
 
 Apart from these changes, we're working on the implementation of a drag-n-drop interactive display of a brewery - flows included.
-https://brewpi-ui-demo.herokuapp.com/processview/herms-automated-valves is the prototype and proof of concept. The Brewblox implementation will allow users to recreate their own setup, and control / view their blocks in the display.
+<https://brewpi-ui-demo.herokuapp.com/processview/herms-automated-valves> is the prototype and proof of concept. The Brewblox implementation will allow users to recreate their own setup, and control / view their blocks in the display.
 
 When the most important features are included, we will start drawing more attention to it in the UI, and add it to the BrewPi classic wizard.
 

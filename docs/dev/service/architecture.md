@@ -11,6 +11,7 @@ This is what we use if we're setting up a new service.
 
 Services created from the *brewblox-boilerplate*
 template are based on the following frameworks:
+
 - [asyncio](https://docs.python.org/3/library/asyncio.html) for writing concurrent code without threading.
 - [aiohttp](https://docs.aiohttp.org/en/stable/) for easily setting up a REST API.
 - [brewblox-service](https://github.com/BrewBlox/brewblox-service) for using Brewblox-specific functionality.
@@ -104,6 +105,7 @@ The loop runs until a shutdown error is raised, or a SIGTERM signal is received.
 
 It's inevitable that some setup code is async, and the concurrent nature of features may require some explicit teardown code.
 For these use cases, `ServiceFeature` has three async lifecycle hooks:
+
 - `async def startup(app)`
 - `async def before_shutdown(app)`
 - `async def shutdown(app)`

@@ -57,7 +57,7 @@ Example message:
 The fields are:
 
 - `BREWBLOX` - Constant string indicating this is a handshake message.
-- `4558bdae` - Short git hash of the [firmware repository]([https:://](https://github.com/brewblox/brewblox-firmware)).
+- `4558bdae` - Short git hash of the [firmware repository](https://github.com/BrewBlox/brewblox-firmware).
 - `b1698b6e` - Short git hash of the [proto message repository](https://github.com/BrewBlox/brewblox-proto).
 - `2022-03-24` - Date of the active commit in the firmware repository.
 - `2022-03-15` - Date of the active commit in the proto message repository.
@@ -118,7 +118,7 @@ Example message:
 The fields are:
 
 - `FIRMWARE_UPDATER` - Constant string indicating this is an upate handshake message.
-- `4558bdae` - Short git hash of the [firmware repository]([https:://](https://github.com/brewblox/brewblox-firmware)).
+- `4558bdae` - Short git hash of the [firmware repository](https://github.com/brewblox/brewblox-firmware).
 - `b1698b6e` - Short git hash of the [proto message repository](https://github.com/BrewBlox/brewblox-proto).
 - `2022-03-24` - Date of the active commit in the firmware repository.
 - `2022-03-15` - Date of the active commit in the proto message repository.

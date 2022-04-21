@@ -30,5 +30,6 @@ these changes should be made:
 - Update packages: `poetry update`
 
 Python 3.8 and 3.9 introduced some useful new features and syntax. You can find changelogs at:
-- https://docs.python.org/3/whatsnew/3.8.html
-- https://docs.python.org/3/whatsnew/3.9.html
+
+- <https://docs.python.org/3/whatsnew/3.8.html>
+- <https://docs.python.org/3/whatsnew/3.9.html>

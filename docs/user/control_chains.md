@@ -47,7 +47,6 @@ It will turn ON the actuator for a part of that 4 second period and off for the 
 A PWM value of 40% will turn ON for 1.6 seconds and OFF for 2.4 seconds and repeat.
 This turns the digital ON/OFF actuator into an 'analog' numeric actuator with a range between 0% and 100%.
 
-
 ## Control chains in the UI
 
 In this guide, we'll be using diagrams to show the relations within control chains.
@@ -262,6 +261,7 @@ When you want to use Brewblox to control the hot side of brewing (mashing, boili
 For each kettle with a heating element, you will have a temperature sensor, sensor setpoint pair, PID, PWM and a digital output.
 
 For reference:
+
 - HLT stands for Hot Liquor Tun, your hot water kettle with a HERMS coil inside.
 - MT stands for Mash Tun
 - BK stands for Brew Kettle, in which you boil the wort.
@@ -378,6 +378,7 @@ First, we create a mutex block that both elements will have to share and add a m
 This will prevent the elements from turning on at the same time. When one element is turned on, it will block the other one from turning on.
 
 ### Balancer
+
 We have prevented blowing fuses, but what happens when you want to pre-heat both your HLT and BK at the same time?
 If both kettles are cold, both PIDs will set their output to 100%.
 

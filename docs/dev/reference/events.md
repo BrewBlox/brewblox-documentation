@@ -45,11 +45,11 @@ In most scenarios, there are two reasons for services to continuously broadcast 
 - The values are to be stored in a history database, and can later be retrieved for analytics. Data is cumulative.
 - The values are to be immediately rendered. Data is volatile, and replaces the previous message.
 
-History data must conform to a common [spec](./history_events), as it is consumed by the shared history service.
+History data must conform to a common [spec](./history_events.md), as it is consumed by the shared history service.
 
 State data is more comprehensive and volatile than history data.
 There naturally is more variation in formatting.
 
-To avoid pollution of the eventbus topic space, we reserved the `brewcast/state` topic. For more information, see the [state event spec](./state_events).
+To avoid pollution of the eventbus topic space, we reserved the `brewcast/state` topic. For more information, see the [state event spec](./state_events.md).
 
-[See here](./spark_state) for a reference as to how Spark service state is published.
+[See here](./spark_state.md) for a reference as to how Spark service state is published.

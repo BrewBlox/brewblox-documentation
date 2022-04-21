@@ -14,7 +14,6 @@ As with any other design pattern, microservices are not a silver bullet. The Bre
 
 **Which benefits and drawbacks of the microservice pattern are relevant to Brewblox?**
 
-
 ## (Relevant) microservice advantages
 
 Microservices.io has a nice overview on [when to implement microservices][microservice_io].
@@ -31,7 +30,7 @@ This does not eliminate the need for integration and system tests, but it does c
 
 This may be nice, but is not strictly required for Brewblox. Each user has a separate installation, greatly reducing the cost of bringing the system down for an update.
 
-### It enables you to organize the development effort around multiple, auto teams.
+### It enables you to organize the development effort around multiple, auto teams
 
 While Brewpi itself does not have multiple teams, it does actively encourage open-source contributors. Active contributors can take responsibility for one or more services, without having to be involved in everything else.
 
@@ -47,11 +46,11 @@ There simply are not enough FTE associated with the project to generate that muc
 
 ### Small applications start faster, making developers more productive
 
-See: previous point. 
+See: previous point.
 
 ### Improved fault isolation
 
-This is certainly useful. If a non-critical service crashes, the impact is limited. 
+This is certainly useful. If a non-critical service crashes, the impact is limited.
 
 Brewblox governs real-world processes of significant duration. Robustness is important when controlling brews over a period of days or weeks.
 
@@ -61,14 +60,12 @@ Easy and incremental refactoring allows utilization of new and innovative framew
 
 Hopefully, this also makes the project more attractive to contributors.
 
-
-### Summary
+### Summary (advantages)
 
 All benefits that revolve around isolation of functionality are useful regardless of the scope of the project.
 
 The significant difference between Brewblox and the monolith envisioned by the microservice pattern is scale.
 Individual Brewblox systems see very little traffic, and Brewpi is unlikely to employ multiple teams of software developers.
-
 
 ## (Relevant) microservice drawbacks
 
@@ -102,13 +99,11 @@ This is probably the biggest issue, even for a relatively small, low-traffic sys
 
 This can be an issue depending on deployment target, and number of services. Individual Python applications don't take much memory, but their isolation containers or environment might.
 
-
-### Summary
+### Summary (drawbacks)
 
 The biggest issue here is that deployment is much more complicated for microservices. Significant effort will have to be spent finding solutions.
 
 A secondary issue is the increased memory overhead. Any isolation using containers, virtual environments, or VM's will add significant memory overhead.
-
 
 ## Conclusion
 
@@ -116,10 +111,8 @@ Many benefits and drawbacks of microservices still hold for Brewblox. The big ex
 
 Brewpi does not and will not have a MLoC sized code base. Any solutions pertaining to inter-team communication are only relevant if external contributors are considered "teams".
 
-
 [microservice_io]: https://microservices.io/patterns/microservices.html
-
 
 ## References
 
-* https://microservices.io/patterns/microservices.html
+* <https://microservices.io/patterns/microservices.html>
