@@ -8,6 +8,7 @@ Spark block data includes two types of special fields: Quantities and Links.
 A Quantity may be `20 degC`, and a Link could be `TempSensorOneWire sensor-1`.
 
 The implementation and required fields are different, but both share some characteristics:
+
 - They are serialized as a single value in Protobuf.
 - They must be converted to match the firmware expectations.
 - They require metadata (unit, object type) to be meaningful.
@@ -55,7 +56,7 @@ interface Link {
 }
 ```
 
-Example objects (not including optional fields): 
+Example objects (not including optional fields):
 
 ```typescript
 const quantity: Quantity = {

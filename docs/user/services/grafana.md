@@ -35,6 +35,7 @@ As always with [YAML](https://learnxinyminutes.com/docs/yaml/) files, indentatio
 ```
 
 ::: details Example compose file
+
 ```yaml
 version: "3.7"
 services:
@@ -52,6 +53,7 @@ services:
       - "GF_SERVER_SERVE_FROM_SUB_PATH=true"
       - "GF_SERVER_ROOT_URL=http://localhost:3000/grafana"
 ```
+
 :::
 
 Now start your services:

@@ -59,7 +59,7 @@ but feel free to customize this at will.
 You will not lose any data when deselecting fields.
 
 ::: tip
-To keep track of data for specific brews, you can add a [Session Log](./all_widgets.html#session-log) widget.
+To keep track of data for specific brews, you can add a [Session Log](./all_widgets.md#session-log) widget.
 :::
 
 ## Builder layout
@@ -73,7 +73,7 @@ Click on the values in your layout to edit block settings, or get more informati
 
 ::: tip
 There's a lot more you can do with the builder.
-See the [Brewery Builder guide](./builder_guide) for more details.
+See the [Brewery Builder guide](./builder_guide.md) for more details.
 :::
 
 ## Blocks
@@ -93,6 +93,6 @@ The toggle button in the top right corner lets you switch between showing blocks
 
 If you want to discover what more you can do with Brewblox, we have other guides that may prove useful:
 
-- The [control chains guide](./control_chains) is a good place to get an understanding of how blocks can be combined.
-- More [widgets](./all_widgets) and [blocks](./all_blocks) can be added to customize your setup.
-- A single Spark can control multiple fermentation setups, but sometimes it's more convenient to [add another Spark](./services/spark).
+- The [control chains guide](./control_chains.md) is a good place to get an understanding of how blocks can be combined.
+- More [widgets](./all_widgets.md) and [blocks](./all_blocks.md) can be added to customize your setup.
+- A single Spark can control multiple fermentation setups, but sometimes it's more convenient to [add another Spark](./services/spark.md).

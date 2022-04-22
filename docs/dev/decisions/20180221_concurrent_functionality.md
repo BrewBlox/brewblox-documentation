@@ -12,11 +12,11 @@ Another source of concurrent execution are long-running background tasks service
 
 Note: A clear and simple explanation of the differences between concurrency, multi-threading, and asynchronicity can be found [here][conc-vs-multi-vs-async]. A more in-depth comparison of threading and event-based models is available [here][threads-vs-events].
 
-This document expects the reader to be familiar with the various approaches to concurrency. 
+This document expects the reader to be familiar with the various approaches to concurrency.
 
 ## Requirements
 
-Must: 
+Must:
 
 * Can be combined in one application
 * Supported by Python
@@ -64,8 +64,8 @@ Multi-threading approaches create multiple call stacks that share resources.
 In this case, the solution would be:
 
 * Process 1 (p1): the service
-    * Thread 1 (t1): listens and responds to REST calls
-    * Thread 2 (t2): listens and responds to received AMQP events
+  * Thread 1 (t1): listens and responds to REST calls
+  * Thread 2 (t2): listens and responds to received AMQP events
 
 The benefit is that t1 and t2 can use shared resources without having to resort to inter-process communication protocols.
 
@@ -79,7 +79,7 @@ A third option is to use an event-driven task scheduler. Here tasks get exclusiv
 
 In this scenario, there is one process that listens to both REST and AMQP. Instead of polling for data, they receive a callback when data is available.
 
-Note that "asynchronous" implementation details vary between languages and frameworks. Per the requirements, we'll focus on the Python implementation: [asyncio][asyncio-introduction]. See [here][asyncio-tutorial] for a tutorial.
+Note that "asynchronous" implementation details vary between languages and frameworks. Per the requirements, we'll focus on the Python implementation: asyncio. See [here][asyncio-tutorial] for a tutorial.
 
 Asyncio can optionally use multiple threads, but its default implementation is to use a single event loop on a single thread.
 
@@ -103,25 +103,10 @@ Given the assumption that functionality grouping in services is already optimize
 
 For I/O constrained applications, the asynchronous implementation is simpler, and performs much better than threads.
 
-
-
 [conc-vs-multi-vs-async]: https://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/
-[asyncio-introduction]: https://www.datacamp.com/community/tutorials/asyncio-introduction
 [asyncio-tutorial]: https://hackernoon.com/asyncio-for-the-working-python-developer-5c468e6e2e8e
 [asyncio-benchmarks]: https://github.com/python/asyncio/wiki/Benchmarks
 [asyncio-benchmark-2]: https://eng.paxos.com/python-3s-killer-feature-asyncio
 [async-looking-glass]: https://hackernoon.com/async-through-the-looking-glass-d69a0a88b661
 [threads-vs-events]: https://berb.github.io/diploma-thesis/original/043_threadsevents.html
 [memory-benchmark]: https://code.kiwi.com/memory-efficiency-of-parallel-io-operations-in-python-6e7d6c51905d
-
-
-## References
-
-* https://codewala.net/2015/07/29/concurrency-vs-multi-threading-vs-asynchronous-programming-explained/
-* https://www.datacamp.com/community/tutorials/asyncio-introduction
-* https://hackernoon.com/asyncio-for-the-working-python-developer-5c468e6e2e8e
-* https://github.com/python/asyncio/wiki/Benchmarks
-* https://eng.paxos.com/python-3s-killer-feature-asyncio
-* https://hackernoon.com/async-through-the-looking-glass-d69a0a88b661
-* https://berb.github.io/diploma-thesis/original/043_threadsevents.html
-* https://code.kiwi.com/memory-efficiency-of-parallel-io-operations-in-python-6e7d6c51905d

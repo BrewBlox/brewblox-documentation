@@ -24,6 +24,7 @@ We've had good experiences with our prototype integration with Node-RED, and wil
 Integrations with Brewfather, Home Assistant, and IFTTT are also under consideration.
 
 To summarize:
+
 - We are ending development of the current automation service.
 - We will keep developing automation functionality.
 - You can use a third-party editor to create and edit automation subroutines.
@@ -47,7 +48,7 @@ You can enable the automation services by adding the following services to your 
 ## Context
 
 The Spark controller is built to keep your system in a steady state.
-You set a desired temperature, and add a sensor to measure actual temperature. <br>
+You set a desired temperature, and add a sensor to measure actual temperature.\
 The UI lets you change what is desired.
 The Spark ensures actual becomes desired.
 
@@ -113,10 +114,10 @@ AutomationService --> SparkService
 The templates for processes are edited in the UI, but the automation service runs the process.
 
 A process consists of a copy of the source template + a list of results.
-Each result lists current step and phase. <br>
+Each result lists current step and phase.\
 You can see the most recent results when hovering over a process in the Automation Widget.
 
-Closing the UI does not interrupt the automation service. <br>
+Closing the UI does not interrupt the automation service.\
 Restarting the automation service will cause processes to resume from the last saved result.
 
 ## Steps and Phases
@@ -163,7 +164,7 @@ In each step, the process waits until all preconditions are satisfied before it 
 
 After actions are applied, transitions are checked.
 Each transition has its own list of conditions.
-The first transition where all conditions are satisfied is used. The transition defines the next step.<br>
+The first transition where all conditions are satisfied is used. The transition defines the next step.\
 If no viable transition is found, the process waits, and checks again.
 
 ## Tasks
@@ -175,10 +176,11 @@ Processes can create tasks, and check their status in conditions.
 You can set or reset task status using the UI.
 
 For example, you could have a step where a kettle is heated from room temperature to 70 °C.
-This will take a while, and you'd rather do something else while it's heating up. <br>
+This will take a while, and you'd rather do something else while it's heating up.\
 The problem is that you do need to be present for the next step.
 
 The solution is add a transition with two conditions:
+
 - Kettle temp >= 70 °C.
 - Task "continue" is marked as done.
 
@@ -186,6 +188,7 @@ The system will now wait for your confirmation before the next step is started.
 You can also confirm early, and then it will continue immediately when the temperature reaches the setpoint.
 
 Some other typical tasks are:
+
 - Swap hoses
 - Add grain
 - Kettle is full
@@ -254,92 +257,109 @@ and then generate the required code.
 You can freely edit and combine multiple snippets to get the desired condition.
 The editor offers a preview function to help inspect and test your code.
 
-For more information, see the [documentation page](./automation_sandbox) for the automation sandbox.
+For more information, see the [documentation page](./automation_sandbox.md) for the automation sandbox.
 
 ## Coming Soon
 
 Automation is a large set of features. Many of them will be added later: the initial release only includes the bare minimum.
 
-#### Variables
+### Variables
+
 Templates should be able to refer to eg. `$MASH_TEMP`.
 When creating a process from the template, the variable must be defined (`MASH_TEMP=70`).
 
 This allows better support for tweaking settings while using the same template.
 
-#### Recipe integration
+### Recipe integration
+
 There are multiple standards for defining recipes (eg. [BeerXML](http://www.beerxml.com/)).
 
 In combination with settable variables, you should be able to define your brewing template,
 and then load a beer.xml recipe to start your batch.
 
-#### Editable processes
+### Editable processes
+
 In the initial version, templates are editable, but processes are not.
 If you wish to change a process, you have to stop it, make the change, and start it again.
 
 Making running processes editable is not impossible, but not trivial, and not critical.
 That is why this feature will be added later.
 
-#### Status of individual conditions
+### Status of individual conditions
+
 For processes to function, only the status of the combined conditions is relevant.
 If the first condition fails, the second doesn't even have to be checked.
 
 Users would prefer status feedback in the form of a checked list:
+
 - ✔ condition A
 - ✘ condition B
 - ✘ condition C
 - ✔ condition D
 
-#### Lots of conditions and actions
+### Lots of conditions and actions
+
 A condition is "anything with a yes/no answer", and an action can be pretty much anything the automation service can do.
 
 We're starting out with a basic set of conditions and actions to do things like getting / setting block settings, checking current / elapsed time, and managing tasks. More will be added over time. If you have any suggestions, please let us know.
 
 ## Glossary
 
-#### Template
+### Template
+
 The blueprint for a process.
 
-#### Process
+### Process
+
 A "script" executed by the automation service.
 When a process is done, it can be removed.
 
-#### Task
+### Task
+
 A notification for the user.
 Conditions can require the user to mark the task as done.
 
-#### Step
-Each template / process consists of multiple steps. <br>
+### Step
+
+Each template / process consists of multiple steps.\
 A process goes through all phases of the current step, and then transitions to the next step.
 
-#### Phase
+### Phase
+
 There are three pre-defined phases in each step:
+
 - Preconditions
 - Actions
 - Transitions
 
 The process first waits for preconditions, then applies actions, and then transitions to the next step.
 
-#### Condition
+### Condition
+
 Preconditions and invididual transitions have conditions.
 
 A condition has a type, and some settings.
 When evaluated, the condition returns `true` or `false`.
 
 Examples of conditions:
+
 - Current date/time is later than 2020/10/10 23:11
 - Task "add grain" is marked as done
 - Measured temperature in Fridge Sensor is > 50 °C.
 
-#### Preconditions
+### Preconditions
+
 A list of conditions that must all return `true` before actions are applied.
 
-#### Actions
+### Actions
+
 Actions change the system.
 
 You can use them to create or edit tasks, create or change blocks,
 make HTTP requests to remote endpoints, and any other "action" we end up supporting in the automation service.
 
-#### Transitions
+### Transitions
+
 Transitions make it possible to have branching and looping steps.
 
 Each transition has a list of conditions, and a *next step* property.

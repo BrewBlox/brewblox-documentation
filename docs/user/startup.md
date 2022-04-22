@@ -50,6 +50,7 @@ Select Raspberry Pi OS Lite (32-bit), select your SD card, and hit **'Ctrl-Shift
 ![RPi-imager-adv](../images/rpi-imager-adv.png)
 
 In the advanced menu you want to define a few settings:
+
 - **Set hostname:** a hostname is used to easily connect to your Pi on your network. Clear and short names work best. The default hostname is `raspberrypi`.
 - **Enable SSH:** you connect remotely to the terminal of your Pi through SSH. Select *Use password authentication* and set your password.
 - **Configure wifi:** here you configure the network name (SSID) & password of your wifi. Set the wifi country setting to your country to match the wifi channels of your access point.
@@ -78,7 +79,7 @@ If you're unfamiliar with SSH, [this tutorial](https://www.howtogeek.com/311287/
 After you installed your SSH client, insert the microSD card into your Pi, and connect the power supply. The Pi will start automatically.
 
 Wait for the Pi to finish starting up, and connect to it using your SSH client.
-The default user name is `pi`, and the hostname and password are what you defined in the RPi Imager advanced menu at [Step 1](#step-1-prepare-the-microsd-card). The default hostname `raspberrypi` is used in the example below.
+The default user name is `pi`, and the hostname and password are what you defined in the RPi Imager advanced menu at [Step 1](#step-1-format-the-microsd-card). The default hostname `raspberrypi` is used in the example below.
 
 ```bash
 ssh pi@raspberrypi
@@ -89,7 +90,7 @@ If the hostname of your Pi is not recognized on your network, you can use the in
 ## Getting the IP address of your Pi
 
 Connecting to your Pi using SSH requires you to know its address.
-Often, your network already knows the address of your Pi by its hostname. If you haven't changed it at [Step 1](#step-1-prepare-the-microsd-card), the default hostname of your Pi is `raspberrypi`.
+Often, your network already knows the address of your Pi by its hostname. If you haven't changed it at [Step 1](#step-1-format-the-microsd-card), the default hostname of your Pi is `raspberrypi`.
 
 If using the name doesn't work, there are multiple tools to discover the IP address.
 
@@ -105,7 +106,8 @@ For Windows Terminal, the default shortcuts to copy/paste in a terminal window a
 You can also right click on the terminal window, and select the desired option from the dropdown menu.
 
 To install package updates:
-```
+
+```sh
 sudo apt update && sudo apt upgrade -y
 sudo reboot
 ```
@@ -113,7 +115,8 @@ sudo reboot
 The `sudo reboot` command will restart your Pi. Reconnect the SSH client to continue.
 
 To download and run the Brewblox installer:
-```
+
+```sh
 wget -qO - https://www.brewblox.com/install | bash
 ```
 
@@ -128,7 +131,7 @@ We'll stick to the basics, and assume the default settings on a Raspberry Pi.
 
 After logging in over SSH, you'll see this text in front of your cursor:
 
-```
+```sh
 pi@raspberrypi:~ $
 ```
 
@@ -142,7 +145,7 @@ This is the shell prompt, and it consists of three parts:
 
 For example, on a Raspberry Pi:
 
-```
+```sh
 pi@raspberrypi:~ $ pwd
 /home/pi
 pi@raspberrypi:~ $
@@ -154,17 +157,17 @@ You can change directories by using the `cd` command. This can be used with eith
 
 For example, after using `cd ./brewblox`, your shell prompt will be:
 
-```
+```sh
 pi@raspberrypi:~/brewblox
 ```
 
 You can navigate back to the home directory by using either one of these commands:
 
-```
+```sh
 cd ~
 ```
 
-```
+```sh
 cd ..
 ```
 
@@ -172,12 +175,12 @@ cd ..
 
 Examples:
 
-```
+```sh
 pi@raspberrypi:~/brewblox $ cd ..
 pi@raspberrypi:~ $
 ```
 
-```
+```sh
 pi@raspberrypi:~/brewblox/deeply/nested/subdirectory $ cd ..
 pi@raspberrypi:~/brewblox/deeply/nested $
 ```
@@ -189,7 +192,7 @@ If you'd like some more explanation, this [guide to linux commands](https://www.
 ::: tip
 If you want to try out Brewblox, you can use the Spark simulation instead.
 
-Skip this step, and follow the instructions [here](./services/spark_sim).
+Skip this step, and follow the instructions [here](./services/spark_sim.md).
 :::
 
 ### Spark 2 or 3 - Flash the firmware
@@ -207,11 +210,12 @@ Follow the instructions until the menu exits.
 If you are upgrading an older Spark, you may need to flash the bootloader.
 
 **Only if you have a Spark 2 or 3, and the LED is blinking blue after the firmware is flashed**, run:
+
 ```bash
 brewblox-ctl particle -c flash-bootloader
 ```
 
-For now, keep the USB cable connected. You can configure Wifi in the UI during [Step 7](#step-7-use-the-system).
+For now, keep the USB cable connected. You can configure Wifi in the UI during [Step 7](#step-6-use-the-system).
 
 ### Spark 4 - Network setup
 
@@ -223,15 +227,16 @@ The app is available on [Android](https://play.google.com/store/apps/details?id=
 and [iOS](https://apps.apple.com/us/app/esp-ble-provisioning/id1473590141).
 
 To set Wifi credentials:
-- Press the <b>(R)ESET</b> button on your Spark.
-- While the Spark restarts, press and hold the <b>OK</b> button for five seconds.
+
+- Press the **(R)ESET** button on your Spark.
+- While the Spark restarts, press and hold the **OK** button for five seconds.
 - The Spark is ready for provisioning if its buttons are blinking blue.
-- Download the <b>ESP BLE Provisioning</b> app.
+- Download the **ESP BLE Provisioning** app.
 - Enable Bluetooth in your phone settings.
 - Open the app.
-- Click <b>Provision New Device</b>.
-- Click <b>I don't have a QR code</b>.
-- Select the <b>PROV_BREWBLOX_</b> device.
+- Click **Provision New Device**.
+- Click **I don't have a QR code**.
+- Select the **PROV_BREWBLOX_** device.
 - Select your Wifi network, and enter your credentials.
 
 The app will now set Wifi credentials for your Spark. An additional IP
@@ -241,12 +246,13 @@ address will be shown in the top left corner of the Spark display.
 
 To list all possible commands, navigate to the Brewblox install directory (default: `cd ~/brewblox`), and run:
 
-```
+```sh
 brewblox-ctl --help
 ```
 
 ::: details Example output
-```
+
+```sh
 pi@raspberrypi:~ $ cd brewblox
 pi@raspberrypi:~/brewblox$ brewblox-ctl --help
 Usage: python -m brewblox_ctl [OPTIONS] COMMAND [ARGS]...
@@ -294,6 +300,7 @@ Commands:
   snapshot        Save or load snapshots.
 pi@raspberrypi:~/brewblox$
 ```
+
 :::
 
 You can use brewblox-ctl to easily manage your system, and perform common actions. Run the following command to start your system:
@@ -325,7 +332,7 @@ For example, this page can be used to set your preferred temperature unit and ti
 
 ## Later: Updating
 
-Brewblox receives regular updates. Whenever a new update is released, the release notes are posted on [the forum](https://community.brewpi.com/), and added to the [overview](./release_notes).
+Brewblox receives regular updates. Whenever a new update is released, the release notes are posted on [the forum](https://community.brewpi.com/), and added to the [overview](./release_notes.md).
 
 To update, close the UI, and run the following command:
 

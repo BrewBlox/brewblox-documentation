@@ -4,7 +4,7 @@ Date: 2018/02/15
 
 ## Business Case
 
-In the top-level microservice [architecture](./20180206_subprojects) for Brewblox, there are some supporting services.
+In the top-level microservice [architecture](./20180206_subprojects.md) for Brewblox, there are some supporting services.
 
 One of them is the gateway. This gateway should function as a unifying API, reverse-proxying all calls to the relevant services.
 
@@ -15,6 +15,7 @@ A quick stab at implementing it ourselves revealed that doing so would be non-tr
 Options will be shortlisted based on the must haves, and then compared on could have, and non-functional requirements.
 
 ### Must haves
+
 * support encrypted traffic.
 * reverse proxy calls to known services
 * configuration hot reload or runtime registration
@@ -24,6 +25,7 @@ Options will be shortlisted based on the must haves, and then compared on could 
 * support multiple instances of services at different end points
 
 ### Could haves
+
 * support multiple instances of services (load balancing)
 * service auto-discovery
 * login redirection for authorized endpoints
@@ -37,6 +39,7 @@ Options will be shortlisted based on the must haves, and then compared on could 
 * service health checking
 
 ### Nonfunctional requirements
+
 * easy to set up
 * easy to configure
 * easy to debug
@@ -49,9 +52,10 @@ Options will be shortlisted based on the must haves, and then compared on could 
 ## Candidates
 
 ### Discarded
-These options did not meet must-have requirements
-* Caddy: paid for business users
 
+These options did not meet must-have requirements
+
+* Caddy: paid for business users
 
 ### [Janus](https://www.gitbook.com/book/hellofresh/janus/details)
 

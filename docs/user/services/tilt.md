@@ -12,7 +12,7 @@ You can use the `brewblox-ctl` tool to add a new Tilt service to your system.
 This will create the `./tilt` directory, and edit your `docker-compose.yml` file.
 The Tilt service will appear automatically in the UI.
 
-```
+```sh
 brewblox-ctl add-tilt
 ```
 
@@ -28,6 +28,7 @@ Whenever a Tilt is detected, it is assigned a unique name.
 The first Tilt of a given color will be named after the color.
 If you have more than one Tilt of a single color, the name will be incremented.
 For example, if you have three red Tilt devices, the names will be:
+
 - Tilt
 - Tilt-2
 - Tilt-3
@@ -37,6 +38,7 @@ In the `./tilt/devices.yml` file, device names are stored under `names`. The key
 If you edit the file, you must restart the service for the changes to take effect.
 
 Example `./tilt/devices.yml`:
+
 ```yaml
 names:
   DD7F97FC141E: Purple
@@ -44,6 +46,7 @@ names:
 ```
 
 Device names must:
+
 - Consist of at least 1, and at most 100 characters.
 - Contain only alphanumerical characters, spaces, and `_-()|`.
 
@@ -55,7 +58,7 @@ Calibration is optional. While the Tilt provides a good indication of fermentati
 
 Calibration is available for SG and temperature values. For both, calibration data should be provided in a CSV file, with the syntax:
 
-```
+```csv
 <device identifer>, <uncalibrated_value>, <calibrated_value>
 ```
 
@@ -70,7 +73,8 @@ If you wish to calibrate your Specific Gravity readings, create a file called `S
 The uncalibrated values are the raw values from the Tilt. The calibrated values are those from a known good hydrometer or calculated when creating your calibration solution. Calibration solutions can be made by adding sugar/DME to water a little at a time to increase the SG of the solution. You can take readings using a hydrometer and the Tilt app as you go. You can include calibration values for multiple colours of Tilt in the calibration file.
 
 Example `./tilt/SGCal.csv`:
-```
+
+```csv
 Black, 1.000, 1.001
 Black, 1.001, 1.002
 Black, 1.002, 1.003
@@ -89,7 +93,8 @@ You will need multiple calibration points. We recommend at least 6 distributed e
 Calibration values for temperature are placed in a file called `tempCal.csv` in the `./tilt` directory. **Temperature values in the calibration file MUST be in Fahrenheit.** The tempCal file can also contain calibration values for multiple Tilts. Again, it should contain at least 6 points distributed evenly across your typical range.
 
 Example `./tilt/tempCal.csv`:
-```
+
+```csv
 Black,39,40
 Black,46,48
 Black,54,55
@@ -122,11 +127,13 @@ services:
 ```
 
 Create the directory for the tilt files
+
 ```bash
 mkdir ./tilt
 ```
 
 Start the service with the following command
+
 ```bash
 docker-compose up -d
 ```
@@ -140,6 +147,7 @@ The solution is to install and run the Python package directly.
 **Warning: because there are no pre-built Python packages available, the installation process can take multiple hours.**
 
 To install, run:
+
 ```sh
 # Install system packages
 sudo apt update
@@ -165,15 +173,18 @@ poetry install
 ```
 
 To test the service`, run:
+
 ```sh
 poetry run python3 -m brewblox_tilt --mqtt-host=${BREWBLOX_HOST_IP}
 ```
+
 Replace `${BREWBLOX_HOST_IP}` with the host or IP address of the server that runs your other Brewblox services.
 
 We want the service to start in the background when the Pi starts.
 This is done using a systemd service.
 
 Create the */etc/systemd/system/brewblox-tilt.service* file, with as content:
+
 ```ini
 [Unit]
 Description=Brewblox Tilt Service
@@ -194,9 +205,11 @@ KillMode=process
 [Install]
 WantedBy=multi-user.target
 ```
+
 Again, replace `${BREWBLOX_HOST_IP}` with the Brewblox server address.
 
 To enable and start the service, run:
+
 ```sh
 sudo chmod 640 /etc/systemd/system/brewblox-tilt.service
 sudo systemctl daemon-reload
@@ -206,6 +219,7 @@ sudo systemctl status brewblox-tilt
 ```
 
 Later, to update the service, run:
+
 ```sh
 cd brewblox-tilt
 git pull
@@ -232,7 +246,8 @@ brewblox-ctl follow tilt
 This will show new messages as they appear. Press Ctrl-C to exit.
 
 Example output:
-```
+
+```sh
 pi@raspberrypi:~/brewblox$ brewblox-ctl follow tilt
 Attaching to brewblox_tilt_1
 tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_tilt.names             Device names loaded from `/share/devices.yml`: {'DD7F97FC141E': 'Purple'}
@@ -256,13 +271,14 @@ tilt_1            | 2022/01/18 15:07:30 INFO     brewblox_tilt.parser           
 ```
 
 **Hardware**
+
 - Does the server have a working Bluetooth adapter?
 - Is the Tilt in range?
 
 The first question can be checked in the service log.
 The service will wait idle until a Bluetooth adapter is found.
 
-```
+```txt
 [...] Looking for Bluetooth adapter...
 [...] Found Bluetooth adapter hci0
 ```
@@ -270,37 +286,42 @@ The service will wait idle until a Bluetooth adapter is found.
 The second question is harder to answer. If you can do so, put the Tilt next to the server, to remove all doubt.
 
 **Bluetooth**
+
 - Is the adapter powered?
 - Is Bluetooth Low Energy (BLE) enabled?
 
 Host Bluetooth may be the problem if your Tilt service starts normally, but does not detect any devices.
 You can check whether it detected any devices by looking for log entries like this:
-```
+
+```txt
 [...] Tilt detected: mac='DD7F97FC141E', color='Purple', name='Purple'
 ```
 
 This is something that must be checked manually, as these are settings on the server itself, and the Tilt service can't access them all.
 To check this, we use the `bluetoothctl` tool.
 
-```
+```sh
 brewblox-ctl down
 sudo bluetoothctl
 ```
 
 This will open a subshell to interact with bluetooth controllers.
 To list controllers, use `list`:
-```
+
+```txt
 [bluetooth]# list
 Controller B8:27:EB:49:54:3C raspberrypi [default]
 ```
 
 If your controller is not marked as default, use `select {MAC ADDRESS}`:
-```
+
+```txt
 [bluetooth]# select B8:27:EB:49:54:3C
 ```
 
 To show detailed info, use `show`:
-```
+
+```txt
 [bluetooth]# show
 Controller B8:27:EB:49:54:3C (public)
         Name: raspberrypi
@@ -322,14 +343,15 @@ If `Powered` is no, then run `power on`
 
 After that, go to the *scan* menu, enable BLE, and clear filters (if any).
 Use *back* to return to the main menu.
-```
+
+```txt
 menu scan
 clear
 transport le
 back
 ```
 
-```
+```txt
 [bluetooth]# menu scan
 Menu scan:
 [...]
@@ -342,7 +364,8 @@ Menu main:
 ```
 
 Then use `scan on` to start scanning for Bluetooth devices.
-```
+
+```txt
 [bluetooth]# scan on
 SetDiscoveryFilter success
 Discovery started
@@ -366,7 +389,7 @@ Discovery started
 In this case, DD:7F:97:FC:14:1E is a Tilt, but pretty much as soon as devices show up, it’s fine.
 Exit bluetoothctl by running exit, and start brewblox again.
 
-```
+```sh
 exit
 brewblox-ctl up
 ```
@@ -377,13 +400,14 @@ The Tilt service uses MQTT to publish data.
 If the device is found, is publishing Bluetooth events, and yet nothing shows up, the next step is to check the eventbus.
 
 In the service log, it should show it is connected to the eventbus:
-```
+
+```txt
 [...] <EventHandler for wss://172.17.0.1:443/eventbus> connected
 ```
 
 If instead, it displays errors about not being able to connect, you may need to update the connection settings.
 
-To directly check the published messages, install https://mqtt-explorer.com/.
+To directly check the published messages, install <https://mqtt-explorer.com/>.
 Connect it to the Pi address, with protocol mqtt and port 1883 (the default).
 
 If everything is working as intended, you should see `tilt` messages both under `brewcast/state` and `brewcast/history`.

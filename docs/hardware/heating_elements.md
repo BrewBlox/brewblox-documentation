@@ -20,7 +20,7 @@ TODO: Elco vragen stuk schrijven over waarom hoog-vermogen elementen, ramp-up ti
 
 Our heating elements work at 230 / 240 V AC. How the elements are connected to your mains depends on where you live. In this section we talk you through the three main configurations and show you how to determine the maximum current and power of the heating element you can connect safely. When unsure about the details of your mains, consult a local electrician.
 
-### Single phase
+### Single phase mains
 
 With the exception of North- and Central-America most residential mains outlets worldwide are single phase outlets operating at 230V AC. With single phase outlets, the heating element is connected between the phase L and neutral N wire.
 
@@ -28,7 +28,7 @@ With the exception of North- and Central-America most residential mains outlets 
 
 In most places, 230V single phase outlets are protected by 16A circuit breakers.
 
-### Split phase
+### Split phase mains
 
 In the US, Canada and some other countries mains electricity operates at 120V AC. For high-power electrical appliances (like heating elements, stoves, etc.) houses in the US are equipped with split phase outlets. In split phase outlets two phases L1 and L2 at 120V are combined to 240V AC. The heating element is connected between phase L1 and L2, see figure.
 
@@ -36,7 +36,7 @@ In the US, Canada and some other countries mains electricity operates at 120V AC
 
 In the US, split phase outlets are typically protected by a 25A circuit breaker.
 
-### Three phase
+### Three phase mains
 
 Three phase mains connections are the high-power electrical connections outside North- and Central-America. They consist of three phases L1, L2, L3 and a neutral N wire. To fully utilize the available power of a three phase outlet requires a three phase heating element. Essentially a three phase heating element consists of three single phase elements combined in a single flange. Three phase elements should be connected **in star configuration**.
 
@@ -59,6 +59,7 @@ When working with electrical equipment, anything you can touch should be grounde
 To protect the electric circuit in your building from an overload or short circuit, it is protected by a circuit breaker or a fuse. The circuit breaker limits the current that can be drawn from a mains outlet and determines the maximum power of the heating element you can safely connect.
 
 We advise you to buy the highest power heating element your mains outlet can power for two reasons:
+
 - reduced waiting time on your brewing day
 - maximum brew receipt flexibility
 
@@ -67,6 +68,7 @@ For instance, some brew receipts require you to quickly ramp up the temperature 
 Find the maximum current of the circuit breaker behind the outlet on your brewing location. Ask your electrician when unsure. You can select your heating element based on the maximum current $I_{max}$ or maximum power $P_{max}$ of the outlet you plan to use. The maximum power is determined by multiplying the voltage of your mains $U$ by the maximum current of the circuit breaker; $P_{max} = U \times I_{max}$.
 
 **Examples:**
+
 - **Single phase:** typical residential mains outlets in the Netherlands are protected by a circuit breaker with a maximum current of 16A. Operating at 230V AC, outlets have a maximum power of 3680W.
 - **Split phase:** typical split phase outlets in the US are protected by a circuit breaker with a maximum current of 25A. Operating at 240V AC these outlets have a maximum power of 6000W.
 - **Three phase:** residential three phase connections in the Netherlands come in two flavors; 3x16 and 3x25A rated current. At 230V AC these connections have a maximum power of 11040 or 17250W respectively.
@@ -136,6 +138,7 @@ To connect an heating element to a single phase outlet requires connecting three
 ![1-phase-connect-123](../images/1-phase-connect-123.svg)
 
 **Examples:**
+
 - Round heating element [#7](#round) has one resistor and draws a current of 15.2A when connected to a 230V outlet.
 - Tri-clamp element [#14](#tri-clamp) has two resistors and draws a current of 6.1A per resistor at 230V. When connected in parallel to a 230V single phase outlet the element will draw a current of 2 x 6.1 = 12.2A.
 - Round heating element [#2](#round) has three resistors and draws a current of 12.3A per resistor at 230V. When connected in parallel to a 230V single phase outlet the element will draw a current of 3 x 12.3 = 36.9A.
@@ -155,6 +158,7 @@ Connecting a 3 resistor element to a three phase outlet requires connecting 5 wi
 ![3-Phase power](../images/3-phase-connect-3.svg)
 
 **Example:**
+
 - Round heating element [#4](#round) has three resistors and draws a current of 14.5A per phase when connected to a 230V three phase outlet.
 
 The wires connected to your element should be of sufficient diameter to transport the current, and the current should not exceed the maximum current of your circuit breaker. More about wire diameter in the next section.
@@ -178,7 +182,7 @@ We sell hole punches in the [store](https://store.brewpi.com/mashing/tools), whi
 
 The hole punches require a 12mm pilot hole for the M12 bolt that pulls the cutter through the wall. The bolt itself requires a 10mm hex key to tighten. When drilling in stainless steel we advise you to get a cobalt head drill bit, and a low-speed, high-torque drill. Cooling your drill bit with running oil / water is advisable.
 
-#### Element position
+### Element position
 
 The flange of the heating element is flat, and your kettle wall is round. Hence the kettle wall will flatten when tightening the heat element locknut during installation. For a proper seal, the kettle wall should be able to flex a little. The bend where the side wall transitions into the kettle bottom is very rigid. Install the center point of the heating element flange about 10cm (4in) above the kettle bottom to allow for a proper flex of the kettle wall.
 
@@ -221,19 +225,19 @@ When in use, SSRs will get hot from the electrical current and require a heat si
 
 The SSR is used to switch the AC voltage to your heating element and thus needs to be installed in the cable in between the element and your mains. Connection diagrams for heating elements connected to single, split, and three phase outlets are discussed below.
 
-#### Single phase
+#### Single phase SSR
 
 Cables connecting heating elements to single phase outlets have three wires; phase L, neutral N and protective earth PE. To switch the AC voltage to the heating element you interrupt either the phase or neutral wire with the AC terminals of the SSR. The other two wires go to the element directly. The DC terminals of the SSR are connected to the respective terminals of the controller. The positive (red) DC wire is interrupted by the float switch for dry fire protection. Make sure your mains outlet is protected by a circuit breaker, and a ground-fault circuit breaker.
 
 ![Connect-1-phase-SSR](../images/connect-1-phase-ssr.svg)
 
-#### Split phase
+#### Split phase SSR
 
 The diagram for connecting your SSR in the case of a split phase outlet is shown below. The diagram is the same as for single phase configuration discussed previously, only the naming of the wires is different. Just interrupt either phase L1 or phase L2 with the AC terminals of the SSR. The +/- wires coming from the controller are connected to the DC terminals of the SSR. The positive (red) DC wire is interrupted by the float switch for dry fire protection. Make sure your mains outlet is protected by a circuit breaker, and a ground-fault circuit breaker.
 
 ![Connect-2-phase-SSR](../images/connect-2-phase-ssr.svg)
 
-#### Three phase
+#### Three phase SSR
 
 The cable connecting your three phase heating element to a three phase outlet has 5 wires; phases L1, L2 and L3, neutral N and protective earth PE. For installation you interrupt the three phases with the AC terminals of the SSR. The neutral and protective earth wire are directly connected to your element. The DC terminals of the SSR are connected to the respective terminals of the controller. The positive (red) wire is interrupted with the float switch for dry fire protection. Make sure your mains outlet is protected by a circuit breaker, and a ground-fault circuit breaker.
 

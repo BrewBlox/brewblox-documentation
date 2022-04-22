@@ -8,10 +8,11 @@ The Plaato service periodically polls the Plaato servers for available data, and
 
 For the service to access your Plaato data, you'll need an authentication token.
 
-See https://plaato.io/apps/help-center#!hc-auth-token on how to get one.
+See <https://plaato.io/apps/help-center#!hc-auth-token> on how to get one.
 
 When you have that, run:
-```
+
+```sh
 brewblox-ctl add-plaato --name plaato --token {TOKEN}
 ```
 

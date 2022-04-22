@@ -30,24 +30,26 @@ CMD ["python3", "-u", "/app/script.py"]
 ## Building
 
 Your `serialscript` directory should look like this:
-```
+
+```txt
 .
 ├── script.py
 └── Dockerfile
 ```
 
 To build the image, run:
-```
+
+```sh
 docker build --tag serialscript serialscript/
 ```
-
 
 ## Running
 
 To access the serial port on the host computer, your Docker container needs elevated privileges.
 
 Start the container by running:
-```
+
+```sh
 docker run --rm --privileged --tty --volume /dev:/dev serialscript
 ```
 

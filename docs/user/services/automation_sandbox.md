@@ -24,6 +24,7 @@ We've had good experiences with our prototype integration with Node-RED, and wil
 Integrations with Brewfather, Home Assistant, and IFTTT are also under consideration.
 
 To summarize:
+
 - We are ending development of the current automation service.
 - We will keep developing automation functionality.
 - You can use a third-party editor to create and edit automation subroutines.
@@ -61,11 +62,13 @@ In JavaScript, functions that have to wait for something to finish are declared 
 API functions that have to make a network call (saving blocks, publishing events, making HTTP requests) are `async`.
 
 When calling an async function, you need to put the `await` keyword before your call:
+
 ```javascript
 const value = await asyncFunction();
 ```
 
 Example:
+
 ```javascript
 const block = getBlock('spark-one', 'Ferment Fridge Setpoint');
 block.data.setting = qty(20, 'degC');
@@ -80,6 +83,7 @@ This means that they are isolated from the rest of the program.
 We added some helper functions to make it easy to write scripts.
 
 ---
+
 ### print(...args)
 
 The `print()` function adds a message to the preview output.
@@ -90,76 +94,87 @@ You can add as many arguments as you want. Objects (`{ key: 'value' }`) and list
 `console.log(...args)` is an alias for `print(...args)`.
 
 Example:
+
 ```javascript
 print('value 1', 1234, {key: 'value'}, ['value1', 'value2']);
 console.log('value 1', 1234, {key: 'value'}, ['value1', 'value2']);
 ```
 
 ---
+
 ### getBlock(serviceId, blockId)
 
-`getBlock()` finds a currently active block with the requested ID. <br>
+`getBlock()` finds a currently active block with the requested ID.\
 It returns `null` if the block was not found.
 
-For a description of how a block looks like, see the [block types documentation](../../dev/reference/block_types).
+For a description of how a block looks like, see the [block types documentation](../../dev/reference/block_types.md).
 
 In the editor is a snippet that lets you select a block from a dropdown, and then generates the `getBlock()` call.
 
 Example:
+
 ```javascript
 const block = getBlock('spark-one', 'Ferment Fridge sensor');
 print(block);
 ```
 
 ---
+
 ### getBlockField(serviceId, blockId, fieldName)
 
-Often you don't need the full block, but only a specific value. <br>
+Often you don't need the full block, but only a specific value.\
 `getBlockField(serviceId, blockId, fieldName)` returns that value.
 
-For a description of what fields are available for each block type, see the [block types documentation](../../dev/reference/block_types).
+For a description of what fields are available for each block type, see the [block types documentation](../../dev/reference/block_types.md).
 
 In the editor is a snippet that lets you select a block and a field from dropdown menus, and then generates the `getBlockField()` call.
 
 Example:
+
 ```javascript
 const field = getBlockField('spark-one', 'Ferment Fridge sensor', 'value');
 print(field);
 ```
 
 ---
+
 ### blocks
 
-`blocks` is a list of block objects. It contains all blocks from all Spark services. <br>
+`blocks` is a list of block objects. It contains all blocks from all Spark services.\
 Typically you want to use `getBlock()` or `getBlockField()` if you want a specific value.
 
-For a description of how a block looks like, see the [block types documentation](../../dev/reference/block_types).
+For a description of how a block looks like, see the [block types documentation](../../dev/reference/block_types.md).
 
 Example:
+
 ```javascript
 print(blocks);
 ```
 
 ---
+
 ### events
 
-`events` is a list of cached [Spark state](../../dev/reference/spark_state) or [history](../../dev/reference/history_events) events.
+`events` is a list of cached [Spark state](../../dev/reference/spark_state.md) or [history](../../dev/reference/history_events.md) events.
 
 The data also includes published topic, and time received.
 Only the last received event for a given topic is included.
 If you want to read events published by your service here, it is advised to publish to a unique topic.
 
 Example:
+
 ```javascript
 print(events)
 ```
 
 ---
+
 ### qty(field) / qty(value, unit) / qty(duration)
 
 Many block fields are quantities. This means that they have both a *value* (eg. `10`), and a *unit* (eg. `degC`).
 
 If you print them, they will look like
+
 ```json
 {
   "__bloxtype": "Quantity",
@@ -171,6 +186,7 @@ If you print them, they will look like
 The `qty()` helper function takes this data, and creates a `Quantity` object that lets you convert and compare quantities.
 
 You can call `qty()` in four different ways:
+
 - With a block field that is a quantity object: `qty(getBlockField(...))`
 - With a value and a unit: `qty(20, 'degC')`
 - With a time string: `qty('1d2h8m')`
@@ -179,6 +195,7 @@ You can call `qty()` in four different ways:
 You can compare two quantities if the units are compatible. `degC` and `degF` are compatible, but `degC` and `delta_degC` are not.
 
 Available comparison functions are:
+
 - `eq(other)` or `isEqualTo(other)`
 - `lt(other)` or `isLessThan(other)`
 - `lte(other)` or `isLessThanEqual(other)`
@@ -188,10 +205,11 @@ Available comparison functions are:
 
 The argument(s) for all comparison functions are the same as that for `qty()` itself.
 
-All comparison functions except `compareTo()` return a boolean true/false. <br>
+All comparison functions except `compareTo()` return a boolean true/false.\
 `compareTo()` returns `-1`, `0`, or `1`, depending on whether the base or compared quantity is higher.
 
 Examples:
+
 ```javascript
 qty('1h10m').eq(70, 'min'); // true
 qty('1h10m').eq(qty(70, 'min')); // true
@@ -217,10 +235,12 @@ To convert a quantity to another compatible quantity, you can use the `to(unit)`
 When converting a quantity, the original is unchanged.
 
 Examples:
+
 ```javascript
 qty('10m').to('s');
 qty(20, 'degC').to('degF');
 ```
+
 ```javascript
 const original = qty(20, 'degC');
 const converted = original.to('degF');
@@ -235,10 +255,12 @@ As with conversion, all mathematical operations return a new quantity, and leave
 When modifying absolute temperatures (`degC`, `degF`), the argument must be a relative value (`delta_degC`, `delta_degF`).
 
 Available operations:
+
 - `plus(other)`
 - `minus(other)`
 
 Examples:
+
 ```javascript
 const original = qty(20, 'degC');
 const other = qty(20, 'delta_degF');
@@ -249,6 +271,7 @@ print(result.value, result.unit); // [ 31.11111, 'degC' ]
 ```
 
 ---
+
 ### saveBlock(block)
 
 To change a block on a Spark, you need to explicitly save it.
@@ -258,6 +281,7 @@ It will write all values in the block data you send, except for readonly fields.
 This is an `async` function, and must be called using `await`.
 
 Example:
+
 ```javascript
 const block = getBlock('spark-one', 'Ferment Fridge setpoint');
 block.data.storedSetting = qty(20, 'degC');
@@ -265,6 +289,7 @@ await saveBlock(block);
 ```
 
 ---
+
 ### publishEvent(topic, payload)
 
 You can publish arbitrary MQTT events with the `publishEvent()` function.
@@ -274,6 +299,7 @@ You can send objects or lists as payload. They will be automatically converted t
 This is an `async` function, and must be called using `await`.
 
 Example:
+
 ```javascript
 await publishEvent('brewcast/history/my-process', {
   key: 'my-process',
@@ -287,6 +313,7 @@ Everything after `brewcast/history` in the topic is optional, but recommended.
 It makes it easier to identify and listen to your events while debugging.
 
 ---
+
 ### axios
 
 [Axios](https://www.npmjs.com/package/axios#example) is a popular JavaScript library for making HTTP requests.
@@ -295,6 +322,7 @@ It comes pre-installed in the automation sandbox.
 HTTP requests are always made from the automation service, both when the process is running, and when you are previewing your script.
 
 Example:
+
 ```javascript
 const resp = await axios.get('https://www.example.com');
 print(resp);

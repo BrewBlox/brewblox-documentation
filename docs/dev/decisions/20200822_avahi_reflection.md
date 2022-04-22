@@ -15,6 +15,7 @@ Previously, the solution was to create a separate `mdns` service that used the `
 The Spark service sent a HTTP request to the mdns service, and the mdns service checked host network interfaces for mDNS services with the correct type.
 
 There are two major drawbacks to this approach:
+
 - The mDNS service has to use a host port for its REST API.
 - Every additional service is another point of failure for a distributed system.
 
@@ -38,14 +39,14 @@ From the [avahi-daemon man page](https://linux.die.net/man/5/avahi-daemon.conf):
 
 > ### Section [reflector]
 >
-> **enable-reflector=** Takes a boolean value ("yes" or "no"). 
-> If set to "yes" avahi-daemon will reflect incoming mDNS requests to all local network interfaces, 
-> effectively allowing clients to browse mDNS/DNS-SD services on all networks connected to the gateway. 
-> The gateway is somewhat intelligent and should work with all kinds of mDNS traffic, 
-> though some functionality is lost (specifically the unicast reply bit, which is used rarely anyway). 
-> Make sure to not run multiple reflectors between the same networks, 
-> this might cause them to play Ping Pong with mDNS packets. 
-> Defaults to "no". 
+> **enable-reflector=** Takes a boolean value ("yes" or "no").
+> If set to "yes" avahi-daemon will reflect incoming mDNS requests to all local network interfaces,
+> effectively allowing clients to browse mDNS/DNS-SD services on all networks connected to the gateway.
+> The gateway is somewhat intelligent and should work with all kinds of mDNS traffic,
+> though some functionality is lost (specifically the unicast reply bit, which is used rarely anyway).
+> Make sure to not run multiple reflectors between the same networks,
+> this might cause them to play Ping Pong with mDNS packets.
+> Defaults to "no".
 
 "All local network interfaces" includes Docker bridge networks,
 making this a very relevant setting.

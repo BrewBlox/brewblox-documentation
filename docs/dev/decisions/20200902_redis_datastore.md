@@ -5,6 +5,7 @@ Date: 2020/09/02
 ## Context
 
 Brewblox systems use three kinds of persistent data:
+
 - Service-specific configuration files
 - Time series history data
 - Persistent configuration data
@@ -63,14 +64,17 @@ we are opting to find a different database.
 ## Requirements
 
 ### Free and anonymous
+
 Every user will be running their own instance.
 Users should not have to create an account, and licence or subscription-based solutions will not be considered.
 
 ### Actively supported
+
 An obvious, but important requirement.
 The project should have the backing of an established and active company or open source collective.
 
 ### JSON documents
+
 CouchDB is a JSON document store.
 Choosing a replacement with a different storage paradigm would increase migration complexity and risk.
 
@@ -80,35 +84,43 @@ We may reconsider in a future update, but for now, strict schema definitions wou
 Here, we don't want to fix what isn't broken. A document store works for us, and we'll stick with it.
 
 ### Local caching / ID indexing
+
 Every client has its own database, and a very limited number (<500) of persisted objects.
 The expected use case is to fetch all documents in a collection at startup, and then use a local data management system for lookups.
 
 If there is a trade-off, we want to select the option optimized for selecting all objects in collection, and adding / modifying / removing a single object in collection.
 
 ### Push events
+
 UI's share the global configuration state. If a change is made, it should be pushed to all other clients, using a web-compatible protocol and format.
 
 ### Memory footprint
+
 Compared to the typical use case of many popular databases, we have very little data, and very little RAM available.
 A running Docker container should use no more than ~50MB RAM.
 
 ### Ease of setup
+
 The Docker image should not require setup calls to its API to be functional.
 Preferably, it does not require a custom configuration file,
 but this is a lesser priority.
 
 ### Ease of import/export
+
 The API for exporting all data to file should be straightforward,
 and symmetrical with the API for importing all files.
 
 ### Ease of implementation
+
 The API should be easily implemented for all current clients:
+
 - Browser-based TypeScript
 - Node.js based TypeScript
 - Asynchronous Python
 - Synchronous Python
 
 ### Multiplatform Docker images
+
 We deploy Brewblox to AMD64 and ARM32v7 platforms, with ARM64v8 being added in the medium-term future.
 Multiplatform Docker images are being increasingly common.
 If reasonably possible, we want our database solution to be on offer as first-party images for all three platforms.

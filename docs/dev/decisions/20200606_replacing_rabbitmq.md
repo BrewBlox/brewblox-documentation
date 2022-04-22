@@ -11,7 +11,7 @@ Date: 2020/06/06
 
 ## Context
 
-[This previous decision](./20200530_mqtt_events) describes the switch from AMQP to MQTT as eventbus protocol.
+[This previous decision](./20200530_mqtt_events.md) describes the switch from AMQP to MQTT as eventbus protocol.
 
 Implementation of a Last Value Cache (LVC) for new subscribers was marked as "further work".
 MQTT natively supports LVC behavior by means of the [retain flag](https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/).
@@ -36,6 +36,7 @@ That leaves third-party and local publishers. We coordinate where we can, but ar
 A deprecation period where both AMQP and MQTT are supported is the most practical approach.
 
 The public API for MQTT in the eventbus is:
+
 - mqtt://eventbus:1883 (inside Brewblox network)
 - ws://eventbus:15675/eventbus (inside Brewblox network)
 - wss://HOST_ADDRESS:443/eventbus (outside Brewblox network)

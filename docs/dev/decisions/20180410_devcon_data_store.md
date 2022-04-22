@@ -15,6 +15,7 @@ As the data is closely coupled with specific controllers (ID alias matches to ha
 ## Requirements
 
 Must:
+
 * Persistent key/value mapping
 * Single item write/read
 * Must be compatible with ARMv7 and AMD architecture
@@ -25,14 +26,15 @@ Must:
 * Free
 
 Should:
+
 * Supports simple data migration
 * Plug-n-play Python (de)serialization library
 * Open source
 
 Don't care:
+
 * Multi-process support
 * Access control (authentication / authorization)
-
 
 ## Options
 
@@ -46,7 +48,7 @@ SQLite + ORM asyncio library not found.
 
 ### Couchbase Lite
 
-Does not have Python bindings (https://github.com/couchbase/couchbase-lite-core/issues/91)
+Does not have Python bindings (<https://github.com/couchbase/couchbase-lite-core/issues/91>)
 
 ### Redis, PostgreSQL, MySQL, CouchDB
 
@@ -68,8 +70,7 @@ If speed is not taken into account, then its use of JSON files is a plus. It mak
 
 Really nice syntax.
 Does not support asyncio. A GitHub issue recommends thread workers
-https://github.com/zopefoundation/ZODB/issues/53
-
+<https://github.com/zopefoundation/ZODB/issues/53>
 
 ## Conclusion
 
@@ -84,14 +85,6 @@ As TinyDB also offers in-memory storage, we can reuse the same database access l
 
 An added bonus is that TinyDB serializes to plain JSON. This makes its backing files user-readable, and allows easy data migration.
 
-
 [1]: https://pythonhosted.org/pickleDB/
 [3]: https://tinydb.readthedocs.io/en/latest/#
 [4]: https://github.com/ASMfreaK/aiotinydb
-
-
-## References:
-
-* https://pythonhosted.org/pickleDB/
-* https://tinydb.readthedocs.io/en/latest/#
-* https://github.com/ASMfreaK/aiotinydb

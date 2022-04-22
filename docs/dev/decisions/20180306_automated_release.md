@@ -8,6 +8,7 @@ Part of an efficient software development pipeline is automatic deployment and r
 This is best implemented relatively early on, because it makes later development easier and more stable.
 
 Current development pipeline has the following steps:
+
 * Create task (task now in Inbox)
 * Accept task (task now in Backlog)
 * Schedule task (task now in Next)
@@ -86,7 +87,6 @@ Normally, only 3 branches will exist in `upstream`: `master`, `develop`, and (wh
 
 In general: small features do not require a feature branches on the upstream repo.
 
-
 ## Semantic Versioning
 
 In order to avoid "dependency hell" in a project using many third-party libraries, [Semantic Versioning][3] was introduced.
@@ -140,9 +140,7 @@ Some features will possibly be relevant in the future, but are not specified or 
 * Releasing Dev/Alpha/Beta/Gamma/rc versions to PyPi.
 * Automatically setting dev version in Python package when building locally.
 * Automating version bumping + release after `release` or `bugfix` branches are merged
-    * Requires automatic determination of whether the release is MAJOR/MINOR/PATCH
-
-
+  * Requires automatic determination of whether the release is MAJOR/MINOR/PATCH
 
 [1]: https://jeffkreeftmeijer.com/git-flow
 [3]: https://semver.org/
@@ -160,16 +158,16 @@ Some features will possibly be relevant in the future, but are not specified or 
 
 ## References
 
-* https://jeffkreeftmeijer.com/git-flow
-* https://semver.org/
-* https://docs.travis-ci.com/user/deployment/pypi/
-* https://github.com/c4urself/bump2version
-* https://packaging.python.org/guides/single-sourcing-package-version/
-* https://github.com/michaeljoseph/changes
-* https://zestreleaser.readthedocs.io/en/latest/
-* https://travis-ci.org/
-* https://pypi.python.org/pypi
-* https://docs.travis-ci.com/user/environment-variables/
-* https://git-scm.com/book/en/v2/Git-Basics-Tagging
-* https://help.github.com/articles/creating-releases/
-* https://docs.travis-ci.com/user/deployment#Conditional-Releases-with-o*
+* <https://jeffkreeftmeijer.com/git-flow>
+* <https://semver.org/>
+* <https://docs.travis-ci.com/user/deployment/pypi/>
+* <https://github.com/c4urself/bump2version>
+* <https://packaging.python.org/guides/single-sourcing-package-version/>
+* <https://github.com/michaeljoseph/changes>
+* <https://zestreleaser.readthedocs.io/en/latest/>
+* <https://travis-ci.org/>
+* <https://pypi.python.org/pypi>
+* <https://docs.travis-ci.com/user/environment-variables/>
+* <https://git-scm.com/book/en/v2/Git-Basics-Tagging>
+* <https://help.github.com/articles/creating-releases/>
+* <https://docs.travis-ci.com/user/deployment#Conditional-Releases-with-o>*

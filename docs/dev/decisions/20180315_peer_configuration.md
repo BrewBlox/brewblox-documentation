@@ -12,9 +12,9 @@ Currently, clients practice [client-side discovery][2]. They announce themselves
 ## Requirements
 
 * Brewblox services must be able to connect to generic services
-    * Gateway
-    * RabbitMQ
-    * InfluxDB
+  * Gateway
+  * RabbitMQ
+  * InfluxDB
 * Brewblox services must be able to connect to other brewblox services
 * Gateway registration must be done using a correct url for reverse proxying
 * Solutions must not involve deploying hard-coded url configuration to all services
@@ -75,7 +75,8 @@ The history service in the example has two peer dependencies: `eventbus` and `in
 We could add url arguments for them to the command line arguments (or config).
 
 Example:
-```
+
+```sh
 python3 -m brewblox_history --name history --influx_url influx:8086 --eventbus_url eventbus:5672
 ```
 
@@ -84,6 +85,7 @@ Especially as we'd add more and more peer services, this can get awfully clunky,
 ## Feature discovery
 
 Our default approach is to directly query the feature host (influx, rabbitmq, etc)
+
 ```plantuml
 @startuml
 
@@ -95,7 +97,7 @@ history_service -> feature_service: POST http://feature_service/do/stuff
 
 The disadvantage here is that each individual service needs to be configured with the host/IP of each peer service. This will not gracefully handle peer services moving host/IP, and the total amount of configuration will scale exponentially.
 
-A different approach is to centralize getting feature addresses through a central registrar (eg. [Consul][12], or [Zookeeper][11]).
+A different approach is to centralize getting feature addresses through a central registrar (eg. Consul, or Zookeeper.
 
 ```plantuml
 @startuml
@@ -112,6 +114,7 @@ This way, each service only needs to remember the host/IP of the registrar. The 
 The disadvantage here is that we just created more hosts.
 
 Example (Consul / Registrator):
+
 ```yaml
 
   history:
@@ -145,6 +148,7 @@ Example (Consul / Registrator):
 Registrator is in charge of automatically adding Docker services to Consul, and we can ask consul where to find services.
 
 Example query:
+
 ```bash
 $ curl localhost:8500/v1/catalog/service/history
 
@@ -199,11 +203,10 @@ This does reduce compatibility with non-docker deployment environments, and sign
 If needed, we can always revisit this decision, and implement dynamic feature discovery. Right now, we just don't need it.
 
 Design decisions are:
+
 * Drop the Janus gateway, as HAProxy automatically recognizes online services.
 * Make host configuration simple in Python (host="eventbus"), and configure deployment to match.
 * We'll drop the "must function on localhost" requirement for now.
-
-
 
 [1]: https://microservices.io/patterns/server-side-discovery.html
 [2]: https://www.nginx.com/blog/service-discovery-in-a-microservices-architecture/
@@ -213,25 +216,5 @@ Design decisions are:
 [6]: https://docs.docker.com/docker-cloud/apps/service-links/#discovering-containers-on-the-same-service-or-stack
 [7]: https://success.docker.com/article/Docker_Reference_Architecture-_Service_Discovery_and_Load_Balancing_with_Docker_Universal_Control_Plane_(UCP)
 [8]: https://serverfault.com/questions/816293/haproxy-reverse-proxy-and-virtual-host
-[9]: https://jasonwilder.com/blog/2014/07/15/docker-service-discovery/
+[9]: http://jasonwilder.com/blog/2014/07/15/docker-service-discovery/
 [10]: https://github.com/gliderlabs/registrator
-[11]: https://blog.arungupta.me/zookeeper-microservice-registration-discovery/
-[12]: https://www.consul.io/intro/index.html
-[13]: https://gliderlabs.com/registrator/latest/user/quickstart/
-
-
-## References
-
-* https://microservices.io/patterns/server-side-discovery.html
-* https://www.nginx.com/blog/service-discovery-in-a-microservices-architecture/
-* https://github.com/docker/dockercloud-haproxy
-* https://gitlab.com/ProftaakS61mGroepA/ProjectPub/blob/master/deploy-order/docker-compose.yml
-* https://github.com/hellofresh/janus
-* https://docs.docker.com/docker-cloud/apps/service-links/#discovering-containers-on-the-same-service-or-stack
-* <https://success.docker.com/article/Docker_Reference_Architecture-_Service_Discovery_and_Load_Balancing_with_Docker_Universal_Control_Plane_(UCP)>
-* https://serverfault.com/questions/816293/haproxy-reverse-proxy-and-virtual-host
-* https://jasonwilder.com/blog/2014/07/15/docker-service-discovery/
-* https://github.com/gliderlabs/registrator
-* https://blog.arungupta.me/zookeeper-microservice-registration-discovery/
-* https://www.consul.io/intro/index.html
-* https://gliderlabs.com/registrator/latest/user/quickstart/

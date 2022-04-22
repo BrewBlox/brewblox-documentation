@@ -1,7 +1,7 @@
 # Analyzing log output
 
 When receiving bug reports or support requests, the first question often is for the user to run `brewblox-ctl log`, and post the results.
-The "result" is a link to https://termbin.com where the log output has been uploaded as text.
+The "result" is a link to <https://termbin.com> where the log output has been uploaded as text.
 The log file includes system diagnostics, and logging for all active Brewblox Docker Compose services.
 
 This log is first and foremost a debugging tool. It will have very little relevant info on a system that's working as intended,
@@ -16,9 +16,11 @@ Various Docker Compose commands are referenced throughout this document.
 `docker-compose` is a Python application that is installed in a [virtualenv](https://docs.python.org/3/library/venv.html) with the other brewblox-ctl dependencies.
 
 To enable `docker-compose` commands in your current shell, run:
-```
+
+```sh
 source .venv/bin/activate
 ```
+
 :::
 
 ## Basics
@@ -31,6 +33,7 @@ While it's not foolproof, some care is taken to avoid leaking secrets or persona
 To see the shell commands used to generate the log, you can run `brewblox-ctl -v log`.
 
 :::details Example
+
 ```sh
 pi@manyberry:~/brewblox$ brewblox-ctl -v log
 SHELL      docker version 2>&1
@@ -119,12 +122,14 @@ SHELL      dmesg -T >> brewblox.log 2>&1
 INFO       Uploading brewblox.log to termbin.com:9999...
 
 ```
+
 :::
 
 ## Contents
 
 Log files are composed from multiple sources, and each section is preceded by a header to make it easier to find any specific section:
-```
+
+```txt
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ .env ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 BREWBLOX_RELEASE=edge
@@ -147,6 +152,7 @@ docker-compose version 1.29.2, build unknown
 
 Based on our own experiences reading logs, and known issues, we add or remove sections with some regularity.
 Right now, included sections are:
+
 - Selected `brewblox/.env` values (this only includes known safe keys).
 - Version information for the OS, python, Docker, and Docker Compose.
 - A list of active Docker Compose services.
@@ -171,7 +177,8 @@ Services are a mixture of BrewPi-made (spark, history, tilt, plaato, hass) and t
 For most problems, the Spark service logs are the most relevant, and the third-party service logs the least.
 
 For local debugging, the `--follow` argument is very useful, as it provides a live view of the service logs. Example:
-```
+
+```txt
 docker-compose logs --follow spark-one
 ```
 
@@ -197,7 +204,8 @@ Some of them contain useful system information, and some of them serve as red fl
 This list is far from complete, and can only suggest where to look.
 
 **dmesg: Under-voltage detected**
-```
+
+```txt
 Dec  6 10:31:57 raspberrypi kernel: [ 1069.039566] Under-voltage detected! (0x00050005)
 ```
 
@@ -206,11 +214,13 @@ Many phone chargers do not deliver enough power, even though they have the corre
 To fix it, make sure the power supply to your Pi [meets the recommended specs](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#typical-power-requirements).
 
 **Spark service: service synchronized!**
-```
+
+```txt
 spark-one_1  | 2022-01-02T21:15:19.590853907Z 2022/01/02 21:15:19 INFO     ...evcon_spark.synchronization  Service synchronized!
 ```
 
 The connection between the Spark service and Spark controller goes through multiple steps before it is fully operational:
+
 - disconnected
 - connected (TCP/USB connection established)
 - acknowledged (the device on the other end uses the right communication protocol)
@@ -219,7 +229,8 @@ The connection between the Spark service and Spark controller goes through multi
 The "service synchronized!" message is the final green light, and a useful target for ctrl-F searches.
 
 **Spark service: handshake**
-```
+
+```txt
 spark-one_1  | 2022-01-02T21:15:17.082854701Z 2022/01/02 21:15:17 INFO     ...lox_devcon_spark.connection  HandshakeMessage(name='BREWBLOX', firmware_version='3b77d006', proto_version='5b7a2e3b', firmware_date='2021-11-29', proto_date='2021-10-01', system_version='4.4.0', platform='esp32', reset_reason_hex='00', reset_data_hex='00', device_id='C4DD5766BB24', reset_reason='NONE', reset_data='NOT_SPECIFIED')
 ```
 
@@ -227,17 +238,19 @@ To verify that the controller uses compatible firmware, a plaintext handshake me
 This message contains the various firmware versions for the controller.
 The matching (desired) version information for the service can be found at the very start of the service logs:
 
-```
+```txt
 spark-one_1   | 2022-01-02T21:28:48.244875895Z 2022/01/02 21:28:48 INFO     __main__                        firmware.ini: {'firmware_version': '3b77d006', 'firmware_date': '2021-11-29', 'firmware_sha': '3b77d00668d495e9083e6ba865e30318c64b09cb', 'proto_version': '5b7a2e3b', 'proto_date': '2021-10-01', 'system_version': '3.1.0'}
 ```
 
 **Spark service: ValueError(Unexpected message)**
-```
+
+```txt
 aquabrew_1   | 2022-01-02T22:11:05.718312578Z 2022/01/02 22:11:05 ERROR    ...blox_devcon_spark.commander  Error parsing message `180205C1|0000,010080FEFF81C4,[...]` : ValueError(Unexpected message)
 ```
 
 The service only expects responses to requests it has sent.
 Unexpected messages can be one of two things:
+
 - The controller had a hangup longer than the timeout for a previous command.
 - Multiple services are connected to the same controller.
 
@@ -245,7 +258,8 @@ In the first scenario, you'll typically find a command timeout error just above 
 The alternative can be verified by checking the service connection settings in `docker-compose.yml`.
 
 **dmesg: ADDRCONF(NETDEV_CHANGE)**
-```
+
+```txt
 [Sat Jan  1 16:22:55 2022] IPv6: ADDRCONF(NETDEV_CHANGE): veth37a8442: link becomes ready
 [Sat Jan  1 16:22:55 2022] IPv6: ADDRCONF(NETDEV_CHANGE): vetha8cc9b3: link becomes ready
 [Sat Jan  1 16:22:55 2022] br-cbd412a18185: port 1(vetha8cc9b3) entered blocking state
@@ -257,4 +271,3 @@ This is logged on systems with IPv6 support whenever a container starts.
 There is a longstanding bug in Docker where other containers restart whenever one changes its IPv6 interface state.
 
 Excessive amounts of these messages indicates IPv6-related problems.
-

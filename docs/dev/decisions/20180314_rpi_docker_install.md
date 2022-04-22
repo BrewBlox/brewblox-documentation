@@ -15,11 +15,10 @@ If we provide a thin OS with our requirements pre-installed, customers can easil
 
 * Prebuilt image, or simple installation guide.
 * Installation of the following containers on a Docker container inside a Raspberry
-    * RabbitMQ
-    * InfluxDB
-    * traefic
-    * Python3.6
-
+  * RabbitMQ
+  * InfluxDB
+  * traefic
+  * Python3.6
 
 ## Installation
 
@@ -38,12 +37,10 @@ This means we can use the default Raspbian image, along with the default [instal
 * Install Python/Pip `sudo apt install -y python python-pip`
 * Install Docker-compose `sudo pip install docker-compose`
 
-
 [1]: https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
 [2]: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
 
-
 ## References
 
-* https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
-* https://www.raspberrypi.org/documentation/installation/installing-images/README.md
+* <https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/>
+* <https://www.raspberrypi.org/documentation/installation/installing-images/README.md>

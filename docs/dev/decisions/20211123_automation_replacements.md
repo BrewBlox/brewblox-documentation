@@ -46,6 +46,7 @@ Initially, automation was seen as a way to build brewery process control, with s
 In software terms, this can be best expressed as a Finite State Machine (FSM) where actions are applied during state transitions.
 
 A process consisted of multiple steps, and each step consisted of three phases:
+
 - Preconditions
 - Actions
 - Transitions
@@ -105,6 +106,7 @@ A specific feature request for Mash support is the *Setpoint Stepper* block (wor
 This block is an alternative to the *Setpoint Profile*, but with the distinction that it can wait until the target temperature is reached before it moves to the next step.
 
 A basic implementation would look like a list of actions, with every action being either:
+
 - Set setpoint setting
 - Wait until setpoint setting is reached
 - Wait for X seconds/minutes/hours
@@ -114,6 +116,7 @@ This feature is straightforward enough that it is a good fit for implementation 
 ## Replacements: Integration with recipe software
 
 For any recipe integration to be feasible, two preconditions must be met:
+
 - There is an interface at a workable abstraction level (matching the recipe definition) to avoid overly fragile configuration.
 - Predefined configuration must support variables and derived variables to allow for configuration re-use.
 

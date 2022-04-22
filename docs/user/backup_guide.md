@@ -10,7 +10,7 @@ Backups are both made and loaded using the brewblox-ctl commandline tool.
 
 To create a backup, use the `backup save` command.
 
-```
+```sh
 brewblox-ctl backup save
 ```
 
@@ -19,7 +19,7 @@ This will create a new zip archive in the `backup/` directory inside your Brewbl
 To load settings from a backup, use the `backup load [ARCHIVE]` command,
 and run brewblox-ctl update to migrate any outdated settings.
 
-```
+```sh
 brewblox-ctl backup load /home/pi/brewblox/backup/brewblox_backup_20200303_1433.zip
 brewblox-ctl update
 ```
@@ -27,6 +27,7 @@ brewblox-ctl update
 ## Content
 
 The backup archive includes the following:
+
 - .env
 - docker-compose.yml
 - Datastore databases
@@ -37,6 +38,7 @@ The backup archive includes the following:
 - Exported Spark blocks
 
 **NOT** included in the backup archive:
+
 - History data
 - Docker images
 
@@ -54,20 +56,19 @@ Backups make a copy of your settings, not a snapshot of your entire system. Back
 
 After loading an old backup, it is advisable to run `brewblox-ctl update` to migrate your configuration to the latest version.
 
-
 ## Automatically creating backups
 
-You can use [cron](https://www.cyberciti.biz/faq/how-do-i-add-jobs-to-cron-under-linux-or-unix-oses/) to automatically run scripts daily/weekly/hourly.
+You can use [cron](https://ostechnix.com/a-beginners-guide-to-cron-jobs/) to automatically run scripts daily/weekly/hourly.
 
 For example, to create weekly backups:
 
-```
+```sh
 crontab -u $USER -e
 ```
 
 Choose Nano as editor, and append the following line to the file:
 
-```
+```sh
 @weekly (cd $HOME/brewblox; $HOME/.local/bin/brewblox-ctl backup save)
 ```
 

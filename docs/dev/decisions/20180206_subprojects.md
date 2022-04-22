@@ -5,23 +5,25 @@ Date: 2018/02/06
 Current (february 2018) state of affairs is that all relevant code is spread over a set of repositories, contained in various accounts.
 
 It needs a more organized setup, but there are some considerations.
+
 * Functionality is logically spread over multiple loosely coupled parts:
-    * The controller firmware (C++)
-    * The controller <-> service communication layer - multiple variants (Python)
-    * (Future) plugins for external hardware not routed through the controller (Python)
-    * Various service-side functionality such as object / measurement databases (Pythyon)
-    * The Server-Side Events API (Python)
-    * The REST API (Python)
-    * The GUI (HTML/JS using the Vue/Vuex framework)
-    * (Future) Application wrappers around the GUI, making it a mobile or desktop app.
+  * The controller firmware (C++)
+  * The controller <-> service communication layer - multiple variants (Python)
+  * (Future) plugins for external hardware not routed through the controller (Python)
+  * Various service-side functionality such as object / measurement databases (Pythyon)
+  * The Server-Side Events API (Python)
+  * The REST API (Python)
+  * The GUI (HTML/JS using the Vue/Vuex framework)
+  * (Future) Application wrappers around the GUI, making it a mobile or desktop app.
 * The platform should stay open for domains other than brewing. Brewing specific implementations should be avoided where generics are possible.
 * Current naming themes include easily confused terms as "blocks", "blox" and "box".
 * It is very likely that future evolutions and spinoffs of the product will want to mix and match the various software components, while adding their own thing.
 
-The C++ controller firmware can continue as is: it has a well-defined interface and set of responsibilities. 
+The C++ controller firmware can continue as is: it has a well-defined interface and set of responsibilities.
 Likewise for the GUI: it is the most specific component, and can easily be swapped out.
 
 This leaves the service layer, which currently has five separate responsibilities, some of which communicate.
+
 * The backend services (controlbox, legacy, and external) register endpoint handlers with the REST API.
 * The backend services publish events to the shared event bus.
 * The logging database (InfluxDB) registers endpoints with the REST API.
@@ -33,13 +35,12 @@ InfluxDB has no implementation-specific dependencies, and will simply log whatev
 
 The various backend service implementations only share endpoints for service health checks, and OpenAPI specs. These are implemented in the generic `brewblox_service`. Everything else they should implement themselves.
 
-
 ## Splitting up
 
 ```plantuml
 @startuml Microservices
 
-title 
+title
     Microservice architecture
 
     <back:gray>Not yet specified</back>
@@ -79,9 +80,9 @@ EventSourceService "subscribe" --> RabbitMQ
 @enduml
 ```
 
-
 An alternative is to take all components identified above, and split them into micro-services.
 The following components would be separate:
+
 * Each backend
 * The event bus
 * InfluxDB / History service

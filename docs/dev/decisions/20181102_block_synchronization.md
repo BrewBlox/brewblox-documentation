@@ -39,7 +39,7 @@ To keep network communication asynchronous, synchronization is done using the ex
     Service_Master --> "read" Spark_Master
     Service_Slave_1 --> "write" Spark_Slave_1
     Service_Slave_2 --> "write" Spark_Slave_2
-    
+
     Service_Master --> "broadcast" RabbitMQ
     Service_Slave_1 -up-> "subscribe" RabbitMQ
     Service_Slave_2 -up-> "subscribe" RabbitMQ
@@ -57,13 +57,13 @@ This approach decouples services, and allows for easy implementation of a one-to
 The brewblox-devcon-spark service offers two endpoints for block synchronization: `/remote/master`, and `/remote/slave`.
 
 Requirements:
+
 - A Brewblox environment with:
-    - A RabbitMQ eventbus
-    - A Spark service called `spark-master`, connected to a Spark
-    - A Spark service called `spark-slave`, connected to a Spark
+  - A RabbitMQ eventbus
+  - A Spark service called `spark-master`, connected to a Spark
+  - A Spark service called `spark-slave`, connected to a Spark
 - A sensor block on `spark-master` called `master-sensor`
 - A dummy sensor block on `spark-slave` called `dummy-sensor`
-
 
 To get started, first call the `/remote/master` endpoint.
 
@@ -72,15 +72,16 @@ curl \
     -X POST \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
-    -d '{ \ 
-            "id": "master-sensor", \ 
-            "interval": 5 \ 
+    -d '{ \
+            "id": "master-sensor", \
+            "interval": 5 \
         }' \
     'http://localhost:5000/spark-master/remote/master'
 ```
 
-Response: 
-```
+Response:
+
+```json
 {
   "key": "spark-master.master-sensor"
 }
@@ -95,10 +96,10 @@ curl \
     -X POST \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
-    -d '{ \ 
-            "id": "dummy-sensor", \ 
-            "key": "spark-master.master-sensor", \ 
-            "translations": {} \ 
+    -d '{ \
+            "id": "dummy-sensor", \
+            "key": "spark-master.master-sensor", \
+            "translations": {} \
         }' \
     'http://localhost:5000/spark-slave/remote/slave'
 ```
@@ -114,6 +115,7 @@ In situations where the slave block has a different data model than the master, 
 `/` characters indicate nested data. Specified keys are merged into the target data.
 
 Example:
+
 ```python
 # translation table
 "translations": {
@@ -181,7 +183,6 @@ The body of the message should be a JSON string containing object data. Object I
 - IF translation table: The slave service merges the translated keys into the read block.
 - ELSE: The slave service replaces the read data with the incoming message.
 - The slave service writes the block with updated data to the controller.
-
 
 [rabbitmq-tutorial]: https://www.rabbitmq.com/tutorials/tutorial-three-python.html
 [boilerplate-main]: https://github.com/Brewblox/brewblox-boilerplate/blob/develop/YOUR_PACKAGE/__main__.py

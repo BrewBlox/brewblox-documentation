@@ -5,7 +5,7 @@ Date: 2021/07/18
 ## Context
 
 Brewblox uses two databases: one for configuration, and one for time-series history data.
-The configuration database already has seen a [migration from CouchDB to Redis](./20200902_redis_datastore),
+The configuration database already has seen a [migration from CouchDB to Redis](./20200902_redis_datastore.md),
 but Brewblox has only ever used InfluxDB as history database.
 
 In may 2021, InfluxDB [announced](https://www.influxdata.com/blog/influxdb-oss-and-enterprise-roadmap-update-from-influxdays-emea/)
@@ -31,6 +31,7 @@ have a continuous query using wildcard fields and aggegration that
 inserts a new point with the exact same field name as the source values.
 
 For example, given the field `value`, the actual field name in various policies will be:
+
 - `autogen` -> `value`
 - `downsample_1m` -> `m_value`
 - `downsample_10m` -> `m_m_value`
@@ -124,12 +125,14 @@ The thorniest issue is user data migration. It is relatively easy to change dire
 [Victoria Metrics on downsampling support](https://github.com/VictoriaMetrics/VictoriaMetrics#downsampling):
 
 > There is no downsampling support at the moment, but:
+>
 > - VictoriaMetrics is optimized for querying big amounts of raw data. See benchmark results for heavy queries in [this article](https://medium.com/@valyala/measuring-vertical-scalability-for-time-series-databases-in-google-cloud-92550d78d8ae).
 > - VictoriaMetrics has good compression for on-disk data. [See this article](https://medium.com/@valyala/victoriametrics-achieving-better-compression-for-time-series-data-than-gorilla-317bc1f95932) for details.
 >
 > These properties reduce the need of downsampling. We plan to implement downsampling in the future. See [this issue](https://github.com/VictoriaMetrics/VictoriaMetrics/issues/36) for details.
 
 Downsampling in InfluxDB was done for three reasons:
+
 - conserving disk space
 - reducing round-trip time when fetching a large dataset over a long period
 - reducing query output size when querying a large dataset over a long period
@@ -178,6 +181,7 @@ now you'll have the `spark-one/sensor/value` and `spark-one/sensor/offset` field
 ## Backwards compatibility
 
 Backwards compatibility is a concern in four areas:
+
 - On-disk files created by InfluxDB
 - Published history events
 - History service REST API
@@ -187,16 +191,16 @@ The files created by InfluxDB are not compatible with Victoria Metrics,
 and Victoria Metrics does not offer built-in tooling to read and convert them.
 **Existing history data must be exported and imported.**
 
-The [spec](../reference/history_events) for publishing history data is equally convenient for both InfluxDB and Victoria Metrics. <br>
+The [spec](../reference/history_events.md) for publishing history data is equally convenient for both InfluxDB and Victoria Metrics.\
 **No changes are required to the history event spec.**
 
 We consider the history service REST API as semi-private, and the schema used by the Prometheus/Victoria Metrics API is somewhat nicer to work with.
-Converting all query results to the previous format would negatively impact performance, memory footprint, and code readability, for very questionable gain. <br>
+Converting all query results to the previous format would negatively impact performance, memory footprint, and code readability, for very questionable gain.\
 **The new history API endpoints will NOT be backwards compatible.**
 
 Graph/Metric configuration is part of multiple widgets in the UI.
 The conversion rules are also relatively simple: `{ measurement: string; fields: string[]; }[]` must be flattened to `string[]`.
-This is a one-liner conversion if done at point of use. <br>
+This is a one-liner conversion if done at point of use.\
 **UI graph configuration will be unchanged, and converted at point of use.**
 
 ## Data migration

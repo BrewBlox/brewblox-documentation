@@ -11,7 +11,7 @@ There are multiple options. We'll go from least to most drastic.
 
 ![Widget actions](../images/widget-actions.png)
 
-When you click the action menu on a widget, you'll see this menu. 
+When you click the action menu on a widget, you'll see this menu.
 Among other options, you can choose to remove the widget.
 
 ![Removing a widget](../images/removing-widget.png)
@@ -77,7 +77,8 @@ First **remove all blocks** (spark service page, action menu).
 Then run the following commands in the brewblox directory on your Pi:
 
 (Assuming you chose the default install directory name `brewblox/`)
-```
+
+```sh
 brewblox-ctl down
 cd ..
 sudo rm -rf ./brewblox/

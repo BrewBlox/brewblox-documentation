@@ -22,5 +22,9 @@
   },
   "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
   "markdown.extension.preview.autoShowPreviewToSide": false,
-  "markdown.extension.print.absoluteImgPath": false
+  "markdown.extension.print.absoluteImgPath": false,
+  "markdownlint.config": {
+    "MD033": false,
+    "MD036": false
+  }
 }

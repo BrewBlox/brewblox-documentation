@@ -1,7 +1,7 @@
 # From InfluxDB to Victoria Metrics
 
 In august 2021, Brewblox switched its history database from InfluxDB to Victoria Metrics.
-For the reasoning behind this change, see the [decision document](../decisions/20210718_victoria_metrics).
+For the reasoning behind this change, see the [decision document](../decisions/20210718_victoria_metrics.md).
 
 To migrate existing history data, we added the `brewblox-ctl database from-influxdb` command.
 This command creates an InfluxDB Docker container, reads all data, and writes it either to file, or to the new history database.
@@ -22,7 +22,8 @@ To avoid accidental data corruption, we've made sure that:
 ## Output
 
 During the migration, progress is printed to the console
-```
+
+```sh
 INFO       Starting InfluxDB container...
 INFO       Exporting services: spark-one
 INFO       spark-one: exported 5000/18521 lines
@@ -36,7 +37,6 @@ There is one line for every time history data was published.
 
 ## Arguments
 
-
 ### Services
 
 If you only want to migrate data for some of your services, you can list those you want to migrate.
@@ -44,11 +44,13 @@ If you only want to migrate data for some of your services, you can list those y
 If you do not specify any, all services will be migrated.
 
 :::details Examples
+
 ```sh
 brewblox-ctl database from-influxdb
 brewblox-ctl database from-influxdb spark-one
 brewblox-ctl database from-influxdb spark-one spark-two tilt
 ```
+
 :::
 
 ### Duration
@@ -60,11 +62,13 @@ If this argument is not set, the command will prompt you to set a value.
 If you leave it empty, there is no limit, and all history data will be migrated.
 
 :::details Examples
+
 ```sh
 brewblox-ctl database from-influxdb --duration 1h
 brewblox-ctl database from-influxdb --duration 30d
 brewblox-ctl database from-influxdb --duration 1y
 ```
+
 :::
 
 ### Offset
@@ -75,11 +79,13 @@ This option has two values: the service name, and the offset value.
 The offset value matches the number of lines printed during the command.
 
 If this was the last line printed by the migrate command before it was interrupted:
-```
+
+```txt
 INFO       spark-one: exported 10000/18521 lines
 ```
 
 Then you can resume the migration by using
+
 ```sh
 brewblox-ctl database from-influxdb --offset spark-one 10000
 ```
@@ -93,19 +99,23 @@ The `--offset` argument can be used multiple times, and can be combined with exp
 For all examples, we'll assume there are three services in InfluxDB: *spark-one*, *spark-two*, and *tilt*
 
 To resume after the migration stopped halfway through *spark-one*
+
 ```sh
 brewblox-ctl database from-influxdb --offset spark-one 10000
 ```
 
 To resume after *spark-one* was fully migrated, and *spark-two* was in progress:
+
 ```sh
 brewblox-ctl database from-influxdb --offset spark-two 10000 spark-two tilt
 ```
 
 To skip the first 5000 lines for all three services:
+
 ```sh
 brewblox-ctl database from-influxdb --offset spark-one 5000 --offset spark-two 5000 --offset tilt 50000
 ```
+
 :::
 
 ### Target
@@ -125,7 +135,9 @@ and will be in the correct order when sorted alphabetically.
 - `{IDX}` is a 3-digit index (`001`, `002`, ...) incremented by one per batch.
 
 :::details Examples
+
 ```sh
 brewblox-ctl database from-influxdb --target file
 ```
+
 :::

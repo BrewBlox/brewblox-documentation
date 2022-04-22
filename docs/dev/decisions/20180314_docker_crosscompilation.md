@@ -81,9 +81,9 @@ There are some workarounds, but those do not play nice with Docker multi-arch ma
 Our problem will be solved as soon as Docker supports the hypothetical `--arch=arm32v7` when pulling images.
 
 Decisions:
+
 * Build ARM Docker images on a Raspberry Pi until Docker supports cross-architecture pulling.
 * Future task: run a build agent on a Raspberry, shadowing the Travis agent, but on ARM.
-
 
 [1]: https://blog.hypriot.com/post/setup-simple-ci-pipeline-for-arm-images/
 [2]: https://docs.docker.com/registry/spec/manifest-v2-2/#manifest-list
@@ -92,14 +92,3 @@ Decisions:
 [5]: https://hub.docker.com/r/arm32v7/rabbitmq/
 [6]: https://docs.docker.com/engine/reference/commandline/cli/#configuration-files
 [7]: https://github.com/docker/cli/issues/327
-
-
-## References:
-
-* https://blog.hypriot.com/post/setup-simple-ci-pipeline-for-arm-images/
-* https://docs.docker.com/registry/spec/manifest-v2-2/#manifest-list
-* https://hub.docker.com/_/rabbitmq/
-* https://github.com/docker-library/official-images#architectures-other-than-amd64
-* https://hub.docker.com/r/arm32v7/rabbitmq/
-* https://docs.docker.com/engine/reference/commandline/cli/#configuration-files
-* https://github.com/docker/cli/issues/327
