@@ -3,7 +3,7 @@
 ::: tip Note
 Blocks are combined to build [control chains](./control_chains.md) to run on the Brewblox Spark.
 
-In the UI, they can be displayed by widgets on a dashboard. For more information on blocks vs widgets, see the [Blocks in depth guide](./blocks_in_depth.md).
+In the UI, they can be displayed by widgets on a dashboard. For more information on blocks vs widgets, see the [Blocks architecture guide](./blocks_architecture.md).
 
 For a description of widgets, see the [widgets page](./all_widgets.md).
 

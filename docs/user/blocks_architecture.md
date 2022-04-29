@@ -1,4 +1,4 @@
-# Blocks in depth
+# Blocks architecture
 
 :::tip
 This page describes the how and why of blocks throughout the system.

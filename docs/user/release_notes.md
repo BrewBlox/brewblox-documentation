@@ -847,7 +847,7 @@ We're introducing new features, but we're also working towards having a stable a
 
 To make the automation service more flexible, we're introducing scripted actions and conditions. These provide an alternative to the existing UI-based configuration.
 
-Brewblox is gradually becoming more stable, and we decided now is a good time to add public documentation for block data types. <br>
+Brewblox is gradually becoming more stable, and we decided now is a good time to add public documentation for block data types.\
 This will help anyone who wants to listen in on block state events or use their own service, script, or application to read or write blocks.
 
 Recently, we switched from AMQP events to MQTT.
@@ -894,12 +894,12 @@ For example, the `qty(value, unit)` function helps you write conditions where un
 ### Block types
 
 With the introduction of the automation scripting sandbox, users can now access the raw block data.
-To help with that, we're declaring blocks a public interface, and added [reference documentation](https://brewblox.netlify.app/dev/reference/block_types.html). <br>
+To help with that, we're declaring blocks a public interface, and added [reference documentation](https://brewblox.netlify.app/dev/reference/block_types.html).\
 Starting with the next release, we'll use a deprecation period if we have to make any breaking changes to block data types.
 
 ### Eventbus migration
 
-In the 2020/06/15 release, we started to migrate from the AMQP event protocol to MQTT. <br>
+In the 2020/06/15 release, we started to migrate from the AMQP event protocol to MQTT.\
 This release we're making the MQTT-only Mosquitto broker the default image for the `eventbus` service.
 
 We're not aware of any third-party service still relying on AMQP,
@@ -944,15 +944,15 @@ A common issue when running Quick Start wizards was that you'd arrive at the har
 and then had to figure out if your beer sensor was `New|TempSensorOneWire-1` or `New|TempSensorOneWire-2`.
 
 We can't magically decide what the purpose is of a newly discovered sensor,
-but we can help with identification. <br>
+but we can help with identification.\
 Most wizards now start with a discovery step.
 Here you are shown the current status and measured value of available OneWire sensors and chips,
-with prominent "change block name" buttons. <br>
+with prominent "change block name" buttons.\
 Unplug a device, and one of these blocks will suddenly have a *disconnected* status.
 
 Block (widget) wizards were somewhat clunky, so we reworked those,
-and added a *New Block* option to wizardry. <br>
-In the *New Widget* wizard you can create a widget that is based on either a new, or an existing block. <br>
+and added a *New Block* option to wizardry.\
+In the *New Widget* wizard you can create a widget that is based on either a new, or an existing block.\
 In the *New Block* wizard you can create a new block,
 and optionally add a widget for displaying your block on a dashboard.
 

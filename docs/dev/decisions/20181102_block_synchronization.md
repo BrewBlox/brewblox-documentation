@@ -2,19 +2,19 @@
 
 Date: 2018/11/02
 
-Note: this document assumes familiarity with RabbitMQ protocols and syntax. <br>
+Note: this document assumes familiarity with RabbitMQ protocols and syntax.\
 A generic tutorial can be found [here][rabbitmq-tutorial]. An example implementation of the brewblox-service eventbus API is available [here][boilerplate-main].
 
 ## Context
 
-Spark controllers currently have no way of interacting with their peers. <br>
+Spark controllers currently have no way of interacting with their peers.\
 This limits scaling, and is problematic in scenarios where it is physically unfeasible to connect all interdependent hardware to the same spark.
 
 ## Solution
 
 As the service is already responsible for (local) network communication, the logical step is to implement object synchronization here.
 
-In order to support both Spark < - > Spark, and Spark < - > Other Controller communication, the protocol is kept generic. <br>
+In order to support both Spark < - > Spark, and Spark < - > Other Controller communication, the protocol is kept generic.\
 To keep network communication asynchronous, synchronization is done using the existing eventbus.
 
 `Master` blocks periodically broadcast their state on the designated RabbitMQ exchange, using a unique routing key.
@@ -167,7 +167,7 @@ When implementing synchronization between a Spark and a different type of contro
 
 The default value for the RabbitMQ exchange is `syncast`. This value can be configured in the Spark service. This exchange is configured as a topic.
 
-The routing key is arbitrary, but should be unique for synchronization master + slave pairs. <br>
+The routing key is arbitrary, but should be unique for synchronization master + slave pairs.\
 When calling `/remote/master`, a routing key is generated. `/remote/slave` takes a routing key as argument.
 
 ### Data

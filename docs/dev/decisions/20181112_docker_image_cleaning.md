@@ -114,7 +114,7 @@ RUN pip3 install --no-index --find-links=/wheeley brewblox-devcon-spark \
 ENTRYPOINT ["python3", "-m", "brewblox_devcon_spark"]
 ```
 
-In the `brewblox-service` image we do not swap to `python:3.6-slim` after compilation. This allows `brewblox-devcon-spark` to import the `brewblox-service` as compiler image. <br>
+In the `brewblox-service` image we do not swap to `python:3.6-slim` after compilation. This allows `brewblox-devcon-spark` to import the `brewblox-service` as compiler image.\
 `brewblox-devcon-spark` now also has access to the `/wheeley` directory in `brewblox-service`, and can skip compiling all the dependencies it inherited from `brewblox-service`.
 
 ## Conclusion

@@ -70,7 +70,7 @@ More on this below.
 
 The vast majority of desired functionality that is independent from REST endpoints can and should be implemented as part of a Feature.
 
-During the setup phase, you can call the `brewblox_service.features.add(app, MyFeature(app))` function to register your feature as part of the active Application. <br>
+During the setup phase, you can call the `brewblox_service.features.add(app, MyFeature(app))` function to register your feature as part of the active Application.\
 Features added with `features.add()` can later be retrieved with `features.get(app, type, key=None)`.
 By default, features are indexed by class type, as in most use cases you only need one instance of each feature.
 

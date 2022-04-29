@@ -6,7 +6,7 @@ To preview Brewblox, you can use a simulated Spark.
 
 For an explanation of how to combine the various Spark Blocks, see the [Brewblox control chains](./control_chains.md) page.
 
-The default configuration uses a single Spark controller. The [Multiple Devices](./multiple_devices.md) guide describes how to get started using more devices.
+The default configuration uses a single Spark controller. The [services guides](./services/) describe how to get started using more devices.
 
 ::: warning
 The following Raspberry Pi models are **NOT** compatible with Brewblox.
@@ -31,10 +31,11 @@ Always:
 When connecting the BrewPi Spark
 
 - BrewPi Spark
-- (Spark 2 or 3 only) Micro-USB to USB cable
+- (Spark 2 or 3) USB to Micro-USB cable
+- (Spark 4) USB to USB-C cable
 
 ::: tip
-You can also install Brewblox on a Synology NAS, desktop computer, or laptop - as long as it's using Linux.
+[You can replace the SD card with a hard drive, or install Brewblox on a Synology NAS, desktop computer, or laptop - as long as it's using Linux.](./pi_alternatives.md)
 :::
 
 ## Step 1: Format the microSD card
@@ -54,6 +55,7 @@ In the advanced menu you want to define a few settings:
 - **Set hostname:** a hostname is used to easily connect to your Pi on your network. Clear and short names work best. The default hostname is `raspberrypi`.
 - **Enable SSH:** you connect remotely to the terminal of your Pi through SSH. Select *Use password authentication* and set your password.
 - **Configure wifi:** here you configure the network name (SSID) & password of your wifi. Set the wifi country setting to your country to match the wifi channels of your access point.
+- **Set username and password:** it's important to have a custom username and password, even inside your local network.
 - **Set locale settings:** define your time zone and [keyboard layout](https://keyshorts.com/blogs/blog/44712961-how-to-identify-laptop-keyboard-localization).
 
 Hit **SAVE** to exit the menu, and **WRITE** to write the image to your SD card.

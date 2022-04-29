@@ -126,6 +126,8 @@ module.exports = {
         'control_chains',
         'all_widgets',
         'all_blocks',
+        'blocks_architecture',
+        'brewery_builder',
         {
           title: 'Services',
           children: [
@@ -139,10 +141,8 @@ module.exports = {
             'services/automation_sandbox',
           ],
         },
-        'multiple_devices',
-        'builder_guide',
         'backup_guide',
-        'blocks_in_depth',
+        'pi_alternatives',
         'removing_things',
         'wireguard',
         'release_notes',
