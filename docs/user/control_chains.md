@@ -1,4 +1,4 @@
-# Brewblox control chains
+# Control chains
 
 When first installing Brewblox, it can be a bit overwhelming.
 We designed Brewblox to be very flexible and modular to give you a lot of freedom (and responsibility) to adapt it to your brewery.
@@ -39,7 +39,7 @@ In Brewblox, the input of a PID is a *Setpoint*. This block contains the target 
 The *PID* calculates the error, the difference between setpoint setting and sensor value, and keeps a history of to calculates an output value.
 [Wikipedia](https://en.wikipedia.org/wiki/PID_controller) offers a good explanation of how PID controllers work.
 
-The *Digital Actuator* toggles an output pin. It can either use a pin on the Spark itself, or one connected through OneWire (DS2408 or DS2413). <br>
+The *Digital Actuator* toggles an output pin. It can either use a pin on the Spark itself, or one connected through OneWire (DS2408 or DS2413).\
 Digital Actuators can only be turned ON or OFF, but the PID calculation generates a numeric value, like 20 or 56. This is solved with a *PWM* block between the PID and the Digital Actuator.
 
 PWM stands for [Pulse Width Modulation](https://en.wikipedia.org/wiki/Pulse-width_modulation). The PWM block has a configurable time period of for example 4 seconds.
@@ -56,8 +56,7 @@ In the top right corner there is a button that lets you toggle between blocks as
 
 The below example shows blocks on a service after running the Fermentation Fridge quickstart wizard.
 
-Click on any of the nodes to open a dialog with block settings,
-or double click on the background to create a new block.
+Click on any of the nodes to open a dialog with block settings.
 
 ![Service page block diagram](../images/ui-fridge-relations-diagram.png)
 

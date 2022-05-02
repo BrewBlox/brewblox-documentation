@@ -153,7 +153,7 @@ In connecting your element to a 240V split phase outlet you have the same option
 
 ### Three phase outlet
 
-Connecting a 3 resistor element to a three phase outlet requires connecting 5 wires; phases L1, L2, L3, neutral N and protective earth PE. How to connect your element is shown in the figure below, with a photo showing how to configure the metal strips. How to determine the current drawn by the element is described in the example. As discussed in the [Mains](#three-phase) section, always connect your 3-phase heating elements in the star configuration shown here. The 400V AC of the delta configuration will draw too much current and fry your element. When your 3 phase outlet comes without a neutral, it can be omitted as discussed [before](#three-phase).
+Connecting a 3 resistor element to a three phase outlet requires connecting 5 wires; phases L1, L2, L3, neutral N and protective earth PE. How to connect your element is shown in the figure below, with a photo showing how to configure the metal strips. How to determine the current drawn by the element is described in the example. As discussed in the [Mains](#three-phase-mains) section, always connect your 3-phase heating elements in the star configuration shown here. The 400V AC of the delta configuration will draw too much current and fry your element. When your 3 phase outlet comes without a neutral, it can be omitted as discussed [before](#three-phase-mains).
 
 ![3-Phase power](../images/3-phase-connect-3.svg)
 

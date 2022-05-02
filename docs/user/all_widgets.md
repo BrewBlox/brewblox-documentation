@@ -10,13 +10,13 @@ For a description of blocks and their widgets, see the [blocks page](./all_block
 
 The Brewery Builder shows a live view of your system. This includes a simulation of how liquid is flowing through your pipes and kettles, based on actual pump and valve states.
 
-You can create your own layouts, or generate them with a Quick Start Wizard. For more info on how this works, see [the Brewery Builder guide](./builder_guide.md).
+You can create your own layouts, or generate them with a Quick Start Wizard. For more info on how this works, see [the Brewery Builder page](./brewery_builder.md).
 
 ## Graph
 
 ![Graph](../images/widget-graph.png)
 
-The Spark and other [devices](./multiple_devices.md) continuously generate history data. The Graph widget can fetch fields from the history database, and render them as graphs on your dashboard.
+The Spark and other [devices](./services/) continuously generate history data. The Graph widget can fetch fields from the history database, and render them as graphs on your dashboard.
 
 The widget has a live link to the history database, and will automatically re-render if new data is available.
 

@@ -57,7 +57,7 @@ You can always check your connection status with the remote host in the bottom l
 
 ## Brewblox files
 
-Once you are connected, select **File** -> **Open**Folder**** in the top bar.
+Once you are connected, select **File** -> **Open Folder** in the top bar.
 Select the *brewblox* directory, and click **OK**.
 
 ![Open brewblox dir](../images/ssh-open-brewblox.gif)
@@ -65,7 +65,7 @@ Select the *brewblox* directory, and click **OK**.
 ## Terminal commands
 
 The Visual Studio Code editor includes a built-in terminal.
-When connected to a remote, terminal commands will also be run on the remote. <br>
+When connected to a remote, terminal commands will also be run on the remote.\
 This means you can use this terminal to run `brewblox-ctl` commands.
 
 To toggle it, press **ctrl + `**

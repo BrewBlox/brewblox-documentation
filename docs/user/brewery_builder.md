@@ -1,4 +1,4 @@
-# Brewery Builder guide
+# Brewery Builder
 
 ![Builder](../images/herms-builder-widget.gif)
 

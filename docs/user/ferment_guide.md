@@ -73,7 +73,7 @@ Click on the values in your layout to edit block settings, or get more informati
 
 ::: tip
 There's a lot more you can do with the builder.
-See the [Brewery Builder guide](./builder_guide.md) for more details.
+See the [Brewery Builder page](./brewery_builder.md) for more details.
 :::
 
 ## Blocks

@@ -97,7 +97,7 @@ if __name__ == '__main__':
 
 ## Conclusion
 
-We now have our own cross-compile-ready base images - and the possibility to create more. <br>
+We now have our own cross-compile-ready base images - and the possibility to create more.\
 The Resin images we used previously worked, but added (for us) unneccessary extra packages. There also was no Python 3.7 image available.
 
 After creating our images we could upgrade all our services to Python 3.7. While not absolutely critical, it is still nice to use the latest and greatest version.

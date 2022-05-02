@@ -306,7 +306,7 @@ This means we need to configure both the server and the client to accept each ot
 
 On the client, generate your public key and private key, and copy the public key.
 
-Earlier, set the **server address** to `10.0.0.1/32` (in /etc/wireguard/wg0.conf). <br>
+Earlier, set the **server address** to `10.0.0.1/32` (in /etc/wireguard/wg0.conf).\
 Set the **client address** to `10.0.0.2/32`.
 If you add more clients, increment their client address (`10.0.0.3/32`, `10.0.0.4/32`, etc).
 
