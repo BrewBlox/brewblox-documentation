@@ -66,8 +66,11 @@ Brewblox is especially impactful, as it writes history data to disk every few se
 
 The expected lifespan of a 32GB card in an active Brewblox setup is somewhere between 1 and 2 years. After that it will slow down and then fail.
 
-For the Raspberry Pi 4 and up, this problem can be avoided by using a SSD or HDD instead, connected using a M.2 or SATA to USB 3.0 adapter.
-In our tests, this markedly increased performance.
+Writes are equally spread out among disk sectors. Larger cards will consequently take longer to degrade.
+We personally consider 64GB or 128GB to be a good balance between longevity and cost.
+
+For the Raspberry Pi 4 and up, the problem can be avoided entirely by using a SSD or HDD instead, connected using a M.2 or SATA to USB 3.0 adapter.
+In our tests, this also markedly increased performance.
 
 For instructions, see [this guide](https://www.tomshardware.com/how-to/boot-raspberry-pi-4-usb).
 
