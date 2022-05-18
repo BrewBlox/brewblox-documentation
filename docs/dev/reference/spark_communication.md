@@ -127,7 +127,7 @@ The fields are:
 
 ## Commands
 
-:::info
+:::tip
 All protobuf message definitions referenced below can be found in the <https://github.com/BrewBlox/brewblox-proto> repository.
 :::
 
