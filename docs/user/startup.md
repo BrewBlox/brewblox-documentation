@@ -126,7 +126,7 @@ After the installation is done, the Pi will restart again. Reconnect the SSH cli
 
 By default, `~/brewblox` is used as install directory.
 
-## Interlude: Navigating Linux directories
+## While you wait: Command line basics
 
 For the next steps, a basic understanding of Linux commands makes things easier.
 We'll stick to the basics, and assume the default settings on a Raspberry Pi.
@@ -191,13 +191,7 @@ If you'd like some more explanation, this [guide to linux commands](https://www.
 
 ## Step 4: Spark setup
 
-::: tip
-If you want to try out Brewblox, you can use the Spark simulation instead.
-
-Skip this step, and follow the instructions [here](./services/spark_sim.md).
-:::
-
-### Spark 2 or 3 - Flash the firmware
+::: details <span style="font-size: 150%; font-weight: bold">Spark 2 and 3</span>
 
 For this step, your Spark should be connected to your Raspberry Pi over USB.
 
@@ -211,15 +205,23 @@ Follow the instructions until the menu exits.
 
 If you are upgrading an older Spark, you may need to flash the bootloader.
 
-**Only if you have a Spark 2 or 3, and the LED is blinking blue after the firmware is flashed**, run:
+**Only if the LED is blinking blue after the firmware is flashed**, run:
 
 ```bash
 brewblox-ctl particle -c flash-bootloader
 ```
 
-For now, keep the USB cable connected. You can configure Wifi in the UI during [Step 7](#step-6-use-the-system).
+For now, keep the USB cable connected. You can configure Wifi in the UI during [Step 6](#step-6-use-the-system).
 
-### Spark 4 - Network setup
+To add a Spark service, run:
+
+```bash
+brewblox-ctl add-spark
+```
+
+:::
+
+::: details <span style="font-size: 150%; font-weight: bold">Spark 4</span>
 
 To use the Spark 4, it needs to be connected to your network. Ethernet and Wifi are both supported.
 
@@ -243,6 +245,31 @@ To set Wifi credentials:
 
 The app will now set Wifi credentials for your Spark. An additional IP
 address will be shown in the top left corner of the Spark display.
+
+To add a Spark service, run:
+
+```bash
+brewblox-ctl add-spark
+```
+
+:::
+
+::: details <span style="font-size: 150%; font-weight: bold">Spark simulator</span>
+
+The Spark service comes with a built-in simulator.
+This simulator won't control physical actuators or use OneWire sensors, but also doesn't need a Spark controller to function.
+
+The Spark simulator is built into the Spark service.
+
+To add a Spark simulator service, run:
+
+```bash
+brewblox-ctl add-spark --simulation
+```
+
+For more information on the simulator, and on how to later convert it to a service for a real controller, see [the spark sim page](./services/spark_sim.md);
+
+:::
 
 ## Step 5: Start the system
 
