@@ -126,7 +126,7 @@ After the installation is done, the Pi will restart again. Reconnect the SSH cli
 
 By default, `~/brewblox` is used as install directory.
 
-## Interlude: Navigating Linux directories
+## While you wait: Command line basics
 
 For the next steps, a basic understanding of Linux commands makes things easier.
 We'll stick to the basics, and assume the default settings on a Raspberry Pi.
