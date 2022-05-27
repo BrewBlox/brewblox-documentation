@@ -116,6 +116,7 @@ module.exports = {
             'decisions/20180206_data_stories',
             'decisions/20180206_block_stories',
             'decisions/20180206_component_definitions',
+            'decisions/20220527_sequence_block',
           ],
         },
       ],
