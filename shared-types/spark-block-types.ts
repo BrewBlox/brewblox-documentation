@@ -2,10 +2,10 @@ import type {
   AnalogCompareOp,
   BlockOrIntfType,
   BlockType,
+  DS2408ConnectMode,
   DigitalCompareOp,
   DigitalState,
   DisplayTempUnit,
-  DS2408ConnectMode,
   FilterChoice,
   GpioDeviceType,
   GpioModuleStatus,
@@ -13,6 +13,8 @@ import type {
   LogicResult,
   ReferenceKind,
   SensorCombiFunc,
+  SequenceError,
+  SequenceStatus,
   Spark2Hardware,
   SparkPlatform,
   TouchCalibrated,
@@ -26,7 +28,6 @@ export interface Block {
   id: string;
   nid?: number;
   serviceId: string;
-  groups: number[];
   type: BlockType;
   data: any;
   meta?: { [k: string]: any };
@@ -336,15 +337,6 @@ export interface InactiveObjectBlock extends Block {
 }
 // #endregion InactiveObject
 
-// #region Groups
-export interface GroupsBlock extends Block {
-  type: 'Groups';
-  data: {
-    active: number[];
-  };
-}
-// #endregion Groups
-
 // #region MockPins
 export interface MockPinsBlock extends Block {
   type: 'MockPins';
@@ -464,6 +456,23 @@ export interface PidBlock extends Block {
   };
 }
 // #endregion Pid
+
+// #region Sequence
+export interface SequenceBlock extends Block {
+  type: 'Sequence';
+  data: {
+    enabled: boolean;
+    overrideState: boolean;
+    activeInstruction: number;
+    activeInstructionStartedAt: number; // seconds since 1970/1/1
+    disabledAt: number; // seconds since 1970/1/1
+    disabledDuration: number; // seconds
+    status: SequenceStatus;
+    error: SequenceError;
+    instructions: string[];
+  };
+}
+// #endregion Sequence
 
 // #region SetpointProfile
 export interface Setpoint {

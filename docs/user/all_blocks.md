@@ -462,17 +462,38 @@ At this point, the expression has been simplified from `(a|b)&(A|B)` to `true & 
 
 ### Combining logic with constraints
 
-When you use the logic actuator to drive a fan, it will set the desired state of the Digital Actuator of the fan. You use an expression like `a|b`, to check that the heater or cooler is turned on.
+When you use the Logic Actuator to drive a fan, it will set the desired state of the Digital Actuator of the fan. You use an expression like `a|b`, to check that the heater or cooler is turned on.
 
 Next you can set a `Delayed ON` and a `Delayed OFF` constraint on that fan actuator. This would cause the fan to start a while after the heater/cooler has turned ON and run for a while after it has turned off.
+
+## Sequence
+
+Where the Logic Actuator has a singular condition, and will always toggle a Digital Actuator,
+the Sequence block executes a list of instructions.
+Some of these instructions set block settings, and others wait for conditions to be satisfied.
+
+With these instructions, you can automate common tasks on the controller, and create triggers that keep watch in the background.
+
+For example, the Sequence block can be used to:
+
+- Group block changes:
+  - Toggle between pre-defined flow routes by opening or closing multiple valves.
+  - Enable or disable the entire system.
+  - Open or close a valve whenever you start or stop a pump.
+  - Reset and start a Setpoint Profile start time.
+- Chain behavior:
+  - Set a temperature, wait for your mash to reach target temperature, and then start a Setpoint Profile.
+  - Turn on a fan, let it run for half an hour, then turn it off again.
+- Trigger actions:
+  - Show a warning light or sound an alarm when your beer temperature is outside the expected range.
+  - Run a defrost cycle once per day.
+
+The [Sequence instructions page](../dev/reference/sequence_instructions.md) describes the syntax and available instructions.
 
 ## Display Settings
 
 The Spark controller has a LCD screen that can show up to six blocks.
 Sensors, setpoints, PWMs, and PIDs can be shown on the display.
 
-You can use the *Display Settings* block to add blocks to the screen and edit how they are displayed.
+You can use the Display Settings block to add blocks to the screen and edit how they are displayed.
 Eligible blocks also have an *Add to Spark display* action in their action menu (top right button in the widget).
-
-The *Display Settings* block has its own temperature unit setting, separate from the service unit setting.
-This only sets the display unit on the Spark. If you wish to configure your system to use Fahrenheit, you will need to edit both settings.

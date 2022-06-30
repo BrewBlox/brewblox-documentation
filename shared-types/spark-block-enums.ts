@@ -7,6 +7,7 @@ import { Enum } from 'typescript-string-enums';
 //   export type MyEnum = Enum<typeof MyEnum>;
 //
 
+// #region BlockIntfType
 export const BlockIntfType = Enum(
   'ProcessValueInterface',
   'TempSensorInterface',
@@ -20,11 +21,13 @@ export const BlockIntfType = Enum(
   'IoModuleInterface',
   'IoArrayInterface',
   'DS2408Interface',
+  'EnablerInterface',
 );
+// #endregion BlockIntfType
 
+// #region BlockType
 export const SystemBlockType = Enum(
   'DisplaySettings',
-  'Groups',
   'OneWireBus',
   'SysInfo',
   'Ticks',
@@ -50,6 +53,7 @@ export const UserBlockType = Enum(
   'MotorValve',
   'Mutex',
   'Pid',
+  'Sequence',
   'SetpointProfile',
   'SetpointSensorPair',
   'TempSensorCombi',
@@ -61,11 +65,61 @@ export const BlockType = Enum(
   ...Enum.values(SystemBlockType),
   ...Enum.values(UserBlockType),
 );
+// #endregion BlockType
 
 export const BlockOrIntfType = Enum(
   ...Enum.values(BlockType),
   ...Enum.values(BlockIntfType),
 );
+
+// #region COMPATIBLE_TYPES
+export const COMPATIBLE_TYPES: Record<BlockIntfType, BlockType[]> = {
+  ProcessValueInterface: [
+    BlockType.ActuatorAnalogMock,
+    BlockType.ActuatorPwm,
+    BlockType.SetpointSensorPair,
+  ],
+  TempSensorInterface: [
+    BlockType.TempSensorCombi,
+    BlockType.TempSensorMock,
+    BlockType.TempSensorOneWire,
+  ],
+  SetpointSensorPairInterface: [BlockType.SetpointSensorPair],
+  ActuatorAnalogInterface: [
+    BlockType.ActuatorAnalogMock,
+    BlockType.ActuatorOffset,
+    BlockType.ActuatorPwm,
+  ],
+  ActuatorDigitalInterface: [BlockType.DigitalActuator, BlockType.MotorValve],
+  BalancerInterface: [BlockType.Balancer],
+  MutexInterface: [BlockType.Mutex],
+  OneWireBusInterface: [BlockType.OneWireGpioModule],
+  OneWireDeviceInterface: [
+    BlockType.TempSensorOneWire,
+    BlockType.DS2408,
+    BlockType.DS2413,
+  ],
+  IoModuleInterface: [],
+  IoArrayInterface: [
+    BlockType.DS2408,
+    BlockType.DS2413,
+    BlockType.Spark2Pins,
+    BlockType.Spark3Pins,
+    BlockType.OneWireGpioModule,
+    BlockType.MockPins,
+  ],
+  DS2408Interface: [BlockType.DS2408],
+  EnablerInterface: [
+    BlockType.ActuatorOffset,
+    BlockType.ActuatorLogic,
+    BlockType.Pid,
+    BlockType.Sequence,
+    BlockType.ActuatorPwm,
+    BlockType.SetpointSensorPair,
+    BlockType.SetpointProfile,
+  ],
+};
+// #endregion COMPATIBLE_TYPES
 
 export const DigitalConstraintKey = Enum(
   'mutexed',
@@ -218,6 +272,30 @@ export const SensorCombiFunc = Enum(
 );
 // #endregion SensorCombiFunc
 
+// #region SequenceStatus
+export const SequenceStatus = Enum(
+  'UNKNOWN',
+  'DISABLED',
+  'PAUSED',
+  'NEXT',
+  'WAITING',
+  'END',
+  'RESTART',
+  'ERROR',
+);
+// #endregion SequenceStatus
+
+// #region SequenceError
+export const SequenceError = Enum(
+  'NONE',
+  'INVALID_ARGUMENT',
+  'INVALID_TARGET',
+  'INACTIVE_TARGET',
+  'DISABLED_TARGET',
+  'SYSTEM_TIME_NOT_AVAILABLE',
+);
+// #endregion SequenceError
+
 // #region Spark2Hardware
 export const Spark2Hardware = Enum('HW_UNKNOWN', 'HW_SPARK1', 'HW_SPARK2');
 // #endregion Spark2Hardware
@@ -279,6 +357,8 @@ export type DS2408ConnectMode = Enum<typeof DS2408ConnectMode>;
 export type ValveState = Enum<typeof ValveState>;
 export type FilterChoice = Enum<typeof FilterChoice>;
 export type SensorCombiFunc = Enum<typeof SensorCombiFunc>;
+export type SequenceStatus = Enum<typeof SequenceStatus>;
+export type SequenceError = Enum<typeof SequenceError>;
 export type Spark2Hardware = Enum<typeof Spark2Hardware>;
 export type SparkPlatform = Enum<typeof SparkPlatform>;
 export type TouchCalibrated = Enum<typeof TouchCalibrated>;

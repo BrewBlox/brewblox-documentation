@@ -15,6 +15,14 @@ The shared fields are defined here, and each block type extends this interface w
 
 <<< @/shared-types/spark-block-types.ts#Block
 
+## Block interfaces
+
+Blocks may implement one or more interface types.
+Links within blocks can declare an interface type instead of a block type.
+All blocks that implement said interface are valid targets for the link.
+
+<<< @/shared-types/spark-block-enums.ts#COMPATIBLE_TYPES
+
 ## BloxField (typed objects)
 
 Some block fields require metadata to be interpreted.
@@ -337,6 +345,24 @@ For a more in-depth explanation of how to use it, see the [blocks guide](../../u
 Referenced enum values:
 
 <<< @/shared-types/spark-block-enums.ts#FilterChoice
+
+## Sequence
+
+*Sequence* implements bare-bones automation behavior, by running a sequential set of instructions.
+Instructions either set a value, or wait for a condition to be true.
+Combined, they can be used to to augment the *SetpointProfile* block or implement if-this-then-that functionality.
+
+Active state (`activeInstruction`, `activeInstructionStartedAt`, `disabledAt`, `disabledDuration`) are readonly unless `overrideState` is set to `true` in a write or patch command.
+
+Client-side, sequence instructions are edited using a line protocol.
+For syntax, and available instructions, see the [sequence instructions page](./sequence_instructions.md).
+
+<<< @/shared-types/spark-block-types.ts#Sequence
+
+Referenced enum values:
+
+<<< @/shared-types/spark-block-enums.ts#SequenceStatus
+<<< @/shared-types/spark-block-enums.ts#SequenceError
 
 ## SetpointProfile
 
