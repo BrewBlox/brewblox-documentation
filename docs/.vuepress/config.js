@@ -67,6 +67,7 @@ module.exports = {
             'reference/block_types',
             'reference/datastore',
             'reference/spark_communication',
+            'reference/sequence_instructions',
           ],
         },
         {
