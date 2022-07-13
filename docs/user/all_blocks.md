@@ -33,6 +33,12 @@ You can use it to play with the system, to see how it will respond.
 Sensor values can be aggregated using this block.
 You can set multiple sensors as input, and choose whether to set output to the average, min, or max value of the linked sensors.
 
+### Temp Sensor (External)
+
+Not all temperature sensors can be connected directly to the Spark.
+This block lets you set sensor values explicitly, with the added fail-safe protection of a timeout.
+If the timeout period is exceeded between value updates, the sensor becomes invalid.
+
 ## Setpoints
 
 A Setpoint holds the target value for a specific sensor. It used as input for a PID.
