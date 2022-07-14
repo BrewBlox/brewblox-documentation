@@ -459,6 +459,18 @@ Referenced enum values:
 
 <<< @/shared-types/spark-block-enums.ts#SensorCombiFunc
 
+## TempSensorExternal
+
+A manually set sensor block, with added safety for unreliable sources.
+The `enabled` and `timeout` fields are persistent,
+but `setting` must be written regularly for the sensor to remain valid.
+
+`value` will become invalid if `enabled` is false, or more than `timeout` has elapsed since the last time `setting` was written.
+
+This timeout behavior can be disabled by setting the `timeout` field to 0.
+
+<<< @/shared-types/spark-block-types.ts#TempSensorExternal
+
 ## TempSensorMock
 
 Can be used interchangeably with the *TempSensorOneWire* block,
