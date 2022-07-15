@@ -247,12 +247,6 @@ Channel mapping:
 
 <<< @/shared-types/spark-block-types.ts#InactiveObject
 
-## Groups
-
-**Deprecated, system object**
-
-<<< @/shared-types/spark-block-types.ts#Groups
-
 ## MockPins
 
 *MockPins* provides dummy *IoChannel* objects for digital actuators.
