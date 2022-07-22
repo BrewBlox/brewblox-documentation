@@ -64,6 +64,14 @@ sudo systemctl disable dphys-swapfile.service
 sudo reboot
 ```
 
+Another common problem is IPv6.
+To disable IPv6 on your Pi, run:
+
+```sh
+echo 'net.ipv6.conf.all.disable_ipv6 = 1' | sudo tee /etc/sysctl.d/90-disable-ipv6.conf
+sudo sysctl -p /etc/sysctl.d/90-disable-ipv6.conf
+```
+
 ### My Pi suddenly reboots
 
 This is often caused by underpowered chargers, especially if the Pi reboots while pulling or starting Docker images.
