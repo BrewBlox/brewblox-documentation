@@ -43,6 +43,18 @@ This can be a block type (*Pid*), but also a block interface type (*TempSensorIn
 
 <<< @/shared-types/spark-block-types.ts#BloxField
 
+## DateString (datetime handling)
+
+Datetime fields are serialized to JSON using the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+
+JSON-wise, this is just a string. For block data types,
+we added the `DateString` alias to make it obvious that a given field will always contain an ISO 8601 formatted date.
+
+When writing block data, dates with non-UTC timezones can be used,
+but the controller will always return dates with UTC timezones.
+
+<<< @/shared-types/spark-block-types.ts#DateString
+
 ## IoChannel
 
 An IoChannel is the software representation of a group of IO pins.
