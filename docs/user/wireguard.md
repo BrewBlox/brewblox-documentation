@@ -26,7 +26,7 @@ Synology users can follow [this guide](https://github.com/runfalk/synology-wireg
 
 A VPN creates a secure tunnel between a client (your phone) and the server (your Pi).
 Where before you needed to send authentication for every request, you now only need to do so once: when creating the tunnel.
-All data to and from the server goes through this tunnel, and can't read or edited by others.
+All data to and from the server goes through this tunnel, and can't be read or edited by others.
 
 This tunnel can be used both for the Brewblox UI, and SSH terminals.
 
@@ -306,7 +306,7 @@ This means we need to configure both the server and the client to accept each ot
 
 On the client, generate your public key and private key, and copy the public key.
 
-Earlier, set the **server address** to `10.0.0.1/32` (in /etc/wireguard/wg0.conf).\
+Earlier, we set the **server address** to `10.0.0.1/32` (in /etc/wireguard/wg0.conf).\
 Set the **client address** to `10.0.0.2/32`.
 If you add more clients, increment their client address (`10.0.0.3/32`, `10.0.0.4/32`, etc).
 
