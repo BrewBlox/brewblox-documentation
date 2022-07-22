@@ -23,6 +23,7 @@
   "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
   "markdown.extension.preview.autoShowPreviewToSide": false,
   "markdown.extension.print.absoluteImgPath": false,
+  "markdown.experimental.validate.enabled": true,
   "markdownlint.config": {
     "MD033": false,
     "MD036": false

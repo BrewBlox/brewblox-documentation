@@ -104,12 +104,12 @@ To forcibly remove them, run:
 brewblox-ctl kill --zombies
 ```
 
-### My Pi is no longer accessible as [HOSTNAME].local
+### My Pi is no longer accessible as {HOSTNAME}.local
 
-The Pi itself publishes the `[HOSTNAME].local` DNS record.
+The Pi itself publishes the `{HOSTNAME}.local` DNS record.
 Sometimes the DNS record is still active when the name service start.
 
-To reset, access the Pi by using the IP address or `[HOSTNAME]-2.local` (eg. *raspberrypi-2.local*),
+To reset, access the Pi by using the IP address or `{HOSTNAME}-2.local` (eg. *raspberrypi-2.local*),
 and restart the name service by running:
 
 ```sh
