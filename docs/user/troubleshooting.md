@@ -155,7 +155,8 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 The `xxxx:xxxx` section after `ID` is the relevant bit. This is the VID:PID (Vendor ID, Product ID) of each device.
 
 The VID:PID for a Spark 2 is `2b04:c006`.\
-The VID:PID for a Spark 3 is `2b04:c008`.
+The VID:PID for a Spark 3 is `2b04:c008`.\
+The VID:PID for a Spark 4 is `10c4:ea60`.
 
 In the example, Bus 001 Device 005 is a Spark 3.
 
