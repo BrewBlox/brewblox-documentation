@@ -2190,6 +2190,12 @@ braces@^3.0.2, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
+"brewblox-proto@https://github.com/brewblox/brewblox-proto#7b77fbf1":
+  version "1.0.0"
+  resolved "https://github.com/brewblox/brewblox-proto#7b77fbf1e7526984672f8232d8c3e9fce5956c8c"
+  dependencies:
+    typescript-string-enums "^1.0.0"
+
 brorand@^1.0.1, brorand@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
