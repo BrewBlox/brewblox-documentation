@@ -50,6 +50,25 @@ Private keys are always kept secret, but public keys will be exchanged: we give 
 
 You can find a more in-depth explanation [here](https://ssd.eff.org/en/module/deep-dive-end-end-encryption-how-do-public-key-encryption-systems-work).
 
+## Alternative: WG-Easy
+
+We can install Wireguard on the Pi itself, or run it in a Docker container, using [WG-Easy](https://github.com/WeeJeWel/wg-easy).
+There are pros and cons to this approach.
+
+Pro:
+
+- Easy to install.
+- Easy to remove: stop the container, and it's gone.
+- No manual editing of configuration files.
+- GUI based configuration for new clients.
+
+Con:
+
+- More system overhead.
+- Less reliable: it depends on Docker to work.
+- Less suitable for remote system management: if you stop the container, you close the tunnel.
+- The container must be run separately from Brewblox, otherwise you can't run `brewblox-ctl update`.
+
 ## Server installation
 
 We need to install the software, create the public and private encryption keys,
@@ -211,6 +230,7 @@ sudo reboot
 
 Wireguard is now installed, but is not yet accessible from the internet.
 For that to happen, we need the router to forward incoming traffic on **port 51820/udp** to the server (the Pi).
+For this step, it doesn't matter whether you installed Wireguard on the host, or using WG-Easy.
 
 The configuration UI to do this is different for each brand and make of router, so we can't write a one-size-fits-all guide.
 You may need to google "port forwarding [ROUTER BRAND NAME]".
@@ -293,6 +313,9 @@ All of these should show port 51820 as "open|filtered".
 
 For us to actually use the VPN, we also need a client.
 Wireguard is [available for Windows, Mac, Android, iOS, and many other systems](https://www.wireguard.com/install/).
+
+For WG-Easy, you can use its web UI to generate a client configuration file.
+If you installed Wireguard on the host, follow the instructions below to manually edit configuration files.
 
 The UI for the various clients will be different, but the basics remain the same:
 
