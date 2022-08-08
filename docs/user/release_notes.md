@@ -8,6 +8,146 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2022/08/??
+
+**firmware release date: 2022-08-??**
+
+**IMPORTANT: This update must be flashed over USB for all controllers**
+
+### Firmware nuts and bolts
+
+Firmware development was becoming a bottleneck for new features.
+To resolve this, Bob picked up firmware work in addition to UI and services,
+and we have thoroughly re-organized and cleaned up the firmware code repository.
+
+Many of the implemented changes are under the hood, but they made it possible to introduce new blocks and more efficient API calls.
+The *Sequence* block implements much-improved support for mashing schedules and pre-defined recipes.
+The *Temp Sensor (External)* block helps with value synchronization. It's now much easier to use a Tilt sensor as Spark input.
+
+With the new soft start settings, the firmware now reduces inrush current peaks when using pumps.
+This change required significant changes to how sub-second PWM is handled,
+and we created the new *Fast PWM* block to handle 50-2000 Hz periods.
+
+For those interacting with the Spark service block API directly, we have introduced the concept of firmware `patch` calls.
+When making a patch call, all fields not explicitly present in argument data will be left unchanged.
+
+### Sequence block
+
+With the [abandonment of the Automation Service](https://brewblox.com/user/services/automation.html)
+we identified [desired features that we'd want to implement in some other way](https://brewblox.com/dev/decisions/20211123_automation_replacements.html).
+Primary among this was firmware support for mash steps.
+
+The most basic implementation would look like:
+
+- Set setpoint setting
+- Wait until setpoint setting is reached
+- Wait for X seconds/minutes/hours
+
+With the new *Sequence* block, we've added this, and more.
+You can use this block to define instructions that are executed in sequence.
+Instructions can **set** block settings, **wait** for conditions to be met, or **start** other profiles or sequences.
+
+For a complete overview of available instructions, see [the reference page](https://brewblox.com/dev/reference/sequence_instructions.html).
+
+### Fast PWM block
+
+Previously, if a `period` value of < 1s was set in the *PWM* block, it would automatically jump to the 200Hz fast PWM implementation.
+With the implementation of new fast PWM settings, this approach became too unwieldy.
+
+PWM with periods of >1s are still handled by the existing *PWM* block,
+but all <1s PWM is now done by the new *Fast PWM* block.
+
+The *Fast PWM* block directly targets an IO channel (Spark 2 Pins, Spark 3 Pins, OneWire GPIO Module).
+Period values of 50-2000Hz are available depending on the target channel type.
+
+### Soft start inrush protection
+
+Digital actuators can now be configured to soft start. When switching on, they will briefly use fast PWM to ramp up from 0 to 1.
+This prevents inrush current peaks that can trigger the overcurrent protection mechanism in the OneWire GPIO module.
+
+### Temp Sensor (External) block
+
+To improve support for third-party temperature sensors such as the Tilt,
+we added a block that makes it easy and safe to work with external values that are written through the block API.
+
+Simply put: it is a manually updated temperature sensor with a timeout.
+If the external source of temperature values stops sending updates, the sensor will become invalid.
+
+Example temperature update:
+
+```sh
+curl -sSk \
+  -X POST \
+  -H 'content-type: application/json' \
+  -d '{
+    "id": "tilt-sensor",
+    "type": "TempSensorExternal",
+    "data": { "setting[degC]": 25.6 }
+  }' \
+  https://brewblox-pi/spark-one/blocks/patch
+```
+
+### UI sidebar folders
+
+The UI sidebar now shows a collapsible tree structure with links to available pages (dashboards, builder layouts, and services).
+New folders can be added to the tree, and folders can contain any desired combination of folders and pages.
+This way, pages can be grouped by logical relation (eg. the dashboards and builder layouts for Fermentation Tank 2).
+
+By default, all pages are placed in the default *Dashboards*, *Layouts*, and *Services* folders.
+If the folder containing a page is removed, the page is moved back to the default folder.
+
+To prevent unintuitive behavior, previously defined custom ordering of sidebar items is ignored,
+and all folders and pages are sorted alphabetically.
+
+**Changes:**
+
+- (docs) Added documentation for installing a Tilt service on a Pi zero W.
+- (fix) Fixed various broken links in documentation.
+- (docs) Updated reference documentation for Spark communication protocol.
+- (docs) Added documentation for alternative hardware options for the service host.
+- (docs) Added reference documentation for *Sequence* instructions.
+- (api) Updated the published Spark state to be more explicit about connection status.
+- (docs) Referenced WG-Easy as an alternative approach to installing Wireguard for remote access.
+- (fix) Fixed Spark 4 Over The Air (OTA) updates.
+- (feature) Added *Sequence* block.
+- (feature) Added *Temp Sensor (External)* block.
+- (feature) Added firmware-side implementation for block updates with partial data (patching).
+- (feature) Firmware dates are now expressed as ISO-8601 date string.
+- (fix) The UI no longer incorrectly shows the firmware update prompt when the controller repeatedly reconnects.
+- (fix) The Spark 4 no longer sometimes goes into Wifi provisioning mode on startup.
+- (feature) The minimum downsampling step size is now configurable for history services using `--minimum-step`.
+- (improve) History graphs now update every 10s (down from 30s).
+- (fix) Confirmed values in the *Quick Actions* widget are now applied and updated correctly.
+- (fix) SSR (+ only) modes in the GPIO editor no longer revert to standard SSR when the editor is re-opened.
+- (improve) An error message is shown in the UI if the `history` service is not reachable.
+- (feature) Added the Metrics part to the Builder.
+- (improve) Long-running Graphs automatically reload when the number of live points exceeds the maximum.
+- (fix) The Spark relations page now always correctly re-renders when switching between services.
+- (fix) Resolved an error when clearing all blocks on a Spark service.
+- (improve) Improved the *Troubleshooter* widget for Spark services.
+- (feature) Added an option in *Admin Page* -> *General Settings* to always use 12H or 24H time formatting.
+- (fix) Fixed the "Disable all setpoints" Quick Action generated by the HERMS Quickstart wizard.
+- (fix) The *SysInfo* widget now correctly shows the IP address for Spark 4 controllers.
+- (feature) Dashboards, Layouts, and Services in the sidebar can now be moved to folders.
+- (feature) Dashboards, Layouts, and Services in the sidebar are now shown in a tree view with collapsable groups.
+- (improve) To prevent confusion, the default snapshot archive name has been changed from `brewblox.tar.gz` to `brewblox-snapshot.tar.gz`.
+- (fix) Brewblox configuration dirs are now created if they do not exist, and will not cause startup errors.
+- (improve) The `spark-one` service is no longer present by default when Brewblox is installed.
+- (improve) Timezone is now mounted in Docker containers where possible.
+- (feature) Added the `BREWBLOX_UPDATE_SYSTEM_PACKAGES` flag to brewblox/.env. If `false`, updates will always skip apt updates.
+- (dev) Vastly simplified the dev env setup for firmware development.
+- (dev) Lots and cleanup and re-organization of the firmware repository.
+- (feature) On the Spark 4, hold the OK button for 5 seconds to start Wifi provisioning.
+- (feature) On the Spark 4, hold the OK button for 10 seconds to clear all Wifi credentials.
+- (fix) Spark 4 OTA updates no longer use a placeholder signing key.
+- (fix) The Spark 4 is now better able to switch between ethernet, Wifi, and Wifi provisioning.
+- (feature) Built-up PID values such as I are now retained during controller software crashes or reboots.
+- (feature) The Spark 2 and 3 now automatically fetch system time from internet NTP time servers.
+- (api) Generic system settings were moved from the *Ticks* and *DisplaySettings* blocks to *SysInfo*.
+- (api) Removed the *Ticks* system block.
+- TODO: exact changes for soft start / fast PWM
+- TODO: exact changes for claiming behavior
+
 ## Brewblox release 2022/01/21
 
 **firmware release date: 2022-01-21**

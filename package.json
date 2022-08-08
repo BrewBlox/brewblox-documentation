@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "check-links": "find docs -name \"*.md\" -print0 | xargs -0 -n1 markdown-link-check -q"
+    "check-links": "find docs -name \"*.md\" -print0 | xargs -0 -n1 markdown-link-check -q",
+    "firmware": "bash script/update-firmware.sh"
   },
   "repository": "git+https://github.com/BrewBlox/brewblox-documentation",
   "keywords": [],
@@ -28,7 +29,7 @@
     "vuepress-plugin-mathjax": "^1.2.8"
   },
   "dependencies": {
-    "brewblox-proto": "https://github.com/brewblox/brewblox-proto#7b77fbf1",
+    "brewblox-proto": "https://github.com/brewblox/brewblox-proto#4c0d20df",
     "typescript-string-enums": "^1.0.0",
     "vue-gallery-slideshow": "^1.5.2",
     "vue-no-ssr": "^1.1.1"
