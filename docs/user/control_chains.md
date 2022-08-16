@@ -20,9 +20,9 @@ component Pin as "Pin / OneWire channel"
 
 Sensor .down.> "input" Setpoint
 Setpoint .down.> "input" PID
-PID -down-> "drives" PWM
-PWM -down-> "drives" Digital
-Digital -down-> "drives" Pin
+PID -down-> "claims" PWM
+PWM -down-> "claims" Digital
+Digital -down-> "claims" Pin
 
 @enduml
 ```
@@ -31,7 +31,7 @@ The minimal building blocks for a control system are:
 
 - A sensor, to measure what you want to control.
 - A setpoint, the target value for the sensor.
-- An actuator, to drive the sensor value towards the setpoint.
+- An actuator, to drive the sensor value towards the setpoint setting.
 - A controller, in our case a *PID*, to calculate what the value for the actuator should be from the sensor and setpoint value.
 
 In Brewblox, the input of a PID is a *Setpoint*. This block contains the target value (setpoint setting) and a link to the sensor.
@@ -83,14 +83,14 @@ fridge_Sensor .down.> "input" fridge_SSP
 fridge_SSP .down.> "input" heat_PID
 fridge_SSP .down.> "input" cool_PID
 
-heat_PID -down-> "drives" heat_PWM
-heat_PWM -down-> "drives" heat_Digital
-heat_Digital -down-> "drives" heat_Pin
+heat_PID -down-> "claims" heat_PWM
+heat_PWM -down-> "claims" heat_Digital
+heat_Digital -down-> "claims" heat_Pin
 heat_Digital .right.> Mutex
 
-cool_PID -down-> "drives" cool_PWM
-cool_PWM -down-> "drives" cool_Digital
-cool_Digital -down-> "drives" cool_Pin
+cool_PID -down-> "claims" cool_PWM
+cool_PWM -down-> "claims" cool_Digital
+cool_Digital -down-> "claims" cool_Pin
 cool_Digital .left.> Mutex
 
 @enduml
@@ -148,21 +148,21 @@ fridge_Sensor .down.> "input" fridge_Setpoint
 fridge_Setpoint .down.> "input" heat_PID
 fridge_Setpoint .down.> "input" cool_PID
 
-heat_PID -down-> "drives" heat_PWM
-heat_PWM -down-> "drives" heat_Digital
+heat_PID -down-> "claims" heat_PWM
+heat_PWM -down-> "claims" heat_Digital
 heat_Digital .right.> Mutex
-heat_Digital -down-> "drives" heat_Pin
+heat_Digital -down-> "claims" heat_Pin
 
-cool_PID -down-> "drives" cool_PWM
-cool_PWM -down-> "drives" cool_Digital
+cool_PID -down-> "claims" cool_PWM
+cool_PWM -down-> "claims" cool_Digital
 cool_Digital .left.> Mutex
-cool_Digital -down- "drives" cool_Pin
+cool_Digital -down- "claims" cool_Pin
 
 beer_Sensor .down.> "input" beer_Setpoint
 beer_Setpoint .down.> "input" beer_PID
 beer_Setpoint .down.> "reference" beer_Offset
 beer_PID -down-> beer_Offset
-beer_Offset -left-> "drives" fridge_Setpoint
+beer_Offset -left-> "claims" fridge_Setpoint
 
 @enduml
 ```
@@ -210,9 +210,9 @@ component Sensor as "Temperature Sensor"
 
 Sensor .down.> "input" Setpoint
 Setpoint .down.> "input" PID
-PID -down-> "drives" PWM
-PWM -down-> "drives" Actuator
-Actuator -down-> "drives" Chip
+PID -down-> "claims" PWM
+PWM -down-> "claims" Actuator
+Actuator -down-> "claims" Chip
 @enduml
 ```
 
@@ -220,7 +220,7 @@ Next to the five actuator pins on the Spark 3, Brewblox supports extension board
 The SSR expansion board that we sell has a DS2413 OneWire chip that provides 2 extra output pins.
 To use it, use the 'discover blocks' button on the Spark service page. The discovered *DS2413* will be added.
 
-The DS2413 can be used just like a Spark 3 output pin. It can be the target of a Digital Actuator, with the exception that it does not support being driven in 100Hz PWM mode.
+The DS2413 can be used just like a Spark 3 output pin. It can be the target of a Digital Actuator, but it does not support soft start or fast PWM.
 
 ## Setpoint Profiles
 
@@ -235,11 +235,11 @@ component Digital as "Digital Actuator"
 component Pin as "Spark Pin"
 
 Sensor .down.> "input" Setpoint
-Profile -down-> "drives" Setpoint
+Profile -down-> "claims" Setpoint
 Setpoint .down.> "input" PID
-PID -down-> "drives" PWM
-PWM -down-> "drives" Digital
-Digital -down-> "drives" Pin
+PID -down-> "claims" PWM
+PWM -down-> "claims" Digital
+Digital -down-> "claims" Pin
 
 @enduml
 ```
@@ -294,20 +294,20 @@ component HLT_Driver as "HLT Setpoint Driver"
 
 HLT_Sensor .down.> "input" HLT_SSP
 HLT_SSP .down.> "input" HLT_PID
-HLT_PID -down-> "drives" HLT_PWM
-HLT_PWM -down-> "drives" HLT_Digital
-HLT_Digital -down-> "drives" HLT_Pin
+HLT_PID -down-> "claims" HLT_PWM
+HLT_PWM -down-> "claims" HLT_Digital
+HLT_Digital -down-> "claims" HLT_Pin
 
 MT_Sensor .down.> "input" MT_SSP
 MT_SSP .down.> "input" MT_PID
-MT_PID -down-> "drives" HLT_Driver
-HLT_Driver -left-> "drives" HLT_SSP
+MT_PID -down-> "claims" HLT_Driver
+HLT_Driver -left-> "claims" HLT_SSP
 
 BK_Sensor .down.> "input" BK_SSP
 BK_SSP .down.> "input" BK_PID
-BK_PID -down-> "drives" BK_PWM
-BK_PWM -down-> "drives" BK_Digital
-BK_Digital -down-> "drives" BK_Pin
+BK_PID -down-> "claims" BK_PWM
+BK_PWM -down-> "claims" BK_Digital
+BK_Digital -down-> "claims" BK_Pin
 
 @enduml
 ```
