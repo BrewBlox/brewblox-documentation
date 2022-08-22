@@ -149,7 +149,7 @@ The board uses 4 channels per valve to drive the motor bidirectionally and to re
 If you use valves that take a single digital signal, like solenoid valves for example, you should just use the Digital Actuator block.
 Both the *Digital Actuator* and the *Motor Valve* block can be linked to a valve in the Brewery Builder.
 
-The Motor Valve block can be driven by a PWM block. It also supports the *Minimum ON*, *Minimum OFF*, and *Mutexed* constraints.
+The Motor Valve block can be claimed by a PWM block. It also supports the *Minimum ON*, *Minimum OFF*, and *Mutexed* constraints.
 
 ### Mock Pins
 
@@ -189,6 +189,17 @@ This turns a digital ON/OFF actuator into an 'analog' actuator with a range betw
 
 Note: The PWM block keeps a short history of when it toggled and tries to maintain the correct average.
 To do this it can make a period a bit longer or shorter than what is configured.
+
+### Fast PWM
+
+The normal *PWM* + *Digital Actuator* combination works for PWM periods longer than a second.
+For high-frequency PWM, a different implementation is required.
+
+The *Fast PWM* block supports periods between 0.5ms (2000Hz) and 12.5ms (80Hz).
+To do this, the block directly controls an IO channel, without the intermediate *Digital Actuator* block.
+
+OneWire extension boards such as the DS2408 and DS2413 do not support Fast PWM.
+They simply can't be toggled fast enough.
 
 ### Setpoint Driver
 
@@ -320,7 +331,7 @@ Settings are divided in three sections:
 
 ### Input / Output
 
-You can choose which Setpoint is used as input here and assign which Analog Actuator is driven by the PID.
+You can choose which Setpoint is used as input here and assign which Analog Actuator is claimed by the PID.
 By Clicking on the *Setting* button, you can also directly edit setting of the Setpoint block.
 
 Below the input and output, the math of the PID algorithm is shown.
@@ -406,7 +417,7 @@ Some examples of when the Logic Actuator can be used:
 
 ### Comparisons
 
-The Logic Actuator drives a Digital Actuator, and evaluates one or more *comparisons* to determine whether the result is ON or OFF.
+The Logic Actuator claims a Digital Actuator, and evaluates one or more *comparisons* to determine whether the result is ON or OFF.
 
 You can add comparisons based on Digital Actuator, Motor Valve, Setpoint, and PWM blocks.
 Each comparison compares the value or setting of the block to a value configured in the comparison.
@@ -468,7 +479,7 @@ At this point, the expression has been simplified from `(a|b)&(A|B)` to `true & 
 
 ### Combining logic with constraints
 
-When you use the Logic Actuator to drive a fan, it will set the desired state of the Digital Actuator of the fan. You use an expression like `a|b`, to check that the heater or cooler is turned on.
+When you use the Logic Actuator to control a fan, it will set the desired state of the Digital Actuator of the fan. You use an expression like `a|b`, to check that the heater or cooler is turned on.
 
 Next you can set a `Delayed ON` and a `Delayed OFF` constraint on that fan actuator. This would cause the fan to start a while after the heater/cooler has turned ON and run for a while after it has turned off.
 

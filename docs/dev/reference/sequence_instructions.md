@@ -54,7 +54,7 @@ WAIT_PROFILE target='BK Profile '
 
 Instructions that have a target block may require a block that implements a specific interface, and not a single block type.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#COMPATIBLE_TYPES
+<<< @/node_modules/brewblox-proto/ts/spark-block-const.ts#COMPATIBLE_TYPES
 
 ## Error states
 
