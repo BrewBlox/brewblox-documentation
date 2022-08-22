@@ -21,7 +21,12 @@ Blocks may implement one or more interface types.
 Links within blocks can declare an interface type instead of a block type.
 All blocks that implement said interface are valid targets for the link.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#COMPATIBLE_TYPES
+Some of these interfaces dictate the presence of fields in block data, but not all.
+
+<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#IoChannel
+<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#EnablerInterfaceBlock
+<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#ClaimableInterfaceBlock
+<<< @/node_modules/brewblox-proto/ts/spark-block-const.ts#COMPATIBLE_TYPES
 
 ## BloxField (typed objects)
 
@@ -68,9 +73,21 @@ There are two exceptions:
 - *OneWireGpioModule* channels are completely user-defined
 - *DS2408* will report different channels based on the value of its `connectMode` field (valve or actuator).
 
-*DigitalActuator* and *MotorValve* blocks use channels as output. This is configured as a combination of a link to to an *IoArray* block, and a `channel` or `startChannel` field.
+*DigitalActuator*, *MotorValve*, and *FastPwm* blocks use channels as output. They all implement the *IoDriverInterface* interface, and have `hwDevice` and `channel` fields.
 
 <<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#IoChannel
+
+## IoChannel capabilities
+
+Not every channel supports all possible uses.
+OneWire expansion boards do not support Fast PWM. Input, power, or GND channels in *OneWireGpioModule* do not support output at all.
+This is declared in the channel `capabilities` field.
+
+The *ChannelCapabilities* enum is a numeric representation of bitwise flags.
+For example, a channel may support digital output and bidirectional output.\
+The value of `capabilities` would be `CHAN_SUPPORTS_DIGITAL_OUTPUT | CHAN_SUPPORTS_BIDIRECTIONAL`, making the numeric value `(1 << 0 | 1 << 5) == (1 | 32) == 33`
+
+<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#ChannelCapabilities
 
 ## Constraints
 
@@ -185,17 +202,12 @@ Referenced enum values:
 
 **System object**
 
-Controls the Spark LCD screen,
-and has its own independent temperature unit setting.
+Controls the Spark LCD screen.
 
 *widgets* is an array of at most 6 slots.
 Slots can be set in any order. The *pos* field determines the on-screen position.
 
 <<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#DisplaySettings
-
-Referenced enum values:
-
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#DisplayTempUnit
 
 ## DS2408
 
@@ -217,24 +229,7 @@ Referenced enum values:
 
 Channel mapping:
 
-```js
-{
-  [DS2408ConnectMode.CONNECT_ACTUATOR]: {
-    1: 'A',
-    2: 'B',
-    3: 'C',
-    4: 'D',
-    5: 'E',
-    6: 'F',
-    7: 'G',
-    8: 'H',
-  },
-  [DS2408ConnectMode.CONNECT_VALVE]: {
-    1: 'B',
-    5: 'A',
-  },
-}
-```
+<<< @/node_modules/brewblox-proto/ts/spark-block-const.ts#CHANNEL_NAMES_DS2408
 
 ## DS2413
 
@@ -246,12 +241,14 @@ Channel mapping:
 
 Channel mapping:
 
-```js
-{
-  1: 'A',
-  2: 'B',
-}
-```
+<<< @/node_modules/brewblox-proto/ts/spark-block-const.ts#CHANNEL_NAMES_DS2413
+
+## FastPwm
+
+The implementation for PWM with sub-second periods.
+*FastPwm* directly targets an *IoChannel*, and not a *DigitalActuator*.
+
+<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#FastPwm
 
 ## InactiveObject
 
@@ -409,14 +406,7 @@ Referenced enum values:
 
 Channel mapping:
 
-```js
-{
-  1: 'Bottom 1',
-  2: 'Bottom 2',
-  3: 'Bottom 3',
-  4: 'Bottom 4',
-}
-```
+<<< @/node_modules/brewblox-proto/ts/spark-block-const.ts#CHANNEL_NAMES_SPARK_2
 
 ## Spark3Pins
 
@@ -429,15 +419,7 @@ and provides an array of *IoChannel* objects, along with settings regulating vol
 
 Channel mapping:
 
-```js
-{
-  1: 'Top 1',
-  2: 'Top 2',
-  3: 'Top 3',
-  4: 'Bottom 1',
-  5: 'Bottom 2',
-}
-```
+<<< @/node_modules/brewblox-proto/ts/spark-block-const.ts#CHANNEL_NAMES_SPARK_3
 
 ## SysInfo
 
@@ -450,6 +432,7 @@ Basic device info can be found here.
 Referenced enum values:
 
 <<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#SparkPlatform
+<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#DisplayTempUnit
 
 ## TempSensorCombi
 
@@ -494,15 +477,6 @@ The basic temperature sensor.
 An offset can be configured for calibration purposes.
 
 <<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#TempSensorOneWire
-
-## Ticks
-
-**System object**
-
-Keeps track of system time.
-*secondsSinceEpoch* is automatically set by the Spark service.
-
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#Ticks
 
 ## TouchSettings
 
