@@ -145,6 +145,7 @@ the second will immediately become active.
   - The channel selection dropdown shows which block currently claims each channel.
   - When a channel is selected, its current claimer is unlinked.
 - (feature) The minimum downsampling step size is now configurable for history services using `--minimum-step`.
+- (feature) You can now always click on Builder text labels to edit them.
 - (improve) An error message is shown in the UI if the `history` service is not reachable.
 - (improve) Long-running Graphs automatically reload when the number of live points exceeds the maximum.
 - (improve) History graphs now update every 10s (down from 30s).
