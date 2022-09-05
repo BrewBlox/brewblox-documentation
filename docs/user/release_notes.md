@@ -158,6 +158,8 @@ the second will immediately become active.
 - (docs) Added documentation for alternative hardware options for the service host.
 - (docs) Added reference documentation for *Sequence* instructions.
 - (docs) Referenced WG-Easy as an alternative approach to installing Wireguard for remote access.
+- (fix) Fixed controller slowdown and hangups when one or more OneWire devices were disconnected.
+- (fix) Remove block and continue when block data is corrupted on the controller.
 - (fix) Fixed various broken links in documentation.
 - (fix) Fixed Spark 4 Over The Air (OTA) updates.
 - (fix) Spark 4 OTA updates no longer use a placeholder signing key.
