@@ -153,6 +153,7 @@ the second will immediately become active.
 - (improve) To prevent confusion, the default snapshot archive name has been changed from `brewblox.tar.gz` to `brewblox-snapshot.tar.gz`.
 - (improve) The `spark-one` service is no longer present by default when Brewblox is installed.
 - (improve) Timezone is now mounted in Docker containers where possible.
+- (improve) Auto-generated block IDs for existing blocks now always use the block type, and not an interface type.
 - (docs) Added documentation for installing a Tilt service on a Pi zero W.
 - (docs) Updated reference documentation for Spark communication protocol.
 - (docs) Added documentation for alternative hardware options for the service host.
@@ -160,6 +161,7 @@ the second will immediately become active.
 - (docs) Referenced WG-Easy as an alternative approach to installing Wireguard for remote access.
 - (fix) Fixed controller slowdown and hangups when one or more OneWire devices were disconnected.
 - (fix) Remove block and continue when block data is corrupted on the controller.
+- (fix) Resolved block create errors when the firmware assigns a numeric ID which is already known to the service.
 - (fix) Fixed various broken links in documentation.
 - (fix) Fixed Spark 4 Over The Air (OTA) updates.
 - (fix) Spark 4 OTA updates no longer use a placeholder signing key.
