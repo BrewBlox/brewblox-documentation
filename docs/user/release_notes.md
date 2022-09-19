@@ -131,6 +131,7 @@ It will remember its user-defined setting, but remain inactive until a new setti
 - (feature) Added *Temp Sensor (External)* block.
 - (feature) Added the *Fast PWM* block.
 - (feature) Added optional soft start settings to *Digital Actuator* blocks.
+- (feature) The *Setpoint Driver* settings now always show temperature values.
 - (feature) Added the Metrics part to the Builder.
 - (feature) GPIO module errors are now shown in the *OneWire GPIO Module* widget, with the option to clear the error state.
 - (feature) Added options in *Admin Page* -> *General Settings* to set date / time formatting

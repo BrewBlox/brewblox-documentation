@@ -166,11 +166,9 @@ Referenced enum values:
 
 ## ActuatorOffset (Setpoint Driver)
 
-The *ActuatorOffset* sets a target block setting to that of a reference block plus offset.
+The *ActuatorOffset* sets a target block setting to that of a reference block plus offset. Both target and reference blocks are Setpoints.
 
 Offset is either set manually, or determined by a PID.
-
-Both target and reference blocks are Setpoints, and values are in degrees Celsius.
 
 The "setting" has four intermediate stages:
 
