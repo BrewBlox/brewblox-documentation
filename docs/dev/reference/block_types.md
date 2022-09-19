@@ -170,6 +170,8 @@ The *ActuatorOffset* sets a target block setting to that of a reference block pl
 
 Offset is either set manually, or determined by a PID.
 
+All settings are delta temperatures. The desired setting of the target block is the reference setting/value + the value of the *setting* field.
+
 <<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#ActuatorOffset
 
 Referenced enum values:
