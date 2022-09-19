@@ -170,27 +170,6 @@ The *ActuatorOffset* sets a target block setting to that of a reference block pl
 
 Offset is either set manually, or determined by a PID.
 
-The "setting" has four intermediate stages:
-
-*storedSetting* is set manually by the user.
-This is the desired offset between reference and target.
-
-*desiredSetting* is either *storedSetting* (if the block is not claimed),
-or the output setting of a *PID* block (if the block is claimed).
-This is the desired offset between reference and target.
-
-*setting* is the actual setting after constraints are evaluated,
-and the reference setting has been added to the desired setting.
-
-If *desiredSetting* is 10, and reference setting is 50, then *setting* will be 60.
-*setting* will be passed on to become the desired setting of the target block.
-
-*value* is the actual achieved offset between reference setting and target value.
-
-If *desiredSetting* is 10, reference setting is 50,
-and measured value of target block is 55,
-then *value* will be 5.
-
 <<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#ActuatorOffset
 
 Referenced enum values:
