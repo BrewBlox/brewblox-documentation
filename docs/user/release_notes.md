@@ -122,6 +122,9 @@ If you assign two *Setpoint Profile* blocks to the same *Setpoint*, the second *
 Blocks release their claim when disabled. In the above example, if you disable the first *Setpoint Profile*,
 the second will immediately become active.
 
+When a block is unclaimed, it does not immediately revert to its last user-defined setting.
+It will remember its user-defined setting, but remain inactive until a new setting has been set.
+
 **Changes:**
 
 - (feature) Added *Sequence* block.
@@ -146,6 +149,7 @@ the second will immediately become active.
   - When a channel is selected, its current claimer is unlinked.
 - (feature) The minimum downsampling step size is now configurable for history services using `--minimum-step`.
 - (feature) You can now always click on Builder text labels to edit them.
+- (improve) When disabling the *Setpoint Driver* block, a prompt is shown to confirm the new settings for the target *Setpoint* block.
 - (improve) An error message is shown in the UI if the `history` service is not reachable.
 - (improve) Long-running Graphs automatically reload when the number of live points exceeds the maximum.
 - (improve) History graphs now update every 10s (down from 30s).
