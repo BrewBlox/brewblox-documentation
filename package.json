@@ -29,7 +29,7 @@
     "vuepress-plugin-mathjax": "^1.2.8"
   },
   "dependencies": {
-    "brewblox-proto": "https://github.com/brewblox/brewblox-proto#eee17b1e",
+    "brewblox-proto": "https://github.com/brewblox/brewblox-proto#29e68d14",
     "typescript-string-enums": "^1.0.0",
     "vue-gallery-slideshow": "^1.5.2",
     "vue-no-ssr": "^1.1.1"

@@ -89,6 +89,39 @@ The value of `capabilities` would be `CHAN_SUPPORTS_DIGITAL_OUTPUT | CHAN_SUPPOR
 
 <<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#ChannelCapabilities
 
+## Stored, desired, and achieved settings
+
+Analog actuators, Setpoints, and Digital actuators have multiple fields to describe their setting or state.
+
+For the analog actuators and setpoints, four fields are used:
+
+- *storedSetting*
+- *desiredSetting*
+- *setting*
+- *value*
+
+*storedSetting* is the setting as written by the user, either directly (using the UI), or indirecty (using the *Sequence* block).
+
+*desiredSetting* is either *storedSetting* (if the block is not claimed),
+or the output setting of the claiming block (if the block is claimed).
+For example, a *SetpointProfile* block will set the *desiredSetting* field of its target *SetpointSensorPair* block.
+
+*setting* is the *desiredSetting* after the constraints have had their say.
+If *desiredSetting* is 100, and a Max=50 constraint is set, *setting* will be 50.
+
+*value* is the measured value as achieved by the system.
+For a setpoint, *value* is measured by a sensor.
+For a PWM, *value* is the percentage of time that the target digital actuator spent active.
+
+For digital actuators, only three fields are used:
+
+- *storedState*
+- *desiredState*
+- *state*
+
+The overall use of the fields is the same, but the actual setting and the measured value are combined into *state*.
+The pins triggere by a digital actuator don't have a meaningful measured value: either they were set to Active/Inactive correctly, or they weren't.
+
 ## Constraints
 
 Various types of constraints can be set on blocks to modify their output.
@@ -97,7 +130,7 @@ Constraints are split in two groups: digital constraints, and analog constraints
 
 Digital actuators (*DigitalActuator*, *MotorValve*) have digital constraints, and analog actuators (*AnalogActuatorMock*, *ActuatorOffset*, *ActuatorPwm*) have analog constraints.
 
-Typically, actuators have a *desiredSetting* and a *setting* field.
+As mentioned above, actuators have a *desiredSetting* and a *setting* field.
 *desiredSetting* is the before, and *setting* is after constraints are evaluated.
 
 <<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#Constraints
@@ -137,18 +170,22 @@ The *ActuatorOffset* sets a target block setting to that of a reference block pl
 
 Offset is either set manually, or determined by a PID.
 
-Both target and reference blocks can be either a Setpoint, or an analog actuator (PWM).
-If a Setpoint is used, values are always in degrees Celsius.
+Both target and reference blocks are Setpoints, and values are in degrees Celsius.
 
-The "setting" has three intermediate stages:
+The "setting" has four intermediate stages:
 
-*desiredSetting* is set manually or by a PID.
+*storedSetting* is set manually by the user.
 This is the desired offset between reference and target.
 
-*setting* is the actual setting.
-Constraints are evaluated, and the reference setting is added.
+*desiredSetting* is either *storedSetting* (if the block is not claimed),
+or the output setting of a *PID* block (if the block is claimed).
+This is the desired offset between reference and target.
+
+*setting* is the actual setting after constraints are evaluated,
+and the reference setting has been added to the desired setting.
 
 If *desiredSetting* is 10, and reference setting is 50, then *setting* will be 60.
+*setting* will be passed on to become the desired setting of the target block.
 
 *value* is the actual achieved offset between reference setting and target value.
 
@@ -289,6 +326,8 @@ It must be connected to a *DS2408*, and technically requires 4 IO channels to fu
 The start channel is configured, and it will automatically claim the next three channels.
 To make this explicit, *DS2408* only reports valid start channels when set to valve mode.
 
+The *OneWireGpioModule* block can also drive motors, but for these, the *DigitalActuator* block can be used to control them.
+
 <<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#MotorValve
 
 Referenced enum values:
@@ -381,7 +420,7 @@ This is the basic Setpoint block: it has a desired setting,
 and is linked to a temperature sensor.
 
 The *storedSetting* field contains the last user-set setting.
-*setting* will equal *storedSetting* unless the Setpoint is driven.
+*desiredSetting* and *setting* will equal *storedSetting* unless the Setpoint is claimed.
 
 The measured value is filtered to reduce jitter, but allows setting a step threshold to improve response time if the value has a legitimate sudden change.
 
