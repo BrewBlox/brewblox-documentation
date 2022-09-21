@@ -16,19 +16,21 @@ Relevant links:
 
 **IMPORTANT: We recommend exporting your blocks before updating**
 
-### Firmware nuts and bolts
-
 Firmware development was becoming a bottleneck for new features.
-To resolve this, Bob picked up firmware work in addition to UI and services,
+To resolve this, Bob also picked up firmware work in addition to UI and services,
 and we have thoroughly re-organized and cleaned up the firmware code repository.
 
-Many of the implemented changes are under the hood, but they made it possible to introduce new blocks and more efficient API calls.
-The *Sequence* block implements much-improved support for mashing schedules and pre-defined recipes.
-The *Temp Sensor (External)* block helps with value synchronization. It's now much easier to use a Tilt sensor as Spark input.
+This includes significant improvements to memory use, responsiveness, and communication.
 
-With the new soft start settings, the firmware now reduces inrush current peaks when using pumps.
-This change required significant changes to how sub-second PWM is handled,
-and we created the new *Fast PWM* block to handle 80-2000 Hz periods.
+Many of the implemented changes are under the hood, but they made it possible to introduce new blocks and more efficient API calls.
+The *Sequence* block implements light-weight automation that runs on the Spark itself.
+The *Temp Sensor (External)* block is a temperature sensor that does not interact with hardware, but is set externally. It's now much easier to use a Tilt sensor as Spark input.
+
+We introduced fast hardware PWM on the Spark 4.
+This is available both as the new *Fast PWM* block, and as soft start setting on *Digital Actuator* blocks.
+Digital actuators can now optionally use fast PWM to gradually transition between ON and OFF states.
+This prevents inrush current from tripping the overcurrent protection on the Spark 4 GPIO module.\
+Any errors that occur still are shown in the GPIO module widget in the UI, and can be cleared.
 
 For those interacting with the Spark service block API directly, we have introduced the concept of firmware `patch` calls.
 When making a patch call, all fields not explicitly present in argument data will be left unchanged.
@@ -42,6 +44,8 @@ PWM with periods of >1s are still handled by the existing *PWM* block,
 but all <1s PWM is now done by the new *Fast PWM* block.
 The *Fast PWM* block directly targets an IO channel (Spark 2 Pins, Spark 3 Pins, OneWire GPIO Module),
 and supports 80, 100, 200, and 2000 Hz frequencies.
+
+Not all frequencies are supported by all hardware. The Spark 2/3 pins only support 100Hz, and DS2408 / DS2413 extension boards do not support fast PWM at all.
 
 *Fast PWM* blocks differ from *PWM* blocks in that they target an IO channel directly, and not a Digital Actuator.
 Digital constraints (Mutex, Min ON, min OFF) are not supported.
@@ -124,8 +128,17 @@ If you assign two *Setpoint Profile* blocks to the same *Setpoint*, the second *
 Blocks release their claim when disabled. In the above example, if you disable the first *Setpoint Profile*,
 the second will immediately become active.
 
-When a block is unclaimed, it does not immediately revert to its last user-defined setting.
-It will remember its user-defined setting, but remain inactive until a new setting has been set.
+When a claim to a block is released, it does not immediately revert to its last user-defined setting.
+It will remember its user-defined setting, but remains inactive until a new setting has been set.
+
+### Spark 4 network handling
+
+On the Spark 4, we've solved a long list of issues with network handling and Wifi provisioning.
+Some of the changes:
+
+- Wifi is automatically disabled if ethernet is connected and available.
+- Press the OK button for 5 seconds to start Wifi provisioning.
+- Press the OK button for 10 seconds to clear stored Wifi credentials.
 
 **Changes:**
 
@@ -152,6 +165,7 @@ It will remember its user-defined setting, but remain inactive until a new setti
   - When a channel is selected, its current claimer is unlinked.
 - (feature) The minimum downsampling step size is now configurable for history services using `--minimum-step`.
 - (feature) You can now always click on Builder text labels to edit them.
+- (improve) The startup beep on the Spark 4 is now more polite.
 - (improve) When disabling the *Setpoint Driver* block, a prompt is shown to confirm the new settings for the target *Setpoint* block.
 - (improve) An error message is shown in the UI if the `history` service is not reachable.
 - (improve) Long-running Graphs automatically reload when the number of live points exceeds the maximum.
