@@ -8,11 +8,13 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
-## Brewblox release 2022/08/??
+## Brewblox release 2022/09/21
 
-**firmware release date: 2022-08-??**
+**firmware release date: 2022-09-21**
 
 **IMPORTANT: This update must be flashed over USB for all controllers**
+
+**IMPORTANT: We recommend exporting your blocks before updating**
 
 ### Firmware nuts and bolts
 
@@ -141,9 +143,9 @@ It will remember its user-defined setting, but remain inactive until a new setti
 - (feature) Dashboards, Layouts, and Services in the sidebar are now shown in a tree view with collapsable groups.
 - (feature) On the Spark 4, hold the OK button for 5 seconds to start Wifi provisioning.
 - (feature) On the Spark 4, hold the OK button for 10 seconds to clear all Wifi credentials.
-- (feature) Added the `BREWBLOX_UPDATE_SYSTEM_PACKAGES` flag to brewblox/.env. If `false`, updates will always skip apt updates.
-- (feature) Built-up PID values such as I are now retained during controller software crashes or reboots.
-- (feature) The Spark 2 and 3 now automatically fetch system time from internet NTP time servers.
+- (feature) Added the `BREWBLOX_UPDATE_SYSTEM_PACKAGES` flag to brewblox/.env. If set to `False`, updates will always skip apt updates.
+- (feature) Built-up PID values such as I (integrator) are now retained during controller software crashes or reboots.
+- (feature) The Spark now automatically fetches system time from internet NTP time servers.
 - (feature) Streamlined target channel selection for *Fast PWM*, *Digital Actuator*, and *Motor Valve* blocks.
   - Target IO array and target channel are now combined into a single dropdown selection.
   - The channel selection dropdown shows which block currently claims each channel.
