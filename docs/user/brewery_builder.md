@@ -1,4 +1,4 @@
-# Brewery Builder guide
+# Brewery Builder
 
 ![Builder](../images/herms-builder-widget.gif)
 
@@ -39,6 +39,7 @@ The function of most tools is self-explanatory, but we'll take a closer look at 
 For many parts this only includes generic settings: rotate, flip, or remove the part.
 
 Some have more settings. For example, the kettle allows setting:
+
 - The label (displayed at the top)
 - The liquid color.
 - The width and height (measured in grid squares).

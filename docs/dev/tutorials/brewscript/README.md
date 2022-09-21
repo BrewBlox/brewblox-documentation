@@ -17,7 +17,7 @@ You reinstall your Pi, and your container is guaranteed to work out of the box, 
 ## Getting started
 
 ::: tip
-This tutorial involves running code on your Raspberry Pi. [The remote development tutorial](../remote_scripts) explains how to easily copy files, or edit them directly on the Pi.
+This tutorial involves running code on your Raspberry Pi. [The remote development tutorial](../deployment.md) explains how to easily copy files, or edit them directly on the Pi.
 :::
 
 Create a new directory called `brewscript`. You can do this on your Pi by using `mkdir brewscript`.
@@ -31,7 +31,6 @@ The script below uses a python package (requests), and fetches the blocks from y
 Copy the code to `brewscript/script.py`. We'll be using it in the next steps.
 
 <<< @/docs/dev/tutorials/brewscript/script.py
-
 
 ## Dockerfile
 
@@ -61,14 +60,16 @@ CMD ["python3", "-u", "/app/script.py"]
 ## Building
 
 After the previous steps, your `brewscript` directory should look like this:
-```
+
+```txt
 .
 ├── Dockerfile
 └── script.py
 ```
 
 To build the image, run:
-```
+
+```sh
 docker build --tag brewscript brewscript/
 ```
 
@@ -78,23 +79,27 @@ It's saved locally on your Pi. You can upload it to [Docker hub](https://hub.doc
 ## Running
 
 To run the built image:
-```
+
+```sh
 docker run --rm --tty brewscript
 ```
 
 The command is using the following arguments:
+
 - `--rm` removes the container after it stops. This prevents leftovers.
 - `--tty` (or `-t`) assigns a tty to the container, to immediately see print() output.
 - `brewscript` is the name of the Docker image.
 
 If you want to run the container in the background, use:
-```
+
+```sh
 docker run --rm --detach brewscript
 ```
 
 You will not see the output in your terminal, but the container will keep running while you use different commands.
 
 To see all active containers, use
-```
+
+```sh
 docker ps
 ```

@@ -48,7 +48,7 @@ In simple terms, WSL2 lets you install Linux inside Windows. You can access the 
 
 To install Brewblox, follow [the WSL install guide](https://docs.microsoft.com/en-us/windows/wsl/install-win10),
 install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows/),
-and then proceed as normal with the [Getting Started guide](../../user/startup).
+and then proceed as normal with the [Getting Started guide](../../user/startup.md).
 
 The Remote Development plugin explicitly supports WSL2 as backend.
 

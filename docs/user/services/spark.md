@@ -40,13 +40,13 @@ We will be using the `brewblox-ctl add-spark` command to add the service. It wil
 
 If you run `brewblox-ctl add-spark` without any arguments, it will prompt you for required info, and then create a sensibly configured service.
 
-If you want to fine-tune your service configuration, multiple arguments are available. The [Connection settings](./connect_settings.md) guide describes these in detail.
+If you want to fine-tune your service configuration, multiple arguments are available. These are described below.
 
 Some arguments that can be set:
-- `--device-id`: If you already know the device ID.
-- `--device-host`: If your Spark controller has a fixed IP address, you can skip discovery, and immediately connect to its IP address. You must assign the Spark controller a static DHCP lease in your router for this to work.
-- `--discovery`: If you want to restrict device discovery to only use USB (`--discovery=usb`), or only use Wifi (`--discovery=wifi`).
 
+* `--device-id`: If you already know the device ID.
+* `--device-host`: If your Spark controller has a fixed IP address, you can skip discovery, and immediately connect to its IP address. You must assign the Spark controller a static DHCP lease in your router for this to work.
+* `--discovery`: If you want to restrict device discovery to only use USB (`--discovery=usb`), or only use Wifi (`--discovery=wifi`).
 
 ## Step 4: Add the service in the UI
 
@@ -61,7 +61,7 @@ Click on it to start using the service in the UI.
 The Spark service can connect to the controller using either Wifi, or USB. Once connected, there is no difference.
 
 Connection settings are specified by editing the Spark service arguments in the `docker-compose.yml` file, or by using the `brewblox-ctl add-spark` command.
-You can follow [this guide](../config_editor) to install a graphical text editor for your configuration files.
+You can follow [this guide](../../dev/tutorials/dev_platform.md#remote-platform-ide) to install a graphical text editor for your configuration files.
 
 See the [Services](../services/) guide for an explanation on service configuration.
 
@@ -73,17 +73,21 @@ There are multiple arguments you can use (and combine) to configure how the Spar
 
 These arguments can be used both in the `docker-compose.yml` file, and with the `brewblox-ctl add-spark` command.
 
-**If: you want to make sure the service always connects to same controller**
-- Use `--device-id`
+### If: you want to make sure the service always connects to same controller
 
-**If: your controller has a static IP address**
-- Use `--device-host`
+* Use `--device-id`
 
-**If: you only want to use Wifi, even if USB is connected**
-- Use `--device-host` or `--discovery=wifi`
+### If: your controller has a static IP address
 
-**If: you only want to use USB, even if Wifi is connected**
-- Use `--discovery=usb`
+* Use `--device-host`
+
+### If: you only want to use Wifi, even if USB is connected
+
+* Use `--device-host` or `--discovery=wifi`
+
+### If: you only want to use USB, even if Wifi is connected
+
+* Use `--discovery=usb`
 
 :::warn
 The Spark 4 does not support USB connections.
@@ -120,7 +124,7 @@ If you set the `--device-id` argument, device discovery will skip any devices wi
 
 Example call to `add-spark`:
 
-```
+```sh
 brewblox-ctl add-spark --name=spark-two --device-id=300045000851353532343835
 ```
 
@@ -148,7 +152,7 @@ After you have done so, you can tell the service to always connect to the same a
 
 Example call to `add-spark`:
 
-```
+```sh
 brewblox-ctl add-spark --name=spark-two --device-host=192.168.0.101
 ```
 
@@ -174,7 +178,7 @@ You can restrict discovery by using the `--discovery` argument. This can be used
 
 Example call to `add-spark`:
 
-```
+```sh
 brewblox-ctl add-spark --name=spark-two --discovery=usb
 ```
 
@@ -195,6 +199,7 @@ Example configuration to only discover USB devices:
 
 The Spark service uses multiple arguments to determine how and where to find the Spark controller it should connect to.
 These arguments are:
+
 * `--device-serial`
 * `--device-host`
 * `--discovery`
@@ -251,12 +256,14 @@ stop
 Note that device ID will still be checked after connection is made.
 
 Examples:
+
 ```yaml
   spark-one:
     ...
     command: >-
       --device-host=192.168.0.60
 ```
+
 ```yaml
   spark-one:
     ...
@@ -264,7 +271,7 @@ Examples:
       --device-serial=/dev/ttyACM0
 ```
 
-`--discovery` has three possible values: `all`, `usb`, or `wifi`. `all` is the default. <br>
+`--discovery` has three possible values: `all`, `usb`, or `wifi`. `all` is the default.\
 Because USB devices are more specific, they will always be checked first.
 
 `device-id` is used to disqualify discovered devices. If `--device-id` is not set, all discovered devices are valid.
@@ -272,13 +279,16 @@ Because USB devices are more specific, they will always be checked first.
 The argument value is the unique device ID of your Spark controller.
 
 Specific device, over Wifi or USB:
+
 ```yaml
   spark-one:
     ...
     command: >-
       --device-id=300045000851353532343835
 ```
+
 Specific device, USB only:
+
 ```yaml
   spark-one:
     ...
@@ -286,7 +296,9 @@ Specific device, USB only:
       --discovery=usb
       --device-id=300045000851353532343835
 ```
+
 First discovered device, Wifi only:
+
 ```yaml
   spark-one:
     ...

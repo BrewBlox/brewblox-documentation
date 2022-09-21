@@ -2,19 +2,19 @@
 
 Date: 2018/11/02
 
-Note: this document assumes familiarity with RabbitMQ protocols and syntax. <br>
+Note: this document assumes familiarity with RabbitMQ protocols and syntax.\
 A generic tutorial can be found [here][rabbitmq-tutorial]. An example implementation of the brewblox-service eventbus API is available [here][boilerplate-main].
 
 ## Context
 
-Spark controllers currently have no way of interacting with their peers. <br>
+Spark controllers currently have no way of interacting with their peers.\
 This limits scaling, and is problematic in scenarios where it is physically unfeasible to connect all interdependent hardware to the same spark.
 
 ## Solution
 
 As the service is already responsible for (local) network communication, the logical step is to implement object synchronization here.
 
-In order to support both Spark < - > Spark, and Spark < - > Other Controller communication, the protocol is kept generic. <br>
+In order to support both Spark < - > Spark, and Spark < - > Other Controller communication, the protocol is kept generic.\
 To keep network communication asynchronous, synchronization is done using the existing eventbus.
 
 `Master` blocks periodically broadcast their state on the designated RabbitMQ exchange, using a unique routing key.
@@ -39,7 +39,7 @@ To keep network communication asynchronous, synchronization is done using the ex
     Service_Master --> "read" Spark_Master
     Service_Slave_1 --> "write" Spark_Slave_1
     Service_Slave_2 --> "write" Spark_Slave_2
-    
+
     Service_Master --> "broadcast" RabbitMQ
     Service_Slave_1 -up-> "subscribe" RabbitMQ
     Service_Slave_2 -up-> "subscribe" RabbitMQ
@@ -57,13 +57,13 @@ This approach decouples services, and allows for easy implementation of a one-to
 The brewblox-devcon-spark service offers two endpoints for block synchronization: `/remote/master`, and `/remote/slave`.
 
 Requirements:
+
 - A Brewblox environment with:
-    - A RabbitMQ eventbus
-    - A Spark service called `spark-master`, connected to a Spark
-    - A Spark service called `spark-slave`, connected to a Spark
+  - A RabbitMQ eventbus
+  - A Spark service called `spark-master`, connected to a Spark
+  - A Spark service called `spark-slave`, connected to a Spark
 - A sensor block on `spark-master` called `master-sensor`
 - A dummy sensor block on `spark-slave` called `dummy-sensor`
-
 
 To get started, first call the `/remote/master` endpoint.
 
@@ -72,15 +72,16 @@ curl \
     -X POST \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
-    -d '{ \ 
-            "id": "master-sensor", \ 
-            "interval": 5 \ 
+    -d '{ \
+            "id": "master-sensor", \
+            "interval": 5 \
         }' \
     'http://localhost:5000/spark-master/remote/master'
 ```
 
-Response: 
-```
+Response:
+
+```json
 {
   "key": "spark-master.master-sensor"
 }
@@ -95,10 +96,10 @@ curl \
     -X POST \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
-    -d '{ \ 
-            "id": "dummy-sensor", \ 
-            "key": "spark-master.master-sensor", \ 
-            "translations": {} \ 
+    -d '{ \
+            "id": "dummy-sensor", \
+            "key": "spark-master.master-sensor", \
+            "translations": {} \
         }' \
     'http://localhost:5000/spark-slave/remote/slave'
 ```
@@ -114,6 +115,7 @@ In situations where the slave block has a different data model than the master, 
 `/` characters indicate nested data. Specified keys are merged into the target data.
 
 Example:
+
 ```python
 # translation table
 "translations": {
@@ -165,7 +167,7 @@ When implementing synchronization between a Spark and a different type of contro
 
 The default value for the RabbitMQ exchange is `syncast`. This value can be configured in the Spark service. This exchange is configured as a topic.
 
-The routing key is arbitrary, but should be unique for synchronization master + slave pairs. <br>
+The routing key is arbitrary, but should be unique for synchronization master + slave pairs.\
 When calling `/remote/master`, a routing key is generated. `/remote/slave` takes a routing key as argument.
 
 ### Data
@@ -181,7 +183,6 @@ The body of the message should be a JSON string containing object data. Object I
 - IF translation table: The slave service merges the translated keys into the read block.
 - ELSE: The slave service replaces the read data with the incoming message.
 - The slave service writes the block with updated data to the controller.
-
 
 [rabbitmq-tutorial]: https://www.rabbitmq.com/tutorials/tutorial-three-python.html
 [boilerplate-main]: https://github.com/Brewblox/brewblox-boilerplate/blob/develop/YOUR_PACKAGE/__main__.py

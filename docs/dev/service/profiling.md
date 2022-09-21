@@ -2,7 +2,7 @@
 
 A profiler is one of the more useful tools for finding performance bottlenecks in code.
 
-There are multiple profilers available for Python. We'll be using the [profiling]([package](https://github.com/what-studio/profiling)) package, as it works well with our "web server in a docker container" runtime.
+There are multiple profilers available for Python. We'll be using the [profiling package](https://github.com/what-studio/profiling), as it works well with our "web server in a docker container" runtime.
 
 ## Setting up
 
@@ -23,7 +23,8 @@ ENTRYPOINT ["profiling", "remote-profile", "--bind", "0.0.0.0:8912", "-m", "brew
 As these changes are strictly local-only, you don't need to worry about layer optimizations in your Dockerfile.
 
 Now build your image:
-```
+
+```sh
 bash docker/before_build.sh
 docker build -t profiled:local docker
 ```
@@ -61,7 +62,7 @@ Check whether your service started OK with `docker-compose logs --follow sparkey
 
 In your repository dir, activate your poetry virtualenv, and view the output.
 
-```
+```sh
 poetry shell
 profiling view localhost:8912
 ```
@@ -79,7 +80,7 @@ You can make code changes without rebuilding your Docker image by mapping a volu
 Normally, you can then apply your code changes by running `docker-compose restart sparkey`. This does not work when profiling: the profiling process is forcibly closed, and after the restart it will be unable to reclaim its bound port.
 To prevent this, use:
 
-```
+```sh
 docker-compose up -d --force-recreate sparkey
 ```
 

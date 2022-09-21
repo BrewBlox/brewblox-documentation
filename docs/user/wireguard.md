@@ -26,7 +26,7 @@ Synology users can follow [this guide](https://github.com/runfalk/synology-wireg
 
 A VPN creates a secure tunnel between a client (your phone) and the server (your Pi).
 Where before you needed to send authentication for every request, you now only need to do so once: when creating the tunnel.
-All data to and from the server goes through this tunnel, and can't read or edited by others.
+All data to and from the server goes through this tunnel, and can't be read or edited by others.
 
 This tunnel can be used both for the Brewblox UI, and SSH terminals.
 
@@ -50,6 +50,25 @@ Private keys are always kept secret, but public keys will be exchanged: we give 
 
 You can find a more in-depth explanation [here](https://ssd.eff.org/en/module/deep-dive-end-end-encryption-how-do-public-key-encryption-systems-work).
 
+## Alternative: WG-Easy
+
+We can install Wireguard on the Pi itself, or run it in a Docker container, using [WG-Easy](https://github.com/WeeJeWel/wg-easy).
+There are pros and cons to this approach.
+
+Pro:
+
+- Easy to install.
+- Easy to remove: stop the container, and it's gone.
+- No manual editing of configuration files.
+- GUI based configuration for new clients.
+
+Con:
+
+- More system overhead.
+- Less reliable: it depends on Docker to work.
+- Less suitable for remote system management: if you stop the container, you close the tunnel.
+- The container must be run separately from Brewblox, otherwise you can't run `brewblox-ctl update`.
+
 ## Server installation
 
 We need to install the software, create the public and private encryption keys,
@@ -58,24 +77,28 @@ and create the configuration for our tunnel.
 Open a terminal on the server (your Pi), and we'll run some terminal commands.
 
 Install Wireguard:
+
 ```bash
 sudo apt update
 sudo apt install -y wireguard
 ```
 
 Edit sysctl settings:
+
 ```bash
 sudo nano /etc/sysctl.conf
 ```
 
 This command opens the `nano` text editor. Use the arrow keys to scroll to the bottom of the file, and add:
-```
+
+```ini
 net.ipv4.ip_forward=1
 ```
 
 Press ctrl-X to save and exit the file.
 
 ::: details Example content of the last part of /etc/sysctl.conf
+
 ```bash
 ###################################################################
 # Magic system request Key
@@ -86,14 +109,17 @@ Press ctrl-X to save and exit the file.
 
 net.ipv4.ip_forward=1
 ```
+
 :::
 
 Now create the server keys:
+
 ```bash
 wg genkey | sudo tee /etc/wireguard/private.key | wg pubkey | sudo tee /etc/wireguard/public.key
 ```
 
 We need the keys for a later step. Let's show them in the terminal:
+
 ```bash
 sudo cat /etc/wireguard/private.key
 sudo cat /etc/wireguard/public.key
@@ -102,13 +128,15 @@ sudo cat /etc/wireguard/public.key
 The keys will both end with a `=`. This is part of the key.
 
 ::: details Example keys (DO NOT USE)
-```
+
+```sh
 pi@raspberrypi:~$ cat /etc/wireguard/private.key
 kH7w/QdU25Age8FKovZApgcZCozECOh8iYuGtMWWr24=
 
 pi@raspberrypi:~$ cat /etc/wireguard/public.key
 FfQebIE7hg2th8KgytSaZ4J9Ov1VIKBDL1pOrtsEZTY=
 ```
+
 :::
 
 We also need to figure out which network interface on the server is being used to handle traffic from the router.
@@ -122,6 +150,7 @@ ifconfig | grep -B 1 192.168
 ```
 
 ::: details Example output
+
 ```bash
 pi@raspberrypi:~$ ifconfig | grep -B 1 192.168
 wlan0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
@@ -132,6 +161,7 @@ In this example, we want to be using the **wlan0** network interface.
 :::
 
 Now create the `wg0.conf` configuration file for your VPN tunnel:
+
 ```bash
 sudo nano /etc/wireguard/wg0.conf
 ```
@@ -142,7 +172,8 @@ To go back to nano, type `fg` and press Enter.
 :::
 
 The previous command opened nano again. In the editor, copy the following text, and then we'll make some changes:
-```
+
+```ini
 [Interface]
 Address = 10.0.0.1/32
 SaveConfig = true
@@ -159,17 +190,20 @@ When done editing, press ctrl-X to save and exit.
 
 We now have two files that contain secrets: `private.key`, and `wg0.conf`.
 Only we should be able to read and write them.
+
 ```bash
 sudo chmod 600 /etc/wireguard/{private.key,wg0.conf}
 ```
 
 Now start wg0 to verify the configuration is OK:
+
 ```bash
 sudo wg-quick up wg0
 ```
 
 ::: details Example output
-```
+
+```txt
 pi@raspberrypi:~$ sudo wg-quick up wg0
 [#] ip link add wg0 type wireguard
 [#] wg setconf wg0 /dev/fd/63
@@ -177,14 +211,17 @@ pi@raspberrypi:~$ sudo wg-quick up wg0
 [#] ip link set mtu 1420 up dev wg0
 [#] iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
 ```
+
 :::
 
 We also want Wireguard to start when the server starts:
+
 ```bash
 sudo systemctl enable wg-quick@wg0
 ```
 
 Now reboot your server for the system changes to take effect:
+
 ```bash
 sudo reboot
 ```
@@ -193,6 +230,7 @@ sudo reboot
 
 Wireguard is now installed, but is not yet accessible from the internet.
 For that to happen, we need the router to forward incoming traffic on **port 51820/udp** to the server (the Pi).
+For this step, it doesn't matter whether you installed Wireguard on the host, or using WG-Easy.
 
 The configuration UI to do this is different for each brand and make of router, so we can't write a one-size-fits-all guide.
 You may need to google "port forwarding [ROUTER BRAND NAME]".
@@ -210,33 +248,39 @@ If you'd rather not use a DNS service, you can also find your public IP address 
 To verify that the port is open and used, we can use the [nmap](https://en.wikipedia.org/wiki/Nmap) tool.
 
 On your server, run:
+
 ```bash
 sudo apt update
 sudo apt install -y nmap
 ```
 
 First, we check the Wireguard status:
+
 ```bash
 sudo wg show wg0
 ```
 
 ::: details Example output
-```
+
+```sh
 pi@raspberrypi:~$ sudo wg show wg0
 interface: wg0
   public key: <SERVER PUBLIC KEY>
   private key: (hidden)
   listening port: 51820
 ```
+
 :::
 
 Now, let's try nmap:
+
 ```bash
 sudo nmap -sU -p 51820 localhost
 ```
 
 ::: details Example output
-```
+
+```sh
 pi@raspberrypi:~$ sudo nmap -sU -p 51820 localhost
 Starting Nmap 7.80 ( https://nmap.org ) at 2021-03-15 14:48 UTC
 Nmap scan report for localhost (127.0.0.1)
@@ -251,13 +295,14 @@ Nmap done: 1 IP address (1 host up) scanned in 2.18 seconds
 This output means that port 51820 is open and used.
 :::
 
-
 Next, we want to check that the port is forwarded by the router:
+
 ```bash
 sudo nmap -sU -p 51820 [EXTERNAL_IP_ADDRESS]
 ```
 
 The final step is to check the domain name:
+
 ```bash
 sudo nmap -sU -p 51820 [NAME].duckdns.org
 ```
@@ -269,7 +314,11 @@ All of these should show port 51820 as "open|filtered".
 For us to actually use the VPN, we also need a client.
 Wireguard is [available for Windows, Mac, Android, iOS, and many other systems](https://www.wireguard.com/install/).
 
+For WG-Easy, you can use its web UI to generate a client configuration file.
+If you installed Wireguard on the host, follow the instructions below to manually edit configuration files.
+
 The UI for the various clients will be different, but the basics remain the same:
+
 - You need a public key and a private key.
 - You need to set a client address.
 - You need to add a peer.
@@ -280,7 +329,7 @@ This means we need to configure both the server and the client to accept each ot
 
 On the client, generate your public key and private key, and copy the public key.
 
-Earlier, set the **server address** to `10.0.0.1/32` (in /etc/wireguard/wg0.conf). <br>
+Earlier, we set the **server address** to `10.0.0.1/32` (in /etc/wireguard/wg0.conf).\
 Set the **client address** to `10.0.0.2/32`.
 If you add more clients, increment their client address (`10.0.0.3/32`, `10.0.0.4/32`, etc).
 
@@ -289,6 +338,7 @@ If you are using DuckDNS, this will be `[NAME].duckdns.org:51820`.
 
 The server **public key** was created earlier during installation.
 To get it, open a terminal on your server, and run:
+
 ```bash
 sudo cat /etc/wireguard/public.key
 ```
@@ -302,33 +352,39 @@ First, copy the **client public key**. We'll need this when editing the server c
 
 Before editing the Wireguard config on the server, you must stop the active service.
 If you don't do this, the changes to the configuration file will not be saved.
+
 ```bash
 sudo wg-quick down wg0
 ```
 
 ::: details Example output
-```
+
+```txt
 pi@raspberrypi:~$ sudo wg-quick down wg0
 [#] wg showconf wg0
 [#] ip link delete dev wg0
 [#] iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o wlan0 -j MASQUERADE
 ```
+
 :::
 
 To edit the config:
+
 ```bash
 sudo nano /etc/wireguard/wg0.conf
 ```
 
 Below the existing configuration, add the following:
-```
+
+```ini
 [Peer]
 PublicKey = <CLIENT PUBLIC KEY>
 AllowedIPs = 10.0.0.2/32
 ```
 
 :::details Example configuration
-```
+
+```ini
 [Interface]
 Address = 10.0.0.1/32
 SaveConfig = true
@@ -341,22 +397,26 @@ PrivateKey = <SERVER PRIVATE KEY>
 PublicKey = <CLIENT PUBLIC KEY>
 AllowedIPs = 10.0.0.2/32
 ```
+
 :::
 
 Again, press Ctrl-X to exit nano.
 
 Now restart Wireguard on the server:
+
 ```bash
 sudo wg-quick up wg0
 ```
 
 To check configuration:
+
 ```bash
 sudo wg show wg0
 ```
 
 ::: details Example output
-```
+
+```txt
 interface: wg0
   public key: <SERVER PUBLIC KEY>
   private key: (hidden)
@@ -366,6 +426,7 @@ peer: <CLIENT PUBLIC KEY>
   endpoint: xxx.xxx.xxx.xxx:xxxxx
   allowed ips: 10.0.0.2/32
 ```
+
 :::
 
 Start the Wireguard interface on your client, and you're done.

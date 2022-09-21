@@ -11,7 +11,7 @@ We're happy with the overall model of using Preconditions -> Actions -> Transiti
 The flow is flexible enough to cover branching processes, and simple enough to explain.
 
 More problematic are the complexity and UI elements required to implement non-trivial Conditions.
-This already comes evident for relatively simple use cases such as 
+This already comes evident for relatively simple use cases such as
 `if measured temperature is more than 10 degrees Celsius lower than desired temperature`.
 
 Our problem is not unique. The automation service is a simple example of [no-code](https://hackernoon.com/10-low-code-and-no-code-application-development-platforms-ew513y8q) software development.
@@ -33,7 +33,8 @@ The user-defined complexity in automation processes is highly localized in Condi
 A promising approach with a lot of precedent is to embed sandboxed user scripts.
 
 This would reduce the before-mentioned expression to:
-```
+
+```txt
 sensorBlock.data.value < setpointBlock.data.setting + 10
 ```
 

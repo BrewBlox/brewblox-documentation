@@ -6,7 +6,7 @@ Date: 2018/11/12
 
 Python packages can include both Python and C source code. While Python code is interpreted on the spot, C code must be compiled during installation.
 
-This also means that C code must be compiled for the correct platform. Compiling code when building Docker images is described in other design documents. ([cross compilation][xcompile-1], [cross compilation (2)][xcompile-2]). <br>
+This also means that C code must be compiled for the correct platform. Compiling code when building Docker images is described in other design documents. ([cross compilation][xcompile-1], [cross compilation (2)][xcompile-2]).\
 
 Compiling code during image creation requires compilers to be installed in the image. Compilers are not used during image runtime, but still significantly increase its size (`python:3.6` is 600mb larger than `python:3.6-slim`).
 
@@ -34,6 +34,7 @@ Multi stage builds rely on copying files between stages. For our images this mea
 Pip can [build wheel files][pip-wheel] where C source code is included as a binary file. Binary wheel files are installable without a compiler.
 
 The required steps now are:
+
 - Import `python:3.6` image
 - Build wheel files for all dependencies
 - Import `python:3.6-slim` image
@@ -43,6 +44,7 @@ The required steps now are:
 - Push the slim image with installed wheels, discarding the `python:3.6` image.
 
 Example:
+
 ```docker
 FROM python:3.6 as base
 
@@ -92,6 +94,7 @@ ENTRYPOINT ["python3", "-m", "brewblox_service"]
 ```
 
 Example (brewblox-devcon-spark):
+
 ```docker
 FROM brewblox/brewblox-service:latest as base
 
@@ -111,21 +114,19 @@ RUN pip3 install --no-index --find-links=/wheeley brewblox-devcon-spark \
 ENTRYPOINT ["python3", "-m", "brewblox_devcon_spark"]
 ```
 
-In the `brewblox-service` image we do not swap to `python:3.6-slim` after compilation. This allows `brewblox-devcon-spark` to import the `brewblox-service` as compiler image. <br>
+In the `brewblox-service` image we do not swap to `python:3.6-slim` after compilation. This allows `brewblox-devcon-spark` to import the `brewblox-service` as compiler image.\
 `brewblox-devcon-spark` now also has access to the `/wheeley` directory in `brewblox-service`, and can skip compiling all the dependencies it inherited from `brewblox-service`.
-
 
 ## Conclusion
 
 By using multi-stage builds we profit from the best of two worlds.
+
 - We purely use pre-configured images: we do not need to manually install python-dev apt packages.
 - Our runtime images are kept small, and do not include packages that were only needed during installation.
 
 Crosscompiling software for the Raspberry Pi ARM32v7 environment takes considerably more time than building AMD images. This is optimized by re-using wheel files built by `brewblox-service`.
 
-
-
-[xcompile-1]: ./20180314_docker_crosscompilation
-[xcompile-2]: ./20180522_crosscompilation_revisited
+[xcompile-1]: ./20180314_docker_crosscompilation.md
+[xcompile-2]: ./20180522_crosscompilation_revisited.md
 [multistage-docker]: https://docs.docker.com/develop/develop-images/multistage-build/
 [pip-wheel]: https://pip.pypa.io/en/stable/reference/pip_wheel/

@@ -5,6 +5,7 @@ Date: 2020/10/08
 ## Context
 
 The process to connect a Spark service to a Spark controller has multiple distinct phases:
+
 - **Disconnected**: the service has not made a connection.
 - **Connected**: there is a transport-layer connection between the service and a remote host, possibly the controller.
 - **Acknowledged**: the remote host has sent a handshake, and is confirmed to be a Spark controller.
@@ -160,6 +161,7 @@ If the firmware is incompatible with the service, *synchronization* will stop he
 
 Now, the controller has been identified as a Spark controller, and its firmware version has been validated.
 Before the service is ready for normal operation, some more actions must be performed:
+
 - the system time on the controller is set.
 - the content of the block store is fetched from the datastore.
 - system trace calls are read from the controller, and tracing is restarted.
@@ -237,7 +239,7 @@ fork
                 note
                     New behaviour:
                     Always increase retry interval,
-                    but only restart service 
+                    but only restart service
                     if usb is a valid type.
                 end note
                 if (discovery type includes usb?) then (yes)

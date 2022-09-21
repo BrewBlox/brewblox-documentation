@@ -33,21 +33,24 @@ CMD ["python3", "-u", "/app/script.py"]
 ## Building
 
 Your `scheduledscript` directory should look like this:
-```
+
+```txt
 .
 ├── script.py
 └── Dockerfile
 ```
 
 To build the image, run:
-```
+
+```sh
 docker build --tag scheduledscript scheduledscript/
 ```
 
 ## Running
 
 To run the built image:
-```
+
+```sh
 docker run --rm --tty scheduledscript
 ```
 
@@ -57,7 +60,7 @@ This is exactly the same as the command in [the dockerized script tutorial](../b
 
 It's often useful to listen in on what messages the eventbus actually received.
 
-You can do so using https://mitsuruog.github.io/what-mqtt/.
+You can do so using <https://mitsuruog.github.io/what-mqtt/>.
 Connect to `wss://PI_ADDRESS:HTTPS_PORT/eventbus`, and listen to your published topic.
 
 Example address: `wss://192.168.2.11:443/eventbus`.

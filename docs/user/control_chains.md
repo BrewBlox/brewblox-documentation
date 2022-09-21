@@ -1,4 +1,4 @@
-# Brewblox control chains
+# Control chains
 
 When first installing Brewblox, it can be a bit overwhelming.
 We designed Brewblox to be very flexible and modular to give you a lot of freedom (and responsibility) to adapt it to your brewery.
@@ -20,9 +20,9 @@ component Pin as "Pin / OneWire channel"
 
 Sensor .down.> "input" Setpoint
 Setpoint .down.> "input" PID
-PID -down-> "drives" PWM
-PWM -down-> "drives" Digital
-Digital -down-> "drives" Pin
+PID -down-> "claims" PWM
+PWM -down-> "claims" Digital
+Digital -down-> "claims" Pin
 
 @enduml
 ```
@@ -31,7 +31,7 @@ The minimal building blocks for a control system are:
 
 - A sensor, to measure what you want to control.
 - A setpoint, the target value for the sensor.
-- An actuator, to drive the sensor value towards the setpoint.
+- An actuator, to drive the sensor value towards the setpoint setting.
 - A controller, in our case a *PID*, to calculate what the value for the actuator should be from the sensor and setpoint value.
 
 In Brewblox, the input of a PID is a *Setpoint*. This block contains the target value (setpoint setting) and a link to the sensor.
@@ -39,14 +39,13 @@ In Brewblox, the input of a PID is a *Setpoint*. This block contains the target 
 The *PID* calculates the error, the difference between setpoint setting and sensor value, and keeps a history of to calculates an output value.
 [Wikipedia](https://en.wikipedia.org/wiki/PID_controller) offers a good explanation of how PID controllers work.
 
-The *Digital Actuator* toggles an output pin. It can either use a pin on the Spark itself, or one connected through OneWire (DS2408 or DS2413). <br>
+The *Digital Actuator* toggles an output pin. It can either use a pin on the Spark itself, or one connected through OneWire (DS2408 or DS2413).\
 Digital Actuators can only be turned ON or OFF, but the PID calculation generates a numeric value, like 20 or 56. This is solved with a *PWM* block between the PID and the Digital Actuator.
 
 PWM stands for [Pulse Width Modulation](https://en.wikipedia.org/wiki/Pulse-width_modulation). The PWM block has a configurable time period of for example 4 seconds.
 It will turn ON the actuator for a part of that 4 second period and off for the remaining time.
 A PWM value of 40% will turn ON for 1.6 seconds and OFF for 2.4 seconds and repeat.
 This turns the digital ON/OFF actuator into an 'analog' numeric actuator with a range between 0% and 100%.
-
 
 ## Control chains in the UI
 
@@ -57,8 +56,7 @@ In the top right corner there is a button that lets you toggle between blocks as
 
 The below example shows blocks on a service after running the Fermentation Fridge quickstart wizard.
 
-Click on any of the nodes to open a dialog with block settings,
-or double click on the background to create a new block.
+Click on any of the nodes to open a dialog with block settings.
 
 ![Service page block diagram](../images/ui-fridge-relations-diagram.png)
 
@@ -85,14 +83,14 @@ fridge_Sensor .down.> "input" fridge_SSP
 fridge_SSP .down.> "input" heat_PID
 fridge_SSP .down.> "input" cool_PID
 
-heat_PID -down-> "drives" heat_PWM
-heat_PWM -down-> "drives" heat_Digital
-heat_Digital -down-> "drives" heat_Pin
+heat_PID -down-> "claims" heat_PWM
+heat_PWM -down-> "claims" heat_Digital
+heat_Digital -down-> "claims" heat_Pin
 heat_Digital .right.> Mutex
 
-cool_PID -down-> "drives" cool_PWM
-cool_PWM -down-> "drives" cool_Digital
-cool_Digital -down-> "drives" cool_Pin
+cool_PID -down-> "claims" cool_PWM
+cool_PWM -down-> "claims" cool_Digital
+cool_Digital -down-> "claims" cool_Pin
 cool_Digital .left.> Mutex
 
 @enduml
@@ -150,21 +148,21 @@ fridge_Sensor .down.> "input" fridge_Setpoint
 fridge_Setpoint .down.> "input" heat_PID
 fridge_Setpoint .down.> "input" cool_PID
 
-heat_PID -down-> "drives" heat_PWM
-heat_PWM -down-> "drives" heat_Digital
+heat_PID -down-> "claims" heat_PWM
+heat_PWM -down-> "claims" heat_Digital
 heat_Digital .right.> Mutex
-heat_Digital -down-> "drives" heat_Pin
+heat_Digital -down-> "claims" heat_Pin
 
-cool_PID -down-> "drives" cool_PWM
-cool_PWM -down-> "drives" cool_Digital
+cool_PID -down-> "claims" cool_PWM
+cool_PWM -down-> "claims" cool_Digital
 cool_Digital .left.> Mutex
-cool_Digital -down- "drives" cool_Pin
+cool_Digital -down- "claims" cool_Pin
 
 beer_Sensor .down.> "input" beer_Setpoint
 beer_Setpoint .down.> "input" beer_PID
 beer_Setpoint .down.> "reference" beer_Offset
 beer_PID -down-> beer_Offset
-beer_Offset -left-> "drives" fridge_Setpoint
+beer_Offset -left-> "claims" fridge_Setpoint
 
 @enduml
 ```
@@ -212,9 +210,9 @@ component Sensor as "Temperature Sensor"
 
 Sensor .down.> "input" Setpoint
 Setpoint .down.> "input" PID
-PID -down-> "drives" PWM
-PWM -down-> "drives" Actuator
-Actuator -down-> "drives" Chip
+PID -down-> "claims" PWM
+PWM -down-> "claims" Actuator
+Actuator -down-> "claims" Chip
 @enduml
 ```
 
@@ -222,7 +220,7 @@ Next to the five actuator pins on the Spark 3, Brewblox supports extension board
 The SSR expansion board that we sell has a DS2413 OneWire chip that provides 2 extra output pins.
 To use it, use the 'discover blocks' button on the Spark service page. The discovered *DS2413* will be added.
 
-The DS2413 can be used just like a Spark 3 output pin. It can be the target of a Digital Actuator, with the exception that it does not support being driven in 100Hz PWM mode.
+The DS2413 can be used just like a Spark 3 output pin. It can be the target of a Digital Actuator, but it does not support soft start or fast PWM.
 
 ## Setpoint Profiles
 
@@ -237,11 +235,11 @@ component Digital as "Digital Actuator"
 component Pin as "Spark Pin"
 
 Sensor .down.> "input" Setpoint
-Profile -down-> "drives" Setpoint
+Profile -down-> "claims" Setpoint
 Setpoint .down.> "input" PID
-PID -down-> "drives" PWM
-PWM -down-> "drives" Digital
-Digital -down-> "drives" Pin
+PID -down-> "claims" PWM
+PWM -down-> "claims" Digital
+Digital -down-> "claims" Pin
 
 @enduml
 ```
@@ -262,6 +260,7 @@ When you want to use Brewblox to control the hot side of brewing (mashing, boili
 For each kettle with a heating element, you will have a temperature sensor, sensor setpoint pair, PID, PWM and a digital output.
 
 For reference:
+
 - HLT stands for Hot Liquor Tun, your hot water kettle with a HERMS coil inside.
 - MT stands for Mash Tun
 - BK stands for Brew Kettle, in which you boil the wort.
@@ -295,20 +294,20 @@ component HLT_Driver as "HLT Setpoint Driver"
 
 HLT_Sensor .down.> "input" HLT_SSP
 HLT_SSP .down.> "input" HLT_PID
-HLT_PID -down-> "drives" HLT_PWM
-HLT_PWM -down-> "drives" HLT_Digital
-HLT_Digital -down-> "drives" HLT_Pin
+HLT_PID -down-> "claims" HLT_PWM
+HLT_PWM -down-> "claims" HLT_Digital
+HLT_Digital -down-> "claims" HLT_Pin
 
 MT_Sensor .down.> "input" MT_SSP
 MT_SSP .down.> "input" MT_PID
-MT_PID -down-> "drives" HLT_Driver
-HLT_Driver -left-> "drives" HLT_SSP
+MT_PID -down-> "claims" HLT_Driver
+HLT_Driver -left-> "claims" HLT_SSP
 
 BK_Sensor .down.> "input" BK_SSP
 BK_SSP .down.> "input" BK_PID
-BK_PID -down-> "drives" BK_PWM
-BK_PWM -down-> "drives" BK_Digital
-BK_Digital -down-> "drives" BK_Pin
+BK_PID -down-> "claims" BK_PWM
+BK_PWM -down-> "claims" BK_Digital
+BK_Digital -down-> "claims" BK_Pin
 
 @enduml
 ```
@@ -378,6 +377,7 @@ First, we create a mutex block that both elements will have to share and add a m
 This will prevent the elements from turning on at the same time. When one element is turned on, it will block the other one from turning on.
 
 ### Balancer
+
 We have prevented blowing fuses, but what happens when you want to pre-heat both your HLT and BK at the same time?
 If both kettles are cold, both PIDs will set their output to 100%.
 

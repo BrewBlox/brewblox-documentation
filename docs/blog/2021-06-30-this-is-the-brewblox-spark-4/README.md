@@ -17,8 +17,8 @@ thumb-size="150px"
 </Gallery>
 </p>
 
-
 ## Designed for flexibility
+
 So what are these new I/O modules?
 
 We decided to take a new approach to hardware modularity for the Spark 4.
@@ -26,6 +26,7 @@ On the Spark 3, additional sensor and actuator boards were connected with cables
 The hardware supported RS-485, but never released an expansion board that used it.
 
 ### The downsides of 1-wire
+
 The 1-Wire protocol is great for its simplicity and costs, but it comes with some major downsides:
 
 - All devices share a single bus. If one of them fails, it can take down all other devices.
@@ -37,6 +38,7 @@ But that means they would need their own microcontroller and firmware.
 This would increase the cost and complexity of expansion boards, both in hardware and software.
 
 ### A new approach: stackable I/O modules
+
 The Spark 4 uses a new approach for connecting sensors and actuators: they can be plugged directly into the main processor.
 Through the bottom of the Spark 4, an I/O module can plug into a 26-pin connector.
 Each I/O module also has a socket for the next module, to allow a stack of up to four I/O modules.
@@ -62,6 +64,7 @@ Each board requires fewer components, usually just the interface ICs for the sen
 To support a new I/O module, we also just need to add a few files for the specific ICs to our main firmware.
 
 ## A more powerful processor: ESP32
+
 <p align="center">
 <Gallery
 :images="['/images/spark4/spark4-16.jpg']"
@@ -81,10 +84,12 @@ This allows us to add more functionality and a nicer display, at lower cost.
 The ESP32 also has Bluetooth, which means we can communicate directly with a Tilt sensor or other Bluetooth device in the future.
 
 ## A bigger display
+
 The Spark 4 has a new 3.5 inch display, with a 480x320 resolution. This is twice the resolution of the Spark 3.
 We also switched to capacitive touch instead of resistive touch for better responsiveness.
 
 ## Wired network with PoE
+
 WiFi is great for its ease of use, but nothing beats wired ethernet in stability.
 Especially in larger professional breweries with lots of stainless steel, wired networking is preferred.
 That's why the Spark 4 comes with both WiFi and wired ethernet.
@@ -93,6 +98,7 @@ On top of that, the Spark 4 supports passive Power-over-Ethernet. This means you
 The Spark 4 can also be powered from USB or through the power input of one of the connected I/O modules.
 
 ## The first I/O module: 1-Wire and flexible GPIO
+
 The first I/O module available for the Spark 4 is for 1-Wire and general-purpose I/O.
 
 <p align="center">
@@ -113,6 +119,7 @@ For each I/O module, you can configure whether I/O should be at 5V or the extern
 Each of the 8 GPIO pins is a configurable half H-bridge with fault detection. What does that mean?
 
 It means that each pin can be one of the following:
+
 - Positive supply voltage (5V or external input voltage)
 - Negative supply voltage (GND, 0V)
 - A low-side switch
@@ -121,6 +128,7 @@ It means that each pin can be one of the following:
 - A digital input
 
 Some examples of what you can connect are:
+
 - A solid-state relay (SSR) or a mechanical relay: 1 high side switch and a GND pin.
 - A fan: a GND pin and a high-side switch.
 - A bidirectional motor or valve: 2 push-pull pins.
@@ -132,33 +140,39 @@ All pins also support individual PWM for speed/intensity control.
 
 As you can see, these eight are suitable for many situations. And if one I/O module still does not give you enough pins, you can still add another I/O module!
 
-
 ## Future I/O modules
+
 As said before, this new approach to modular hardware makes it easier for us to create new I/O modules.
 We already have three new modules in development.
 
 ### Resistive temperature sensors
+
 Resistive temperature sensors (RTDs), like the PT-100 and PT-1000, are common in professional breweries and are often integrated into tanks.
 A module for RTD sensors will be the second I/O module we will release. It will have the same GPIO configuration as the 1-Wire module, but it will have an analog front-end instead of 1-Wire.
 
 RTD sensors will be able to measure higher temperatures. 1-Wire sensors only go up to 115 &deg;C.
 
 ### Pressure sensors
+
 Pressure sensors will allow level sensing and carbonation control in the future.
 We have been developing and testing boards to measure pressure with maximum precision and temperature stability.
 
 ### Chemical sensors
+
 We are also testing chemical sensors for measuring acidity (PH) and oxygen-reducing potential (ORP).
 For both chemical and pressure sensors, we are designing a custom hygienic stainless steel probe.
 
 ### Your DIY I/O modules?
+
 With the I2C and SPI pins directly available on the bottom of the Spark 4, it will be easier to prototype your own sensors.
 Please contact us if you have ideas for new sensors and would like to collaborate.
 
 ## How will the Spark 4 fit in your brewery?
+
 As you can see, the Spark 4 will be very flexible. It will fit almost any brewery.
 
 ### Our Brewblox software
+
 This hardware upgrade brings the Spark in line with the flexibility of our new Brewblox software platform.
 Brewblox lets you fully customize your control schemes, graphs, dashboards, interactive flow diagrams, and more.
 
@@ -172,12 +186,14 @@ The Spark is not based on the Raspberry Pi, the Raspberry Pi is just one of the 
 The Brewblox name aligns better with our modular approach to brewery control.
 
 ### One or more Sparks?
+
 For maximum reliability, we recommend to keep sensor and actuator wires short: put the controller close to the tank.
 We recommend a Spark 4 per 1 or 2 tanks for professional breweries. Just the network cable should go to the central hub.
 Don't misuse the module system to wire your entire brewery to a single point.
 It does make sense to use four I/O boards with a single Spark if you if you want to control 16 motorized valves in a HERMS.
 
 ### Optional display and casing
+
 We designed a new casing for the Spark 4, which can be 3d-printed.
 You can buy it with the Spark 4 or print it yourself.
 
@@ -186,14 +202,6 @@ That is why you can also opt to buy the Spark 4 without them, which saves costs 
 
 With simple brackets, the Spark and the I/O modules can be clicked onto on a DIN rail inside your box.
 
-
 ## What do you think?
+
 Let us know your thoughts [on our community forum](https://community.brewpi.com/t/this-is-the-spark-4/).
-
-
-
-
-
-
-
-

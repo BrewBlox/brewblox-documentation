@@ -2,19 +2,19 @@
 
 Date: 2019/01/01
 
-Brewblox is set up to be dynamic and extensible at runtime through configuration. <br>
+Brewblox is set up to be dynamic and extensible at runtime through configuration.\
 While the backend accomplishes this through a microservice architecture, the UI is still a single application.
 
-Making a transpiled single application dynamically extensible is not trivial. 
+Making a transpiled single application dynamically extensible is not trivial.
 This document describes the various steps that must be taken to do so.
 
 ## Context
 
-The [backend architecture design](./20180206_subprojects) set out to make the system scalable by dividing it into separate applications.
+The [backend architecture design](./20180206_subprojects.md) set out to make the system scalable by dividing it into separate applications.
 
 The UI requires a slightly different approach: it should be a single application where end users can monitor and control all backend services.
 
-Any solution will need to take into account that not all plugins are official. 
+Any solution will need to take into account that not all plugins are official.
 External contributors are encouraged, and should be supported without them having to submit PRs to the main repository.
 
 ## Previous Efforts
@@ -22,7 +22,7 @@ External contributors are encouraged, and should be supported without them havin
 In the [UI repository][ui-repo] efforts have been made to separate framework and spark-specific code and components.
 
 All specific code has been placed in [src/plugins][ui-plugin-dir].
-Plugins register implementations of generic types (eg. dashboard widgets). <br>
+Plugins register implementations of generic types (eg. dashboard widgets).\
 The framework code renders plugin-defined widgets in dashboards, and offers tools to persist configuration.
 
 This separation of framework and plugins makes it easier to move to dynamically loaded plugins.
@@ -117,12 +117,13 @@ This fulfills the requirement of being able to use development features as hot m
 
 ## Core plugins
 
-It is a reasonable assumption that the majority of Brewblox end users are using the Spark/History plugins. <br>
+It is a reasonable assumption that the majority of Brewblox end users are using the Spark/History plugins. \
 
 To improve load times, and avoid splitting the brewblox-ui repository, these plugins should remain in the `src/plugins` directory.
 The Starter module should by default load these core plugins, along with all plugins provided by the entrypoint.
 
 Example function signature:
+
 ```typescript
 export type Plugin = (args: PluginArguments) => void;
 
@@ -141,8 +142,6 @@ Summary of required changes:
 - Load configuration from datastore in entrypoint
 - Load plugins from CDN in entrypoint
 - Create example / boilerplate repository for plugin developers
-
-
 
 [ui-repo]: https://github.com/Brewblox/brewblox-ui
 [ui-plugin-dir]: https://github.com/Brewblox/brewblox-ui/tree/develop/src/plugins

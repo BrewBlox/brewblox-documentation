@@ -29,6 +29,7 @@ Debian versions become stable a year after release.
 This means their EOL date is *one year after the release of the next version*.
 
 The EOL dates for the last three Debian versions are:
+
 - Buster: ~2022
 - Stretch: 2020/07/06
 - Jessie: 2018/06/17
@@ -41,6 +42,7 @@ Python versions are active for five years after release.
 New versions may have some compatibility problems immediately after release.
 
 The EOL dates for the last Python versions are:
+
 - 3.9: ~2025
 - 3.8: 2024/10
 - 3.7: 2023/06
@@ -67,7 +69,7 @@ This is done by making a snapshot of your installation directory, and loading it
 
 To make a snapshot, navigate to your Brewblox directory, and run:
 
-```
+```sh
 brewblox-ctl snapshot save
 ```
 
@@ -83,12 +85,12 @@ The host field should be `sftp://IP_ADDRESS`. Username / password are the same a
 
 ### Using a snapshot during installation
 
-Follow the [Startup Guide](./startup) to install Brewblox.
+Follow the [Startup Guide](./startup.md) to install Brewblox.
 Then use FileZilla to copy your *brewblox.tar.gz* snapshot to the /home/pi directory on your Pi.
 
 When this is done, navigate to your Brewblox directory, and run:
 
-```
+```sh
 brewblox-ctl snapshot load
 brewblox-ctl update
 ```

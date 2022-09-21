@@ -22,6 +22,7 @@ These are not updated: if a decision changes or is reversed, a new document is a
 - [Github](https://github.com/Brewblox)
 
 ## Noteworthy repositories
+
 - [brewblox-service: common code for python services](https://github.com/brewblox/brewblox-service)
 - [brewblox-boilerplate: a template for new services](https://github.com/brewblox/brewblox-boilerplate)
 - [brewblox-devcon-spark: the Spark service](https://github.com/brewblox/brewblox-devcon-spark)

@@ -11,6 +11,7 @@ This works well when iterations are very short, and there are only a handful of 
 ## Issues
 
 There are two major deficiencies in the current work flow:
+
 - There is no `release` or `edge` branch where new features undergo high-level testing.
 - Features often require simultaneous releases in multiple repositories.
 
@@ -34,6 +35,7 @@ This will not upload any new images to Docker Hub - the layer hashes will be rec
 ## User perspective
 
 Using this release strategy, the user can choose one of three tracks:
+
 - `develop`: new features are immediately available, but will break regularly.
 - `edge`: new features are available quickly, and in more coherent groups. May contain some bugs.
 - `stable`: new features are tested, and released together.
@@ -44,11 +46,13 @@ Travis can support this workflow by using two rules for deployment:
 
 **Any push to a `brewblox` repository triggers building Docker images tagged as the branch name**
 Example: a push to `edge` will result in:
+
 - `brewblox/repository-name:edge`
 - `brewblox/repository-name:rpi-edge`
 
 **Pushed Git tags trigger building Docker images tagged as `newest-tag`, and as the Git tag**
-Example: adding the Git tag `0.2.3` will result in: 
+Example: adding the Git tag `0.2.3` will result in:
+
 - `brewblox/repository-name:0.2.3`
 - `brewblox/repository-name:newest-tag`
 - `brewblox/repository-name:rpi-0.2.3`
@@ -63,7 +67,7 @@ This can be accomplished by a simple bash script, implementing the following log
 
 ```bash
 for repo in ${DOCKER_REPOS}; do
-    
+
     docker pull ${repo}:newest-tag
     docker pull ${repo}:rpi-newest-tag
 
@@ -79,6 +83,4 @@ done
 Ideally, immediately after releasing stable images, `develop` is merged into `edge` to allow testing of a new set of features.
 Whether this is always relevant in practice remains to be seen: BrewPi is a small company, with more repositories than developers.
 
-
-
-[automated-release]: ./20180306_automated_release
+[automated-release]: ./20180306_automated_release.md

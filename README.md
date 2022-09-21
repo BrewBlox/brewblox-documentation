@@ -4,23 +4,17 @@
 
 This is the code repository for the Brewblox documentation website. These docs are built with vuepress and written in markdown.
 
-## Editing
-
-Recommended tools:
-- Visual Studio Code
-- [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) plugin.
-
 ## Building
 
 In the root of this repo, run:
 
-```
+```sh
 yarn ci
 ```
 
 To build the docs with hot reloading:
 
-```
+```sh
 yarn dev
 ```
 

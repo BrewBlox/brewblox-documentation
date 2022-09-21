@@ -95,6 +95,7 @@ We'll look at it a few lines at a time.
     command: >-
       --api.dashboard=true
 ```
+
 This enables the Traefik dashboard at `/dashboard/` (the trailing `/` is required).
 
 ```yaml
@@ -102,6 +103,7 @@ This enables the Traefik dashboard at `/dashboard/` (the trailing `/` is require
       --providers.docker.constraints="Label(`com.docker.compose.project`, `${COMPOSE_PROJECT_NAME}`)"
       --providers.docker.defaultrule="PathPrefix(`/{{ index .Labels \"com.docker.compose.service\" }}`)"
 ```
+
 `--providers.docker` means Traefik scans the Docker socket for active containers.
 
 To avoid trying to route to any and all containers on the host, we add constraints.
@@ -115,6 +117,7 @@ We can get service name from another container label set by docker-compose: `com
 ```yaml
       --providers.file.directory=/config
 ```
+
 `/config` is a mounted volume that leads to `brewblox/traefik`.
 There's a configuration file and SSL certificates in there.
 
@@ -123,6 +126,7 @@ There's a configuration file and SSL certificates in there.
       --entrypoints.websecure.address=:${BREWBLOX_PORT_HTTPS}
       --entrypoints.websecure.http.tls=true
 ```
+
 There are two entrypoints: one for HTTP (`web`), and one for HTTPS (`websecure`).
 
 ## Traefik dashboard
@@ -137,6 +141,7 @@ For a detailed explanation of how these interact, you can check [this Traefik do
 ## Other Brewblox services
 
 Traefik allows for a number of shortcuts:
+
 - A Traefik Router is automatically added if you declare a Traefik Service.
 - You only need to specify a target port on your service if multiple ports are exposed.
 
@@ -168,6 +173,7 @@ If you check `docker-compose.shared.yml`, you'll find:
 ```
 
 Notes:
+
 - `eventbus` and `datastore` have multiple published ports, so we need to be specific.
 - `influx` is not accessible through the gateway.
 - `datastore` uses the `prefix-strip` middleware we declared in `traefik` labels.
@@ -186,11 +192,11 @@ but for now we can use `avahi-publish` to temporarily add DNS-SD records.
 
 Open two terminal windows, and run (one command in each):
 
-```
+```sh
 avahi-publish -a -R brewblox.local 192.168.XXX.XXX
 ```
 
-```
+```sh
 avahi-publish -a -R webby.local 192.168.XXX.XXX
 ```
 
@@ -234,6 +240,7 @@ See the [docker-compose documentation](https://docs.docker.com/compose/networkin
 You will also need to change or remove the provider constraint for the `traefik` service.
 
 Currently, it is:
+
 ```yaml
   traefik:
     ...
@@ -244,7 +251,8 @@ Currently, it is:
 ```
 
 To add the `webby` project, you can modify the value to:
-```
+
+```go
 LabelRegex(`com.docker.compose.project`, `(${COMPOSE_PROJECT_NAME}|webby)`)
 ```
 

@@ -5,7 +5,7 @@ Date: 2020/08/04
 ## Context
 
 As part of the introduction of the automation scripting sandbox,
-we have been re-evaluating [typed fields](./20200723_typed_fields).
+we have been re-evaluating [typed fields](./20200723_typed_fields.md).
 
 This includes lessons learned from implementing quantity handling in automation, and the new requirements for interface definitions.
 With the introduction of the scripting API, block interfaces become public, and need to be well-documented.
@@ -22,6 +22,7 @@ but is useful as a reference.
 Some conclusions:
 
 The `qty()` constructor needs to accept four distinct sets of arguments:
+
 - Raw objects with a `"__bloxtype": "Quantity"` field.
 - Objects previously created with `qty()` (`qty(qty(...))` must be valid).
 - Value/unit arguments: `qty(10, 'degC')`.
@@ -31,6 +32,7 @@ Quantity / Link manipulation functions should not modify the base object, but al
 
 The Quantity object should implement a .toJSON() function that returns a typed object.
 This saves explicitly having to convert / sanitize all data before feeding it to an API after function calls such as:
+
 ```javascript
 block.data.value = qty(10, 'degC');
 ```
@@ -91,12 +93,14 @@ Class objects can implement a `toString()` function that is automatically called
 Raw typed objects do not have a `toString()` function, and would require explicit processing before rendering.
 
 In Javascript that would take the form of wrapping the object:
+
 ```javascript
 const text: string = `block value: ${qty(block.data.value)}`;
 ```
 
 In Vue, the recommended solution is to use a filter:
-```
+
+```vue
 <div>
     {{ block.data.value | quantity }}
 </div>

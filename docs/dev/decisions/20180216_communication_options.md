@@ -19,11 +19,11 @@ Due to the popularity of distributed systems, there is ample choice as to what p
 ## Requirements
 
 * Supported by the top 5 [popular backend languages][language-popularity]
-    * JavaScript
-    * Java
-    * Python
-    * C#
-    * C++
+  * JavaScript
+  * Java
+  * Python
+  * C#
+  * C++
 * Language-agnostic
 * Graceful degradation if target application not running
 * Fault-tolerant
@@ -63,7 +63,6 @@ The suggested norm is to use the RPI pattern for synchronous communication, and 
 
 The industry default for RPI is REST, but more research is required to determine the most suitable event bus protocol and vendor.
 
-
 [language-popularity]: https://insights.stackoverflow.com/survey/2018/#technology-programming-scripting-and-markup-languages
 [communication-patterns]: https://medium.com/@diogo.lucas/communication-patterns-in-a-microservice-world-af07192b12d3
 [is-rest-best]: https://capgemini.github.io/architecture/is-rest-best-microservices/
@@ -75,16 +74,15 @@ The industry default for RPI is REST, but more research is required to determine
 [thrift]: https://thrift.apache.org/
 [implementing-rpc]: https://pages.cs.wisc.edu/~sschang/OS-Qual/distOS/RPC.htm
 
-
 ## References
 
-* https://insights.stackoverflow.com/survey/2018/#technology-programming-scripting-and-markup-languages
-* https://medium.com/@diogo.lucas/communication-patterns-in-a-microservice-world-af07192b12d3
-* https://capgemini.github.io/architecture/is-rest-best-microservices/
-* https://dzone.com/articles/communicating-between-microservices
-* https://en.wikipedia.org/wiki/Representational_state_transfer
-* https://microservices.io/patterns/microservices.html
-* https://microservices.io/patterns/communication-style/rpi.html
-* https://grpc.io/
-* https://thrift.apache.org/
-* https://pages.cs.wisc.edu/~sschang/OS-Qual/distOS/RPC.htm
+* <https://insights.stackoverflow.com/survey/2018/#technology-programming-scripting-and-markup-languages>
+* <https://medium.com/@diogo.lucas/communication-patterns-in-a-microservice-world-af07192b12d3>
+* <https://capgemini.github.io/architecture/is-rest-best-microservices/>
+* <https://dzone.com/articles/communicating-between-microservices>
+* <https://en.wikipedia.org/wiki/Representational_state_transfer>
+* <https://microservices.io/patterns/microservices.html>
+* <https://microservices.io/patterns/communication-style/rpi.html>
+* <https://grpc.io/>
+* <https://thrift.apache.org/>
+* <https://pages.cs.wisc.edu/~sschang/OS-Qual/distOS/RPC.htm>

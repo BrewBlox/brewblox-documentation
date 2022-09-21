@@ -1,7 +1,7 @@
 # Removing things
 
 It's possible to remove block names or widgets without removing the block itself, and vice versa.
-For an in-depth explanation of why this can happen, see [this page](./blocks_in_depth.md).
+For an in-depth explanation of why this can happen, see [this page](./blocks_architecture.md).
 
 This guide explains how and where to remove widgets, blocks, services, or your entire system.
 
@@ -11,7 +11,7 @@ There are multiple options. We'll go from least to most drastic.
 
 ![Widget actions](../images/widget-actions.png)
 
-When you click the action menu on a widget, you'll see this menu. 
+When you click the action menu on a widget, you'll see this menu.
 Among other options, you can choose to remove the widget.
 
 ![Removing a widget](../images/removing-widget.png)
@@ -38,7 +38,7 @@ On the spark service page, you can find a dropdown menu with service actions. Ma
 
 ## Remove unused block names
 
-As explained in the [blocks in depth guide](./blocks_in_depth.md), block names are not stored on the controller. In the spark service action menu you can choose **Remove unused block names** to remove all block names that are not associated with an existing block on the controller.
+As explained in the [blocks architecture guide](./blocks_architecture.md), block names are not stored on the controller. In the spark service action menu you can choose **Remove unused block names** to remove all block names that are not associated with an existing block on the controller.
 
 You don't normally need to do this, but it is possible for the controller to end up in a state where all blocks are gone, but the names are still there.
 
@@ -60,12 +60,10 @@ If you import blocks, all blocks and block names will be removed before importin
 
 ![brewblox-ctl service remove](../images/removing-service-ctl.png)
 
-![Removing UI service](../images/removing-service.png)
-
 There are two steps to removing a Spark service: removing it on the Pi, and removing it in the UI.
 
 To remove it on the Pi, run `brewblox-ctl service remove -n <SERVICE_NAME>`.
-To remove it in the UI, edit services in the sidebar, click on the service, and choose `Remove service`.
+To remove it in the UI, navigate to the admin page, expand the service, and select `Remove service`.
 
 This will remove the service, but not the blocks on the controller, or the block names in the datastore. For that to happen, remove all blocks before removing the service.
 
@@ -77,7 +75,8 @@ First **remove all blocks** (spark service page, action menu).
 Then run the following commands in the brewblox directory on your Pi:
 
 (Assuming you chose the default install directory name `brewblox/`)
-```
+
+```sh
 brewblox-ctl down
 cd ..
 sudo rm -rf ./brewblox/

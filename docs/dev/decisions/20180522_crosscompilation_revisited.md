@@ -4,7 +4,7 @@ Date: 2018/05/22
 
 ## Context
 
-[Previous research ](./20180314_docker_crosscompilation) concluded that cross compiling ARMv7 Docker images was not feasible.
+[Previous research](./20180314_docker_crosscompilation.md) concluded that cross compiling ARMv7 Docker images was not feasible.
 
 Re-evaluating used references indicated that a solution was not yet considered.
 
@@ -63,11 +63,4 @@ The excessive build time for the ARM history image remained an issue (>1 hour). 
 
 [An issue][aioinflux issue] was submitted to the relevant project, and resolved in short order by the author. This reduced the history service build time from more than an hour to less than a minute.
 
-
-
 [aioinflux issue]: https://github.com/plugaai/aioinflux/issues/9
-
-
-## References
-
-* https://github.com/plugaai/aioinflux/issues/9

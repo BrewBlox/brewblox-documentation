@@ -11,6 +11,7 @@ This is what we use if we're setting up a new service.
 
 Services created from the *brewblox-boilerplate*
 template are based on the following frameworks:
+
 - [asyncio](https://docs.python.org/3/library/asyncio.html) for writing concurrent code without threading.
 - [aiohttp](https://docs.aiohttp.org/en/stable/) for easily setting up a REST API.
 - [brewblox-service](https://github.com/BrewBlox/brewblox-service) for using Brewblox-specific functionality.
@@ -69,7 +70,7 @@ More on this below.
 
 The vast majority of desired functionality that is independent from REST endpoints can and should be implemented as part of a Feature.
 
-During the setup phase, you can call the `brewblox_service.features.add(app, MyFeature(app))` function to register your feature as part of the active Application. <br>
+During the setup phase, you can call the `brewblox_service.features.add(app, MyFeature(app))` function to register your feature as part of the active Application.\
 Features added with `features.add()` can later be retrieved with `features.get(app, type, key=None)`.
 By default, features are indexed by class type, as in most use cases you only need one instance of each feature.
 
@@ -104,6 +105,7 @@ The loop runs until a shutdown error is raised, or a SIGTERM signal is received.
 
 It's inevitable that some setup code is async, and the concurrent nature of features may require some explicit teardown code.
 For these use cases, `ServiceFeature` has three async lifecycle hooks:
+
 - `async def startup(app)`
 - `async def before_shutdown(app)`
 - `async def shutdown(app)`

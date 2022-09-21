@@ -18,11 +18,10 @@ The ability to automatically release development versions would significantly he
 * Assigned versions do not conflict with "real" released versions
 * Semantic versioning must be used
 * No code changes required to trigger a develop release
-    * Example: manually setting a version number
-    * This carries a significant risk of accidentally committing these changes
+  * Example: manually setting a version number
+  * This carries a significant risk of accidentally committing these changes
 * Users downloading "latest and greatest" must never get a development release
 * Only contributors who can push to the brewblox repository may release software
-
 
 ## Versioning: Python
 
@@ -34,7 +33,7 @@ A common scheme is to tag release commits in git, and set the develop version as
 
 Example:
 
-```
+```txt
 1.2.3          <== latest release
 1.2.4.dev5     <== 5 commits since 1.2.3
 ```
@@ -60,7 +59,6 @@ setup(
 
 This approach allows us to release development versions to PyPi without them conflicting with release versions. They will also not be downloaded unless the user explicitly allows development versions.
 
-
 ## Versioning: Docker
 
 Contrary to PyPi, Docker Hub allows re-uploading specific versions.
@@ -70,7 +68,8 @@ Keeping a history of development versions is not required, but multiple features
 Tagging Docker images with the name of the feature branch meets these requirements: the image has no name conflict with release versions, and is unique for each feature. It also overwrites previous development releases for the feature, reducing clutter in Docker Hub.
 
 Example version (tag):
-```
+
+```txt
 brewblox/brewblox-devcon-spark:feature-implement-doodad
 ```
 
@@ -79,17 +78,17 @@ brewblox/brewblox-devcon-spark:feature-implement-doodad
 When creating the Docker image, it must be associated with the correct Python package. We don't want to rely on uploading to PyPi, and immediately downloading that very last version, and also need to support release and development versions out of the box.
 
 A solution is to perform the following steps:
+
 * Build Python package (version determined by setuptools_scm)
 * Copy the built package (zip file) into a specific directory (`/pkg/`) in the Docker image
 * `pip install` everything in `/pkg/`. This automatically resolves the version issue - it will install the version we just copied, along with its dependencies.
 * In case we somehow did not copy a Python package to the directory, install the Python package by name
-    * By default, Pip will not upgrade if any version is already installed
-    * If no package was copied to `/pkg/`, it will ensure -something- is installed in the image
-
+  * By default, Pip will not upgrade if any version is already installed
+  * If no package was copied to `/pkg/`, it will ensure -something- is installed in the image
 
 ## Trigger conditions
 
-The current [development flow](./20180306_automated_release) assumes that all contributors have their own fork, but allows larger feature branches to be pushed to the central repository.
+The current [development flow](./20180306_automated_release.md) assumes that all contributors have their own fork, but allows larger feature branches to be pushed to the central repository.
 
 An approach to automation is to release a develop version for every push to the central repository. Release versions are created when a new tag is pushed.
 
@@ -137,19 +136,16 @@ bbt-deploy-docker -i rpi-docker/ -n brewblox/brewblox-devcon-spark -t rpi-featur
 
 It is not required for developers to know these commands by heart: they can copy them from the `.travis.yml` file.
 
-
 ## Conclusion
 
 All requirements can be satisfied by a combination of deployment rules (expressed in `.travis.yml`), a `brewblox-tools` package, and a Python package for determining dev versions (`setuptools_scm`).
-
 
 [setuptools_scm]: https://github.com/pypa/setuptools_scm
 [dev_version_pep]: https://www.python.org/dev/peps/pep-0440/
 [travis_secure_vars]: https://docs.travis-ci.com/user/environment-variables/#Defining-encrypted-variables-in-.travis.yml
 
-
 ## References
 
-* https://github.com/pypa/setuptools_scm
-* https://www.python.org/dev/peps/pep-0440/
-* https://docs.travis-ci.com/user/environment-variables/#Defining-encrypted-variables-in-.travis.yml
+* <https://github.com/pypa/setuptools_scm>
+* <https://www.python.org/dev/peps/pep-0440/>
+* <https://docs.travis-ci.com/user/environment-variables/#Defining-encrypted-variables-in-.travis.yml>
