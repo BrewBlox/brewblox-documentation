@@ -159,6 +159,7 @@ It will remember its user-defined setting, but remain inactive until a new setti
 - (improve) The `spark-one` service is no longer present by default when Brewblox is installed.
 - (improve) Timezone is now mounted in Docker containers where possible.
 - (improve) Auto-generated block IDs for existing blocks now always use the block type, and not an interface type.
+- (deprecation) Removed the deprecated *Extra hold time* field in the *Mutex* block. Extra hold time should be set in individual mutex constraints.
 - (docs) Added documentation for installing a Tilt service on a Pi zero W.
 - (docs) Updated reference documentation for Spark communication protocol.
 - (docs) Added documentation for alternative hardware options for the service host.
