@@ -6,7 +6,7 @@ module.exports = {
     extraFileExtensions: ['.vue'],
   },
   extends: [
-    'plugin:vue/recommended',
+    'plugin:vue/vue3-recommended',
   ],
   plugins: [
     'vue',
@@ -30,22 +30,12 @@ module.exports = {
       },
     ],
     'vue/no-v-html': 0,
-    'vue/max-attributes-per-line': ['warn', {
-      'singleline': 8,
-      'multiline': {
-        'max': 1,
-        'allowFirstLine': false,
+    'vue/max-attributes-per-line': [
+      'warn',
+      {
+        singleline: 8,
+        multiline: 1,
       },
-    }],
+    ],
   },
-  // overrides: [
-  //   {
-  //     files: ['*.js'],
-  //     rules: {
-  //       '@typescript-eslint/no-var-requires': 'off',
-  //       '@typescript-eslint/explicit-function-return-type': 'off',
-  //       '@typescript-eslint/explicit-module-boundary-types': 'off',
-  //     },
-  //   },
-  // ],
 };
