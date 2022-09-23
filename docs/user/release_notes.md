@@ -8,6 +8,16 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2022/??/??
+
+**firmware release date: 2022-??-??**
+
+**Changes:**
+
+- (feature) Added the `brewblox-ctl esptool` command. This wraps `esptool.py`, and is a management tool for the Spark 4.
+- (feature) Tilt services can now directly push temperatures to *Temp Sensor (External)* blocks.
+- (improve) `brewblox-ctl up` now ignores the `-d` option. It always calls `docker-compose up -d`.
+
 ## Brewblox release 2022/09/21
 
 **firmware release date: 2022-09-21**
