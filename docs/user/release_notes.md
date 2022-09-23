@@ -18,6 +18,7 @@ Relevant links:
 - (feature) Tilt services can now directly push temperatures to *Temp Sensor (External)* blocks.
 - (improve) `brewblox-ctl up` now ignores the `-d` option. It always calls `docker-compose up -d`.
 - (improve) Removed the somewhat confusing `--force/-f` flag from `brewblox-ctl add-spark / add-tilt / add-node-red`. Commands now prompt to say they'll create/overwrite.
+- (fix) Fixed graph sidepanel for the *Temp Sensor (External)* block widget.
 
 ## Brewblox release 2022/09/21
 
