@@ -8,7 +8,7 @@ Setting it up is easy.
 Navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and run this command in your terminal:
 
 ```bash
-brewblox-ctl add-spark --name spark-one --force --simulation
+brewblox-ctl add-spark --name spark-one --simulation
 ```
 
 ## Using multiple Simulation services
@@ -18,7 +18,7 @@ To add more simulation services, run the above command again, but replace *spark
 Example:
 
 ```bash
-brewblox-ctl add-spark --name spark-two --force --simulation
+brewblox-ctl add-spark --name spark-two --simulation
 ```
 
 ## Converting a service
@@ -28,7 +28,7 @@ Blocks and block names defined by a simulation service will not be used by a non
 If you originally set up the system with a *spark-one* simulation service, you can convert it to a non-simulation service by running the following command:
 
 ```bash
-brewblox-ctl add-spark --name spark-one --force
+brewblox-ctl add-spark --name spark-one
 ```
 
 The simulation blocks will be kept, but not used by the Spark controller.

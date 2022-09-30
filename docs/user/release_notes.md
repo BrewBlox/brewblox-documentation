@@ -271,7 +271,7 @@ For a comprehensive overview of changes, see <https://github.com/BrewBlox/brewbl
 For setup and calibration instructions, see <https://github.com/BrewBlox/brewblox-tilt>.
 
 **Note:** if Tilt data does not show up in the UI after updating, you may still be using the original third-party Tilt service.
-To fix this, run `brewblox-ctl add-tilt -f`.
+To fix this, run `brewblox-ctl add-tilt`.
 
 **Changes:**
 
@@ -451,7 +451,7 @@ James Sandford's brewblox-tilt service has been very popular for some years now,
 James was happy for us to take over development and maintenance, so we [forked his service](https://github.com/BrewBlox/brewblox-tilt).
 The new service comes with support for the Tilt Pro.
 
-You can install the new Tilt service by running `brewblox-ctl add-tilt -f`.
+You can install the new Tilt service by running `brewblox-ctl add-tilt`.
 
 ### Graphical config editor
 
@@ -1382,7 +1382,7 @@ The code used by the simulator is the actual firmware code running on the Spark,
 From now on, the simulator is embedded in the devcon container. If you used the preview simulator, please update by running
 
 ```sh
-brewblox-ctl add-spark --name spark-sim --force --simulation
+brewblox-ctl add-spark --name spark-sim --simulation
 ```
 
 ### New MDNS library (firmware)

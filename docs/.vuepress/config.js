@@ -75,6 +75,8 @@ module.exports = {
           children: [
             'decisions/',
             // Decisions are sorted descending by date.
+            'decisions/20220922_desired_stored',
+            'decisions/20220527_sequence_block',
             'decisions/20211123_automation_replacements',
             'decisions/20211101_unified_brewblox_ctl',
             'decisions/20210929_python_upgrade',
@@ -117,7 +119,6 @@ module.exports = {
             'decisions/20180206_data_stories',
             'decisions/20180206_block_stories',
             'decisions/20180206_component_definitions',
-            'decisions/20220527_sequence_block',
           ],
         },
       ],

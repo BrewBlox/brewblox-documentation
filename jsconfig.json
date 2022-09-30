@@ -3,6 +3,10 @@
     "module": "commonjs",
     "target": "es6"
   },
+  "include": [
+    "docs/.vuepress/**/*.js",
+    "docs/.vuepress/**/*.vue"
+  ],
   "exclude": [
     "node_modules",
     ".cache",
