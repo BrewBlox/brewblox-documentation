@@ -3,7 +3,7 @@
   publish = "docs/.vuepress/dist"
 
 [build.environment]
-NODE_VERSION = 16
+NODE_VERSION = "16"
 
 [[redirects]]
   from = "/install"
