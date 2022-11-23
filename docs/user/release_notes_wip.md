@@ -5,4 +5,3 @@
 **firmware release date: 2022-??-??**
 
 **Changes:**
-

@@ -3,7 +3,7 @@
 A central component of Brewblox systems is the Spark controller.
 Custom services that wish to read or write blocks will typically interface with the Spark service API to do so.
 
-This document assumes familiarity with the [Block data types](../reference/block_types.md).
+This document assumes familiarity with the [Block data types](./block_types.md).
 
 :::tip
 Spark service endpoints are documented using Swagger.
@@ -26,7 +26,7 @@ Patch functions merge the patch with the last known state of the block, and then
 
 Readonly values can safely be included or omitted when writing blocks: they will be silently ignored.
 
-## CRUD endpoints
+## Endpoints
 
 The block API endpoints for CRUD operations are:
 
@@ -38,11 +38,72 @@ The block API endpoints for CRUD operations are:
 - POST `/{SERVICE_ID}/blocks/all/read`
 - POST `/{SERVICE_ID}/blocks/all/delete`
 
+## Payload
+
 The `create`, `write`, and `patch` endpoints should be called with a block as request body.
 For the `create` and `write` functions, `Block.data` should be complete.
-For `patch`, this field will be merged with the last known values.
+For `patch`, fields not written will remain unchanged.
 
-`read` and `delete` can also be called with a block as request body, but `{ id: string; }` suffices.
+Any readonly fields in `Block.data` will be ignored.
+
+<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#Block
+
+As an example, to **create** a new *Setpoint* block:
+
+```json
+{
+  "id": "Beer Setpoint",
+  "serviceId": "spark-one",
+  "type": "SetpointSensorPair",
+  "data": {
+    "enabled": true,
+    "storedSetting": {
+      "__bloxtype": "Quantity",
+      "unit": "degC",
+      "value": 20
+    },
+    "filter": "FILTER_15s",
+    "filterThreshold": {
+      "__bloxtype": "Quantity",
+      "unit": "delta_degC",
+      "value": 5
+    },
+    "sensorId": {
+      "__bloxtype": "Link",
+      "type": "TempSensorInterface",
+      "id": "Beer Sensor"
+    }
+  }
+}
+```
+
+Later, to change its setting in a **patch**:
+
+```json
+{
+  "id": "Beer Setpoint",
+  "serviceId": "spark-one",
+  "type": "SetpointSensorPair",
+  "data": {
+    "storedSetting": {
+      "__bloxtype": "Quantity",
+      "unit": "degC",
+      "value": 45
+    }
+  }
+}
+```
+
+`read` and `delete` can also be called with a block as request body, but everything apart from the ID is ignored.
+
+Example payload for a **read** request:
+
+```json
+{
+  "id": "Beer Setpoint",
+  "serviceId": "spark-one"
+}
+```
 
 The `create`, `read`, `write`, and `patch` endpoints all return a block.
 
@@ -92,7 +153,7 @@ Logged and stored data for one or more blocks can be fetched using the following
 
 ## Using State / history events
 
-The Spark service periodically emits [State](../reference/spark_state.md) and [History](../reference/history_events.md) events.
+The Spark service periodically emits [State](./spark_state.md) and [History](./history_events.md) events.
 The full spec is described in their respective documents, but there are some implications for using them in other services.
 
 State events are emitted every ~5s, and whenever the service disconnects.
@@ -118,10 +179,4 @@ Spark services listen to the following MQTT topics:
 - `brewcast/spark/blocks/delete`
 
 All listeners expect a JSON-serialized body as payload.
-The argument requirements are the same as those of their REST counterparts, with one exception.
-
-In contrast with the REST API, the topics do not include service IDs.
-The JSON payload for all events must include the `serviceId` field.
-
-The `Block` interface already includes `serviceId`, so this changes nothing for the `create`, `write`, and `patch` endpoints.
-The `delete` endpoint now requires an object matching `{ serviceId: string; id: string; }`.
+The argument requirements are the same as those of their REST counterparts.

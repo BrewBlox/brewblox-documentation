@@ -16,16 +16,7 @@ On your Pi, create a new directory `serialscript`. In it, create two files:
 
 **Dockerfile**
 
-```Dockerfile
-FROM python:3.7-slim
-
-COPY script.py /app/script.py
-
-RUN pip3 install pyserial
-
-CMD ["python3", "-u", "/app/script.py"]
-
-```
+<<< @/docs/dev/tutorials/serialscript/Dockerfile
 
 ## Building
 

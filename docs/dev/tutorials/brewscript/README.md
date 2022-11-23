@@ -40,22 +40,7 @@ Every container started from the same image is identical.
 
 Copy the code below to `brewscript/Dockerfile`, and we'll get started using it.
 
-```Dockerfile
-# We use the official `python` image as base.
-FROM python:3.7-slim
-
-# Copy the python script into the image
-# Syntax: `COPY [SOURCE] [DESTINATION]`
-COPY script.py /app/script.py
-
-# We need to run commands while building the image
-# This will install the `requests` package so we can use it in script.py
-RUN pip3 install requests
-
-# The command is executed when the container starts
-CMD ["python3", "-u", "/app/script.py"]
-
-```
+<<< @/docs/dev/tutorials/brewscript/Dockerfile
 
 ## Building
 
