@@ -30,14 +30,11 @@ The behavior remains the same, but it's now easy to spot that a *PWM* is Inactiv
 Status dots are shown in the relations diagram and in Builder parts that are linked to blocks.
 In future updates, we'll also introduce them in block widgets, along with UI components that explain why the block is not Active.
 
-### Builder part rendering
-
 **Changes:**
 
 - (feature) Added the `brewblox-ctl esptool` command. This wraps `esptool.py`, and is a management tool for the ESP32 chips found in the Spark 4.
 - (feature) Tilt services can now directly sync temperatures to *Temp Sensor (External)* blocks.
 - (feature) The Spark relations diagram and Builder parts now show a status dot for blocks.
-
 - (feature) Reworked multiple Builder parts to have a more consistent layout.
 - (improve) `brewblox-ctl up` now ignores the `-d` option. It always calls `docker-compose up -d`.
 - (improve) Removed the somewhat confusing `--force/-f` flag from `brewblox-ctl add-spark / add-tilt / add-node-red`. Commands now prompt to say they'll create/overwrite.
