@@ -89,7 +89,7 @@ These arguments can be used both in the `docker-compose.yml` file, and with the 
 
 * Use `--discovery=usb`
 
-:::warn
+::: warning
 The Spark 4 does not support USB connections.
 `--discovery=wifi` is compatible with both ethernet and Wifi.
 :::

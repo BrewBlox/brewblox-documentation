@@ -8,6 +8,51 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2022/11/23
+
+**firmware release date: 2022-11-22**
+
+After the previous release, we spent some time fixing the inevitable issues that crop up after a big release.
+Things have settled down again, and we started work on UI improvements.
+
+### Block status icons
+
+Blocks are rendered in multiple places throughout the UI, but often without a clear indication of whether the block is active.
+To remedy this, we introduced status dots that use traffic light colors to indicate whether a block is Active, Inactive, Invalid or Disabled.
+
+- Green -> Active -> block has valid output.
+- Orange -> Inactive -> input or claiming block is Invalid or Disabled.
+- Red -> Invalid -> block configuration must be fixed (is there no link to input/output block?).
+- Grey -> Disabled -> block is disabled by user.
+
+The behavior remains the same, but it's now easy to spot that a *PWM* is Inactive because the *Setpoint* is Disabled.
+
+Status dots are shown in the relations diagram and in Builder parts that are linked to blocks.
+In future updates, we'll also introduce them in block widgets, along with UI components that explain why the block is not Active.
+
+### Builder part rendering
+
+**Changes:**
+
+- (feature) Added the `brewblox-ctl esptool` command. This wraps `esptool.py`, and is a management tool for the ESP32 chips found in the Spark 4.
+- (feature) Tilt services can now directly sync temperatures to *Temp Sensor (External)* blocks.
+- (feature) The Spark relations diagram and Builder parts now show a status dot for blocks.
+
+- (feature) Reworked multiple Builder parts to have a more consistent layout.
+- (improve) `brewblox-ctl up` now ignores the `-d` option. It always calls `docker-compose up -d`.
+- (improve) Removed the somewhat confusing `--force/-f` flag from `brewblox-ctl add-spark / add-tilt / add-node-red`. Commands now prompt to say they'll create/overwrite.
+- (improve) Added a confirmation dialog when closing the *Sequence* editor with unsaved changes.
+- (improve) Editing Builder parts or PID input will now open a dialog for the (input) block itself, not the claiming block.
+- (improve) History now immediately writes received data to the database.
+- (improve) The PID now more predictably opens its input block dialog.
+- (remove) The `--write-interval` for the history service is removed because all data is written immediately.
+- (fix) Removed bugged folder creation functionality from the dashboard wizard.
+- (fix) Builder flows now re-render when a soft start actuator is toggled.
+- (fix) The Spark 2/3 display now re-renders when the display temperature unit is changed.
+- (fix) Fixed graph sidepanel for the *Temp Sensor (External)* block widget.
+- (fix) The Quick Actions widget now automatically updates actions that edited the "enabled" field for Setpoint blocks.
+- (fix) The Quick Actions widget no longer sometimes erronously converts actions from F to C on startup. The conversion has become a manual action.
+
 ## Brewblox release 2022/09/21
 
 **firmware release date: 2022-09-21**
