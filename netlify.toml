@@ -3,7 +3,7 @@
   publish = "docs/.vuepress/dist"
 
 [build.environment]
-NODE_OPTIONS = "--openssl-legacy-provider"
+NODE_VERSION = 16
 
 [[redirects]]
   from = "/install"
