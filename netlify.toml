@@ -2,6 +2,9 @@
   command = "yarn build"
   publish = "docs/.vuepress/dist"
 
+[build.environment]
+NODE_OPTIONS = "--openssl-legacy-provider"
+
 [[redirects]]
   from = "/install"
   to = "https://raw.githubusercontent.com/BrewBlox/brewblox-ctl/edge/bootstrap-install.sh"
