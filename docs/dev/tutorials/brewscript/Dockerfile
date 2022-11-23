@@ -1,5 +1,5 @@
 # We use the official `python` image as base.
-FROM python:3.7-slim
+FROM python:3.9-slim
 
 # Copy the python script into the image
 # Syntax: `COPY [SOURCE] [DESTINATION]`

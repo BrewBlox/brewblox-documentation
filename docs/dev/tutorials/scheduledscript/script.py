@@ -17,7 +17,7 @@ from paho.mqtt import client as mqtt
 # Change this value if Brewblox is installed on a different computer
 HOST = '172.17.0.1'
 
-# 80 is the default port for HTTP, but this can be changed in brewblox env settings.
+# 1883 is the default port for MQTT, but this can be changed in brewblox env settings.
 PORT = 80
 
 # This is a constant value. You never need to change it.
@@ -27,9 +27,8 @@ HISTORY_TOPIC = 'brewcast/history'
 # We can make our topic more specific to help debugging
 TOPIC = HISTORY_TOPIC + '/scheduledscript'
 
-# Create a websocket MQTT client
-client = mqtt.Client(transport='websockets')
-client.ws_set_options(path='/eventbus')
+# Create the MQTT client
+client = mqtt.Client()
 
 
 def publish():
