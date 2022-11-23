@@ -11,6 +11,15 @@ Our first reply often consists of the same handful of questions. To save you som
 
 ## Known issues / workarounds
 
+### Fields don't show up in Graph widget settings
+
+Due to a bug in the history database, field presence and data are not always returned in queries.
+No data is lost - it just won't show up.
+we've raised the issue with Victoria Metrics, but this is unfortunately a problem that must be fixed on their end.
+
+A workaround is to change the "hide after" setting in the Graph widget a few times (between for example 1d, 30d, 100d).
+This can trigger the database to then correctly return fields and graph data.
+
 ### Installation fails with "E: Package 'python3-venv' has no installation candidate"
 
 For example:
