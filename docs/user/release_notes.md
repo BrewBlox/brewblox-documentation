@@ -2,9 +2,9 @@
 
 Relevant links:
 
-- User guides: <https://brewblox.netlify.app/>
+- User guides: <https://www.brewblox.com/>
 - Discord server: <https://discord.gg/WaFYD2jaaT>
-- Previous release notes: <https://brewblox.netlify.app/user/release_notes.html>
+- Previous release notes: <https://www.brewblox.com/user/release_notes.html>
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
@@ -471,17 +471,17 @@ This is a deal-breaker for us, as Raspberry Pi OS has a 32-bit architecture.
 
 We decided to go with [Victoria Metrics](https://github.com/VictoriaMetrics/VictoriaMetrics) as replacement,
 as it had the best combination of features and small CPU/RAM/disk footprint.
-For a more detailed explanation, you can find the decision document [here](https://brewblox.netlify.app/dev/decisions/20210718_victoria_metrics).
+For a more detailed explanation, you can find the decision document [here](https://www.brewblox.com/dev/decisions/20210718_victoria_metrics).
 
 Database migrations are always a big step, but we're pretty happy with this one.
 Broadly speaking, it's twice as fast, and uses half the memory.
 
 Where the InfluxDB data required some custom handling,
 the Victoria Metrics model is much simpler.
-It's simple enough that you can [add a Grafana service](https://brewblox.netlify.app/user/services/grafana), and have it work as expected out of the box.
+It's simple enough that you can [add a Grafana service](https://www.brewblox.com/user/services/grafana), and have it work as expected out of the box.
 
 Your system will be immediately functional after updating, and will log data into Victoria Metrics. Older data will have to be copied from InfluxDB to Victoria.
-For this, we made a [data migration command](https://brewblox.netlify.app/dev/migration/influxdb)
+For this, we made a [data migration command](https://www.brewblox.com/dev/migration/influxdb)
 
 You can run the migrate command in the background. Depending on how much data you have, the migration takes minutes to hours.
 Migrations can safely be stopped and restarted or resumed.
@@ -503,7 +503,7 @@ You'll still sometimes have to edit the configuration files themselves.
 Terminal text editors have a pretty steep learning curve, but by now the *Remote - SSH* plugin for Visual Studio Code is stable enough that we're happy recommending it.
 This way you read and edit text files from the comfort of your own computer.
 
-You can find the install guide [here](https://brewblox.netlify.app/user/config_editor.html).
+You can find the install guide [here](https://www.brewblox.com/user/config_editor.html).
 
 **Changes:**
 
@@ -660,7 +660,7 @@ We feel that this provides better overview for novice users, but any and all fee
 On the backend, the MQTT eventbus port (1883) is now exposed by default to reduce required setup steps for various integrations.
 If this causes a port conflict (or you simply don't want to expose the port) you can override this setting using brewblox-ctl or the docker-compose.yml file.
 
-For those wishing for remote access, we added a [tutorial for setting up a Wireguard VPN](https://brewblox.netlify.app/user/wireguard.html).
+For those wishing for remote access, we added a [tutorial for setting up a Wireguard VPN](https://www.brewblox.com/user/wireguard.html).
 Many thanks to Douwe Houvast for the preparatory work!
 
 We're still planning to support secure remote access natively, but a VPN is a decent workaround until we find the time to do it right.
@@ -837,8 +837,8 @@ The service page will show all currently publishing Tilt devices.
 - (feature) Builder value display parts now have a setting to toggle rendering the part border.
 - (feature) Node-red data is now included in `brewblox-ctl backup save`.
 - (feature) The touch delay in brewery layouts is now configurable using the admin page. Options are: *Always*, *Never*, *Only on mobile*. It defaults to *Only on mobile*.
-- (docs) Updated and split the documentation for [history](https://brewblox.netlify.app/dev/reference/history_events) and [state](https://brewblox.netlify.app/dev/reference/state_events) events.
-- (docs) Added a [Fermentation fridge guide](https://brewblox.netlify.app/user/ferment_guide) for new users.
+- (docs) Updated and split the documentation for [history](https://www.brewblox.com/dev/reference/history_events) and [state](https://www.brewblox.com/dev/reference/state_events) events.
+- (docs) Added a [Fermentation fridge guide](https://www.brewblox.com/user/ferment_guide) for new users.
 - (enhancement) Replaced the "Waiting for datastore" notification with a spinner shown in the current page.
 - (enhancement) The Setpoint Driver widget now also shows the setting field.
 - (enhancement) Improved error messages when network calls failed.
@@ -971,7 +971,7 @@ For those unsure of which Raspbian version they're using: *brewblox-ctl* will wa
 but depends on other software projects that have announced they will soon no longer be compatible with Python 3.5.
 
 We added commands to *brewblox-ctl* to make it easy to move your Brewblox installation without losing any settings or history data.
-For more information, see [our system upgrade guide](https://brewblox.netlify.app/user/system_upgrades).
+For more information, see [our system upgrade guide](https://www.brewblox.com/user/system_upgrades).
 
 The PWM block has also received a minor rework, both in firmware, and in the UI.
 In the firmware, we fixed an issue where the PWM overcompensated for setting changes after it had spent a long period at either 0% or 100%.
@@ -986,9 +986,9 @@ It will be some time before we find the time to significantly extend this servic
 **Changes**
 
 - (docs) Added system upgrade guide.
-  - <https://brewblox.netlify.app/user/system_upgrades>
+  - <https://www.brewblox.com/user/system_upgrades>
 - (docs) Added service architecture doc.
-  - <https://brewblox.netlify.app/dev/service/architecture>
+  - <https://www.brewblox.com/dev/service/architecture>
 - (feature) Added the `brewblox-ctl init` command. This creates a brewblox dir. It is also part of `brewblox-ctl install`.
 - (feature) Added the `brewblox-ctl snapshot save` command. This zips the entire brewblox dir. It is more complete, but also takes much more space than `brewblox-ctl backup save`.
 - (feature) Added the `brewblox-ctl snapshot load` command. This restores snapshots created by `brewblox-ctl snapshot save`. You can also use `brewblox-ctl install --snapshot ARCHIVE`.
@@ -1016,7 +1016,7 @@ It will be some time before we find the time to significantly extend this servic
 **firmware release date: 2020/09/22**
 
 After one too many "Waiting for datastore..." notification, we decided to go looking for a replacement.
-[We evaluated multiple candidates](https://brewblox.netlify.app/dev/decisions/20200902_redis_datastore.html), and decided to try Redis as a replacement.
+[We evaluated multiple candidates](https://www.brewblox.com/dev/decisions/20200902_redis_datastore.html), and decided to try Redis as a replacement.
 This trial was a success. For our purposes, Redis is simpler, faster, and more reliable than CouchDB.
 
 Your data will be migrated automatically, and the old CouchDB data will be moved to `brewblox/couchdb-migrated-{DATE}`.
@@ -1104,7 +1104,7 @@ We also added two more Quickstart wizards, and gave the block / block widget wiz
 While implementing automation functionality, the limitations of a fully UI-based configuration became noticeable.
 If the action or condition is repetitive, complicated, or uncommon, then it quickly becomes cumbersome or even impossible to configure.
 
-Our solution is to implement an optional [JavaScript sandbox](https://brewblox.netlify.app/user/services/automation_sandbox) for actions and conditions.
+Our solution is to implement an optional [JavaScript sandbox](https://www.brewblox.com/user/services/automation_sandbox) for actions and conditions.
 
 Some of the highlights:
 
@@ -1134,7 +1134,7 @@ For example, the `qty(value, unit)` function helps you write conditions where un
 ### Block types
 
 With the introduction of the automation scripting sandbox, users can now access the raw block data.
-To help with that, we're declaring blocks a public interface, and added [reference documentation](https://brewblox.netlify.app/dev/reference/block_types.html).\
+To help with that, we're declaring blocks a public interface, and added [reference documentation](https://www.brewblox.com/dev/reference/block_types.html).\
 Starting with the next release, we'll use a deprecation period if we have to make any breaking changes to block data types.
 
 ### Eventbus migration
@@ -1161,7 +1161,7 @@ Previously, Brewblox used a separate service to do Wifi discovery of Spark contr
 We've revisited this design, and replaced it with a change to the avahi-daemon configuration on the host.
 
 This means we now have one less service, and **no longer use port 5000**.
-For more details, see [the decision document](https://brewblox.netlify.app/dev/decisions/20200822_avahi_reflection.html).
+For more details, see [the decision document](https://www.brewblox.com/dev/decisions/20200822_avahi_reflection.html).
 
 This change does depend on the host environment and network layout.
 The change to Avahi settings is kept optional, and we mapped multiple alternatives.
@@ -1208,14 +1208,14 @@ and optionally add a widget for displaying your block on a dashboard.
 - (improve) If the PID is controlling a Setpoint Driver, values in *PID* and *Setpoint Driver* parts are automatically converted to user temp units.
   - The underlying value is still unitless degC.
 - (improve) Added a *Setpoint Driver* part to the Builder layout generated by the *HERMS* Quickstart wizard.
-- (feature) `brewblox-ctl setup` and `brewblox-ctl update` [enable reflection in the avahi-daemon config](https://brewblox.netlify.app/dev/decisions/20200822_avahi_reflection.html). This removes the need for a separate `mdns` service.
+- (feature) `brewblox-ctl setup` and `brewblox-ctl update` [enable reflection in the avahi-daemon config](https://www.brewblox.com/dev/decisions/20200822_avahi_reflection.html). This removes the need for a separate `mdns` service.
 - (remove) Removed the `mdns` service.
 - (improve) The Spark service no longer relies on the `mdns` service for Wifi device discovery.
 - (improve) Spark device discovery in `brewblox-ctl` no longer requires pulling and running an `mdns` container.
 - (improve) Removed the `--mdns-port` setting from `brewblox-ctl service ports`.
 - (documentation) Added documentation for the state/history events published by the Spark service.
   - These events are now considered a public interface, meaning we'll strive to make any changes backwards compatible. A deprecation period will be used if this is impossible.
-- (documentation) Added documentation for block types. You can find it at <https://brewblox.netlify.app/dev/reference/block_types.html>.
+- (documentation) Added documentation for block types. You can find it at <https://www.brewblox.com/dev/reference/block_types.html>.
   - Blocks are now also considered a public interface spec.
 - (improve) Updated traefik and traefik label syntax to v2.
 - (feature) The *DS2408* block can now toggle between Valve mode and Actuator mode.
@@ -1307,12 +1307,12 @@ While evaluating what will be next for the automation service, we spent this rel
 
 The biggest change is that we decided to use a different protocol for eventbus messages (used to publish history data).
 The short version is that the MQTT protocol is more lightweight, and can be used by external scripts and services without exposing the 5672 port.
-The details of the how and why are described [here](https://brewblox.netlify.app/dev/decisions/20200530_mqtt_events.html) and [here](https://brewblox.netlify.app/dev/decisions/20200606_replacing_rabbitmq.html).
+The details of the how and why are described [here](https://www.brewblox.com/dev/decisions/20200530_mqtt_events.html) and [here](https://www.brewblox.com/dev/decisions/20200606_replacing_rabbitmq.html).
 
 The existing protocol will be supported until **2020/09/15**.
 
 After that, services and scripts that publish history data will have to use MQTT to be compatible.
-We updated the [boilerplate repository](https://github.com/BrewBlox/brewblox-boilerplate/blob/develop/YOUR_PACKAGE/publish_example.py) and the [script tutorials](https://brewblox.netlify.app/dev/tutorials/pubscript/) to provide code examples.
+We updated the [boilerplate repository](https://github.com/BrewBlox/brewblox-boilerplate/blob/develop/YOUR_PACKAGE/publish_example.py) and the [script tutorials](https://www.brewblox.com/dev/tutorials/pubscript/) to provide code examples.
 
 The immediate advantage is that Brewblox needs one less Docker container: the *emitter* service was used to convert AMQP events to a protocol usable by the UI.
 The UI can now subscribe directly to MQTT events, eliminating the need for the emitter service.
@@ -1368,7 +1368,7 @@ The automation service is and will be completely optional.
 We'll make an announcement when the automation service is sufficiently polished and stable for general release.
 For now you'll see release notes split between regular changes, and those concerning automation.
 
-For those wanting to try the preview version, we added a short [guide](https://brewblox.netlify.app/user/services/automation).
+For those wanting to try the preview version, we added a short [guide](https://www.brewblox.com/user/services/automation).
 
 **Changes**
 
@@ -1398,7 +1398,7 @@ We also added a new command to brewblox-ctl: `brewblox-ctl service expose`. This
 So far, the most common use case is to expose the eventbus port.
 You can do this by running `brewblox-ctl service expose eventbus 5672:5672`.
 
-Earlier this week, we also published some tutorials for adding straightforward scripts that interact with Brewblox. You can check them out at <https://brewblox.netlify.app/dev/>.
+Earlier this week, we also published some tutorials for adding straightforward scripts that interact with Brewblox. You can check them out at <https://www.brewblox.com/dev/>.
 
 **Changes:**
 
