@@ -8,6 +8,65 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2022/12/06
+
+**firmware release date: 2022-11-22**
+
+For this release, we improved how data is stored in Brewblox.
+Spark services regularly export block data to file, making it easy to restore blocks after reinstalling the system or resetting the controller.
+
+### Automatic block backups
+
+All Brewblox configuration data is stored in the `brewblox/` directory, with the exception of the Spark blocks, which are stored on the controller.
+This meant that you wanted to restore your system from a snapshot, you needed to run `brewblox-ctl backup save` before creating the snapshot.
+Likewise, you needed to create regular backups to recover data if a controller broke or had to have its flash memory wiped.
+
+To reliably create data backups before you need them, the Spark service now automatically generates backups.
+The backups are stored in `brewblox/spark/backup/{service}`, and will be automatically included in snapshots.
+
+A new backup is created five minutes after service startup, and then every hour. The filename includes the date. This means a new file will be created every day, and that the latest file will be overwritten every hour.
+
+You can load, create, download, and upload backup files using the *Controller backups* Spark service action (found in the admin page).
+
+If you have loaded a backup from a controller with different OneWire sensors, you can use the *Swap OneWire address* action in the *Temp Sensor (OneWire)* block to link the named sensor block with the physically present sensor.
+
+### Builder changes
+
+We made some changes to how Builder parts are rendered. Some of these changes are instantly noticeable, and some of them will be used in future releases.
+
+Builder parts that have no pipes now allow for more freedom in scaling.
+Height and width are adjustable, and the part will be rendered inside the available area while preserving aspect ratio.
+
+A 1x1 element such as *Display: PID* will be centered in a 2x1 part, and scaled in a 2x2 part.
+
+Additionally, parts can now have multiple interaction (click) handlers.
+For now, this results in being able to edit Fridge / Kettle labels without having to visit the editor page.
+We're looking at various other parts, such as the Conical, that would benefit from having inline displays of multiple blocks.
+
+**Changes:**
+
+- (feature) The Spark service now automatically generates backup files.
+  - A new file is created every day.
+  - The latest backup file is overwritten every hour.
+  - Files are stored in `brewblox/spark/backup/{service}`.
+  - To load or create backup files, use the *Controller backups* Spark service action.
+- (feature) The Kettle / Fridge labels are now editable by clicking on the top row of the part.
+- (feature) Replaced scaling with width/height sliders for Builder parts. Aspect ratio is preserved for parts that can't be stretched. Affected parts:
+  - Beer bottle
+  - Conical
+  - Display: PID
+  - Display: PWM
+  - Display: Setpoint
+  - Display: Setpoint Driver
+  - Display: Setpoint Profile
+  - Display: Temp Sensor
+  - Display: Tilt
+  - Keg
+- (improve) Changed background color to a neutral dark on all UI notifications to improve readability.
+- (fix) *Quick Actions* correctly store the new value for actions with confirmed values.
+- (fix) Various input fields and dialogs now correctly handle null values.
+- (remove) Removed the "export pin names" Spark service action.
+
 ## Brewblox release 2022/11/23
 
 **firmware release date: 2022-11-22**
