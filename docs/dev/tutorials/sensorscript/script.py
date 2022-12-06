@@ -23,7 +23,7 @@ API_TOPIC = 'brewcast/spark/blocks'
 
 # We'll be using the 'patch' command
 # 'create', 'write', and 'delete' are also available
-# https://brewblox.netlify.app/dev/reference/blocks_api.html
+# https://www.brewblox.com/dev/reference/blocks_api.html
 TOPIC = API_TOPIC + '/patch'
 
 # Create a websocket MQTT client
@@ -50,7 +50,7 @@ try:
             # The unique service name
             'serviceId': 'spark-one',
 
-            # https://brewblox.netlify.app/dev/reference/block_types.html#tempsensorexternal
+            # https://www.brewblox.com/dev/reference/block_types.html#tempsensorexternal
             'type': 'TempSensorExternal',
 
             # We only write the field we want to change
