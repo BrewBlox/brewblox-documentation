@@ -52,6 +52,28 @@ Device names must:
 
 If device names do not meet these criteria, they will be sanitized on startup.
 
+### Sensor synchronization
+
+Measured values can be pushed to Spark *Temp Sensor (External)* blocks.
+To set this up, create the block, and add an entry under `sync` to the `./tilt/devices.yml` file
+
+```yaml
+names:
+  DD7F97FC141E: Purple
+  AA7F97FC141E: Red
+sync:
+  - type: TempSensorExternal
+    tilt: Purple
+    service: spark-one
+    block: Purple Tilt Sensor
+```
+
+**sync** is a list of objects. Each object should have the following fields:
+
+- **type** is a constant value.
+- **service** is the Service ID of your Spark service.
+- **block** is the block ID of your *Temp Sensor (External)* block.
+
 ## Calibration
 
 Calibration is optional. While the Tilt provides a good indication of fermentation progress without calibration, it's values can be less accurate than a traditional hydrometer. With calibration its accuracy is approximately that of a traditional hydrometer. If you wish to use your Tilt for anything beyond simple tracking of fermentation progress (e.g. stepping temperatures at a given SG value) it is recommended you calibrate your Tilt.
