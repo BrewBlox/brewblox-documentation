@@ -8,6 +8,30 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2022/12/14
+
+**firmware release date: 2022-11-22**
+
+This is a smaller release that includes a workaround for a bug in the history database.
+
+Sometimes, field presence and graph data are not returned in queries.
+No data is lost, and the field will reappear when the database refreshes its cache.
+The problem is still rather annoying, as it causes one or more graph fields to go inexplicably missing for extended periods.
+
+The bug itself is something that has to be fixed by the database vendor.
+This release includes a workaround on our side that should reduce or resolve the problem.
+
+If you continue to have problems with missing fields or graph data, please let us know.
+
+**Changes:**
+
+- (feature) Graph widgets can now import their settings from Session Log graphs. This is a one-time copy of settings.
+- (improve) PWM pumps in the Builder now open the PWM dialog on interact, not just a value dialog.
+- (fix) Applied a workaround for the history bug where graph fields would go missing for extended periods.
+- (fix) The Metrics Display part now renders correctly in Safari browsers.
+- (fix) The Temp Sensor Display part now correctly shows its border.
+- (fix) Fixed an issue where the border setting for Builder parts could not be toggled.
+
 ## Brewblox release 2022/12/06
 
 **firmware release date: 2022-11-22**
