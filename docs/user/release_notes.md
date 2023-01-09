@@ -44,9 +44,10 @@ Derivative of P * Td = D
 - (improve) Parts in the "new part" dialog in the Builder editor now show placeholder values instead of "block not found" errors.
 - (improve) The PID now always gradually decreases the integrator, instead of instantly resetting it to 0.
 - (docs) Moved all Tilt service documentation to brewblox.com.
-- (fix) When cached PID values are loaded after controller reboot, they are no longer immediately reset.
+- (fix) When cached PID itegral values are loaded after controller reboot, they are no longer immediately reset.
 - (fix) onscreen keyboards now again correctly spawn a numpad layout for numbers and quantities.
 - (fix) fixed rendering error where onscreen keyboards would have a small horizontal scroll bar.
+- (fix) PWM on the OneWire GPIO module now correctly goes to 100%, instead of 99.2%.
 - (remove) Removed the "Edit Settings" tool from the Builder editor. Part settings are now editable in context menus (right click / long press).
 - (remove) Removed support for the automation widget from the UI.
 
