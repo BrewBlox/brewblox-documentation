@@ -8,6 +8,49 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2023/01/09
+
+**firmware release date: 2023-01-06**
+
+We've continued our work on improving the Builder. This release this includes a rework of how part settings are edited.
+In both the editor, and layout widgets or pages, you can right click (long press for mobile) on parts to show their settings in a context menu.
+Parts that have settings are highlighted on hover.
+
+In another change, we've also simplified how the PID calculation is presented.
+The *integral* and *derivative* are now unitless values derived from *P*.
+This changes the calculation overview from:
+
+```text
+Error      * Kp      = P
+Integral   * Kp / Ti = I
+Derivative * Kp * Td = D
+```
+
+to:
+
+```text
+Error           * Kp = P
+Integral of P   / Ti = I
+Derivative of P * Td = D
+```
+
+**Changes:**
+
+- (feature) Builder part settings are now editable in context menus (right click / long press).
+- (feature) Simplified the PID calculation display by making I and D based on P, and not Kp.
+- (feature) Added the option to export graphs as PNG with transparent background.
+- (feature) Pump parts in builder now have a configurable on-click behavior: toggle or show dialog. Toggled PWM blocks are enabled / disabled.
+- (feature) Added the *Display: Image* Builder part. This shows a given JPG/PNG/SVG image URL in the builder.
+- (improve) Parts in the "new part" dialog in the Builder editor now show placeholder values instead of "block not found" errors.
+- (improve) The PID now always gradually decreases the integrator, instead of instantly resetting it to 0.
+- (docs) Moved all Tilt service documentation to brewblox.com.
+- (fix) When cached PID itegral values are loaded after controller reboot, they are no longer immediately reset.
+- (fix) onscreen keyboards now again correctly spawn a numpad layout for numbers and quantities.
+- (fix) fixed rendering error where onscreen keyboards would have a small horizontal scroll bar.
+- (fix) PWM on the OneWire GPIO module now correctly goes to 100%, instead of 99.2%.
+- (remove) Removed the "Edit Settings" tool from the Builder editor. Part settings are now editable in context menus (right click / long press).
+- (remove) Removed support for the automation widget from the UI.
+
 ## Brewblox release 2022/12/14
 
 **firmware release date: 2022-11-22**

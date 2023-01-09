@@ -25,9 +25,9 @@ a message will be published where `data` is null.
 `data.blocks` lists all blocks on the controller.
 The interfaces for all block types are documented [here](./block_types.md).
 
-`data.relations` and `data.drive_chains` contain calculated block metadata.
+`data.relations` and `data.claims` contain calculated block metadata.
 Relations can be used to graph the links between blocks,
-and drive chains indicate active control chains.
+and claims indicate active control chains.
 
 ## Spark status
 
@@ -76,15 +76,15 @@ While typically the block that defines the link is considered the relation *sour
 For example, the *PID* block has a link to its input *Setpoint*,
 but for the purposes of the control chain, the Setpoint is considered the source, and the PID the target.
 
-## Drive chains
+## Claims
 
-<<< @/node_modules/brewblox-proto/ts/spark-service-types.ts#BlockDriveChain
+<<< @/node_modules/brewblox-proto/ts/spark-service-types.ts#BlockClaim
 
-When one block is actively and exclusively controlling another block, this is referred to as *driving*.
-Driving blocks may in turn be driven by another block (a *Digital Actuator* is driven by a *PWM* which is driven by a *PID*).
+When one block is actively and exclusively controlling another block, this is referred to as a *claim*.
+Claiming blocks may in turn be claimed by another block (a *Digital Actuator* is claimed by a *PWM* which is claimed by a *PID*).
 
-These drive chains are analyzed, and published as part of the service state.
-A chain is generated for every combination of driven block and initial driver (a driving block that is not driven).
+These claims are analyzed, and published as part of the service state.
+A *BlockClaim* is generated for every combination of claimed block and initial claimer (a claiming block that is not claimed itself).
 
 Given a typical fermentation control scheme with these blocks...
 
@@ -96,7 +96,7 @@ Given a typical fermentation control scheme with these blocks...
 - Cool Actuator
 - Spark Pins
 
-...the following drive chains will be generated
+...the following *BlockClaim* objects will be generated
 
 - target=Spark Pins, source=Heat PID, intermediate=[Heat Actuator, Heat PWM]
 - target=Heat Actuator, source=Heat PID, intermediate=[Heat PWM]
