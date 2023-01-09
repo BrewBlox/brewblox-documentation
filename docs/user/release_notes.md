@@ -40,6 +40,7 @@ Derivative of P * Td = D
 - (feature) Simplified the PID calculation display by making I and D based on P, and not Kp.
 - (feature) Added the option to export graphs as PNG with transparent background.
 - (feature) Pump parts in builder now have a configurable on-click behavior: toggle or show dialog. Toggled PWM blocks are enabled / disabled.
+- (feature) Added the *Display: Image* Builder part. This shows a given JPG/PNG/SVG image URL in the builder.
 - (improve) Parts in the "new part" dialog in the Builder editor now show placeholder values instead of "block not found" errors.
 - (improve) The PID now always gradually decreases the integrator, instead of instantly resetting it to 0.
 - (docs) Moved all Tilt service documentation to brewblox.com.
