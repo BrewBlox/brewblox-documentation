@@ -27,6 +27,7 @@ You can also use this to copy or move parts between layouts.
 - (improve) The Sequence line parser now raises an error when a delta temperature value is used in an absolute temperature field, and vice versa.
 - (docs) Removed obsolete sections from Tilt service documentation.
 - (fix) Resolved an issue where the Spark service would fail to parse some blocks when generating backups.
+- (fix) Blocks now immediately unclaim their target when disabled in a Sequence instruction.
 - (fix) The UI no longer redirects to a 404 page when removing the current Builder layout.
 
 ## Brewblox release 2023/01/09
