@@ -8,7 +8,7 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
-## Brewblox release 2023/01/25
+## Brewblox release 2023/01/26
 
 **firmware release date: 2023-01-11**
 
@@ -25,6 +25,7 @@ You can also use this to copy or move parts between layouts.
 - (improve) The Builder is now much more precise in determining what parts should be re-rendered when settings are changed.
 - (improve) The "Import layout" and "New layout" actions are now shown in more locations.
 - (improve) The Sequence line parser now raises an error when a delta temperature value is used in an absolute temperature field, and vice versa.
+- (improve) When picking up Builder parts, the cursor is now centered instead of in the top-left square.
 - (docs) Removed obsolete sections from Tilt service documentation.
 - (fix) Resolved an issue where the Spark service would fail to parse some blocks when generating backups.
 - (fix) Blocks now immediately unclaim their target when disabled in a Sequence instruction.
