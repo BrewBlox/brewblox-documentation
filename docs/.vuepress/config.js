@@ -76,6 +76,7 @@ module.exports = {
           children: [
             'decisions/',
             // Decisions are sorted descending by date.
+            'decisions/20230123_builder_reactivity',
             'decisions/20220922_desired_stored',
             'decisions/20220527_sequence_block',
             'decisions/20211123_automation_replacements',

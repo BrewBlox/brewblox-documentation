@@ -8,6 +8,29 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2023/01/26
+
+**firmware release date: 2023-01-11**
+
+After some technical tweaks, we can now properly render graphs in Builder layouts - without the graph being reloaded when a neighboring valve opens.
+
+As an added bonus, copy / cut / paste keyboard shortcuts are now supported in the Builder editor.
+You can also use this to copy or move parts between layouts.
+
+**Changes**
+
+- (feature) Added the `Display: Graph` Builder part.
+- (feature) Added the `Display: iframe` Builder part.
+- (feature) Copy / cut / paste keyboards shortcuts are now supported in the Builder editor.
+- (improve) The Builder is now much more precise in determining what parts should be re-rendered when settings are changed.
+- (improve) The "Import layout" and "New layout" actions are now shown in more locations.
+- (improve) The Sequence line parser now raises an error when a delta temperature value is used in an absolute temperature field, and vice versa.
+- (improve) When picking up Builder parts, the cursor is now centered instead of in the top-left square.
+- (docs) Removed obsolete sections from Tilt service documentation.
+- (fix) Resolved an issue where the Spark service would fail to parse some blocks when generating backups.
+- (fix) Blocks now immediately unclaim their target when disabled in a Sequence instruction.
+- (fix) The UI no longer redirects to a 404 page when removing the current Builder layout.
+
 ## Brewblox release 2023/01/09
 
 **firmware release date: 2023-01-06**
