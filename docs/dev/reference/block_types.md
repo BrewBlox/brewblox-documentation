@@ -133,7 +133,8 @@ Digital actuators (*DigitalActuator*, *MotorValve*) have digital constraints, an
 As mentioned above, actuators have a *desiredSetting* and a *setting* field.
 *desiredSetting* is the before, and *setting* is after constraints are evaluated.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#Constraints
+<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#DigitalConstraints
+<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#AnalogConstraints
 
 ## ActuatorAnalogMock
 
