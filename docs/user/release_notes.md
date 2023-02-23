@@ -8,6 +8,38 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2023/02/23
+
+**firmware release date: 2023-02-22**
+
+With this release, the Spark simulator is no longer based on the Spark 3.
+Some of the changes are immediately noticeable:
+
+- The *Spark Sim Display* now uses the Spark 4 display library.
+- The simulator no longer pretends it only has 2kB EEPROM.
+- The simulator no longer has a *Spark 3 Pins* block.
+- The simulator no longer automatically "discovers" temp sensor and DS2408/DS2413 blocks.
+
+Other changes are still in progress. A simulated *OneWire GPIO Module* block will be included in a future release.
+
+**If you already have a simulator service, you will need to reload its active blocks from a backup.**
+Block backups are generated automatically on a daily basis, and can be accessed from *Admin* -> *Services* -> *{service name}* -> *Controller backups*.
+
+**Changes**
+
+- (feature) The Spark sim has been updated.
+- (feature) The Spark Sim Display widget now shows the Spark 4 display.
+- (feature) Reworked constraints to be more straightforward.
+- (feature) The *Balancer* and *Mutex* block now show an overview of clients and potential clients.
+- (improve) The firmware update dialog now replaces the "flash" button with "close" if the flash was successful.
+- (improve) Spark backups are now sorted to display the latest first.
+- (improve) The Claims field in blocks now lets you navigate to all blocks in the chain.
+- (improve) Builder flows are now updated correctly when an actuator linked to an L-Valve changes state.
+- (fix) Resolved various system problems if IPv6 was disabled in the kernel.
+- (fix) Fixed an issue where the PID integral could reach the limits of the number type used to store it.
+- (deprecate) brewblox-ctl no longer supports Python 3.6 (last seen in Ubuntu 18.04).
+- (deprecate) brewblox-ctl no longer automatically adds the `automation-ui` service if an automation service was detected.
+
 ## Brewblox release 2023/01/26
 
 **firmware release date: 2023-01-11**
