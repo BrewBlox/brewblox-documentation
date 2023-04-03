@@ -46,7 +46,7 @@ Some arguments that can be set:
 
 * `--device-id`: If you already know the device ID.
 * `--device-host`: If your Spark controller has a fixed IP address, you can skip discovery, and immediately connect to its IP address. You must assign the Spark controller a static DHCP lease in your router for this to work.
-* `--discovery`: If you want to restrict device discovery to only use USB (`--discovery=usb`), or only use Wifi (`--discovery=wifi`).
+* `--discovery`: If you want to restrict device discovery to only use USB (`--discovery=usb`), or only use TCP (wifi/ethernet) (`--discovery=mdns`).
 
 ## Step 4: Add the service in the UI
 
@@ -58,7 +58,7 @@ Click on it to start using the service in the UI.
 
 ## Spark connection settings
 
-The Spark service can connect to the controller using either Wifi, or USB. Once connected, there is no difference.
+The Spark service can connect to the controller using either TCP, or USB. Once connected, there is no difference.
 
 Connection settings are specified by editing the Spark service arguments in the `docker-compose.yml` file, or by using the `brewblox-ctl add-spark` command.
 You can follow [this guide](../../dev/tutorials/dev_platform.md#remote-platform-ide) to install a graphical text editor for your configuration files.
@@ -66,6 +66,18 @@ You can follow [this guide](../../dev/tutorials/dev_platform.md#remote-platform-
 See the [Services](../services/) guide for an explanation on service configuration.
 
 The service can either connect immediately to a fixed address, or first try to discover the controller address.
+
+## Device ID
+
+TODO(Bob)
+
+* device ID is always strongly recommended
+* add-spark automatically sets device ID
+* (TODO, new) add get device ID functionality to add-spark
+
+## Discovery vs direct connections
+
+TODO(Bob)
 
 ## What settings to use
 
@@ -81,46 +93,46 @@ These arguments can be used both in the `docker-compose.yml` file, and with the 
 
 * Use `--device-host`
 
-### If: you only want to use Wifi, even if USB is connected
+### If: you only want to use TCP, even if USB is connected
 
-* Use `--device-host` or `--discovery=wifi`
+* Use `--device-host` or `--discovery=mdns`
 
-### If: you only want to use USB, even if Wifi is connected
+### If: you only want to use USB, even if TCP (wifi / ethernet) is connected
 
 * Use `--discovery=usb`
 
 ::: warning
 The Spark 4 does not support USB connections.
-`--discovery=wifi` is compatible with both ethernet and Wifi.
 :::
 
 ## Finding the device ID
 
 Every Spark controller has a unique serial number that can be used as device ID. The Spark service can use this ID to check that it doesn't accidentally connect to the wrong Spark controller.
 
-The simplest way to find the controller device ID is to use `brewblox-ctl discover-spark`. This will scan for devices: both over USB, and Wifi.
+If you run `brewblox-ctl add-spark` without any of the `--device-id` / `--device-host` / `--device-serial` arguments, it will automatically discover devices, and let you pick one.
 
-The output format is `connection type` + `device ID` + `additional values`.
+You can also manually run `brewblox-ctl discover-spark`.
 
 Example output:
 
 ```bash
 pi@washberry:~/brewblox $ brewblox-ctl discover-spark
 INFO       Discovering devices...
-INFO       usb  30003D001947383434353030 P1
-INFO       wifi 30003D001947383434353030 192.168.2.2 8332
-INFO       wifi 240024000451353432383931 192.168.0.86 8332
-INFO       Done!
+Type Model   Device ID                Device host     Service
+---- ------- ------------------------ --------------- -------
+USB  Spark 3 30003d001947383434353030
+TCP  Spark 3 30003d001947383434353030 192.168.2.5
+TCP  Spark 4 c4dd5766bb18             192.168.2.4     spark-four
 ```
 
-In the example, two devices were found. We know this because there are only two unique device IDs in the list. The first can be reached over both USB and Wifi, the second is only reachable over Wifi.
+In the example, two devices were found. We know this because there are only two unique device IDs in the list. The first can be reached over both USB and TCP, the second is only reachable over TCP.
 
-For USB devices, "additional values" is the chip model (Spark v2 = Photon, Spark v3 = P1).
-For Wifi devices, the IP address and port are listed here.
+While searching, the `docker-compose.yml` file is scanned for Spark services where the `--device-id` argument matches the discovered device ID.
+If any is found, its name is listed in the *Service* column.
 
 ## `--device-id`
 
-If you set the `--device-id` argument, device discovery will skip any devices with a different ID. This goes for discovery in both USB, and Wifi.
+If you set the `--device-id` argument, device discovery will skip any devices with a different ID. This goes for both USB and TCP discovery.
 
 Example call to `add-spark`:
 
@@ -146,7 +158,7 @@ In YAML, `>-` indicates the start of a [multi-line string](https://yaml-multilin
 
 ## `--device-host`
 
-If you enabled Wifi on the Spark, you can use the management page in your router to give it a fixed IP address. To find out how to do so, google "static dhcp lease" + the brand and model of your router.
+If you enabled wifi/ethernet on the Spark, you can use the management page in your router to give it a fixed IP address. To find out how to do so, google "static dhcp lease" + the brand and model of your router.
 
 After you have done so, you can tell the service to always connect to the same address by using the `--device-host` argument.
 
@@ -168,11 +180,11 @@ Example configuration with `--device-host` set:
       --device-host=192.168.0.101
 ```
 
-## `--discovery=wifi` / `--discovery=usb`
+## `--discovery=tcp` / `--discovery=usb`
 
 If you haven't used `--device-host` to set a fixed address, the Spark service will try to discover the Spark controller.
 
-Controllers can be discovered both over USB, and over Wifi. By default, the service tries both: first USB, then Wifi.
+Controllers can be discovered both over USB, and over Wifi. By default, the service tries both: first USB, then TCP.
 
 You can restrict discovery by using the `--discovery` argument. This can be used in combination with `--device-id`. Valid options for `--discovery` are: `all`, `usb`, or `wifi`.
 
@@ -215,45 +227,38 @@ start
 :Startup;
 
 if (--device-serial arg?) then (yes)
-    :select serial address;
+    :Select serial address;
 elseif (--device-host arg?) then (yes)
-    :select TCP address;
+    :Select TCP address;
 else
     :Discovery;
 
-    if (--discovery=all) then (yes)
-        :discover USB;
-        :discover Wifi;
-    elseif (--discovery=usb) then (yes)
-        :discover USB;
-    elseif (--discovery=wifi) then (yes)
-        :discover Wifi;
-    else
-        stop
-    endif
 
-    if (device(s) discovered) then (yes)
-        if (--device-id arg?) then (yes)
-            if (device found with correct ID) then (yes)
-            else (no)
-                stop
-            endif
-        endif
+    switch(--discovery arg)
+    case ("all")
+        :Discover USB;
+        :Discover wifi;
+    case ("usb")
+        :Discover USB;
+    case ("wifi" or "lan")
+        :Discover wifi;
+    endswitch
+
+    if (device(s) discovered?) then (yes)
+        :Select discovered address;
     else (no)
-        stop
+        :Stop;
+        kill
     endif
-
-    :select discovered address;
 endif
 
 :Ready to connect;
+kill
 
-stop
 @enduml
 ```
 
 `--device-serial` and `--device-host` are the most specific arguments, and will take priority.
-Note that device ID will still be checked after connection is made.
 
 Examples:
 
@@ -271,14 +276,14 @@ Examples:
       --device-serial=/dev/ttyACM0
 ```
 
-`--discovery` has three possible values: `all`, `usb`, or `wifi`. `all` is the default.\
+`--discovery` has four possible values: `all`, `usb`, `lan`, and `wifi`. The default value is `all`. `wifi` is a synonym for `lan` \
 Because USB devices are more specific, they will always be checked first.
 
 `device-id` is used to disqualify discovered devices. If `--device-id` is not set, all discovered devices are valid.
 
 The argument value is the unique device ID of your Spark controller.
 
-Specific device, over Wifi or USB:
+Specific device, using any kind of connection:
 
 ```yaml
   spark-one:
@@ -297,11 +302,11 @@ Specific device, USB only:
       --device-id=300045000851353532343835
 ```
 
-First discovered device, Wifi only:
+First discovered device, LAN only:
 
 ```yaml
   spark-one:
     ...
     command: >-
-      --discovery=wifi
+      --discovery=lan
 ```
