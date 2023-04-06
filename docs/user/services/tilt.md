@@ -140,7 +140,7 @@ On the remote machine in the directory you wish to install the service, create a
 version: '3.7'
 services:
   tilt:
-    image: brewblox/brewblox-tilt:${BREWBLOX_RELEASE:-edge}
+    image: ghcr.io/brewblox/brewblox-tilt:${BREWBLOX_RELEASE:-edge}
     restart: unless-stopped
     privileged: true
     network_mode: host
