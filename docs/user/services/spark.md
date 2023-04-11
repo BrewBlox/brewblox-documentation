@@ -1,4 +1,7 @@
-# BrewPi Spark
+# Brewblox Spark
+
+The Spark service is the bridge between Brewblox and the Spark controller.
+You need a service for each controller.
 
 The [Services](../services/) guide explains how services work in Brewblox. Here, we'll look at how to add a new Spark service, and what settings are available.
 
@@ -6,40 +9,33 @@ The [Services](../services/) guide explains how services work in Brewblox. Here,
 
 The basic process for adding a Spark service is straightforward.
 
-You will need:
+New Sparks are shipped with Brewblox firmware pre-installed.
+If you have an older model, please also see the [Flashing a Spark](#flashing-a-spark) section below.
 
-- [Existing Brewblox installation](../startup.md)
-- BrewPi Spark
-- USB cable
-  - Spark 2 or 3 -> Micro-USB
-  - Spark 4 -> USB-C
+To use the Spark 4, it needs to be connected to your network. Ethernet and Wifi are both supported.
 
-Connect your Spark controller with the USB cable to your Pi.\
-If any other Sparks are connected over USB, disconnect them for now.
+Setting up ethernet is as simple as plugging in a cable.
+Wifi credentials are set over Bluetooth, using the **ESP BLE Provisioning** app.
+The app is available on [Android](https://play.google.com/store/apps/details?id=com.espressif.provble)
+and [iOS](https://apps.apple.com/us/app/esp-ble-provisioning/id1473590141).
 
-Open a terminal on your Pi, either in the desktop environment, or by logging in over SSH.
+To set Wifi credentials:
 
-All the commands listed below should be run in the Brewblox directory:
+- Press the **(R)ESET** button on your Spark.
+- While the Spark restarts, press and hold the **OK** button for five seconds.
+- The Spark is ready for provisioning if its buttons are blinking blue.
+- Download the **ESP BLE Provisioning** app.
+- Enable Bluetooth in your phone settings.
+- Open the app.
+- Click **Provision New Device**.
+- Click **I don't have a QR code**.
+- Select the **PROV_BREWBLOX_** device.
+- Select your Wifi network, and enter your credentials.
 
-```bash
-cd ./brewblox
-```
+The app will now set Wifi credentials for your Spark. An additional IP
+address will be shown in the top left corner of the Spark display.
 
-To flash the firmware, run:
-
-```bash
-brewblox-ctl flash
-```
-
-Follow the instructions until the menu exits.
-
-*Wifi is not a requirement. If you want to use USB (Spark 2 / 3), or ethernet (Spark 4), you can skip this step.*
-
-To set up wifi, run:
-
-```bash
-brewblox-ctl wifi
-```
+To add the Spark service, open a terminal on your Pi, and navigate to the Brewblox directory (default `./brewblox`).
 
 To add a service for your Spark, run:
 
@@ -49,8 +45,6 @@ brewblox-ctl add-spark
 
 This will ask you some questions, and then edit your `docker-compose.yml` file to create or edit the service.
 
-If you're using wifi/ethernet, you can now disconnect the Spark from USB, and reconnect any Sparks you disconnected earlier.
-
 After starting the newly added service, it will automatically show up in the UI sidebar a few seconds later.
 Click on it to start using the service in the UI.
 
@@ -58,18 +52,16 @@ Click on it to start using the service in the UI.
 
 ## Connection settings
 
+Normally, `brewblox-ctl add-spark` identifies the controller, and the service automatically discovers it.
+If this is not the case, you may need to use more specific connection settings.
+
 For a Spark service to communicate with a Spark controller, three things need to happen:
 
 - The service needs to **discover** the address and connection type of the controller.
 - The service needs to **connect** to the controller.
 - The service needs to **identify** the controller, to make sure it is connected to the right controller.
 
-For these purposes, there are multiple arguments that can be given to the Spark service.\
-These arguments are declared in the `docker-compose.yml` file.
-See the [Services](../services/) guide for an explanation on service configuration.
-All settings discussed below are set in the `command` field of the Spark service, and are also valid arguments for the `brewblox-ctl add-spark` command.
-
-### `--device-id`
+### Controller ID
 
 All Spark controllers have a unique ID. This ID cannot be changed, and will remain the same after a factory reset.
 
@@ -80,13 +72,15 @@ This is undesirable behavior when you have multiple controllers.
 
 The UI will show a warning when no `--device-id` argument is set on a Spark service.
 
-### `--discovery`
+### Controller discovery
 
 To prevent having to use hardcoded controller addresses, the service can discover controllers that are either connected over USB or connected to the local network over wifi/ethernet.\
 Discovered controllers with an ID that does not match the service `--device-id` argument are ignored.
 
 [Multicast Domain Name System (mDNS)](https://en.wikipedia.org/wiki/Multicast_DNS) is used to discover Spark controllers connected to the local network.
 This is a local protocol: as a rule of thumb, only devices connected to the same router will be discovered by mDNS.
+
+You can run `brewblox-ctl add-spark` with the `--discovery` argument to specify what kind of discovery should be used.
 
 The discovery argument has three possible values:
 
@@ -105,7 +99,7 @@ Previously, `--discovery=wifi` and `--discovery=lan` were used as well.
 These are still valid aliases for `--discovery=mdns`.
 :::
 
-### `--device-host`
+### Static controller address
 
 In some scenarios, discovery is not a valid option.
 Maybe your Pi and your Spark are on different subnets, maybe you're using a proxy or a VPN, or maybe mDNS just doesn't work, and you have no idea why.
@@ -157,6 +151,38 @@ endif
 kill
 
 @enduml
+```
+
+## Flashing a Spark
+
+Normally, the Spark firmware can be updated using the UI.
+If the firmware is very old, you may need to flash new firmware over USB.
+
+You will need:
+
+- [Existing Brewblox installation](../startup.md)
+- Brewblox Spark
+- USB cable
+  - Spark 2 or 3 -> Micro-USB
+  - Spark 4 -> USB-C
+
+Connect your Spark controller with the USB cable to your Pi.\
+If any other Sparks are connected over USB, disconnect them for now.
+
+Open a terminal on your Pi, and navigate to the Brewblox directory (default `./brewblox`).
+
+To flash the firmware, run:
+
+```bash
+brewblox-ctl flash
+```
+
+If you are upgrading an older Spark 2 or 3, you may need to flash the bootloader.
+
+**Only if you have a Spark 2/3 AND the LED is blinking blue after the firmware is flashed**, run:
+
+```bash
+brewblox-ctl particle -c flash-bootloader
 ```
 
 ## MQTT connections (BETA)
