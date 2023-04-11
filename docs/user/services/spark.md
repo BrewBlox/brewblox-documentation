@@ -21,19 +21,18 @@ and [iOS](https://apps.apple.com/us/app/esp-ble-provisioning/id1473590141).
 
 To set Wifi credentials:
 
-- Press the **(R)ESET** button on your Spark.
-- While the Spark restarts, press and hold the **OK** button for five seconds.
-- The Spark is ready for provisioning if its buttons are blinking blue.
 - Download the **ESP BLE Provisioning** app.
 - Enable Bluetooth in your phone settings.
+- Press and hold the **OK** button on the Spark for five seconds. It will beep twice.
+- The Spark is ready for provisioning if its buttons are blinking blue.
 - Open the app.
 - Click **Provision New Device**.
 - Click **I don't have a QR code**.
 - Select the **PROV_BREWBLOX_** device.
 - Select your Wifi network, and enter your credentials.
 
-The app will now set Wifi credentials for your Spark. An additional IP
-address will be shown in the top left corner of the Spark display.
+The app will now set Wifi credentials for your Spark.
+An IP address will be shown in the top left corner of the Spark display.
 
 To add the Spark service, open a terminal on your Pi, and navigate to the Brewblox directory (default `./brewblox`).
 
@@ -63,19 +62,18 @@ For a Spark service to communicate with a Spark controller, three things need to
 
 ### Controller ID
 
-All Spark controllers have a unique ID. This ID cannot be changed, and will remain the same after a factory reset.
+All Spark controllers have a unique hardware ID. This ID cannot be changed. \
+A Spark service is linked to a specific controller, and it identifies the controller by its ID.
 
-The service uses the `--device-id` argument to identify its controller.
-When you run `brewblox-ctl add-spark`, it will always attempt to find out and set `--device-id={ID}`.\
+For this check to happen, the `--device-id` argument is provided to the Spark service.
+When you run `brewblox-ctl add-spark` it will get the controller ID from the selected Spark, and use it to set the service `--device-id` argument.
+
 If this argument is not set, the service will connect to the first controller it discovers.
 This is undesirable behavior when you have multiple controllers.
 
 The UI will show a warning when no `--device-id` argument is set on a Spark service.
 
 ### Controller discovery
-
-To prevent having to use hardcoded controller addresses, the service can discover controllers that are either connected over USB or connected to the local network over wifi/ethernet.\
-Discovered controllers with an ID that does not match the service `--device-id` argument are ignored.
 
 [Multicast Domain Name System (mDNS)](https://en.wikipedia.org/wiki/Multicast_DNS) is used to discover Spark controllers connected to the local network.
 This is a local protocol: as a rule of thumb, only devices connected to the same router will be discovered by mDNS.
@@ -88,7 +86,8 @@ The discovery argument has three possible values:
 - `--discovery=usb`
 - `--discovery=mdns`
 
-The default is `all`. In this case, both USB and mDNS will be used to discover potential controllers.
+The default is `all`. In this case, both USB and mDNS will be used to discover potential controllers.\
+USB connections are not supported by the Spark 4, and the controller will not be discovered this way.
 
 :::tip
 Try `brewblox-ctl discover-spark` to run discovery without editing service settings.
@@ -104,7 +103,7 @@ These are still valid aliases for `--discovery=mdns`.
 In some scenarios, discovery is not a valid option.
 Maybe your Pi and your Spark are on different subnets, maybe you're using a proxy or a VPN, or maybe mDNS just doesn't work, and you have no idea why.
 
-In these cases, you can skip discovery, and declare a static hostname or IP address using the `--device-host` argument. For example: `--device-host=192.168.0.1`, or `--device-host=myspark.home`.
+In these cases, you can skip discovery, and declare a static hostname or IP address using the `--device-host` argument. For example: `--device-host=192.168.0.100`, or `--device-host=myspark.home`.
 
 If you're declaring a static IP address, it is recommended to set a static DHCP lease for that particular Spark in your router settings. The Spark will then always be assigned the same IP address.
 
@@ -215,7 +214,7 @@ Run the [basic setup steps](#the-short-version), but make sure the Spark is conn
 Then run:
 
 ```bash
-brewblox-ctl experimental enable-spark-mqtt --system-host={PUBLIC_ADDRESS}
+brewblox-ctl experimental enable-spark-mqtt --server-host={PUBLIC_ADDRESS}
 ```
 
 What happens:
@@ -227,6 +226,7 @@ What happens:
   - Server public hostname.
   - Server public port.
   - Password.
+  - Server SSL certificate.
 
 :::tip
 To preview what happens, run:
@@ -237,6 +237,25 @@ brewblox-ctl --dry-run experimental enable-spark-mqtt
 ```
 
 :::
+
+### Setup without controller
+
+It may be inconvenient to connect the Spark controller to the same local network as the Spark server.
+In this case, you can use a `--device-id` argument for `brewblox-ctl experimental enable-spark-mqtt`.
+
+To get the controller ID, navigate to the Spark IP address in your browser.
+This will show a comma-separated handshake message. The last field is the ID.
+
+On the Brewblox server, run:
+
+```bash
+brewblox-ctl experimental enable-spark-mqtt --device-id={ID} --device-host={SPARK_IP}
+```
+
+Instead of sending the credentials, it will print the commands you can use to manually send them.
+Copy the commands, and run them on a computer that can reach the Spark.
+
+If `--device-host` is not set, it will use a placeholder in the printed command.
 
 ### MQTT Discovery
 
