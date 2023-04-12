@@ -1,4 +1,4 @@
-# BrewPi Spark simulation
+# Brewblox Spark simulation
 
 The Spark service comes with a built-in simulator.
 This simulator won't control physical actuators or use OneWire sensors, but also doesn't need a Spark controller to function.
