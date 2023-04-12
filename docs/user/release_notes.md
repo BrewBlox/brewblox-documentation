@@ -8,6 +8,53 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2023/04/??
+
+**firmware release date: 2023/04/??**
+
+### GitHub Container Registry
+
+Mid-march, Docker announced they would drop support for free team accounts on Docker Hub.
+Any teams that did not upgrade to a paid account would have their data deleted.
+
+We migrated our images to the GitHub Container Registry.
+The image names remain the same, but will be prefixed with `ghcr.io/`.
+`brewblox-ctl update` will automatically adjust the image names for default tags.
+
+### Docker Compose
+
+`brewblox-ctl` uses Docker Compose to manage and start Docker containers.
+Docker Compose v1 (`docker-compose`) is a Python application we install in the Brewblox directory. \
+Docker Compose v2 (`docker compose`) no longer uses Python, and is installed as a plugin for Docker itself.
+
+If you have a Pi or other Debian / Ubuntu system, this change happens automatically during your next update.
+
+If you're using a non-Debian OS such as Synology, you may need to manually install the Compose v2 plugin: <https://docs.docker.com/compose/install/linux/>.
+
+### MQTTS Connections
+
+To improve support for remote devices, Brewblox now listens on a password-protected MQTTS (MQTT + TLS) port.
+The default is `8883`. To change it, set the `MQTTS_PORT` variable in the .env file.
+
+As a beta implementation, we have added support for MQTT Spark connections.
+Here, the Spark connects to the MQTTS port, and the service and controller exchange messages over MQTT.
+
+This way, you can safely connect remote Sparks to a central system, with only the secure MQTTS port exposed to the internet.
+
+**Changes**
+
+- (feature) Added periodic time synchronization to the Spark service, as backup to NTP.
+- (feature) Added beta support for MQTT Spark connections.
+- (feature) The eventbus now also listens on a TLS+password protected port.
+  - The default is `8883`. To change it, set the `MQTTS_PORT` variable in the .env file.
+- (feature) Added sidebar button and query arg (`?kiosk`) to activate UI kiosk mode.
+- (feature) `brewblox-ctl` now uses system-wide Compose v2, instead of locally installed `docker-compose`.
+- (feature) Switched from Docker Hub to the Github Container Registry as Docker image host.
+- (feature) Added the `WAIT_DIGITAL_EQUALS` Sequence instruction. This waits until a Digital Actuator state equals a given state.
+- (improve) Reduced the update interval when waiting for a Sequence instruction condition from 1s to 10ms.
+- (docs) Updated Spark service documentation.
+- (fix) Updated to Victoria Metrics 1.88, which includes a fix for the bug where history data would be missing on fetch.
+
 ## Brewblox release 2023/02/23
 
 **firmware release date: 2023-02-22**
