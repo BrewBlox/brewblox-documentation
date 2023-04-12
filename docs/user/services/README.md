@@ -72,13 +72,13 @@ version: "3"
 
 services:
   history:
-    image: brewblox/brewblox-history:edge
+    image: ghcr.io/brewblox/brewblox-history:edge
 
   spark-one:
-    image: brewblox/brewblox-devcon-spark:edge
+    image: ghcr.io/brewblox/brewblox-devcon-spark:edge
 
   spark-two:
-    image: brewblox/brewblox-devcon-spark:edge
+    image: ghcr.io/brewblox/brewblox-devcon-spark:edge
 
 ```
 
@@ -124,7 +124,7 @@ When you install Brewblox, it generates a `docker-compose.yml` file for you. Thi
 
 ```yaml
   spark-one:
-    image: brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
+    image: ghcr.io/brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
     privileged: true
     restart: unless-stopped
     command: '--name=spark-one'
@@ -136,7 +136,7 @@ This configuration is more advanced than what we've seen so far. To make sense o
 
 ```yaml
 spark-one:
-  image: brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
+  image: ghcr.io/brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
   ...
 ```
 
@@ -169,7 +169,7 @@ The `command` setting contains arguments for the software running *inside* the s
 
 The `--name` argument must (again) be the same as the service name.
 
-For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./spark.md#spark-connection-settings)
+For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./spark.md#connection-settings)
 
 ::: tip
 The service name is mentioned two times in the YAML for a Spark service. The values must match.

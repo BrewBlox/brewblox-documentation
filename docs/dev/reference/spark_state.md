@@ -46,7 +46,7 @@ Expected and actual firmware properties are both included in the Spark status,
 along with the current state of the connection process.
 
 First, the service attempts to connect to a controller.
-This process is described in the [Spark connection settings guide](../../user/services/spark.md#spark-connection-settings).
+This process is described in the [Spark connection settings guide](../../user/services/spark.md#connection-settings).
 
 After the service is connected, the state becomes `CONNECTED`, and the service starts prompting the controller to send a handshake message. This is a plaintext string with firmware and device information. The contents are stored in the `status.controller` field.
 

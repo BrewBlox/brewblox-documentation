@@ -8,17 +8,7 @@ Setting it up is easy.
 Navigate to the directory you chose during the installation (default: `cd ~/brewblox`), and run this command in your terminal:
 
 ```bash
-brewblox-ctl add-spark --name spark-one --simulation
-```
-
-## Using multiple Simulation services
-
-To add more simulation services, run the above command again, but replace *spark-one* with your desired service name.
-
-Example:
-
-```bash
-brewblox-ctl add-spark --name spark-two --simulation
+brewblox-ctl add-spark --simulation
 ```
 
 ## Converting a service

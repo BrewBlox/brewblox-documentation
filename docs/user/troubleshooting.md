@@ -203,7 +203,7 @@ In most - but not all - routers, mDNS is enabled by default. Check your router c
 
 If you can't solve the problem in your router settings, it may be preferable to skip discovery,
 and add `--device-host=SPARK_IP` to your docker-compose.yml file.
-You can find the syntax in the [connection settings guide](./services/spark.md#spark-connection-settings).
+You can find the syntax in the [connection settings guide](./services/spark.md#connection-settings).
 
 When doing so, it is advised to assign a fixed IP address to the Spark in your router settings. (Also called "static DHCP lease").
 
