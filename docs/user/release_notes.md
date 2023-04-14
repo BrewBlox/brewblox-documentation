@@ -48,9 +48,12 @@ This way, you can safely connect remote Sparks to a central system, with only th
 - (feature) The eventbus now also listens on a TLS+password protected port.
   - The default is `8883`. To change it, set the `MQTTS_PORT` variable in the .env file.
 - (feature) Added sidebar button and query arg (`?kiosk`) to activate UI kiosk mode.
+- (feature) The Spark System Info block now shows RAM diagnostics.
+- (feature) The Spark System Info block now reports measured voltage for both 5V and external.
 - (feature) `brewblox-ctl` now uses system-wide Compose v2, instead of locally installed `docker-compose`.
 - (feature) Switched from Docker Hub to the Github Container Registry as Docker image host.
 - (feature) Added the `WAIT_DIGITAL_EQUALS` Sequence instruction. This waits until a Digital Actuator state equals a given state.
+- (feature) Updated default CI file in brewblox/brewblox-boilerplate to use GitHub Actions.
 - (improve) Reduced the update interval when waiting for a Sequence instruction condition from 1s to 10ms.
 - (docs) Updated Spark service documentation.
 - (fix) Updated to Victoria Metrics 1.88, which includes a fix for the bug where history data would be missing on fetch.
