@@ -57,6 +57,8 @@ This way, you can safely connect remote Sparks to a central system, with only th
 - (improve) Reduced the update interval when waiting for a Sequence instruction condition from 1s to 10ms.
 - (docs) Updated Spark service documentation.
 - (fix) Updated to Victoria Metrics 1.88, which includes a fix for the bug where history data would be missing on fetch.
+- (fix) The Graph display part in the Builder now re-renders when its size is changed.
+- (fix) The Metrics display part border can be toggled again.
 
 ## Brewblox release 2023/02/23
 
