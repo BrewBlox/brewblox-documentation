@@ -8,9 +8,31 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
-## Brewblox release 2023/04/??
+## Brewblox release 2023/04/17
 
-**firmware release date: 2023/04/??**
+**firmware release date: 2023/04/14**
+
+### History bug fixed
+
+For some time, graphs suffered from a bug in the history database where it would sometimes fail to return any data for some fields.
+This problem has now been fixed in the database.
+
+Because the bug caused an incorrect cached index to be generated, the problem may persist for a few hours until a new index is generated.
+
+If you wish to immediately re-generate the index, run:
+
+```bash
+brewblox-ctl down
+sudo mv ./victoria/indexdb ./victoria/indexdb_bak
+brewblox-ctl up
+```
+
+Wait for the system to start, and check whether graphs work again.
+Then remove the old index with:
+
+```bash
+sudo rm -rf ./victoria/indexdb_bak
+```
 
 ### GitHub Container Registry
 
