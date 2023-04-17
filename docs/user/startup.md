@@ -1,7 +1,7 @@
 # Getting started
 
 This guide describes how to install the Brewblox system on a Raspberry Pi.</br>
-The default device for the Brewblox system is the BrewPi Spark.
+The default device for the Brewblox system is the Spark.
 To preview Brewblox, you can use a simulated Spark.
 
 For an explanation of how to combine the various Spark Blocks, see the [Brewblox control chains](./control_chains.md) page.
@@ -232,19 +232,18 @@ and [iOS](https://apps.apple.com/us/app/esp-ble-provisioning/id1473590141).
 
 To set Wifi credentials:
 
-- Press the **(R)ESET** button on your Spark.
-- While the Spark restarts, press and hold the **OK** button for five seconds.
-- The Spark is ready for provisioning if its buttons are blinking blue.
 - Download the **ESP BLE Provisioning** app.
 - Enable Bluetooth in your phone settings.
+- Press and hold the **OK** button on the Spark for five seconds. It will beep twice.
+- The Spark is ready for provisioning if its buttons are blinking blue.
 - Open the app.
 - Click **Provision New Device**.
 - Click **I don't have a QR code**.
 - Select the **PROV_BREWBLOX_** device.
 - Select your Wifi network, and enter your credentials.
 
-The app will now set Wifi credentials for your Spark. An additional IP
-address will be shown in the top left corner of the Spark display.
+The app will now set Wifi credentials for your Spark.
+An IP address will be shown in the top left corner of the Spark display.
 
 To add a Spark service, run:
 

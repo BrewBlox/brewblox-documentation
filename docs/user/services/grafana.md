@@ -40,7 +40,7 @@ As always with [YAML](https://learnxinyminutes.com/docs/yaml/) files, indentatio
 version: "3.7"
 services:
   spark-one:
-    image: brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
+    image: ghcr.io/brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
     privileged: true
     restart: unless-stopped
     command: --name=spark-one
