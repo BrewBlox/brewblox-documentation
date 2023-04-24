@@ -56,7 +56,7 @@ If you're using a non-Debian OS such as Synology, you may need to manually insta
 ### MQTTS Connections
 
 To improve support for remote devices, Brewblox now listens on a password-protected MQTTS (MQTT + TLS) port.
-The default is `8883`. To change it, set the `MQTTS_PORT` variable in the .env file.
+The default is `8883`. To change it, set the `BREWBLOX_PORT_MQTTS` variable in the .env file.
 
 As a beta implementation, we have added support for MQTT Spark connections.
 Here, the Spark connects to the MQTTS port, and the service and controller exchange messages over MQTT.
@@ -68,7 +68,7 @@ This way, you can safely connect remote Sparks to a central system, with only th
 - (feature) Added periodic time synchronization to the Spark service, as backup to NTP.
 - (feature) Added beta support for MQTT Spark connections.
 - (feature) The eventbus now also listens on a TLS+password protected port.
-  - The default is `8883`. To change it, set the `MQTTS_PORT` variable in the .env file.
+  - The default is `8883`. To change it, set the `BREWBLOX_PORT_MQTTS` variable in the .env file.
 - (feature) Added sidebar button and query arg (`?kiosk`) to activate UI kiosk mode.
 - (feature) The Spark System Info block now shows RAM diagnostics.
 - (feature) The Spark System Info block now reports measured voltage for both 5V and external.
