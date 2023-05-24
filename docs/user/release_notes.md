@@ -8,6 +8,26 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2023/05/??
+
+**firmware release date: 2023/05/06**
+
+This release mostly involves UI fixes and improvements.
+On the firmware side, work to support digital inputs (buttons) and RTD sensors is still in progress.
+
+Due to a long-standing bug in Safari, nested HTML components in Builder layouts would be rendered incorrectly.
+This affected most parts, but was most noticeable in the Graph, Web frame, and Heating Element parts.
+We implemented workarounds to compensate or avoid this bug.
+
+Separately, we redesigned the wizards used to create new blocks and widgets. They should now be more straightforward.
+
+**Changes**
+
+- (feature) The Home Assistant service now also publishes whether Setpoint Profile blocks are active.
+- (improve) Reworked the block / widget wizards in the UI.
+- (improve) Moved the Wizardry button to the UI sidebar to make it easier to find.
+- (fix) Fixed rendering of builder layouts on iOS and MacOS.
+
 ## Brewblox release 2023/04/17
 
 **firmware release date: 2023/04/14**
