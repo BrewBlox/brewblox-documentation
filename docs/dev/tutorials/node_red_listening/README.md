@@ -41,6 +41,10 @@ We can use this to create a Node-RED flow that responds to changes in block data
 Because the `node-red` service runs inside the Brewblox network, we can connect to the eventbus directly.
 For a more in-depth explanation, see the [routing guide](../../reference/routing.md).
 
+::: tip
+If you're running Node-RED externally, the eventbus address is `{BREWBLOX_ADDRESS}:1883`
+:::
+
 Steps:
 
 - Create a *mqtt in* node.
@@ -110,7 +114,8 @@ Connect the debug node to the function node, and you will see the block appear i
 
 ## Changing the actuator block
 
-If the sensor value is above 25°C, we want to turn on a desk fan. If the sensor value falls below 25°C, we want to turn it off again.
+If the sensor value is above 26°C, we want to turn on a desk fan. If the sensor value falls below 24°C, we want to turn it off again.
+Between 24°C and 26°C is the dead band, where we don't change the actuator either way.
 To do this, we need to check the sensor, and depending on its value, update the setting of an actuator.
 
 Create a *Digital Actuator* block called **Fan Actuator** on the Spark service, and link it to an IO channel.
@@ -138,13 +143,17 @@ const actuatorPatch = {
     id: 'Fan Actuator',
     type: 'DigitalActuator',
     serviceId: 'spark-one',
-    data: {
-        storedState: 'STATE_INACTIVE',
-    },
+    data: {},
 };
 
-if(sensorValue > 25) {
+if (sensorValue < 24) {
+    actuatorPatch.data.storedState = 'STATE_INACTIVE';
+}
+else if (sensorValue > 26) {
     actuatorPatch.data.storedState = 'STATE_ACTIVE';
+}
+else {
+    return null;
 }
 
 msg.payload = actuatorPatch;
@@ -152,13 +161,17 @@ return msg;
 ```
 
 To send the patch, we can use the [Spark service REST API](../../reference/blocks_api.md).
-Just as with the eventbus, we can connect to the service directly, and don't need to use the public IP address.
+Just as with the eventbus, we can connect to the service directly at `spark-one:5000`, and don't need to use the public IP address.
 
-For the `spark-one` service, the URL will always be:
+For the `spark-one` service, the URL will be:
 
 ```txt
 http://spark-one:5000/spark-one/blocks/patch
 ```
+
+::: tip
+If you're running Node-RED externally, the URL will be `http://{BREWBLOX_ADDRESS}/spark-one/blocks/patch`.
+:::
 
 Create a *http request* node to send a POST request to this URL.
 The response will always be a JSON object.
@@ -174,6 +187,5 @@ The `blocks/patch` response is the new state of the changed block.
 ## Source
 
 ```json
-[{"id":"9992de42fa5ebbce","type":"tab","label":"Using blocks","disabled":false,"info":"","env":[]},{"id":"01302c4161e4ff52","type":"mqtt in","z":"9992de42fa5ebbce","name":"","topic":"brewcast/state/#","qos":"2","datatype":"auto-detect","broker":"5523a8995d4ae51d","nl":false,"rap":true,"rh":0,"inputs":0,"x":760,"y":120,"wires":[["5625c086cba505df"]]},{"id":"b139372f833daf59","type":"debug","z":"9992de42fa5ebbce","name":"debug 1","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1200,"y":220,"wires":[]},{"id":"5625c086cba505df","type":"function","z":"9992de42fa5ebbce","name":"Get sensor block","func":"if(msg.payload.type !== 'Spark.state') {\n    // Not a Spark state event\n    return null;\n}\n\nif(!msg.payload.data) {\n    // Spark service is not connected\n    return null;\n}\n\nconst block = msg\n    .payload\n    .data\n    .blocks\n    .find((block) => block.id === 'Ambient Sensor');\n\nif(!block) {\n    // Sensor block not found\n    return null;\n}\n\n// We have a block\n// Let's send it to the next node\nmsg.payload = block;\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":990,"y":120,"wires":[["1c3621bde205eab0"]]},{"id":"1c3621bde205eab0","type":"function","z":"9992de42fa5ebbce","name":"Create output patch","func":"// The numerical value is in Celsius or Fahrenheit\n// This depends on your system-wide settings\nconst sensorBlock = msg.payload;\nconst sensorValue = sensorBlock.data.value.value;\n\n// Create a block patch\n// The 'data' field only includes the fields we want to change\nconst actuatorPatch = {\n    id: 'Fan Actuator',\n    type: 'DigitalActuator',\n    serviceId: 'spark-one',\n    data: {\n        storedState: 'STATE_INACTIVE',\n    },\n};\n\nif (sensorValue > 25) {\n    actuatorPatch.data.storedState = 'STATE_ACTIVE';\n}\n\nmsg.payload = actuatorPatch;\nreturn msg;\n","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1230,"y":120,"wires":[["5ef8f86ee768a4c0"]]},{"id":"5ef8f86ee768a4c0","type":"http request","z":"9992de42fa5ebbce","name":"Send patch","method":"POST","ret":"obj","paytoqs":"ignore","url":"http://spark-one:5000/spark-one/blocks/patch","tls":"","persist":false,"proxy":"","insecureHTTPParser":false,"authType":"","senderr":false,"headers":[],"x":1010,"y":220,"wires":[["b139372f833daf59"]]},{"id":"5523a8995d4ae51d","type":"mqtt-broker","name":"","broker":"eventbus","port":"1883","clientid":"","autoConnect":true,"usetls":false,"protocolVersion":"4","keepalive":"60","cleansession":true,"birthTopic":"","birthQos":"0","birthPayload":"","birthMsg":{},"closeTopic":"","closeQos":"0","closePayload":"","closeMsg":{},"willTopic":"","willQos":"0","willPayload":"","willMsg":{},"userProps":"","sessionExpiry":""}]
-
+[{"id":"9992de42fa5ebbce","type":"tab","label":"Using blocks","disabled":false,"info":"","env":[]},{"id":"01302c4161e4ff52","type":"mqtt in","z":"9992de42fa5ebbce","name":"","topic":"brewcast/state/#","qos":"2","datatype":"auto-detect","broker":"5523a8995d4ae51d","nl":false,"rap":true,"rh":0,"inputs":0,"x":760,"y":120,"wires":[["5625c086cba505df"]]},{"id":"b139372f833daf59","type":"debug","z":"9992de42fa5ebbce","name":"debug 1","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","statusVal":"","statusType":"auto","x":1200,"y":220,"wires":[]},{"id":"5625c086cba505df","type":"function","z":"9992de42fa5ebbce","name":"Get sensor block","func":"if(msg.payload.type !== 'Spark.state') {\n    // Not a Spark state event\n    return null;\n}\n\nif(!msg.payload.data) {\n    // Spark service is not connected\n    return null;\n}\n\nconst block = msg\n    .payload\n    .data\n    .blocks\n    .find((block) => block.id === 'Ambient Sensor');\n\nif(!block) {\n    // Sensor block not found\n    return null;\n}\n\n// We have a block\n// Let's send it to the next node\nmsg.payload = block;\n\nreturn msg;","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":990,"y":120,"wires":[["1c3621bde205eab0"]]},{"id":"1c3621bde205eab0","type":"function","z":"9992de42fa5ebbce","name":"Create output patch","func":"// The numerical value is in Celsius or Fahrenheit\n// This depends on your system-wide settings\nconst sensorBlock = msg.payload;\nconst sensorValue = sensorBlock.data.value.value;\n\n// Create a block patch\n// The 'data' field only includes the fields we want to change\nconst actuatorPatch = {\n    id: 'Fan Actuator',\n    type: 'DigitalActuator',\n    serviceId: 'spark-one',\n    data: {},\n};\n\nif (sensorValue < 24) {\n    actuatorPatch.data.storedState = 'STATE_INACTIVE';\n}\nelse if (sensorValue > 26) {\n    actuatorPatch.data.storedState = 'STATE_ACTIVE';\n}\nelse {\n    return null;\n}\n\nmsg.payload = actuatorPatch;\nreturn msg;\n","outputs":1,"noerr":0,"initialize":"","finalize":"","libs":[],"x":1230,"y":120,"wires":[["5ef8f86ee768a4c0"]]},{"id":"5ef8f86ee768a4c0","type":"http request","z":"9992de42fa5ebbce","name":"Send patch","method":"POST","ret":"obj","paytoqs":"ignore","url":"http://spark-one:5000/spark-one/blocks/patch","tls":"","persist":false,"proxy":"","insecureHTTPParser":false,"authType":"","senderr":false,"headers":[],"x":1010,"y":220,"wires":[["b139372f833daf59"]]},{"id":"5523a8995d4ae51d","type":"mqtt-broker","name":"","broker":"eventbus","port":"1883","clientid":"","autoConnect":true,"usetls":false,"protocolVersion":"4","keepalive":"60","cleansession":true,"birthTopic":"","birthQos":"0","birthPayload":"","birthMsg":{},"closeTopic":"","closeQos":"0","closePayload":"","closeMsg":{},"willTopic":"","willQos":"0","willPayload":"","willMsg":{},"userProps":"","sessionExpiry":""}]
 ```

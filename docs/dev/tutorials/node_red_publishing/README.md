@@ -87,8 +87,12 @@ Deploy the nodes, and the debug output changes to the formatted data.
 
 ## Publishing to MQTT
 
-Because the `node-red` service runs inside the Brewblox network, we can connect to the eventbus directly.
+Because the `node-red` service runs inside the Brewblox network, we can connect to the eventbus directly at `eventbus:1883`.
 For a more in-depth explanation, see the [routing guide](../../reference/routing.md).
+
+::: tip
+If you're running Node-RED externally, the eventbus address is `{BREWBLOX_ADDRESS}:1883`
+:::
 
 To publish, we need a *mqtt out* node.
 Add it, and double click to edit settings.
