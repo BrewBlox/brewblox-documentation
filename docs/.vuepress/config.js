@@ -39,6 +39,8 @@ module.exports = {
             'tutorials/pubscript/',
             'tutorials/sensorscript/',
             'tutorials/scheduledscript/',
+            'tutorials/node_red_listening/',
+            'tutorials/node_red_publishing/',
             'tutorials/subrouting',
           ],
         },
