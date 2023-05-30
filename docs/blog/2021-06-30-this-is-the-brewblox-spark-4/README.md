@@ -81,8 +81,6 @@ This means that our goals and theirs did not always align and we paid a premium 
 Compared to the Photon inside the Spark 2 and 3, the ESP32 is much more powerful and has much more memory.
 This allows us to add more functionality and a nicer display, at lower cost.
 
-The ESP32 also has Bluetooth, which means we can communicate directly with a Tilt sensor or other Bluetooth device in the future.
-
 ## A bigger display
 
 The Spark 4 has a new 3.5 inch display, with a 480x320 resolution. This is twice the resolution of the Spark 3.
