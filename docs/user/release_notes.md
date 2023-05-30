@@ -23,10 +23,13 @@ Separately, we redesigned the wizards used to create new blocks and widgets. The
 
 **Changes**
 
-- (feature) The Home Assistant service now also publishes whether Setpoint Profile blocks are active.
+- (feature) The Home Assistant service now publishes Setpoint Profile state as binary sensor.
 - (improve) Reworked the block / widget wizards in the UI.
 - (improve) Moved the Wizardry button to the UI sidebar to make it easier to find.
+- (docs) Added tutorials for interacting with Brewblox in Node-RED.
+- (docs) Added documentation for published Tilt service state events.
 - (fix) Fixed rendering of builder layouts on iOS and MacOS.
+- (fix) Resolved a bug where block widgets would temporarily disappear from dashboards.
 
 ## Brewblox release 2023/04/17
 
