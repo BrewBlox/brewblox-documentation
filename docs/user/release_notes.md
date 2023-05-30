@@ -8,7 +8,7 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
-## Brewblox release 2023/05/??
+## Brewblox release 2023/05/30
 
 **firmware release date: 2023/05/06**
 
