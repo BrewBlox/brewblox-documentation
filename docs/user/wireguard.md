@@ -275,13 +275,13 @@ interface: wg0
 Now, let's try nmap:
 
 ```bash
-sudo nmap -sU -p 51820 localhost
+sudo nmap -Pn -sU -p 51820 localhost
 ```
 
 ::: details Example output
 
 ```sh
-pi@raspberrypi:~$ sudo nmap -sU -p 51820 localhost
+pi@raspberrypi:~$ sudo nmap -Pn -sU -p 51820 localhost
 Starting Nmap 7.80 ( https://nmap.org ) at 2021-03-15 14:48 UTC
 Nmap scan report for localhost (127.0.0.1)
 Host is up.
@@ -298,13 +298,13 @@ This output means that port 51820 is open and used.
 Next, we want to check that the port is forwarded by the router:
 
 ```bash
-sudo nmap -sU -p 51820 [EXTERNAL_IP_ADDRESS]
+sudo nmap -Pn -sU -p 51820 [EXTERNAL_IP_ADDRESS]
 ```
 
 The final step is to check the domain name:
 
 ```bash
-sudo nmap -sU -p 51820 [NAME].duckdns.org
+sudo nmap -Pn -sU -p 51820 [NAME].duckdns.org
 ```
 
 All of these should show port 51820 as "open|filtered".
