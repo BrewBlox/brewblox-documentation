@@ -374,7 +374,7 @@ Referenced enum values:
 Instructions either set a value, or wait for a condition to be true.
 Combined, they can be used to to augment the *SetpointProfile* block or implement if-this-then-that functionality.
 
-Active state (`activeInstruction`, `activeInstructionStartedAt`, `disabledAt`, `disabledDuration`) are readonly unless `overrideState` is set to `true` in a write or patch command.
+The `activeInstruction` field is readonly unless `overrideState` is set to `true` in a write or patch command.
 
 Client-side, sequence instructions are edited using a line protocol.
 For syntax, and available instructions, see the [sequence instructions page](./sequence_instructions.md).
