@@ -8,6 +8,62 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2023/07/27
+
+**firmware release date: 2023/07/27**
+
+## Holiday closure
+
+The shop is closed from July 29 to August 18. If you place an order during this period, it will ship after the 18th.
+
+## Digital Input
+
+The *OneWire GPIO Module* block now supports Input channels for detecting either low current (3-100mA) or high current (30-1000mA).
+These can be used by the new *Digital Input* block. When current is detected (the circuit is closed),
+The *Digital Input* block state will be active.
+*Digital Input* state can be used in *Sequence* instructions (WAIT_DIGITAL_STATE) and in the *Logic Actuator* block.
+
+## GPIO channel changes
+
+Some IO channels will be configured differently based on Active/Inactive state.
+
+NC = not connected \
+GND = ground, negative pole of supply \
+SUPPLY = positive pole of supply
+
+| Type                          | Inactive before | Inactive after | Active before | Active after | Current limit  after PR |
+| ----------------------------- | --------------- | -------------- | ------------- | ------------ | ----------------------- |
+| SSR_2P                        | GND GND         | NC  NC         | GND SUPPLY    | GND SUPPLY   | 100mA                   |
+| SSR_1P                        | GND             | NC             | SUPPLY        | SUPPLY       | 100mA                   |
+| MECHANICAL_RELAY_2P           | GND NC          | NC NC          | GND SUPPLY    | GND SUPPLY   | 1A                      |
+| MECHANICAL_RELAY_1P_HIGH_SIDE | NC              | NC             | SUPPLY        | SUPPLY       | 1A                      |
+| MECHANICAL_RELAY_1P_LOW_SIDE  | NC              | NC             | GND           | GND          | 1A                      |
+| COIL_2P                       | GND NC          | NC NC          | GND SUPPLY    | GND SUPPLY   | 1A                      |
+| COIL_2P_BIDIRECTIONAL         | GND SUPPLY      | GND SUPPLY     | SUPPLY GND    | SUPPLY GND   | 1A                      |
+| COIL_1P_HIGH_SIDE             | NC              | NC             | SUPPLY        | SUPPLY       | 1A                      |
+| COIL_1P_LOW_SIDE              | NC              | NC             | GND           | GND          | 1A                      |
+| MOTOR_2P                      | GND NC          | NC NC          | GND SUPPLY    | GND SUPPLY   | 1A                      |
+| MOTOR_2P_BIDIRECTIONAL        | GND SUPPLY      | GND SUPPLY     | SUPPLY GND    | SUPPLY GND   | 1A                      |
+| MOTOR_1P_HIGH_SIDE            | NC              | NC             | SUPPLY        | SUPPLY       | 1A                      |
+| MOTOR_1P_LOW_SIDE             | NC              | NC             | GND           | GND          | 1A                      |
+| POWER_1P                      | -               | -              | -             | -            | 1A                      |
+| GND_1P                        |                 |                |               |              | 1A                      | 100mA |
+
+**Changes**
+
+- (feature) Added the *Digital Input* block, and GPIO input channel types.
+- (feature) Added the *Display: Digital* Builder part. This shows state for a *Digital Actuator*, *Motor Valve* or *Digital Input* block.
+- (feature) The *Sequence* block now support comments. Use a `#` to start a comment line.
+- (improve) The GPIO module will automatically clear overcurrent errors.
+- (improve) The *Sequence* block no longer requires system time to be set.
+  - Some instructions (WAIT_UNTIL, START_PROFILE, WAIT_PROFILE) still require system time to be set.
+- (improve) The *Sequence* block widget now shows time remaining for WAIT_DURATION and WAIT_UNTIL instructions.
+- (fix) Quick Actions now correctly track and save prompted settings.
+- (fix) Quick Actions now correctly switch previously claimed blocks to manual control.
+- (fix) The brewblox-hass service will now correctly replace `-` characters in entity names.
+- (fix) The controller will no longer crash when it can't get an IP address after connecting.
+- (dev) Added `/blocks/batch/{create|read|write|patch|delete}` endpoints to the Spark service.
+
 ## Brewblox release 2023/05/30
 
 **firmware release date: 2023/05/06**
