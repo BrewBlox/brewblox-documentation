@@ -14,7 +14,7 @@ Relevant links:
 
 ## Holiday closure
 
-The shop is closed from July 29 to August 18. If you place an order during this period, it will ship after the 18th.
+The shop will be closed from July 29 to August 18. If you place an order during this period, it will ship after the 18th.
 
 ## Digital Input
 
@@ -25,29 +25,34 @@ The *Digital Input* block state will be active.
 
 ## GPIO channel changes
 
-Some IO channels will be configured differently based on Active/Inactive state.
+Some channels will now be configured differently when inactive.
+Previously, some pins were connected to GND when inactive.
+Now, they will be not connected to either supply or GND.
+
+Additionally, overcurrent errors no longer need to be cleared manually.
+*Open Load* checks have been added. Channels will report this error when no current flows when they are turned on.
 
 NC = not connected \
 GND = ground, negative pole of supply \
 SUPPLY = positive pole of supply
 
-| Type                          | Inactive before | Inactive after | Active before | Active after | Current limit  after PR |
-| ----------------------------- | --------------- | -------------- | ------------- | ------------ | ----------------------- |
-| SSR_2P                        | GND GND         | NC  NC         | GND SUPPLY    | GND SUPPLY   | 100mA                   |
-| SSR_1P                        | GND             | NC             | SUPPLY        | SUPPLY       | 100mA                   |
-| MECHANICAL_RELAY_2P           | GND NC          | NC NC          | GND SUPPLY    | GND SUPPLY   | 1A                      |
-| MECHANICAL_RELAY_1P_HIGH_SIDE | NC              | NC             | SUPPLY        | SUPPLY       | 1A                      |
-| MECHANICAL_RELAY_1P_LOW_SIDE  | NC              | NC             | GND           | GND          | 1A                      |
-| COIL_2P                       | GND NC          | NC NC          | GND SUPPLY    | GND SUPPLY   | 1A                      |
-| COIL_2P_BIDIRECTIONAL         | GND SUPPLY      | GND SUPPLY     | SUPPLY GND    | SUPPLY GND   | 1A                      |
-| COIL_1P_HIGH_SIDE             | NC              | NC             | SUPPLY        | SUPPLY       | 1A                      |
-| COIL_1P_LOW_SIDE              | NC              | NC             | GND           | GND          | 1A                      |
-| MOTOR_2P                      | GND NC          | NC NC          | GND SUPPLY    | GND SUPPLY   | 1A                      |
-| MOTOR_2P_BIDIRECTIONAL        | GND SUPPLY      | GND SUPPLY     | SUPPLY GND    | SUPPLY GND   | 1A                      |
-| MOTOR_1P_HIGH_SIDE            | NC              | NC             | SUPPLY        | SUPPLY       | 1A                      |
-| MOTOR_1P_LOW_SIDE             | NC              | NC             | GND           | GND          | 1A                      |
-| POWER_1P                      | -               | -              | -             | -            | 1A                      |
-| GND_1P                        |                 |                |               |              | 1A                      | 100mA |
+| Type                          | Inactive before | Inactive after | Active before | Active after | Max current | Open Load |
+| ----------------------------- | --------------- | -------------- | ------------- | ------------ | ----------- | --------- |
+| SSR_2P                        | GND GND         | NC  NC         | GND SUPPLY    | GND SUPPLY   | 100mA       | <2mA      |
+| SSR_1P                        | GND             | NC             | SUPPLY        | SUPPLY       | 100mA       | <2mA      |
+| MECHANICAL_RELAY_2P           | GND NC          | NC NC          | GND SUPPLY    | GND SUPPLY   | 1A          | <30mA     |
+| MECHANICAL_RELAY_1P_HIGH_SIDE | NC              | NC             | SUPPLY        | SUPPLY       | 1A          | <30mA     |
+| MECHANICAL_RELAY_1P_LOW_SIDE  | NC              | NC             | GND           | GND          | 1A          | <30mA     |
+| COIL_2P                       | GND NC          | NC NC          | GND SUPPLY    | GND SUPPLY   | 1A          | <30mA     |
+| COIL_2P_BIDIRECTIONAL         | GND SUPPLY      | GND SUPPLY     | SUPPLY GND    | SUPPLY GND   | 1A          | <30mA     |
+| COIL_1P_HIGH_SIDE             | NC              | NC             | SUPPLY        | SUPPLY       | 1A          | <30mA     |
+| COIL_1P_LOW_SIDE              | NC              | NC             | GND           | GND          | 1A          | <30mA     |
+| MOTOR_2P                      | GND NC          | NC NC          | GND SUPPLY    | GND SUPPLY   | 1A          | <30mA     |
+| MOTOR_2P_BIDIRECTIONAL        | GND SUPPLY      | GND SUPPLY     | SUPPLY GND    | SUPPLY GND   | 1A          | <30mA     |
+| MOTOR_1P_HIGH_SIDE            | NC              | NC             | SUPPLY        | SUPPLY       | 1A          | <30mA     |
+| MOTOR_1P_LOW_SIDE             | NC              | NC             | GND           | GND          | 1A          | <30mA     |
+| POWER_1P                      | -               | -              | -             | -            | 1A          | -         |
+| GND_1P                        | -               | -              | -             | -            | 1A          | -         |
 
 **Changes**
 
@@ -62,6 +67,7 @@ SUPPLY = positive pole of supply
 - (fix) Quick Actions now correctly switch previously claimed blocks to manual control.
 - (fix) The brewblox-hass service will now correctly replace `-` characters in entity names.
 - (fix) The controller will no longer crash when it can't get an IP address after connecting.
+- (fix) Excessive mDNS traffic will no longer cause buffer overflows on the Spark 2/3.
 - (dev) Added `/blocks/batch/{create|read|write|patch|delete}` endpoints to the Spark service.
 
 ## Brewblox release 2023/05/30
