@@ -10,7 +10,7 @@ Relevant links:
 
 ## Brewblox release 2023/07/27
 
-**firmware release date: 2023/07/27**
+**firmware release date: 2023/07/26**
 
 ## Holiday closure
 
