@@ -39,12 +39,16 @@ Time duration values (such as found in `WAIT_DURATION`) can be expressed either 
 If any argument is a string that contains trailing or leading spaces, it must be quoted using single quotes.
 For all other arguments, quotes are allowed but optional.
 
+Lines that start with a `#` are comments, and will not be executed.
+Comments are stored on the Spark, and may cause it to run out of memory.
+
 Example instructions:
 
 ```txt
 SET_SETPOINT target=BK Setpoint, setting=65C
 ENABLE target='BK Setpoint'
 WAIT_SETPOINT target='BK Setpoint', precision=1dC
+# Starting the profile sets its start time to 'now'
 START_PROFILE target='BK Profile '
 ENABLE target='BK Profile'
 WAIT_PROFILE target='BK Profile '
