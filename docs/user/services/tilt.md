@@ -16,12 +16,6 @@ The Tilt service will appear automatically in the UI.
 brewblox-ctl add-tilt
 ```
 
-## Configure ports
-
-By default, the Tilt services uses MQTT over WSS (HTTPS websockets).
-
-If you are using a non-default HTTPS port (e.g. if you run brewblox on a NAS), you'll also want to add `--mqtt-port=<port>` to the command.
-
 ## Device names
 
 Whenever a Tilt is detected, it is assigned a unique name.
@@ -76,7 +70,7 @@ sync:
 
 ## Calibration
 
-Calibration is optional. While the Tilt provides a good indication of fermentation progress without calibration, it's values can be less accurate than a traditional hydrometer. With calibration its accuracy is approximately that of a traditional hydrometer. If you wish to use your Tilt for anything beyond simple tracking of fermentation progress (e.g. stepping temperatures at a given SG value) it is recommended you calibrate your Tilt.
+Calibration is optional. While the Tilt provides a good indication of fermentation progress without calibration, its values can be less accurate than a traditional hydrometer. With calibration its accuracy is approximately that of a traditional hydrometer. If you wish to use your Tilt for anything beyond simple tracking of fermentation progress (e.g. stepping temperatures at a given SG value) it is recommended you calibrate your Tilt.
 
 Calibration is available for SG and temperature values. For both, calibration data should be provided in a CSV file, with the syntax:
 
@@ -117,15 +111,15 @@ Calibration values for temperature are placed in a file called `tempCal.csv` in 
 Example `./tilt/tempCal.csv`:
 
 ```csv
-Black,39,40
-Black,46,48
-Black,54,55
-Black,60,62
-Black,68,70
-Black,75,76
+Black, 39, 40
+Black, 46, 48
+Black, 54, 55
+Black, 60, 62
+Black, 68, 70
+Black, 75, 76
 ```
 
-Calibrated values will be logged in Brewblox separately to uncalibrated values. If you don't provide calibration values for a given colour of Tilt, only uncalibrated values will be logged. You don't need to calibrate both temperature and SG. If you only want to provide calibration values for SG, that works fine. Calibrated temp values would not be generated in this case but calibrated SG values would be.
+Calibrated values will be logged in Brewblox separately to uncalibrated values. If you don't provide calibration values for a given colour of Tilt, only uncalibrated values will be logged. You don't need to calibrate both temperature and SG. If you only want to provide calibration values for SG, that works fine. The system will then generate calibrated values for SG, but not for temperature.
 
 It is also recommended that you re-calibrate SG whenever you change your battery. Different batteries and different placements of the sled inside the Tilt can affect the calibration.
 
@@ -143,8 +137,9 @@ services:
     image: ghcr.io/brewblox/brewblox-tilt:${BREWBLOX_RELEASE:-edge}
     restart: unless-stopped
     privileged: true
-    network_mode: host
-    volumes: ['./tilt:/share']
+    volumes:
+      - './tilt:/share'
+      - '/var/run/dbus:/var/run/dbus'
     command: --mqtt-host=<brewblox_hostname/IP>
 ```
 
@@ -176,26 +171,40 @@ This will show new messages as they appear. Press Ctrl-C to exit.
 Example output:
 
 ```sh
-pi@raspberrypi:~/brewblox$ brewblox-ctl follow tilt
-Attaching to brewblox_tilt_1
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_tilt.names             Device names loaded from `/share/devices.yml`: {'DD7F97FC141E': 'Purple'}
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_tilt.parser            Calibration values loaded from `/share/SGCal.csv`: keys=()
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_tilt.parser            Calibration values loaded from `/share/tempCal.csv`: keys=()
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_service.service        Service name: tilt
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_service.service        Service info:  @ Tue Jan 18 14:56:02 UTC 2022
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_service.service        Service config: {'host': '0.0.0.0', 'port': 5000, 'name': 'tilt', 'debug': False, 'mqtt_protocol': 'wss', 'mqtt_host': '172.17.0.1', 'mqtt_port': None, 'mqtt_path': '/eventbus', 'history_topic': 'brewcast/history', 'state_topic': 'brewcast/state', 'lower_bound': 0.5, 'upper_bound': 2, 'inactive_scan_interval': 5, 'active_scan_interval': 10, 'simulate': None}
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_service.mqtt           Starting <EventHandler for wss://172.17.0.1:443/eventbus>
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_service.mqtt           listen(brewcast/tilt/tilt/names)
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_service.mqtt           subscribe(brewcast/tilt/tilt/names)
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_tilt.broadcaster       Looking for Bluetooth adapter...
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_tilt.broadcaster       Found Bluetooth adapter hci0
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_tilt.broadcaster       HCI Version native = <HCIVersion.BT_CORE_SPEC_5_0: 9>
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_tilt.broadcaster       HCI Version env = None
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_tilt.broadcaster       HCI Version max = <HCIVersion.BT_CORE_SPEC_4_2: 8>
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_tilt.broadcaster       HCI Version used = <HCIVersion.BT_CORE_SPEC_4_2: 8>
-tilt_1            | 2022/01/18 15:07:24 INFO     brewblox_service.mqtt           <EventHandler for wss://172.17.0.1:443/eventbus> connected
-tilt_1            | 2022/01/18 15:07:30 INFO     brewblox_tilt.parser            Tilt detected: mac='DD7F97FC141E', color='Purple', name='Purple'
+pi@raspberrypi:~/brewblox $ brewblox-ctl follow tilt
+brewblox-tilt-1  | 2023/09/19 14:16:01 INFO     brewblox_tilt.device            Device config loaded from `/share/devices.yml`: {'DD7F97FC141E': 'Purple'}
+brewblox-tilt-1  | 2023/09/19 14:16:01 INFO     brewblox_tilt.parser            Calibration values loaded from `/share/SGCal.csv`: keys=()
+brewblox-tilt-1  | 2023/09/19 14:16:01 INFO     brewblox_tilt.parser            Calibration values loaded from `/share/tempCal.csv`: keys=()
+brewblox-tilt-1  | 2023/09/19 14:16:01 INFO     brewblox_service.service        Service name: tilt
+brewblox-tilt-1  | 2023/09/19 14:16:01 INFO     brewblox_service.service        Service config: host='0.0.0.0' port=5000 name='tilt' debug=False mqtt_protocol='mqtt' mqtt_host='eventbus' mqtt_port=None mqtt_path='/eventbus' history_topic='brewcast/history' state_topic='brewcast/state' lower_bound=0.5 upper_bound=2.0 scan_duration=5.0 active_scan_interval=10.0 inactive_scan_interval=5.0 simulate=None
+brewblox-tilt-1  | 2023/09/19 14:16:07 INFO     brewblox_tilt.parser            Tilt detected: mac='DD7F97FC141E', color='Purple', name='Purple'
+```
 
+**Configuration**
+
+- Is the tilt service privileged?
+- Is `/var/run/dbus` mounted?
+
+To access the Bluetooth adapter, the Tilt service communicates with the host D-Bus messaging system.
+To reach D-Bus, the service must be privileged, and it must be able to access the `/var/run/dbus` directory on the host.
+
+Your Tilt service must have the following configuration set:
+
+```yaml
+  tilt:
+    ...
+    privileged: true
+    ...
+```
+
+```yaml
+  tilt:
+    ...
+    volumes:
+      - type: bind
+        target: /var/run/dbus
+        source: /var/run/dbus
+    ...
 ```
 
 **Hardware**
@@ -204,11 +213,10 @@ tilt_1            | 2022/01/18 15:07:30 INFO     brewblox_tilt.parser           
 - Is the Tilt in range?
 
 The first question can be checked in the service log.
-The service will wait idle until a Bluetooth adapter is found.
+The service will log an error if no Bluetooth adapter is found.
 
 ```txt
-[...] Looking for Bluetooth adapter...
-[...] Found Bluetooth adapter hci0
+[...] <Broadcaster> error during run(): BleakError(No Bluetooth adapters found.)
 ```
 
 The second question is harder to answer. If you can do so, put the Tilt next to the server, to remove all doubt.
@@ -225,11 +233,10 @@ You can check whether it detected any devices by looking for log entries like th
 [...] Tilt detected: mac='DD7F97FC141E', color='Purple', name='Purple'
 ```
 
-This is something that must be checked manually, as these are settings on the server itself, and the Tilt service can't access them all.
-To check this, we use the `bluetoothctl` tool.
+The Tilt service will attempt to set these settings, but they can also be checked manually.
+To do this, we use the `bluetoothctl` tool.
 
 ```sh
-brewblox-ctl down
 sudo bluetoothctl
 ```
 
@@ -267,7 +274,8 @@ Controller B8:27:EB:49:54:3C (public)
         Discovering: no
 ```
 
-If `Powered` is no, then run `power on`
+If `Powered` is no, run `power on`. \
+To power cycle the adapter, you can also run `power off` and then `power on`.
 
 After that, go to the *scan* menu, enable BLE, and clear filters (if any).
 Use *back* to return to the main menu.
@@ -312,28 +320,25 @@ Discovery started
 [CHG] Device DD:7F:97:FC:14:1E ManufacturerData Value:
   02 15 a4 95 bb 40 c5 b1 4b 44 b5 12 13 70 f0 2d  .....@..KD...p.-
   74 de 00 44 04 1e c5
+[DEL] Device DD:7F:97:FC:14:1E DD-7F-97-FC-14-1E
+[NEW] Device DD:7F:97:FC:14:1E DD-7F-97-FC-14-1E
 ```
 
-In this case, DD:7F:97:FC:14:1E is a Tilt, but pretty much as soon as devices show up, it’s fine.
-Exit bluetoothctl by running exit, and start brewblox again.
+The Tilt only broadcasts data when its angle is within a plausible range.
+If you physically pick up the device and hold it either straight horizontal or straight vertical, a `[DEL]` event will be logged in the bluetoothctl view. \
+Re-float the tilt, or hold it at a ~30° angle to trigger broadcasting.
+
+In this case, DD:7F:97:FC:14:1E is a Tilt. \
+You can exit bluetoothctl by using the exit command.
 
 ```sh
 exit
-brewblox-ctl up
 ```
 
 **Eventbus communication**
 
 The Tilt service uses MQTT to publish data.
 If the device is found, is publishing Bluetooth events, and yet nothing shows up, the next step is to check the eventbus.
-
-In the service log, it should show it is connected to the eventbus:
-
-```txt
-[...] <EventHandler for wss://172.17.0.1:443/eventbus> connected
-```
-
-If instead, it displays errors about not being able to connect, you may need to update the connection settings.
 
 To directly check the published messages, install <https://mqtt-explorer.com/>.
 Connect it to the Pi address, with protocol mqtt and port 1883 (the default).
