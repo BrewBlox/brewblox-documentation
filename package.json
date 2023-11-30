@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "ci": "rm -rf node_modules; yarn install --frozen-lockfile",
+    "ci": "yarn install --immutable",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
@@ -20,12 +20,12 @@
   },
   "homepage": "https://github.com/BrewBlox/brewblox-documentation#readme",
   "devDependencies": {
-    "axios": "^1.6.0",
-    "eslint": "^8.23.1",
-    "eslint-plugin-vue": "^9.5.1",
-    "markdown-link-check": "^3.10.3",
+    "axios": "^1.6.2",
+    "eslint": "^8.54.0",
+    "eslint-plugin-vue": "^9.18.1",
+    "markdown-link-check": "^3.11.2",
     "plantuml-encoder": "^1.4.0",
-    "vuepress": "^1.9.7",
+    "vuepress": "^1.9.10",
     "vuepress-plugin-mathjax": "^1.2.8"
   },
   "dependencies": {
@@ -33,5 +33,9 @@
     "typescript-string-enums": "^1.0.0",
     "vue-gallery-slideshow": "^1.5.2",
     "vue-no-ssr": "^1.1.1"
-  }
+  },
+  "engines": {
+    "node": ">= 18"
+  },
+  "packageManager": "yarn@4.0.2"
 }
