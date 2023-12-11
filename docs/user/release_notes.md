@@ -8,6 +8,36 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2023/12/??
+
+**firmware release date: 2023/12/??**
+
+**Changes**
+
+- (feature) The UI redirects HTTP to HTTPS. iOS users should import the CA certificate to prevent Websocket-related problems.
+- (feature) The Tilt service can now share the Bluetooth adapter.
+- (improve) Significantly improved performance of the history csv endpoint.
+- (feature) Added a login screen to the UI.
+- (feature) Added optional authentication support. Enable it by running `brewblox-ctl auth init`.
+- (feature) Brewblox now uses a self-signed CA to sign its SSL certificate. You can import the CA certificate to prevent the browser warning.
+- (feature) Added relations diagrams for blocks with meaningful links.
+- (improve) The Spark service is more intelligent about when it needs to restart if it can't discover a Spark.
+- (improve) Improved error handling for invalid widgets. They will no longer block other widgets.
+- (fix) The Spark service returns an error object if it can't decode a block sent by the Spark.
+- (fix) The history csv endpoint can no longer yield duplicate points.
+- (fix) The UI now always checks whether itself was updated.
+- (fix) The SysInfo block now shows the correct values for memory usage.
+- (fix) Fixed behavior for multiple UI input fields if a value is not set.
+- (fix) The PID relations diagram no longer causes an error.
+- (fix) The Metrics widget now correctly shows older values.
+- (fix) The duration shortcuts in the maximized Graph window work again.
+- (fix) Prevented bogus Open Load errors for mechanical relays and bidirectional motors.
+- (fix) Fixed a buffer overflow when reading many / large blocks on the Spark 4.
+- (fix) Fixed a stack overflow in Spark MQTT communication.
+- (fix) PID integrator values are now correctly read from cache after controller restart.
+- (docs) Added developer documentation for setting up a Python virtualenv.
+- (dev) Added a admin port (default `9600`). This is a non-authenticated HTTP port that is only accessible from the server itself.
+
 ## Brewblox release 2023/07/27
 
 **firmware release date: 2023/07/26**
