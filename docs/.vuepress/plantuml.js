@@ -3,9 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 
-
-const hashCode = s =>
-  s.split('').reduce((a, b) => (((a << 5) - a) + b.charCodeAt(0)) | 0, 0);
+const hashCode = (s) =>
+  s.split('').reduce((a, b) => ((a << 5) - a + b.charCodeAt(0)) | 0, 0);
 
 const download = async (encoded, dest) => {
   const url = `http://www.plantuml.com/plantuml/png/${encoded}`;
@@ -22,11 +21,9 @@ const download = async (encoded, dest) => {
   });
 };
 
-const umlTitle = src => {
+const umlTitle = (src) => {
   const match = src.match(/@startuml (.*)/);
-  return match && match[1]
-    ? match[1].trim()
-    : 'Diagram';
+  return match && match[1] ? match[1].trim() : 'Diagram';
 };
 
 const highlight = (fallback) => (str, lang) => {

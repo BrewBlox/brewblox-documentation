@@ -62,9 +62,7 @@ module.exports = {
         },
         {
           title: 'Migration tools',
-          children: [
-            'migration/influxdb',
-          ],
+          children: ['migration/influxdb'],
         },
         {
           title: 'Using brewblox-service',
@@ -184,7 +182,7 @@ module.exports = {
     lastUpdated: 'Last Updated',
     editLinks: true,
   },
-  chainMarkdown: config => {
+  chainMarkdown: (config) => {
     const opts = config.options;
     // Pass the default function as backup to plantuml highlight
     opts.set('highlight', plantuml.highlight(opts.get('highlight')));
