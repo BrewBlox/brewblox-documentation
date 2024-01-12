@@ -3,7 +3,7 @@ import VueGallerySlideshow from 'vue-gallery-slideshow';
 import NoSSR from 'vue-no-ssr';
 
 export default {
-  name: 'Gallery',
+  name: 'SlideGallery',
   components: {
     VueGallerySlideshow,
     'no-ssr': NoSSR,
