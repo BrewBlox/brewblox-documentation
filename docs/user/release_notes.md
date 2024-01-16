@@ -12,10 +12,53 @@ Relevant links:
 
 **firmware release date: 2023/12/??**
 
+## Authentication
+
+A requirement for any kind of remote access is security: the UI should not allow any unauthorized users to access the system.
+The safest and most comprehensive way to do this is by [setting up a Virtual Private Network (VPN)](https://www.brewblox.com/user/wireguard.html).
+The downside to this is that configuration is relatively complicated, and it must be set up for every device.
+
+In this release, we've added an alternative: password authentication for all public API access.
+Authentication is not enabled by default. If you want to continue using Brewblox inside your local network only, we're not going to annoy you with mandatory login pages. \
+To enable it, run:
+
+```sh
+brewblox-ctl auth init
+```
+
+This will prompt you to add a user, and will then enable the service that checks all incoming HTTP requests.
+
+## SSL Certificates and Authorities
+
+HTTPS connections are secured using SSL certificates. If you have a public website, you can create a certificate, and then ask a Certificate Authority (CA) to sign it.
+When signed, it will be trusted by browsers.
+SSL Certificates are valid only for a specific domain. When you ask a CA to sign a certificate for `www.your-page.com`, the CA first checks that you actually control `www.your-page.com`.
+
+We expect Brewblox to be hosted locally. If you can't access the Brewblox UI from outside your local network, a CA can't either.
+If we can't get a public CA to sign our SSL certificate, the alternative is to have a **self-signed certificate**.
+When browsers encounter a self-signed SSL certificate, they don't trust it, and will show a warning page first. \
+On iOS devices, graphs in the UI won't work even after clicking through the warning page.
+
+To fix these issues, we now create a new and unique **self-signed CA certificate** when installing Brewblox,
+and use that to sign the certificates used by the UI and the REST API.
+By default, this changes very little. You have to click through a slightly different error message when accessing the UI.
+
+If you want to use the UI without the error page, or have an iOS device, you can choose to install the self-signed CA certificate on your device.
+Your browser will then trust the UI certificate without any further prompting.
+
+To do this:
+
+- Navigate to the Brewblox UI
+- Click continue when shown the certificate warning page
+- Go to "Admin"
+- Expand "General Settings"
+- Click on "Install SSL Cert"
+- Follow the instructions for your browser or device
+
 **Changes**
 
 - (feature) The UI redirects HTTP to HTTPS. iOS users should import the CA certificate to prevent Websocket-related problems.
-- (feature) Brewblox now uses a self-signed CA to sign its SSL certificate. You can import the CA certificate to prevent the browser warning.
+- (feature) Brewblox now uses a self-signed CA to sign its SSL certificate. You can import the CA certificate to prevent browser warnings.
 - (feature) Added an instruction dialog for importing the Brewblox CA certificate.
 - (feature) The Tilt service can now share the Bluetooth adapter.
 - (improve) Significantly improved performance of the history csv endpoint.
