@@ -14,16 +14,20 @@ Relevant links:
 
 ## Authentication
 
-A requirement for any kind of remote access is security: the UI should not allow any unauthorized users to access the system.
+By default, Brewblox is only accessible from inside your local network.
+If you want to use the UI when away from home, it must be secured.
+
 The safest and most comprehensive way to do this is by [setting up a Virtual Private Network (VPN)](https://www.brewblox.com/user/wireguard.html).
+This way, you can connect to the local network even when away from home.
 The downside to this is that configuration is relatively complicated, and it must be set up for every device.
 
 In this release, we've added an alternative: password authentication for all public API access.
+With this, you can safely expose the Brewblox UI to the internet.
 Authentication is not enabled by default. If you want to continue using Brewblox inside your local network only, we're not going to annoy you with mandatory login pages. \
 To enable it, run:
 
 ```sh
-brewblox-ctl auth init
+brewblox-ctl auth enable
 ```
 
 This will prompt you to add a user, and will then enable the service that checks all incoming HTTP requests.
@@ -32,7 +36,7 @@ This will prompt you to add a user, and will then enable the service that checks
 
 HTTPS connections are secured using SSL certificates. If you have a public website, you can create a certificate, and then ask a Certificate Authority (CA) to sign it.
 When signed, it will be trusted by browsers.
-SSL Certificates are valid only for a specific domain. When you ask a CA to sign a certificate for `www.your-page.com`, the CA first checks that you actually control `www.your-page.com`.
+SSL Certificates are valid only for a specific domain. When you ask a CA to sign a certificate for `www.example.com`, the CA first checks that you actually control `www.example.com`.
 
 We expect Brewblox to be hosted locally. If you can't access the Brewblox UI from outside your local network, a CA can't either.
 If we can't get a public CA to sign our SSL certificate, the alternative is to have a **self-signed certificate**.
@@ -62,7 +66,7 @@ To do this:
 - (feature) Added an instruction dialog for importing the Brewblox CA certificate.
 - (feature) The Tilt service can now share the Bluetooth adapter.
 - (improve) Significantly improved performance of the history csv endpoint.
-- (feature) Added optional authentication support. Enable it by running `brewblox-ctl auth init`.
+- (feature) Added optional authentication support. Enable it by running `brewblox-ctl auth enable`.
 - (feature) Added a login screen to the UI if authentication is enabled.
 - (feature) Added relations diagrams for blocks with meaningful links.
 - (improve) The Spark service is more intelligent about when it needs to restart if it can't discover a Spark.
