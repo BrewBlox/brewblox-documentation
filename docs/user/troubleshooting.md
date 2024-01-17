@@ -47,14 +47,19 @@ Remove the alias, reload your shell, and try again.
 
 ### Graphs and widgets don't show on iOS
 
-There is a bug on iOS where Websockets always fail to connect if the backend is using a self-signed SSL certificate.
-Brewblox uses Websockets to stream graph data, and by default uses self-signed SSL certificates.
+Because Brewblox is normally hosted in a local network, it can't request an SSL certificate from a public Certificate Authority (CA).
+To use SSL / HTTPS anyway, Brewblox generates its own CA, and uses that to sign SSL certificates.
 
-When using Brewblox in a local network, the simplest solution is to switch to HTTP when using iOS.
-The UI will automatically suggest this if it fails to make a Websocket connection when using iOS + HTTPS.
+All browsers show a warning page when visiting a site secured by a self-signed SSL certificate. A temporary exception can be made by clicking a "continue to website" button. \
+On iOS, Websocket connections over self-signed certificates fail even when this temporary exception is in place.
 
-Do note that its suggested redirect is not perfect: if you are using non-standard ports for HTTP/HTTPS, you will be redirected to an invalid page.
-In that case, manually navigate to `http://address:port`.
+To fix this problem, you can add the Brewblox CA certificate to your device's certificate store.
+Browser / device specific instructions can be found in the UI:
+
+- Go to the Admin page
+- Expand "General Settings"
+- Click on "Install SSL Cert"
+- Follow the instructions
 
 ### During updates, my Pi hangs while creating services
 

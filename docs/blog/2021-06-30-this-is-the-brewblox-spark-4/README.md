@@ -10,11 +10,11 @@ You can see the new Spark 4 below, with the first I/O module that will be availa
 <source src="/images/spark4/rotating-spark4.webm">
 </video>
 
-<Gallery
+<SlideGallery
 :images="['/images/spark4/spark4-01.jpg','/images/spark4/spark4-02.jpg','/images/spark4/spark4-03.jpg','/images/spark4/spark4-04.jpg']"
 thumb-size="150px"
 />
-</Gallery>
+</SlideGallery>
 </p>
 
 ## Designed for flexibility
@@ -44,11 +44,11 @@ Through the bottom of the Spark 4, an I/O module can plug into a 26-pin connecto
 Each I/O module also has a socket for the next module, to allow a stack of up to four I/O modules.
 
 <p align="center">
-<Gallery
+<SlideGallery
 :images="['/images/spark4/spark4-05.jpg','/images/spark4/spark4-06.jpg','/images/spark4/spark4-14.jpg','/images/spark4/spark4-08.jpg','/images/spark4/spark4-07.jpg','/images/spark4/spark4-15.jpg']"
 thumb-size="230px"
 />
-</Gallery>
+</SlideGallery>
 </p>
 
 The advantages of these stackable I/O modules are:
@@ -66,11 +66,11 @@ To support a new I/O module, we also just need to add a few files for the specif
 ## A more powerful processor: ESP32
 
 <p align="center">
-<Gallery
+<SlideGallery
 :images="['/images/spark4/spark4-16.jpg']"
 thumb-size="500px"
 />
-</Gallery>
+</SlideGallery>
 </p>
 
 We decided to switch to the ESP32 platform instead of the Particle platform.
@@ -100,11 +100,11 @@ The Spark 4 can also be powered from USB or through the power input of one of th
 The first I/O module available for the Spark 4 is for 1-Wire and general-purpose I/O.
 
 <p align="center">
-<Gallery
+<SlideGallery
 :images="['/images/spark4/spark4-12.jpg', '/images/spark4/spark4-13.jpg', '/images/spark4/spark4-17.jpg', '/images/spark4/spark4-18.jpg']"
 thumb-size="170px"
 />
-</Gallery>
+</SlideGallery>
 </p>
 
 On one side, this GPIO module lets you plug in 4 of our temperature sensors.

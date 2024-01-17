@@ -145,13 +145,14 @@ export default {
   text-decoration: none;
   -webkit-user-select: none;
   -moz-user-select: none;
+  user-select: none;
 }
 .table-button:hover {
   background: #dddddd;
-   border-color: #dddddd;
+  border-color: #dddddd;
 }
 .table-button:active {
   background: #bbbbbb;
-   border-color: #bbbbbb;
+  border-color: #bbbbbb;
 }
 </style>

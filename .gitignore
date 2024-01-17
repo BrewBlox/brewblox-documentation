@@ -68,6 +68,9 @@ typings/
 # nuxt.js build output
 .nuxt
 
+# yarn cache
+.yarn
+
 # Serverless directories
 .serverless
 
