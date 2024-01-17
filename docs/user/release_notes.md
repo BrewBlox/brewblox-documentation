@@ -8,6 +8,85 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2023/01/17
+
+**firmware release date: 2024/01/03**
+
+## Authentication
+
+By default, Brewblox is only accessible from inside your local network.
+If you want to use the UI when away from home, it must be secured.
+
+The safest and most comprehensive way to do this is by [setting up a Virtual Private Network (VPN)](https://www.brewblox.com/user/wireguard.html).
+This way, you can connect to the local network even when away from home.
+The downside to this is that configuration is relatively complicated, and it must be set up for every device.
+
+In this release, we've added an alternative: password authentication for all public API access.
+With this, you can safely expose the Brewblox UI to the internet.
+Authentication is not enabled by default. If you want to continue using Brewblox inside your local network only, we're not going to annoy you with mandatory login pages. \
+To enable it, run:
+
+```sh
+brewblox-ctl auth enable
+```
+
+This will prompt you to add a user, and will then enable the service that checks all incoming HTTP requests.
+
+## SSL Certificates and Authorities
+
+HTTPS connections are secured using SSL certificates. If you have a public website, you can create a certificate, and then ask a Certificate Authority (CA) to sign it.
+When signed, it will be trusted by browsers.
+SSL Certificates are valid only for a specific domain. When you ask a CA to sign a certificate for `www.example.com`, the CA first checks that you actually control `www.example.com`.
+
+We expect Brewblox to be hosted locally. If you can't access the Brewblox UI from outside your local network, a CA can't either.
+If we can't get a public CA to sign our SSL certificate, the alternative is to have a **self-signed certificate**.
+When browsers encounter a self-signed SSL certificate, they don't trust it, and will show a warning page first. \
+On iOS devices, graphs in the UI won't work even after clicking through the warning page.
+
+To fix these issues, we now create a new and unique **self-signed CA certificate** when installing Brewblox,
+and use that to sign the certificates used by the UI and the REST API.
+By default, this changes very little. You have to click through a slightly different error message when accessing the UI.
+
+If you want to use the UI without the error page, or have an iOS device, you can choose to install the self-signed CA certificate on your device.
+Your browser will then trust the UI certificate without any further prompting.
+
+To do this:
+
+- Navigate to the Brewblox UI
+- Click continue when shown the certificate warning page
+- Go to "Admin"
+- Expand "General Settings"
+- Click on "Install SSL Cert"
+- Follow the instructions for your browser or device
+
+**Changes**
+
+- (feature) The UI redirects HTTP to HTTPS. iOS users should import the CA certificate to prevent Websocket-related problems.
+- (feature) Brewblox now uses a self-signed CA to sign its SSL certificate. You can import the CA certificate to prevent browser warnings.
+- (feature) Added an instruction dialog for importing the Brewblox CA certificate.
+- (feature) The Tilt service can now share the Bluetooth adapter.
+- (improve) Significantly improved performance of the history csv endpoint.
+- (feature) Added optional authentication support. Enable it by running `brewblox-ctl auth enable`.
+- (feature) Added a login screen to the UI if authentication is enabled.
+- (feature) Added relations diagrams for blocks with meaningful links.
+- (improve) The Spark service is more intelligent about when it needs to restart if it can't discover a Spark.
+- (improve) Improved error handling for invalid widgets. They will no longer block other widgets.
+- (fix) The Spark service returns an error object if it can't decode a block sent by the Spark.
+- (fix) The history csv endpoint can no longer yield duplicate points.
+- (fix) The UI now always checks whether itself was updated.
+- (fix) The SysInfo block now shows the correct values for memory usage.
+- (fix) Fixed behavior for multiple UI input fields if a value is not set.
+- (fix) The PID relations diagram no longer causes an error.
+- (fix) The Metrics widget now correctly shows older values.
+- (fix) The duration shortcuts in the maximized Graph window work again.
+- (fix) The duration shortcuts in the block widget sidepanel work again.
+- (fix) Prevented bogus Open Load errors for mechanical relays and bidirectional motors.
+- (fix) Fixed a buffer overflow when reading many / large blocks on the Spark 4.
+- (fix) Fixed a stack overflow in Spark MQTT communication.
+- (fix) PID integrator values are now correctly read from cache after controller restart.
+- (docs) Added developer documentation for setting up a Python virtualenv.
+- (dev) Added a admin port (default `9600`). This is a non-authenticated HTTP port that is only accessible from the server itself.
+
 ## Brewblox release 2023/07/27
 
 **firmware release date: 2023/07/26**
