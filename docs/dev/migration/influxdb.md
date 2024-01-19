@@ -1,4 +1,4 @@
-# From InfluxDB to Victoria Metrics
+# InfluxDB To Victoria Metrics
 
 In august 2021, Brewblox switched its history database from InfluxDB to Victoria Metrics.
 For the reasoning behind this change, see the [decision document](../decisions/20210718_victoria_metrics.md).

@@ -208,13 +208,7 @@ Design decisions are:
 * Make host configuration simple in Python (host="eventbus"), and configure deployment to match.
 * We'll drop the "must function on localhost" requirement for now.
 
-[1]: https://microservices.io/patterns/server-side-discovery.html
 [2]: https://www.nginx.com/blog/service-discovery-in-a-microservices-architecture/
 [3]: https://github.com/docker/dockercloud-haproxy
 [4]: https://gitlab.com/ProftaakS61mGroepA/ProjectPub/blob/master/deploy-order/docker-compose.yml
 [5]: https://github.com/hellofresh/janus
-[6]: https://docs.docker.com/docker-cloud/apps/service-links/#discovering-containers-on-the-same-service-or-stack
-[7]: https://success.docker.com/article/Docker_Reference_Architecture-_Service_Discovery_and_Load_Balancing_with_Docker_Universal_Control_Plane_(UCP)
-[8]: https://serverfault.com/questions/816293/haproxy-reverse-proxy-and-virtual-host
-[9]: http://jasonwilder.com/blog/2014/07/15/docker-service-discovery/
-[10]: https://github.com/gliderlabs/registrator

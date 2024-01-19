@@ -1,4 +1,4 @@
-# Publishing service state
+# Events: State
 
 For any services with a remote client (UI), it is desirable to publish current service state and sensor readings.
 This state tends to be a superset of the published history data, and may include non-numerical values.

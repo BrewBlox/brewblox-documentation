@@ -1,4 +1,4 @@
-# Eventbus revisited: MQTT events
+# Eventbus Revisited: MQTT Events
 
 Date: 2020/05/30
 

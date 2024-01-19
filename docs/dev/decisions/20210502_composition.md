@@ -1,4 +1,4 @@
-# Using Vue composition API
+# Using Vue Composition API
 
 Date: 2021/05/02
 

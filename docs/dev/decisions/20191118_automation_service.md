@@ -1,4 +1,4 @@
-# Next steps: Automation Service
+# Automation Service
 
 Date: 2019/11/18
 

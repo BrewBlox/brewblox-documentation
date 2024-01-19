@@ -1,4 +1,4 @@
-# Spark service state
+# Service Events: Spark
 
 Every few seconds, the Spark services publishes its current [state](./state_events.md).
 This document serves as reference for the topic and payload schemas used.
@@ -10,7 +10,7 @@ All referenced code snippets use the [TypeScript interface syntax](https://www.t
 The main Spark state event is published to the `brewcast/state/<Service ID>` topic.
 This includes service state, and current block settings and values.
 
-<<< @/node_modules/brewblox-proto/ts/spark-service-types.ts#SparkStateEvent
+<<< @/../node_modules/brewblox-proto/ts/spark-service-types.ts#SparkStateEvent
 
 `key` is always set to the Service ID (eg. `spark-one`). This will match the slug in the topic.
 
@@ -31,7 +31,7 @@ and claims indicate active control chains.
 
 ## Spark status
 
-<<< @/node_modules/brewblox-proto/ts/spark-service-types.ts#SparkDescription
+<<< @/../node_modules/brewblox-proto/ts/spark-service-types.ts#SparkDescription
 
 For the system to function, the service and controller must be using the same communication and messaging protocols.
 The service is built to match a specific firmware version,
@@ -40,7 +40,7 @@ and checks the actual firmware version during the connection process.
 If the expectation is incompatible with the reality,
 the connection process is stopped before blocks can be read or written.
 
-<<< @/node_modules/brewblox-proto/ts/spark-service-types.ts#SparkStatusDescription
+<<< @/../node_modules/brewblox-proto/ts/spark-service-types.ts#SparkStatusDescription
 
 Expected and actual firmware properties are both included in the Spark status,
 along with the current state of the connection process.
@@ -66,7 +66,7 @@ The service will now read/write blocks on the controller.
 
 ## Block relations
 
-<<< @/node_modules/brewblox-proto/ts/spark-service-types.ts#BlockRelation
+<<< @/../node_modules/brewblox-proto/ts/spark-service-types.ts#BlockRelation
 
 Relevant links between blocks are analyzed, and published as part of the service state.
 The relations can be used to map the active control chains.
@@ -78,7 +78,7 @@ but for the purposes of the control chain, the Setpoint is considered the source
 
 ## Claims
 
-<<< @/node_modules/brewblox-proto/ts/spark-service-types.ts#BlockClaim
+<<< @/../node_modules/brewblox-proto/ts/spark-service-types.ts#BlockClaim
 
 When one block is actively and exclusively controlling another block, this is referred to as a *claim*.
 Claiming blocks may in turn be claimed by another block (a *Digital Actuator* is claimed by a *PWM* which is claimed by a *PID*).
@@ -113,7 +113,7 @@ Clients are free to ignore patch events, and wait for the next published Spark s
 
 Patch events are published to the `brewcast/state/<Service ID>/patch` topic.
 
-<<< @/node_modules/brewblox-proto/ts/spark-service-types.ts#SparkPatchEvent
+<<< @/../node_modules/brewblox-proto/ts/spark-service-types.ts#SparkPatchEvent
 
 `key` is always set to the Service ID (eg. `spark-one`). This will match the slug in the topic.
 
@@ -131,7 +131,7 @@ This does not apply to firmware updates triggered by `brewblox-ctl flash`.
 
 Update progress events are published to the `brewcast/state/<Service ID>/update` topic.
 
-<<< @/node_modules/brewblox-proto/ts/spark-service-types.ts#SparkUpdateEvent
+<<< @/../node_modules/brewblox-proto/ts/spark-service-types.ts#SparkUpdateEvent
 
 `key` is always set to the Service ID (eg. `spark-one`). This will match the slug in the topic.
 

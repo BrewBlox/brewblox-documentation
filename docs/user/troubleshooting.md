@@ -1,6 +1,6 @@
 # Troubleshooting
 
-We're happy to help with any problems or questions that arise when using Brewblox. You can reach us on the [forum](https://community.brewpi.com).
+We're happy to help with any problems or questions that arise when using Brewblox. You can reach us on the [forum](https://community.brewpi.com), or on Discord.
 
 Our first reply often consists of the same handful of questions. To save you some time, you may want to run through this checklist first.
 
@@ -9,16 +9,7 @@ Our first reply often consists of the same handful of questions. To save you som
 - In the UI sidebar, bottom left corner there is a "bug" button. Click here, and choose "Export API errors to file". Please attach this file to your post.
 - If your Spark service page is working, it may be useful to include your Blocks. You can export them by clicking on the "Actions" button in the top right corner of the service page, and then choosing "Import/Export Blocks". Please attach the generated file to your post.
 
-## Known issues / workarounds
-
-### Fields don't show up in Graph widget settings
-
-Due to a bug in the history database, field presence and data are not always returned in queries.
-No data is lost - it just won't show up.
-we've raised the issue with Victoria Metrics, but this is unfortunately a problem that must be fixed on their end.
-
-A workaround is to change the "hide after" setting in the Graph widget a few times (between for example 1d, 30d, 100d).
-This can trigger the database to then correctly return fields and graph data.
+## Known issues
 
 ### Installation fails with "E: Package 'python3-venv' has no installation candidate"
 
@@ -65,7 +56,7 @@ Browser / device specific instructions can be found in the UI:
 
 The most likely cause for this is overflow in swap memory.
 
-Especially if you have a Pi 3 or 4, you may see improvements when disabling swap memory altogether:
+Especially if you have a Pi >=3, you may see improvements when disabling swap memory altogether:
 
 ```sh
 sudo dphys-swapfile swapoff
@@ -137,8 +128,6 @@ and restart the name service by running:
 ```sh
 sudo service avahi-daemon restart
 ```
-
-## Frequently asked questions
 
 ### No Spark controller detected (in service, or in brewblox-ctl)
 
@@ -212,7 +201,9 @@ You can find the syntax in the [connection settings guide](./services/spark.md#c
 
 When doing so, it is advised to assign a fixed IP address to the Spark in your router settings. (Also called "static DHCP lease").
 
-**How do I display temperature values in Fahrenheit?**
+## Frequently asked questions
+
+### How do I display temperature values in Fahrenheit?
 
 In the UI, go to the *Admin* page. This can be accessed at the top of the sidebar.
 
@@ -221,7 +212,7 @@ Here, go to *General settings* -> *Temperature units*, and select Fahrenheit.
 History data field names include the unit.
 If you have active graphs, you will need to reconfigure them to use the Fahrenheit values.
 
-**Why can removed or renamed blocks still be selected in the Graph Widget settings?**
+### Why can removed or renamed blocks still be selected in the Graph Widget settings?
 
 History data is not changed when a block changes name.
 After a name change, the service simply starts publishing data under the new name.

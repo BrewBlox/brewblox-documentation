@@ -1,4 +1,4 @@
-# Serializing type information in block fields
+# Serializing Type Information in Block Fields
 
 Date: 2020/07/23
 

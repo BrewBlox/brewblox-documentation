@@ -1,4 +1,4 @@
-# Block data types
+# Block Data Types
 
 This page describes the interface specs for all block types.
 
@@ -13,7 +13,7 @@ The [TypeScript interface syntax](https://www.typescriptlang.org/docs/handbook/i
 *Block* is the base type for all blocks.
 The shared fields are defined here, and each block type extends this interface with more specific typings for `type` and `data`.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#Block
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#Block
 
 ## Block interfaces
 
@@ -23,10 +23,10 @@ All blocks that implement said interface are valid targets for the link.
 
 Some of these interfaces dictate the presence of fields in block data, but not all.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#IoChannel
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#EnablerInterfaceBlock
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#ClaimableInterfaceBlock
-<<< @/node_modules/brewblox-proto/ts/spark-block-const.ts#COMPATIBLE_TYPES
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#IoChannel
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#EnablerInterfaceBlock
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#ClaimableInterfaceBlock
+<<< @/../node_modules/brewblox-proto/ts/spark-block-const.ts#COMPATIBLE_TYPES
 
 ## BloxField (typed objects)
 
@@ -46,7 +46,7 @@ Link objects are fields in block data that refer to other blocks.
 Each link field has a fixed type.
 This can be a block type (*Pid*), but also a block interface type (*TempSensorInterface*).
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#BloxField
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#BloxField
 
 ## DateString (datetime handling)
 
@@ -58,7 +58,7 @@ we added the `DateString` alias to make it obvious that a given field will alway
 When writing block data, dates with non-UTC timezones can be used,
 but the controller will always return dates with UTC timezones.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#DateString
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#DateString
 
 ## IoChannel
 
@@ -75,7 +75,7 @@ There are two exceptions:
 
 *DigitalActuator*, *MotorValve*, and *FastPwm* blocks use channels as output. They all implement the *IoDriverInterface* interface, and have `hwDevice` and `channel` fields.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#IoChannel
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#IoChannel
 
 ## IoChannel capabilities
 
@@ -87,7 +87,7 @@ The *ChannelCapabilities* enum is a numeric representation of bitwise flags.
 For example, a channel may support digital output and bidirectional output.\
 The value of `capabilities` would be `CHAN_SUPPORTS_DIGITAL_OUTPUT | CHAN_SUPPORTS_BIDIRECTIONAL`, making the numeric value `(1 << 0 | 1 << 5) == (1 | 32) == 33`
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#ChannelCapabilities
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#ChannelCapabilities
 
 ## Stored, desired, and achieved settings
 
@@ -133,15 +133,15 @@ Digital actuators (*DigitalActuator*, *MotorValve*) have digital constraints, an
 As mentioned above, actuators have a *desiredSetting* and a *setting* field.
 *desiredSetting* is the before, and *setting* is after constraints are evaluated.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#DigitalConstraints
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#AnalogConstraints
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#DigitalConstraints
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#AnalogConstraints
 
 ## ActuatorAnalogMock
 
 This block can be used as a dummy replacement for an *ActuatorPwm*,
 or as input block for an *ActuatorLogic*.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#ActuatorAnalogMock
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#ActuatorAnalogMock
 
 ## ActuatorLogic
 
@@ -159,11 +159,11 @@ and *AnalogCompare* objects are lettered `A` through `Z`.
 If a compare is removed from the array, the letter designation of all
 subsequent compares will shift.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#ActuatorLogic
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#ActuatorLogic
 
 Referenced enum values:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#Logic
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#Logic
 
 ## ActuatorOffset (Setpoint Driver)
 
@@ -173,11 +173,11 @@ Offset is either set manually, or determined by a PID.
 
 All settings are delta temperatures. The desired setting of the target block is the reference setting/value + the value of the *setting* field.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#ActuatorOffset
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#ActuatorOffset
 
 Referenced enum values:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#ReferenceKind
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#ReferenceKind
 
 ## ActuatorPwm
 
@@ -186,7 +186,7 @@ The percentage of time spent ON will match the analog setting.
 
 It drives a digital actuator, and has analog constraints.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#ActuatorPwm
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#ActuatorPwm
 
 ## Balancer
 
@@ -195,13 +195,13 @@ based on their desired setting.
 
 It is linked to an actuator using the *Balanced* analog constraint.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#Balancer
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#Balancer
 
 ## DeprecatedObject
 
 *DeprecatedObject* blocks are stub object: the block itself exists, but the type is no longer supported.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#DeprecatedObject
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#DeprecatedObject
 
 ## DigitalActuator
 
@@ -209,11 +209,11 @@ Turns an *IoChannel* ON or OFF.
 
 The actuator itself is typically driven by a PWM, and supports digital constraints.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#DigitalActuator
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#DigitalActuator
 
 Referenced enum values:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#DigitalState
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#DigitalState
 
 ## DisplaySettings
 
@@ -224,7 +224,7 @@ Controls the Spark LCD screen.
 *widgets* is an array of at most 6 slots.
 Slots can be set in any order. The *pos* field determines the on-screen position.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#DisplaySettings
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#DisplaySettings
 
 ## DS2408
 
@@ -238,15 +238,15 @@ Based on the value of the *connectMode* field, different IO channels are availab
 In actuator mode, channels 1-8 can be used.
 In valve mode, (start) channels 1 and 5 are available.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#DS2408
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#DS2408
 
 Referenced enum values:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#DS2408ConnectMode
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#DS2408ConnectMode
 
 Channel mapping:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-const.ts#CHANNEL_NAMES_DS2408
+<<< @/../node_modules/brewblox-proto/ts/spark-block-const.ts#CHANNEL_NAMES_DS2408
 
 ## DS2413
 
@@ -254,24 +254,24 @@ Channel mapping:
 
 *DS2408* provides *IoChannel* objects for digital actuators.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#DS2413
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#DS2413
 
 Channel mapping:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-const.ts#CHANNEL_NAMES_DS2413
+<<< @/../node_modules/brewblox-proto/ts/spark-block-const.ts#CHANNEL_NAMES_DS2413
 
 ## FastPwm
 
 The implementation for PWM with sub-second periods.
 *FastPwm* directly targets an *IoChannel*, and not a *DigitalActuator*.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#FastPwm
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#FastPwm
 
 ## InactiveObject
 
 **Deprecated**
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#InactiveObject
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#InactiveObject
 
 ## MockPins
 
@@ -280,7 +280,7 @@ The implementation for PWM with sub-second periods.
 This is useful for simulator services,
 but also for use in *ActuatorLogic* configurations where a digital actuator is only used as input, and is not expected to control hardware.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#MockPins
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#MockPins
 
 Channel mapping:
 
@@ -308,12 +308,12 @@ To make this explicit, *DS2408* only reports valid start channels when set to va
 
 The *OneWireGpioModule* block can also drive motors, but for these, the *DigitalActuator* block can be used to control them.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#MotorValve
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#MotorValve
 
 Referenced enum values:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#DigitalState
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#ValveState
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#DigitalState
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#ValveState
 
 ## Mutex
 
@@ -324,13 +324,13 @@ It is configured by setting a *Mutexed* constraint on two or more digital actuat
 If *extraHoldTime* is set in a mutexed constraint,
 it will override the *differentActuatorWait* value.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#Mutex
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#Mutex
 
 ## OneWireBus
 
 **System object**
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#OneWireBus
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#OneWireBus
 
 ## OneWireGpioModule
 
@@ -349,11 +349,11 @@ If no pins are claimed, the channel is still a valid target for a digital actuat
 
 The `GpioModuleStatus` and `GpioPins` enums are [8-bit masks](https://basarat.gitbook.io/typescript/type-system/enums#number-enums-as-flags).
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#OneWireGpioModule
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#OneWireGpioModule
 
 Referenced enum values:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#Gpio
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#Gpio
 
 ## Pid
 
@@ -362,11 +362,11 @@ and calculates desired output for an analog actuator.
 
 For a more in-depth explanation of how to use it, see the [blocks guide](../../user/all_blocks.md).
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#Pid
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#Pid
 
 Referenced enum values:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#FilterChoice
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#FilterChoice
 
 ## Sequence
 
@@ -379,12 +379,12 @@ The `activeInstruction` field is readonly unless `overrideState` is set to `true
 Client-side, sequence instructions are edited using a line protocol.
 For syntax, and available instructions, see the [sequence instructions page](./sequence_instructions.md).
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#Sequence
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#Sequence
 
 Referenced enum values:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#SequenceStatus
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#SequenceError
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#SequenceStatus
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#SequenceError
 
 ## SetpointProfile
 
@@ -392,7 +392,7 @@ The *SetpointProfile* drives a *SetpointSensorPair* to gradually change its sett
 
 For a more in-depth explanation of how to use it, see the [blocks guide](../../user/all_blocks.md).
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#SetpointProfile
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#SetpointProfile
 
 ## SetpointSensorPair
 
@@ -404,11 +404,11 @@ The *storedSetting* field contains the last user-set setting.
 
 The measured value is filtered to reduce jitter, but allows setting a step threshold to improve response time if the value has a legitimate sudden change.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#SetpointSensorPair
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#SetpointSensorPair
 
 Referenced enum values:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#FilterChoice
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#FilterChoice
 
 ## Spark2Pins
 
@@ -417,15 +417,15 @@ Referenced enum values:
 The *Spark2Pins* object is only found on Spark 2 controllers,
 and provides an array of *IoChannel* objects.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#Spark2Pins
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#Spark2Pins
 
 Referenced enum values:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#Spark2Hardware
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#Spark2Hardware
 
 Channel mapping:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-const.ts#CHANNEL_NAMES_SPARK_2
+<<< @/../node_modules/brewblox-proto/ts/spark-block-const.ts#CHANNEL_NAMES_SPARK_2
 
 ## Spark3Pins
 
@@ -434,11 +434,11 @@ Channel mapping:
 The *Spark3Pins* object is only found on Spark 3 controllers,
 and provides an array of *IoChannel* objects, along with settings regulating voltage.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#Spark3Pins
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#Spark3Pins
 
 Channel mapping:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-const.ts#CHANNEL_NAMES_SPARK_3
+<<< @/../node_modules/brewblox-proto/ts/spark-block-const.ts#CHANNEL_NAMES_SPARK_3
 
 ## SysInfo
 
@@ -446,12 +446,12 @@ Channel mapping:
 
 Basic device info can be found here.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#SysInfo
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#SysInfo
 
 Referenced enum values:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#SparkPlatform
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#DisplayTempUnit
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#SparkPlatform
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#DisplayTempUnit
 
 ## TempSensorCombi
 
@@ -461,11 +461,11 @@ Disconnected or unknown sensors are ignored.
 A maximum of 8 sensors can be set.
 A TempSensorCombi can use other TempSensorCombi blocks as input.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#TempSensorCombi
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#TempSensorCombi
 
 Referenced enum values:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#SensorCombiFunc
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#SensorCombiFunc
 
 ## TempSensorExternal
 
@@ -477,7 +477,7 @@ but `setting` must be written regularly for the sensor to remain valid.
 
 This timeout behavior can be disabled by setting the `timeout` field to 0.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#TempSensorExternal
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#TempSensorExternal
 
 ## TempSensorMock
 
@@ -486,7 +486,7 @@ except that its setting is user-defined.
 
 Fluctuations can be configured for improved simulation of real-world conditions.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#TempSensorMock
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#TempSensorMock
 
 ## TempSensorOneWire
 
@@ -495,17 +495,17 @@ Fluctuations can be configured for improved simulation of real-world conditions.
 The basic temperature sensor.
 An offset can be configured for calibration purposes.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#TempSensorOneWire
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#TempSensorOneWire
 
 ## TouchSettings
 
 **System object**
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#TouchSettings
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#TouchSettings
 
 Referenced enum values:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#TouchCalibrated
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#TouchCalibrated
 
 ## WiFiSettings
 
@@ -514,8 +514,8 @@ Referenced enum values:
 Wifi setting values are write-only, and will always be empty when read.
 This block is only present on Spark 2 and 3 controllers.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#WiFiSettings
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#WiFiSettings
 
 Referenced enum values:
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#Wifi
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#Wifi

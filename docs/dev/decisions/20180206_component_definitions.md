@@ -1,4 +1,4 @@
-# Definitions and mapping of GUI entities
+# Definitions and Mapping of GUI Entities
 
 Date: 2018/02/06
 

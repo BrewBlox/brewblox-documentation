@@ -1,4 +1,4 @@
-# Configuration backups
+# Configuration Backups
 
 It is often useful to create backups of your settings. You may wish to migrate Brewblox to a different host, or simply be prepared for possible SD card failures.
 

@@ -1,4 +1,4 @@
-# Getting started
+# Getting Started
 
 This guide describes how to install the Brewblox system on a Raspberry Pi.</br>
 The default device for the Brewblox system is the Spark.
@@ -8,21 +8,12 @@ For an explanation of how to combine the various Spark Blocks, see the [Brewblox
 
 The default configuration uses a single Spark controller. The [services guides](./services/) describe how to get started using more devices.
 
-::: warning
-The following Raspberry Pi models are **NOT** compatible with Brewblox.
-
-- Raspberry Pi 1 Model A
-- Raspberry Pi 1 Model B
-- Raspberry Pi Zero
-- Raspberry Pi Zero W
-  :::
-
 ## What you will need
 
 Always:
 
 - Laptop or desktop computer
-- [Raspberry Pi 3 or 4](https://www.raspberrypi.org/products/) minicomputer
+- [Raspberry Pi](https://www.raspberrypi.org/products/) minicomputer ([model 3 or later](./pi_alternatives.md#pi-models))
 - Raspberry Pi power supply cable
 - MicroSD card
 - MicroSD card reader

@@ -1,4 +1,4 @@
-# Redis datastore
+# Redis Datastore
 
 Date: 2020/09/02
 

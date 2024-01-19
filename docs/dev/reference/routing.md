@@ -1,4 +1,4 @@
-# Service routing
+# Service Routing
 
 When using or developing Brewblox services, you'll probably call on the API of another service.
 To do so, it is important to understand how routing and hostnames are handled in a typical setup.
