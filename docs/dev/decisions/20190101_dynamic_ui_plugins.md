@@ -1,4 +1,4 @@
-# Dynamically loading UI plugins
+# Dynamically Loading UI Plugins
 
 Date: 2019/01/01
 

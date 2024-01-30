@@ -1,3 +1,0 @@
-# Upcoming release notes
-
-**Changes:**

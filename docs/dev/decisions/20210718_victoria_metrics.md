@@ -1,4 +1,4 @@
-# InfluxDB to Victoria Metrics
+# InfluxDB To Victoria Metrics
 
 Date: 2021/07/18
 

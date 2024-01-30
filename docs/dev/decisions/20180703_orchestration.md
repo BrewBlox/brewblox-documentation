@@ -70,7 +70,6 @@ While it lacks a good GUI, and is declining in popularity, docker-compose is arg
 As soon as Docker Swarm supports devices, it might be beneficial to switch over.
 
 [device-workaround-1]: https://github.com/docker/swarmkit/issues/1244#issuecomment-394343097
-[device-workaround-2]: https://github.com/docker/swarmkit/issues/1244#issuecomment-285935430
 [podlike]: https://blog.viktoradam.net/2018/05/14/podlike/
 [swarm-device-proposal]: https://github.com/docker/swarmkit/issues/2682
 [kubernetes]: https://kubernetes.io/

@@ -1,4 +1,4 @@
-# Publishing history data
+# Events: History
 
 Services commonly generate sensor data that should be stored in a Time-Series Database (TSDB).
 Brewblox uses [Victoria Metrics](https://github.com/VictoriaMetrics/VictoriaMetrics) as its TSDB for history data, and [MQTT events](./events.md) as publisher protocol.

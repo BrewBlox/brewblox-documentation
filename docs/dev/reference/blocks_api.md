@@ -1,4 +1,4 @@
-# Spark blocks API
+# Blocks API
 
 A central component of Brewblox systems is the Spark controller.
 Custom services that wish to read or write blocks will typically interface with the Spark service API to do so.
@@ -7,7 +7,7 @@ This document assumes familiarity with the [Block data types](./block_types.md).
 
 :::tip
 Spark service endpoints are documented using Swagger.
-For comprehensive endpoint documentation, navigate to `http://{HOST}/{SERVICE_ID}/api/doc` in your browser.
+For comprehensive endpoint documentation, navigate to `https://{HOST}/{SERVICE_ID}/api/doc` in your browser.
 :::
 
 ## Hostname
@@ -46,7 +46,7 @@ For `patch`, fields not written will remain unchanged.
 
 Any readonly fields in `Block.data` will be ignored.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-types.ts#Block
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#Block
 
 As an example, to **create** a new *Setpoint* block:
 

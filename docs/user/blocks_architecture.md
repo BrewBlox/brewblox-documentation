@@ -1,4 +1,4 @@
-# Blocks architecture
+# Blocks in Brewblox
 
 :::tip
 This page describes the how and why of blocks throughout the system.
@@ -26,7 +26,7 @@ The controller simply doesn't have space for block names. It uses 16-bit numbers
 
 Whenever the Spark service reads block data from the controller, it does the following:
 
-- Convert data from the [controlbox protocol](../dev/reference/spark_communication.md) to JSON.
+- Convert data from the [cbox protocol](../dev/reference/cbox.md) to JSON.
 - Convert values to user units (the controller always uses Celsius).
 - Find the block name (`SID`, or `String IDentifier`) associated with the block `NID`.
 
@@ -66,6 +66,6 @@ This architecture of controller, service, and UI all working together has many a
 
 The most obvious one is that blocks are stored in multiple places. You can remove all block names without removing the blocks themselves, and vice versa.
 
-The 16-bit ID used by the controller is also far from unique. If you'd use a second Pi to remove and replace all blocks on your controller, and then reconnect the first Pi, the service would "recognize" many blocks because their `NID` was reused.
+The 16-bit ID used by the controller is far from unique. If you'd use a second Pi to remove and replace all blocks on your controller, and then reconnect the first Pi, the service would "recognize" many blocks because their `NID` was reused.
 
 For instructions on how to prevent or fix this, see the [guide to removing things](./removing_things.md).

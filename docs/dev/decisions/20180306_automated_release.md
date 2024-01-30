@@ -1,4 +1,4 @@
-# Automated software release
+# Automated Software Release
 
 Date: 2018/03/06
 
@@ -146,9 +146,6 @@ Some features will possibly be relevant in the future, but are not specified or 
 [3]: https://semver.org/
 [4]: https://docs.travis-ci.com/user/deployment/pypi/
 [5]: https://github.com/c4urself/bump2version
-[6]: https://packaging.python.org/guides/single-sourcing-package-version/
-[7]: https://github.com/michaeljoseph/changes
-[8]: https://zestreleaser.readthedocs.io/en/latest/
 [9]: https://travis-ci.org/
 [10]: https://pypi.python.org/pypi
 [11]: https://docs.travis-ci.com/user/environment-variables/

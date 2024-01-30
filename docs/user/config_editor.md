@@ -1,4 +1,4 @@
-# Getting started: config editor
+# Remote Editor
 
 Brewblox service configuration is defined in various files placed in your installation directory (default `~/brewblox`).
 

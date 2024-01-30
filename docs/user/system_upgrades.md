@@ -1,7 +1,7 @@
-# Upgrading your system
+# System Upgrades
 
 Brewblox is designed to be compatible with the majority of Linux-based systems.
-To achieve this, it has two major dependencies: Docker, and Python.
+To achieve this, it has three major dependencies: Docker, Docker Compose, and Python.
 Both are available on most operating systems, but released versions have an End of Life (EOL) date.
 Beyond this date, they are no longer supported, and compatibility is no longer guaranteed.
 
@@ -28,11 +28,7 @@ and we support the releases based on the [stable Debian version](https://wiki.de
 Debian versions become stable a year after release.
 This means their EOL date is *one year after the release of the next version*.
 
-The EOL dates for the last three Debian versions are:
-
-- Buster: ~2022
-- Stretch: 2020/07/06
-- Jessie: 2018/06/17
+For an overview of Debian EOL dates, see <https://endoflife.date/debian>.
 
 ### Python
 
@@ -41,24 +37,23 @@ Python versions are active for five years after release.
 
 New versions may have some compatibility problems immediately after release.
 
-The EOL dates for the last Python versions are:
-
-- 3.9: ~2025
-- 3.8: 2024/10
-- 3.7: 2023/06
-- 3.6: 2021/12
-- 3.5: 2020/09
+For an overview Of Python EOL dates, see <https://endoflife.date/python>.
 
 For reference, these are the default Python versions for various distros:
 
 - Debian Stretch: Python 3.5
 - Debian Buster: Python 3.7
 - Debian Bullseye: Python 3.9
+- Debian Bookworm: Python 3.11
 - Ubuntu 18.04: Python 3.6
 - Ubuntu 20.04: Python 3.8
+- Ubuntu 22.04: Python 3.10
 
 If you are using Synology, MacOS, or one of the many other flavours of Linux,
 then the Python version is the most important factor for compatibility.
+
+The Python EOL date commonly falls before the Debian EOL date.
+In this case, support is on a best-effort base.
 
 ## Upgrading Brewblox
 

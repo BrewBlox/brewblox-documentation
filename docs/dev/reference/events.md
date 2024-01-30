@@ -1,4 +1,4 @@
-# Publishing service events
+# Events
 
 Brewblox services typically involve sensors, and will constantly generate data.
 In order for the system to make use of this data, services must be able to push it without being prompted by a REST request.

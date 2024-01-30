@@ -1,21 +1,18 @@
 {
   "eslint.run": "onType",
-  "eslint.validate": [
-    "vue",
-    "html",
-    "javascript",
-    "typescript"
-  ],
+  "html.autoClosingTags": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
-    "source.fixAll.eslint": "explicit"
-  },
   "markdown.extension.preview.autoShowPreviewToSide": false,
   "markdown.extension.print.absoluteImgPath": false,
   "markdownlint.config": {
     "MD033": false,
     "MD036": false
+  },
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   }
 }

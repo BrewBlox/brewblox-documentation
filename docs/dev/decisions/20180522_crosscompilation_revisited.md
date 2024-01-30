@@ -1,4 +1,4 @@
-# Cross Compilation: revisited
+# Cross-compilation: Revisited
 
 Date: 2018/05/22
 

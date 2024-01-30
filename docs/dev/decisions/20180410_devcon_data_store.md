@@ -1,4 +1,4 @@
-# Spark device connector data store selection
+# Spark Service Datastore Selection
 
 Date: 2018/04/10
 

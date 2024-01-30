@@ -1,4 +1,4 @@
-# Replacing RabbitMQ eventbus
+# Replacing RabbitMQ
 
 Date: 2020/06/06
 

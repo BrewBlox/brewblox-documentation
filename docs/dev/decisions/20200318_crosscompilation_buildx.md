@@ -1,4 +1,4 @@
-# Cross-compilation: Docker buildx
+# Cross-compilation: Docker Buildx
 
 Date: 2020/03/18
 

@@ -1,4 +1,4 @@
-# Configuration datastore
+# Datastore API
 
 Brewblox uses two shared databases: a [Victoria Metrics](https://victoriametrics.com/) Time-Series Database for [history data](./history_events.md),
 and a key/value [Redis](https://redis.io/) database for configuration.
@@ -171,10 +171,3 @@ Topic: `brewcast/datastore/brewblox-ui-store`
 
 We strongly recommend picking an explicit namespace that is unique to your service.
 **Do NOT use** a generic term such as `settings`, `config` or `_` as top-level namespace.
-
-The namespaces used by services maintained by BrewPi are:
-
-- `brewblox-global`
-- `brewblox-ui-store`
-- `brewblox-automation`
-- `spark-service`

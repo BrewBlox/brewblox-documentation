@@ -1,4 +1,4 @@
-# Analyzing the Spark device/service connection state machine
+# Spark Service State Machine
 
 Date: 2020/10/08
 

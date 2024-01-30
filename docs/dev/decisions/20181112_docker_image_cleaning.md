@@ -1,4 +1,4 @@
-# Generating clean Python docker images
+# Generating Clean Python Docker Images
 
 Date: 2018/11/12
 
