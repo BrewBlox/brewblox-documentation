@@ -49,6 +49,22 @@ Click on it to start using the service in the UI.
 
 ![Adding service](../../images/adding-service.gif)
 
+## Service settings
+
+Settings are set as "key=value" list items in the `environment` section of the service in `docker-compose.yml`.
+For the Spark service, all settings are prefixed with `BREWBLOX_SPARK_`. \
+For example:
+
+```yaml
+services:
+  spark-one:
+    environment:
+      - BREWBLOX_SPARK_DEVICE_ID=AABBCCDDEEFF
+      - BREWBLOX_SPARK_DISCOVERY=all
+```
+
+Legacy `--key=value` settings in the `command` section are supported to provide backwards compatibility. `environment` settings will override `command` settings.
+
 ## Connection settings
 
 Normally, `brewblox-ctl add-spark` identifies the controller, and the service automatically discovers it.
@@ -62,16 +78,16 @@ For a Spark service to communicate with a Spark controller, three things need to
 
 ### Controller ID
 
-All Spark controllers have a unique hardware ID. This ID cannot be changed. \
+All Spark controllers have a unique device ID. This ID cannot be changed. \
 A Spark service is linked to a specific controller, and it identifies the controller by its ID.
 
-For this check to happen, the `--device-id` argument is provided to the Spark service.
-When you run `brewblox-ctl add-spark` it will get the controller ID from the selected Spark, and use it to set the service `--device-id` argument.
+To link service and controller, the `BREWBLOX_SPARK_DEVICE_ID` setting is defined.
+When you run `brewblox-ctl add-spark` it will get the controller ID from the selected Spark, and use it to set `BREWBLOX_SPARK_DEVICE_ID`.
 
-If this argument is not set, the service will connect to the first controller it discovers.
+If this setting is not defined, the service will connect to the first controller it discovers.
 This is undesirable behavior when you have multiple controllers.
 
-The UI will show a warning when no `--device-id` argument is set on a Spark service.
+The UI will show a warning when `BREWBLOX_SPARK_DEVICE_ID` is not set.
 
 ### Controller discovery
 
@@ -89,13 +105,11 @@ The discovery argument has three possible values:
 The default is `all`. In this case, both USB and mDNS will be used to discover potential controllers.\
 USB connections are not supported by the Spark 4, and the controller will not be discovered this way.
 
-:::tip
-Try `brewblox-ctl discover-spark` to run discovery without editing service settings.
-:::
+For the service itself, this settings is defined using `BREWBLOX_SPARK_DISCOVERY`.
+For example, when you run `brewblox-ctl add-spark --discovery=mdns`, it will set `BREWBLOX_SPARK_DISCOVERY=mdns`.
 
 :::tip
-Previously, `--discovery=wifi` and `--discovery=lan` were used as well.
-These are still valid aliases for `--discovery=mdns`.
+Try `brewblox-ctl discover-spark` to run discovery without editing service settings.
 :::
 
 ### Static controller address
@@ -103,11 +117,11 @@ These are still valid aliases for `--discovery=mdns`.
 In some scenarios, discovery is not a valid option.
 Maybe your Pi and your Spark are on different subnets, maybe you're using a proxy or a VPN, or maybe mDNS just doesn't work, and you have no idea why.
 
-In these cases, you can skip discovery, and declare a static hostname or IP address using the `--device-host` argument. For example: `--device-host=192.168.0.100`, or `--device-host=myspark.home`.
+In these cases, you can skip discovery, and declare a static hostname or IP address using the `BREWBLOX_SPARK_DEVICE_HOST` setting. For example: `BREWBLOX_SPARK_DEVICE_HOST=192.168.0.100` or `BREWBLOX_SPARK_DEVICE_HOST=myspark.home`.
 
 If you're declaring a static IP address, it is recommended to set a static DHCP lease for that particular Spark in your router settings. The Spark will then always be assigned the same IP address.
 
-Even when a static address is set, the `--device-id` argument is checked.
+Even when a static address is set, `BREWBLOX_SPARK_DEVICE_ID` is checked.
 If the Spark on the other side of the connection has a different ID, the service will not communicate with it.
 
 ## Connection flowchart
@@ -123,12 +137,12 @@ start
 
 :Startup;
 
-if (--device-host defined?) then (yes)
+if (BREWBLOX_SPARK_DEVICE_HOST defined?) then (yes)
     :Select TCP address;
 else (no)
     :Discovery;
 
-    switch(--discovery)
+    switch(BREWBLOX_SPARK_DISCOVERY)
     case ("all")
         :Discover USB;
         :Discover mDNS;
@@ -259,8 +273,8 @@ If `--device-host` is not set, it will use a placeholder in the printed command.
 
 ### MQTT Discovery
 
-For MQTT, a fourth option was added to the `--discovery` argument: `--discovery=mqtt`.
+For MQTT, a fourth discovery option was added: `BREWBLOX_SPARK_DISCOVERY=mqtt`.
 When set, the Spark service will wait for the controller to announce itself by publishing a message to the eventbus.
 
-`--discovery=all` will also check for MQTT connections, but while the feature is in beta, this is done last.
+`BREWBLOX_SPARK_DISCOVERY=all` will also check for MQTT connections, but while the feature is in beta, this is done last.
 If your controller is both in the same local network, and has MQTT enabled, the service will prefer to use a direct TCP connection.

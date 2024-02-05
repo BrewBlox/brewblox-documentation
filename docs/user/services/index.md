@@ -68,8 +68,7 @@ You can follow [this guide](../config_editor.md) to install a graphical text edi
 A shortened configuration file:
 
 ```yaml
-version: "3"
-
+version: '3.7'
 services:
   history:
     image: ghcr.io/brewblox/brewblox-history:edge
@@ -93,6 +92,7 @@ All of them have a unique name, but `spark-one` and `spark-two` share the same t
 GOOD:
 
 ```yaml
+version: '3.7'
 services:
   service-one:
     image: brewblox-image-one
@@ -104,6 +104,7 @@ services:
 BAD:
 
 ```yaml
+version: '3.7'
 services:
   service-one:
     image: brewblox-image-one
@@ -116,65 +117,4 @@ services:
 
 If we want to add a new device, we need a new service to manage it. Once again: the name must be unique, but the type can be the same.
 
-Each type of service may have a slightly different configuration. We'll take a detailed look at a Spark service here, but other services will have configuration that is very much like it.
-
-## Docker-compose service syntax
-
-When you install Brewblox, it generates a `docker-compose.yml` file for you. This includes the default `spark-one` service.
-
-```yaml
-  spark-one:
-    image: ghcr.io/brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
-    privileged: true
-    restart: unless-stopped
-    command: '--name=spark-one'
-```
-
-This configuration is more advanced than what we've seen so far. To make sense of it, we'll look at the individual settings.
-
----
-
-```yaml
-spark-one:
-  image: ghcr.io/brewblox/brewblox-devcon-spark:${BREWBLOX_RELEASE}
-  ...
-```
-
-This is like the short service configurations we saw earlier. The two most important settings in a service's configuration are its name (spark-one), and its type (everything after `image:`).
-
-The basic principles still apply. When you want to control multiple Spark devices, you'll need one service per device. Every service will have the same `image`, but a different name.
-
----
-
-```yaml
-  ...
-  privileged: true
-  restart: unless-stopped
-```
-
-These settings are the same for every Spark service (and many other services).
-
-`privileged` services can use USB connections.
-
-`restart: unless-stopped` does what it says: when your service crashes, it will automatically restart.
-
----
-
-```yaml
-  ...
-  command: '--name=spark-one'
-```
-
-The `command` setting contains arguments for the software running *inside* the service.
-
-The `--name` argument must (again) be the same as the service name.
-
-For a Spark service, the command is where you add the settings for [how it connects to a Spark controller](./spark.md#connection-settings)
-
-::: tip
-The service name is mentioned two times in the YAML for a Spark service. The values must match.
-
-* at the top (`spark-one:`)
-* in the command (`--name=spark-one`)
-
-:::
+Instructions for some service types can be found here, or in the [tutorials](../../dev/tutorials/brewscript/index.md).
