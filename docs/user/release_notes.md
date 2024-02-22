@@ -8,7 +8,50 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
-## Brewblox release 2023/01/17
+## Brewblox release 2024/02/??
+
+**firmware release date: 2024/02/??**
+
+For this release, we've focused on fixing bugs and updating dependencies.
+
+The brewblox.com website has a new look and feel, and now supports both light and dark mode.
+We also reorganized the pages slightly to make the sidebar index more intuitive.
+
+For our Python services, we decided to switch from `Aiohttp` to `FastAPI`.
+This simplified the code greatly, to the point where the shared `brewblox-service` dependency is no longer useful.
+We updated [brewblox-boilerplate](https://github.com/BrewBlox/brewblox-boilerplate) accordingly.
+
+This change to how services are built also changed how they accept configuration options.
+Before, services were configured using the `command:` section in `docker-compose.yml`.
+Now, they use the `environment:` section. \
+To provide backwards compatibility, the service command is still parsed, and known options are converted to environment variables.
+
+Supported options for all services can be found under <https://brewblox.com/dev/>.
+
+**Changes**
+
+- (feature) Brewblox services now use environment variables for configuration. `command:` is still parsed for backwards compatibility.
+- (improve) The Spark service will now automatically detect its name. The `--name` / `BREWBLOX_SPARK_NAME` argument is optional.
+- (improve) The Docker Compose bridge network interface now has a name (default: `br-brewblox`).
+- (fix) Fixed a bug where the Spark 4 could broadcast a `000000000000` device ID when connected to ethernet.
+- (fix) Fixed data publishing in the `brewblox-hass` service.
+- (fix) Fixed an invalid handshake when performing OTA updates for the Spark 2/3.
+- (fix) Sequence blocks now clear the error flag when a WAIT_XX instruction clears its error state, but still has to wait.
+- (fix) Fixed the firmware update interval for the Temp Sensor (OneWire), PID, and Setpoint blocks.
+- (fix) The `brewblox-ctl` script no longer calls `tput` on systems that don't have it.
+- (fix) The `auth` service is now privileged to compensate for a bug in Debian Buster.
+- (fix) Direct URLs to UI pages no longer redirect to the home page on first load.
+- (fix) Environment args for `brewblox-history` now use the correct prefix.
+- (remove) Removed the `brewblox-ctl add-plaato` command, as the Plaato API will be shut down.
+- (dev) `brewblox-boilerplate` is updated and simplified.
+- (dev) `brewblox-service` is no longer a dependency for services based on `brewblox-boilerplate`.
+- (dev) Block patches now perform a deep merge for objects.
+- (docs) brewblox.com now has a new look.
+- (docs) Improved the organization and naming of docs pages.
+- (docs) Updated the Spark service page to use environment args.
+- (docs) Added reference documentation for service configuration options.
+
+## Brewblox release 2024/01/17
 
 **firmware release date: 2024/01/03**
 
