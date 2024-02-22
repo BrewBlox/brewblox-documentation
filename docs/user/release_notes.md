@@ -26,7 +26,7 @@ Before, services were configured using the `command:` section in `docker-compose
 Now, they use the `environment:` section. \
 To provide backwards compatibility, the service command is still parsed, and known options are converted to environment variables.
 
-Supported options for all services can be found under <https://brewblox.com/dev/>.
+Supported environment options for Python services can be found under <https://brewblox.com/dev/reference/service_env>.
 
 **Changes**
 
@@ -50,6 +50,8 @@ Supported options for all services can be found under <https://brewblox.com/dev/
 - (docs) Improved the organization and naming of docs pages.
 - (docs) Updated the Spark service page to use environment args.
 - (docs) Added reference documentation for service configuration options.
+- (docs) Updated the backup guide to use snapshots.
+- (docs) Updated documentation to reflect changes to configuration, and logging output.
 
 ## Brewblox release 2024/01/17
 
