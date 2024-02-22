@@ -131,6 +131,10 @@ export default defineConfig({
               text: 'Cbox Protocol',
               link: '/dev/reference/cbox',
             },
+            {
+              text: 'Service Env Options',
+              link: '/dev/reference/service_env',
+            },
           ],
         },
         {
