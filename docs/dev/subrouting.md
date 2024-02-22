@@ -32,44 +32,64 @@ If you check `brewblox/docker-compose.shared.yml`, you'll find the `traefik` ser
 
 ```yaml
   traefik:
-    image: traefik:2.2
-    ports:
-      - "${BREWBLOX_PORT_HTTP}:${BREWBLOX_PORT_HTTP}"
-      - "${BREWBLOX_PORT_HTTPS}:${BREWBLOX_PORT_HTTPS}"
+    image: traefik:2.10
+    restart: unless-stopped
     labels:
       - traefik.http.routers.api.rule=PathPrefix(`/api`) || PathPrefix(`/dashboard`)
       - traefik.http.routers.api.service=api@internal
       - traefik.http.middlewares.prefix-strip.stripprefixregex.regex=/[^/]+
+      - traefik.http.middlewares.auth.forwardauth.address=http://auth:5000/auth/verify
+      - traefik.http.middlewares.cors.headers.AccessControlAllowMethods=CONNECT,HEAD,GET,DELETE,OPTIONS,PATCH,POST,PUT,TRACE
+      - traefik.http.middlewares.cors.headers.accessControlAllowOriginListRegex=.*
+      - traefik.http.middlewares.cors.headers.AccessControlAllowCredentials=true
+      - traefik.http.middlewares.cors.headers.AccessControlAllowHeaders=Origin,X-Requested-With,Content-Type,Accept
     volumes:
-      - ./traefik:/config
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: >-
-      --api.dashboard=true
-      --providers.docker=true
-      --providers.docker.constraints="Label(`com.docker.compose.project`, `${COMPOSE_PROJECT_NAME}`)"
-      --providers.docker.defaultrule="PathPrefix(`/{{ index .Labels \"com.docker.compose.service\" }}`)"
-      --providers.file.directory=/config
-      --entrypoints.web.address=:${BREWBLOX_PORT_HTTP}
-      --entrypoints.websecure.address=:${BREWBLOX_PORT_HTTPS}
-      --entrypoints.websecure.http.tls=true
+      - type: bind
+        source: ./traefik
+        target: /config
+        read_only: true
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+    ports:
+      - "${BREWBLOX_PORT_HTTP}:${BREWBLOX_PORT_HTTP}"
+      - "${BREWBLOX_PORT_HTTPS}:${BREWBLOX_PORT_HTTPS}"
+      - "${BREWBLOX_PORT_MQTT}:${BREWBLOX_PORT_MQTT}"
+      - "${BREWBLOX_PORT_MQTTS}:${BREWBLOX_PORT_MQTTS}"
+      - "127.0.0.1:${BREWBLOX_PORT_ADMIN}:${BREWBLOX_PORT_ADMIN}"
+    environment:
+      - TRAEFIK_API_DASHBOARD=true
+      - TRAEFIK_PROVIDERS_DOCKER=true
+      - TRAEFIK_PROVIDERS_DOCKER_CONSTRAINTS=LabelRegex(`com.docker.compose.project`, `${COMPOSE_PROJECT_NAME}`)
+      - TRAEFIK_PROVIDERS_DOCKER_DEFAULTRULE=PathPrefix(`/{{ index .Labels "com.docker.compose.service" }}`)
+      - TRAEFIK_PROVIDERS_FILE_DIRECTORY=/config
+      - TRAEFIK_ENTRYPOINTS_WEBSECURE_ADDRESS=:${BREWBLOX_PORT_HTTPS}
+      - TRAEFIK_ENTRYPOINTS_WEBSECURE_HTTP_TLS=true
+      - TRAEFIK_ENTRYPOINTS_WEBSECURE_HTTP_MIDDLEWARES=cors,auth
+      - TRAEFIK_ENTRYPOINTS_WEB_ADDRESS=:${BREWBLOX_PORT_HTTP}
+      - TRAEFIK_ENTRYPOINTS_WEB_HTTP_REDIRECTIONS_ENTRYPOINT_TO=websecure
+      - TRAEFIK_ENTRYPOINTS_ADMIN_ADDRESS=:${BREWBLOX_PORT_ADMIN}
+      - TRAEFIK_ENTRYPOINTS_ADMIN_HTTP_MIDDLEWARES=cors
+      - TRAEFIK_ENTRYPOINTS_MQTT_ADDRESS=:${BREWBLOX_PORT_MQTT}/tcp
+      - TRAEFIK_ENTRYPOINTS_MQTTS_ADDRESS=:${BREWBLOX_PORT_MQTTS}/tcp
 ```
 
 This is a big blob of configuration at once, so we'll go through it section by section.
 
 ```yaml
-    ports:
-      - "${BREWBLOX_PORT_HTTP}:${BREWBLOX_PORT_HTTP}"
-      - "${BREWBLOX_PORT_HTTPS}:${BREWBLOX_PORT_HTTPS}"
-```
-
-`BREWBLOX_PORT_HTTP` and `BREWBLOX_PORT_HTTPS` are set in the `brewblox/.env` file.
-Their default values are 80 and 443, but we can change that later.
-
-```yaml
     labels:
       - traefik.http.routers.api.rule=PathPrefix(`/api`) || PathPrefix(`/dashboard`)
       - traefik.http.routers.api.service=api@internal
       - traefik.http.middlewares.prefix-strip.stripprefixregex.regex=/[^/]+
+      - traefik.http.middlewares.auth.forwardauth.address=http://auth:5000/auth/verify
+      - traefik.http.middlewares.cors.headers.AccessControlAllowMethods=CONNECT,HEAD,GET,DELETE,OPTIONS,PATCH,POST,PUT,TRACE
+      - traefik.http.middlewares.cors.headers.AccessControlAllowOriginListRegex=.*
+      - traefik.http.middlewares.cors.headers.AccessControlAllowCredentials=true
+      - traefik.http.middlewares.cors.headers.AccessControlAllowHeaders=Origin,X-Requested-With,Content-Type,Accept
 ```
 
 The two labels starting with `traefik.http.routers.api` are for the Traefik dashboard, hosted at `<ADDRESS>/dashboard/`.
@@ -77,10 +97,23 @@ The two labels starting with `traefik.http.routers.api` are for the Traefik dash
 `traefik.http.middlewares.prefix-strip.stripprefixregex.regex=/[^/]+`
 is a reusable middleware for routing a public path with a prefix to a private path without a prefix.
 
+`traefik.http.middlewares.cors.(...)` headers contain access control
+and [Cross-Origin Resource Sharing (CORS)](https://aws.amazon.com/what-is/cross-origin-resource-sharing/) configuration.
+For Brewblox this is set very permissive, as the origin (server address) is different for every installation.
+
 ```yaml
     volumes:
-      - ./traefik:/config
-      - /var/run/docker.sock:/var/run/docker.sock
+      - type: bind
+        source: ./traefik
+        target: /config
+        read_only: true
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
 ```
 
 The used SSL certs are placed in `./traefik`, along with a `traefik-cert.yaml` configuration file.
@@ -88,23 +121,39 @@ The used SSL certs are placed in `./traefik`, along with a `traefik-cert.yaml` c
 `/var/run/docker.sock:/var/run/docker.sock` allows access to the Docker socket.
 This is required in order to autodetect active Docker containers.
 
-There are quite a few arguments in the `command:` section.
+`/etc/localtime` is mounted to make sure the container uses the same time and timezone settings as the host.
+
+```yaml
+    ports:
+      - "${BREWBLOX_PORT_HTTP}:${BREWBLOX_PORT_HTTP}"
+      - "${BREWBLOX_PORT_HTTPS}:${BREWBLOX_PORT_HTTPS}"
+      - "${BREWBLOX_PORT_MQTT}:${BREWBLOX_PORT_MQTT}"
+      - "${BREWBLOX_PORT_MQTTS}:${BREWBLOX_PORT_MQTTS}"
+      - "127.0.0.1:${BREWBLOX_PORT_ADMIN}:${BREWBLOX_PORT_ADMIN}"
+```
+
+The `BREWBLOX_PORT_XXXX` variables are defined in the `brewblox/.env` file.
+The default values are set during installation.
+
+The admin port is special: it is a non-authenticated HTTP port that is only accessible from the server itself.
+This port is used by `brewblox-ctl` during installation and updates.
+
+There are quite a few arguments in the `environment:` section.
 We'll look at it a few lines at a time.
 
 ```yaml
-    command: >-
-      --api.dashboard=true
+      - TRAEFIK_API_DASHBOARD=true
 ```
 
 This enables the Traefik dashboard at `/dashboard/` (the trailing `/` is required).
 
 ```yaml
-      --providers.docker=true
-      --providers.docker.constraints="Label(`com.docker.compose.project`, `${COMPOSE_PROJECT_NAME}`)"
-      --providers.docker.defaultrule="PathPrefix(`/{{ index .Labels \"com.docker.compose.service\" }}`)"
+      - TRAEFIK_PROVIDERS_DOCKER=true
+      - TRAEFIK_PROVIDERS_DOCKER_CONSTRAINTS=LabelRegex(`com.docker.compose.project`, `${COMPOSE_PROJECT_NAME}`)
+      - TRAEFIK_PROVIDERS_DOCKER_DEFAULTRULE=PathPrefix(`/{{ index .Labels "com.docker.compose.service" }}`)
 ```
 
-`--providers.docker` means Traefik scans the Docker socket for active containers.
+`TRAEFIK_PROVIDERS_DOCKER` enables Traefik scanning the Docker socket for active containers.
 
 To avoid trying to route to any and all containers on the host, we add constraints.
 Docker-compose sets the `com.docker.compose.project` label on managed containers.
@@ -115,19 +164,40 @@ eg. `<ADDRESS>/spark-one/blocks` should be routed to the `spark-one` service.
 We can get service name from another container label set by docker-compose: `com.docker.compose.service`.
 
 ```yaml
-      --providers.file.directory=/config
+      - TRAEFIK_PROVIDERS_FILE_DIRECTORY=/config
 ```
 
 `/config` is a mounted volume that leads to `brewblox/traefik`.
 There's a configuration file and SSL certificates in there.
 
 ```yaml
-      --entrypoints.web.address=:${BREWBLOX_PORT_HTTP}
-      --entrypoints.websecure.address=:${BREWBLOX_PORT_HTTPS}
-      --entrypoints.websecure.http.tls=true
+      - TRAEFIK_ENTRYPOINTS_WEBSECURE_ADDRESS=:${BREWBLOX_PORT_HTTPS}
+      - TRAEFIK_ENTRYPOINTS_WEBSECURE_HTTP_TLS=true
+      - TRAEFIK_ENTRYPOINTS_WEBSECURE_HTTP_MIDDLEWARES=cors,auth
+      - TRAEFIK_ENTRYPOINTS_WEB_ADDRESS=:${BREWBLOX_PORT_HTTP}
+      - TRAEFIK_ENTRYPOINTS_WEB_HTTP_REDIRECTIONS_ENTRYPOINT_TO=websecure
+      - TRAEFIK_ENTRYPOINTS_ADMIN_ADDRESS=:${BREWBLOX_PORT_ADMIN}
+      - TRAEFIK_ENTRYPOINTS_ADMIN_HTTP_MIDDLEWARES=cors
+      - TRAEFIK_ENTRYPOINTS_MQTT_ADDRESS=:${BREWBLOX_PORT_MQTT}/tcp
+      - TRAEFIK_ENTRYPOINTS_MQTTS_ADDRESS=:${BREWBLOX_PORT_MQTTS}/tcp
 ```
 
-There are two entrypoints: one for HTTP (`web`), and one for HTTPS (`websecure`).
+There are five entrypoints:
+
+- `websecure`
+- `web`
+- `admin`
+- `mqtt`
+- `mqtts`
+
+`websecure` is the primary user-facing entrypoint. HTTPS and authentication are both enabled.
+
+`web` is a HTTP entrypoint that immediately redirects requests to `websecure`.
+Without it, you would get an error when visiting `http://{address}`.
+
+`admin` is a HTTP entrypoint used by `brewblox-ctl`. To keep it safe, it is only accessible from the server itself (ie. bound to `127.0.0.1` in `ports:`).
+
+`mqtt` and `mqtts` are directly forwarded to the MQTT eventbus.
 
 ## Traefik dashboard
 
@@ -153,30 +223,41 @@ If you check `docker-compose.shared.yml`, you'll find:
   eventbus:
     ...
     labels:
+      # MQTT
+      - traefik.tcp.routers.mqtt.entrypoints=mqtt
+      - traefik.tcp.routers.mqtt.rule=HostSNI(`*`)
+      - traefik.tcp.routers.mqtt.tls=false
+      - traefik.tcp.routers.mqtt.service=mqtt
+      - traefik.tcp.services.mqtt.loadBalancer.server.port=1883
+      # MQTTS with TLS termination by traefik
+      - traefik.tcp.routers.mqtts.entrypoints=mqtts
+      - traefik.tcp.routers.mqtts.rule=HostSNI(`*`)
+      - traefik.tcp.routers.mqtts.tls=true
+      - traefik.tcp.routers.mqtts.service=mqtts
+      - traefik.tcp.services.mqtts.loadBalancer.server.port=1884
+      # MQTT over websockets
       - traefik.http.services.eventbus.loadbalancer.server.port=15675
 
-  influx:
+  victoria:
+    ...
+    labels:
+      - traefik.http.services.victoria.loadbalancer.server.port=8428
+
+  redis:
     ...
     labels:
       - traefik.enable=false
 
-  datastore:
-    ...
-    labels:
-      - traefik.http.services.datastore.loadbalancer.server.port=5984
-      - traefik.http.routers.datastore.middlewares=prefix-strip
-
   ui:
     ...
     labels:
-      - traefik.http.routers.ui.rule=PathPrefix(`/ui`) || Path(`/`)
+      - traefik.http.routers.ui.rule=PathPrefix(`/ui`) || PathPrefix(`/static`) || Path(`/`)
 ```
 
 Notes:
 
-- `eventbus` and `datastore` have multiple published ports, so we need to be specific.
-- `influx` is not accessible through the gateway.
-- `datastore` uses the `prefix-strip` middleware we declared in `traefik` labels.
+- `eventbus` and `victoria` have multiple published ports, so we need to be specific.
+- `redis` is not accessible through the gateway.
 - `ui` has a custom routing rule: if you go to `<Address>:<Port>`, you will be routed to the UI service.
 
 So much for the default settings. Time for change!
@@ -193,14 +274,12 @@ but for now we can use `avahi-publish` to temporarily add DNS-SD records.
 Open two terminal windows, and run (one command in each):
 
 ```sh
-avahi-publish -a -R brewblox.local 192.168.XXX.XXX
+avahi-publish -a -R brewblox.local $(hostname -I | cut -d' ' -f1)
 ```
 
 ```sh
-avahi-publish -a -R webby.local 192.168.XXX.XXX
+avahi-publish -a -R webby.local $(hostname -I | cut -d' ' -f1)
 ```
-
-Replace `192.168.XXX.XXX` with the LAN address of your host.
 
 Leave the terminal windows open. The records disappear when you close the running process.
 
@@ -213,13 +292,7 @@ We'll keep it simple, and use the default Nginx image.
 
 We want `webby.local` to go to `webby`, and `brewblox.local` to go to the Brewblox UI.
 
-Let's override `ui` in `docker-compose.yml`, and add `webby`.
-
 ```yaml
-  ui:
-    labels:
-      - traefik.http.routers.ui.rule=Host(`brewblox.local`) && (PathPrefix(`/ui`) || Path(`/`))
-
   webby:
     image: nginx
     labels:
@@ -244,9 +317,9 @@ Currently, it is:
 ```yaml
   traefik:
     ...
-    command: >-
+    environment:
       ...
-      --providers.docker.constraints="Label(`com.docker.compose.project`, `${COMPOSE_PROJECT_NAME}`)"
+      - TRAEFIK_PROVIDERS_DOCKER_CONSTRAINTS=LabelRegex(`com.docker.compose.project`, `${COMPOSE_PROJECT_NAME}`)
       ...
 ```
 
@@ -256,9 +329,9 @@ To add the `webby` project, you can modify the value to:
 LabelRegex(`com.docker.compose.project`, `(${COMPOSE_PROJECT_NAME}|webby)`)
 ```
 
-If you want all containers on the host to be managed by traefik, you can completely remove the `--providers.docker.constraints` argument.
+If you want all containers on the host to be managed by traefik, you can completely remove the `TRAEFIK_PROVIDERS_DOCKER_CONSTRAINTS` argument.
 
-Note that you can't partially override the `traefik` service `command`.
+Note that you can't partially override the `traefik` service `environment`.
 If you want to change one argument, you'll have to copy and include all other arguments.
 
 Run `docker-compose config` afterwards to check the merged result.
