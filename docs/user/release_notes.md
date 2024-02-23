@@ -33,6 +33,7 @@ Supported environment options for Python services can be found under <https://br
 - (feature) Brewblox services now use environment variables for configuration. `command:` is still parsed for backwards compatibility.
 - (improve) The Spark service will now automatically detect its name. The `--name` / `BREWBLOX_SPARK_NAME` argument is optional.
 - (improve) The Docker Compose bridge network interface now has a name (default: `br-brewblox`).
+- (improve) The CA cert menu now also shows instructions for (some versions of) Android.
 - (fix) Fixed a bug where the Spark 4 could broadcast a `000000000000` device ID when connected to ethernet.
 - (fix) Fixed data publishing in the `brewblox-hass` service.
 - (fix) Fixed an invalid handshake when performing OTA updates for the Spark 2/3.
@@ -52,6 +53,7 @@ Supported environment options for Python services can be found under <https://br
 - (docs) Added reference documentation for service configuration options.
 - (docs) Updated the backup guide to use snapshots.
 - (docs) Updated documentation to reflect changes to configuration, and logging output.
+- (docs) The Builder guide no longer refers to the replaced "Edit Settings" tool.
 
 ## Brewblox release 2024/01/17
 
