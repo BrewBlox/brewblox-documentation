@@ -8,9 +8,9 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
-## Brewblox release 2024/02/??
+## Brewblox release 2024/02/23
 
-**firmware release date: 2024/02/??**
+**firmware release date: 2024/02/23**
 
 For this release, we've focused on fixing bugs and updating dependencies.
 
@@ -43,6 +43,7 @@ Supported environment options for Python services can be found under <https://br
 - (fix) The `auth` service is now privileged to compensate for a bug in Debian Buster.
 - (fix) Direct URLs to UI pages no longer redirect to the home page on first load.
 - (fix) Environment args for `brewblox-history` now use the correct prefix.
+- (fix) `brewblox-ctl snapshot save` now stops and resumes running services to prevent file access errors.
 - (remove) Removed the `brewblox-ctl add-plaato` command, as the Plaato API will be shut down.
 - (dev) `brewblox-boilerplate` is updated and simplified.
 - (dev) `brewblox-service` is no longer a dependency for services based on `brewblox-boilerplate`.
