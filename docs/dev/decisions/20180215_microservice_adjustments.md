@@ -1,4 +1,4 @@
-# Microservice design adjustments for Brewblox
+# Microservice Design Adjustments for Brewblox
 
 Date: 2018/02/15
 

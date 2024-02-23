@@ -76,9 +76,13 @@ typings/
 
 # vuepress build output
 docs/.vuepress/dist
+docs/.vitepress/dist
+docs/.vitepress/cache
 
 # Generated files
 docs/.vuepress/generated/*
 !docs/.vuepress/generated/.gitkeep
+docs/.vitepress/generated/*
+!docs/.vitepress/generated/.gitkeep
 .cache/
 .temp/

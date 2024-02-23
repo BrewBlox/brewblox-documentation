@@ -1,6 +1,6 @@
-# Remote access
+# Wireguard VPN
 
-It's nice to be able to check up on the status of your brew while away from home, or edit block settings.
+It's nice to be able to check up on the status of your brew while away from home.
 Because this involves the internet, this must be done safely and securely - you don't want strangers in control of your brew.
 
 When you visit a website (or the Brewblox UI), your browser sends multiple requests to the server.

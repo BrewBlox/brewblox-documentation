@@ -1,4 +1,4 @@
-# Options for gateway services in a microservice architecture
+# Gateway Service Options
 
 Date: 2018/02/15
 

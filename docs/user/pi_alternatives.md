@@ -1,4 +1,4 @@
-# Pi alternatives
+# Pi Alternatives
 
 By default, we recommend installing Brewblox on a Raspberry Pi.
 This is a cheap and simple way to have a dedicated server.
@@ -6,14 +6,16 @@ As with anything else, there are tradeoffs, and you may prefer an alternative so
 
 ## Basic requirements
 
-Before we get into details, we'll take a quick look at the system requirements for Brewblox.
+We try to minimize the requirements for Brewblox, to make it widely compatible.
+The core requirements are:
 
 - Docker
+- Docker Compose
 - Python 3
 - `sh`
 
 **Linux** is mostly supported, with the exception of some very niche distributions.\
-On Debian-based systems, everything works out of the box.
+On Debian, Ubuntu, and Linux Mint, everything works out of the box.
 On other Linux systems, some dependencies must be installed manually, as we only check for the `apt-get` system package manager.
 
 **[Synology NAS](https://www.synology.com/en-global)** systems are officially supported and actively tested.
@@ -26,18 +28,20 @@ This limitation can be avoided by using [Windows Subsystem for Linux](https://do
 
 ## Pi models
 
-As noted in the startup guide, the Pi Zero and 1 are not supported.
+Not all Raspberry Pi models are created equal, and not all of them can run Brewblox.
+
+The Pi Zero and 1 are not supported.
 This is a hard limitation: we do not support their ARMv6 processor architecture.
 
-This leaves the Pi 2, 3, 4, and 400.
-
-The Pi 2 is supported, but not recommended. While it can run Brewblox, it will be slow, and you cannot use some of the more memory-hungry optional services.\
+The Pi 2 is compatible, but not recommended. While it can run Brewblox, it will be slow, and you cannot use some of the more memory-hungry optional services.\
 You will not be able to run the desktop environment in combination with Brewblox.
+
+This leaves the Pi 3, 4, 5, and 400.
 
 The Pi 3 is fully supported, and serves as a baseline for our tests.
 We still recommend using the Lite version of the Raspberry Pi OS, as the desktop environment uses significant amounts of CPU and RAM.
 
-The Pi 4 is the most recent model. Multiple versions are available, with 1GB, 2GB, 4GB or 8GB RAM.
+The Pi 5 is the most recent model. Multiple versions are available, with 1GB, 2GB, 4GB or 8GB RAM.
 If you wish to use the desktop environment, we recommend using a 4GB or 8GB version.\
 From the Pi 4 up, USB 3.0 ports are available. This allows for replacing the SD card with an SSD as the primary storage device. More on this below.
 
@@ -81,5 +85,5 @@ Note that we are not affiliated or involved with this page in any way, and have 
 
 It is somewhat common for users to mount a screen in their brewery to display the UI in kiosk mode.
 
-Unless you're using a Pi 4 with 4GB+ RAM, we recommend using a separate device for this.
+Unless you're using at least a Pi 4 with 4GB+ RAM, we recommend using a separate device for this.
 It's not guaranteed to fail, but it makes it significantly more likely that a spike in memory usage will cause a random process on the Pi to be terminated.

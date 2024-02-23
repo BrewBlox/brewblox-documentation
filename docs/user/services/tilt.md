@@ -172,12 +172,11 @@ Example output:
 
 ```sh
 pi@raspberrypi:~/brewblox $ brewblox-ctl follow tilt
-brewblox-tilt-1  | 2023/09/19 14:16:01 INFO     brewblox_tilt.device            Device config loaded from `/share/devices.yml`: {'DD7F97FC141E': 'Purple'}
-brewblox-tilt-1  | 2023/09/19 14:16:01 INFO     brewblox_tilt.parser            Calibration values loaded from `/share/SGCal.csv`: keys=()
-brewblox-tilt-1  | 2023/09/19 14:16:01 INFO     brewblox_tilt.parser            Calibration values loaded from `/share/tempCal.csv`: keys=()
-brewblox-tilt-1  | 2023/09/19 14:16:01 INFO     brewblox_service.service        Service name: tilt
-brewblox-tilt-1  | 2023/09/19 14:16:01 INFO     brewblox_service.service        Service config: host='0.0.0.0' port=5000 name='tilt' debug=False mqtt_protocol='mqtt' mqtt_host='eventbus' mqtt_port=None mqtt_path='/eventbus' history_topic='brewcast/history' state_topic='brewcast/state' lower_bound=0.5 upper_bound=2.0 scan_duration=5.0 active_scan_interval=10.0 inactive_scan_interval=5.0 simulate=None
-brewblox-tilt-1  | 2023/09/19 14:16:07 INFO     brewblox_tilt.parser            Tilt detected: mac='DD7F97FC141E', color='Purple', name='Purple'
+tilt-1  | 2024/02/22 17:45:27.985 [I:brewblox_tilt.stored.calibration:65] Calibration values loaded from `/share/SGCal.csv`: keys=()
+tilt-1  | 2024/02/22 17:45:27.986 [I:brewblox_tilt.stored.calibration:65] Calibration values loaded from `/share/tempCal.csv`: keys=()
+tilt-1  | 2024/02/22 17:45:28.000 [I:brewblox_tilt.stored.devices:49] Device config loaded from `/share/devices.yml`: {'DD7F97FC141E': 'Purple'}
+tilt-1  | 2024/02/22 17:45:34.163 [I:brewblox_tilt.app_factory:31] name='tilt' debug=False mqtt_protocol='mqtt' mqtt_host='eventbus' mqtt_port=1883 lower_bound=0.5 upper_bound=2.0 scan_duration=5.0 inactive_scan_interval=5.0 active_scan_interval=10.0 simulate=[]
+tilt-1  | 2024/02/22 17:50:10.951 [I:brewblox_tilt.parser:102] Tilt detected: mac='DD7F97FC141E', color='Purple', name='Purple'
 ```
 
 **Configuration**
@@ -216,7 +215,7 @@ The first question can be checked in the service log.
 The service will log an error if no Bluetooth adapter is found.
 
 ```txt
-[...] <Broadcaster> error during run(): BleakError(No Bluetooth adapters found.)
+[...] [E:brewblox_tilt.broadcaster:103] BleakError(No Bluetooth adapters found.)
 ```
 
 The second question is harder to answer. If you can do so, put the Tilt next to the server, to remove all doubt.
@@ -230,7 +229,7 @@ Host Bluetooth may be the problem if your Tilt service starts normally, but does
 You can check whether it detected any devices by looking for log entries like this:
 
 ```txt
-[...] Tilt detected: mac='DD7F97FC141E', color='Purple', name='Purple'
+[...] [I:brewblox_tilt.parser:102] Tilt detected: mac='DD7F97FC141E', color='Purple', name='Purple'
 ```
 
 The Tilt service will attempt to set these settings, but they can also be checked manually.

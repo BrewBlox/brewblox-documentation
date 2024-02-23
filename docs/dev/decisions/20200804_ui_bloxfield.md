@@ -1,4 +1,4 @@
-# UI implementation of typed objects
+# UI Implementation of Typed Objects
 
 Date: 2020/08/04
 

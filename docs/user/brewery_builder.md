@@ -33,23 +33,15 @@ In the Builder editor right-hand sidebar, you can find the tools required for ch
 To activate the tool, click the menu button or use the associated shortcut.
 Depending on the tool, you can click or drag to use it.
 
-The function of most tools is self-explanatory, but we'll take a closer look at two of them: `Edit settings` and `Interact`.
-
-**Edit settings** will open a dialog with the settings available for a part.
-For many parts this only includes generic settings: rotate, flip, or remove the part.
-
-Some have more settings. For example, the kettle allows setting:
-
-- The label (displayed at the top)
-- The liquid color.
-- The width and height (measured in grid squares).
-- The liquid level (for display only - ignored in flow calculations).
-
-![Kettle settings](../images/builder-kettle-settings.png)
+The function of most tools is self-explanatory, but we'll take a closer look at one of them: `Interact`.
 
 **Interact** is the equivalent of clicking on a part in the Builder widget. Click on valves to open/close them, or click on linked parts to open the block dialog.
 
 ![Interact](../images/builder-interact.gif)
+
+Right click (or long press) on a part to edit part settings.
+
+![Context Menu](../images/builder-context-menu.png)
 
 ## Flow calculations
 

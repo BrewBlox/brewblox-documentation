@@ -1,6 +1,7 @@
-# Tilt service state
+# Service Events: Tilt
 
-The Tilt service periodically publishes [state events](./state_events.md).
+The Tilt service periodically publishes both [history](./history_events.md)
+and [state](./state_events.md) events.
 This document serves as reference for the topic and payload schemas used.
 
 All referenced code snippets use the [TypeScript interface syntax](https://www.typescriptlang.org/docs/handbook/interfaces.html).

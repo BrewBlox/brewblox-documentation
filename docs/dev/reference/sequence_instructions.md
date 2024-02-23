@@ -1,6 +1,11 @@
-# Sequence block instructions
+# Sequence Instructions
 
-reference manual for supported instructions.
+<script setup>
+import SequenceDocumentation from '../../components/SequenceDocumentation.vue'
+</script>
+
+This is a reference manual for the instructions supported by the *Sequence* block.
+For basic information on block types, see [here](./block_types.md).
 
 ## Line protocol
 
@@ -58,7 +63,7 @@ WAIT_PROFILE target='BK Profile '
 
 Instructions that have a target block may require a block that implements a specific interface, and not a single block type.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-const.ts#COMPATIBLE_TYPES
+<<< @/../node_modules/brewblox-proto/ts/spark-block-const.ts#COMPATIBLE_TYPES
 
 ## Error states
 
@@ -70,7 +75,7 @@ If the error is resolved (for example, by creating a missing target), the error 
 - `DISABLED_TARGET`: The target block is disabled in configuration.
 - `SYSTEM_TIME_NOT_AVAILABLE`: Controller system time is not set, and the *Sequence* block can't execute any instructions.
 
-<<< @/node_modules/brewblox-proto/ts/spark-block-enums.ts#SequenceError
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#SequenceError
 
 ## Instructions
 

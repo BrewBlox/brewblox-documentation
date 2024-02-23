@@ -1,4 +1,4 @@
-# Cross-compilation: base images
+# Cross-compilation: Base Images
 
 Date: 2018/12/07
 

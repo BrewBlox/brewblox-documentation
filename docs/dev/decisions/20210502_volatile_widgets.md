@@ -1,4 +1,4 @@
-# Handling volatile widgets
+# Handling Volatile Widgets
 
 Date: 2021/05/02
 

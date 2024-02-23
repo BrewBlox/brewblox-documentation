@@ -1,4 +1,4 @@
-# Docker Cross Compilation
+# Docker Cross-compilation
 
 Date: 2018/03/14
 

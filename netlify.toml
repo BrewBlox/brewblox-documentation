@@ -1,6 +1,6 @@
 [build]
   command = "yarn build"
-  publish = "docs/.vuepress/dist"
+  publish = "docs/.vitepress/dist"
 
 [[redirects]]
   from = "/install"

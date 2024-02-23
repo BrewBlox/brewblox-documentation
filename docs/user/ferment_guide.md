@@ -1,4 +1,4 @@
-# Getting started: fermentation fridge
+# Quick Start: Fermentation Fridge
 
 While going through the [startup guide](./startup.md), you may have run the *Fermentation fridge* quick start wizard.
 The wizard asked you some questions, and then generated a dashboard and four widgets.

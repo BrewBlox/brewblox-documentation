@@ -1,4 +1,4 @@
-# Releasing development versions
+# Development Releases
 
 Date: 2018/05/22
 

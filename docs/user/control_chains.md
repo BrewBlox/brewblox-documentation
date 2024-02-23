@@ -1,8 +1,8 @@
-# Control chains
+# Control Chains
 
 When first installing Brewblox, it can be a bit overwhelming.
-We designed Brewblox to be very flexible and modular to give you a lot of freedom (and responsibility) to adapt it to your brewery.
-The downside of this flexibility is that it there are a lot of parts that you can combine and should understand.
+We designed Brewblox to be very flexible and modular to give you a lot of freedom to adapt it to your needs.
+The downside of this flexibility is that it there are a lot of moving parts.
 
 This page describes some common ways on how blocks can be combined to create control chains.
 We will add wizards to the UI to create the most common arrangements, but still it helps to understand their design.
