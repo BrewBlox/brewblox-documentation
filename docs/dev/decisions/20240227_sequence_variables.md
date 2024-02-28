@@ -4,15 +4,44 @@ Date: 2024/02/27
 
 ## Context
 
-- Sequences have proven to be a useful control tool
-- drawbacks:
-  - branching: out of scope
-  - variables: can be implemented
+The [Sequence block](./20220527_sequence_block.md) provides an API for basic scripting control over block settings.
+The block has proven useful for a wide range of use cases, and would benefit from further development.
+
+The Sequence API is intentionally very limited.
+If full scripting functionality is required, the correct implementation is to use an existing scripting language, not to hand-roll our own.
+In practical terms, this means two major language features are absent: branching, and variables.
+
+Branching is considered incompatible with the declared scope for the Sequence block.
+The syntax would either require inter-dependent if/else statements, or assembly-like stack push/pop operations.
+Neither is desirable for a user-facing API.
+
+Variables do not require inter-dependent statements or a major shift in how instructions are evaluated and executed.
+
+## Requirements
+
+There are five functional requirements for the implementation, and two non-functional requirements.
+
+- Variables are identified using a human-readable key.
+- Values are stored on the controller.
+- Variables can be shared by multiple sequences.
+- Variables can be declared or changed without changes to the consuming sequences.
+- Variables can be declared, changed, or removed while the consuming sequences are active.
+
+- Stored size is minimal
+- Binary size is minimal
+
+## Variable declaration and definition
+
+There are four major requirements for the implementation:
+
+
+
 - any variables store must be serialized as proto
 - human-defined keys
-
-## Block separation
-
+- preferable to declare variables outside sequences
+  - sequences support arbitrary instruction access
+  - sequences do not support branching. the variable can only change value when editing the sequence
+  - sequences do not support patching. automatic updates to variables would need to read and parse the sequence
 - variables are stored in a separate block, so they can be shared by multiple sequences
 - The spark 2/3 will not support variables due to binary size constraints
 - The variables block is not compiled on particle platforms
