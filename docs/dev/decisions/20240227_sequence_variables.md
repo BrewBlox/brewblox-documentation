@@ -19,7 +19,7 @@ Variables do not require inter-dependent statements or a major shift in how inst
 
 ## Requirements
 
-There are five functional requirements for the implementation, and two non-functional requirements.
+There are five functional requirements for the implementation:
 
 - Variables are identified using a human-readable key.
 - Values are stored on the controller.
@@ -27,17 +27,20 @@ There are five functional requirements for the implementation, and two non-funct
 - Variables can be declared or changed without changes to the consuming sequences.
 - Variables can be declared, changed, or removed while the consuming sequences are active.
 
+The non-functional requirements are:
+
 - Stored size is minimal
 - Binary size is minimal
 
 ## Variable declaration and definition
 
-There are four major requirements for the implementation:
+Because variables can be shared by multiple sequences, they are implemented as a separate block.
+
+For the moment, the Variables block is not supported on the Spark 2/3.
+Early estimates indicated that the remaining binary size budget would not be enough for even a minimized implementation.
+We may revisit this if we manage to free up space.
 
 
-
-- any variables store must be serialized as proto
-- human-defined keys
 - preferable to declare variables outside sequences
   - sequences support arbitrary instruction access
   - sequences do not support branching. the variable can only change value when editing the sequence
