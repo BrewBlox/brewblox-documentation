@@ -507,6 +507,12 @@ Referenced enum values:
 
 <<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#TouchCalibrated
 
+## Variables
+
+Stores values that can be referenced by *Sequence* blocks.
+
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#Variables
+
 ## WiFiSettings
 
 **System object**

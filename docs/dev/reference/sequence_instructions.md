@@ -44,7 +44,10 @@ Time duration values (such as found in `WAIT_DURATION`) can be expressed either 
 If any argument is a string that contains trailing or leading spaces, it must be quoted using single quotes.
 For all other arguments, quotes are allowed but optional.
 
-Lines that start with a `#` are comments, and will not be executed.
+Argument values may refer to a value stored in a linked *Variables* block.
+For variable values, the `key=$var_name` syntax is used, where `var_name` is the name of the entry stored in the *Variables* block.
+
+Lines prefixed with a `#` are comments, and will not be executed.
 Comments are stored on the Spark, and may cause it to run out of memory.
 
 Example instructions:
@@ -57,7 +60,24 @@ WAIT_SETPOINT target='BK Setpoint', precision=1dC
 START_PROFILE target='BK Profile '
 ENABLE target='BK Profile'
 WAIT_PROFILE target='BK Profile '
+DISABLE target='BK Profile'
+SET_SETPOINT target='BK Setpoint', setting=$bk_setting
 ```
+
+## Variables
+
+**This feature is not supported on the Spark 2 and 3**
+
+Instruction arguments can refer to a value stored in a linked *Variables* block.
+Multiple sequences can be linked to the same *Variables* block.
+
+To refer to a variable value, use the `key=$var_name` syntax, where `var_name` is the variable name.
+
+The argument value type must match the variable value type.
+If it does not, the instruction will trigger an error.
+
+Variables are resolved when the instruction starts.
+If the linked *Variables* block is changed, the active instruction is reloaded.
 
 ## Block interfaces
 
@@ -74,12 +94,14 @@ If the error is resolved (for example, by creating a missing target), the error 
 - `INACTIVE_TARGET`: The target block is inactive because it depends on or is driven by a block that is missing, disabled or disconnected.
 - `DISABLED_TARGET`: The target block is disabled in configuration.
 - `SYSTEM_TIME_NOT_AVAILABLE`: Controller system time is not set, and the *Sequence* block can't execute any instructions.
+- `VARIABLES_NOT_SUPPORTED`: The instruction contains a variable, but the controller does not support the *Variables* block (Spark 2 and 3).
+- `UNDEFINED_VARIABLE`: The referenced variable did not exist in the linked *Variables* block.
+- `INVALID_VARIABLE`: The referenced variable was found, but was of the wrong type.
 
 <<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#SequenceError
 
 ## Instructions
 
 Below is a list of supported opcodes, their arguments, and the errors they may trigger.
-The `SYSTEM_TIME_NOT_AVAILABLE` error is not listed, as it is triggered before any instruction is executed.
 
 <SequenceDocumentation/>
