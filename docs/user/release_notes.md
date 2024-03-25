@@ -8,6 +8,41 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2024/03/??
+
+**firmware release 2024/03/12**
+
+**WARNING: Python 3.7 and Debian Buster are no longer supported. If you're using Debian Buster, see <https://www.brewblox.com/user/system_upgrades.html>**
+
+For this release, we have two major changes: Sequences can use variables, and brewblox-ctl has a dedicated configuration file.
+
+## Variables
+
+- variables block
+- using variables in sequences
+- syntax for using variables
+- not supported on spark 2/3
+
+## brewblox.yml
+
+- dedicated config file
+- yaml syntax
+- other config is generated
+- `brewblox-ctl config inspect` to see options
+- `brewblox-ctl config apply` after making changes
+
+**Changes**
+
+- (feature) Added the *Variables* block.
+- (feature) Sequence instructions can reference named variables defined in a linked *Variables* block.
+- (feature) The *Sequence* block behavior on startup can now be configured to start/pause/resume at first/current instruction.
+- (feature) Brewblox-ctl now uses a central `brewblox.yml` config file to generate other configuration files.
+- (feature) TLS termination in traefik can now be disabled.
+- (improve) The *Digital Input* block now has better detection for Open Load errors.
+- (improve) Actuator Soft Start now resets on overcurrent error.
+- (fix) Fixed the Spark service page not updating the document title.
+- (deprecate) Brewblox no longer supports Python 3.7 / Debian Buster.
+
 ## Brewblox release 2024/02/23
 
 **firmware release date: 2024/02/23**
