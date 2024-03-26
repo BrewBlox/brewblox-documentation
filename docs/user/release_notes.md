@@ -8,9 +8,9 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
-## Brewblox release 2024/03/??
+## Brewblox release 2024/03/26
 
-**firmware release 2024/03/??**
+**firmware release 2024/03/26**
 
 **WARNING: Python 3.7 and Debian Buster are no longer supported. If you're using Debian Buster, see <https://www.brewblox.com/user/system_upgrades.html>**
 
