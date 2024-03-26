@@ -20,13 +20,15 @@ and brewblox configuration are now generated based on settings in the new `brewb
 ## Variables
 
 Before, if you wanted to change a temperature value or a block name in a Sequence, you always had to update the sequence itself.
-If you had multiple instructions editing or waiting on the same block, you had to write the block name every time.
+If you had multiple instructions targeting or waiting on the same block, you had to copy the block name in every instruction.
 
 Now, instruction arguments can either be a value (as before), or a reference to a variable.
 Variables are stored in the new *Variables* block. Multiple *Sequence* blocks can use the same *Variables* block.
 In the *Variables* block, you create a new variable, and give it a name and value.
 In the sequence instruction, you use a `$` + the variable name instead of an argument value.
 The variable type (block link, temperature, duration, etc) must match the argument type.
+
+An example use case for variables is to have a generic sequence that you don't change often, and a variable block that you update for each batch, with variables for setpoint settings and durations.
 
 Example syntax:
 
