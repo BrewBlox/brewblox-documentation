@@ -143,6 +143,10 @@ export default defineConfig({
           items: [
             // Decisions are sorted descending by date.
             {
+              text: '2024: Sequence Variables',
+              link: '/dev/decisions/20240227_sequence_variables',
+            },
+            {
               text: '2024: Deep Block Patching',
               link: '/dev/decisions/20240123_deep_patching',
             },

@@ -8,6 +8,70 @@ Relevant links:
 - Project board: <https://github.com/orgs/Brewblox/projects/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2024/03/26
+
+**firmware release 2024/03/26**
+
+**WARNING: Python 3.7 and Debian Buster are no longer supported. If you're using Debian Buster, see <https://www.brewblox.com/user/system_upgrades.html>**
+
+For this release, we have two new features: Sequences can use variables,
+and brewblox configuration files are now generated based on settings in the new `brewblox.yml` file.
+
+## Variables
+
+Before, if you wanted to change a temperature value or a block name in a Sequence, you always had to update the sequence itself.
+If you had multiple instructions targeting or waiting on the same block, you had to copy the block name in every instruction.
+
+Now, instruction arguments can either be a value (as before), or a reference to a variable.
+Variables are stored in the new *Variables* block. Multiple *Sequence* blocks can use the same *Variables* block.
+In the *Variables* block, you create a new variable, and give it a name and value.
+In the sequence instruction, you use a `$` + the variable name instead of an argument value.
+The variable type (block link, temperature, duration, etc) must match the argument type.
+
+An example use case for variables is to have a generic sequence that you don't change often, and a variable block that you update for each batch, with variables for setpoint settings and durations.
+
+Example syntax:
+
+```txt
+SET_SETPOINT target=$setpoint_block, setting=$beer_temp
+```
+
+The bad news is that **the variables block is not available on the Spark 2 and 3**.
+We were unable to make the implementation small enough to fit the firmware partition.
+
+## brewblox.yml
+
+In Brewblox, we want to maintain a balance between configurability and ease of use.
+`brewblox-ctl install` creates configuration files, and if you want to, you can override them.
+Environment variables were used to declare simple settings, such as the published HTTP / HTTPS ports.
+
+This has its drawbacks. Some configuration could not be partially overridden, or would be reset during updates.
+To make it easier to apply specific and common configuration changes, we reworked how configuration files are handled.
+
+`brewblox-ctl` now stores its own settings in a dedicated file: `brewblox.yml`.
+Other configuration files are no longer static, but are generated based on the settings in `brewblox.yml`.
+For example, you can now disable TLS termination without having to copy all traefik service settings in your own `docker-compose.yml`.
+
+Configuration files are generated during updates, and when using the `brewblox-ctl config apply` command.
+
+This includes the `.env` file. Any manual edits to `.env` will be lost when configuration is generated.
+If you want to include custom environment variables in `.env`, you can use the `environment` section in `brewblox.yml`. \
+When updating to this release, existing values in `.env` will not be discarded, but placed in the newly created `brewblox.yml`.
+
+To see all available settings, run `brewblox-ctl config inspect`.
+
+**Changes**
+
+- (feature) Added the *Variables* block.
+- (feature) Sequence instructions can reference named variables defined in a linked *Variables* block.
+- (feature) The *Sequence* block behavior on startup can now be configured to start/pause/resume at first/current instruction.
+- (feature) Brewblox-ctl now uses a central `brewblox.yml` config file to generate other configuration files.
+- (feature) TLS termination in traefik can now be disabled.
+- (improve) The *Digital Input* block now has better detection for Open Load errors.
+- (improve) Actuator Soft Start now resets on overcurrent error.
+- (fix) Fixed the Spark service page not updating the document title.
+- (deprecate) Brewblox no longer supports Python 3.7 / Debian Buster.
+
 ## Brewblox release 2024/02/23
 
 **firmware release date: 2024/02/23**
