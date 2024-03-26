@@ -15,7 +15,7 @@ Relevant links:
 **WARNING: Python 3.7 and Debian Buster are no longer supported. If you're using Debian Buster, see <https://www.brewblox.com/user/system_upgrades.html>**
 
 For this release, we have two new features: Sequences can use variables,
-and brewblox configuration are now generated based on settings in the new `brewblox.yml` file.
+and brewblox configuration files are now generated based on settings in the new `brewblox.yml` file.
 
 ## Variables
 
