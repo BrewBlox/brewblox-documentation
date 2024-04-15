@@ -143,6 +143,10 @@ export default defineConfig({
           items: [
             // Decisions are sorted descending by date.
             {
+              text: '2024: brewblox.yml',
+              link: '/dev/decisions/20240326_brewblox_yml',
+            },
+            {
               text: '2024: Sequence Variables',
               link: '/dev/decisions/20240227_sequence_variables',
             },
@@ -351,7 +355,7 @@ export default defineConfig({
     config: (md) => {
       const opts = md.options;
       // Pass the default function as backup to plantuml highlight
-      opts.highlight = wrapHighlight(opts.highlight);
+      opts.highlight = wrapHighlight(opts.highlight!);
     },
   },
 });
