@@ -12,6 +12,7 @@ export default defineConfig({
       { text: 'Blog', link: '/blog/2021-06-30-this-is-the-brewblox-spark-4/' },
       { text: 'User guides', link: '/user/startup' },
       { text: 'Developer docs', link: '/dev/' },
+      { text: 'Store', link: 'https://store.brewpi.com' },
       // Hardware section commented out for update / review Elco
       // { text: 'Hardware', link: '/hardware/' },
       // { text: 'BrewPi', link: 'https://www.brewpi.com/' },
