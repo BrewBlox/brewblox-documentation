@@ -242,8 +242,8 @@ message Payload {
 ```
 
 Both requests and responses can use masks to indicate field presence.
-This feature is implemented to complement Protobuf's automatic omission of empty values,
-and provides a way to distinguish between omitted fields and empty, nulled, or 0 values.
+This feature is implemented to complement Protobuf's automatic omission of empty and `0` values,
+and provides a way to distinguish between omitted fields and empty, nulled, or `0` values.
 
 The `maskFields` field provides a list of potentially nested field tags that are included in the mask.
 
@@ -313,7 +313,7 @@ enum Opcode {
 
 ### BLOCK_READ
 
-- Request payload: **Yes, block identity only**
+- Request payload: **Yes, block identifiers only**
 - Response payload: **Yes, single block**
 
 ### BLOCK_READ_ALL
@@ -328,12 +328,12 @@ enum Opcode {
 
 ### BLOCK_CREATE
 
-- Request payload: **Yes, block identity optional, block type required**
+- Request payload: **Yes, block identifiers optional, block type required**
 - Response payload: **Yes, single block**
 
 ### BLOCK_DELETE
 
-- Request payload: **Yes, block identity only**
+- Request payload: **Yes, block identifiers only**
 - Response payload: **No**
 
 ### BLOCK_DISCOVER
@@ -343,18 +343,18 @@ enum Opcode {
 
 ### NAME_READ
 
-- Request payload: **Yes, block identity only**
-- Response payload: **Yes, block identity without data**
+- Request payload: **Yes, block identifiers only**
+- Response payload: **Yes, block identifiers without data**
 
 ### NAME_READ_ALL
 
 - Request payload: **No**
-- Response payload: **Yes, block identity for all blocks**
+- Response payload: **Yes, block identifiers for all blocks**
 
 ### NAME_WRITE
 
-- Request payload: **Yes, block identity with current ID and desired name**
-- Response payload: **Yes, block identity**
+- Request payload: **Yes, block identifiers with current ID and desired name**
+- Response payload: **Yes, block identifiers**
 
 ### REBOOT
 
