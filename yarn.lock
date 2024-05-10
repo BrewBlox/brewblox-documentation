@@ -1730,7 +1730,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^6.19.0"
     "@typescript-eslint/parser": "npm:^6.19.0"
     axios: "npm:^1.6.2"
-    brewblox-proto: "https://github.com/brewblox/brewblox-proto#commit=06247728d07ae71ac3aceb7480101b82e85c1e3f"
+    brewblox-proto: "https://github.com/brewblox/brewblox-proto#commit=2e7314a6a50cf459f49e725444c8e5cacd2bcd77"
     eslint: "npm:^8.56.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-import: "npm:^2.29.1"
@@ -1746,12 +1746,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"brewblox-proto@https://github.com/brewblox/brewblox-proto#commit=06247728d07ae71ac3aceb7480101b82e85c1e3f":
+"brewblox-proto@https://github.com/brewblox/brewblox-proto#commit=2e7314a6a50cf459f49e725444c8e5cacd2bcd77":
   version: 1.0.0
-  resolution: "brewblox-proto@https://github.com/brewblox/brewblox-proto.git#commit=06247728d07ae71ac3aceb7480101b82e85c1e3f"
+  resolution: "brewblox-proto@https://github.com/brewblox/brewblox-proto.git#commit=2e7314a6a50cf459f49e725444c8e5cacd2bcd77"
   dependencies:
     typescript-string-enums: "npm:^1.0.0"
-  checksum: 10c0/8e487ea61f0db0949937e5701ee8b361b5c1d6b5cc4c3ee446322332059d2bdf937f9efb4071097dbdaa5e5d3792e724c554a7ccdba8cb30ab47e8b171efa5ed
+  checksum: 10c0/cfb9d17ef3fe0ed66c17fd963dfeb7c5d953f244d4372c9ab71134d5390b27729f988bc597a0ea41ae9dccb8a0f8b2040f3d4e1580a6f0c9b03a2df5364955da
   languageName: node
   linkType: hard
 

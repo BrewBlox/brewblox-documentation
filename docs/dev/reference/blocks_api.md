@@ -138,9 +138,10 @@ Block data has two subsets: logged and stored data.
 
 Logged data consists of the fields that are published to the history service.
 This does not include string values, links, arrays, and some of the more persistent settings.
+You can't recreate a block's settings by writing its logged output.
 
-Stored data are the values persisted to EEPROM storage by the controller.
-Backups, for example, use stored data.
+Stored data consists of the fields that should be persisted to restore the block's settings after startup or from a backup.
+This does not include volatile and read-only fields.
 
 Computed values such as achieved values, remaining constraint time, and PID integrator buildup are not stored.
 
