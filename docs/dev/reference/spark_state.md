@@ -59,7 +59,7 @@ Some examples:
 - Setting the controller date/time.
 - Setting the controller time zone.
 - Setting the controller display units (Celsius or Fahrenheit).
-- Getting block names from the datastore.
+- Getting block names from the controller.
 
 Once this is done, the connection state becomes `SYNCHRONIZED`.
 The service will now read/write blocks on the controller.

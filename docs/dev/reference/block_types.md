@@ -349,6 +349,7 @@ If no pins are claimed, the channel is still a valid target for a digital actuat
 
 The `GpioModuleStatus` and `GpioPins` enums are [8-bit masks](https://basarat.gitbook.io/typescript/type-system/enums#number-enums-as-flags).
 
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#GpioModule
 <<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#OneWireGpioModule
 
 Referenced enum values:

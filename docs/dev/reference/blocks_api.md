@@ -137,10 +137,11 @@ This is not a merger: any and all blocks not present in the exported state will 
 Block data has two subsets: logged and stored data.
 
 Logged data consists of the fields that are published to the history service.
-This does not include string values, links, arrays, and some of the more persistent settings.
+This does not include links or non-numerical data types such as strings or arrays.
+Logged data output should not be used as input for `/write` calls, as it will cause omitted persistent settings to be set to default.
 
-Stored data are the values persisted to EEPROM storage by the controller.
-Backups, for example, use stored data.
+Stored data consists of the fields that should be persisted to restore the block's settings at startup or from a backup.
+This does not include volatile and read-only fields.
 
 Computed values such as achieved values, remaining constraint time, and PID integrator buildup are not stored.
 
