@@ -144,6 +144,10 @@ export default defineConfig({
           items: [
             // Decisions are sorted descending by date.
             {
+              text: '2024: Firmware ReadMode',
+              link: '/dev/decisions/20240510_cbox_read_mode',
+            },
+            {
               text: '2024: brewblox.yml',
               link: '/dev/decisions/20240326_brewblox_yml',
             },
