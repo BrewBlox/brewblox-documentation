@@ -17,7 +17,7 @@ Relevant links:
 For this release, we have two new features: Sequences can use variables,
 and brewblox configuration files are now generated based on settings in the new `brewblox.yml` file.
 
-## Variables
+### Variables
 
 Before, if you wanted to change a temperature value or a block name in a Sequence, you always had to update the sequence itself.
 If you had multiple instructions targeting or waiting on the same block, you had to copy the block name in every instruction.
@@ -39,7 +39,7 @@ SET_SETPOINT target=$setpoint_block, setting=$beer_temp
 The bad news is that **the variables block is not available on the Spark 2 and 3**.
 We were unable to make the implementation small enough to fit the firmware partition.
 
-## brewblox.yml
+### brewblox.yml
 
 In Brewblox, we want to maintain a balance between configurability and ease of use.
 `brewblox-ctl install` creates configuration files, and if you want to, you can override them.
@@ -124,7 +124,7 @@ Supported environment options for Python services can be found under <https://br
 
 **firmware release date: 2024/01/03**
 
-## Authentication
+### Authentication
 
 By default, Brewblox is only accessible from inside your local network.
 If you want to use the UI when away from home, it must be secured.
@@ -144,7 +144,7 @@ brewblox-ctl auth enable
 
 This will prompt you to add a user, and will then enable the service that checks all incoming HTTP requests.
 
-## SSL Certificates and Authorities
+### SSL Certificates and Authorities
 
 HTTPS connections are secured using SSL certificates. If you have a public website, you can create a certificate, and then ask a Certificate Authority (CA) to sign it.
 When signed, it will be trusted by browsers.
@@ -203,18 +203,18 @@ To do this:
 
 **firmware release date: 2023/07/26**
 
-## Holiday closure
+### Holiday closure
 
 The shop will be closed from July 29 to August 18. If you place an order during this period, it will ship after the 18th.
 
-## Digital Input
+### Digital Input
 
 The *OneWire GPIO Module* block now supports Input channels for detecting either low current (3-100mA) or high current (30-1000mA).
 These can be used by the new *Digital Input* block. When current is detected (the circuit is closed),
 The *Digital Input* block state will be active.
 *Digital Input* state can be used in *Sequence* instructions (WAIT_DIGITAL_STATE) and in the *Logic Actuator* block.
 
-## GPIO channel changes
+### GPIO channel changes
 
 Some channels will now be configured differently when inactive.
 Previously, some pins were connected to GND when inactive.
