@@ -144,6 +144,10 @@ export default defineConfig({
           items: [
             // Decisions are sorted descending by date.
             {
+              text: '2024: Block Names on Controller',
+              link: '/dev/decisions/20240513_block_name_storage',
+            },
+            {
               text: '2024: Firmware ReadMode',
               link: '/dev/decisions/20240510_cbox_read_mode',
             },
