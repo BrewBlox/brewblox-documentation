@@ -36,11 +36,13 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-vue": "^9.20.1",
+    "flexsearch": "^0.7.43",
     "markdown-it-mathjax3": "^4.3.2",
     "markdown-link-check": "^3.11.2",
     "plantuml-encoder": "^1.4.0",
     "prettier": "^3.2.4",
-    "vitepress": "^1.0.0-rc.39"
+    "vitepress": "^1.0.0-rc.39",
+    "vitepress-plugin-search": "^1.0.4-alpha.22"
   },
   "engines": {
     "node": ">= 18"

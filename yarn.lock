@@ -1040,6 +1040,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/flexsearch@npm:^0.7.3":
+  version: 0.7.6
+  resolution: "@types/flexsearch@npm:0.7.6"
+  checksum: 10c0/175c1dae422fc175ac103f9d8fb58cf48e9d3243180fff1e5feca610e0c17570562d30df5774c5ccef46aadee4e7b76d94a970bbd3b5febb1bc16857a69a18f3
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:^7.0.12":
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
@@ -1058,6 +1065,16 @@ __metadata:
   version: 3.0.2
   resolution: "@types/linkify-it@npm:3.0.2"
   checksum: 10c0/4cf1452a11f5b9465aafe0448b36323fdc640bd370a61c44421bed89b8b88b77d94deede21e1bd54e410412492a1c21252efc15fa80b1529df5057f03a15bd49
+  languageName: node
+  linkType: hard
+
+"@types/markdown-it@npm:^12.2.3":
+  version: 12.2.3
+  resolution: "@types/markdown-it@npm:12.2.3"
+  dependencies:
+    "@types/linkify-it": "npm:*"
+    "@types/mdurl": "npm:*"
+  checksum: 10c0/f72e08f69d76be2e30cd367fd6e5302c6878aa44e5b1a952fe7e41280044502bcb9bac8459ad94f6bb5e4f9c4cb52803950609ad66786f0fddc3a8bd533f777d
   languageName: node
   linkType: hard
 
@@ -1735,12 +1752,14 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-import: "npm:^2.29.1"
     eslint-plugin-vue: "npm:^9.20.1"
+    flexsearch: "npm:^0.7.43"
     markdown-it-mathjax3: "npm:^4.3.2"
     markdown-link-check: "npm:^3.11.2"
     plantuml-encoder: "npm:^1.4.0"
     prettier: "npm:^3.2.4"
     typescript-string-enums: "npm:^1.0.0"
     vitepress: "npm:^1.0.0-rc.39"
+    vitepress-plugin-search: "npm:^1.0.4-alpha.22"
     vue: "npm:^3.4.15"
     vue3-carousel: "npm:^0.3.1"
   languageName: unknown
@@ -2266,6 +2285,13 @@ __metadata:
   version: 4.5.0
   resolution: "entities@npm:4.5.0"
   checksum: 10c0/5b039739f7621f5d1ad996715e53d964035f75ad3b9a4d38c6b3804bb226e282ffeae2443624d8fdd9c47d8e926ae9ac009c54671243f0c3294c26af7cc85250
+  languageName: node
+  linkType: hard
+
+"entities@npm:~3.0.1":
+  version: 3.0.1
+  resolution: "entities@npm:3.0.1"
+  checksum: 10c0/2d93f48fd86de0b0ed8ee34456aa47b4e74a916a5e663cfcc7048302e2c7e932002926daf5a00ad6d5691e3c90673a15d413704d86d7e1b9532f9bc00d975590
   languageName: node
   linkType: hard
 
@@ -2801,6 +2827,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"flexsearch@npm:^0.7.43":
+  version: 0.7.43
+  resolution: "flexsearch@npm:0.7.43"
+  checksum: 10c0/797dc474ed97750b8e85c118b1af63eb2709da5fc05defcb13e96515774f28743ccb2448b63f3b703cf1ca571928c006069503dacf7d177bc07b9ee15e1f85d0
+  languageName: node
+  linkType: hard
+
 "focus-trap@npm:^7.5.4":
   version: 7.5.4
   resolution: "focus-trap@npm:7.5.4"
@@ -2983,6 +3016,13 @@ __metadata:
   dependencies:
     is-glob: "npm:^4.0.3"
   checksum: 10c0/317034d88654730230b3f43bb7ad4f7c90257a426e872ea0bf157473ac61c99bf5d205fad8f0185f989be8d2fa6d3c7dce1645d99d545b6ea9089c39f838e7f8
+  languageName: node
+  linkType: hard
+
+"glob-to-regexp@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "glob-to-regexp@npm:0.4.1"
+  checksum: 10c0/0486925072d7a916f052842772b61c3e86247f0a80cc0deb9b5a3e8a1a9faad5b04fb6f58986a09f34d3e96cd2a22a24b7e9882fb1cf904c31e9a310de96c429
   languageName: node
   linkType: hard
 
@@ -3620,6 +3660,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"linkify-it@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "linkify-it@npm:4.0.1"
+  dependencies:
+    uc.micro: "npm:^1.0.1"
+  checksum: 10c0/f1949ee2c7c2979c4f80c8c08f507d813f50775ebc5adfdb7ee662f28e0ee53dbd4a329d5231be67414405fc60d4e99b37536d6949702d311fe509a6bcbcf4a6
+  languageName: node
+  linkType: hard
+
 "locate-path@npm:^6.0.0":
   version: 6.0.0
   resolution: "locate-path@npm:6.0.0"
@@ -3713,6 +3762,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"markdown-it@npm:^13.0.1":
+  version: 13.0.2
+  resolution: "markdown-it@npm:13.0.2"
+  dependencies:
+    argparse: "npm:^2.0.1"
+    entities: "npm:~3.0.1"
+    linkify-it: "npm:^4.0.1"
+    mdurl: "npm:^1.0.1"
+    uc.micro: "npm:^1.0.5"
+  bin:
+    markdown-it: bin/markdown-it.js
+  checksum: 10c0/4fe0c41bc4c318c2901dc2923470c259cab137a4ab870001038877b942c9cc65072923e2d957f785de69a9da27c55657bd531607ccfd258246bd72a8deb8c2ee
+  languageName: node
+  linkType: hard
+
 "markdown-link-check@npm:^3.11.2":
   version: 3.11.2
   resolution: "markdown-link-check@npm:3.11.2"
@@ -3759,6 +3823,13 @@ __metadata:
     mj-context-menu: "npm:^0.6.1"
     speech-rule-engine: "npm:^4.0.6"
   checksum: 10c0/48f55747bd91aa6bba905bab8654045e4d654a0a65869b1d446e25a89284ef37dc722c6c4a585e7fc14c5f87bb6954291f066e08e5a8245bb5ff0c4f4c54c8d4
+  languageName: node
+  linkType: hard
+
+"mdurl@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "mdurl@npm:1.0.1"
+  checksum: 10c0/ea8534341eb002aaa532a722daef6074cd8ca66202e10a2b4cda46722c1ebdb1da92197ac300bc953d3ef1bf41cd6561ef2cc69d82d5d0237dae00d4a61a4eee
   languageName: node
   linkType: hard
 
@@ -4998,6 +5069,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uc.micro@npm:^1.0.1, uc.micro@npm:^1.0.5":
+  version: 1.0.6
+  resolution: "uc.micro@npm:1.0.6"
+  checksum: 10c0/9bde2afc6f2e24b899db6caea47dae778b88862ca76688d844ef6e6121dec0679c152893a74a6cfbd2e6fde34654e6bd8424fee8e0166cdfa6c9ae5d42b8a17b
+  languageName: node
+  linkType: hard
+
 "unbox-primitive@npm:^1.0.2":
   version: 1.0.2
   resolution: "unbox-primitive@npm:1.0.2"
@@ -5109,6 +5187,22 @@ __metadata:
   bin:
     vite: bin/vite.js
   checksum: 10c0/b5717bb00c2570c08ff6d8ed917655e79184efcafa9dd62d52eea19c5d6dfc5a708ec3de9ebc670a7165fc5d401c2bdf1563bb39e2748d8e51e1593d286a9a13
+  languageName: node
+  linkType: hard
+
+"vitepress-plugin-search@npm:^1.0.4-alpha.22":
+  version: 1.0.4-alpha.22
+  resolution: "vitepress-plugin-search@npm:1.0.4-alpha.22"
+  dependencies:
+    "@types/flexsearch": "npm:^0.7.3"
+    "@types/markdown-it": "npm:^12.2.3"
+    glob-to-regexp: "npm:^0.4.1"
+    markdown-it: "npm:^13.0.1"
+  peerDependencies:
+    flexsearch: ^0.7.31
+    vitepress: ^1.0.0-rc.35
+    vue: 3
+  checksum: 10c0/59fb063b8e20450406eb8a27edbb8eaa0eac8b5ab9acbe23ee05008f715ce6bc0bac533e7b2c97220e7f50a4eb5b1fae9ec1a071a270ca0adedac1057e105266
   languageName: node
   linkType: hard
 
