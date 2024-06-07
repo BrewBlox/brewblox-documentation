@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress';
+import { SearchPlugin } from 'vitepress-plugin-search';
 import { wrapHighlight } from './plantuml.mjs';
 
 // https://vitepress.dev/reference/site-config
@@ -357,6 +358,9 @@ export default defineConfig({
         link: 'https://discord.gg/WaFYD2jaaT',
       },
     ],
+  },
+  vite: {
+    plugins: [SearchPlugin()],
   },
   markdown: {
     math: true,
