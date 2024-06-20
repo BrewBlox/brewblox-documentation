@@ -18,6 +18,7 @@ In the Brewblox directory, run:
 
 ```sh
 mkdir -p ./node-red
+sudo chown -R 1000:1000 ./node-red
 ```
 
 ## Add the service
@@ -55,7 +56,8 @@ brewblox-ctl up
 Then, edit the configuration file to set the `/node-red` prefix for the web UI:
 
 ```sh
-sed -i 's#//httpAdminRoot:.*#httpAdminRoot: "/node-red",#g' ./node-red/settings.js
+sudo sed -i 's#//httpAdminRoot:.*#httpAdminRoot: "/node-red",#g' ./node-red/settings.js
+sudo chown 1000:1000 ./node-red/settings.js
 ```
 
 Restart the service to apply the setting:
