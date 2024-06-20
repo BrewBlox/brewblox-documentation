@@ -11,11 +11,11 @@ and change actuator on/off state in response.
 We'll assume a basic familiarity with Node-RED, MQTT, and Brewblox blocks.
 For introductions on these topics, see:
 
-- [Node-RED](https://nodered.org/docs/tutorials/) (See below for an easy way to install Node-RED)
+- [Node-RED](https://nodered.org/docs/tutorials/)
 - [MQTT](http://www.steves-internet-guide.com/mqtt-works/)
 - [Blocks](../../../user/blocks_architecture.md)
 
-## Installation
+## Setup
 
 We need to have at least one active Spark service.
 If you don't have a Spark at hand, you can add a [simulation service](../../../user/services/spark_sim.md).
@@ -23,13 +23,9 @@ If you don't have a Spark at hand, you can add a [simulation service](../../../u
 In this tutorial, we'll call the service **spark-one**.
 Adjust as needed in the configuration and code blocks if your service has a different name.
 
-To add the Node-RED service, run:
+To add the Node-RED service, see our [setup guide](../node_red_setup.md).
 
-```sh
-brewblox-ctl add-node-red
-```
-
-When this is done, you can access the Node-RED interface at `{BREWBLOX_ADDRESS}/node-red`
+When this is done, you can access the Node-RED web UI at `{BREWBLOX_ADDRESS}/node-red`.
 
 ## Listening to the Brewblox eventbus
 

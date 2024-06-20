@@ -86,6 +86,10 @@ export default defineConfig({
               link: '/dev/tutorials/scheduledscript/',
             },
             {
+              text: 'Node-RED: Setup',
+              link: '/dev/tutorials/node_red_setup',
+            },
+            {
               text: 'Node-RED: Use Blocks',
               link: '/dev/tutorials/node_red_listening/',
             },
