@@ -10,17 +10,15 @@ This tutorial shows how to publish Brewblox history data that can then be viewed
 We'll assume a basic familiarity with Node-RED, MQTT, and Brewblox history data.
 For introductions on these topics, see:
 
-- [Node-RED](https://nodered.org/docs/tutorials/) (See below for an easy way to install Node-RED)
+- [Node-RED](https://nodered.org/docs/tutorials/)
 - [MQTT](http://www.steves-internet-guide.com/mqtt-works/)
 - [History](../../reference/history_events.md)
 
-## Installation
+## Setup
 
-To add the Node-RED service, run:
+To add the Node-RED service, see our [setup guide](../node_red_setup.md).
 
-```sh
-brewblox-ctl add-node-red
-```
+When this is done, you can access the Node-RED web UI at `{BREWBLOX_ADDRESS}/node-red`.
 
 ## Flow
 
