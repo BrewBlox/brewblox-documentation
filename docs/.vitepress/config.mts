@@ -59,6 +59,7 @@ export default defineConfig({
           link: '/dev/dev_platform',
         },
         { text: 'Python Environment Setup', link: '/dev/python_env' },
+        { text: 'Common Issues', link: '/dev/common_issues' },
         { text: 'Deploying Scripts', link: '/dev/deployment' },
         { text: 'Analyzing Logs', link: '/dev/analyzing_logs' },
         { text: 'Sharing the Traefik Proxy', link: '/dev/subrouting' },
