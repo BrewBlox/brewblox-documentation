@@ -5,8 +5,64 @@ Relevant links:
 - User guides: <https://www.brewblox.com/>
 - Discord server: <https://discord.gg/WaFYD2jaaT>
 - Previous release notes: <https://www.brewblox.com/user/release_notes.html>
-- Project board: <https://github.com/orgs/Brewblox/projects/1>
+- Project board: <https://github.com/orgs/BrewBlox/projects/2/views/1>
 - Code repositories: <https://github.com/Brewblox>
+
+## Brewblox release 2024/07/??
+
+**firmware release 2024/??/??**
+
+With this release, Brewblox now supports the new Analog GPIO module.
+This module is connected to the Spark 4 in the same way as the OneWire GPIO module,
+and features four RTD sensor slots in addition to the GPIO pins.
+Initially, analog temperature sensors are supported.
+We're working on software support for pressure and flow sensors.
+
+In firmware, we first squeezed a few more kB from our build size,
+then rewrote how data is stored in persistent flash memory,
+and now we have enough space to store block names on the controller.
+Blocks will no longer lose their names and revert to `New|BlockType-1` when Brewblox is (re-)installed.
+
+On the server, we introduced two new optional services: the mDNS reflector, and the USB proxy.
+
+mDNS is used to discover Sparks connected to the local network.
+To receive mDNS packets in the Spark service,
+they must be forwarded (reflected) from the network adapter connected to the local network.
+Previously, we enabled reflection by editing the Avahi configuration on the server.
+We want to avoid touching host configuration where possible,
+so now we're handling reflection in small dedicated services.
+For new installations, we can now avoid editing Avahi configuration,
+and you have more fine-grained control over when and how mDNS reflection is enabled.
+
+Similarly, USB connections have become an optional feature.
+The Spark 4 and all future controllers no longer support it,
+and the Spark 2 and 3 support both wifi and USB.
+If you want to use USB connections, you can enable the new `usb-proxy` service in brewblox.yml.
+When an USB device is detected, the Spark service connects to the `usb-proxy` service,
+and all commands are forwarded to the Spark over USB.\
+This way, the Spark service no longer needs to have permission to access USB on the server.
+
+- (feature) A new Spark 4 module is now available: the Analog GPIO module.
+- (feature) The `OneWire GPIO Module` is now the `GPIO Module`, and also supports Analog GPIO modules.
+- (feature) Added the `Temp Sensor (Analog)` block.
+- (feature) Block names are now stored on the controller.
+- (feature) Added dedicated mDNS reflection services.
+- (feature) Added the optional `usb-proxy` service to handle USB connections to Spark 2/3 controllers.
+- (improve) The timeout for when old Metrics Widget values are excluded is now editable.
+- (improve) Blocks with generated names are no longer excluded from history.
+- (improve) Generated names for newly discovered blocks are more specific to avoid repeated `New|TempSensorOneWire-1` blocks.
+- (improve) Numeric IDs for new blocks are now randomized to prevent new blocks being recognized as an old block.
+- (improve) Reduced the image size of the Docker image used to flash Spark 2/3 controllers over USB.
+- (improve) The Troubleshooter widget on the UI Spark service page now lists discovered controllers.
+- (improve) Host Avahi reflection is disabled by default. Brewblox now uses default Avahi settings when newly installed.
+- (improve) The Spark 4 now receives the CA certificate when MQTT connection is enabled.
+- (improve) HTTP->HTTPS redirection is now optional. This setting is configurable in brewblox.yml.
+- (fix) The Spark 4 no longer runs out of memory when connected over MQTT.
+- (fix) Brewblox services recognize the `1d5h10m` format again for duration settings in `environment`.
+- (fix) The Spark service no longer tries to use the 64-bit simulator on 32-bit ARM platforms.
+- (docs) The Node-RED guides now include a setup guide for the official Node-RED Docker image.
+- (docs) Added a search bar to brewblox.com.
+- (deprecate) Removed the `brewblox-ctl add-node-red` command.
 
 ## Brewblox release 2024/03/26
 
