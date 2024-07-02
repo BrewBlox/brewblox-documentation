@@ -193,6 +193,10 @@ The install script, and later `brewblox-ctl` itself fetch `brewblox-ctl.tar.gz` 
 **brewblox-images** manages build configuration for Docker images where we wrap existing applications
 or Docker images without contributing a meaningful amount of code.
 
+**brewblox-documentation** contains the source for the user-facing <https://brewblox.com> website.
+`brewblox.com` itself is only updated during `edge` releases.
+<https://brewblox-dev.netlify.app> shows the current state of the `develop` branch.
+
 ```plantuml
 @startuml Artifacts
 left to right direction
