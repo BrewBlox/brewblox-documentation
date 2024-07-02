@@ -150,6 +150,14 @@ export default defineConfig({
           items: [
             // Decisions are sorted descending by date.
             {
+              text: '2024: USB Proxy Service',
+              link: '/dev/decisions/20240628_usb_proxy',
+            },
+            {
+              text: '2024: Reflector Service',
+              link: '/dev/decisions/20240620_reflector_service',
+            },
+            {
               text: '2024: Block Names on Controller',
               link: '/dev/decisions/20240513_block_name_storage',
             },
