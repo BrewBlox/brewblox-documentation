@@ -163,3 +163,123 @@ If a Spark controller (connected to the LAN) broadcasts mDNS packets,
 these will not reach the Docker bridge network.\
 The mDNS reflection services use `--network-mode=host`,
 and reflect mDNS packets between the LAN network interface(s) and the Docker bridge network.
+
+## Build Artifacts
+
+The various repositories generate build artifacts that are used either by other repositories,
+or during system runtime.
+
+**brewblox-dev-images** contains the Dockerfiles for the images used in the firmware CI build,
+and local development. As they are relatively static, and not linked to any release track, they are built manually.
+
+**brewblox-firmware** generates firmware binaries that are then uploaded to Azure Storage.
+A `firmware.ini` file is uploaded separately. This file is manually downloaded and committed into the brewblox-devcon-spark and brewblox-ui repositories.
+
+The firmware binary file for the ESP-based Spark 4 is uploaded separately.
+The OTA update for the Spark 4 consists of sending the Spark the Azure Storage URL where it can download its new binary.
+
+**brewblox-devcon-spark** downloads and redistributes the firmware artifacts.
+For user-facing releases, the firmware shipped with `brewblox-devcon-spark` artifacts
+is considered the "released" firmware. During builds, `brewblox-devcon-spark` will always fetch
+the firmware release zip associated with the `firmware.ini` committed in the `brewblox-devcon-spark` repository.
+
+**brewblox-ctl** has two associated artifacts: the `brewblox-ctl.tar.gz` Python package dist,
+and the Bash install script.\
+`brewblox-ctl.tar.gz` is uploaded to Azure Storage, but the install script is not actively deployed.
+Instead, <https://www.brewblox.com/install> redirects to the direct link for the install script on Github.
+
+The install script, and later `brewblox-ctl` itself fetch `brewblox-ctl.tar.gz` from Azure Storage.
+
+**brewblox-images** manages build configuration for Docker images where we wrap existing applications
+or Docker images without contributing a meaningful amount of code.
+
+```plantuml
+@startuml Artifacts
+left to right direction
+skinparam nodesep 10
+
+legend left
+  | Color         | Type         |
+  | <#LightBlue>  | Docker image |
+  | <#Yellow>     | Archive      |
+  | <#Snow>       | Text file    |
+  | <#Red>        | Binary       |
+  | <#LightGreen> | Website      |
+endlegend
+
+node "brewblox-dev-images" as dev_images {
+  artifact "ghcr.io/brewblox/firmware-compiler" as fw_compiler #LightBlue
+  artifact "ghcr.io/brewblox/simulator-compiler" as sim_compiler #LightBlue
+  artifact "ghcr.io/brewblox/firmware-devcontainer" as fw_devcontainer #LightBlue
+}
+
+node "brewblox-ctl" as ctl {
+  artifact "Install script" as install_script #Snow
+  artifact "brewblox-ctl.tar.gz" as ctl_dist #Yellow
+}
+
+node "brewblox-firmware" as firmware {
+  artifact "Firmware release zip" as fw_release #Yellow
+  artifact "Firmware ini" as fw_ini #Snow
+  artifact "Firmware ESP binary" as fw_esp_binary #Red
+}
+
+node "brewblox-documentation" as docs {
+  artifact "https://brewblox.com" #LightGreen
+  artifact "https://brewblox-dev.netlify.app" #LightGreen
+}
+
+node "brewblox-images" as images {
+  artifact "ghcr.io/brewblox/minica" as minica_image #LightBlue
+  artifact "ghcr.io/brewblox/mosquitto" as mosquitto_image #LightBlue
+}
+
+node "brewblox-history" as history {
+  artifact "ghcr.io/brewblox/brewblox-history" #LightBlue
+}
+
+node "brewblox-devcon-spark" as devcon {
+  artifact "ghcr.io/brewblox/brewblox-devcon-spark" #LightBlue
+  artifact "ghcr.io/brewblox/brewblox-firmware-flasher" #LightBlue
+}
+
+node "brewblox-ui" as ui {
+  artifact "ghcr.io/brewblox/brewblox-ui" #LightBlue
+}
+
+node "brewblox-auth" as auth {
+  artifact "ghcr.io/brewblox/brewblox-auth" #LightBlue
+}
+
+node "brewblox-usb-proxy" as proxy {
+  artifact "ghcr.io/brewblox/brewblox-usb-proxy" #LightBlue
+}
+
+node "brewblox-tilt" as tilt {
+  artifact "ghcr.io/brewblox/brewblox-tilt" #LightBlue
+}
+
+node "brewblox-hass" as hass {
+  artifact "ghcr.io/brewblox/brewblox-hass" #LightBlue
+}
+
+dev_images ..> firmware
+
+fw_ini ..> devcon
+fw_release ..> devcon
+fw_ini ..> ui
+
+install_script ..> docs
+
+
+docs -[hidden]left- images
+images -[hidden]left- history
+history -[hidden]left- devcon
+devcon -[hidden]left- ui
+ui -[hidden]left- auth
+auth -[hidden]left- proxy
+proxy -[hidden]left- tilt
+tilt -[hidden]left- hass
+
+@enduml
+```
