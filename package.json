@@ -21,7 +21,7 @@
   "homepage": "https://github.com/BrewBlox/brewblox-documentation#readme",
   "dependencies": {
     "@duannx/vue-client-only": "^1.0.3",
-    "brewblox-proto": "https://github.com/brewblox/brewblox-proto#commit=2e7314a6a50cf459f49e725444c8e5cacd2bcd77",
+    "brewblox-proto": "https://github.com/brewblox/brewblox-proto#commit=7a7cafa46705bfe03945a6cd3978b88f37d28102",
     "typescript-string-enums": "^1.0.0",
     "vue": "^3.4.15",
     "vue3-carousel": "^0.3.1"
