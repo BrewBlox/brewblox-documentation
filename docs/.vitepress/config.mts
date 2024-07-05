@@ -142,6 +142,10 @@ export default defineConfig({
               text: 'Service Env Options',
               link: '/dev/reference/service_env',
             },
+            {
+              text: 'System Architecture',
+              link: '/dev/reference/architecture',
+            },
           ],
         },
         {
