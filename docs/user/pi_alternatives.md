@@ -76,7 +76,7 @@ We personally consider 64GB or 128GB to be a good balance between longevity and 
 For the Raspberry Pi 4 and up, the problem can be avoided entirely by using a SSD or HDD instead, connected using a M.2 or SATA to USB 3.0 adapter.
 In our tests, this also markedly increased performance.
 
-For instructions, see [this guide](https://www.tomshardware.com/how-to/boot-raspberry-pi-4-usb).
+For instructions on how to boot your Pi from USB, see [this guide](https://www.tomshardware.com/how-to/boot-raspberry-pi-4-usb).
 
 For a list of compatible disks and adapters, see [this page](https://jamesachambers.com/best-ssd-storage-adapters-for-raspberry-pi-4-400/).
 Note that we are not affiliated or involved with this page in any way, and have not independently verified all listed devices.
