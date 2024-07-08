@@ -18,10 +18,30 @@ and features four RTD sensor slots in addition to the GPIO pins.
 Initially, analog temperature sensors are supported.
 We're working on software support for pressure and flow sensors.
 
-In firmware, we first squeezed a few more kB from our build size,
-then rewrote how data is stored in persistent flash memory,
-and now we have enough space to store block names on the controller.
-Blocks will no longer lose their names and revert to `New|BlockType-1` when Brewblox is (re-)installed.
+A limitation of the Spark 2 and 3 was that only 2kB of storage was available for use on the controller.
+This is not enough to store both block data and block name.
+Block names were stored separately in a database on the Pi.
+If you re-installed Brewblox, you would see all blocks revert to `New|BlockType-1` as name,
+as the controller retained block settings, but not names.
+
+The Spark 4 has plenty of persistent memory (2MB), making it a Spark 2 and 3 specific problem.
+We have no plans to drop support for the Spark 2 and 3, and wanted to avoid parallel implementations
+where the Spark 4 stores names on the controller, and others store names on the server.\
+If we wanted to store block names on the controller, we'd need to find a way to free up memory on the Spark 2 and 3.
+We explored two options: using SD cards, and optimizing the existing implementation.
+If possible, the second option was preferable, as it wouldn't introduce a new hardware dependency.
+
+The system library storage implementation requires a lot of overhead:
+two address bytes and a checksum byte for every byte of data.
+This is on top of the [wear leveling](https://www.techtarget.com/searchstorage/definition/wear-leveling) required by flash memory.
+Because we store blocks and not single bytes, we decided to write our own storage implementation.
+We still need to implement wear leveling, but now instead of 3 bytes overhead per byte,
+we have 6 bytes overhead per block. With its name, a typical block is somewhere between 30 and 300 bytes.\
+Needless to say, we are very happy with this result.
+
+After you update, the Spark service will use the existing block name database
+to update the block names on the controller. If the automated migration runs into trouble,
+we recommend loading the previous day's backup. This will recreate all blocks to include their name.
 
 On the server, we introduced two new optional services: the mDNS reflector, and the USB proxy.
 
