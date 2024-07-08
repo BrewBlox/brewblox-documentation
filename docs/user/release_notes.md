@@ -12,11 +12,15 @@ Relevant links:
 
 **firmware release 2024/??/??**
 
+### Analog GPIO Modules
+
 With this release, Brewblox now supports the new Analog GPIO module.
 This module is connected to the Spark 4 in the same way as the OneWire GPIO module,
 and features four RTD sensor slots in addition to the GPIO pins.
 Initially, analog temperature sensors are supported.
 We're working on software support for pressure and flow sensors.
+
+### Block names on the Spark
 
 A limitation of the Spark 2 and 3 was that only 2kB of storage was available for use on the controller.
 This is not enough to store both block data and block name.
@@ -43,6 +47,8 @@ After you update, the Spark service will use the existing block name database
 to update the block names on the controller. If the automated migration runs into trouble,
 we recommend loading the previous day's backup. This will recreate all blocks to include their name.
 
+### mDNS and USB services
+
 On the server, we introduced two new optional services: the mDNS reflector, and the USB proxy.
 
 mDNS is used to discover Sparks connected to the local network.
@@ -57,10 +63,12 @@ and you have more fine-grained control over when and how mDNS reflection is enab
 Similarly, USB connections have become an optional feature.
 The Spark 4 and all future controllers no longer support it,
 and the Spark 2 and 3 support both wifi and USB.
-If you want to use USB connections, you can enable the new `usb-proxy` service in brewblox.yml.
 When an USB device is detected, the Spark service connects to the `usb-proxy` service,
 and all commands are forwarded to the Spark over USB.\
 This way, the Spark service no longer needs to have permission to access USB on the server.
+
+The USB proxy service is disabled by default, and is enabled through `brewblox.yml`.
+For instructions on enabling it, see the [connection settings page](./services/spark.md#usb-support).
 
 - (feature) A new Spark 4 module is now available: the Analog GPIO module.
 - (feature) The `OneWire GPIO Module` is now the `GPIO Module`, and also supports Analog GPIO modules.

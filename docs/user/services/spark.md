@@ -112,6 +112,21 @@ For example, when you run `brewblox-ctl add-spark --discovery=mdns`, it will set
 Try `brewblox-ctl discover-spark` to run discovery without editing service settings.
 :::
 
+### USB support
+
+The dedicated `usb-proxy` service handles the actual USB connections.
+If you have a Spark 2 or 3, and want to use USB, you must enable this service.
+Once enabled, all Spark services can use it.
+
+To do this, add the following to `brewblox.yml`:
+
+```yml
+usb_proxy:
+  enabled: true
+```
+
+For more information, and the current state of the setting, run `brewblox-ctl config inspect`.
+
 ### Static controller address
 
 In some scenarios, discovery is not a valid option.
