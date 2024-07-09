@@ -8,44 +8,55 @@ Relevant links:
 - Project board: <https://github.com/orgs/BrewBlox/projects/2/views/1>
 - Code repositories: <https://github.com/Brewblox>
 
-## Brewblox release 2024/07/??
+## Brewblox release 2024/07/09
 
-**firmware release 2024/??/??**
+**firmware release 2024/07/08**
 
-### Analog GPIO Modules
+### Analog GPIO Modules for RTDs and pressure sensors
 
-With this release, Brewblox now supports the new Analog GPIO module.
-This module is connected to the Spark 4 in the same way as the OneWire GPIO module,
-and features four RTD sensor slots in addition to the GPIO pins.
-Initially, analog temperature sensors are supported.
-We're working on software support for pressure and flow sensors.
+We designed a new module for the Spark 4 to interface RTDs (PT100 and PT1000) and pressure transducers (unamplified wheatstone bridges).
+This release adds support for this new module, which gives super accurate sensor readings (0.001C).
+The modules will be available for purchase after our summer holiday (July 22- Aug 10), during which the shop will be closed.
+We will provide more details in an official announcement on our blog later.
 
-### Block names on the Spark
+### Block names stored on the Spark
 
-A limitation of the Spark 2 and 3 was that only 2kB of storage was available for use on the controller.
-This is not enough to store both block data and block name.
-Block names were stored separately in a database on the Pi.
-If you re-installed Brewblox, you would see all blocks revert to `New|BlockType-1` as name,
-as the controller retained block settings, but not names.
+A limitation of the Spark 2 and 3 was that limited persistent storage was available for use on the controller.
+A part of flash memory was allocated for this by Particle, and this area was overprovisioned for wear leveling.
+The scheme provided by Particle has a lot of overhead, so for each byte to store, it needed to write 4 bytes and reserve space for wear leveling, resulting in only 2kb of usable storage.
 
-The Spark 4 has plenty of persistent memory (2MB), making it a Spark 2 and 3 specific problem.
-We have no plans to drop support for the Spark 2 and 3, and wanted to avoid parallel implementations
-where the Spark 4 stores names on the controller, and others store names on the server.\
-If we wanted to store block names on the controller, we'd need to find a way to free up memory on the Spark 2 and 3.
-We explored two options: using SD cards, and optimizing the existing implementation.
-If possible, the second option was preferable, as it wouldn't introduce a new hardware dependency.
+We implemented our own custom wear leveling scheme that writes larger chunks and needs less overhead.
+With more efficient use of the same flash area, we can now store up to 16kb of persistent data!
 
-The system library storage implementation requires a lot of overhead:
-two address bytes and a checksum byte for every byte of data.
-This is on top of the [wear leveling](https://www.techtarget.com/searchstorage/definition/wear-leveling) required by flash memory.
-Because we store blocks and not single bytes, we decided to write our own storage implementation.
-We still need to implement wear leveling, but now instead of 3 bytes overhead per byte,
-we have 6 bytes overhead per block. With its name, a typical block is somewhere between 30 and 300 bytes.\
-Needless to say, we are very happy with this result.
+Because of the storage limitation, we didn't store the block names on the Spark, we stored them in the database on the server
+and matched them to the numeric block ID. If you lost the database or reinstalled the server, the names would be lost or mismatch
+and blocks would revert to `New|BlockType-1` as name.
 
-After you update, the Spark service will use the existing block name database
-to update the block names on the controller. If the automated migration runs into trouble,
-we recommend loading the previous day's backup. This will recreate all blocks to include their name.
+This was annoying and not necessary on the Spark 4, but:
+
+- We wanted to use the same architecture for all versions
+- We want to offer long term support, even for devices we no longer sell
+
+With this effort to write a new storage scheme, we made more room on the Spark 2 and 3 and can now store block names on the controller
+for all versions.
+
+After you update, the Spark service will automatically use the existing block name database
+to update the block names on the controller. If this fails for unforeseen reasons, please go to the page for the Spark service and
+restore a daily backup. This will recreate all blocks to include their name.
+
+We also changed the block ids to be 32-bit instead of 16-bit and randomly generated. This avoids accidental matches when something is misconfigured.
+
+### A better PID derivative filter
+
+A problem when trying to control temperatures with a very small fluctuation is limited resolution.
+1-Wire sensors have a resolution of 0.0625C. When zoomed in, a slow increase in temperature is a staircase shape with a step for every bit.
+When you take a derivative of a staircase shaped line, it is zero or infinite.
+To smooth out the staircase steps, a low-pass filter is applied before the derivative is taken.
+When you are filtering, you are averaging past values, so more filtering comes with more delay.
+
+The purpose of the derivative part of PID is to stop heating or cooling early when the temperature is already moving in the right direction. If the derivative is delayed too much, you might find this out too late and don't stop early. Worse, when the derivative is exactly out of sync with the proportional part, it could even cause oscillations.
+
+In this release, we added a better way to get a filtered derivative on top of the existing filters. We derived the amount of filtering automatically from Td already, but now use a faster default. You can also manually select the amount of filtering for the derivative in the PID settings now.
 
 ### mDNS and USB services
 
@@ -70,10 +81,11 @@ This way, the Spark service no longer needs to have permission to access USB on 
 The USB proxy service is disabled by default, and is enabled through `brewblox.yml`.
 For instructions on enabling it, see the [connection settings page](./services/spark.md#usb-support).
 
-- (feature) A new Spark 4 module is now available: the Analog GPIO module.
+- (feature) Added support of the new Analog + GPIO module for the Spark 4
 - (feature) The `OneWire GPIO Module` is now the `GPIO Module`, and also supports Analog GPIO modules.
 - (feature) Added the `Temp Sensor (Analog)` block.
 - (feature) Block names are now stored on the controller.
+- (improve) Filter derivative with a *Maximally Flat Lowpass Digital Differentiator* and pick a faster filter by default.
 - (feature) Added dedicated mDNS reflection services.
 - (feature) Added the optional `usb-proxy` service to handle USB connections to Spark 2/3 controllers.
 - (improve) The timeout for when old Metrics Widget values are excluded is now editable.
