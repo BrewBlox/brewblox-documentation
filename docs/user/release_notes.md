@@ -5,8 +5,104 @@ Relevant links:
 - User guides: <https://www.brewblox.com/>
 - Discord server: <https://discord.gg/WaFYD2jaaT>
 - Previous release notes: <https://www.brewblox.com/user/release_notes.html>
-- Project board: <https://github.com/orgs/Brewblox/projects/1>
+- Project board: <https://github.com/orgs/BrewBlox/projects/2/views/1>
 - Code repositories: <https://github.com/Brewblox>
+
+## Brewblox release 2024/07/09
+
+**firmware release 2024/07/08**
+
+### Analog GPIO Modules for RTDs and pressure sensors
+
+We designed a new module for the Spark 4 to interface RTDs (PT100 and PT1000) and pressure transducers (unamplified wheatstone bridges).
+This release adds support for this new module, which gives super accurate sensor readings (0.001C).
+The modules will be available for purchase after our summer holiday (July 22- Aug 10), during which the shop will be closed.
+We will provide more details in an official announcement on our blog later.
+
+### Block names stored on the Spark
+
+A limitation of the Spark 2 and 3 was that limited persistent storage was available for use on the controller.
+A part of flash memory was allocated for this by Particle, and this area was overprovisioned for wear leveling.
+The scheme provided by Particle has a lot of overhead, so for each byte to store, it needed to write 4 bytes and reserve space for wear leveling, resulting in only 2kb of usable storage.
+
+We implemented our own custom wear leveling scheme that writes larger chunks and needs less overhead.
+With more efficient use of the same flash area, we can now store up to 16kb of persistent data!
+
+Because of the storage limitation, we didn't store the block names on the Spark, we stored them in the database on the server
+and matched them to the numeric block ID. If you lost the database or reinstalled the server, the names would be lost or mismatch
+and blocks would revert to `New|BlockType-1` as name.
+
+This was annoying and not necessary on the Spark 4, but:
+
+- We wanted to use the same architecture for all versions
+- We want to offer long term support, even for devices we no longer sell
+
+With this effort to write a new storage scheme, we made more room on the Spark 2 and 3 and can now store block names on the controller
+for all versions.
+
+After you update, the Spark service will automatically use the existing block name database
+to update the block names on the controller. If this fails for unforeseen reasons, please go to the page for the Spark service and
+restore a daily backup. This will recreate all blocks to include their name.
+
+We also changed the block ids to be 32-bit instead of 16-bit and randomly generated. This avoids accidental matches when something is misconfigured.
+
+### A better PID derivative filter
+
+A problem when trying to control temperatures with a very small fluctuation is limited resolution.
+1-Wire sensors have a resolution of 0.0625C. When zoomed in, a slow increase in temperature is a staircase shape with a step for every bit.
+When you take a derivative of a staircase shaped line, it is zero or infinite.
+To smooth out the staircase steps, a low-pass filter is applied before the derivative is taken.
+When you are filtering, you are averaging past values, so more filtering comes with more delay.
+
+The purpose of the derivative part of PID is to stop heating or cooling early when the temperature is already moving in the right direction. If the derivative is delayed too much, you might find this out too late and don't stop early. Worse, when the derivative is exactly out of sync with the proportional part, it could even cause oscillations.
+
+In this release, we added a better way to get a filtered derivative on top of the existing filters. We derived the amount of filtering automatically from Td already, but now use a faster default. You can also manually select the amount of filtering for the derivative in the PID settings now.
+
+### mDNS and USB services
+
+On the server, we introduced two new optional services: the mDNS reflector, and the USB proxy.
+
+mDNS is used to discover Sparks connected to the local network.
+To receive mDNS packets in the Spark service,
+they must be forwarded (reflected) from the network adapter connected to the local network.
+Previously, we enabled reflection by editing the Avahi configuration on the server.
+We want to avoid touching host configuration where possible,
+so now we're handling reflection in small dedicated services.
+For new installations, we can now avoid editing Avahi configuration,
+and you have more fine-grained control over when and how mDNS reflection is enabled.
+
+Similarly, USB connections have become an optional feature.
+The Spark 4 and all future controllers no longer support it,
+and the Spark 2 and 3 support both wifi and USB.
+When an USB device is detected, the Spark service connects to the `usb-proxy` service,
+and all commands are forwarded to the Spark over USB.\
+This way, the Spark service no longer needs to have permission to access USB on the server.
+
+The USB proxy service is disabled by default, and is enabled through `brewblox.yml`.
+For instructions on enabling it, see the [connection settings page](./services/spark.md#usb-support).
+
+- (feature) Added support of the new Analog + GPIO module for the Spark 4
+- (feature) The `OneWire GPIO Module` is now the `GPIO Module`, and also supports Analog GPIO modules.
+- (feature) Added the `Temp Sensor (Analog)` block.
+- (feature) Block names are now stored on the controller.
+- (improve) Filter derivative with a *Maximally Flat Lowpass Digital Differentiator* and pick a faster filter by default.
+- (feature) Added dedicated mDNS reflection services.
+- (feature) Added the optional `usb-proxy` service to handle USB connections to Spark 2/3 controllers.
+- (improve) The timeout for when old Metrics Widget values are excluded is now editable.
+- (improve) Blocks with generated names are no longer excluded from history.
+- (improve) Generated names for newly discovered blocks are more specific to avoid repeated `New|TempSensorOneWire-1` blocks.
+- (improve) Numeric IDs for new blocks are now randomized to prevent new blocks being recognized as an old block.
+- (improve) Reduced the image size of the Docker image used to flash Spark 2/3 controllers over USB.
+- (improve) The Troubleshooter widget on the UI Spark service page now lists discovered controllers.
+- (improve) Host Avahi reflection is disabled by default. Brewblox now uses default Avahi settings when newly installed.
+- (improve) The Spark 4 now receives the CA certificate when MQTT connection is enabled.
+- (improve) HTTP->HTTPS redirection is now optional. This setting is configurable in brewblox.yml.
+- (fix) The Spark 4 no longer runs out of memory when connected over MQTT.
+- (fix) Brewblox services recognize the `1d5h10m` format again for duration settings in `environment`.
+- (fix) The Spark service no longer tries to use the 64-bit simulator on 32-bit ARM platforms.
+- (docs) The Node-RED guides now include a setup guide for the official Node-RED Docker image.
+- (docs) Added a search bar to brewblox.com.
+- (deprecate) Removed the `brewblox-ctl add-node-red` command.
 
 ## Brewblox release 2024/03/26
 
