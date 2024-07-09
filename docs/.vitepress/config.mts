@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress';
+import { SearchPlugin } from 'vitepress-plugin-search';
 import { wrapHighlight } from './plantuml.mjs';
 
 // https://vitepress.dev/reference/site-config
@@ -12,6 +13,7 @@ export default defineConfig({
       { text: 'Blog', link: '/blog/2021-06-30-this-is-the-brewblox-spark-4/' },
       { text: 'User guides', link: '/user/startup' },
       { text: 'Developer docs', link: '/dev/' },
+      { text: 'Store', link: 'https://store.brewpi.com' },
       // Hardware section commented out for update / review Elco
       // { text: 'Hardware', link: '/hardware/' },
       // { text: 'BrewPi', link: 'https://www.brewpi.com/' },
@@ -57,6 +59,7 @@ export default defineConfig({
           link: '/dev/dev_platform',
         },
         { text: 'Python Environment Setup', link: '/dev/python_env' },
+        { text: 'Common Issues', link: '/dev/common_issues' },
         { text: 'Deploying Scripts', link: '/dev/deployment' },
         { text: 'Analyzing Logs', link: '/dev/analyzing_logs' },
         { text: 'Sharing the Traefik Proxy', link: '/dev/subrouting' },
@@ -82,6 +85,10 @@ export default defineConfig({
             {
               text: 'Docker: Schedule Jobs',
               link: '/dev/tutorials/scheduledscript/',
+            },
+            {
+              text: 'Node-RED: Setup',
+              link: '/dev/tutorials/node_red_setup',
             },
             {
               text: 'Node-RED: Use Blocks',
@@ -135,6 +142,10 @@ export default defineConfig({
               text: 'Service Env Options',
               link: '/dev/reference/service_env',
             },
+            {
+              text: 'System Architecture',
+              link: '/dev/reference/architecture',
+            },
           ],
         },
         {
@@ -142,6 +153,26 @@ export default defineConfig({
           collapsed: true,
           items: [
             // Decisions are sorted descending by date.
+            {
+              text: '2024: USB Proxy Service',
+              link: '/dev/decisions/20240628_usb_proxy',
+            },
+            {
+              text: '2024: Reflector Service',
+              link: '/dev/decisions/20240620_reflector_service',
+            },
+            {
+              text: '2024: Block Names on Controller',
+              link: '/dev/decisions/20240513_block_name_storage',
+            },
+            {
+              text: '2024: Firmware ReadMode',
+              link: '/dev/decisions/20240510_cbox_read_mode',
+            },
+            {
+              text: '2024: brewblox.yml',
+              link: '/dev/decisions/20240326_brewblox_yml',
+            },
             {
               text: '2024: Sequence Variables',
               link: '/dev/decisions/20240227_sequence_variables',
@@ -345,13 +376,16 @@ export default defineConfig({
       },
     ],
   },
+  vite: {
+    plugins: [SearchPlugin()],
+  },
   markdown: {
     math: true,
     image: { lazyLoading: true },
     config: (md) => {
       const opts = md.options;
       // Pass the default function as backup to plantuml highlight
-      opts.highlight = wrapHighlight(opts.highlight);
+      opts.highlight = wrapHighlight(opts.highlight!);
     },
   },
 });

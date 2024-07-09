@@ -140,7 +140,8 @@ services:
     volumes:
       - './tilt:/share'
       - '/var/run/dbus:/var/run/dbus'
-    command: --mqtt-host=<brewblox_hostname/IP>
+    environment:
+      - BREWBLOX_TILT_MQTT_HOST={{brewblox_hostname/IP}}
 ```
 
 Create the directory for the tilt files
@@ -200,9 +201,7 @@ Your Tilt service must have the following configuration set:
   tilt:
     ...
     volumes:
-      - type: bind
-        target: /var/run/dbus
-        source: /var/run/dbus
+      - '/var/run/dbus:/var/run/dbus'
     ...
 ```
 

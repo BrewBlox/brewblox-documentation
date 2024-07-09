@@ -65,12 +65,12 @@ but the controller will always return dates with UTC timezones.
 An IoChannel is the software representation of a group of IO pins.
 Channels are provided by blocks that implement *IoArray*, and are used by digital actuators.
 
-*DS2408*, *DS2413*, *Spark2Pins*, *Spark3Pins*, *MockPins*, *OneWireGpioModule* all implement *IoArray*.
+*DS2408*, *DS2413*, *Spark2Pins*, *Spark3Pins*, *MockPins*, *GpioModule* all implement *IoArray*.
 
 By default, channels are constant and cannot be modified.
 There are two exceptions:
 
-- *OneWireGpioModule* channels are completely user-defined
+- *GpioModule* channels are completely user-defined
 - *DS2408* will report different channels based on the value of its `connectMode` field (valve or actuator).
 
 *DigitalActuator*, *MotorValve*, and *FastPwm* blocks use channels as output. They all implement the *IoDriverInterface* interface, and have `hwDevice` and `channel` fields.
@@ -80,7 +80,7 @@ There are two exceptions:
 ## IoChannel capabilities
 
 Not every channel supports all possible uses.
-OneWire expansion boards do not support Fast PWM. Input, power, or GND channels in *OneWireGpioModule* do not support output at all.
+OneWire expansion boards do not support Fast PWM. Input, power, or GND channels in *GpioModule* do not support output at all.
 This is declared in the channel `capabilities` field.
 
 The *ChannelCapabilities* enum is a numeric representation of bitwise flags.
@@ -267,6 +267,31 @@ The implementation for PWM with sub-second periods.
 
 <<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#FastPwm
 
+## GpioModule
+
+**Discovered object**
+
+*GpioModule* is the software representation of a Spark 4 GPIO module,
+either the OneWire GPIO Module, or the Analog GPIO Module.
+There will be one block per attached module, up to a maximum of 4.
+
+In contrast with other *IoArray* blocks, all channels are user-defined.
+
+*GpioModuleChannel* objects define a pin mask to claim 0-8 of the available pins.
+The number of claimed pins should be either 0, or match the value of `GpioModuleChannel.width`.
+Only continuous blocks of pins can be claimed for a single channel, and channels cannot overlap.
+
+If no pins are claimed, the channel is still a valid target for a digital actuator.
+
+The `GpioModuleStatus` and `GpioPins` enums are [8-bit masks](https://basarat.gitbook.io/typescript/type-system/enums#number-enums-as-flags).
+
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#GpioModule
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#AnalogGpioModule
+
+Referenced enum values:
+
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#GpioModule
+
 ## InactiveObject
 
 **Deprecated**
@@ -306,7 +331,7 @@ It must be connected to a *DS2408*, and technically requires 4 IO channels to fu
 The start channel is configured, and it will automatically claim the next three channels.
 To make this explicit, *DS2408* only reports valid start channels when set to valve mode.
 
-The *OneWireGpioModule* block can also drive motors, but for these, the *DigitalActuator* block can be used to control them.
+The *GpioModule* block can also drive motors, but for these, the *DigitalActuator* block can be used to control them.
 
 <<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#MotorValve
 
@@ -325,35 +350,6 @@ If *extraHoldTime* is set in a mutexed constraint,
 it will override the *differentActuatorWait* value.
 
 <<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#Mutex
-
-## OneWireBus
-
-**System object**
-
-<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#OneWireBus
-
-## OneWireGpioModule
-
-**Discovered object**
-
-*OneWireGpioModule* is the software representation of a Spark 4 GPIO module.
-There will be one block per attached module, up to a maximum of 4.
-
-In contrast with other *IoArray* blocks, all channels are user-defined.
-
-*GpioModuleChannel* objects define a pin mask to claim 0-8 of the available pins.
-The number of claimed pins should be either 0, or match the value of `GpioModuleChannel.width`.
-Only continuous blocks of pins can be claimed for a single channel, and channels cannot overlap.
-
-If no pins are claimed, the channel is still a valid target for a digital actuator.
-
-The `GpioModuleStatus` and `GpioPins` enums are [8-bit masks](https://basarat.gitbook.io/typescript/type-system/enums#number-enums-as-flags).
-
-<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#OneWireGpioModule
-
-Referenced enum values:
-
-<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#Gpio
 
 ## Pid
 
@@ -452,6 +448,18 @@ Referenced enum values:
 
 <<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#SparkPlatform
 <<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#DisplayTempUnit
+
+## TempSensorAnalog
+
+A temperature sensor connected to the Analog GPIO Module.
+2, 3, 4 wire RTD is supported in configuration.
+
+<<< @/../node_modules/brewblox-proto/ts/spark-block-types.ts#TempSensorAnalog
+
+Referenced enum values:
+
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#AnalogModule
+<<< @/../node_modules/brewblox-proto/ts/spark-block-enums.ts#TempSensorAnalog
 
 ## TempSensorCombi
 
