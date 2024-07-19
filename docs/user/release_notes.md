@@ -8,6 +8,26 @@ Relevant links:
 - Project board: <https://github.com/orgs/BrewBlox/projects/2/views/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2024/07/19
+
+**firmware release 2024/07/19**
+
+This is the customary smaller follow-up release after the dust from a larger update has settled.
+Included is a fix to PID behavior, along with various small QoL improvements.
+
+**Changes**
+
+- (feature) You can now set a custom duration in block graphs, in addition to the existing preset options.
+- (feature) Added the *Valve: three way* part to the Builder. This is a manually operated T-bore three-way valve.
+- (feature) PID boil mode minimum output can now be set through a quick action.
+- (feature) Added the `brewblox-ctl monitor` command. This will show log output for a Spark 4 connected over USB.
+- (improve) Added 4h and 12h to graph presets.
+- (improve) brewblox-ctl now always uses curl for HTTP requests executed as shell command.
+- (improve) reflector services now periodically retry if the network interface was initially disconnected.
+- (fix) Resolved a problem where the PID would trigger its windup protection during a normal PWM cycle.
+- (fix) Sensors and actuators are now created correctly when loading a backup made on a different model Spark.
+- (deprecate) Removed the hidden `brewblox-ctl http` command group.
+
 ## Brewblox release 2024/07/09
 
 **firmware release 2024/07/08**
