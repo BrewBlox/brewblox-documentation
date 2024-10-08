@@ -146,7 +146,7 @@ Some examples of what you can connect are:
 - A switch: a digital input and a GND pin.
 
 If you have valves that automatically close when they lose power, you can even use all pins as a high-side switch to connect eight valves to the board and connect GND to them externally.
-Each pin can source or sink up to 1A, but multiple pings can be combined if you need more current.
+Each pin can source or sink up to 1A, but multiple pins can be combined if you need more current.
 All pins also support individual PWM for speed/intensity control.
 
 As you can see, these eight are suitable for many situations. And if one I/O module still does not give you enough pins, you can still add another I/O module!
