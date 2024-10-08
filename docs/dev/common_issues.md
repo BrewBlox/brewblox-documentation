@@ -23,12 +23,12 @@ When this happens, the solution is to version pin both cryptography dependencies
 to a version that has been built by piwheels.
 
 First, check <https://www.piwheels.org/project/cryptography/> for the latest version that has a successful build.
-We'll use `42.0.5` as an example.
+We'll use `42.0.8` as an example.
 
 Then, pin the poetry dependency to that version.
 
 ```sh
-poetry add "cryptography@==42.0.5"
+poetry add "cryptography@==42.0.8"
 ```
 
 Then, edit `pyproject.toml` to pin the build system dependency.

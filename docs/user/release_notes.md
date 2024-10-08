@@ -8,6 +8,21 @@ Relevant links:
 - Project board: <https://github.com/orgs/BrewBlox/projects/2/views/1>
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox release 2024/10/08
+
+**firmware release 2024/10/07**
+Firmware in the previous release was actually reverted tot 2024/07/08 due to an critical bug just before our holiday.
+The PID fix to limit the impact of D on anti-windup is included in this release.
+
+**Changes**
+
+- (feature) You can set a min/max on graph fields to hide outliers
+- (improve) Improved reliability of USB flashing for Spark 2 and Spark 3.
+- (fix) Toggling the enabled field for a spark service (auto connect) was stored not immediately applied
+- (fix) Comments in a sequence caused encoding errors
+- (fix) Channel H of the mock pins block didn't have the right error state
+- (fix) Claimer id was truncated to 16-bit causing the driver of a block to not be displayed correctly
+
 ## Brewblox release 2024/07/19
 
 **firmware release 2024/07/19**
