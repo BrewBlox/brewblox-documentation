@@ -11,6 +11,7 @@ Relevant links:
 ## Brewblox release 2024/10/08
 
 **firmware release 2024/10/07**
+
 Firmware in the previous release was actually reverted tot 2024/07/08 due to an critical bug just before our holiday.
 The PID fix to limit the impact of D on anti-windup is included in this release.
 
