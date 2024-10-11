@@ -6,7 +6,22 @@ Relevant links:
 - Discord server: <https://discord.gg/WaFYD2jaaT>
 - Previous release notes: <https://www.brewblox.com/user/release_notes.html>
 - Project board: <https://github.com/orgs/BrewBlox/projects/2/views/1>
+
 - Code repositories: <https://github.com/Brewblox>
+
+## Brewblox release 2024/10/11
+
+**firmware release 2024/10/11**
+
+A small bugfix/improvements release with no new features. This release hopefully reduces peak memory use in rare cases on the spark 2 and 3.
+With many blocks on the controller and low available memory, running out of memory could cause a reboot.
+These changes hopefully reduce the amount of buffers that are allocated if timings align in an unfortunate way.
+
+**Changes**
+
+- (fix) On spark 2/3 close and discard tcp connections quickly on error
+- (fix) On spark 2/3 process or discard mDNS requests early
+- (fix) Always include CRC in reset command to ADC in precision analog modules so the ADC never discards it
 
 ## Brewblox release 2024/10/08
 
