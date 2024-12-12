@@ -9,6 +9,58 @@ Relevant links:
 
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox Release 2024/12/12
+
+**Firmware Release 2024/12/02**
+
+### Fixed Spark 2/3 Reboots with Low Memory
+
+The primary focus of this release was resolving sporadic restarts of Spark 2/3 devices with many blocks and limited free RAM. Peaks in RAM consumption, most likely occurring while processing TCP packets, could trigger an out-of-memory panic.
+
+No memory leak was detected (free RAM reported by the system block remained constant), but the minimum free RAM could dip as much as 10kB lower. To address this, I optimized memory usage and memory reallocations across the codebase. Additionally, the build system for all our tests was switched to CMake and Clang to uncover warnings missed by GCC.
+
+*Tip for C++ Developers:*
+
+Clangd is significantly better than the default C++ language server for VSCode and doesn’t slow to unusable levels. Clang can also run coverage, memory sanitizer, and undefined behavior sanitizer simultaneously without significantly slowing down unit tests.
+
+The restarts on Spark 2 and 3 devices appear to be fully resolved.
+
+---
+
+### External Temp Sensors
+
+A user with extensive external scripting to simulate custom sensors reported frequent flash page erases on Spark 2/3 devices. Excessive flash writes can lead to premature wear. Although wear-leveling techniques reduce this impact, it’s critical to minimize writes.
+
+To prevent this, always use the **Temp Sensor External** block for frequent updates, *not the Temp Sensor Mock block*. The purpose of the Temp Sensor External block is to allow frequent updates without wearing out flash storage. It includes a timeout to validate the value and ensures no flash writes are made. As a further safeguard, it now always requires a new value to be written after boot.
+
+Previously, the externally written setting was mistakenly stored in EEPROM. This issue has been resolved in this release.
+
+---
+
+### Faster brewblox-ctl
+
+The `brewblox-ctl` update process has been significantly improved. Previously, running `brewblox-ctl update` was slow as it reinstalled all dependencies. We’ve switched to **UV** as the Python package and virtual environment manager, resulting in much faster performance. UV will be installed automatically after the update. To experience the improvement, run `brewblox-ctl update` twice.
+
+Additionally:
+
+- The `brewblox-ctl` tarball has been removed from the Brewblox directory and snapshots, reducing their size.
+- Git is now used for installing and versioning `brewblox-ctl`.
+
+The `devcon-spark` service was also migrated to UV (replacing Poetry). Other services will follow, significantly reducing container build times in CI.
+
+---
+
+### Changes
+
+- *Temp Sensor External* no longer writes its value to EEPROM.
+- DS2413 and DS2408 pins can now also function as inputs.
+- NTP on Spark 3 (updating time from the internet) is now handled asynchronously to avoid blocking while waiting for a reply.
+- Fixed rare cases of encoding errors in Sequence block instructions due to underestimated maximum size.
+- Memory optimizations to reduce reallocations. Reduced memory usage for mDNS processing on Spark 3.
+- All unit tests now use CMake and Clang instead of Make and GCC, revealing additional compiler warnings that were addressed. Improved test coverage reporting and added tests for previously uncovered code paths.
+- OneWire devices on Spark 4 are no longer power-cycled on every boot, preventing false "short detected" reports during initialization.
+- Fixed a timing issue where the elapsed time between conversion start and result reading was off by a few milliseconds immediately after boot. This previously caused readings of 85°C for one second after a power cycle.
+
 ## Brewblox release 2024/10/11
 
 **firmware release 2024/10/11**

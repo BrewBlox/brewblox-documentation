@@ -104,6 +104,6 @@ the resulting selector is often invalid.
 You can fix this by using the `__name__` argument inside the `{}` brackets.
 
 **BAD**: `service/block name/value{}`<br>
-**GOOD**: `{__name__:"service/block name/value"}`
+**GOOD**: `{__name__="service/block name/value"}`
 
 ![Valid selector](../../images/grafana-valid-selector.png)
