@@ -9,6 +9,51 @@ Relevant links:
 
 - Code repositories: <https://github.com/Brewblox>
 
+## Brewblox Release 2025/03/05
+
+**Firmware date in this release: 2025/03/03**
+
+This release took a bit longer, but we moved into a new office had I had a baby. Some great new features are included in this release though.
+
+### PID improvements and feed forward support (ambient temperature correction)
+
+This is probably the biggest feature in this release for most users. I added the option to configure an ambient sensor for PID blocks.
+
+A feed forward term (FF) can now be used to compensate for ambient losses, calculated as FF = (setting - ambient) * Kff.
+The PID output will be P+I+D+FF, instead of P+I+D when an ambient sensor is selected.
+With the right value for Kff, the integral can remain near zero if the fementation does not generate heat.
+The ambient temperature is smoothed with a time constant in the order of Ti.
+
+I also changed the limits on D from +/- Kp to +/- P. This allows D to grow larger to counteract the proportional part P.
+When P is small, because the setpoint and sensor are close, it limits D more.
+In my testing, this works well to reduce overshoot and not cause oscillations in steady state.
+
+### Improved network handling on the Spark 2 and 3
+
+I took the time to rewrite some of the network layer for the Spark 2 and 3 to bypass the TCP/UDP classes provided by Particle and use a custom implementation more directly on the network layer. This helps with memory use, latency and early discarding of closed connections.
+It also avoids blocking the execustion loop when waiting for certain NTP or MDNS packages.
+
+### Further improvements and final fixes for the new analog module for RTDs and pressure sensors
+
+This new module will finally be available soon. This release adds the option to fully customize RTD specs (R0, A,B,C in the Callendar-Van Dusen equation).
+It also optimizes channel cycling order, conversion latency, loose wire detection and internal calculations.
+
+### Bug fix: always init enough filter stages
+
+This is a small bug fix, but with enough impact to deserve its own header.
+I discovered a bug that only enough filter stages were initialized if the a PID derivative needed them.
+So if you configured a filter over 15s in a setpoint, but a PID did not use the setpoint with a Td over 15 seconds, the intput filtering would only be 15s.
+
+### Other changes
+
+- Enabled digital input support for DS2408
+- Bumped victoria version from 1.98 to 1.112
+- Reduced size of flasher docker image
+- Better explanation of PID settings in UI
+- Improvements in brewblox-ctl for installing and updating python packages with uv.
+
+---
+
 ## Brewblox Release 2024/12/12
 
 **Firmware Release 2024/12/02**
